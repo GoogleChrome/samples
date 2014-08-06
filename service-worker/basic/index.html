@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<script>
+var scope = 'hello/';
+
+function register() {
+  navigator.serviceWorker.register('service-worker.js', {scope: scope})
+    .then(function(serviceWorker) {
+      console.log('registered: ');
+      console.log(serviceWorker);
+    })
+    .catch(function(whut) {
+      console.error('uh oh... ');
+      console.error(whut);
+    });
+}
+
+function unregister() {
+  navigator.serviceWorker.unregister(scope)
+    .then(function() {
+      console.log('unregistered');
+    });
+}
+</script>
+<button onclick="register()">Register</button>
+<button onclick="unregister()">Unregister</button>
+
+<p>Some nice places to visit:
+
+<ul>
+<li><a href="hello/world">world</a>
+<li><a href="hello/Cleveland">Cleveland</a>
+</ul>
