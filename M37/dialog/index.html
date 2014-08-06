@@ -15,11 +15,14 @@
     <h2>Chrome 37+</h2>
 
     <!-- // [START code-block] -->
+    <p>This button will open a native &lt;dialog&gt; element: <button id="show">Open Dialog</button></p>
+
     <dialog>
-      <p>Here's the dialog!</p>
+      <p>Here's the dialog with default styles!</p>
+      <p>You can modify the styles if you wish.</p>
       <button id="close">Close</button>
     </dialog>
-    <button id="show">Open Dialog</button>
+
     <script>
       var dialog = document.querySelector('dialog');
       document.querySelector('#show').onclick = function() {
@@ -36,7 +39,7 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-53563471-1');
       ga('send', 'pageview');
     </script>
   </body>
