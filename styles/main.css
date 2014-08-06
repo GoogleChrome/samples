@@ -10,7 +10,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  margin: 0.5em;
+  margin: 0;
   padding: 0;
 }
 
@@ -242,9 +242,16 @@ textarea[contenteditable] {
 
 @media only screen and (min-width: 800px) {
   /* Style adjustments for viewports that meet the condition */
+  html, body {
+    margin: 0.5em;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (min-resolution: 144dpi) {
   /* Style adjustments for viewports that meet the condition */
+}
+
+h1 {
+  margin-bottom: -0.5em;
 }
