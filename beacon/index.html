@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Beacon Sample</title>
+
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <h1>Beacon Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/features/5517433905348608">Chrome 37+</a></p>
+
+    <p>Beacon let you to asynchronously transfer small HTTP data from
+    the User Agent to a web server. It can be used e.g. to send analytics
+    or diagnostics code without delaying the page's unload or affecting
+    the performance of the next navigation.</p>
+
+    <p>The sample below sends a beacon to a sample server at
+    <code>https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop</code> on unload.
+    Close this page and visit
+    <a href="https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop/inspect">PutsReq inspect page</a>
+    to see if the becaon data was received.
+    </p>
+
+    <pre>
+      <code>
+      window.addEventListener('unload', logData, false);
+
+      var diagnosticData = 'Sent by a beacon!';
+
+      function logData() {
+          navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", diagnosticData);
+      }
+      </code>
+    </pre>
+
+
+    <!-- // [START code-block] -->
+    <script>
+    window.addEventListener('unload', logData, false);
+
+    var diagnosticData = 'Sent by a beacon!';
+
+    function logData() {
+        navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", diagnosticData);
+    }
+    </script>
+    <!-- // [END code-block] -->
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
