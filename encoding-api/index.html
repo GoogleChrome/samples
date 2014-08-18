@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Encoding API Sample</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <h1>Encoding API Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/5714368087982080">Chrome 38+</a></p>
+
+    <p>The JavaScript Encoding API allows developers to encode and decode strings using a wide range of character encodings.</p>
+
+    <p>
+      The example on this page illustrates decoding data from a file into JavaScript strings.
+      The code obtains raw binary <code>ArrayBuffer</code> by making an <code>XMLHttpRequest</code> for a local file.
+      The code then calls <code>TextDecoder.decode()</code> to translate the data into a string, given the appropriate character encoding.
+    </p>
+
+    <p>
+      In a real world scenario, source data might be ready from files that predate UTF-8
+      or from a legacy database system that only supported a specific character encoding.
+    </p>
+
+    <!-- // [START code-block] -->
+    <pre id="results"></pre>
+
+    <script>
+      // The local files to be fetched, mapped to the encoding that they're using.
+      var filesToEncoding = {
+        'utf8.bin': 'utf-8',
+        'utf16le.bin': 'utf-16le',
+        'macintosh.bin': 'macintosh'
+      };
+
+      Object.keys(filesToEncoding).forEach(function(file) {
+        fetchAndDecode(file, filesToEncoding[file]);
+      });
+
+      // Use XHR to fetch `file` and interpret its contents as being encoded with `encoding`.
+      function fetchAndDecode(file, encoding) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', file);
+        // Using 'arraybuffer' as the responseType ensures that the raw data is returned,
+        // rather than letting XMLHttpRequest decode the data first.
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function() {
+          if (this.status == 200) {
+            // The decode() method takes a DataView as a parameter, which is a wrapper on top of the ArrayBuffer.
+            var dataView = new DataView(this.response);
+            // The TextDecoder interface is documented at http://encoding.spec.whatwg.org/#interface-textdecoder
+            var decoder = new TextDecoder(encoding);
+            var decodedString = decoder.decode(dataView);
+            // Add the decoded file's text to the <pre> element on the page.
+            document.querySelector('#results').textContent += decodedString + '\n';
+          }
+        };
+        xhr.send();
+      }
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
