@@ -57,6 +57,8 @@
             var decodedString = decoder.decode(dataView);
             // Add the decoded file's text to the <pre> element on the page.
             document.querySelector('#results').textContent += decodedString + '\n';
+          } else {
+            console.error('Error while requesting', file, this);
           }
         };
         xhr.send();
