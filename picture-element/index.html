@@ -13,16 +13,19 @@
     <p>Available in <a href="http://www.chromestatus.com/feature/5910974510923776">Chrome 38+</a></p>
 
     <p>The <code>&lt;picture></code> element informs Chrome which version of
-    the picture to fetch, based on some criteria, like user's viewport,
-    screen type etc.</p>
+    an image resource to fetch based on some criteria, such as the user's
+    viewport, screen type, and image format support.</p>
 
     <p>In the example below, the browser looks for the first
-    <code>&lt;source></code> element where media query matches user's
+    <code>&lt;source></code> element where the media query matches the user's
     current setup, and fetches the image specified in the <code>srcset</code>
     attribute of that <code>&lt;source></code> element.</p>
 
-    <p><code>&lt;img></code> element is used as a fallback for browsers not supporting
-    the <code>&lt;picture></code> element.</p>
+    <p>The <code>&lt;img></code> element is required as the last nested child
+    tag of the <code>&lt;picture></code> declaration block. The 
+    <code>&lt;img></code> element will act as the default image resource and 
+    also the fallback for browsers that do not support the 
+    <code>&lt;picture></code> element.</p>
 
     <p>Resize the browser to see different versions of the picture
     loading at different viewport sizes.</p>
@@ -30,19 +33,14 @@
 
     <!-- // [START code-block] -->
     <style>
-      /* The image takes 1/3 of the viewport on big screens */
-      img { width: 33.3vw; }
-      /* and 100% of the viewport on small screens */
-      @media (max-width: 640px) {
-        img { width: 100vw; }
-      }
+      picture {display: block; width: 100%; text-align: center;}
     </style>
 
     <picture>
-       <source media="(min-width: 640px)" srcset="images/butterfly_large.jpg">
-       <source media="(min-width: 320px)" srcset="images/butterfly_medium.jpg">
-       <!-- Img tag for browsers that do not support picture element -->
-       <img src="images/butterfly_small.jpg" alt="A butterfly">
+      <source media="(min-width: 650px)" srcset="images/kitten-large.png">
+      <source media="(min-width: 465px)" srcset="images/kitten-medium.png">
+      <!-- img tag for browsers that do not support picture element -->
+      <img src="images/kitten-small.png" alt="a cute kitten">
     </picture>
     <!-- // [END code-block] -->
 
