@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>File Constructor Sample</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <h1>File Constructor Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/5731244088229888">Chrome 38+</a></p>
+
+    <p>
+      This demo illustrates the use of the
+      <a href="http://dev.w3.org/2006/webapi/FileAPI/#file"><code>File constructor</code></a>
+      to create references to
+      <a href="http://dev.w3.org/2006/webapi/FileAPI/#dfn-file"><code>File</code></a> objects.
+    </p>
+
+    <p>
+      It also makes use of <code>&lt;a&gt;</code> elements with the
+      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/semantics.html#downloading-resources"><code>download</code></a>
+      attribute to provide links to the generated files for download.
+    </p>
+
+    <p>Download these auto-generated files:</p>
+    <ul id="files"></ul>
+
+    <!-- // [START code-block] -->
+    <script>
+      var filesElement = document.querySelector('#files');
+
+      // Some in-memory attributes of the new File objects that will be constructed.
+      var fileData = {
+        'sample.xml': {
+          data: '<test>Hello!</test>',
+          type: 'application/xml'
+        },
+        'sample.csv': {
+          data: 'Test1,Test2\nHello1,Hello2',
+          type: 'text/csv'
+        },
+        'sample.json': {
+          data: JSON.stringify({test: 'Hello!'}),
+          type: 'application/json'
+        }
+      };
+
+      Object.keys(fileData).forEach(function(name) {
+        // This example passes in an array of string data as the first argument to File().
+        // It's also possible to pass in an ArrayBuffer or ArrayBufferView.
+        var file = new File([fileData[name].data], name, {
+          type: fileData[name].type,
+          lastModified: Date.now()
+        });
+        // See http://docs.webplatform.org/wiki/apis/file/URL/createObjectURL
+        var url = URL.createObjectURL(file, {
+          oneTimeOnly: true
+        });
+
+        var aElement = document.createElement('a');
+        aElement.href = url;
+        aElement.download = name;
+        aElement.textContent = name;
+
+        var liElement = document.createElement('li');
+        liElement.appendChild(aElement);
+        filesElement.appendChild(liElement);
+      });
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
