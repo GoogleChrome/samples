@@ -34,7 +34,7 @@
 
       log('Creating, using, and iterating over a Set:');
       var randomIntegers = new Set();
-      // Generate random integers in the range [1..10] five times,
+      // Generate a random integer in the range [1..10] five times,
       // and use a Set to keep track of the distinct integers that were generated.
       for (var i = 0; i < 5; i++) {
         randomIntegers.add(Math.floor(Math.random() * 10) + 1);
@@ -42,7 +42,7 @@
       log(randomIntegers.size, ' distinct integers were generated.');
       log('The number 10 was ', randomIntegers.has(10) ? '' : 'not ', 'one of them.');
       log('Here\'s all of them:');
-      // Use for .. of to iterate over the items in the Set.
+      // Use for...of to iterate over the items in the Set.
       // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements
       // The Set iterator yields a single value corresponding to each entry in the Set.
       for (var item of randomIntegers) {
@@ -60,7 +60,7 @@
       ]);
       // You can also call set() to add new keys/values to an existing Map.
       typesOfKeys.set('!!!!', 'My key is excited!');
-      // Use for .. of to iterate over the items in the Map.
+      // Use for...of to iterate over the items in the Map.
       // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements
       // The Map iterator yields an Array with two items; the first is the Map entry's key and the
       // second is the Map entry's value.
