@@ -13,36 +13,55 @@
     <p>Available in <a href="http://www.chromestatus.com/feature/5910974510923776">Chrome 38+</a></p>
 
     <p>The <code>&lt;picture></code> element informs Chrome which version of
-    an image resource to fetch based on some criteria, such as the user's
-    viewport, screen type, and image format support.</p>
+    an image resource to fetch based on some criteria, such as the browser
+    viewport size and/or image format support.</p>
 
-    <p>In the example below, the browser looks for the first
-    <code>&lt;source></code> element where the media query matches the user's
-    current setup, and fetches the image specified in the <code>srcset</code>
-    attribute of that <code>&lt;source></code> element.</p>
+    <section id="media-query-example">
+    
+      <p>In the first example below, resize the browser to see different versions 
+      of the picture loading at different viewport sizes. The browser looks for 
+      the first <code>&lt;source></code> element where the media query matches
+      the user's current viewport width, and fetches the image specified in the 
+      <code>srcset</code> attribute of that <code>&lt;source></code> element.</p>
 
-    <p>The <code>&lt;img></code> element is required as the last nested child
-    tag of the <code>&lt;picture></code> declaration block. The 
-    <code>&lt;img></code> element will act as the default image resource and 
-    also the fallback for browsers that do not support the 
-    <code>&lt;picture></code> element.</p>
+      <!-- // [START code-block-source-media] -->
+      <style>
+        picture {display: block; width: 100%; text-align: center;}
+      </style>
 
-    <p>Resize the browser to see different versions of the picture
-    loading at different viewport sizes.</p>
+      <picture>
+        <source media="(min-width: 650px)" srcset="images/kitten-large.png">
+        <source media="(min-width: 465px)" srcset="images/kitten-medium.png">
+        <!-- img tag for browsers that do not support picture element -->
+        <img src="images/kitten-small.png" alt="a cute kitten">
+      </picture>
+      <!-- // [END code-block] -->
 
+    </section>
 
-    <!-- // [START code-block] -->
-    <style>
-      picture {display: block; width: 100%; text-align: center;}
-    </style>
+    <section id="file-format-example">
 
-    <picture>
-      <source media="(min-width: 650px)" srcset="images/kitten-large.png">
-      <source media="(min-width: 465px)" srcset="images/kitten-medium.png">
-      <!-- img tag for browsers that do not support picture element -->
-      <img src="images/kitten-small.png" alt="a cute kitten">
-    </picture>
-    <!-- // [END code-block] -->
+      <p>In the second example below, the browser will display a WebP image 
+      instead of a JPG when the browser supports WebP.</p>
+
+      <!-- // [START code-block-source-type] -->
+      <picture>
+        <source type="image/webp" srcset="images/butterfly.webp">
+        <img src="images/butterfly.jpg" alt="a butterfly">
+      </picture>
+      <!-- // [END code-block] -->
+
+    </section>
+
+    <section id="notes">
+    
+      <p>The <code>&lt;img></code> element is required as the last nested child
+      tag of the <code>&lt;picture></code> declaration block. The 
+      <code>&lt;img></code> element will act as the default image resource and 
+      also the fallback for browsers that do not support the 
+      <code>&lt;picture></code> element.</p>
+
+    </section>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
