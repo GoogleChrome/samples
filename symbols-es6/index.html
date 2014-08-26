@@ -14,16 +14,21 @@
     <p>Available in <a href="http://www.chromestatus.com/feature/6042091272536064">Chrome 38+</a></p>
 
     <p>
-      Symbols, as <a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-symbol-objects">described</a>
+      <code>Symbols</code>, as <a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-symbol-objects">described</a>
       in the ES6 draft specification, have a <a href="http://tc39wiki.calculist.org/es6/symbols/">variety of uses</a>.
-      This demo illustrates how they can be used to simulate private member variables in a class.
+      This demo illustrates how they can be used to "simulate" private member variables in a class.
+      <strong>Note:</strong> While <code>Symbols</code> provide a convenient way to approximate private member variables,
+      the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols"><code>Object.getOwnPropertySymbols()</code></a>
+      method makes it possible to obtain the list of <code>Symbols</code> defined for any object. Properties named via
+      <code>Symbols</code> can be accessed by making use of this reflection method, meaning the properties are not truly private.
     </p>
 
     <p>
       The <code>AccessCounter</code> class defined in this page's JavaScript can be used to keep track of the number of
-      times a private member variable is accessed via a getter method.
+      times a property is accessed via a getter method.
       Each time the <code>value</code> getter is called, an internal counter is incremented.
-      Neither the <code>AccessCounter</code>'s value nor the counter are exposed directly, only via the getter methods.
+      Neither the <code>AccessCounter</code>'s value nor the counter are exposed directly
+      (though see the previous <strong>Note</strong> about reflection).
     </p>
 
     <!-- // [START code-block] -->
