@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS Shapes Level 1 Sample</title>
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <h1>CSS Shapes Level 1 Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/5163890719588352">Chrome 37+</a></p>
+
+    <style>
+    .shape {
+      width: 160px;
+      height: 160px;
+      background-color: red;
+      background-size: 260px 260px;
+    }
+    p {
+      width: 100%;
+      max-width: 500px;
+      font-size: 14px;
+    }
+
+    p:after {
+      content: '';
+      display:block;
+      clear: both;
+    }
+
+    .polygon {
+      -webkit-clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+      clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+    }
+
+    .circle {
+      -webkit-clip-path: circle(80px at 50% 50%);
+      clip-path: circle(80px at 50% 50%);
+    }
+
+    .inset {
+      border-radius: 40px;
+      width: 140px;
+      height: 140px;
+    }
+    </style>
+
+    <h2>Defining the shape</h2>
+
+    <!-- // [START shape-outside-polygon] -->
+    <style>
+      .polygon {
+        shape-outside: polygon(
+          50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%
+        );
+        float: left;
+      }
+    </style>
+    <div class="shape polygon"></div>
+    <p>
+      Thanks to the <code>shape-outside</code> css property set on
+      the element on the left, this paragraph is flowing around the polygon
+      shape defined in that property's value.
+    </p>
+    <!-- // [END shape-outside-polygon] -->
+
+    <!-- // [START shape-outside-circle] -->
+    <style>
+      .circle {
+        shape-outside: circle(80px at 50% 50%);
+        float: left;
+      }
+    </style>
+    <div class="shape circle"></div>
+    <p>
+      There are four basic shapes supported: <code>polygon(), circle(), ellipse()
+      and inset()</code>. This circle is defined using the radius (<code>80px</code>)
+      and the center position (<code>at 50% 50%</code>).
+    </p>
+    <!-- // [END shape-outside-polygon] -->
+
+    <!-- // [START shape-outside-inset] -->
+    <style>
+      .inset {
+        shape-outside: inset(0px round 50px) border-box;
+        float: left;
+      }
+    </style>
+    <div class="shape inset"></div>
+    <p>
+      <code>inset()</code> is used to create rectangular shapes
+      inside an element. It is useful for defining some rounded
+      corners for the float area.
+    </p>
+    <!-- // [END shape-outside-inset] -->
+
+    <!-- // [START shape-outside-image] -->
+    <style>
+      .cat {
+        shape-outside: url(cat.png);;
+        shape-image-threshold: 0.5;
+        float: left;
+        background: url('cat.png') no-repeat;
+      }
+    </style>
+    <div class="shape cat">
+    </div>
+    <p>
+      You can use alpha channel of an image to float text around it.
+      Pass the image's url to the <code>shape-outside</code> property.
+      The shape is defined by the pixels whose alpha value is greater than
+      the threshold specified in the <code>shape-image-threshold</code>.
+    </p>
+    <!-- // [END shape-outside-image] -->
+
+    <h2>Shape spacing</h2>
+
+    <!-- // [START shape-outside-margin] -->
+    <style>
+      .margin {
+        margin: 20px;
+        shape-outside: inset(0px round 50px) border-box;
+        shape-margin: 20px;
+      }
+    </style>
+    <div class="shape circle margin"></div>
+    <p>
+      <code>shape-margin</code> creates a space between the shape defined in
+      <code>shape-outside</code> and the flowing text around it.
+    </p>
+    <!-- // [END shape-outside-margin] -->
+
+    <!-- // [START shape-outside-margin-box] -->
+    <style>
+      .box {
+        height: 50px;
+        width: 50px;
+        padding: 1em;
+        margin: 1em;
+        border: 1em solid yellow;
+        box-shadow: 0 0 0 1em blue;
+        float: left;
+      }
+      .margin-box {
+        shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%) margin-box;
+      }
+    </style>
+    <div class="shape box margin-box">
+      <p>content</p>
+    </div>
+    <p>
+      CSS shapes use <em>reference box</em> to define the exact layout of
+      the float area. Apart from the default width and height of the element,
+      <code>margin-box</code>, <code>content-box</code>,
+      <code>padding-box</code>, and <code>border-box</code> can be used.
+      This shape uses <code>margin-box</code>, defined in the
+      <code>shape-outside</code> property.
+    </p>
+    <!-- // [END shape-outside-margin-box] -->
+
+    <!-- // [START shape-outside-border-box] -->
+    <style>
+      .box {
+        height: 50px;
+        width: 50px;
+        padding: 1em;
+        margin: 1em;
+        border: 1em solid yellow;
+        box-shadow: 0 0 0 1em blue;
+        float: left;
+      }
+      .border-box {
+        shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%) border-box;
+      }
+    </style>
+    <div class="shape box border-box">
+      <p>content</p>
+    </div>
+    <p>
+      This shape uses <code>border-box</code>, defined in the
+      <code>shape-outside</code> property. The content is in red,
+      border in yellow and margin area in light blue.
+    </p>
+    <!-- // [END shape-outside-border-box] -->
+
+    <!-- // [START shape-outside-padding-box] -->
+    <style>
+      .box {
+        height: 50px;
+        width: 50px;
+        padding: 1em;
+        margin: 1em;
+        border: 1em solid yellow;
+        box-shadow: 0 0 0 1em lightblue;
+        float: left;
+      }
+      .padding-box {
+        shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%) padding-box;
+      }
+    </style>
+    <div class="shape box padding-box">
+      <p>content</p>
+    </div>
+    <p>
+      This shape uses <code>padding-box</code>, defined in the
+      <code>shape-outside</code> property. The content is in red,
+      border in yellow and margin area in light blue.
+    </p>
+    <!-- // [END shape-outside-padding-box] -->
+
+    <!-- // [START shape-outside-content-box] -->
+    <style>
+      .box {
+        height: 50px;
+        width: 50px;
+        padding: 1em;
+        margin: 1em;
+        border: 1em solid yellow;
+        box-shadow: 0 0 0 1em lightblue;
+        float: left;
+      }
+      .content-box {
+        shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%) content-box;
+      }
+    </style>
+    <div class="shape box content-box">
+      <p>content</p>
+    </div>
+    <p>
+      This shape uses <code>content-box</code>, defined in the
+      <code>shape-outside</code> property. The content is in red,
+      border in yellow and margin area in light blue.
+    </p>
+    <!-- // [END shape-outside-content-box] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
