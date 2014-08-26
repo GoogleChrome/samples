@@ -48,6 +48,7 @@
         }
 
         AccessCounter.prototype = {
+          // Each time value() is called, the accessCount is incremented.
           get value() {
             this[accessCountSymbol]++;
             return this[valueSymbol];
