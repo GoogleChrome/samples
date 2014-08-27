@@ -82,6 +82,8 @@
       // The default Map iterator yields an Array with two items; the first is the Map entry's key and the
       // second is the Map entry's value. This default iterator is equivalent to typesOfKeys.entries().
       log('Keys and values:');
+      // Alternative, ES6-idiomatic syntax currently supported in Safari & Firefox:
+      // for ([key, value] of typesOfKeys) { ... }
       for (var item of typesOfKeys) {
         log('  ', item[0], ' -> ', item[1]);
       }
