@@ -6,17 +6,11 @@ body {
 
 body {
   position: relative;
-  font-family: 'Roboto Condensed', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
   font-weight: 300;
   background-color: #FFFFFF;
   box-sizing: border-box;
   min-height: 100%;
-}
-
-p,
-ul,
-ol {
-  font-size: 19px;
 }
 
 @media all and (min-width: 990px) {
