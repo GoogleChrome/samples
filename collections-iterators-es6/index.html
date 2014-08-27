@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Collections and Iterators (ES6) Sample</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <h1>Collections and Iterators (ES6) Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/4696563918045184">Chrome 38+</a></p>
+
+    <p>
+      There are several new types of collections and ways of iterating over collections in the
+      <a href="https://people.mozilla.org/~jorendorff/es6-draft.html">draft ECMAScript 6 specification</a>.
+    </p>
+
+    <p>
+      This sample demonstrates creating and working with two types of collections, <code>Set</code>
+      and <code>Map</code>. It also demonstrates using the  <code>for...of</code> syntax to iterate over
+      each type of collection.
+    </p>
+
+    <!-- // [START code-block] -->
+    <pre id="log"></pre>
+
+    <script>
+      function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+      }
+
+      log('Creating, using, and iterating over a Set:');
+      var randomIntegers = new Set();
+      // Generate a random integer in the range [1..10] five times,
+      // and use a Set to keep track of the distinct integers that were generated.
+      for (var i = 0; i < 5; i++) {
+        randomIntegers.add(Math.floor(Math.random() * 10) + 1);
+      }
+
+      log(randomIntegers.size, ' distinct integers were generated.');
+      log('The number 10 was ', randomIntegers.has(10) ? '' : 'not ', 'one of them.');
+      log('Here\'s all of them:');
+
+      // Use for...of to iterate over the items in the Set.
+      // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements
+      // The Set iterator yields a single value corresponding to each entry in the Set.
+      for (var item of randomIntegers) {
+        log(item);
+      }
+
+      log('\nCreating and iterating over a Map:');
+      // Maps can be initialized by passing in an iterable value (https://people.mozilla.org/~jorendorff/es6-draft.html#sec-map-iterable)
+      // Here, we use an Array of Arrays to initialize. The first value in each sub-Array is the new
+      // Map entry's key, and the second is the item's value.
+      var typesOfKeys = new Map([
+        ['one', 'My key is a string.'],
+        ['1', 'My key is also a string'],
+        [1, 'My key is a number'],
+        [document.querySelector('#log'), 'My key is an object']
+      ]);
+      // You can also call set() to add new keys/values to an existing Map.
+      typesOfKeys.set('!!!!', 'My key is excited!');
+
+      // Use for...of to iterate over the items in the Map.
+      // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements
+      // There are several types of Map iterators available.
+      // typesOfKeys.keys() can be used to iterate over just the keys:
+      log('Just the keys:');
+      for (var key of typesOfKeys.keys()) {
+        log('  key: ', key);
+      }
+
+      // typesOfKeys.values() can be used to iterate over just the values:
+      log('Just the values:');
+      for (var value of typesOfKeys.values()) {
+        log('  value: ', value);
+      }
+
+      // The default Map iterator yields an Array with two items; the first is the Map entry's key and the
+      // second is the Map entry's value. This default iterator is equivalent to typesOfKeys.entries().
+      log('Keys and values:');
+      // Alternative, ES6-idiomatic syntax currently supported in Safari & Firefox:
+      // for ([key, value] of typesOfKeys) { ... }
+      for (var item of typesOfKeys) {
+        log('  ', item[0], ' -> ', item[1]);
+      }
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
