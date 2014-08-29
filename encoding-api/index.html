@@ -30,16 +30,20 @@
     <pre id="results"></pre>
 
     <script>
-      // The local files to be fetched, mapped to the encoding that they're using.
-      var filesToEncoding = {
-        'utf8.bin': 'utf-8',
-        'utf16le.bin': 'utf-16le',
-        'macintosh.bin': 'macintosh'
-      };
+      if ('TextDecoder' in window) {
+        // The local files to be fetched, mapped to the encoding that they're using.
+        var filesToEncoding = {
+          'utf8.bin': 'utf-8',
+          'utf16le.bin': 'utf-16le',
+          'macintosh.bin': 'macintosh'
+        };
 
-      Object.keys(filesToEncoding).forEach(function(file) {
-        fetchAndDecode(file, filesToEncoding[file]);
-      });
+        Object.keys(filesToEncoding).forEach(function(file) {
+          fetchAndDecode(file, filesToEncoding[file]);
+        });
+      } else {
+        document.querySelector('#results').textContent = 'Your browser does not support the Encoding API.'
+      }
 
       // Use XHR to fetch `file` and interpret its contents as being encoded with `encoding`.
       function fetchAndDecode(file, encoding) {
