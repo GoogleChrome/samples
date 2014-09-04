@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: Registration</title>
+
+    <link rel="stylesheet" href="../../styles/main.css">
+    <style>
+      .registration {
+        margin: 0.5em;
+        padding: 0.5em;
+        border-radius: 0.5em;
+        background-color: rgb(235, 235, 235);
+      }
+
+      .installing {
+        background-color: rgb(225, 225, 225);
+      }
+
+      .installed {
+        background-color: rgb(215, 215, 215);
+      }
+
+      .activating {
+        background-color: rgb(205, 205, 205);
+      }
+
+      .activated {
+        background-color: rgb(125, 215, 125);
+      }
+
+      .redundant {
+        background-color: rgb(215, 125, 125);
+      }
+    </style>
+  </head>
+  <body>
+    <script src="http://www.polymer-project.org/platform.js"></script>
+    <link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html">
+
+    <h1>Service Worker Sample: Registration</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 39+</a></p>
+
+    <!-- // [START code-block] -->
+    <template id="page-template" is="auto-binding">
+      <template if="{{ error }}">
+        <h3>Error: {{error}}</h3>
+      </template>
+
+      <template if="{{ registrations && registrations.length > 0 }}">
+        <h3>Registered Service Workers:</h3>
+
+        <template repeat="{{ registrationInfo, i in registrations }}">
+          <div class="registration {{registrationInfo.currentState}}">
+            <p>Script <strong>{{registrationInfo.url}}</strong> with scope <strong>{{registrationInfo.scope}}</strong></p>
+
+            <div>
+              <button on-tap="{{update}}">Force Update</button>
+              <button on-tap="{{getAll}}">Get All Clients</button>
+              <button on-tap="{{unregister}}">Unregister</button>
+            </div>
+
+            <template if="{{ registrationInfo.states && registrationInfo.states.length > 0 }}">
+              <div>
+                <p>State Transitions:</p>
+                <ol>
+                  <template repeat="{{ state, i in registrationInfo.states }}">
+                    <li>{{state}}</li>
+                  </template>
+                </ol>
+              </div>
+            </template>
+
+            <div>
+              <p>Send a Message:</p>
+              <div>
+                <input type="text" size="60" value="{{messageValues[i]}}">
+                <button on-tap="{{sendMessage}}" disabled?="{{!messageValues[i]}}">Send</button>
+              </div>
+            </div>
+
+            <template if="{{ registrationInfo.messages && registrationInfo.messages.length > 0 }}">
+              <div>
+                <p>Message Responses:</p>
+                <ul>
+                  <template repeat="{{ message in registrationInfo.messages }}">
+                    <li>{{message}}</li>
+                  </template>
+                </ul>
+              </div>
+            </template>
+          </div>
+        </template>
+      </template>
+    </template>
+
+    <script>
+      var template = document.querySelector('#page-template');
+      template.registrations = [];
+      template.messageValues = {};
+
+      function postMessageToWorker(message, model) {
+        var messageChannel = new MessageChannel();
+        messageChannel.port1.onmessage = function(e) {
+          model.registrationInfo.messages.push(e.data);
+        };
+
+        model.registrationInfo.serviceWorker.postMessage(message, [messageChannel.port2]);
+      }
+
+      template.unregister = function(e) {
+        var registration = e.target.templateInstance.model.registrationInfo.registration;
+        registration.unregister();
+      };
+
+      template.update = function(e) {
+        var model = e.target.templateInstance.model;
+        postMessageToWorker('update', model);
+      };
+
+      template.getAll = function(e) {
+        var model = e.target.templateInstance.model;
+        postMessageToWorker('getAll', model);
+      };
+
+      template.sendMessage = function(e) {
+        var model = e.target.templateInstance.model;
+        var message = template.messageValues[model.i];
+        template.messageValues[model.i] = '';
+
+        postMessageToWorker(message, model);
+      };
+
+      var scriptToScopes = {
+        'service-worker-one.js': ['/', './'],
+        'service-worker-two.js': ['./']
+      };
+
+      if ('serviceWorker' in navigator) {
+        Object.keys(scriptToScopes).forEach(function(script) {
+          var scopes = scriptToScopes[script];
+
+          scopes.forEach(function(scope) {
+            navigator.serviceWorker.register(script, { scope: scope }).then(
+              function(registration) {
+                [registration.installing, registration.waiting, registration.active].forEach(function(serviceWorker) {
+                  if (serviceWorker) {
+                    var index = template.registrations.length;
+                    template.registrations.push({
+                      registration: registration,
+                      serviceWorker: serviceWorker,
+                      url: serviceWorker.scriptURL,
+                      currentState: serviceWorker.state,
+                      states: [serviceWorker.state],
+                      scope: registration.scope,
+                      messages: []
+                    });
+
+                    serviceWorker.addEventListener('statechange', function(e) {
+                      template.registrations[index].currentState = e.target.state;
+                      template.registrations[index].states.push(e.target.state);
+                    });
+                  }
+                });
+              },
+              function(error) {
+                template.error = 'Registering ' + script + ' with scope ' + scope + ' failed: ' + error;
+              }
+            );
+          });
+        });
+      } else {
+        template.error = 'Service Workers are not available.';
+      }
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
