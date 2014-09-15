@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample of basic Service Worker registration.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: Basic Registration</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <!-- TODO: Replace PLACEHOLDER with feature name. -->
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Basic Registration">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../../images/favicon.ico">
+
+    <link rel="stylesheet" href="../../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Service Worker Sample: Basic Registration</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 39+</a></p>
+
+    <p>
+      This sample demonstrates the most basic Service Worker registration scenario. The script
+      <code>service-worker.js</code> is registered to handle the URL scope <code>./</code>. It is "safe"
+      to register the same script multiple times, it's not necessary to check for a previous registration.
+    </p>
+
+    <p>
+      The sample doesn't track the state of the registered Service Worker (whether it ends up being redundant,
+      the "worker-in-waiting", etc.), but it's sufficient to ensure that a Service Worker will control
+      documents under that scope the next time one of them is loaded.
+    </p>
+
+    <!-- // [START code-block] -->
+    <div class="output">
+      <p>Service Worker registration: <strong id="status"></strong></p>
+    </div>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        // Override the default scope of '/' with './', so that the registration applies
+        // to the current directory and everything underneath it.
+        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(
+          function(registration) {
+            // At this point, registration has taken place.
+            // The Service Worker will not handle requests until this page and any
+            // other instances of this page (in other tabs, etc.) have been
+            // closed/reloaded.
+            document.querySelector('#status').textContent = 'succeeded';
+          },
+          function(error) {
+            // Something went wrong during registration. The service-worker.js file
+            // might be unavailable or contain a syntax error.
+            document.querySelector('#status').textContent = error;
+          }
+        );
+      } else {
+        // The current browser doesn't support Service Workers.
+        var aElement = document.createElement('a');
+        aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
+        aElement.textContent = 'unavailable';
+        document.querySelector('#status').appendChild(aElement);
+      }
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>

@@ -171,3 +171,10 @@ textarea[contenteditable] {
 h1 {
   margin-bottom: -0.5em;
 }
+
+.output {
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 0.75em;
+  background-color: rgb(234, 234, 234);
+}
