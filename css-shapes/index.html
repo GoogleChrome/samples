@@ -14,53 +14,75 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of CSS Shapes Level 1.">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>CSS Shapes Level 1 Sample</title>
-    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="CSS Shapes Level 1 Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
     <link rel="stylesheet" href="../styles/main.css">
   </head>
+
   <body>
     <h1>CSS Shapes Level 1 Sample</h1>
     <p>Available in <a href="http://www.chromestatus.com/feature/5163890719588352">Chrome 37+</a></p>
 
     <style>
-    .shape {
-      width: 160px;
-      height: 160px;
-      background-color: red;
-      background-size: 260px 260px;
-    }
-    p {
-      width: 100%;
-      max-width: 500px;
-      font-size: 14px;
-    }
+      .shape {
+        width: 160px;
+        height: 160px;
+        background-color: red;
+        background-size: 260px 260px;
+      }
+      p {
+        width: 100%;
+        max-width: 500px;
+        font-size: 14px;
+      }
 
-    p:after {
-      content: '';
-      display:block;
-      clear: both;
-    }
+      p:after {
+        content: '';
+        display:block;
+        clear: both;
+      }
 
-    .polygon {
-      -webkit-clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
-      clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
-    }
+      .polygon {
+        -webkit-clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+        clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+      }
 
-    .circle {
-      -webkit-clip-path: circle(80px at 50% 50%);
-      clip-path: circle(80px at 50% 50%);
-    }
+      .circle {
+        -webkit-clip-path: circle(80px at 50% 50%);
+        clip-path: circle(80px at 50% 50%);
+      }
 
-    .inset {
-      border-radius: 40px;
-      width: 140px;
-      height: 140px;
-    }
+      .inset {
+        border-radius: 40px;
+        width: 140px;
+        height: 140px;
+      }
     </style>
 
     <h2>Defining the shape</h2>
@@ -256,8 +278,9 @@ limitations under the License.
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-53563471-1');
+      ga('create', 'UA-53563471-1', 'auto');
       ga('send', 'pageview');
     </script>
+    <!-- Built with love using Web Starter Kit -->
   </body>
 </html>
