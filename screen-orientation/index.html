@@ -59,6 +59,9 @@
     <script>
       var lock = function() {
         /* // [START lock-orientation] */
+        // Page needs to be in a fullscreen mode for orientation lock to work.
+        document.body.webkitRequestFullScreen();
+        // Lock orientation.
         screen.orientation.lock('landscape').then(
           function() {
             alert('Orientation locked!');
@@ -70,7 +73,6 @@
         );
         /* // [END lock-orientation] */
       };
-
     </script>
     <button onclick="lock()">lock orientation</button>
 
