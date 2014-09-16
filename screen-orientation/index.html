@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Screen Orientation Sample</title>
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <h1>Screen Orientation Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/6191285283061760">Chrome 38+</a></p>
+
+    <p>Screen Orientation API gives ability to read the screen orientation and lock it. It can be used to adapt the layout of a web app, e.g.
+    from vertical to horizontal grid.</p>
+
+    <p>To read the current orientation of the screen, inspect the <code>orientation</code> property of the global <code>screen</code> object.</p>
+
+    <script>
+    /* // [START read-orientation] */
+      var log = document.createElement('pre')
+      log.innerText = 'Current orientation: ' + screen.orientation.type;
+      document.body.appendChild(log);
+    /* // [END read-orientation] */
+    </script>
+
+    <p>It is possible to listen to the changes in screen orientation using the
+    <code>onchange</code> listener.</p>
+
+    <pre>
+      screen.orientation.onchange = function() {
+        alert('Orientation changed! the current angle is ' +
+            screen.orientation.angle);
+      }
+    </pre>
+    <script>
+
+    /* // [START listen-orientation] */
+      screen.orientation.onchange = function() {
+        alert('Orientation changed! the current angle is ' +
+            screen.orientation.angle);
+      }
+    /* // [END listen-orientation] */
+    </script>
+
+    <p>You can lock the orientation to a supported value (
+      landscape,
+      landscape-primary,
+      landscape-secondary,
+      portrait,
+      portrait-primary,
+      portrait-secondary,
+      natural).
+    Calling <code>screen.orientation.lock</code> returns a promise. The promise will be rejected if the device does not support the orientation lock.
+    </p>
+
+
+    <script>
+      var lock = function() {
+        /* // [START lock-orientation] */
+        // Page needs to be in a fullscreen mode for orientation lock to work.
+        document.body.webkitRequestFullScreen();
+        // Lock orientation.
+        screen.orientation.lock('landscape').then(
+          function() {
+            alert('Orientation locked!');
+          },
+          function(err) {
+            alert(err.message);
+            // E.g. "lockOrientation() is not available on this device"
+          }
+        );
+        /* // [END lock-orientation] */
+      };
+    </script>
+    <button onclick="lock()">lock orientation</button>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
