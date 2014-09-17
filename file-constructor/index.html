@@ -66,7 +66,7 @@ limitations under the License.
 
       Object.keys(fileData).forEach(function(name) {
         // This example passes in an array of string data as the first argument to File().
-        // It's also possible to pass in an ArrayBuffer or ArrayBufferView.
+        // The array can also contain ArrayBuffer, ArrayBufferView, Blob, and File instances.
         var file = new File([fileData[name].data], name, {
           type: fileData[name].type,
           lastModified: Date.now()
