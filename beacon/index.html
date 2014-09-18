@@ -15,14 +15,33 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html>
-  <head>
+  <head lang="en">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of Beacon.">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Beacon Sample</title>
 
-    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Beacon Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
     <link rel="stylesheet" href="../styles/main.css">
   </head>
   <body>
@@ -56,13 +75,13 @@ limitations under the License.
 
     <!-- // [START code-block] -->
     <script>
-    window.addEventListener('unload', logData, false);
+      window.addEventListener('unload', logData, false);
 
-    var diagnosticData = 'Sent by a beacon!';
+      var diagnosticData = 'Sent by a beacon!';
 
-    function logData() {
-        navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", diagnosticData);
-    }
+      function logData() {
+          navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", diagnosticData);
+      }
     </script>
     <!-- // [END code-block] -->
 
@@ -72,8 +91,9 @@ limitations under the License.
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-53563471-1');
+      ga('create', 'UA-53563471-1', 'auto');
       ga('send', 'pageview');
     </script>
+    <!-- Built with love using Web Starter Kit -->
   </body>
 </html>
