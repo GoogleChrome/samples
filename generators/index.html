@@ -68,6 +68,7 @@ limitations under the License.
     <script>
       var loremIpsumArray = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'.split(' ');
 
+      //The '*' character after 'function' indicates that this is a generator, not a normal function.
       function* loremIpsumGenerator(maxWords, uppercase) {
         // Initialize state. Each iterator based on this generator maintains its own state.
         var count = 0;
@@ -163,8 +164,6 @@ limitations under the License.
       }
     </script>
     <!-- // [END code-block] -->
-
-    <script src="https://apis.google.com/js/client.js?onload=gapiAvailable" async defer></script>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
