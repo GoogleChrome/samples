@@ -1,0 +1,11 @@
+{
+  "name": "Web Application Manifest Sample!",
+  "icons": [{
+    "src": "../images/touch/chrome-touch-icon-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "orientation": "landscape"
+}
