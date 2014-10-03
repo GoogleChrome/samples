@@ -76,7 +76,8 @@ limitations under the License.
 
         // Assuming maxWords isn't set via the generator constructor, this will repeat infinitely.
         // If maxWords is set, then terminate the loop once count is equal to it.
-        while (maxWords === undefined || count < maxWords) {
+        maxWords = maxWords || Infinity;
+        while (count < maxWords) {
           var nextWord = loremIpsumArray[i];
           // uppercase takes its value from the generator constructor the first time through the loop,
           // and takes its value from an optional parameter to .next() each subsequent time.
@@ -100,14 +101,15 @@ limitations under the License.
         }
 
         // If we reach this point due to loop termination, then there's an implicit
-        //   return { done: true, value: undefined };
-        // Be sure to check the .done property if you're iterating with .next()!
-        // If you iterate with a for..of loop, it will automatically terminate when .done is true.
+        //   return undefined;
+        // which in turn yields {done: true, value: undefined}.
+        // If you iterate with a for..of loop, it will automatically terminate when .done is true,
+        // but be sure to check the .done property if you're iterating with .next()!
       }
 
       document.querySelector('#add-many-words').addEventListener('click', function() {
         // This will iterate over an infinite sequence of words.
-        var infiniteIpsumIterator = loremIpsumGenerator();
+        var infiniteIpsumIterator = new loremIpsumGenerator();
         var manyWordsElement = document.querySelector('#many-words');
 
         for (var word of infiniteIpsumIterator) {
@@ -124,28 +126,21 @@ limitations under the License.
 
       var fiveWordIpsumIterator;
       var fiveWordsElement = document.querySelector('#five-words');
-
       document.querySelector('#add-word').addEventListener('click', function() {
-        if (fiveWordIpsumIterator === undefined) {
-          // Create an iterator from the generator if it doesn't already exist.
-          // The iterator will yield 5 words, and the first word will not be in uppercase.
-          fiveWordIpsumIterator = loremIpsumGenerator(5, false);
-        }
-
         addNextWord(false);
       });
-
       document.querySelector('#add-uppercase-word').addEventListener('click', function() {
-        if (fiveWordIpsumIterator === undefined) {
-          // Create an iterator from the generator if it doesn't already exist.
-          // The iterator will yield 5 words, and the first word will be in uppercase.
-          fiveWordIpsumIterator = loremIpsumGenerator(5, true);
-        }
-
         addNextWord(true);
       });
 
       function addNextWord(uppercase) {
+        if (fiveWordIpsumIterator === undefined) {
+          // Create an iterator from the generator if it doesn't already exist.
+          // The iterator will yield 5 words, and whether the first word is in uppercase
+          // or not depends on the value of the 'uppercase' parameter.
+          fiveWordIpsumIterator = new loremIpsumGenerator(5, uppercase);
+        }
+
         // Get the next value from the iterator.
         // The uppercase parameter will be effectively ignored if this is the first time
         // we're calling .next(); the value passed in when constructing the iterator
