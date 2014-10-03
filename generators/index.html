@@ -49,26 +49,56 @@ limitations under the License.
     <h1>Generators (ES6) Sample</h1>
     <p>Available in <a href="http://www.chromestatus.com/feature/4959347197083648">Chrome 39+</a></p>
 
+    <p>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*">Generators</a>
+      are special functions which produce
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/The_Iterator_protocol">iterators</a>
+      when constructed.
+      The <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield">yield</a></code>
+      statement within a generator suspends execution and returns control back to the calling
+      function, and normally also returns a value. Subsequent iterations will reuse the previous
+      state and continue execution of the generator code where it last left off.
+    </p>
+
+    <p>
+      This two-part example relies on a generator function which yields the words in the first sentence of
+      <a href="http://en.wikipedia.org/wiki/Lorem_ipsum">Lorem ipsum...</a>, one at a time.
+    </p>
+
+    <p>
+      The first part uses an iterator that terminates after yielding five words, and the words
+      can optionally be yielded in uppercase.
+    </p>
+
+    <p>
+      The second part uses an iterator that will continue yielding words infinitely, looping around
+      to the beginning after the last word in the "Lorem ipsum..." sequence is yielded. Since infinite
+      loops are no fun, we explicitly break out of the iteration once enough words have been yielded
+      to take up 300px of vertical space on the page.
+    </p>
+
+    <div class="output">
+      <h3>Five Words</h3>
+      <p>
+        The buttons will add words until the iterator runs out:
+        <button id="add-word">Add Word</button>
+        <button id="add-uppercase-word">Add UPPERCASE Word</button>
+      </p>
+      <p id="five-words"></p>
+
+      <h3>300px Worth of Words</h3>
+      <p>
+        This will add enough words to use up 300px of vertical space:
+        <button id="add-many-words">Add Words</button>
+      </p>
+      <p id="many-words"></p>
+    </div>
+
     <!-- // [START code-block] -->
-    <h3>Five Words</h3>
-    <p>
-      The buttons will add words until the iterator runs out:
-      <button id="add-word">Add Word</button>
-      <button id="add-uppercase-word">Add UPPERCASE Word</button>
-    </p>
-    <p id="five-words"></p>
-
-    <h3>300px Worth of Words</h3>
-    <p>
-      This will add enough words to use up 300px of vertical space:
-      <button id="add-many-words">Add Words</button>
-    </p>
-    <p id="many-words"></p>
-
     <script>
       var loremIpsumArray = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'.split(' ');
 
-      //The '*' character after 'function' indicates that this is a generator, not a normal function.
+      // The '*' character after 'function' indicates that this is a generator, not a normal function.
       function* loremIpsumGenerator(maxWords, uppercase) {
         // Initialize state. Each iterator based on this generator maintains its own state.
         var count = 0;
@@ -115,7 +145,7 @@ limitations under the License.
         for (var word of infiniteIpsumIterator) {
           // The for..of loop automatically sets the variable to the .value yielded by the iterator each time through.
           // It will terminate whenever the iterator yields a .done value of true, which never happens in this case.
-          // Therefore, we need to break out of the loop explicity.
+          // Therefore, we need to break out of the loop explicitly.
           if (manyWordsElement.clientHeight > 300) {
             break;
           }
