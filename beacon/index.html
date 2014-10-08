@@ -62,28 +62,28 @@ limitations under the License.
 
     <pre>
       <code>
-      window.addEventListener('unload', logData, false);
-
-      var diagnosticData = 'Sent by a beacon!';
-
-      function logData() {
-          navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", diagnosticData);
-      }
+      function() {
+          window.addEventListener('pagehide', logData, false);
+          function logData() {
+              navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", 'Sent by a beacon!');
+          }
+      }();
       </code>
     </pre>
 
 
-    <!-- // [START code-block] -->
-    <script>
-      window.addEventListener('unload', logData, false);
-
-      var diagnosticData = 'Sent by a beacon!';
-
-      function logData() {
-          navigator.sendBeacon("https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop", diagnosticData);
-      }
-    </script>
-    <!-- // [END code-block] -->
+<!-- // [START code-block] -->
+<script>
+  function() {
+    window.addEventListener('pagehide', logData, false);
+    function logData() {
+        navigator.sendBeacon(
+          'https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop',
+          'Sent by a beacon!');
+    }
+  }();
+</script>
+<!-- // [END code-block] -->
 
 
     <script>
