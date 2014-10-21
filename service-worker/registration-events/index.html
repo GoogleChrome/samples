@@ -48,7 +48,7 @@ limitations under the License.
 <body>
 <h1>Service Worker Sample: Detailed Registration</h1>
 
-<p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 39+</a></p>
+<p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
 
 <p>
   This sample provides some insight into the events involved in a typical Service Worker registration.
@@ -60,7 +60,7 @@ limitations under the License.
 <p>
   Various pieces of information about the Service Worker from the perspective of the registering page
   can be found below. Additionally, logging information from the Service Worker itself
-  (<code>service-worker.js</code>) can be found by visiting the address
+  (<code><a href="service-worker.js" target="_blank">service-worker.js</a></code>) can be found by visiting the address
   <code>chrome://serviceworker-internals</code> (if you're using Chrome).
 </p>
 
@@ -72,7 +72,7 @@ limitations under the License.
     <em>(Whether <code>'serviceWorker' in navigator</code>.)</em>
   </p>
 
-  <h2>Is This Page Controlled?</h2>
+  <h2>Is This Page Controlled by a Service Worker?</h2>
   <p>
     This page <strong id="controlled"></strong> currently controlled.
     <em>(Whether <code>navigator.serviceWorker.controller</code> is set.)</em>
@@ -90,8 +90,9 @@ limitations under the License.
     </em>
   </p>
   <p>
-    <em>Tip:</em> Try reloading this page to activate an installing/waiting Service Worker and
-    have it start controlling the page. You can also reload with the Shift key held down to load
+    <em>Tip:</em> With a newly registered Service Worker in the <code>activated</code> state,
+    try reloading the page to have start controlling the page.
+    You can also reload with the Shift key held down to load
     the page without the Service Worker controlling it.
   </p>
   <p>State transitions of the Service Worker associated with the current registration:</p>
