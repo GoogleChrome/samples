@@ -1,0 +1,203 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of Generators (ES6).">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Generators (ES6) Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Generators (ES6) Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Generators (ES6) Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/4959347197083648">Chrome 39+</a></p>
+
+    <p>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*">Generators</a>
+      are special functions which produce
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/The_Iterator_protocol">iterators</a>
+      when constructed.
+      The <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield">yield</a></code>
+      statement within a generator suspends execution and returns control back to the calling
+      function, and normally also returns a value. Subsequent iterations will reuse the previous
+      state and continue execution of the generator code where it last left off.
+    </p>
+
+    <p>
+      This two-part example relies on a generator function which yields the words in the first sentence of
+      <a href="http://en.wikipedia.org/wiki/Lorem_ipsum">Lorem ipsum...</a>, one at a time.
+    </p>
+
+    <p>
+      The first part uses an iterator that terminates after yielding five words, and the words
+      can optionally be yielded in uppercase.
+    </p>
+
+    <p>
+      The second part uses an iterator that will continue yielding words infinitely, looping around
+      to the beginning after the last word in the "Lorem ipsum..." sequence is yielded. Since infinite
+      loops are no fun, we explicitly break out of the iteration once enough words have been yielded
+      to take up 300px of vertical space on the page.
+    </p>
+
+    <div class="output">
+      <h3>Five Words</h3>
+      <p>
+        The buttons will add words until the iterator runs out:
+        <button id="add-word">Add Word</button>
+        <button id="add-uppercase-word">Add UPPERCASE Word</button>
+      </p>
+      <p id="five-words"></p>
+
+      <h3>300px Worth of Words</h3>
+      <p>
+        This will add enough words to use up 300px of vertical space:
+        <button id="add-many-words">Add Words</button>
+      </p>
+      <p id="many-words"></p>
+    </div>
+
+    <!-- // [START code-block] -->
+    <script>
+      var loremIpsumArray = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'.split(' ');
+
+      // The '*' character after 'function' indicates that this is a generator, not a normal function.
+      function* loremIpsumGenerator(maxWords, uppercase) {
+        // Initialize state. Each iterator based on this generator maintains its own state.
+        var count = 0;
+        var i = 0;
+
+        // Assuming maxWords isn't set via the generator constructor, this will repeat infinitely.
+        // If maxWords is set, then terminate the loop once count is equal to it.
+        maxWords = maxWords || Infinity;
+        while (count < maxWords) {
+          var nextWord = loremIpsumArray[i];
+          // uppercase takes its value from the generator constructor the first time through the loop,
+          // and takes its value from an optional parameter to .next() each subsequent time.
+          if (uppercase) {
+            nextWord = nextWord.toUpperCase();
+          }
+
+          count++;
+          // Wrap around to the beginning of the array if we've reach the end.
+          if (i >= loremIpsumArray.length) {
+            i = 0;
+          } else {
+            i++;
+          }
+
+          // uppercase is assigned the value passed into the .next() invoked following
+          // the yield, when execution flow switches back to this generator.
+          // It is not assigned a value until another .next() is called and generator execution resumes!
+          // The value is used the subsequent time through the loop.
+          uppercase = yield nextWord;
+        }
+
+        // If we reach this point due to loop termination, then there's an implicit
+        //   return undefined;
+        // which in turn yields {done: true, value: undefined}.
+        // If you iterate with a for..of loop, it will automatically terminate when .done is true,
+        // but be sure to check the .done property if you're iterating with .next()!
+      }
+
+      document.querySelector('#add-many-words').addEventListener('click', function() {
+        // This will iterate over an infinite sequence of words.
+        var infiniteIpsumIterator = new loremIpsumGenerator();
+        var manyWordsElement = document.querySelector('#many-words');
+
+        for (var word of infiniteIpsumIterator) {
+          // The for..of loop automatically sets the variable to the .value yielded by the iterator each time through.
+          // It will terminate whenever the iterator yields a .done value of true, which never happens in this case.
+          // Therefore, we need to break out of the loop explicitly.
+          if (manyWordsElement.clientHeight > 300) {
+            break;
+          }
+
+          manyWordsElement.textContent += word + ' ';
+        }
+      });
+
+      var fiveWordIpsumIterator;
+      var fiveWordsElement = document.querySelector('#five-words');
+      document.querySelector('#add-word').addEventListener('click', function() {
+        addNextWord(false);
+      });
+      document.querySelector('#add-uppercase-word').addEventListener('click', function() {
+        addNextWord(true);
+      });
+
+      function addNextWord(uppercase) {
+        if (fiveWordIpsumIterator === undefined) {
+          // Create an iterator from the generator if it doesn't already exist.
+          // The iterator will yield 5 words, and whether the first word is in uppercase
+          // or not depends on the value of the 'uppercase' parameter.
+          fiveWordIpsumIterator = new loremIpsumGenerator(5, uppercase);
+        }
+
+        // Get the next value from the iterator.
+        // The uppercase parameter will be effectively ignored if this is the first time
+        // we're calling .next(); the value passed in when constructing the iterator
+        // is used the first time through.
+        var nextResult = fiveWordIpsumIterator.next(uppercase);
+
+        // You need to explicitly check if .done is true
+        // (or alternatively check if .value is undefined, if you know your generator never normally
+        // yields undefined) when iterating with .next().
+        if (nextResult.done) {
+          fiveWordsElement.textContent += 'Hey, the iterator is done! Stop pressing me! ';
+        } else {
+          // If we're not done, .value is set to whatever is yielded by the generator.
+          fiveWordsElement.textContent += nextResult.value + ' ';
+        }
+      }
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
