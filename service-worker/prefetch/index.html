@@ -19,11 +19,11 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Sample of prefetching resources during Service Worker registration.">
+    <meta name="description" content="Sample of pre-fetching resources during Service Worker registration.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Service Worker Sample: Prefetching Resources During Registration</title>
+    <title>Service Worker Sample: Pre-fetching Resources During Registration</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -47,12 +47,12 @@ limitations under the License.
   </head>
 
   <body>
-    <h1>Service Worker Sample: Prefetching Resources During Registration</h1>
+    <h1>Service Worker Sample: Pre-fetching Resources During Registration</h1>
 
     <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
 
     <p>
-      This sample demonstrates basic Service Worker registration, in conjunction with pre-caching of a list
+      This sample demonstrates basic Service Worker registration, in conjunction with pre-fetching of a list
       of specific resource URLs during the installation phase.
     </p>
 
@@ -60,26 +60,29 @@ limitations under the License.
       Visit <code>chrome://serviceworker-internals</code> and click on the "Inspect" button next to
       the registered Service Worker to view logging statements for the various actions the
       <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
-    </p>
-
-    <p>
-      The resources that have been pre-fetched should be available without a network connection—
-      try disabling your network and then clicking on the corresponding links. Contrast that with
-      the resource that have not been pre-fetched which will not be initially available without a
-      network connection. There's also an example of a non-existent resource that will always
-      return a HTTP 404.
+      Since most of the action takes place during the Service Worker's install handler, and that is
+      only executed the very first time you visit this page (unless the Service Worker script changes),
+      it can be helpful to inspect the logging in a
+      <a href="https://support.google.com/chrome/answer/95464">Chrome Incognito window</a>.
     </p>
 
     <!-- // [START code-block] -->
     <div class="output">
       <div id="status"></div>
 
-      <ul id="files" style="display: none">
-        <li><a href="static/file1.txt" target="_blank">file1.txt (pre-fetched)</a></li>
-        <li><a href="static/file2.txt" target="_blank">file2.txt (pre-fetched)</a></li>
-        <li><a href="static/file3.txt" target="_blank">file3.txt (not pre-fetched)</a></li>
-        <li><a href="static/does_not_exist.txt" target="_blank">does_not_exist.txt (returns a 404)</a></li>
-      </ul>
+      <div id="files" style="display: none">
+        <p>
+          Some of the resources below have been pre-fetched, and some haven't. Try disabling your network connection
+          and clicking on all the links. The resources that have been pre-fetched should be served from the Service
+          Worker's cache and display as expected; the resource that hasn't been pre-fetched will be unavailable.
+        </p>
+
+        <ul>
+          <li><a href="static/pre_fetched.txt" target="_blank">pre_fetched.txt</a></li>
+          <li><a href="static/pre_fetched.html" target="_blank">pre_fecthed.html</a></li>
+          <li><a href="static/not_pre_fetched.txt" target="_blank">not_pre_fetched.txt</a></li>
+        </ul>
+      </div>
     </div>
 
     <script>
@@ -88,17 +91,23 @@ limitations under the License.
       }
 
       if ('serviceWorker' in navigator) {
-        // Override the default scope of '/' with './', so that the registration applies
-        // to the current directory and everything underneath it.
-        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(
+        navigator.serviceWorker.register('./service-worker.js', {scope: './'}).then(
           function(registration) {
+            document.querySelector('#status').textContent = 'Service Worker registration succeeded.';
+
             if (registration.installing) {
+              // If the current registration represents the "installing" Service Worker, then wait
+              // until the installation step (during which the resources are pre-fetched) completes
+              // to display the file list.
               registration.installing.addEventListener('statechange', function(e) {
                 if (e.target.state === 'installed') {
                   showFilesList();
                 }
               });
             } else {
+              // Otherwise, if this isn't the "installing" Service Worker, then installation must have been
+              // completed during a previous visit to this page, and the resources are already pre-fetched.
+              // So we can show the list of files right away.
               showFilesList();
             }
           },
