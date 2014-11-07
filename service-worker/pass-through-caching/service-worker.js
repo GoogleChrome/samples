@@ -18,8 +18,18 @@ self.addEventListener('fetch', function(event) {
           return fetch(event.request).then(function(response) {
             console.log('  Response for %s from network is: %O', event.request.url, response);
 
-            // We need to call .clone() on the response object to save a copy of it to the cache.
-            cache.put(event.request, response.clone());
+            if (response && response.status < 400) {
+              // This avoids caching responses that we know are errors (i.e. HTTP status code of 4xx or 5xx).
+              // One limitation is that, for non-CORS requests, we get back a filtered opaque response
+              // (https://fetch.spec.whatwg.org/#concept-filtered-response-opaque) which will always have a
+              // .status of 0, regardless of whether the underlying HTTP call was successful. Since we're
+              // blindly caching those opaque responses, we run the risk of caching a transient error response.
+              //
+              // We need to call .clone() on the response object to save a copy of it to the cache.
+              // (https://fetch.spec.whatwg.org/#dom-request-clone)
+              cache.put(event.request, response.clone());
+            }
+
             // Return the original response object, which will be used to fulfill the resource request.
             return response;
           });
