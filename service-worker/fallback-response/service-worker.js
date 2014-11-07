@@ -9,16 +9,18 @@ self.addEventListener('fetch', function(event) {
       if (response.status >= 400) {
         // Any 4xx or 5xx HTTP status code indicates an error, so this potentially is a situation
         // in which we'd want to return a fallback response.
-        console.error('The HTTP request returned an error response:', response);
 
-        if (event.request.url.match(/'https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/)) {
+
+        if (event.request.url.match(/https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/)) {
           // We only want to return our fallback response if this is a specific type of API request.
           // In a real application, you might have logic that returned different responses for different types of
           // requests, using the request URL or the request headers (like Accept:) to determine if/how to fallback.
+          console.info('Returning fallback response to page...');
           return fallbackResponse();
         } else {
           // If this is an error response not associated with the specific type API request we have a fallback for,
           // then just return it to the browser and it will be treated like any other failed HTTP request.
+          console.error('Returning error response directly to page:', response);
           return response;
         }
       } else {
