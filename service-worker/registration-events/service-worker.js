@@ -1,5 +1,5 @@
 // In Chrome, you can view these log messages and many more useful pieces of
-// debugging info at chrome://serviceworker-internals
+// debugging info at chrome://inspect/#service-workers
 
 self.addEventListener('install', function(e) {
   // This event will be fired once when this version of the script is first registered for
