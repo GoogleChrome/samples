@@ -10,7 +10,6 @@ self.addEventListener('fetch', function(event) {
         // Any 4xx or 5xx HTTP status code indicates an error, so this potentially is a situation
         // in which we'd want to return a fallback response.
 
-
         if (event.request.url.match(/https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/)) {
           // We only want to return our fallback response if this is a specific type of API request.
           // In a real application, you might have logic that returned different responses for different types of
@@ -47,7 +46,5 @@ function fallbackResponse() {
   // an error) as a fallback. As an alternative, you can construct and return your own Response object using a
   // Blob as the response body and with whatever headers and response status you'd like.
   // See https://fetch.spec.whatwg.org/#response-class
-  return fetch('static/youtube_api_fallback.json').then(function(response) {
-    return response;
-  });
+  return fetch('static/youtube_api_fallback.json');
 }
