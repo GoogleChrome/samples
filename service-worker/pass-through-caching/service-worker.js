@@ -1,3 +1,11 @@
+// This sample illustrates an aggressive approach to caching, in which every valid response is
+// cached and every request is first checked against the cache.
+// This may not be an appropriate approach if your web application makes requests for
+// arbitrary URLs as part of its normal operation (e.g. a RSS client or a news aggregator),
+// as the cache could end up containing large responses that might not end up ever being accessed.
+// Other approaches, like selectively caching based on response headers or only caching
+// responses served from a specific domain, might be more appropriate for those use cases.
+
 self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
@@ -15,7 +23,7 @@ self.addEventListener('fetch', function(event) {
           // undefined, and we need to fetch() the resource.
           console.log(' No response for %s found in cache. About to fetch from network...', event.request.url);
 
-          return fetch(event.request).then(function(response) {
+          return fetch(event.request.clone()).then(function(response) {
             console.log('  Response for %s from network is: %O', event.request.url, response);
 
             if (response && response.status < 400) {
