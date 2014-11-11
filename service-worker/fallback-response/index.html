@@ -1,0 +1,162 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample of using a Service Worker to provide a fallback response when a fetch() fails.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: Fallback Response</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Fallback Response">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../../images/favicon.ico">
+
+    <link rel="stylesheet" href="../../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Service Worker Sample: Fallback Response</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
+
+    <p>
+      This sample demonstrates basic Service Worker registration, with the Service Worker providing fallback
+      responses when specific HTTP requests fail. This is done within the fetch handler of the Service Worker,
+      and will only work for responses that are not
+      <a href="https://fetch.spec.whatwg.org/#concept-filtered-response-opaque">opaque</a>,
+      since we need to examine the response's HTTP status code.
+    </p>
+
+    <p>
+      Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
+      the registered Service Worker to view logging statements for the various actions the
+      <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
+    </p>
+
+    <!-- // [START code-block] -->
+    <div class="output">
+      <p id="status"></p>
+
+      <div id="request-buttons" style="display: none">
+        <p>
+          Each of these buttons will trigger a CORS-enabled HTTP request to fetch a list of videos from the YouTube Data
+          API. One button makes a valid request, and the other makes an invalid request that always trigger an error
+          response (due to an invalid API key). The Service Worker takes care of translating the error response into a
+          valid fallback response, which is treated by the host page exactly like any other valid response.
+        </p>
+
+        <button id="valid-api-call">Make Valid Request</button>
+        <button id="invalid-api-call">Make Invalid Request</button>
+
+        <p id="response"></p>
+      </div>
+    </div>
+
+    <script>
+      function showRequestButtons() {
+        document.querySelector('#valid-api-call').addEventListener('click', function() {
+          // This is a valid YouTube API key, and should result in a valid API request.
+          makeApiRequest('AIzaSyCr0XVB-Hz1ohPpjvLatdj4qZ5zcSohHsU');
+        });
+
+        document.querySelector('#invalid-api-call').addEventListener('click', function() {
+          // This is an (obviously) invalid YouTube API key, and should result in an invalid API request.
+          makeApiRequest('INVALID_API_KEY');
+        });
+
+        document.querySelector('#request-buttons').style.display = 'block';
+      }
+
+      function makeApiRequest(apiKey) {
+        var xhr = new XMLHttpRequest();
+        // Use the API key passed in to construct the YouTube API request URL.
+        xhr.open('GET', 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=3&' +
+          'playlistId=UU_x5XG1OV2P6uZZ5FSM9Ttw&key=' + apiKey);
+
+        xhr.addEventListener('load', function() {
+          // The controlling Service Worker's fetch handler intercepts this XHR and will automatically translate a
+          // failed API request into a successful response using static fallback data. So regardless of whether
+          // the original HTTP request returned an error or not, this 'load' response handler will be invoked with
+          // a successful response.
+          var response = JSON.parse(xhr.response);
+          console.log('Response is', response);
+
+          var titles = response.items.map(function(item) {
+            return '"' + item.snippet.title + '"';
+          }).join(', ');
+
+          document.querySelector('#response').textContent = 'The three most recent videos in the channel are: ' + titles;
+        });
+
+        xhr.send();
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(function() {
+          if (navigator.serviceWorker.controller) {
+            // If .controller is set, then this page is being actively controlled by the Service Worker.
+            document.querySelector('#status').textContent = 'The Service Worker is currently handling network operations.';
+
+            showRequestButtons();
+          } else {
+            // If .controller isn't set, then prompt the user to reload the page so that the Service Worker can take
+            // control. Until that happens, the Service Worker's fetch handler won't be used.
+            document.querySelector('#status').textContent = 'Please reload this page to allow the Service Worker to handle network operations.';
+          }
+        }, function(error) {
+          // Something went wrong during registration. The service-worker.js file
+          // might be unavailable or contain a syntax error.
+          document.querySelector('#status').textContent = error;
+        });
+      } else {
+        // The current browser doesn't support Service Workers.
+        var aElement = document.createElement('a');
+        aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
+        aElement.textContent = 'unavailable';
+        document.querySelector('#status').appendChild(aElement);
+      }
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
