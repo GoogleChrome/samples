@@ -100,6 +100,8 @@ limitations under the License.
             registration.installing.addEventListener('statechange', function(e) {
               if (e.target.state == 'installed') {
                 resolve();
+              } else if(e.target.state == 'redundant') {
+                reject();
               }
             });
           } else {
