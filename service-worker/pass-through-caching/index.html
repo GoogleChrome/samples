@@ -57,7 +57,16 @@ limitations under the License.
     </p>
 
     <p>
-      Visit <code>chrome://serviceworker-internals</code> and click on the "Inspect" button next to
+      <strong>Note:</strong> This is a very aggressive approach to caching, and might not be appropriate
+      if your web application makes requests for arbitrary URLs as part of its normal operation
+      (e.g. a RSS client or a news aggregator), as the cache could end up containing large responses
+      that might not end up ever being accessed. Other approaches, like selectively caching based on
+      response headers or only caching responses served from a specific domain, might be more
+      appropriate for those use cases.
+    </p>
+
+    <p>
+      Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
       the registered Service Worker to view logging statements for the various actions the
       <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
     </p>
