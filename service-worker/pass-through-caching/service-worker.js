@@ -26,7 +26,9 @@ self.addEventListener('fetch', function(event) {
           return fetch(event.request.clone()).then(function(response) {
             console.log('  Response for %s from network is: %O', event.request.url, response);
 
-            if (response && response.status < 400) {
+            // Optional: add in extra conditions here, e.g. response.type == 'basic' to only cache
+            // responses from the same domain. See https://fetch.spec.whatwg.org/#concept-response-type
+            if (response.status < 400) {
               // This avoids caching responses that we know are errors (i.e. HTTP status code of 4xx or 5xx).
               // One limitation is that, for non-CORS requests, we get back a filtered opaque response
               // (https://fetch.spec.whatwg.org/#concept-filtered-response-opaque) which will always have a
