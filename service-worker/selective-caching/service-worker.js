@@ -63,6 +63,9 @@ self.addEventListener('fetch', function(event) {
           // undefined, and we need to fetch() the resource.
           console.log(' No response for %s found in cache. About to fetch from network...', event.request.url);
 
+          // We call .clone() on the request since we might use it in a call to cache.put() later on.
+          // Both fetch() and cache.put() "consume" the request, so we need to make a copy.
+          // (see https://fetch.spec.whatwg.org/#dom-request-clone)
           return fetch(event.request.clone()).then(function(response) {
             console.log('  Response for %s from network is: %O', event.request.url, response);
 
@@ -77,8 +80,9 @@ self.addEventListener('fetch', function(event) {
               // All of the Google Web Fonts are served off of a domain that supports CORS, so that isn't an issue here.
               // It is something to keep in mind if you're attempting to cache other resources from a cross-origin
               // domain that doesn't support CORS, though!
-              // We need to call .clone() on the response object to save a copy of it to the cache.
-              // (https://fetch.spec.whatwg.org/#dom-request-clone)
+              // We call .clone() on the response to save a copy of it to the cache. By doing so, we get to keep
+              // the original response object which we will return back to the controlled page.
+              // (see https://fetch.spec.whatwg.org/#dom-response-clone)
               console.log('  Caching the response to', event.request.url);
               cache.put(event.request, response.clone());
             } else {
