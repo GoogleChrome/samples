@@ -47,8 +47,8 @@ self.addEventListener('fetch', function(event) {
 
     console.log(' Responding with a mock response body:', responseBody);
     event.respondWith(mockResponse);
-  } else {
-    console.log(' Responding with the default response.');
-    event.respondWith(event.default());
   }
+
+  // If event.respondWith() isn't called because this wasn't a request that we want to mock,
+  // then the default request/response behavior will automatically be used.
 });
