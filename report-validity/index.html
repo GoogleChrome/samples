@@ -61,14 +61,15 @@ limitations under the License.
 
     <p>
       In this particular case, the <code>&lt;form&gt;</code> contains one <code>&lt;input&gt;</code>,
-      with two constraints: <code>required</code>, as well as <code>minlength="4"</code>.
+      with two constraints: <code>required</code>, as well as
+      <code><a href="https://html.spec.whatwg.org/multipage/forms.html#attr-fe-minlength">minlength</a>="4"</code>.
     </p>
 
     <!-- // [START code-block] -->
     <div class="output">
       <form id="sample-form">
         <div>
-          <label for="year">Current Year (required):</label>
+          <label for="year">Enter at least four characters (required):</label>
           <input id="year" type="text" minlength="4" required>
         </div>
       </form>
