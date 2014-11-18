@@ -51,19 +51,19 @@ limitations under the License.
     <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 39+</a></p>
 
     <p>
-      This sample demonstrates the most basic Service Worker registration scenario. The script
+      This sample demonstrates the most basic service worker registration scenario. The script
       <code>service-worker.js</code> is registered to handle the URL scope <code>./</code>. It is "safe"
       to register the same script multiple times, it's not necessary to check for a previous registration.
     </p>
 
     <p>
-      The sample doesn't track the state of the registered Service Worker (whether it ends up being redundant,
-      the "worker-in-waiting", etc.), but it's sufficient to ensure that a Service Worker will control
+      The sample doesn't track the state of the registered service worker (whether it ends up being redundant,
+      the "worker-in-waiting", etc.), but it's sufficient to ensure that a service worker will control
       documents under that scope the next time one of them is loaded.
     </p>
 
     <div class="output">
-      <p>Service Worker registration: <strong id="status"></strong></p>
+      <p>service worker registration: <strong id="status"></strong></p>
     </div>
 
     <script>
@@ -73,7 +73,7 @@ limitations under the License.
         navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(
           function(registration) {
             // At this point, registration has taken place.
-            // The Service Worker will not handle requests until this page and any
+            // The service worker will not handle requests until this page and any
             // other instances of this page (in other tabs, etc.) have been
             // closed/reloaded.
             document.querySelector('#status').textContent = 'succeeded';
@@ -85,7 +85,7 @@ limitations under the License.
           }
         );
       } else {
-        // The current browser doesn't support Service Workers.
+        // The current browser doesn't support service workers.
         var aElement = document.createElement('a');
         aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
         aElement.textContent = 'unavailable';

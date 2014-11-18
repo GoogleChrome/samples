@@ -19,7 +19,7 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Sample of using a Service Worker to provide a fallback response when a fetch() fails.">
+    <meta name="description" content="Sample of using a service worker to provide a fallback response when a fetch() fails.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,8 +51,8 @@ limitations under the License.
     <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
 
     <p>
-      This sample demonstrates basic Service Worker registration, with the Service Worker providing fallback
-      responses when specific HTTP requests fail. This is done within the fetch handler of the Service Worker,
+      This sample demonstrates basic service worker registration, with the service worker providing fallback
+      responses when specific HTTP requests fail. This is done within the fetch handler of the service worker,
       and will only work for responses that are not
       <a href="https://fetch.spec.whatwg.org/#concept-filtered-response-opaque">opaque</a>,
       since we need to examine the response's HTTP status code.
@@ -60,7 +60,7 @@ limitations under the License.
 
     <p>
       Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
-      the registered Service Worker to view logging statements for the various actions the
+      the registered service worker to view logging statements for the various actions the
       <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
     </p>
 
@@ -71,7 +71,7 @@ limitations under the License.
         <p>
           Each of these buttons will trigger a CORS-enabled HTTP request to fetch a list of videos from the YouTube Data
           API. One button makes a valid request, and the other makes an invalid request that always trigger an error
-          response (due to an invalid API key). The Service Worker takes care of translating the error response into a
+          response (due to an invalid API key). The service worker takes care of translating the error response into a
           valid fallback response, which is treated by the host page exactly like any other valid response.
         </p>
 
@@ -104,7 +104,7 @@ limitations under the License.
           'playlistId=UU_x5XG1OV2P6uZZ5FSM9Ttw&key=' + apiKey);
 
         xhr.addEventListener('load', function() {
-          // The controlling Service Worker's fetch handler intercepts this XHR and will automatically translate a
+          // The controlling service worker's fetch handler intercepts this XHR and will automatically translate a
           // failed API request into a successful response using static fallback data. So regardless of whether
           // the original HTTP request returned an error or not, this 'load' response handler will be invoked with
           // a successful response.
@@ -124,14 +124,14 @@ limitations under the License.
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(function() {
           if (navigator.serviceWorker.controller) {
-            // If .controller is set, then this page is being actively controlled by the Service Worker.
-            document.querySelector('#status').textContent = 'The Service Worker is currently handling network operations.';
+            // If .controller is set, then this page is being actively controlled by the service worker.
+            document.querySelector('#status').textContent = 'The service worker is currently handling network operations.';
 
             showRequestButtons();
           } else {
-            // If .controller isn't set, then prompt the user to reload the page so that the Service Worker can take
-            // control. Until that happens, the Service Worker's fetch handler won't be used.
-            document.querySelector('#status').textContent = 'Please reload this page to allow the Service Worker to handle network operations.';
+            // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
+            // control. Until that happens, the service worker's fetch handler won't be used.
+            document.querySelector('#status').textContent = 'Please reload this page to allow the service worker to handle network operations.';
           }
         }, function(error) {
           // Something went wrong during registration. The service-worker.js file
@@ -139,7 +139,7 @@ limitations under the License.
           document.querySelector('#status').textContent = error;
         });
       } else {
-        // The current browser doesn't support Service Workers.
+        // The current browser doesn't support service workers.
         var aElement = document.createElement('a');
         aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
         aElement.textContent = 'unavailable';

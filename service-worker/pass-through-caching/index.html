@@ -16,7 +16,7 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Sample of pass-through caching with Service Workers.">
+    <meta name="description" content="Sample of pass-through caching with service workers.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,10 +48,10 @@ limitations under the License.
     <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
 
     <p>
-      This sample demonstrates basic Service Worker registration, in conjunction with pass-through
-      caching. After the Service Worker starts controlling this page, the first time a specific
+      This sample demonstrates basic service worker registration, in conjunction with pass-through
+      caching. After the service worker starts controlling this page, the first time a specific
       resource is requested, it's <code>fetch()</code>ed from the network and a copy of the response
-      is stored in the Service Worker's cache. All subsequent times that the same resource is
+      is stored in the service worker's cache. All subsequent times that the same resource is
       requested, it's returned directly from the cache.
     </p>
 
@@ -66,7 +66,7 @@ limitations under the License.
 
     <p>
       Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
-      the registered Service Worker to view logging statements for the various actions the
+      the registered service worker to view logging statements for the various actions the
       <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
     </p>
 
@@ -87,17 +87,17 @@ limitations under the License.
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js', {scope: './'}).then(
           function() {
-            // Registration was successful. Now, check to see whether the Service Worker is controlling the page.
+            // Registration was successful. Now, check to see whether the service worker is controlling the page.
             if (navigator.serviceWorker.controller) {
-              // If .controller is set, then this page is being actively controlled by the Service Worker.
-              document.querySelector('#status').textContent = 'The Service Worker is currently handling network operations. ' +
-                'If you reload the page, the images (and everything else) will be served from the Service Worker\'s cache.';
+              // If .controller is set, then this page is being actively controlled by the service worker.
+              document.querySelector('#status').textContent = 'The service worker is currently handling network operations. ' +
+                'If you reload the page, the images (and everything else) will be served from the service worker\'s cache.';
 
               showImages();
             } else {
-              // If .controller isn't set, then prompt the user to reload the page so that the Service Worker can take
-              // control. Until that happens, the Service Worker's fetch handler won't be used.
-              document.querySelector('#status').textContent = 'Please reload this page to allow the Service Worker to handle network operations.';
+              // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
+              // control. Until that happens, the service worker's fetch handler won't be used.
+              document.querySelector('#status').textContent = 'Please reload this page to allow the service worker to handle network operations.';
             }
           },
           function(error) {
@@ -107,10 +107,10 @@ limitations under the License.
           }
         );
       } else {
-        // The current browser doesn't support Service Workers.
+        // The current browser doesn't support service workers.
         var aElement = document.createElement('a');
         aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
-        aElement.textContent = 'Service Workers are not supported in the current browser.';
+        aElement.textContent = 'Service workers are not supported in the current browser.';
         document.querySelector('#status').appendChild(aElement);
       }
     </script>
