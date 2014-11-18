@@ -1,1 +1,1 @@
-// This Service Worker doesn't actually do anything!
+// This service worker doesn't actually do anything!
