@@ -17,7 +17,7 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('prefetch-sample').then(function(cache) {
       cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
-        // It's very important to use { mode: 'no-cors' } if there is any chance that
+        // It's very important to use {mode: 'no-cors'} if there is any chance that
         // the resources being fetched are served off of a server that doesn't support
         // CORS (http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
         // In this example, www.chromium.org doesn't support CORS, and the fetch()
@@ -27,7 +27,7 @@ self.addEventListener('install', function(event) {
         // (https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#cross-origin-resources)
         // and it is not possible to determine whether an opaque response represents a success or failure
         // (https://github.com/whatwg/fetch/issues/14).
-        return new Request(urlToPrefetch, { mode: 'no-cors' });
+        return new Request(urlToPrefetch, {mode: 'no-cors'});
       })).then(function() {
         console.log('All resources have been fetched and cached.');
       });

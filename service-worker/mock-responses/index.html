@@ -122,7 +122,7 @@ limitations under the License.
       }
 
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(function() {
+        navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function() {
           if (navigator.serviceWorker.controller) {
             // If .controller is set, then this page is being actively controlled by the service worker.
             document.querySelector('#status').textContent = 'The service worker is currently handling network operations.';
