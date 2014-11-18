@@ -133,7 +133,7 @@ limitations under the License.
             // control. Until that happens, the service worker's fetch handler won't be used.
             document.querySelector('#status').textContent = 'Please reload this page to allow the service worker to handle network operations.';
           }
-        }, function(error) {
+        }).catch(function(error) {
           // Something went wrong during registration. The service-worker.js file
           // might be unavailable or contain a syntax error.
           document.querySelector('#status').textContent = error;

@@ -85,27 +85,24 @@ limitations under the License.
       }
 
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./service-worker.js', {scope: './'}).then(
-          function() {
-            // Registration was successful. Now, check to see whether the service worker is controlling the page.
-            if (navigator.serviceWorker.controller) {
-              // If .controller is set, then this page is being actively controlled by the service worker.
-              document.querySelector('#status').textContent = 'The service worker is currently handling network operations. ' +
-                'If you reload the page, the images (and everything else) will be served from the service worker\'s cache.';
+        navigator.serviceWorker.register('./service-worker.js', {scope: './'}).then(function() {
+          // Registration was successful. Now, check to see whether the service worker is controlling the page.
+          if (navigator.serviceWorker.controller) {
+            // If .controller is set, then this page is being actively controlled by the service worker.
+            document.querySelector('#status').textContent = 'The service worker is currently handling network operations. ' +
+              'If you reload the page, the images (and everything else) will be served from the service worker\'s cache.';
 
-              showImages();
-            } else {
-              // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
-              // control. Until that happens, the service worker's fetch handler won't be used.
-              document.querySelector('#status').textContent = 'Please reload this page to allow the service worker to handle network operations.';
-            }
-          },
-          function(error) {
-            // Something went wrong during registration. The service-worker.js file
-            // might be unavailable or contain a syntax error.
-            document.querySelector('#status').textContent = error;
+            showImages();
+          } else {
+            // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
+            // control. Until that happens, the service worker's fetch handler won't be used.
+            document.querySelector('#status').textContent = 'Please reload this page to allow the service worker to handle network operations.';
           }
-        );
+        }).catch(function(error) {
+          // Something went wrong during registration. The service-worker.js file
+          // might be unavailable or contain a syntax error.
+          document.querySelector('#status').textContent = error;
+        });
       } else {
         // The current browser doesn't support service workers.
         var aElement = document.createElement('a');
