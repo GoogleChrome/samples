@@ -60,52 +60,59 @@ self.addEventListener('message', function(event) {
 
   caches.open(CURRENT_CACHES['some-cache']).then(function(cache) {
     switch (event.data.command) {
+      // This command returns a list of the URLs corresponding to the Request objects
+      // that serve as keys for the current cache.
       case 'keys':
         cache.keys().then(function(requests) {
           var urls = requests.map(function(request) {
             return request.url;
           });
 
+          // event.ports[0] corresponds to the MessagePort that was transferred as part of the controlled page's
+          // call to controller.postMessage(). Therefore, event.ports[0].postMessage() will trigger the onmessage
+          // handler from the controlled page.
+          // It's up to you how to structure the messages that you send back; this is just one example.
           event.ports[0].postMessage({
             error: null,
-            urls: urls
-          });
-        }).catch(function(error) {
-          event.ports[0].postMessage({
-            error: error.toString()
+            urls: urls.sort()
           });
         });
       break;
 
+      // This command adds a new request/response pair to the cache.
       case 'add':
-        cache.add(new Request(event.data.url, {mode: 'no-cors'})).then(function(response) {
+        // If event.data.url isn't a valid URL, new Request() will throw a TypeError which will be handled
+        // by the outer .catch().
+        // Hardcode {mode: 'no-cors} since the default for new Requests constructed from strings is to require
+        // CORS, and we don't have any way of knowing whether an arbitrary URL that a user entered supports CORS.
+        var request = new Request(event.data.url, {mode: 'no-cors'});
+        cache.add(request).then(function() {
           event.ports[0].postMessage({
             error: null
-          });
-        }).catch(function(error) {
-          console.error('vvvvv');
-          event.ports[0].postMessage({
-            error: error.toString()
           });
         });
       break;
 
+      // This command removes a request/response pair from the cache (assuming it exists).
       case 'delete':
-        cache.delete(event.data.url).then(function() {
+        var request = new Request(event.data.url, {mode: 'no-cors'});
+        cache.delete(request).then(function(success) {
           event.ports[0].postMessage({
-            error: null
-          });
-        }).catch(function(error) {
-          event.ports[0].postMessage({
-            error: error.toString()
+            error: success ? null : 'Item was not found in the cache.'
           });
         });
       break;
 
       default:
-        event.ports[0].postMessage({
-          error: 'Unknown command: ' + event.data.command
-        });
+        // This will be handled by the outer .catch().
+        throw 'Unknown command: ' + event.data.command;
     }
+  }).catch(function(error) {
+    // If the promise rejects, handle it by returning a standardized error message to the controlled page.
+    console.error('Message handling failed:', error);
+
+    event.ports[0].postMessage({
+      error: error.toString()
+    });
   });
 });

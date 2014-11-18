@@ -49,7 +49,7 @@ limitations under the License.
 
     <p>
       This sample demonstrates basic Service Worker registration, in conjunction with using the
-      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.postMessage"><code>postMessage</code></a>
+      <a href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage"><code>postMessage</code></a>
       interface to communicate with the service worker controlling the page. Note that while the service worker can
       reply to messages sent from a controlled page, it's currently not possible for the service worker to originate a
       message. (The Push API specification, which is closely related to service workers, is currently being developed,
@@ -71,14 +71,13 @@ limitations under the License.
       <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
     </p>
 
-    <!-- // [START code-block] -->
     <div class="output">
       <div id="status"></div>
 
       <div id="commands" style="display: none">
         <div>
           <label for="url">Resource URL:</label>
-          <input id="url" type="text" size="50" value="http://localhost:8000">
+          <input id="url" type="text" size="50" value="https://www.google.com/">
           <button id="add">Add to Cache</button>
           <button id="delete">Delete from Cache</button>
         </div>
@@ -100,8 +99,9 @@ limitations under the License.
             command: 'add',
             url: document.querySelector('#url').value
           }).then(function() {
+            // If the promise resolves, just display a success message.
             setStatus('Added to cache.');
-          }).catch(setStatus);
+          }).catch(setStatus); // If the promise rejects, then setStatus will be called with the error.
         });
 
         document.querySelector('#delete').addEventListener('click', function() {
@@ -109,8 +109,9 @@ limitations under the License.
             command: 'delete',
             url: document.querySelector('#url').value
           }).then(function() {
+            // If the promise resolves, just display a success message.
             setStatus('Deleted from cache.');
-          }).catch(setStatus);
+          }).catch(setStatus); // If the promise rejects, then setStatus will be called with the error.
         });
 
         document.querySelector('#list-contents').addEventListener('click', function() {
@@ -118,22 +119,28 @@ limitations under the License.
             command: 'keys'
           }).then(function(data) {
             var contentsElement = document.querySelector('#contents');
+            // Clear out the existing items from the list.
             while (contentsElement.firstChild) {
               contentsElement.removeChild(contentsElement.firstChild);
             }
 
+            // Add each cached URL to the list, one by one.
             data.urls.forEach(function(url) {
               var liElement = document.createElement('li');
               liElement.textContent = url;
               contentsElement.appendChild(liElement);
             });
-          }).catch(setStatus);
+          }).catch(setStatus); // If the promise rejects, then setStatus will be called with the error.
         });
 
         document.querySelector('#commands').style.display = 'block';
       }
 
       function sendMessage(message) {
+        // This wraps the message posting/response in a promise, which will resolve if the response doesn't
+        // contain an error, and reject with the error if it does. If you'd prefer, it's possible to call
+        // controller.postMessage() and set up the onmessage handler independently of a promise, but this is
+        // a convenient wrapper.
         return new Promise(function(resolve, reject) {
           var messageChannel = new MessageChannel();
           messageChannel.port1.onmessage = function(event) {
@@ -144,6 +151,10 @@ limitations under the License.
             }
           };
 
+          // This sends the message data as well as transferring messageChannel.port2 to the service worker.
+          // The service worker can then use the transferred port to reply via postMessage(), which
+          // will in turn trigger the onmessage handler on messageChannel.port1.
+          // See https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage
           navigator.serviceWorker.controller.postMessage(message, [messageChannel.port2]);
         });
       }
@@ -174,7 +185,6 @@ limitations under the License.
         document.querySelector('#status').appendChild(aElement);
       }
     </script>
-    <!-- // [END code-block] -->
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
