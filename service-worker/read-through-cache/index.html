@@ -16,18 +16,18 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Sample of pass-through caching with service workers.">
+    <meta name="description" content="Sample of read-through caching with service workers.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Service Worker Sample: Pass-through Caching</title>
+    <title>Service Worker Sample: Read-through Caching</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Pass-through Caching">
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Read-through Caching">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -43,12 +43,12 @@ limitations under the License.
   </head>
 
   <body>
-    <h1>Service Worker Sample: Pass-through Caching</h1>
+    <h1>Service Worker Sample: Read-through Caching</h1>
 
     <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
 
     <p>
-      This sample demonstrates basic service worker registration, in conjunction with pass-through
+      This sample demonstrates basic service worker registration, in conjunction with read-through
       caching. After the service worker starts controlling this page, the first time a specific
       resource is requested, it's <code>fetch()</code>ed from the network and a copy of the response
       is stored in the service worker's cache. All subsequent times that the same resource is

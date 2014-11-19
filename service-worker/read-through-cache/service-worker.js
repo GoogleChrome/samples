@@ -26,7 +26,7 @@
 // updated service worker is activated.
 var CACHE_VERSION = 1;
 var CURRENT_CACHES = {
-  'pass-through': 'pass-through-cache-v' + CACHE_VERSION
+  'read-through': 'read-through-cache-v' + CACHE_VERSION
 };
 
 self.addEventListener('activate', function(event) {
@@ -63,7 +63,7 @@ self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
   event.respondWith(
-    caches.open(CURRENT_CACHES['pass-through']).then(function(cache) {
+    caches.open(CURRENT_CACHES['read-through']).then(function(cache) {
       return cache.match(event.request).then(function(response) {
         if (response) {
           // If there is an entry in the cache for event.request, then response will be defined
@@ -104,7 +104,7 @@ self.addEventListener('fetch', function(event) {
         // This catch() will handle exceptions that arise from the match() or fetch() operations.
         // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
         // It will return a normal response object that has the appropriate error code set.
-        console.error('  Pass-through caching failed:', error);
+        console.error('  Read-through caching failed:', error);
 
         throw error;
       });
