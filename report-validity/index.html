@@ -1,0 +1,101 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of reportValidity().">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>reportValidity() Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="reportValidity() Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1><code>reportValidity()</code> Sample</h1>
+    <p>Available in <a href="http://www.chromestatus.com/feature/5433505009893376">Chrome 40+</a></p>
+
+    <p>
+      This sample illustrates the use of
+      <code><a href="https://html.spec.whatwg.org/multipage/forms.html#dom-cva-reportvalidity">reportValidity()</a></code>,
+      which provides a way to trigger <code>&lt;form&gt;</code> validation logic.
+      If any of a <code>&lt;form&gt;</code>'s inputs are considered invalid, the offending inputs and the constraints
+      that are imposed will be identified in the user interface.
+      Additionally, <code>reportValidity()</code> returns a boolean value indicating whether all of the inputs
+      in the <code>&lt;form&gt;</code> were valid or not.
+    </p>
+
+    <p>
+      In this particular case, the <code>&lt;form&gt;</code> contains one <code>&lt;input&gt;</code>,
+      with two constraints: <code>required</code>, as well as
+      <code><a href="https://html.spec.whatwg.org/multipage/forms.html#attr-fe-minlength">minlength</a>="4"</code>.
+    </p>
+
+    <!-- // [START code-block] -->
+    <div class="output">
+      <form id="sample-form">
+        <div>
+          <label for="year">Enter at least four characters (required):</label>
+          <input id="year" type="text" minlength="4" required>
+        </div>
+      </form>
+
+      <button id="report-validity">Report Validity</button>
+
+      <div id="status"></div>
+    </div>
+
+    <script>
+      document.querySelector('#report-validity').addEventListener('click', function() {
+        var isValid = document.querySelector('#sample-form').reportValidity();
+        document.querySelector('#status').textContent =
+          'The form ' + (isValid ? 'is' : 'is not') + ' valid.';
+      });
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
