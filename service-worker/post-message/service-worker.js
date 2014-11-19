@@ -17,7 +17,8 @@ importScripts('../serviceworker-cache-polyfill.js');
 
 // While overkill for this specific sample in which there is only one cache,
 // this is one best practice that can be followed in general to keep track of
-// all multiple caches used by a given service worker, and keep them all versioned.
+// multiple caches used by a given service worker, and keep them all versioned.
+// It maps a shorthand identifier for a cache to a specific, versioned cache name.
 
 // Note that since global state is discarded in between service worker restarts, these
 // variables will be reinitialized each time the service worker handles an event, and you
@@ -29,7 +30,7 @@ importScripts('../serviceworker-cache-polyfill.js');
 // updated service worker is activated.
 var CACHE_VERSION = 1;
 var CURRENT_CACHES = {
-  'some-cache': 'some-cache-v' + CACHE_VERSION
+  'post-message': 'post-message-cache-v' + CACHE_VERSION
 };
 
 self.addEventListener('activate', function(event) {
@@ -58,7 +59,7 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('message', function(event) {
   console.log('Handling message event:', event);
 
-  caches.open(CURRENT_CACHES['some-cache']).then(function(cache) {
+  caches.open(CURRENT_CACHES['post-message']).then(function(cache) {
     switch (event.data.command) {
       // This command returns a list of the URLs corresponding to the Request objects
       // that serve as keys for the current cache.
