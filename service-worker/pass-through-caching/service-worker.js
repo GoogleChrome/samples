@@ -1,3 +1,44 @@
+// While overkill for this specific sample in which there is only one cache,
+// this is one best practice that can be followed in general to keep track of
+// multiple caches used by a given service worker, and keep them all versioned.
+// It maps a shorthand identifier for a cache to a specific, versioned cache name.
+
+// Note that since global state is discarded in between service worker restarts, these
+// variables will be reinitialized each time the service worker handles an event, and you
+// should not attempt to change their values inside an event handler. (Treat them as constants.)
+
+// If at any point you want to force pages that use this service worker to start using a fresh
+// cache, then increment the CACHE_VERSION value. It will kick off the service worker update
+// flow and the old cache(s) will be purged as part of the activate event handler when the
+// updated service worker is activated.
+var CACHE_VERSION = 1;
+var CURRENT_CACHES = {
+  'pass-through': 'pass-through-cache-v' + CACHE_VERSION
+};
+
+self.addEventListener('activate', function(event) {
+  // Delete all caches that aren't named in CURRENT_CACHES.
+  // While there is only one cache in this example, the same logic will handle the case where
+  // there are multiple versioned caches.
+  var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
+    return CURRENT_CACHES[key];
+  });
+
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (expectedCacheNames.indexOf(cacheName) == -1) {
+            // If this cache name isn't present in the array of "expected" cache names, then delete it.
+            console.log('Deleting out of date cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
 // This sample illustrates an aggressive approach to caching, in which every valid response is
 // cached and every request is first checked against the cache.
 // This may not be an appropriate approach if your web application makes requests for
@@ -5,12 +46,11 @@
 // as the cache could end up containing large responses that might not end up ever being accessed.
 // Other approaches, like selectively caching based on response headers or only caching
 // responses served from a specific domain, might be more appropriate for those use cases.
-
 self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
   event.respondWith(
-    caches.open('pass-through-caching-sample').then(function(cache) {
+    caches.open(CURRENT_CACHES['pass-through']).then(function(cache) {
       return cache.match(event.request).then(function(response) {
         if (response) {
           // If there is an entry in the cache for event.request, then response will be defined
