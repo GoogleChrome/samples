@@ -2,6 +2,24 @@
 // which are not implemented in Chrome 40.
 importScripts('../serviceworker-cache-polyfill.js');
 
+// While overkill for this specific sample in which there is only one cache,
+// this is one best practice that can be followed in general to keep track of
+// multiple caches used by a given service worker, and keep them all versioned.
+// It maps a shorthand identifier for a cache to a specific, versioned cache name.
+
+// Note that since global state is discarded in between service worker restarts, these
+// variables will be reinitialized each time the service worker handles an event, and you
+// should not attempt to change their values inside an event handler. (Treat them as constants.)
+
+// If at any point you want to force pages that use this service worker to start using a fresh
+// cache, then increment the CACHE_VERSION value. It will kick off the service worker update
+// flow and the old cache(s) will be purged as part of the activate event handler when the
+// updated service worker is activated.
+var CACHE_VERSION = 1;
+var CURRENT_CACHES = {
+  prefetch: 'prefetch-cache-v' + CACHE_VERSION
+};
+
 self.addEventListener('install', function(event) {
   var urlsToPrefetch = [
     './static/pre_fetched.txt',
@@ -15,7 +33,7 @@ self.addEventListener('install', function(event) {
   console.log('Handling install event. Resources to pre-fetch:', urlsToPrefetch);
 
   event.waitUntil(
-    caches.open('prefetch-sample').then(function(cache) {
+    caches.open(CURRENT_CACHES['prefetch']).then(function(cache) {
       cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
         // It's very important to use {mode: 'no-cors'} if there is any chance that
         // the resources being fetched are served off of a server that doesn't support
@@ -38,10 +56,35 @@ self.addEventListener('install', function(event) {
   );
 });
 
+self.addEventListener('activate', function(event) {
+  // Delete all caches that aren't named in CURRENT_CACHES.
+  // While there is only one cache in this example, the same logic will handle the case where
+  // there are multiple versioned caches.
+  var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
+    return CURRENT_CACHES[key];
+  });
+
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (expectedCacheNames.indexOf(cacheName) == -1) {
+            // If this cache name isn't present in the array of "expected" cache names, then delete it.
+            console.log('Deleting out of date cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
 self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
   event.respondWith(
+    // caches.match() will look for a cache entry in all of the caches available to the service worker.
+    // It's an alternative to first opening a specific named cache and then matching on that.
     caches.match(event.request).then(function(response) {
       if (response) {
         console.log('Found response in cache:', response);

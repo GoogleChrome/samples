@@ -13,7 +13,8 @@
 
 // While overkill for this specific sample in which there is only one cache,
 // this is one best practice that can be followed in general to keep track of
-// all multiple caches used by a given service worker, and keep them all versioned.
+// multiple caches used by a given service worker, and keep them all versioned.
+// It maps a shorthand identifier for a cache to a specific, versioned cache name.
 
 // Note that since global state is discarded in between service worker restarts, these
 // variables will be reinitialized each time the service worker handles an event, and you
@@ -25,7 +26,7 @@
 // updated service worker is activated.
 var CACHE_VERSION = 1;
 var CURRENT_CACHES = {
-  'font-cache': 'font-cache-v' + CACHE_VERSION
+  font: 'font-cache-v' + CACHE_VERSION
 };
 
 self.addEventListener('activate', function(event) {
@@ -55,7 +56,7 @@ self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
   event.respondWith(
-    caches.open(CURRENT_CACHES['font-cache']).then(function(cache) {
+    caches.open(CURRENT_CACHES['font']).then(function(cache) {
       return cache.match(event.request).then(function(response) {
         if (response) {
           // If there is an entry in the cache for event.request, then response will be defined
