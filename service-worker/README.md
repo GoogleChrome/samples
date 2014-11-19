@@ -15,7 +15,7 @@ available offline.
 a sample of how a service worker can cache resources "on the fly", assuming the resources meet certain criteria (MIME type,
 domain, etc.).
 
-- [Pass-through caching](https://googlechrome.github.io/samples/service-worker/pass-through-caching/index.html) -
+- [Read-through caching](https://googlechrome.github.io/samples/service-worker/read-through-caching/index.html) -
 a sample of caching _all_ resources that are requested "on the fly", unconditionally.
 
 - [Fallback responses](https://googlechrome.github.io/samples/service-worker/fallback-response/index.html) -
