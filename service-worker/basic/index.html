@@ -22,8 +22,8 @@ function register() {
   navigator.serviceWorker.register('service-worker.js', {scope: scope})
     .then(function(r) {
       console.log('registered: ');
-      console.log(r);
       registration = r;
+      console.log(registration);
     })
     .catch(function(whut) {
       console.error('uh oh... ');
