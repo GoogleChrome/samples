@@ -16,12 +16,14 @@ limitations under the License.
 -->
 <script>
 var scope = 'hello/';
+var registration;
 
 function register() {
   navigator.serviceWorker.register('service-worker.js', {scope: scope})
-    .then(function(serviceWorker) {
+    .then(function(r) {
       console.log('registered: ');
-      console.log(serviceWorker);
+      console.log(r);
+      registration = r;
     })
     .catch(function(whut) {
       console.error('uh oh... ');
@@ -30,7 +32,7 @@ function register() {
 }
 
 function unregister() {
-  navigator.serviceWorker.unregister(scope)
+  registration.unregister()
     .then(function() {
       console.log('unregistered');
     });
