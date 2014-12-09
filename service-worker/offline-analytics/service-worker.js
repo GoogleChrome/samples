@@ -80,11 +80,13 @@ function replayAnalyticsRequests() {
 
         console.log(' Replaying', requestUrl);
 
-        fetch(requestUrl, {mode: 'no-cors'}).then(function() {
-          // Since this is a no-cors request, we can't actually differentiate a HTTP 200 response vs.
-          // an HTTP 4xx/5xx response here, so this MIGHT not be a success. But it's the best we can do.
-          getObjectStore(STORE_NAME, 'readwrite').delete(savedRequest.url);
-          console.log(' Replaying succeeded.');
+        fetch(requestUrl).then(function(response) {
+          if (response.status < 400) {
+            getObjectStore(STORE_NAME, 'readwrite').delete(savedRequest.url);
+            console.log(' Replaying succeeded.');
+          } else {
+            console.error(' Replaying failed:', response);
+          }
         }).catch(function(error) {
           // This will be triggered if the network is still down. The request will be replayed again
           // the next time the service worker starts up.
