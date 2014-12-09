@@ -53,13 +53,6 @@ function getObjectStore(storeName, mode) {
   return idbDatabase.transaction(storeName, mode).objectStore(storeName);
 }
 
-function saveAnalyticsRequest(requestUrl) {
-  getObjectStore(STORE_NAME, 'readwrite').add({
-    url: requestUrl,
-    timestamp: Date.now()
-  });
-}
-
 function replayAnalyticsRequests() {
   var savedRequests = [];
 
@@ -164,17 +157,18 @@ self.addEventListener('fetch', function(event) {
               // We need to call .clone() on the response object to save a copy of it to the cache.
               // (https://fetch.spec.whatwg.org/#dom-request-clone)
               cache.put(event.request, response.clone());
+            } else {
+              // If this is a Google Analytics ping then we want to retry it if a HTTP 4xx/5xx response
+              // was returned, just like we'd retry it if the network was down.
+              checkForAnalyticsRequest(event.request.url);
             }
 
             // Return the original response object, which will be used to fulfill the resource request.
             return response;
           }).catch(function(error) {
-            console.error('  Unable to fetch %s due to "%s".', event.request.url, error);
-
-            if (event.request.url.match(/\/\/www.google-analytics.com\/collect/i)) {
-              console.log('  Storing Google Analytics request in IndexedDB to be replayed later.');
-              saveAnalyticsRequest(event.request.url);
-            }
+            // The catch() will be triggered for network failures. Let's see if it was a request for
+            // a Google Analytics ping, and save it to be retried if it was.
+            checkForAnalyticsRequest(event.request.url);
 
             throw error;
           });
@@ -188,3 +182,17 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
+
+function checkForAnalyticsRequest(requestUrl) {
+  if (requestUrl.match(/\/\/www.google-analytics.com\/collect/i)) {
+    console.log('  Storing Google Analytics request in IndexedDB to be replayed later.');
+    saveAnalyticsRequest(requestUrl);
+  }
+}
+
+function saveAnalyticsRequest(requestUrl) {
+  getObjectStore(STORE_NAME, 'readwrite').add({
+    url: requestUrl,
+    timestamp: Date.now()
+  });
+}
