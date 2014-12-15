@@ -78,9 +78,9 @@ limitations under the License.
       will check for any saved requests and "replay" them, by sending them to the Google Analytics
       server with the appropriate
       <a href="https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#qt>"<code>qt</code></a>
-      parameter set to specify the delta since the ping was created. If that replay succeeds, the request
-      will be removed from IndexedDB, and if it fails (because the network is still not available) then
-      it will be retried the next time the service worker script starts up.
+      parameter set to specify the delta since the ping was created. If that replay succeeds, the
+      request will be removed from IndexedDB, and if it fails (because the network is still not
+      available) then it will be retried the next time the service worker script starts up.
     </p>
 
     <p>
