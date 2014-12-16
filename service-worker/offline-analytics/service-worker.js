@@ -31,6 +31,7 @@ var CURRENT_CACHES = {
 
 var idbDatabase;
 var IDB_VERSION = 1;
+var STOP_RETRYING_AFTER = 86400000; // One day, in milliseconds.
 var STORE_NAME = 'urls';
 
 // This is basic boilerplate for interacting with IndexedDB. Adapted from
@@ -77,28 +78,33 @@ function replayAnalyticsRequests() {
 
       savedRequests.forEach(function(savedRequest) {
         var queueTime = Date.now() - savedRequest.timestamp;
-        // The qt= URL parameter specifies the time delta in between right now, and when the
-        // /collect request was initially intended to be sent. See
-        // https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#qt
-        var requestUrl = savedRequest.url + '&qt=' + queueTime;
+        if (queueTime > STOP_RETRYING_AFTER) {
+          getObjectStore(STORE_NAME, 'readwrite').delete(savedRequest.url);
+          console.log(' Request has been queued for %d milliseconds. No longer attempting to replay.', queueTime);
+        } else {
+          // The qt= URL parameter specifies the time delta in between right now, and when the
+          // /collect request was initially intended to be sent. See
+          // https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#qt
+          var requestUrl = savedRequest.url + '&qt=' + queueTime;
 
-        console.log(' Replaying', requestUrl);
+          console.log(' Replaying', requestUrl);
 
-        fetch(requestUrl).then(function(response) {
-          if (response.status < 400) {
-            // If sending the /collect request was successful, then remove it from the IndexedDB.
-            getObjectStore(STORE_NAME, 'readwrite').delete(savedRequest.url);
-            console.log(' Replaying succeeded.');
-          } else {
-            // This will be triggered if, e.g., Google Analytics returns a HTTP 50x response.
-            // The request will be replayed the next time the service worker starts up.
-            console.error(' Replaying failed:', response);
-          }
-        }).catch(function(error) {
-          // This will be triggered if the network is still down. The request will be replayed again
-          // the next time the service worker starts up.
-          console.error(' Replaying failed:', error);
-        });
+          fetch(requestUrl).then(function (response) {
+            if (response.status < 400) {
+              // If sending the /collect request was successful, then remove it from the IndexedDB.
+              getObjectStore(STORE_NAME, 'readwrite').delete(savedRequest.url);
+              console.log(' Replaying succeeded.');
+            } else {
+              // This will be triggered if, e.g., Google Analytics returns a HTTP 50x response.
+              // The request will be replayed the next time the service worker starts up.
+              console.error(' Replaying failed:', response);
+            }
+          }).catch(function (error) {
+            // This will be triggered if the network is still down. The request will be replayed again
+            // the next time the service worker starts up.
+            console.error(' Replaying failed:', error);
+          });
+        }
       });
     }
   };
@@ -119,6 +125,8 @@ self.addEventListener('activate', function(event) {
   });
 
   event.waitUntil(
+    // `caches` refers to the global CacheStorage object, and is defined at
+    // http://slightlyoff.github.io/ServiceWorker/spec/service_worker/#self-caches
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
@@ -175,8 +183,8 @@ self.addEventListener('fetch', function(event) {
               // We need to call .clone() on the response object to save a copy of it to the cache.
               // (https://fetch.spec.whatwg.org/#dom-request-clone)
               cache.put(event.request, response.clone());
-            } else {
-              // If this is a Google Analytics ping then we want to retry it if a HTTP 4xx/5xx response
+            } else if (response.status >= 500) {
+              // If this is a Google Analytics ping then we want to retry it if a HTTP 5xx response
               // was returned, just like we'd retry it if the network was down.
               checkForAnalyticsRequest(event.request.url);
             }
