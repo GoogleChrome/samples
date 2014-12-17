@@ -18,6 +18,9 @@ domain, etc.).
 - [Read-through caching](https://googlechrome.github.io/samples/service-worker/read-through-caching/index.html) -
 a sample of caching _all_ resources that are requested "on the fly", unconditionally.
 
+- [Offline Google Analytics](https://googlechrome.github.io/samples/service-worker/offline-analytics/index.html) -
+extends the [read-through caching](https://googlechrome.github.io/samples/service-worker/read-through-caching/index.html) example to add in support for "replaying" failed Google Analytics pings, allowing pages to submit Google Analytics data associated with offline/cached page views.
+
 - [Fallback responses](https://googlechrome.github.io/samples/service-worker/fallback-response/index.html) -
 a sample illustrating how you can return alternative "fallback" content if an initial fetch request fails.
 
