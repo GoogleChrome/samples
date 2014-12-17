@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample of read-through caching and offline analytics with service workers.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: Read-through Caching (w/Offline Analytics)</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Read-through Caching (w/Offline Analytics)">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../../images/favicon.ico">
+
+    <script>
+      // Service workers require HTTPS (http://goo.gl/lq4gCo). If we're running on a real web server
+      // (as opposed to localhost on a custom port, which is whitelisted), then change the protocol to HTTPS.
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
+
+    <link rel="stylesheet" href="../../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Service Worker Sample: Read-through Caching (w/Offline Analytics)</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
+
+    <p>
+      This sample demonstrates basic service worker registration, in conjunction with read-through
+      caching. After the service worker starts controlling this page, the first time a specific
+      resource is requested, it's <code>fetch()</code>ed from the network and a copy of the response
+      is stored in the service worker's cache. All subsequent times that the same resource is
+      requested, it's returned directly from the cache.
+    </p>
+
+    <p>
+      <strong>Note:</strong> This is a very aggressive approach to caching, and might not be appropriate
+      if your web application makes requests for arbitrary URLs as part of its normal operation
+      (e.g. a RSS client or a news aggregator), as the cache could end up containing large responses
+      that might not end up ever being accessed. Other approaches, like selectively caching based on
+      response headers or only caching responses served from a specific domain, might be more
+      appropriate for those use cases.
+    </p>
+
+    <p>
+      Additionally, this sample will save up any failed Google Analytics <code>/collect</code> pings
+      that fail, and store them in IndexedDB. Every time the service worker script starts up, it
+      will check for any saved requests and "replay" them, by sending them to the Google Analytics
+      server with the appropriate
+      <a href="https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#qt>"<code>qt</code></a>
+      parameter set to specify the delta since the ping was created. If that replay succeeds, the
+      request will be removed from IndexedDB, and if it fails (because the network is still not
+      available) then it will be retried the next time the service worker script starts up.
+    </p>
+
+    <p>
+      Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
+      the registered service worker to view logging statements for the various actions the
+      <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
+    </p>
+
+    <div class="output">
+      <div id="status"></div>
+
+      <ul id="images" style="display: none">
+        <li><img src="http://www.chromium.org/_/rsrc/1302286216006/config/customLogo.gif"></li>
+        <li><img src="http://www.chromium.org/_/rsrc/1365117468642/chromium-projects/chrome-64.png"></li>
+      </ul>
+    </div>
+
+    <script>
+      function showImages() {
+        document.querySelector('#images').style.display = 'block';
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js', {scope: './'}).then(function() {
+          // Registration was successful. Now, check to see whether the service worker is controlling the page.
+          if (navigator.serviceWorker.controller) {
+            // If .controller is set, then this page is being actively controlled by the service worker.
+            document.querySelector('#status').textContent = 'The service worker is currently handling network operations. ' +
+              'If you reload the page, the images (and everything else) will be served from the service worker\'s cache.';
+
+            showImages();
+          } else {
+            // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
+            // control. Until that happens, the service worker's fetch handler won't be used.
+            document.querySelector('#status').textContent = 'Please reload this page to allow the service worker to handle network operations.';
+          }
+        }).catch(function(error) {
+          // Something went wrong during registration. The service-worker.js file
+          // might be unavailable or contain a syntax error.
+          document.querySelector('#status').textContent = error;
+        });
+      } else {
+        // The current browser doesn't support service workers.
+        var aElement = document.createElement('a');
+        aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
+        aElement.textContent = 'Service workers are not supported in the current browser.';
+        document.querySelector('#status').appendChild(aElement);
+      }
+    </script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
