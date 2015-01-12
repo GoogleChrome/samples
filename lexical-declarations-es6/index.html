@@ -1,0 +1,136 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of Lexical Declarations (ES6)">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lexical Declarations (ES6) Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Lexical Declarations (ES6) Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+<h1>Lexical Declarations (ES6) Sample</h1>
+
+<p>Available in <a href="https://www.chromestatus.com/feature/4645595339816960">Chrome 41+</a></p>
+
+<p>Lexical declarations introduce new declaration forms for defining variables using the
+    <code>let</code> and <code>const</code> keywords</p>
+
+<ul>
+    <li><code>let</code> is similar to <code>var</code>, but defines a variable <strong>limited in scope</strong> to the block,
+        statement or expression in which it is used. This differs from the <code>var</code> keyword, which defines variables globally or local to a function regardless of block scope.</li>
+    <li><code>const</code> is similar to <code>let</code>, but for <strong>constant declarations that are read-only</strong>.</li>
+</ul>
+
+
+<div class="output">
+    <pre id="log"></pre>
+</div>
+<!-- // [START code-block] -->
+<script>
+    "use strict";
+
+    function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    }
+
+    (function(log){
+
+        log('Use let to declare a block scope local variable, optionally initializing it to a value:');
+
+        var a = 5;
+        var b = 10;
+        log('The initial value of var a is ' +  a);
+        log('The initial value of var b is ' +  b);
+
+        if (a === 5) {
+            let a = 4; // The scope is inside the if-block
+            var b = 1; // The scope is inside the function
+            log('Inside an if-block, let a = 4 and var b = 1');
+
+            log('The value of a is ' +  a);
+            log('The value of b is ' +  b);
+        }
+
+        log('Outside the scope of the block:');
+        log('The value of a is ' +  a);
+        log('The value of b is ' +  b);
+
+        log('\nlet can also be used to bind variables locally in the scope of for loops:')
+        for (let i = 0; i < 3; i ++) {
+            log('i = ' + i);
+        }
+        try {
+            log(i);
+        } catch (e) {
+            log('i doesn\'t exist outside of the loop');
+        }
+        log('If i had been a var, it would still be accessible outside of the loop');
+
+    }(log));
+
+
+    log('\nUse const to create a read-only named constant:');
+
+    log('Define favorite as a constant and give it the value 7');
+    const favorite = 7;
+    log('My favorite number is ' + favorite);
+
+    log('Attempt to overwrite favorite, setting it to 15');
+    try {
+        favorite = 15;
+    } catch (e) {
+        log('Receive a "TypeError: Assignment to constant variable" exception');
+        log('My favorite number is still ' + favorite);
+    }
+</script>
+<!-- // [END code-block] -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-53563471-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<!-- Built with love using Web Starter Kit -->
+</body>
+</html>
