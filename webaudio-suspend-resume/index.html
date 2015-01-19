@@ -86,23 +86,13 @@ limitations under the License.
       source.start(0);
     });
 
-    function suspendRace() {
-      var timeout, raf;
-
-      raf = window.requestAnimationFrame(function() {
-        window.clearTimeout(timeout);
-        context.resume();
-
-        window.setTimeout(function() {
-          suspendRace();
-        }, 1000);
-      });
-      timeout = window.setTimeout(function() {
-        console.debug('suspending audio, no rAF');
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
         context.suspend();
-      }, 500);
-    };
-    suspendRace();
+      } else {
+        context.resume();
+      }
+    });
 
     </script>
     <!-- // [END code-block] -->
