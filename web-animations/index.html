@@ -1,0 +1,123 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of Web Animations.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Web Animations Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Web Animations Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Web Animations Sample</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/4854343836631040">Chrome 36+</a></p>
+
+    <p>
+      This demo shows simple animations with <a href="http://updates.html5rocks.com/2014/05/Web-Animations---element-animate-is-now-in-Chrome-36">Web Animations</a> and the <code>element.animate()</code> method.
+      Hover (or tap, on mobile) over each square to trigger an animation to a new random background color.
+    </p>
+    <p>
+      A larger <a href="http://web-animations.github.io/web-animations-demos/">suite of demos</a> are available in a <a href="https://github.com/web-animations/web-animations-demos">dedicated repository</a>, some requiring Chrome 39+ or polyfill support.
+    </p>
+
+    <!-- // [START code-block] -->
+    <style type="text/css">
+    .box {
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      background: #eee;
+    }
+    </style>
+
+    <div id="holder">
+      <div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+      <div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+      <div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    var eventHandler = function(ev) {
+      var element = ev.target;
+      if (!element || !element.classList.contains('box')) return;
+
+      // Choose a random background color to animate to.
+      var hue = Math.random() * 360;
+      var target = 'hsl(' + hue + ', 100%, 50%)'
+
+      // Create keyframes and use element.animate().
+      var keyframes = [
+        { background: '#eee' },
+        { background: target }
+      ];
+      var duration = 1000;
+      element.animate(keyframes, duration);
+    };
+    var holder = document.getElementById('holder');
+    holder.addEventListener('mouseover', eventHandler);
+    // mouseover is mostly emulated on a touch device by tapping.
+    </script>
+
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
