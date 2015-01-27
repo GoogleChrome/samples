@@ -99,32 +99,25 @@ limitations under the License.
         // -> A method with a computed name was called
 
         // Example 3
-        log('\nUsing Computed property names with ES6 Classes:');
-        function ID(x) {
-            return x;
-        }
-
-        class Person {
-            getUsername() { return 'ErikArvidsson'}
-            ['getLastName']() { return 'Arvidsson'; }
-            getGroup() { return 'TC39'; }
-            [ID('getTeam')]() { return 'Chrome'; }
-        }
-        log(new Person().getUsername());
-        log(new Person().getLastName());
-        log(new Person().getGroup());
-        log(new Person().getTeam());
-
-        // Example 4
-        log('\nUsing Computed property names with ES6 Symbols.');
-        log('Define a symbol to use as a property key that will always be unique:');
+        log('\nUsing Computed property names with ES6 Classes & Symbols.');
+        // Define a symbol to use as a property key that will always be unique
         let Foo = Symbol();
-        var someObject = {
-          [Foo]() {
-            return 'bar';
-          }
-        };
-        log(someObject[Foo]());
+        class Person {
+            constructor(firstName, lastName) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
+
+            [Foo]() {
+                return 'Why, hello ' + this.firstName;
+            }
+
+            toString() {
+                return this.name;
+            }
+        }
+
+        log(new Person('Inigo', 'Montoya')[Foo]());
     </script>
     <!-- // [END code-block] -->
 
