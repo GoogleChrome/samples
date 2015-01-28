@@ -15,7 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -43,21 +44,17 @@ limitations under the License.
     <link rel="icon" href="../images/favicon.ico">
 
     <link rel="stylesheet" href="../styles/main.css">
-  </head>
+</head>
 
-  <body>
+<body>
     <h1>Computed Property Names (ES6) Sample</h1>
 
     <!--
     <p>Available in <a href="http://www.chromestatus.com/feature/PLACEHOLDER">Chrome PLACEHOLDER+</a></p>
     -->
-    <p>ES6 Computed property names allow you to dynamically create property names using an expression in brackets (<code>[ ]</code>)
-        similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">property accessors</a>.
-        Below, computed property names are demonstrated using Object Literals, ES6 Classes and ES6 Symbols.
+    <p>ES6 Computed property names allow you to dynamically create property names using an expression in brackets (<code>[ ]</code>) similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">property accessors</a>. Below, computed property names are demonstrated using Object Literals, ES6 Classes and ES6 Symbols.
     </p>
-    <p>This feature is available in Chrome 42 behind the <code>--harmony-computed-property-names</code> flag. For step-by-step instructions on how to use command-line
-    flags with Chrome, read the <a href="http://www.chromium.org/for-testers/command-line-flags">command-line flags</a> guide. In this case, you would
-    launch Chrome with <code>--args --js-flags="--harmony-computed-property-names"</code>.</p>
+    <p>This feature is available in Chrome 42 behind the <code>--harmony-computed-property-names</code> flag. For step-by-step instructions on how to use command-line flags with Chrome, read the <a href="http://www.chromium.org/for-testers/command-line-flags">command-line flags</a> guide. In this case, you would launch Chrome with <code>--args --js-flags="--harmony-computed-property-names"</code>.</p>
 
     <div class="output">
         <pre id="log"></pre>
@@ -65,70 +62,77 @@ limitations under the License.
 
     <!-- // [START code-block] -->
     <script>
-        "use strict";
+    "use strict";
 
-        function log() {
-            document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    }
+
+    // Example 1
+    log('Using Computed property names in an object literal:');
+    var prefix = 'foo';
+    var myObject = {
+        [prefix + 'bar']: 'hello', [prefix + 'baz']: 'world', [prefix + prefix.toUpperCase()]: true
+    };
+
+    log(myObject['foobar']);
+    // -> hello
+    log(myObject['foobaz']);
+    // -> world
+    log(myObject['fooFOO']);
+    // -> true
+
+    // Example 2
+    log('\nUsing Computed method names in an object literal:');
+    var fieldName = "field name";
+    var methodName = "method name";
+    var O = {
+        [fieldName]: "value", [methodName]() {
+            log("A method with a computed name was called");
+        }
+    };
+    O[methodName]();
+    // -> A method with a computed name was called
+
+    // Example 3
+    log('\nUsing Computed property names with ES6 Classes & Symbols.');
+    // Define a symbol to use as a property key that will always be unique
+    let Foo = Symbol();
+    class Person {
+        constructor(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
         }
 
-        // Example 1
-        log('Using Computed property names in an object literal:');
-        var prefix = 'foo';
-        var myObject = {
-                [prefix + 'bar']: 'hello',
-                [prefix + 'baz']: 'world',
-                [prefix + prefix.toUpperCase()]: true
-        };
-
-        log(myObject['foobar']);
-        // -> hello
-        log(myObject['foobaz']);
-        // -> world
-        log(myObject['fooFOO']);
-        // -> true
-
-        // Example 2
-        log('\nUsing Computed method names in an object literal:');
-        var fieldName = "field name";
-        var methodName = "method name";
-        var O = {
-                [fieldName]: "value",
-                [methodName]() { log("A method with a computed name was called"); }
-        };
-        O[methodName]();
-        // -> A method with a computed name was called
-
-        // Example 3
-        log('\nUsing Computed property names with ES6 Classes & Symbols.');
-        // Define a symbol to use as a property key that will always be unique
-        let Foo = Symbol();
-        class Person {
-            constructor(firstName, lastName) {
-                this.firstName = firstName;
-                this.lastName = lastName;
-            }
-
-            [Foo]() {
-                return 'Why, hello ' + this.firstName;
-            }
-
-            toString() {
-                return this.name;
-            }
+        [Foo]() {
+            return 'Why, hello ' + this.firstName;
         }
 
-        log(new Person('Inigo', 'Montoya')[Foo]());
+        toString() {
+            return this.name;
+        }
+    }
+
+    log(new Person('Inigo', 'Montoya')[Foo]());
     </script>
     <!-- // [END code-block] -->
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-53563471-1', 'auto');
-      ga('send', 'pageview');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-53563471-1', 'auto');
+    ga('send', 'pageview');
     </script>
     <!-- Built with love using Web Starter Kit -->
-  </body>
+</body>
+
 </html>
