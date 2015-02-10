@@ -112,11 +112,11 @@ limitations under the License.
 
     if ('serviceWorker' in navigator) {
       // The current browser supports service workers.
-      document.querySelector('#availability').innerText = 'are';
+      document.querySelector('#availability').textContent = 'are';
 
       // navigator.serviceWorker.controlled iff there is currently a service worker handling
       // requests on this page for the current navigation.
-      document.querySelector('#controlled').innerText = navigator.serviceWorker.controller ? 'is' : 'is not';
+      document.querySelector('#controlled').textContent = navigator.serviceWorker.controller ? 'is' : 'is not';
 
       // Override the default scope of '/' with './', so that the registration applies
       // to the current directory and everything underneath it.
@@ -152,7 +152,7 @@ limitations under the License.
       });
     } else {
       // The current browser doesn't support service workers.
-      document.querySelector('#availability').innerText = 'are not';
+      document.querySelector('#availability').textContent = 'are not';
     }
   </script>
 
