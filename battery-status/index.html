@@ -70,16 +70,16 @@ limitations under the License.
   var warningEl = document.getElementById("warning");
 
   var updateBatteryUI = function(battery) {
-    levelEl.innerText = (battery.level * 100) + "%";
+    levelEl.textContent = (battery.level * 100) + "%";
 
-    chargingTime.innerText = battery.chargingTime + " Seconds";
-    dischargeTime.innerText = battery.dischargingTime + " Seconds";
+    chargingTime.textContent = battery.chargingTime + " Seconds";
+    dischargeTime.textContent = battery.dischargingTime + " Seconds";
 
     if(battery.charging === true) {
-      chargingStateEl.innerText = "Charging";
+      chargingStateEl.textContent = "Charging";
     }
     else if(battery.charging === false) {
-      chargingStateEl.innerText = "Discharging";
+      chargingStateEl.textContent = "Discharging";
     }
   }
 
@@ -107,14 +107,14 @@ limitations under the License.
   };
 
   var batteryFailure = function(e) {
-    warngingEl.innerText = "There was an error getting access to the Battery Status API.";
+    warngingEl.textContent = "There was an error getting access to the Battery Status API.";
   };
 
   if(!!navigator.getBattery) {
     navigator.getBattery().then(batterySuccess, batteryFailure);
   } 
   else {
-    warngingEl.innerText = "Battery Status API is not supported on this platform.";
+    warngingEl.textContent = "Battery Status API is not supported on this platform.";
   }
 })();</code>
     </pre>
@@ -132,16 +132,16 @@ limitations under the License.
     var warningEl = document.getElementById("warning");
 
     var updateBatteryUI = function(battery) {
-      levelEl.innerText = (battery.level * 100) + "%";
+      levelEl.textContent = (battery.level * 100) + "%";
 
-      chargingTime.innerText = battery.chargingTime + " Seconds";
-      dischargeTime.innerText = battery.dischargingTime + " Seconds";
+      chargingTime.textContent = battery.chargingTime + " Seconds";
+      dischargeTime.textContent = battery.dischargingTime + " Seconds";
 
       if(battery.charging === true) {
-        chargingStateEl.innerText = "Charging";
+        chargingStateEl.textContent = "Charging";
       }
       else if(battery.charging === false) {
-        chargingStateEl.innerText = "Discharging";
+        chargingStateEl.textContent = "Discharging";
       }
     }
 
@@ -169,14 +169,14 @@ limitations under the License.
     };
 
     var batteryFailure = function(e) {
-      warngingEl.innerText = "There was an error getting access to the Battery Status API.";
+      warngingEl.textContent = "There was an error getting access to the Battery Status API.";
     };
 
     if(!!navigator.getBattery) {
       navigator.getBattery().then(batterySuccess, batteryFailure);
     } 
     else {
-      warngingEl.innerText = "Battery Status API is not supported on this platform.";
+      warngingEl.textContent = "Battery Status API is not supported on this platform.";
     }
   })();
 </script>
