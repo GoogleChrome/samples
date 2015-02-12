@@ -17,30 +17,23 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample of using a service worker to provide a custom 'offline' web page.">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Service Worker Sample: Mock Responses</title>
+    <title>Service Worker Sample: Custom Offline Page</title>
 
-    <!-- Add to homescreen for Chrome on Android -->
+    <!-- Web app manifest and theme color, followed by various fallbacks. -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#db5945">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Custom Offline Page">
-
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Mock Responses">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../../images/apple-touch-icon-precomposed.png">
-
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../../images/favicon.ico">
 
     <script>
