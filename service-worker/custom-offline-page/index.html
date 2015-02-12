@@ -17,8 +17,7 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <!-- Turn off HTTP caching so that we can illustrate the offline response. -->
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="description" content="Sample of using a service worker to provide a custom 'offline' web page.">
@@ -68,7 +67,10 @@ limitations under the License.
     </p>
 
     <p>
-      Try disconnecting from your network and reloading this page to trigger the offline response.
+      Try disconnecting from your network, and then use <a id="reload">this link</a> to revisit this
+      page with a cache-busting URL parameter appended—this ensures that the browser's HTTP cache
+      doesn't fulfill the service worker's <code>fetch()</code> (which would prevent the offline
+      response).
     </p>
 
     <p>
@@ -78,6 +80,9 @@ limitations under the License.
     </p>
 
     <script>
+      var cacheBustedUrl = 'index.html?cache-bust=' + Date.now();
+      document.querySelector('#reload').href = cacheBustedUrl;
+
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js', {scope: './'});
       }
