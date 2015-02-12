@@ -28,8 +28,6 @@ self.addEventListener('fetch', function(event) {
       id: 'http://goo.gl/IKyjuU',
       longUrl: 'https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html'
     };
-    // We can't directly return an object or a string, so wrap it in a Blob.
-    var blobResponseBody = new Blob([JSON.stringify(responseBody)]);
 
     var responseInit = {
       // status/statusText default to 200/OK, but we're explicitly setting them here.
@@ -43,7 +41,7 @@ self.addEventListener('fetch', function(event) {
       }
     };
 
-    var mockResponse = new Response(blobResponseBody, responseInit);
+    var mockResponse = new Response(JSON.stringify(responseBody), responseInit);
 
     console.log(' Responding with a mock response body:', responseBody);
     event.respondWith(mockResponse);
