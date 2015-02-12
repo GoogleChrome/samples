@@ -40,7 +40,7 @@ self.addEventListener('fetch', function(event) {
 
         // Normally, fetch() will consult the browser's HTTP caches before attempting a
         // network request, so in order to trigger offline failure for this sample, we had to
-        // explicitly disable HTTP caching of index.html.
+        // use a cache-busting URL parameter to avoid the cache.
         console.error('Fetch failed; returning offline page instead.', e);
         return caches.open(OFFLINE_CACHE).then(function(cache) {
           return cache.match(OFFLINE_URL);
