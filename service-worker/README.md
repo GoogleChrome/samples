@@ -29,3 +29,6 @@ a sample illustrating how you can return content created on the fly in response 
 
 - [Using `postMessage`](https://googlechrome.github.io/samples/service-worker/post-message/index.html) -
 a sample illustrating the use of `postMessage()` to send commands from a controlled page to its service worker, giving the page control over the cache.
+
+- [Custom offline page](https://googlechrome.github.io/samples/service-worker/custom-offline-page/index.html) -
+a sample showing how to display a custom "Sorry, you're offline." error page when a network request fails.
