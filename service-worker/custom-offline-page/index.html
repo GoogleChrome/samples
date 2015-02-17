@@ -1,0 +1,92 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sample of using a service worker to provide a custom 'offline' web page.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: Custom Offline Page</title>
+
+    <!-- Web app manifest and theme color, followed by various fallbacks. -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#db5945">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Mock Responses">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../../images/apple-touch-icon-precomposed.png">
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <link rel="icon" href="../../images/favicon.ico">
+
+    <script>
+      // Service workers require HTTPS (http://goo.gl/lq4gCo). If we're running on a real web server
+      // (as opposed to localhost on a custom port, which is whitelisted), then change the protocol to HTTPS.
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
+
+    <link rel="stylesheet" href="../../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Service Worker Sample: Custom Offline Page</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
+
+    <p>
+      This sample demonstrates basic service worker registration. During the installation step, a
+      custom "Sorry, you're offline." page is cached. The service worker handles all fetch requests
+      for HTML pages (ignoring other requests), and if fetching an HTML page fails due to a network
+      error, it will instead return the cached "offline" page.
+    </p>
+
+    <p>
+      Try disconnecting from your network, and then use <a id="reload">this link</a> to revisit this
+      page with a cache-busting URL parameter appended—this ensures that the browser's HTTP cache
+      doesn't fulfill the service worker's <code>fetch()</code> (which would prevent the offline
+      response).
+    </p>
+
+    <p>
+      Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
+      the registered service worker to view logging statements for the various actions the
+      <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
+    </p>
+
+    <script>
+      var cacheBustedUrl = 'index.html?cache-bust=' + Date.now();
+      document.querySelector('#reload').href = cacheBustedUrl;
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js', {scope: './'});
+      }
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
