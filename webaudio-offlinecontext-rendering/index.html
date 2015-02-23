@@ -74,10 +74,10 @@ limitations under the License.
     // Fade the tones in/out.
     var gainNode = offlineAudioContext.createGain();
     gainNode.connect(offlineAudioContext.destination);
-    gainNode.gain.linearRampToValueAtTime(0, 0);
+    gainNode.gain.setValueAtTime(0, 0);
     gainNode.gain.linearRampToValueAtTime(1, 0.5);
-    gainNode.gain.linearRampToValueAtTime(1, seconds - 1.0);
-    gainNode.gain.linearRampToValueAtTime(0, seconds - 0.5);
+    gainNode.gain.setValueAtTime(1, seconds - 0.5);
+    gainNode.gain.linearRampToValueAtTime(0, seconds);
 
     var firstSource = offlineAudioContext.createOscillator();
     firstSource.frequency.value = 200;
