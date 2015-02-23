@@ -67,16 +67,17 @@ limitations under the License.
     <!-- // [START code-block] -->
     <script>
 
-    var seconds = 2.5;
+    var seconds = 4;
     var offlineAudioContext = new OfflineAudioContext(2, seconds * 44100, 44100);
+    var audioContext = new AudioContext();
 
     // Fade the tones in/out.
     var gainNode = offlineAudioContext.createGain();
     gainNode.connect(offlineAudioContext.destination);
     gainNode.gain.linearRampToValueAtTime(0, 0);
     gainNode.gain.linearRampToValueAtTime(1, 0.5);
-    gainNode.gain.linearRampToValueAtTime(1, seconds - 0.5);
-    gainNode.gain.linearRampToValueAtTime(0, seconds);
+    gainNode.gain.linearRampToValueAtTime(1, seconds - 1.0);
+    gainNode.gain.linearRampToValueAtTime(0, seconds - 0.5);
 
     var firstSource = offlineAudioContext.createOscillator();
     firstSource.frequency.value = 200;
@@ -104,10 +105,13 @@ limitations under the License.
         var duration = +new Date() - start;
         results.innerText = audioBuffer.toString() + ' in ' + duration + 'ms';
 
-        var context = new AudioContext();
-        var source = context.createBufferSource();
+        // Transform to an AudioBufferSourceNode.
+        var source = audioContext.createBufferSource();
         source.buffer = audioBuffer;
-        source.connect(context.destination);
+        source.connect(audioContext.destination);
+        return source;
+      }).then(function(source) {
+        // Play the source.
         source.start();
       });
 
