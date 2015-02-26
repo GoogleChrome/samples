@@ -124,10 +124,9 @@ function initialiseState() {
     return;
   }
 
-  // We need the service worker to be registered and activated
-  // to test for push messaging support
+  // We need the service worker registration to check for a subscription
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    // Do we already have a push message scubscription?
+    // Do we already have a push message subscription?
     serviceWorkerRegistration.pushManager.getSubscription()
       .then(function(subscription) {
         // Enable any UI which subscribes / unsubscribes from
