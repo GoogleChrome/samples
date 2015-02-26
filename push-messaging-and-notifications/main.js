@@ -52,7 +52,7 @@ function unsubscribe() {
           // the users data from your data store and 
           // inform the user that you disabled push
 
-          console.log('Unsubscribtion error: ', e);
+          console.log('Unsubscription error: ', e);
           pushButton.disabled = false;
         });
       }).catch(function(e) {
