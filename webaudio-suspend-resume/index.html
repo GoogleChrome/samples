@@ -6,7 +6,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,18 +19,18 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Sample illustrating the use of Pixelated Image Rendering.">
+    <meta name="description" content="Sample illustrating the use of WebAudio suspend/resume">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pixelated Image Rendering Sample</title>
+    <title>WebAudio suspend/resume Sample</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-title" content="Pixelated Image Rendering Sample">
+    <meta name="apple-mobile-web-app-title" content="WebAudio suspend/resume Sample">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -46,26 +46,57 @@ limitations under the License.
   </head>
 
   <body>
-    <h1>Pixelated Image Rendering Sample</h1>
-    <p>Available in <a href="http://www.chromestatus.com/feature/5118058116939776">Chrome 41+</a> and <a href="https://dev.opera.com/blog/opera-26/#css-image-rendering-pixelated">Opera 26+</a></p>
+    <h1>WebAudio suspend/resume Sample</h1>
+    <p>Available in <a href="https://www.chromestatus.com/feature/5664622837235712">Chrome 41+</a></p>
 
-    <p>The original image is a 2x2 pixel PNG. Squint or zoom into this dot: <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVQIHWP4z8DwHwyBNJDN8B8AQNEG+t5Ik2kAAAAASUVORK5CYII="></p>
+    <p>
+      These methods support suspending and resuming a whole <code>AudioContext</code> to allow applications to pause the audio device when not needed.
+      This reduces CPU usage and power consumption, as the audio device can be closed.
+    </p>
 
-    <p>When you blow the image up in size (for example, to 100x100 pixels) without editing the original source image, the browser will apply anti-aliasing. Like so:</p>
-    
-    <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVQIHWP4z8DwHwyBNJDN8B8AQNEG+t5Ik2kAAAAASUVORK5CYII=" width="100" height="100"></p>
-
-    <p>To instead use a nearest-neighbor interpolation resulting in sharper edges, add <code>image-rendering: pixelated</code> to the image. This can be applied to image and canvas elements, along with any images loaded via <code>background-image</code> in CSS.</p>
+    <div class="output">
+      <div>
+        Start and stop a single tone.
+        When this tab is hidden (e.g., open a new tab, hiding this tab), the <code>AudioContext</code> will be suspended; when this tab is reopened, the context will be resumed.
+      </div>
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+    </div>
 
     <!-- // [START code-block] -->
-    <style>
-      .pixelated {
-        image-rendering: pixelated;
-      }
-    </style>
+    <script>
 
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVQIHWP4z8DwHwyBNJDN8B8AQNEG+t5Ik2kAAAAASUVORK5CYII=" width="100" height="100" class="pixelated">
+    var context = new AudioContext();
+    var source;
+
+    function stop() {
+      if (source) {
+        source.stop();
+        source = null;
+      }
+    }
+
+    document.getElementById('stop').addEventListener('click', stop);
+    document.getElementById('start').addEventListener('click', function() {
+      stop();
+      source = context.createOscillator();
+      source.frequency.value = 200;
+      source.connect(context.destination);
+      source.loop = true;
+      source.start(0);
+    });
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        context.suspend();
+      } else {
+        context.resume();
+      }
+    });
+
+    </script>
     <!-- // [END code-block] -->
+
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

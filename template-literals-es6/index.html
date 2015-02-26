@@ -1,0 +1,131 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of Template Literals (ES6).">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Template Literals (ES6) Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Template Literals (ES6) Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+<h1>Template Literals (ES6) Sample</h1>
+
+<p>Available in <a href="https://www.chromestatus.com/feature/4743002513735680">Chrome 41+</a></p>
+<p>ES6 Template Literals are strings that can include <strong>embedded expressions</strong>. This is sometimes referred
+    to as string interpolation.</p>
+
+<p>Template Literals use back-ticks rather than the single or double quotes we're used to with regular strings.
+    The template literal can contain placeholders using the <code>${ }</code> syntax. The value populated in
+    placeholders including the text between them gets passed to a function. This is determined on the expression
+    before the template string. If no expression exists before the template literal, the default template is used.</p>
+<p>
+
+<p>
+    This sample demonstrates creating and working with expression placeholders, expression interpolation, multi-line strings
+    and functions inside expressions. We also look at tagged Template Literals.</p>
+<!-- // [START code-block] -->
+
+<div class="output">
+    <pre id="log"></pre>
+</div>
+
+<script>
+    function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    }
+
+    log('Using a basic expression placeholder:');
+    var person = 'Addy Osmani';
+    log(`Yo! My name is ${person}!`);
+
+    log('\nUsing expressions work just as well with object literals:');
+    var user = {name: 'Caitlin Potter'};
+    log(`Thanks for getting this into V8, ${user.name}.`);
+
+    log('\nExpression interpolation. One use is readable inline math:');
+    var a = 50;
+    var b = 100;
+    log(`The number of JS frameworks is ${a + b} and not ${2 * a + b}.`);
+
+    log('\nMulti-line strings without requiring a new line feed:');
+    log(`string text line 1
+    string text line 2
+       string text line 3`);
+
+    log('\nFunctions inside expressions:');
+    function fn() { return "result"; }
+    log(`foo ${fn()} bar`);
+
+    log('\nModifying output using an expression preceding the template literal (Tagged Template Literal):');
+
+    var uppercase = function(strings){
+        var values = [].slice.call(arguments, 1);
+        var result = "";
+
+        for(var i = 0; i < strings.length; i++){
+            result += strings[i];
+            if(i < values.length){
+                result += values[i];
+            }
+        }
+
+        return result.toUpperCase();
+    };
+
+    var x = 1;
+    var y = 4;
+
+    log(uppercase `Did you know ${x} + ${y} is ${x+y}?`);
+
+</script>
+<!-- // [END code-block] -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-53563471-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<!-- Built with love using Web Starter Kit -->
+</body>
+</html>

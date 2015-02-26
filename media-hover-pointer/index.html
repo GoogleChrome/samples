@@ -1,0 +1,214 @@
+<!doctype html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of 'any-hover' and 'any-pointer' Media Queries.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>'any-pointer' and 'any-hover' Media Queries Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="'any-pointer' and 'any-hover' Media Queries Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1>'any-pointer' and 'any-hover' Media Queries Sample</h1>
+    <p>Available in <a href="https://www.chromestatus.com/feature/6460705494532096">Chrome 41+</a></p>
+
+    <p>
+      These media queries describe the capabilities of all input devices available to the user as per <a href="http://www.w3.org/TR/2014/WD-mediaqueries-4-20140605/#any-input">the specification</a>.
+      These are similar to the older <code>'pointer'</code> and <code>'hover'</code> media features, except that these only reflect the primary input device.
+    </p>
+    <p>
+      For example, if a user is on a tablet with a connected a mouse, <code>'any-pointer'</code> will be satisfied.
+      If the mouse is then removed, the browser will report <code>'any-pointer'</code> as <code>none</code>.
+    </p>
+    <p>
+      
+    </p>
+
+    <!-- // [START code-block-any-pointer] -->
+    <style>
+      .sized {
+        font-size: 0.5em;
+      }
+      @media (any-pointer: none), (any-pointer: coarse) {
+        .sized {
+          font-size: 1.5em;
+        }
+      }
+      </style>
+      <div class="output">
+        <button id="sized_1" class="sized">
+          Click Me
+        </button>
+        <label for="sized_1">This button will be larger where there is no fine pointer available</label>
+      </div>
+    <!-- // [END code-block-any-pointer] -->
+
+    <!-- // [START code-block-options] -->
+    <style>
+    .demo {
+      display: inline-block;
+      width: 200px;
+      height: 100px;
+      line-height: 100px;
+      background: #aaa;
+      text-align: center;
+      opacity: 0.4;
+      margin: 4px;
+      border-radius: 1px;
+      text-decoration: line-through;
+      cursor: default;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .demo:hover {
+      background: #c00;
+      color: white;
+    }
+    .demo:focus {
+      outline: 0;
+      border-color: rgba(33, 33, 33, 0.2);
+    }
+    @media (any-hover: none) {
+      .demo:active {
+        background: #00c;
+        color: white;
+      }
+    }
+
+    /** any-pointer options */
+    @media (any-pointer) {
+      .demo.any-pointer {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+    @media (any-pointer: none) {
+      .demo.any-pointer--none {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+    @media (any-pointer: coarse) {
+      .demo.any-pointer--coarse {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+    @media (any-pointer: fine) {
+      .demo.any-pointer--fine {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+
+    /** any-hover options */
+    @media (any-hover) {
+      .demo.any-hover {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+    @media (any-hover: none) {
+      .demo.any-hover--none {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+    @media (any-hover: on-demand) {
+      .demo.any-hover--on-demand {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+    @media (any-hover: hover) {
+      .demo.any-hover--hover {
+        opacity: 1.0;
+        text-decoration: none;
+      }
+    }
+
+    </style>
+
+    <div class="output">
+        These buttons will <code>:hover</code> red, but where hover is not available, set <code>:active</code> blue
+
+      <div>
+        <div class="demo any-pointer">
+          any-pointer
+        </div>
+        <div class="demo any-pointer--none">
+          any-pointer: none
+        </div>
+        <div class="demo any-pointer--coarse">
+          any-pointer: coarse
+        </div>
+        <div class="demo any-pointer--fine">
+          any-pointer: fine
+        </div>
+      </div>
+
+      <div>
+        <div class="demo any-hover">
+          any-hover
+        </div>
+        <div class="demo any-hover--none">
+          any-hover: none
+        </div>
+        <div class="demo any-hover--on-demand">
+          any-hover: on-demand
+        </div>
+        <div class="demo any-hover--hover">
+          any-hover: hover
+        </div>
+      </div>
+    </div>
+    <!-- // [END code-block-options] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
