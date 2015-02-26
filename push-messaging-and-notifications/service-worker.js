@@ -40,5 +40,6 @@ self.addEventListener('pushsubscriptionchange', function(event) {
 });
 
 self.addEventListener('notificationclick', function(event) {
-  console.log('On notification click: ', event);
+  console.log('On notification click: ', event.notification.tag);
+  event.waitUntil(clients.openWindow('/'));
 });

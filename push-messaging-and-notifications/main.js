@@ -20,10 +20,10 @@ function unsubscribe() {
 
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
     // To unsubscribe from push messaging, you need get the
-    // subcription object, which you can unsubscribe() on.
+    // subcription object, which you can call unsubscribe() on.
     serviceWorkerRegistration.pushManager.getSubscription().then(
       function(pushSubscription) {
-        // Check we have a subscribtion to unsubscribe
+        // Check we have a subscription to unsubscribe
         if (!pushSubscription) {
           // No subscription object, so set the state
           // to allow the user to subscribe to push
@@ -74,7 +74,7 @@ function subscribeToPushManager() {
         // The subscription was successful
         isPushEnabled = true;
 
-        // TODO: Send the subscriptionId and Endpoint to your server
+        // TODO: Send the subscriptionId and endpoint to your server
         // and save it to send a push message at a later date
         var subscriptionId = subscription.subscriptionId;
         var endpoint = subscription.endpoint;
@@ -87,12 +87,12 @@ function subscribeToPushManager() {
         if (Notification.permission === 'denied') {
           // The user denied the notification permission which
           // means we failed to subscribe and the user will need
-          // to manually cahnge the notification permission to
+          // to manually change the notification permission to
           // subscribe to push messages
           console.warn('Permission for Notifications was denied');
           pushButton.disabled = true;
         } else {
-          // A problem occured with the subscribtion, this can
+          // A problem occurred with the subscription, this can
           // often be down to an issue or lack of the gcm_sender_id
           // and / or gcm_user_visible_only
           console.error('Unable to subscribe to push.', e);
