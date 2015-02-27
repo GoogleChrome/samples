@@ -133,11 +133,15 @@ limitations under the License.
         // ===============================================================
 
         // Classes support extending other classes, but can also extend
-        // other objects. Let's extend the Polygon class to create a new
-        // derived class called Square.
+        // other objects. Whatever you extend must be a constructor.
+        //
+        // Let's extend the Polygon class to create a new derived class
+        // called Square.
         class Square extends Polygon {
             constructor(length) {
-                // The reserved 'super' keyword allows access to parent methods.
+                // The reserved 'super' keyword is for making super-constructor
+                // calls and allows access to parent methods.
+                //
                 // Here, it will call the parent class' constructor with lengths
                 // provided for the Polygon's width and height
                 super(length, length);
@@ -195,8 +199,8 @@ limitations under the License.
             }
         }
 
-        // Similar to earlier methods in our other examples, super() calls to a
-        // parent class can also be made from inside a static method:
+        // super.prop in this example is used for accessing super-properties from
+        // a parent class. This works fine in static methods too:
         class BiggerTripple extends Tripple {
             static tripple(n) {
                 return super.tripple(n) * super.tripple(n);
@@ -210,26 +214,8 @@ limitations under the License.
         // log(tp.tripple()); tp.tripple is not a function
 
 
-        // Example 6: Subclassing built-in classes
+        // Example 6: Subclassing built-in classes and DOM
         // ===============================================================
-        // Note: At this time (Chrome 42), V8 supports subclassing built-ins but
-        // will not support subclassing arrays until Chrome 43.
-        //
-        //        class Stack extends Array {
-        //            constructor() {
-        //                super();
-        //            }
-        //
-        //            top() {
-        //                return this[this.length - 1];
-        //            }
-        //        }
-        //
-        //        var stack = new Stack();
-        //        stack.push('world');
-        //        stack.push('hello');
-        //        log(stack.top());
-        //        log(stack.length);
 
         // Extend Date built-in
         class myDate extends Date {
@@ -280,6 +266,25 @@ limitations under the License.
         player.lyrics = 'Never gonna give you up';
         document.querySelector('body').appendChild(player);
         log(player.lyrics);
+
+        // Note: At this time (Chrome 42), V8 supports subclassing built-ins but
+        // will not support subclassing arrays until Chrome 43.
+        //
+        //        class Stack extends Array {
+        //            constructor() {
+        //                super();
+        //            }
+        //
+        //            top() {
+        //                return this[this.length - 1];
+        //            }
+        //        }
+        //
+        //        var stack = new Stack();
+        //        stack.push('world');
+        //        stack.push('hello');
+        //        log(stack.top());
+        //        log(stack.length);
     </script>
     <!-- // [END code-block] -->
 
