@@ -49,7 +49,7 @@ function unsubscribe() {
         }).catch(function(e) {
           // We failed to unsubscribe, this can lead to
           // an unusual state, so may be best to remove 
-          // the users data from your data store and 
+          // the subscription id from your data store and 
           // inform the user that you disabled push
 
           console.log('Unsubscription error: ', e);
@@ -62,7 +62,7 @@ function unsubscribe() {
 }
 
 
-function subscribeToPushManager() {
+function subscribe() {
   // Disable the button so it can't be changed while
   // we process the permission request
   var pushButton = document.querySelector('.js-push-button');
@@ -158,17 +158,15 @@ window.addEventListener('load', function() {
     if (isPushEnabled) {
       unsubscribe();
     } else {
-      subscribeToPushManager();
+      subscribe();
     }
   });
 
   // Check that service workers are supported, if so, progressively
   // enhance and add push messaging support, otherwise continue without it.
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-    .then(function() {
-      initialiseState();
-    });
+    navigator.serviceWorker.register('./service-worker.js')
+    .then(initialiseState);
   } else {
     console.log('Service workers aren\'t supported in this browser.');
   }

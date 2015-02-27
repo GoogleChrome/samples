@@ -1,7 +1,10 @@
 'use strict';
 
-function sendToServer() {
+function sendToServer(subscription) {
   // TODO: Implement ;)
+  // Send subscription.subscriptionId and subscription.endpoint
+  // to your backend to make a request to the GCM API
+  // to send a push message
 }
 
 self.addEventListener('push', function(event) {
@@ -41,5 +44,5 @@ self.addEventListener('pushsubscriptionchange', function(event) {
 
 self.addEventListener('notificationclick', function(event) {
   console.log('On notification click: ', event.notification.tag);
-  event.waitUntil(clients.openWindow('/'));
+  event.waitUntil(clients.openWindow('./'));
 });
