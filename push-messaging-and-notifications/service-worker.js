@@ -1,6 +1,6 @@
 'use strict';
 
-importScript('./subscription-controller.js');
+importScripts('./subscription-controller.js');
 
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
