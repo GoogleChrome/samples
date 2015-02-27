@@ -64,7 +64,7 @@ limitations under the License.
         <li>Extending an existing class</li>
         <li>Subclassing methods of a parent class</li>
         <li>Defining static methods</li>
-        <li>Subclassing built-ins (not yet supported)</li>
+        <li>Subclassing built-ins</li>
        </ul>
     </p>
 
@@ -212,8 +212,8 @@ limitations under the License.
 
         // Example 6: Subclassing built-in classes
         // ===============================================================
-        // Note: At this time (Chrome 42), V8 does not support subclassing built-ins
-        // and DOM objects. This may change in the future.
+        // Note: At this time (Chrome 42), V8 supports subclassing built-ins but
+        // will not support subclassing arrays until Chrome 43.
         //
         //        class Stack extends Array {
         //            constructor() {
@@ -230,6 +230,56 @@ limitations under the License.
         //        stack.push('hello');
         //        log(stack.top());
         //        log(stack.length);
+
+        // Extend Date built-in
+        class myDate extends Date {
+            constructor() {
+                super();
+            }
+
+            getFormattedDate() {
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                return this.getDate() + "-" + months[this.getMonth()] + "-" + this.getFullYear();
+            }
+        }
+
+        var aDate = new myDate();
+        log(aDate.getTime());
+        log(aDate.getFormattedDate());
+
+        // Extend Uint8Array
+        class ExtendedUint8Array extends Uint8Array {
+            constructor() {
+                super(10);
+                this[0] = 255;
+                this[1] = 0xFFA;
+            }
+        }
+
+        var eua = new ExtendedUint8Array();
+        log(eua.byteLength);
+
+        // Extend DOM Audio element
+        class myAudio extends Audio {
+            constructor() {
+                super();
+                this._lyrics = '';
+            }
+
+            get lyrics() {
+                return this._lyrics;
+            }
+
+            set lyrics(str) {
+                this._lyrics = str;
+            }
+        }
+
+        var player = new myAudio();
+        player.controls = true;
+        player.lyrics = 'Never gonna give you up';
+        document.querySelector('body').appendChild(player);
+        log(player.lyrics);
     </script>
     <!-- // [END code-block] -->
 
