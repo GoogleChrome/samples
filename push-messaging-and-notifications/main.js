@@ -2,9 +2,10 @@
 
 var API_KEY = 'AIzaSyBBh4ddPa96rQQNxqiq_qQj7sq1JdsNQUQ';
 
+var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
 
-function sendToServer(subscriptionId, endpoint) {
+function showCurlCommand(subscriptionId, endpoint) {
   // The curl command to trigger a push message straight from GCM
   var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
     '" --header Content-Type:"application/json" ' + endpoint + 
@@ -12,11 +13,18 @@ function sendToServer(subscriptionId, endpoint) {
 
   // Below is a curl command to test sending a push message
   console.log(curlCommand);
+  curlCommandDiv.textContent = curlCommand;
+}
+
+function sendToServer(subscriptionId, endpoint) {
+  // TODO: Send the subscriptionId and endpoint to your server
+  // and save it to send a push message at a later date
 }
 
 function unsubscribe() {
   var pushButton = document.querySelector('.js-push-button');
   pushButton.disabled = true;
+  curlCommandDiv.textContent = '';
 
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
     // To unsubscribe from push messaging, you need get the
@@ -79,6 +87,7 @@ function subscribe() {
         var subscriptionId = subscription.subscriptionId;
         var endpoint = subscription.endpoint;
         sendToServer(subscriptionId, endpoint);
+        showCurlCommand(subscriptionId, endpoint);
         
         pushButton.textContent = 'Disable Push Messages';
         pushButton.disabled = false;
@@ -139,6 +148,8 @@ function initialiseState() {
           // to allow the user to enable push
           return;
         }
+
+        showCurlCommand(subscription.subscriptionId, subscription.endpoint);
 
         // Set your UI to show they have subscribed for
         // push messages
