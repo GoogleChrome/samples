@@ -49,8 +49,17 @@ limitations under the License.
 
   <body>
     <h1>Push Messaging &amp; Notifications</h1>
-
+    
     <p>Available in <a href="http://www.chromestatus.com/feature/5416033485586432">Chrome 42+</a> &amp; <a href="http://www.chromestatus.com/feature/5480344312610816">Chrome 42+</a></p>
+  
+    <p>To use this sample please do the following:</p>
+
+    <ol>
+      <li>Create a project in the Google Developer Console</li>
+      <li>Enable GCM support</li>
+      <li>Replace "&lt;YOUR API KEY HERE&gt;" in main.js with your own API key from the Google Developer Console project</li>
+      <li>Replace "&lt;YOUR PROJECT NUMBER&gt;" in manifest.json with your own project number from the Google Developer Console project</li>
+    </ol>
 
     <p>
         <button class="js-push-button" disabled>
@@ -63,7 +72,8 @@ limitations under the License.
 
     <h2>cURL Command to Send Push</h2>
     <div class="js-curl-command"></div>
-
+  
+    <script src="subscription-controller.js"></script>
     <script src="main.js"></script>
 
     <script>

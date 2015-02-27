@@ -1,12 +1,14 @@
 'use strict';
 
-var API_KEY = 'AIzaSyBBh4ddPa96rQQNxqiq_qQj7sq1JdsNQUQ';
+var API_KEY = '<YOUR API KEY HERE>';
 
 var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
 
-function showCurlCommand(subscriptionId, endpoint) {
+function showCurlCommand(subscription) {
   // The curl command to trigger a push message straight from GCM
+  var subscriptionId = subscription.subscriptionId;
+  var endpoint = subscription.endpoint;
   var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
     '" --header Content-Type:"application/json" ' + endpoint + 
     ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
@@ -14,11 +16,6 @@ function showCurlCommand(subscriptionId, endpoint) {
   // Below is a curl command to test sending a push message
   console.log(curlCommand);
   curlCommandDiv.textContent = curlCommand;
-}
-
-function sendToServer(subscriptionId, endpoint) {
-  // TODO: Send the subscriptionId and endpoint to your server
-  // and save it to send a push message at a later date
 }
 
 function unsubscribe() {
@@ -40,12 +37,13 @@ function unsubscribe() {
           return;
         }
         
+        var subscriptionId = pushSubscription.subscriptionId;
+        // TODO: Make a request to your server to remove
+        // the subscriptionId from your data store so you 
+        // don't attempt to send them push messages anymore
+
         // We have a subcription, so call unsubscribe on it
         pushSubscription.unsubscribe().then(function(successful) {
-          // TODO: Make a request to your server to remove
-          // the user from your data store so you don't attempt
-          // to send them push messages anymore
-
           pushButton.disabled = false;
           pushButton.textContent = 'Enable Push Messages';
           isPushEnabled = false;
@@ -82,12 +80,14 @@ function subscribe() {
         // The subscription was successful
         isPushEnabled = true;
 
-        // TODO: Send the subscriptionId and endpoint to your server
+        // TODO: Send the subscription.subscriptionId and 
+        // subscription.endpoint to your server
         // and save it to send a push message at a later date
-        var subscriptionId = subscription.subscriptionId;
-        var endpoint = subscription.endpoint;
-        sendToServer(subscriptionId, endpoint);
-        showCurlCommand(subscriptionId, endpoint);
+        // sendSubscriptionToServer is defined in subscription-controller.js
+        // (This is so sendSubscriptionToServer can be imported in the
+        // service-worker.js file)
+        sendSubscriptionToServer(subscription);
+        showCurlCommand(subscription);
         
         pushButton.textContent = 'Disable Push Messages';
         pushButton.disabled = false;
@@ -149,7 +149,7 @@ function initialiseState() {
           return;
         }
 
-        showCurlCommand(subscription.subscriptionId, subscription.endpoint);
+        showCurlCommand(subscription);
 
         // Set your UI to show they have subscribed for
         // push messages
@@ -179,6 +179,6 @@ window.addEventListener('load', function() {
     navigator.serviceWorker.register('./service-worker.js')
     .then(initialiseState);
   } else {
-    console.log('Service workers aren\'t supported in this browser.');
+    console.warn('Service workers aren\'t supported in this browser.');
   }
 });

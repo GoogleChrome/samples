@@ -1,11 +1,6 @@
 'use strict';
 
-function sendToServer(subscription) {
-  // TODO: Implement ;)
-  // Send subscription.subscriptionId and subscription.endpoint
-  // to your backend to make a request to the GCM API
-  // to send a push message
-}
+importScript('./subscription-controller.js');
 
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
@@ -36,7 +31,8 @@ self.addEventListener('pushsubscriptionchange', function(event) {
   event.waitUntil(self.registration.pushManager.subscribe().then(function(subscription) {
       // TODO: Send subscriptionId and endpoint to your server
       // so that you can send a push message at a later date
-      return sendToServer(subscription);
+      // sendSubscriptionToServer is defined in subscription-controller.js
+      return sendSubscriptionToServer(subscription);
     }).catch(function(error) {
       console.warn('Unable to subscribe user to push notifications');
     }));
