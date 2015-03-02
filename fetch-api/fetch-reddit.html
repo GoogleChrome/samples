@@ -71,7 +71,7 @@ limitations under the License.
 
     function fetchSubreddit(url) {
         if(url) {
-            fetch('https://www.reddit.com' + url + '.json')
+            fetch('https://www.reddit.com/r/' + url + '.json')
                     .then(function(response) {
                         return response.json()
                     }).then(function(body) {
@@ -84,15 +84,15 @@ limitations under the License.
         }
     }
 
-    fetch('https://www.reddit.com/reddits.json')
+    fetch('https://www.reddit.com/api/subreddits_by_topic.json?query=javascript')
             .then(function(response) {
                 return response.json()
             }).then(function(json) {
-                console.log(json);
+              console.log(json);
                 var select = document.createElement('select');
                 var links = '';
-                for(var k = 0; k < json.data.children.length; k++){
-                    links += '<option value="'+ json.data.children[k].data.url + '">' + json.data.children[k].data.url + '</option>';
+                for(var k = 0; k < json.length; k++){
+                    links += '<option value="'+ json[k].name + '">' + json[k].name + '</option>';
                 }
                 select.innerHTML = links;
                 select.addEventListener('change', function(e) {

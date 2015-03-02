@@ -63,14 +63,13 @@ limitations under the License.
     }
 
     fetch('users.json').then(function(response) {
-        console.log(response);
-        log(response.headers.get('Content-Type'));
-        log(response.headers.get('Date'));
-
         log(response.status);
         log(response.statusText);
         log(response.type);
         log(response.url);
+
+        log('Content-Type: ' + response.headers.get('Content-Type'));
+        log('Date: ' + response.headers.get('Date'));
     });
 </script>
 <!-- // [END code-block] -->

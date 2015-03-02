@@ -6,7 +6,7 @@ Fetch API Samples
 * [Fetch JSON](https://googlechrome.github.io/samples/fetch-api/fetch-json.html)
 * [Fetch HTML](https://googlechrome.github.io/samples/fetch-api/fetch-html.html)
 * [Multiple fetch requests + Reddit API](https://googlechrome.github.io/samples/fetch-api/fetch-reddit.html)
-* [Posting with fetch](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
+* [Posting to the GitHub API with fetch](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
 * [Response metadata](https://googlechrome.github.io/samples/fetch-api/fetch-response-metadata.html)
 * [Fetch success/error handlers](https://googlechrome.github.io/samples/fetch-api/fetch-success-error-handlers.html)
 

@@ -82,6 +82,12 @@ limitations under the License.
             }).catch(function(error) {
                 log('Request failed', error)
             });
+
+    fetch('invalid.json')
+            .then(status)
+            .catch(function(error) {
+              log('Request failed', error)
+            });
 </script>
 <!-- // [END code-block] -->
 

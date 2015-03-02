@@ -50,6 +50,12 @@ limitations under the License.
 
 <p>Available in <a href="http://www.chromestatus.com/feature/6730533392351232">Chrome 42+</a></p>
 
+<textarea autofocus id="gist" id="" cols="80" rows="10">
+// Enter some JavaScript here
+// e.g
+</textarea>
+<p><button>Create new GitHub Gist</button></p>
+
 <div class="output">
     <p id="log"></p>
 </div>
@@ -64,45 +70,39 @@ limitations under the License.
         logEl.innerHTML += '<p>' + Array.prototype.join.call(arguments, '') + '<p>';
     }
 
-    function serialize(data) {
-        if(data) {
-            return Object.keys(data).map(function (key) {
-                return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-            }).join('&');
-        }
-    }
-
-    /**
-     *
-     * @param url URL for validation
-     * @param json JSON to validate
-     * @note adapted from http://blog.gospodarets.com/fetch_in_action/
-     */
-    function validate(url, json) {
-        json = typeof json === 'object' ? JSON.stringify(json) : json;
-        return fetch(url, {
-            method: 'post',
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-            },
-            body: serialize({json: json})
+    function createGist(opts) {
+        log('Posting request to GitHub API...');
+        fetch('https://api.github.com/gists', {
+          method: 'post',
+          body: JSON.stringify(opts)
         }).then(function (response) {
-            return response.json();
+          return response.json();
         }).then(function (data) {
-            if (data.validate) {
-                log('String: "' + json + '" is valid JSON');
-            } else {
-                log('String: "' + json + '" is not valid JSON');
-                log(data.error);
-            }
-        }).catch(function (error) {
-            log(error.message);
+          log('Created Gist: <a href="' + data.html_url + '">' + data.html_url + '</a>');
         });
     }
 
-    var jsonValidator = 'http://validate.jsontest.com/';
-    validate(jsonValidator, '}');
-    validate(jsonValidator, {foo: 'bar'});
+    function submitGist() {
+      var content = document.querySelector('textarea').value;
+      if (content) {
+        createGist({
+            "description": 'Fetch API Post example',
+            "public": true,
+            "files": {
+                "test.js": {
+                    "content": content
+                }
+            }
+        });
+      } else {
+        log('Please enter in content to post to a new Gist.');
+      }
+    }
+
+    var submitBtn = document.querySelector('button');
+    submitBtn.addEventListener('click', function () {
+      submitGist();
+    });
 </script>
 <!-- // [END code-block] -->
 
