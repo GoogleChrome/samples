@@ -13,8 +13,6 @@ function showCurlCommand(subscription) {
     '" --header Content-Type:"application/json" ' + endpoint + 
     ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
-  // Below is a curl command to test sending a push message
-  console.log(curlCommand);
   curlCommandDiv.textContent = curlCommand;
 }
 
@@ -49,7 +47,7 @@ function unsubscribe() {
           isPushEnabled = false;
 
           if (!successful) {
-            console.error('We were unable to unregister from push');
+            window.Demo.debug.log('We were unable to unregister from push');
             return;
           }
         }).catch(function(e) {
@@ -58,11 +56,11 @@ function unsubscribe() {
           // the subscription id from your data store and 
           // inform the user that you disabled push
 
-          console.log('Unsubscription error: ', e);
+          window.Demo.debug.log('Unsubscription error: ', e);
           pushButton.disabled = false;
         });
       }).catch(function(e) {
-        console.error('Error thrown while unsubscribing from push messaging.', e);
+        window.Demo.debug.log('Error thrown while unsubscribing from push messaging.', e);
       });
   });
 }
@@ -98,13 +96,13 @@ function subscribe() {
           // means we failed to subscribe and the user will need
           // to manually change the notification permission to
           // subscribe to push messages
-          console.warn('Permission for Notifications was denied');
+          window.Demo.debug.log('Permission for Notifications was denied');
           pushButton.disabled = true;
         } else {
           // A problem occurred with the subscription, this can
           // often be down to an issue or lack of the gcm_sender_id
           // and / or gcm_user_visible_only
-          console.error('Unable to subscribe to push.', e);
+          window.Demo.debug.log('Unable to subscribe to push.', e);
           pushButton.disabled = false;
         }
       });
@@ -115,7 +113,7 @@ function subscribe() {
 function initialiseState() {
   // Are Notifications supported?
   if (!('Notification' in window)) {
-    console.warn('Notifications aren\'t supported.');
+    window.Demo.debug.log('Notifications aren\'t supported.');
     return;
   }
 
@@ -123,13 +121,13 @@ function initialiseState() {
   // If its denied, it's a permanent block until the
   // user changes the permission
   if (Notification.permission === 'denied') {
-    console.warn('The user has blocked notifications.');
+    window.Demo.debug.log('The user has blocked notifications.');
     return;
   }
 
   // Check if push messaging is supported
   if (!('PushManager' in window)) {
-    console.warn('Push messaging isn\'t supported.');
+    window.Demo.debug.log('Push messaging isn\'t supported.');
     return;
   }
 
@@ -157,7 +155,7 @@ function initialiseState() {
         isPushEnabled = true;
       })
       .catch(function(err) {
-        console.warn('Error during getSubscription()', err);
+        window.Demo.debug.log('Error during getSubscription()', err);
       });
   });
 }
@@ -179,6 +177,6 @@ window.addEventListener('load', function() {
     navigator.serviceWorker.register('./service-worker.js')
     .then(initialiseState);
   } else {
-    console.warn('Service workers aren\'t supported in this browser.');
+    window.Demo.debug.log('Service workers aren\'t supported in this browser.');
   }
 });
