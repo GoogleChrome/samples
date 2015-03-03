@@ -20,22 +20,34 @@ self.addEventListener('push', function(event) {
 });
 
 self.addEventListener('pushsubscriptionchange', function(event) {
-  if(Notification.permission !== 'granted') {
-    // We need to ask the user to enable notifications
-
-    // You may want to remove any previous subscription details
-    // from your server since the user won't receive any of the
-    // push messages
-    return;
-  } 
-  event.waitUntil(self.registration.pushManager.subscribe().then(function(subscription) {
-      // TODO: Send subscriptionId and endpoint to your server
-      // so that you can send a push message at a later date
-      // sendSubscriptionToServer is defined in subscription-controller.js
-      return sendSubscriptionToServer(subscription);
-    }).catch(function(error) {
-      console.warn('Unable to subscribe user to push notifications');
-    }));
+  event.waitUntil(
+    self.registration.pushManager.subscribe()
+      .then(function(subscription) {
+        // TODO: Send new subscriptionId and endpoint to 
+        // your server so that you can send a push message 
+        // at a later date sendSubscriptionToServer is 
+        // defined in subscription-controller.js
+        return sendSubscriptionToServer(subscription);
+      })
+      .catch(function(error) {
+        // Check whether we're still registered.
+        self.registration.pushManager.getSubscription()
+          .then(function(subscription) {
+            if (subscription === null) {
+              throw new Error("No subscription");
+            }
+          })
+          .catch(function(err) {
+            console.warn('Unable to re-subscribe user to push notifications');
+            // TODO: Remove any previous subscription details from 
+            // your server since the user won't receive any of the 
+            // push messages. Since the PushSubscription has been 
+            // deleted, you need to have stored a copy of 
+            // subscriptionId or some other identifier in a cookie 
+            // or similar.
+          });
+      })
+    );
 });
 
 self.addEventListener('notificationclick', function(event) {
