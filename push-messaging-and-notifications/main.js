@@ -1,6 +1,6 @@
 'use strict';
 
-var API_KEY = '<YOUR API KEY HERE>';
+var API_KEY = '<YOUR API KEY>';
 
 var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
@@ -32,6 +32,7 @@ function unsubscribe() {
           // to allow the user to subscribe to push
           isPushEnabled = false;
           pushButton.disabled = false;
+          pushButton.textContent = 'Enable Push Messages';
           return;
         }
         
@@ -45,11 +46,6 @@ function unsubscribe() {
           pushButton.disabled = false;
           pushButton.textContent = 'Enable Push Messages';
           isPushEnabled = false;
-
-          if (!successful) {
-            window.Demo.debug.log('We were unable to unregister from push');
-            return;
-          }
         }).catch(function(e) {
           // We failed to unsubscribe, this can lead to
           // an unusual state, so may be best to remove 
@@ -77,6 +73,10 @@ function subscribe() {
       .then(function(subscription) {
         // The subscription was successful
         isPushEnabled = true;
+        pushButton.textContent = 'Disable Push Messages';
+        pushButton.disabled = false;
+
+        showCurlCommand(subscription);
 
         // TODO: Send the subscription.subscriptionId and 
         // subscription.endpoint to your server
@@ -84,11 +84,7 @@ function subscribe() {
         // sendSubscriptionToServer is defined in subscription-controller.js
         // (This is so sendSubscriptionToServer can be imported in the
         // service-worker.js file)
-        sendSubscriptionToServer(subscription);
-        showCurlCommand(subscription);
-        
-        pushButton.textContent = 'Disable Push Messages';
-        pushButton.disabled = false;
+        return sendSubscriptionToServer(subscription);
       })
       .catch(function(e) {
         if (Notification.permission === 'denied') {
@@ -104,6 +100,7 @@ function subscribe() {
           // and / or gcm_user_visible_only
           window.Demo.debug.log('Unable to subscribe to push.', e);
           pushButton.disabled = false;
+          pushButton.textContent = 'Enable Push Messages';
         }
       });
   });
@@ -111,8 +108,8 @@ function subscribe() {
 
 // Once the service worker is registered set the initial state
 function initialiseState() {
-  // Are Notifications supported?
-  if (!('Notification' in window)) {
+  // Are Notifications supported in the service worker?
+  if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
     window.Demo.debug.log('Notifications aren\'t supported.');
     return;
   }
