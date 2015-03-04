@@ -1,9 +1,16 @@
 'use strict';
 
-var API_KEY = '<YOUR API KEY>';
+var API_KEY = 'AIzaSyBBh4ddPa96rQQNxqiq_qQj7sq1JdsNQUQ';
 
 var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
+
+function sendSubscriptionToServer(subscription) {
+  // TODO: Send the subscription.subscriptionId and 
+  // subscription.endpoint to your server and save 
+  // it to send a push message at a later date
+  console.log('TODO: Implement sendSubscriptionToServer()');
+}
 
 function showCurlCommand(subscription) {
   // The curl command to trigger a push message straight from GCM
@@ -81,9 +88,6 @@ function subscribe() {
         // TODO: Send the subscription.subscriptionId and 
         // subscription.endpoint to your server
         // and save it to send a push message at a later date
-        // sendSubscriptionToServer is defined in subscription-controller.js
-        // (This is so sendSubscriptionToServer can be imported in the
-        // service-worker.js file)
         return sendSubscriptionToServer(subscription);
       })
       .catch(function(e) {
