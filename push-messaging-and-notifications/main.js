@@ -148,6 +148,9 @@ function initialiseState() {
           return;
         }
 
+        // Keep your server in sync with the latest subscriptionId
+        sendSubscriptionToServer(subscription);
+        
         showCurlCommand(subscription);
 
         // Set your UI to show they have subscribed for
