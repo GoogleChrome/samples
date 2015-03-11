@@ -51,6 +51,7 @@ limitations under the License.
     <p>Available in <a href="http://www.chromestatus.com/feature/4873630588600320">Chrome 42+</a></p>
 
     <p>Extended Object Literals simplify object creation and composition by reducing the required amount of typing with some syntactic sugar.</p>
+    <p>With this, object literals are now syntactically similar to ES6’s new class syntax and have less duplication in common use-cases like constructor function.</p>
 
     <div class="output">
         <pre id="log"></pre>
@@ -63,25 +64,24 @@ limitations under the License.
         document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
     }
 
-    var a = "somestring", b = 5, c = {"key": "value"};
-    var es5 = {a: a, b: b, c: c};
-    var es6 = {a, b, c};
-    log("es5 = "+JSON.stringify(es5));
-    log("es6 = "+JSON.stringify(es6));
+    function person(name, age){
+      return {name, age}; // Property name is inferred from variable name
+    }
 
-    var x = {
+    var me = person("Alex", 26);
+    log("me: " + JSON.stringify(me));
+
+    var tools = {
       add1(i) { // You don’t have to type `function` over and over
         return i + 1;
       },
-      * random() { // also works with generators
-        while(true)
-          yield 4; // Chosen by fair dice roll
+      * countdown(i) { // also works with generators
+        while(i>0)
+          yield i--;
       },
-    }
-    log("\nIf you add1() to 5 you get "+x.add1(5));
+    };
+    log("\nIf you add1() to 5 you get "+tools.add1(5));
 
-    var gen = x.random();
-    log("Here are 3 random numbers: ", [gen.next().value, gen.next().value, gen.next().value]);
     </script>
     <!-- // [END code-block] -->
 
