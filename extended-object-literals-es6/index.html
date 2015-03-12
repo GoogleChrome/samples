@@ -64,12 +64,19 @@ limitations under the License.
         document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
     }
 
+    var a = "somestring", b = 5, c = {"key": "value"};
+    // The following two declarations are equivalent
+    var es5 = {a: a, b: b, c: c};
+    var es6 = {a, b, c}; // Property name is inferred from variable name
+    log("es5: "+JSON.stringify(es5));
+    log("es6: "+JSON.stringify(es6));
+
     function person(name, age){
-      return {name, age}; // Property name is inferred from variable name
+      return {name, age}; // Again, property name is inferred
     }
 
     var me = person("Alex", 26);
-    log("me: " + JSON.stringify(me));
+    log("\nme: " + JSON.stringify(me));
 
     var tools = {
       add1(i) { // You don’t have to type `function` over and over
