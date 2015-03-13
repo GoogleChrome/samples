@@ -61,11 +61,10 @@ limitations under the License.
     <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 40+</a></p>
 
     <p>
-      This sample demonstrates basic Service Worker registration, and using the
-      <a href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage"><code>postMessage</code></a>
-      interface to communicate with a service worker that has just been installed, and is not yet controlling the page.
-      This allows for immediate communication with a service worker, immediately after it has been installed, without
-      waiting for the next time the user visits a page in the service worker's scope.
+      This sample demonstrates using the <a href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage"><code>postMessage</code></a>
+      interface to communicate with a Service Worker that has just been installed, and is not yet controlling the page.
+      This allows for immediate communication with a Service Worker, immediately after it has been installed, without
+      waiting for the next time the user visits a page in the Service Worker's scope.
     </p>
 
     <p>
@@ -153,7 +152,7 @@ limitations under the License.
               // Disable button for sending a message using ServiceWorkerRegistration.installing
               document.querySelector('#send-message-registration').disabled = true;
             }
-            // Show the interface for sending messages to the service worker.
+            // Show the interface for sending messages to the Service Worker.
             showCommands();
         }).catch(function(error) {
           // Something went wrong during registration. The service-worker.js file
