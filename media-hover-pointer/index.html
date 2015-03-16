@@ -50,12 +50,12 @@ limitations under the License.
     <p>Available in <a href="https://www.chromestatus.com/feature/6460705494532096">Chrome 41+</a></p>
 
     <p>
-      These media queries describe the capabilities of all input devices available to the user as per <a href="http://www.w3.org/TR/2014/WD-mediaqueries-4-20140605/#any-input">the specification</a>.
-      These are similar to the older <code>'pointer'</code> and <code>'hover'</code> media features, except that these only reflect the primary input device.
+      These media features describe the capabilities of all input devices available to the user as per <a href="http://www.w3.org/TR/2014/WD-mediaqueries-4-20140605/#any-input">the specification</a>.
+      These are similar to the older <code>'pointer'</code> and <code>'hover'</code> media features, except that the older featres only reflect the primary input device.
     </p>
     <p>
-      For example, if a user is on a tablet with a connected a mouse, <code>'any-pointer'</code> will be satisfied.
-      If the mouse is then removed, the browser will report <code>'any-pointer'</code> as <code>none</code>.
+      For example, if a user is on a tablet (with a primary touch input) with a connected mouse, <code>'any-pointer'</code> will be <code>fine</code>.
+      <!-- Note that this is not yet dynamic, e.g. when hotplugging devices: http://crbug/442418 -->
     </p>
     <p>
       
@@ -93,23 +93,12 @@ limitations under the License.
       margin: 4px;
       border-radius: 1px;
       text-decoration: line-through;
-      cursor: default;
       -webkit-user-select: none;
       user-select: none;
     }
     .demo:hover {
       background: #c00;
       color: white;
-    }
-    .demo:focus {
-      outline: 0;
-      border-color: rgba(33, 33, 33, 0.2);
-    }
-    @media (any-hover: none) {
-      .demo:active {
-        background: #00c;
-        color: white;
-      }
     }
 
     /** any-pointer options */
@@ -167,8 +156,6 @@ limitations under the License.
     </style>
 
     <div class="output">
-        These buttons will <code>:hover</code> red, but where hover is not available, set <code>:active</code> blue
-
       <div>
         <div class="demo any-pointer">
           any-pointer
