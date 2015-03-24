@@ -47,7 +47,7 @@ self.addEventListener('install', function(event) {
 
   event.waitUntil(
     caches.open(CURRENT_CACHES['prefetch']).then(function(cache) {
-      cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
+      return cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
         // It's very important to use {mode: 'no-cors'} if there is any chance that
         // the resources being fetched are served off of a server that doesn't support
         // CORS (http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
