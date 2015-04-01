@@ -19,7 +19,7 @@
 if (typeof self.skipWaiting === 'function') {
   console.log('self.skipWaiting() is supported.');
   self.addEventListener('install', function(e) {
-    // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-global-scope-skipwaiting
+    // See https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-global-scope-skipwaiting
     e.waitUntil(self.skipWaiting());
   });
 } else {
