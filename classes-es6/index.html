@@ -267,24 +267,26 @@ limitations under the License.
         document.querySelector('body').appendChild(player);
         log(player.lyrics);
 
-        // Note: At this time (Chrome 42), V8 supports subclassing built-ins but
-        // will not support subclassing arrays until Chrome 43.
-        //
-        //        class Stack extends Array {
-        //            constructor() {
-        //                super();
-        //            }
-        //
-        //            top() {
-        //                return this[this.length - 1];
-        //            }
-        //        }
-        //
-        //        var stack = new Stack();
-        //        stack.push('world');
-        //        stack.push('hello');
-        //        log(stack.top());
-        //        log(stack.length);
+
+
+        // Note: The V8 in Chrome 42 supports subclassing built-ins but Arrays.
+        // Subclassing arrays supported in Chrome 43.
+        
+        class Stack extends Array {
+            constructor() {
+                super();
+            }
+
+            top() {
+                return this[this.length - 1];
+            }
+        }
+
+        var stack = new Stack();
+        stack.push('world');
+        stack.push('hello');
+        log(stack.top());
+        log(stack.length);
     </script>
     <!-- // [END code-block] -->
 
