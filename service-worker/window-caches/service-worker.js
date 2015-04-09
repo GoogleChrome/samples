@@ -87,10 +87,6 @@ self.addEventListener('activate', function(event) {
           }
         })
       );
-    }).then(function() {
-      if (self.clients && self.clients.claim === 'function') {
-        return self.clients.claim();
-      }
     })
   );
 });
