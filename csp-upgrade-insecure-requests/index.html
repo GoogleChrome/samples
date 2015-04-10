@@ -47,6 +47,13 @@ limitations under the License.
 
     <link rel="icon" href="../images/favicon.ico">
 
+    <script>
+      // Ensure that this page is loaded via https:, since this demo won't be meaningful otherwise.
+      if ((!location.port || location.port === '80') && location.protocol !== 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
+
     <link rel="stylesheet" href="../styles/main.css">
   </head>
 
@@ -75,7 +82,7 @@ limitations under the License.
       <a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/#the-meta-tag">alternative</a>
       is to include the
       <code>&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code>
-      tag in your HTML, preferably in the <code>&lt;head&gt;</code>.
+      tag in your HTML's <code>&lt;head&gt;</code>.
     </p>
 
     <div class="output">
