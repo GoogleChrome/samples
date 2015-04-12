@@ -1,0 +1,193 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample of registering a service worker that immediately takes control of the page.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: Immediate Control</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Service Worker Sample: Immediate Control">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../../images/favicon.ico">
+
+    <script>
+      // Service workers require HTTPS (http://goo.gl/lq4gCo). If we're running on a real web server
+      // (as opposed to localhost on a custom port, which is whitelisted), then change the protocol to HTTPS.
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
+
+    <link rel="stylesheet" href="../../styles/main.css">
+  </head>
+
+  <body>
+  <h1>Service Worker Sample: Immediate Control</h1>
+
+  <p>Available in <a href="http://www.chromestatus.com/feature/6561526227927040">Chrome 42+</a></p>
+
+  <p>
+    This sample is a modified version of the
+    <a href="https://googlechrome.github.io/samples/service-worker/registration-events/index.html">detailed registration</a>
+    sample. It shows off two new methods available to service workers:
+  </p>
+
+  <ul>
+    <li>
+      <code><a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-global-scope-skipwaiting">skipWaiting()</a></code>:
+      During a service worker update, when there's an existing service worker that differs from the
+      updated service worker, the updated service worker is immediately considered
+      <a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#dfn-active-worker"><em>active</em></a>,
+      instead of
+      <a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#dfn-waiting-worker"><em>waiting</em></a>.
+    </li>
+    <li>
+      <code><a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#clients-claim-method">clients.claim()</a></code>:
+      Causes the activated service worker to take control over all open pages under the scope
+      immediately, rather than taking control only after the next navigation.
+    </li>
+  </ul>
+
+  <p>
+    While both of those methods have independent uses, when used together they ensure that when
+    there's an update to the underlying service worker, the update takes effect immediately and
+    applies to both the current page and all other active pages. It's important that your new
+    service worker code behaves properly when assuming control a page that might have been initially
+    loaded with an older version of your service worker and older cache entries. If you're not sure
+    that it will, then relying on the default service lifecycle behavior may be more appropriate.
+  </p>
+
+  <p>
+    Various pieces of information about the service worker from the perspective of the registering page
+    can be found below.
+    Additionally, visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
+    the registered service worker to view logging statements for the various actions the
+    <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
+  </p>
+
+  <div class="output">
+    <h2>Service Worker Availability</h2>
+    <p>
+      Service Workers <strong id="availability"></strong> available in your browser.
+      <em>(Whether <code>'serviceWorker' in navigator</code>.)</em>
+    </p>
+
+    <h2>Is This Page Controlled by a Service Worker?</h2>
+    <p>
+      This page <strong id="controlled"></strong> currently controlled.
+      <em>(Whether <code>navigator.serviceWorker.controller</code> is set.)</em>
+    </p>
+
+    <h2>Info about the Current Registration</h2>
+    <p>
+      The <code>navigator.serviceWorker.register()</code> call <strong id="register"></strong>.
+    </p>
+    <p>
+      The current registration represents the <strong id="kind"></strong> service worker.
+    </p>
+    <p>
+      <em>Tip:</em> With a newly registered service worker in the <code>activated</code> state,
+      refresh the page to have the service worker take control.
+      You can also refresh with the Shift key held down to load
+      the page without the service worker controlling it.
+    </p>
+    <p>State transitions of the service worker associated with the current registration:</p>
+    <ol id="states"></ol>
+  </div>
+
+  <script>
+    function logState(state) {
+      var liElement = document.createElement('li');
+      liElement.textContent = state;
+      document.querySelector('#states').appendChild(liElement);
+
+      // navigator.serviceWorker.controlled iff there is currently a service worker handling
+      // requests on this page for the current navigation.
+      document.querySelector('#controlled').textContent = navigator.serviceWorker.controller ? 'is' : 'is not';
+    }
+
+    if ('serviceWorker' in navigator) {
+      // The current browser supports service workers.
+      document.querySelector('#availability').textContent = 'are';
+
+      // Override the default scope of '/' with './', so that the registration applies
+      // to the current directory and everything underneath it.
+      navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
+        // At this point, registration has taken place.
+        // The service worker will not handle requests until this page and any
+        // other instances of this page (in other tabs, etc.) have been
+        // closed/reloaded.
+        document.querySelector('#register').textContent = 'succeeded';
+
+        var serviceWorker;
+        if (registration.installing) {
+          serviceWorker = registration.installing;
+          document.querySelector('#kind').textContent = 'installing';
+        } else if (registration.waiting) {
+          serviceWorker = registration.waiting;
+          document.querySelector('#kind').textContent = 'waiting';
+        } else if (registration.active) {
+          serviceWorker = registration.active;
+          document.querySelector('#kind').textContent = 'active';
+        }
+
+        if (serviceWorker) {
+          logState(serviceWorker.state);
+          serviceWorker.addEventListener('statechange', function(e) {
+            logState(e.target.state);
+          });
+        }
+      }).catch(function(error) {
+        // Something went wrong during registration. The service-worker.js file
+        // might be unavailable or contain a syntax error.
+        document.querySelector('#register').textContent = 'failed: ' + error;
+      });
+    } else {
+      // The current browser doesn't support service workers.
+      document.querySelector('#availability').textContent = 'are not';
+    }
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-53563471-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
