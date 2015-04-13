@@ -58,11 +58,14 @@ limitations under the License.
 
     <div><b>Geolocation:</b> <span id='geolocation'></span></div>
     <div><b>Notifications:</b> <span id='notifications'></span></div>
+    <div><b>Midi:</b> <span id='midi'></span></div>
+    <div><b>Midi SysEx:</b> <span id='midi-sysex'></span></div>
 
     <fieldset>
       <legend>Requests</legend>
       <button id="getPositionBtn">Geolocation</button>
       <button id="getNotificationBtn">Notifications</button>
+      <button id="getMidiBtn">Midi SysEx</button>
     </fieldset>
 
     <div class="output">
@@ -84,6 +87,7 @@ limitations under the License.
 
         var getPosBtn = document.querySelector('#getPositionBtn');
         var getNotBtn = document.querySelector('#getNotificationBtn');
+        var getMidBtn = document.querySelector('#getMidiBtn');
 
         // Check for Geolocation API permissions
         navigator.permissions.query({name:'geolocation'}).then(function(p) {
@@ -97,10 +101,24 @@ limitations under the License.
         // Check for Notifications API permissions
         navigator.permissions.query({name:'notifications'}).then(function(p) {
           updatePermission('notifications', p.status);
-
           p.onchange = function() {
             updatePermission('notifications', p.status);
           };
+        });
+
+        // Check for Midi/Midi SysEx permissions
+        navigator.permissions.query({name:'midi', sysex:false}).then(function(p) {
+          var update = function() { updatePermission('midi', p.status); };
+          update();
+
+          p.onchange = update;
+        });
+
+        navigator.permissions.query({name:'midi', sysex:true}).then(function(p) {
+          var update = function() { updatePermission('midi-sysex', p.status); };
+          update();
+
+          p.onchange = update;
         });
 
         getPosBtn.addEventListener('click', function() {
@@ -122,6 +140,10 @@ limitations under the License.
             }
             log('Permission was granted for notifications');
           });
+        });
+
+        getMidBtn.addEventListener('click', function() {
+          navigator.requestMIDIAccess({sysex:true});
         });
       }
 
