@@ -22,6 +22,7 @@ limitations under the License.
     <meta name="description" content="Sample illustrating the use of the Permissions aPI.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="manifest.json">
 
     <title>Permissions API Sample</title>
 
@@ -53,24 +54,33 @@ limitations under the License.
     <p>The Permissions API allows a web application to be aware of the status of a given permission, to know whether it is granted, denied or if the user will be asked whether the permission should be granted.</p>
 
     <!-- // [START code-block] -->
-
     <h3>Permissions</h3>
 
     <div><b>Geolocation:</b> <span id='geolocation'></span></div>
     <div><b>Notifications:</b> <span id='notifications'></span></div>
     <div><b>Midi:</b> <span id='midi'></span></div>
     <div><b>Midi SysEx:</b> <span id='midi-sysex'></span></div>
+    <div><b>Push Notifications:</b> <span id='push-notifications'></span></div>
 
     <fieldset>
       <legend>Requests</legend>
       <button id="getPositionBtn">Geolocation</button>
       <button id="getNotificationBtn">Notifications</button>
       <button id="getMidiBtn">Midi SysEx</button>
+      <button id="getPushNotificationBtn">Push Notifications</button>
     </fieldset>
 
     <div class="output">
       <pre id="log"></pre>
     </div>
+
+    <script>
+      // Service workers require HTTPS (http://goo.gl/lq4gCo). If we're running on a real web server
+      // (as opposed to localhost on a custom port, which is whitelisted), then change the protocol to HTTPS.
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
 
     <script>
     (function () {
@@ -83,11 +93,22 @@ limitations under the License.
         document.getElementById(name).textContent = status;
       }
 
+      function requestPushPermission() {
+        navigator.serviceWorker.register('sw-focus.js', {
+          scope: './'
+        }).then(function(reg) {
+          return reg.pushManager.subscribe();
+        }).then(function(reg) {
+          console.log('push reg', reg);
+        });
+      }
+
       function init() {
 
         var getPosBtn = document.querySelector('#getPositionBtn');
         var getNotBtn = document.querySelector('#getNotificationBtn');
         var getMidBtn = document.querySelector('#getMidiBtn');
+        var getPushNotBtn = document.querySelector('#getPushNotificationBtn');
 
         // Check for Geolocation API permissions
         navigator.permissions.query({name:'geolocation'}).then(function(p) {
@@ -121,6 +142,14 @@ limitations under the License.
           p.onchange = update;
         });
 
+        // Check for Push notifications
+        navigator.permissions.query({name:'push', userVisible:true}).then(function(p) {
+          var update = function() { updatePermission('push-notifications', p.status); };
+          update();
+
+          p.onchange = update;
+        });
+
         getPosBtn.addEventListener('click', function() {
           navigator.geolocation.getCurrentPosition(function(position) {
             log('Geolocation permissions granted');
@@ -144,6 +173,10 @@ limitations under the License.
 
         getMidBtn.addEventListener('click', function() {
           navigator.requestMIDIAccess({sysex:true});
+        });
+
+        getPushNotBtn.addEventListener('click', function() {
+          requestPushPermission();
         });
       }
 
