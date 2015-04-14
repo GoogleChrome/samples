@@ -8,6 +8,7 @@ Fetch API Samples
 * [Multiple fetch requests + Reddit API](https://googlechrome.github.io/samples/fetch-api/fetch-reddit.html)
 * [Posting to the GitHub API with fetch](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
 * [Response metadata](https://googlechrome.github.io/samples/fetch-api/fetch-response-metadata.html)
+* [Response body stream](https://googlechrome.github.io/samples/fetch-api/fetch-response-stream.html)
 * [Fetch success/error handlers](https://googlechrome.github.io/samples/fetch-api/fetch-success-error-handlers.html)
 
 Learn more at http://www.chromestatus.com/feature/6730533392351232
