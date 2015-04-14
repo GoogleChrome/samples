@@ -22,7 +22,6 @@ limitations under the License.
     <meta name="description" content="Sample illustrating the use of the Permissions API.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="manifest.json">
 
     <title>Permissions API Sample</title>
 
@@ -60,15 +59,15 @@ limitations under the License.
     <div><b>Notifications:</b> <span id='notifications'></span></div>
     <div><b>Midi:</b> <span id='midi'></span></div>
     <div><b>Midi SysEx:</b> <span id='midi-sysex'></span></div>
-    <div><b>Push Notifications:</b> <span id='push-notifications'></span></div>
 
-    <fieldset>
-      <legend>Requests</legend>
-      <button id="getPositionBtn">Geolocation</button>
-      <button id="getNotificationBtn">Notifications</button>
-      <button id="getMidiBtn">Midi SysEx</button>
-      <button id="getPushNotificationBtn">Push Notifications</button>
-    </fieldset>
+    <p>
+      <fieldset>
+        <legend>Requests</legend>
+        <button id="getPositionBtn">Geolocation</button>
+        <button id="getNotificationBtn">Notifications</button>
+        <button id="getMidiBtn">Midi SysEx</button>
+      </fieldset>
+    </p>
 
     <div class="output">
       <pre id="log"></pre>
@@ -93,22 +92,11 @@ limitations under the License.
         document.getElementById(name).textContent = status;
       }
 
-      function requestPushPermission() {
-        navigator.serviceWorker.register('sw-focus.js', {
-          scope: './'
-        }).then(function(reg) {
-          return reg.pushManager.subscribe();
-        }).then(function(reg) {
-          console.log('push reg', reg);
-        });
-      }
-
       function init() {
 
         var getPosBtn = document.querySelector('#getPositionBtn');
         var getNotBtn = document.querySelector('#getNotificationBtn');
         var getMidBtn = document.querySelector('#getMidiBtn');
-        var getPushNotBtn = document.querySelector('#getPushNotificationBtn');
 
         // Check for Geolocation API permissions
         navigator.permissions.query({name:'geolocation'}).then(function(p) {
@@ -129,25 +117,17 @@ limitations under the License.
 
         // Check for Midi/Midi SysEx permissions
         navigator.permissions.query({name:'midi', sysex:false}).then(function(p) {
-          var update = function() { updatePermission('midi', p.status); };
-          update();
-
-          p.onchange = update;
+          updatePermission('midi', p.status);
+          p.onchange = function() {
+            updatePermission('midi', p.status);
+          };
         });
 
         navigator.permissions.query({name:'midi', sysex:true}).then(function(p) {
-          var update = function() { updatePermission('midi-sysex', p.status); };
-          update();
-
-          p.onchange = update;
-        });
-
-        // Check for Push notifications
-        navigator.permissions.query({name:'push', userVisible:true}).then(function(p) {
-          var update = function() { updatePermission('push-notifications', p.status); };
-          update();
-
-          p.onchange = update;
+          updatePermission('midi-sysex', p.status);
+          p.onchange = function() {
+            updatePermission('midi-sysex', p.status);
+          };
         });
 
         getPosBtn.addEventListener('click', function() {
@@ -161,7 +141,7 @@ limitations under the License.
         getNotBtn.addEventListener('click', function() {
           Notification.requestPermission(function(result) {
             if (result === 'denied') {
-              log('Permission wasn\'t granted. Allow a retry.');
+              log('Permission wasn\'t granted.');
               return;
             } else if (result === 'default') {
               log('The permission request was dismissed.');
@@ -174,14 +154,10 @@ limitations under the License.
         getMidBtn.addEventListener('click', function() {
           navigator.requestMIDIAccess({sysex:true});
         });
-
-        getPushNotBtn.addEventListener('click', function() {
-          requestPushPermission();
-        });
       }
 
       init();
-    })(document);
+    })();
     </script>
     <!-- // [END code-block] -->
 

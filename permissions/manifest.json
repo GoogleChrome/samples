@@ -1,8 +1,0 @@
-{
-  "name": "Permissions API sample",
-  "short_name": "Permissions sample",
-  "display": "standalone",
-  "orientation": "landscape",
-  "gcm_user_visible_only": true,
-  "gcm_sender_id": "foobar"
-}
