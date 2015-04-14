@@ -60,6 +60,17 @@ limitations under the License.
     <p>Email me at <a class="js-emaillink" href="mailto:matt@example.co.uk" >matt@example.co.uk</a></p>
     <p><button class="js-emailcopybtn">Copy Email Address</button></p>
     
+    <h1>Log</h1>
+    <div class="output">
+      <pre id="log"></pre>
+    </div>
+    
+    <script>
+      function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+      }
+    </script>
+
     <script>
       function performCopyEmail() {
         var emailLink = document.querySelector('.js-emaillink');
@@ -71,9 +82,9 @@ limitations under the License.
         try {  
           var successful = document.execCommand('copy');
           var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Copy email command was ' + msg);
+          log('Copy email command was ' + msg);
         } catch(err) {
-          console.log('execCommand Error', err);
+          log('execCommand Error', err);
         }
         window.getSelection().removeAllRanges();
       }
@@ -86,9 +97,9 @@ limitations under the License.
         try {
           var successful = document.execCommand('cut');
           var msg = successful ? 'successful' : 'unsuccessful';
-          console.log('Cutting text command was ' + msg);
+          log('Cutting text command was ' + msg);
         } catch(err) {
-          console.log('execCommand Error', err);
+          log('execCommand Error', err);
         }
       }  
 
