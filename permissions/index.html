@@ -103,7 +103,7 @@ limitations under the License.
           updatePermission('geolocation', p.status);
 
           p.onchange = function() {
-            updatePermission('geolocation', p.status);
+            updatePermission('geolocation', this.status);
           };
         });
 
@@ -111,7 +111,7 @@ limitations under the License.
         navigator.permissions.query({name:'notifications'}).then(function(p) {
           updatePermission('notifications', p.status);
           p.onchange = function() {
-            updatePermission('notifications', p.status);
+            updatePermission('notifications', this.status);
           };
         });
 
@@ -119,14 +119,14 @@ limitations under the License.
         navigator.permissions.query({name:'midi', sysex:false}).then(function(p) {
           updatePermission('midi', p.status);
           p.onchange = function() {
-            updatePermission('midi', p.status);
+            updatePermission('midi', this.status);
           };
         });
 
         navigator.permissions.query({name:'midi', sysex:true}).then(function(p) {
           updatePermission('midi-sysex', p.status);
           p.onchange = function() {
-            updatePermission('midi-sysex', p.status);
+            updatePermission('midi-sysex', this.status);
           };
         });
 
