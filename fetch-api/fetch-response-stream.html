@@ -1,0 +1,200 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <meta name="description" content="Sample illustrating the use of Fetch API.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Fetch API Streaming Response Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Fetch + Streams Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+
+    <style>
+      * { box-sizing: border-box; }
+
+      form { max-width: 500px; margin: 0 auto; text-align: center; }
+
+      label, input, output { display: block; }
+      input[type="text"] { width: 100%; margin: 0.5em 0; }
+      input[type="submit"] { display: inline; }
+
+      label { margin: 2em auto; padding: 1em; background-color: #efe; }
+      output { font-family: monospace; margin: 0.5em 0; min-height: 30px; }
+
+      #output { margin-top: 2em; }
+
+      footer { font-size: smaller; border-top: 1px solid #3C790A; text-align: center; margin-top: 2em; }
+    </style>
+  </head>
+
+  <body>
+    <h1>Fetch API Streaming Response Sample</h1>
+
+    <p>Available in <a href="https://www.chromestatus.com/features/5804334163951616">Chrome 43+</a></p>
+
+    <p>This demo will search the first billion digits of PI for a substring you specify, and tell you the position at which it was found. It will do this without consuming a billion bytes of memory! That was impossible with XHR!
+
+    <p>Furthermore, it won't even need to do text decoding and string comparison, as it will operate on the bytes directly. (XHR's pseudo-streaming mode, with an ever-growing <code>responseText</code> you could poll, was text-only.)
+
+    <p>Finally, once it finds the substring, it will cancel the stream, preventing further network usage! Canceling a fetch was not previously possible. (It is not yet possible to cancel before the headers arrive; see <a href="https://github.com/slightlyoff/ServiceWorker/issues/592">slightlyoff/ServiceWorker#592</a> and linked issues.)
+
+    <!-- // [START code-block] -->
+    <form id="form">
+      <label>
+        Enter a substring to search for (bytes displayed below)
+        <input type="text" id="substring" pattern="[0-9]+" title="Enter only digits" required>
+        <output id="bytes" for="substring"></output>
+      </label>
+
+      <input type="submit" value="Search, with the Power of Streams!">
+
+      <fieldset id="output" hidden>
+        <progress id="progress"></progress>
+        <output id="progress-text"></output>
+      </fieldset>
+    </form>
+
+    <footer>
+      <p><a href="https://domenic.github.io/streams-demo/">Based on domenic/streams-demo</a></p>
+
+      <a href="https://streams.spec.whatwg.org/"><img alt="Streams Logo" src="https://resources.whatwg.org/logo-streams.svg" height="30"></a>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+
+      const PI_URL = 'http://stuff.mit.edu/afs/sipb/contrib/pi/pi-billion.txt';
+
+      const substring = document.querySelector('#substring');
+      const bytes = document.querySelector('#bytes');
+      const form = document.querySelector('#form');
+
+      const output = document.querySelector('#output');
+      const progress = document.querySelector('#progress');
+      const progressText = document.querySelector('#progress-text');
+
+      const encoder = new TextEncoder();
+
+      let bytesValue = new Uint8Array();
+      substring.addEventListener('input', function () {
+        bytesValue = encoder.encode(substring.value);
+
+        const bytesAsStrings = Array.prototype.map.call(bytesValue, function (b) { return `0x${b.toString(16)}`; });
+        bytes.value = Array.prototype.join.call(bytesAsStrings, ' ');
+      });
+
+      let soFar;
+      let contentLength;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        output.removeAttribute('hidden');
+
+        progressText.textContent = 'Performing fetch...';
+
+        fetch(`https://cors-anywhere.herokuapp.com/${PI_URL}`).then(function (res) {
+          soFar = 0;
+          contentLength = res.headers.get('Content-Length');
+          progress.max = contentLength;
+
+          return pump(res.body.getReader());
+        })
+        .catch(function (e) {
+          progressText.textContent = e;
+        });
+      });
+
+      function pump(reader) {
+        return reader.read().then(function (result) {
+          if (result.done) {
+            progressText.textContent = `All done! (${soFar} bytes total)`;
+            return;
+          }
+
+          const chunk = result.value;
+
+          soFar += chunk.byteLength;
+          updateProgress();
+
+          let found = -1;
+          for (let i = 0; i < chunk.length; ++i) {
+            if (chunk[i] === bytesValue[0]) {
+              found = i;
+              for (let j = 1; j < bytesValue.length; ++j) {
+                if (chunk[i + j] !== bytesValue[j]) {
+                  found = -1;
+                  break;
+                }
+              }
+            }
+
+            if (found !== -1) {
+              break;
+            }
+          }
+
+          if (found !== -1) {
+            progressText.textContent = `Found it! At position ${soFar - chunk.byteLength + found}.`;
+
+            return reader.cancel();
+          } else {
+            return pump(reader);
+          }
+        });
+      }
+
+      function updateProgress() {
+        progressText.textContent = contentLength ?
+          `${soFar}/${contentLength} bytes received` : `${soFar} bytes received`;
+        progress.value = contentLength ? soFar : null;
+      }
+    }());
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>
