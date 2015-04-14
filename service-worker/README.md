@@ -36,5 +36,9 @@ a sample illustrating multiple `fetch` handlers, each of which intercepts a diff
 - [Custom offline page](https://googlechrome.github.io/samples/service-worker/custom-offline-page/index.html) -
 a sample showing how to display a custom "Sorry, you're offline." error page when a network request fails.
 
+- [Immediate control](https://googlechrome.github.io/samples/service-worker/immediate-control/index.html) -
+a sample showing how to use `skipWaiting()` and `clients.claim()` to force a new service worker to
+take control of the page that just registered it.
+
 - [Using `window.caches`](https://googlechrome.github.io/samples/service-worker/window-caches/index.html) -
 a sample showing how `window.caches` provides access to the Cache Storage API.
