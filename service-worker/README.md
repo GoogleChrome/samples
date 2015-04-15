@@ -39,3 +39,6 @@ a sample showing how to display a custom "Sorry, you're offline." error page whe
 - [Immediate control](https://googlechrome.github.io/samples/service-worker/immediate-control/index.html) -
 a sample showing how to use `skipWaiting()` and `clients.claim()` to force a new service worker to
 take control of the page that just registered it.
+
+- [Using `window.caches`](https://googlechrome.github.io/samples/service-worker/window-caches/index.html) -
+a sample showing how `window.caches` provides access to the Cache Storage API.
