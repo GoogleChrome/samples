@@ -62,6 +62,7 @@ limitations under the License.
       </div>
       <button id="btn-play">Play</button>
       <button id="btn-connect">Toggle Left Channel</button>
+      <pre id="result" style="color: red"></pre>
     </div>
 
     <!-- // [START code-block] -->
@@ -93,9 +94,10 @@ limitations under the License.
     });
 
     loadAudio("../audio/techno.wav").then(function(buffer) {
-      playerNode.source = buffer;
-    }, function(e) {
-      alert('Could not load demo audio: ' + e.toString());
+      playerNode.buffer = buffer;
+    }).catch(function(e) {
+      var result = document.getElementById('result');
+      result.textContent = 'Could not load demo audio: ' + e.toString();
     });
 
     // splitterNode splits the source audio into L/R channels.
@@ -105,7 +107,7 @@ limitations under the License.
     // mergerNode merges arbitrary audio into L/R channels.
     var mergerNode = context.createChannelMerger(2);
     mergerNode.connect(context.destination);
-    splitterNode.connect(mergerNode, 0, 1); // flip left output to right input
+    splitterNode.connect(mergerNode, 0, 1); // flip left output to rightinput
 
     var connected = false;
     document.getElementById('btn-connect').addEventListener('click', function() {
