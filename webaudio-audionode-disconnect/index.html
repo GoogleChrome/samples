@@ -61,7 +61,7 @@ limitations under the License.
         The left channel is toggled via <code>AudioNode.connect</code> and <code>AudioNode.disconnect</code> with selective arguments.
       </div>
       <button id="btn-play">Play</button>
-      <button id="btn-connect">Toggle Left Channel</button>
+      <button id="btn-connect">Connect Left Channel</button>
       <pre id="result" style="color: red"></pre>
     </div>
 
@@ -114,8 +114,10 @@ limitations under the License.
       // Connect/disconnect right output to left input.
       if (connected) {
         splitterNode.disconnect(mergerNode, 1, 0);
+        this.textContent = 'Connect Left Channel';
       } else {
         splitterNode.connect(mergerNode, 1, 0);
+        this.textContent = 'Disconnect Left Channel';
       }
       connected = !connected;
     });
