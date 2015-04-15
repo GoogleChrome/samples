@@ -70,43 +70,43 @@ limitations under the License.
     <!-- // [START code-block] -->
     <script>
 
-    var pool = [];
-    var i = 0;
-    var context;
-
-    // Create a large number of initial contexts. On Mac OS X running M44, this
+    // Create a large pool of initial contexts. On Mac OS X running M44, this
     // can create six contexts.
-    while (++i < 100) {
-      try {
-        context = new AudioContext();
-      } catch (e) {
-        break;  // give up, can't create more contexts
+    var pool = (function(max) {
+      var pool = [];
+      var context;
+
+      while (pool.length < max) {
+        try {
+          context = new AudioContext();
+        } catch (e) {
+          break;  // give up, can't create more contexts
+        }
+        pool.push(context);
       }
-      pool.push(context);
-    }
+
+      return pool;
+    }(100));
 
     function refreshCountMessage(opt_message) {
-      count.innerText = 'pool: ' + pool.length + ' AudioContext instances';
-      results.innerText = opt_message || '';
+      count.textContent = 'pool: ' + pool.length + ' AudioContext instances';
+      results.textContent = opt_message || '';
     }
     refreshCountMessage()
 
     function closeRandomContext() {
-      if (pool.length == 0) {
-        refreshCountMessage();
-        return;
-      }
-      var choice = Math.floor(Math.random() * pool.length);
-      var context = pool[choice];
+      if (pool.length > 0) {
+        var choice = Math.floor(Math.random() * pool.length);
+        var context = pool[choice];
 
-      var promise = context.close();
-      promise.then(function() {
-        pool.splice(pool.indexOf(context), 1);
-        refreshCountMessage('close promise resolved');
-      }, function(e) {
-        e = e || 'unknown';
-        refreshCountMessage('close promise failed to resolve: ' + e.toString());
-      });
+        context.close().then(function() {
+          pool.splice(pool.indexOf(context), 1);
+          refreshCountMessage('close promise resolved');
+        }).catch(function(e) {
+          e = e || 'unknown';
+          refreshCountMessage('close promise rejected: ' + e.toString());
+        });
+      }
     }
 
     function createContext() {
