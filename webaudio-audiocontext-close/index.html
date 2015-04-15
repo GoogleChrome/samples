@@ -100,6 +100,8 @@ limitations under the License.
         var context = pool[choice];
 
         context.close().then(function() {
+          // Find the context inside pool again, as its index may have changed
+          // from 'choice' before the Promise resolved.
           pool.splice(pool.indexOf(context), 1);
           refreshCountMessage('close promise resolved');
         }).catch(function(e) {
