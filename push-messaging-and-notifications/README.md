@@ -9,3 +9,6 @@ To use this sample please do the following:
 2. Enable GCM support
 3. Replace `<YOUR API KEY HERE>` in [main.js](main.js) with your own API key from the Google Developer Console project
 4. Replace `<YOUR PROJECT NUMBER>` in [manifest.json](manifest.json) with your own project number from the Google Developer Console project
+
+# Related Samples
+  Push messaging and notifications are useful in web apps that use [service workers](https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker). 
