@@ -7,9 +7,9 @@ var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
 
 function sendSubscriptionToServer(subscription) {
-  // TODO: Send the subscription.subscriptionId and
-  // subscription.endpoint to your server and save
-  // it to send a push message at a later date
+  // TODO: Send the subscription.endpoint
+  // to your server and save it to send a
+  // push message at a later date
   console.log('TODO: Implement sendSubscriptionToServer()');
 }
 
@@ -62,9 +62,8 @@ function unsubscribe() {
           return;
         }
 
-        var subscriptionId = pushSubscription.subscriptionId;
         // TODO: Make a request to your server to remove
-        // the subscriptionId from your data store so you
+        // the users data from your data store so you
         // don't attempt to send them push messages anymore
 
         // We have a subcription, so call unsubscribe on it
@@ -104,9 +103,9 @@ function subscribe() {
 
         showCurlCommand(subscription);
 
-        // TODO: Send the subscription.subscriptionId and
-        // subscription.endpoint to your server
-        // and save it to send a push message at a later date
+        // TODO: Send the subscription subscription.endpoint
+        // to your server and save it to send a push message
+        // at a later date
         return sendSubscriptionToServer(subscription);
       })
       .catch(function(e) {
@@ -167,7 +166,7 @@ function initialiseState() {
           return;
         }
 
-        // Keep your server in sync with the latest subscriptionId
+        // Keep your server in sync with the latest subscription
         sendSubscriptionToServer(subscription);
 
         showCurlCommand(subscription);

@@ -14,5 +14,8 @@
   "undef"         : true,
   "unused"        : "vars",
   "strict"        : true,
-  "globalstrict"  : true
+  "globalstrict"  : true,
+  "globals" : {
+    "ServiceWorkerRegistration": true
+  }
 }
