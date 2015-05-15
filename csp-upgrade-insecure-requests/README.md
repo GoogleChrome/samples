@@ -1,4 +1,4 @@
-Upgrade Insecure Resource Requests Sample
+Upgrade Insecure Requests Sample
 ===
 See https://googlechrome.github.io/samples/csp-upgrade-insecure-requests/index.html for a live demo.
 
