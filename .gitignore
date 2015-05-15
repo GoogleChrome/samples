@@ -1,2 +1,4 @@
 *.iml
 .idea/*
+push-messaging-and-notifications/config.js
+push-messaging-and-notifications/manifest.json

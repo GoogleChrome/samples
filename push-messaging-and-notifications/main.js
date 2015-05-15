@@ -1,23 +1,42 @@
 'use strict';
 
-var API_KEY = '<YOUR API KEY>';
+var API_KEY = window.GoogleSamples.Config.gcmAPIKey;
+var GCM_ENDPOINT = 'https://android.googleapis.com/gcm/send';
 
 var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
 
 function sendSubscriptionToServer(subscription) {
-  // TODO: Send the subscription.subscriptionId and 
-  // subscription.endpoint to your server and save 
+  // TODO: Send the subscription.subscriptionId and
+  // subscription.endpoint to your server and save
   // it to send a push message at a later date
   console.log('TODO: Implement sendSubscriptionToServer()');
 }
 
-function showCurlCommand(subscription) {
+// NOTE: This code is only suitable for GCM endpoints,
+// When another browser has a working version, alter
+// this to send a PUSH request directly to the endpoint
+function showCurlCommand(pushSubscription) {
   // The curl command to trigger a push message straight from GCM
-  var subscriptionId = subscription.subscriptionId;
-  var endpoint = subscription.endpoint;
+  if (pushSubscription.endpoint.indexOf(GCM_ENDPOINT) !== 0) {
+    window.Demo.debug.log('This browser isn\'t currently ' +
+      'supported for this demo');
+    return;
+  }
+
+  var mergedEndpoint = pushSubscription.endpoint;
+  if (pushSubscription.subscriptionId &&
+    !pushSubscription.endpoint.includes(subscriptionId)) {
+    // Handle version 42 where you have separate subId and Endpoint
+    mergedEndpoint = pushSubscription.endpoint + '/' +
+      pushSubscription.subscriptionId;
+  }
+
+  var endpointSections = mergedEndpoint.split('/');
+  var subscriptionId = endpointSections[endpointSections.length - 1];
+
   var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
-    '" --header Content-Type:"application/json" ' + endpoint + 
+    '" --header Content-Type:"application/json" ' + GCM_ENDPOINT +
     ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
   curlCommandDiv.textContent = curlCommand;
@@ -42,10 +61,10 @@ function unsubscribe() {
           pushButton.textContent = 'Enable Push Messages';
           return;
         }
-        
+
         var subscriptionId = pushSubscription.subscriptionId;
         // TODO: Make a request to your server to remove
-        // the subscriptionId from your data store so you 
+        // the subscriptionId from your data store so you
         // don't attempt to send them push messages anymore
 
         // We have a subcription, so call unsubscribe on it
@@ -55,19 +74,19 @@ function unsubscribe() {
           isPushEnabled = false;
         }).catch(function(e) {
           // We failed to unsubscribe, this can lead to
-          // an unusual state, so may be best to remove 
-          // the subscription id from your data store and 
+          // an unusual state, so may be best to remove
+          // the subscription id from your data store and
           // inform the user that you disabled push
 
           window.Demo.debug.log('Unsubscription error: ', e);
           pushButton.disabled = false;
         });
       }).catch(function(e) {
-        window.Demo.debug.log('Error thrown while unsubscribing from push messaging.', e);
+        window.Demo.debug.log('Error thrown while unsubscribing from ' +
+          'push messaging.', e);
       });
   });
 }
-
 
 function subscribe() {
   // Disable the button so it can't be changed while
@@ -76,7 +95,7 @@ function subscribe() {
   pushButton.disabled = true;
 
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.pushManager.subscribe()
+    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
       .then(function(subscription) {
         // The subscription was successful
         isPushEnabled = true;
@@ -85,7 +104,7 @@ function subscribe() {
 
         showCurlCommand(subscription);
 
-        // TODO: Send the subscription.subscriptionId and 
+        // TODO: Send the subscription.subscriptionId and
         // subscription.endpoint to your server
         // and save it to send a push message at a later date
         return sendSubscriptionToServer(subscription);
@@ -150,7 +169,7 @@ function initialiseState() {
 
         // Keep your server in sync with the latest subscriptionId
         sendSubscriptionToServer(subscription);
-        
+
         showCurlCommand(subscription);
 
         // Set your UI to show they have subscribed for
@@ -163,7 +182,6 @@ function initialiseState() {
       });
   });
 }
-
 
 window.addEventListener('load', function() {
   var pushButton = document.querySelector('.js-push-button');
