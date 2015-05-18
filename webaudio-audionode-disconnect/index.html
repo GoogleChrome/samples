@@ -1,0 +1,138 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of WebAudio AudioNode selective disconnect.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>WebAudio AudioNode selective disconnect Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="WebAudio AudioNode selective disconnect Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1>WebAudio AudioNode selective disconnect Sample</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/4793068276416512">Chrome 43+</a></p>
+
+    <p>
+      The overloaded method <code>AudioNode.disconnect</code> supports disconnecting either all connections, or a single connection (see the <a href="https://webaudio.github.io/web-audio-api/#idl-def-AudioNode">audio node spec</a>).
+      Selective disconnection, choosing a specific signal path to disconnect, is supported as of Chrome 43+.
+    </p>
+
+    <div class="output">
+      <div>
+        Plays a demo audio file, but only connects the right channel.
+        The left channel is toggled via <code>AudioNode.connect</code> and <code>AudioNode.disconnect</code> with selective arguments.
+      </div>
+      <button id="btn-play">Play</button>
+      <button id="btn-connect">Connect Left Channel</button>
+      <pre id="result" style="color: red"></pre>
+    </div>
+
+    <!-- // [START code-block] -->
+    <script>
+
+    var context = new AudioContext();
+
+    // Load the audio file at the specified url, returning a Promise containing
+    // an AudioBuffer.
+    function loadAudio(url) {
+      // fetch is available in Chrome 42+.
+      return fetch(url).then(function(response) {
+        return response.arrayBuffer();
+      }).then(function(data) {
+        return new Promise(function(resolve, reject) {
+          context.decodeAudioData(data, function(buffer) {
+            buffer ? resolve(buffer) : reject();
+          });
+        });
+      })
+    }
+
+    var playerNode = context.createBufferSource();
+    playerNode.loop = true;
+
+    document.getElementById('btn-play').addEventListener('click', function() {
+      this.disabled = true;
+      playerNode.start();
+    });
+
+    loadAudio("../audio/techno.wav").then(function(buffer) {
+      playerNode.buffer = buffer;
+    }).catch(function(e) {
+      var result = document.getElementById('result');
+      result.textContent = 'Could not load demo audio: ' + e.toString();
+    });
+
+    // splitterNode splits the source audio into L/R channels.
+    var splitterNode = context.createChannelSplitter();
+    playerNode.connect(splitterNode);
+
+    // mergerNode merges arbitrary audio into L/R channels.
+    var mergerNode = context.createChannelMerger(2);
+    mergerNode.connect(context.destination);
+    splitterNode.connect(mergerNode, 0, 1); // flip left output to rightinput
+
+    var connected = false;
+    document.getElementById('btn-connect').addEventListener('click', function() {
+      // Connect/disconnect right output to left input.
+      if (connected) {
+        splitterNode.disconnect(mergerNode, 1, 0);
+        this.textContent = 'Connect Left Channel';
+      } else {
+        splitterNode.connect(mergerNode, 1, 0);
+        this.textContent = 'Disconnect Left Channel';
+      }
+      connected = !connected;
+    });
+
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Copyright 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="./manifest.json">
+    <script>
+    window.addEventListener('load', function() {
+
+      navigator.serviceWorker.register('service-worker.js', { scope: './' })
+        .then(function(r) {
+          console.log('registered service worker');
+        })
+        .catch(function(whut) {
+          console.error('uh oh... ');
+          console.error(whut);
+        });
+    });
+    </script>
+  </head>
+  <body>
+    <h1>Web App Install Banner Sample</h1>
+
+    <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 42+ (for Android)</a></p>
+
+    <p>The web app install banner will prompt the user to add your web app to the users home screen.
+    It will only prompt when a number of criteria have been met:
+    </p>
+
+    <ul>
+      <li>The app uses a service worker</li>
+      <li>The site is using SSL</li>
+      <li>The app has a manifest declared</li>
+      <li>The manifest has a `short_name`, 144 pixel icon and a type of 'image/png'</li>
+    </ul>
+
+    <p>To see if this example works, come back in another day and you will see the banner.</p>
+    <p>If you are impatient and would like to force the banner to appear for testing purposes visit chrome://flags/#bypass-app-banner-engagement-checks</p>
+  </body>
+</head>

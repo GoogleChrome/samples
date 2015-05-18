@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- // [START meta-tag] -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!-- // [END meta-tag] -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of Content-Security-Policy: upgrade-insecure-requests.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Upgrade Insecure Requests Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Upgrade Insecure Requests Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <script>
+      // Ensure that this page is loaded via https:, since this demo won't be meaningful otherwise.
+      if ((!location.port || location.port === '80') && location.protocol !== 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Upgrade Insecure Requests Sample</h1>
+
+    <p>Available in <a href="http://www.chromestatus.com/feature/6534575509471232">Chrome 43+</a></p>
+
+    <p>
+      The "<a href="https://w3c.github.io/webappsec/specs/upgrade/">Upgrade Insecure Requests</a>"
+      <a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/">Content Security Policy</a>
+      can be used to automatically upgrade insecure (e.g. <code>http:</code>) requests to
+      a secure alternative (e.g. <code>https:</code>) before a browser fetches them.
+    </p>
+
+    <p>
+      In practice, this helps avoid mixed-content warnings when a page is accessed via
+      <code>https:</code>, but it contains references to resources using absolute
+      <code>http:</code> URLs.
+    </p>
+
+    <p>
+      Like other Content Security Policies, the recommend approach is to enable it via a HTTP
+      response header, <code>Content-Security-Policy: upgrade-insecure-requests</code>. However,
+      if you do not have control over the underlying web server (as is the case in this demo), an
+      <a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/#the-meta-tag">alternative</a>
+      is to include the
+      <code>&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code>
+      tag in your HTML's <code>&lt;head&gt;</code>.
+    </p>
+
+    <div class="output">
+      <p>
+        The following image is loaded with an explicit <code>http:</code> URL,
+        <code>http://googlechrome.github.io/samples/images/touch/chrome-touch-icon-192x192.png</code>.
+        Because this page has <code>Content-Security-Policy: upgrade-insecure-requests</code>
+        active, the <code>http:</code> is treated as <code>https:</code>, and no mixed-content
+        warnings are displayed.
+      </p>
+      <img src="http://googlechrome.github.io/samples/images/touch/chrome-touch-icon-192x192.png">
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>

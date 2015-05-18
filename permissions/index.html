@@ -1,0 +1,166 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample illustrating the use of the Permissions API.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Permissions API Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-title" content="Permissions API Sample">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+
+  <body>
+    <h1>Permissions API Sample</h1>
+
+    <p>Available in <a href="https://www.chromestatus.com/feature/6376494003650560">Chrome 43+</a></p>
+
+    <p>The Permissions API allows a web application to be aware of the status of a given permission, to know whether it is granted, denied or if the user will be asked whether the permission should be granted.</p>
+
+    <!-- // [START code-block] -->
+    <h3>Permissions</h3>
+
+    <div><b>Geolocation:</b> <span id='geolocation'></span></div>
+    <div><b>Notifications:</b> <span id='notifications'></span></div>
+    <div><b>Midi:</b> <span id='midi'></span></div>
+    <div><b>Midi SysEx:</b> <span id='midi-sysex'></span></div>
+
+    <p>
+      <fieldset>
+        <legend>Requests</legend>
+        <button id="getPositionBtn">Geolocation</button>
+        <button id="getNotificationBtn">Notifications</button>
+        <button id="getMidiBtn">Midi SysEx</button>
+      </fieldset>
+    </p>
+
+    <div class="output">
+      <pre id="log"></pre>
+    </div>
+
+    <script>
+    (function () {
+      function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+      }
+
+      function updatePermission(name, status) {
+        log('update permission for ' + name + ' with ' + status)
+        document.getElementById(name).textContent = status;
+      }
+
+      function init() {
+
+        var getPosBtn = document.querySelector('#getPositionBtn');
+        var getNotBtn = document.querySelector('#getNotificationBtn');
+        var getMidBtn = document.querySelector('#getMidiBtn');
+
+        // Check for Geolocation API permissions
+        navigator.permissions.query({name:'geolocation'}).then(function(p) {
+          updatePermission('geolocation', p.status);
+
+          p.onchange = function() {
+            updatePermission('geolocation', this.status);
+          };
+        });
+
+        // Check for Notifications API permissions
+        navigator.permissions.query({name:'notifications'}).then(function(p) {
+          updatePermission('notifications', p.status);
+          p.onchange = function() {
+            updatePermission('notifications', this.status);
+          };
+        });
+
+        // Check for Midi/Midi SysEx permissions
+        navigator.permissions.query({name:'midi', sysex:false}).then(function(p) {
+          updatePermission('midi', p.status);
+          p.onchange = function() {
+            updatePermission('midi', this.status);
+          };
+        });
+
+        navigator.permissions.query({name:'midi', sysex:true}).then(function(p) {
+          updatePermission('midi-sysex', p.status);
+          p.onchange = function() {
+            updatePermission('midi-sysex', this.status);
+          };
+        });
+
+        getPosBtn.addEventListener('click', function() {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            log('Geolocation permissions granted');
+            log('Latitude:' + position.coords.latitude);
+            log('Longitude:' + position.coords.longitude);
+          });
+        });
+
+        getNotBtn.addEventListener('click', function() {
+          Notification.requestPermission(function(result) {
+            if (result === 'denied') {
+              log('Permission wasn\'t granted.');
+              return;
+            } else if (result === 'default') {
+              log('The permission request was dismissed.');
+              return;
+            }
+            log('Permission was granted for notifications');
+          });
+        });
+
+        getMidBtn.addEventListener('click', function() {
+          navigator.requestMIDIAccess({sysex:true});
+        });
+      }
+
+      init();
+    })();
+    </script>
+    <!-- // [END code-block] -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- Built with love using Web Starter Kit -->
+  </body>
+</html>

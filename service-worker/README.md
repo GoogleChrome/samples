@@ -30,8 +30,19 @@ a sample illustrating how you can return content created on the fly in response 
 - [Using `postMessage`](https://googlechrome.github.io/samples/service-worker/post-message/index.html) -
 a sample illustrating the use of `postMessage()` to send commands from a controlled page to its service worker, giving the page control over the cache.
 
-- [Multiple `fetch` hanlders](https://googlechrome.github.io/samples/service-worker/multiple-handlers/index.html) -
+- [Multiple `fetch` handlers](https://googlechrome.github.io/samples/service-worker/multiple-handlers/index.html) -
 a sample illustrating multiple `fetch` handlers, each of which intercepts a different type of request.
 
 - [Custom offline page](https://googlechrome.github.io/samples/service-worker/custom-offline-page/index.html) -
 a sample showing how to display a custom "Sorry, you're offline." error page when a network request fails.
+
+- [Immediate control](https://googlechrome.github.io/samples/service-worker/immediate-control/index.html) -
+a sample showing how to use `skipWaiting()` and `clients.claim()` to force a new service worker to
+take control of the page that just registered it.
+
+- [Using `window.caches`](https://googlechrome.github.io/samples/service-worker/window-caches/index.html) -
+a sample showing how `window.caches` provides access to the Cache Storage API.
+
+# Related samples
+
+- Instructions for [registering for Push Messages and showing Notifications](https://github.com/GoogleChrome/samples/tree/gh-pages/push-messaging-and-notifications).

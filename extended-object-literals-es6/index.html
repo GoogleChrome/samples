@@ -19,28 +19,25 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <meta name="description" content="Sample illustrating the use of PLACEHOLDER.">
+    <meta name="description" content="Sample illustrating the use of Extended Object Literals (ES6).">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <title>PLACEHOLDER Sample</title>
+    <title>Extended Object Literals (ES6) Sample</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <meta name="apple-mobile-web-app-title" content="PLACEHOLDER Sample">
+    <meta name="apple-mobile-web-app-title" content="Extended Object Literals (ES6) Sample">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
     <link rel="icon" href="../images/favicon.ico">
@@ -49,17 +46,50 @@ limitations under the License.
   </head>
 
   <body>
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <h1>PLACEHOLDER Sample</h1>
+    <h1>Extended Object Literals (ES6) Sample</h1>
 
-    <!-- TODO: Replace the PLACEHOLDERs with chromestatus.com feature id and Chrome milestone version. -->
-    <p>Available in <a href="https://www.chromestatus.com/feature/PLACEHOLDER">Chrome PLACEHOLDER+</a></p>
+    <p>Available in <a href="http://www.chromestatus.com/feature/4873630588600320">Chrome 42+</a></p>
 
+    <p>Extended Object Literals simplify object creation and composition by reducing the required amount of typing with some syntactic sugar.</p>
+    <p>With this, object literals are now syntactically similar to ES6’s new class syntax and have less duplication in common use-cases like constructor function.</p>
+
+    <div class="output">
+        <pre id="log"></pre>
+    </div>
     <!-- // [START code-block] -->
-    <!-- TODO: Replace PLACEHOLDER with HTML/JavaScript/CSS. -->
-    <p>PLACEHOLDER PLACEHOLDER PLACEHOLDER</p>
-    <p>PLACEHOLDER PLACEHOLDER PLACEHOLDER</p>
-    <p>PLACEHOLDER PLACEHOLDER PLACEHOLDER</p>
+    <script>
+    "use strict";
+
+    function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    }
+
+    var a = "somestring", b = 5, c = {"key": "value"};
+    // The following two declarations are equivalent
+    var es5 = {a: a, b: b, c: c};
+    var es6 = {a, b, c}; // Property name is inferred from variable name
+    log("es5: " + JSON.stringify(es5));
+    log("es6: " + JSON.stringify(es6));
+
+    function person(name, age){
+      return {name, age}; // Again, property name is inferred
+    }
+
+    var me = person("Alex", 26);
+    log("\nme: " + JSON.stringify(me));
+
+    var tools = {
+      add1(i) { // You don’t have to type `function` over and over
+        return i + 1;
+      },
+      * countdown(i) { // also works with generators
+        while(i>0)
+          yield i--;
+      },
+    };
+    log("\nIf you add1() to 5 you get "+tools.add1(5));
+
+    </script>
     <!-- // [END code-block] -->
 
     <script>

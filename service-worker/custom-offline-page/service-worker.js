@@ -11,11 +11,13 @@
  limitations under the License.
 */
 
-var OFFLINE_CACHE = 'offline';
-var OFFLINE_URL = 'offline.html';
+'use strict';
+
+const OFFLINE_CACHE = 'offline';
+const OFFLINE_URL = 'offline.html';
 
 self.addEventListener('install', function(event) {
-  var offlineRequest = new Request(OFFLINE_URL);
+  const offlineRequest = new Request(OFFLINE_URL);
   event.waitUntil(
     fetch(offlineRequest).then(function(response) {
       return caches.open(OFFLINE_CACHE).then(function(cache) {
