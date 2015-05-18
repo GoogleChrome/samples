@@ -56,11 +56,14 @@ limitations under the License.
 
     <ol>
       <li>Create a project in the <a href="https://console.developers.google.com"  target="_blank">Google Developer Console</a>.</li>
-      <li>Under APIs enable Google Cloud Messaging for Android.</li>
+      <li>Under APIs enable Google Cloud Messaging for Android and Google Cloud Messaging for Chrome.</li>
       <li>Under Credentials, create a new key and select Server key as the type.</li>
-      <li>Replace "&lt;YOUR API KEY HERE&gt;" in main.js with your own API key from the Google Developer Console project.</li>
-      <li>Replace "&lt;YOUR PROJECT NUMBER&gt;" in manifest.json with your own project number from the Overview page of your Google Developer Console project.</li>
+      <li>Create a copy of [config.sample.js](config.sample.js) called config.js</li>
+      <li>Create a copy of [manifest.sample.json](manifest.sample.json) called manifest.json</li>
+      <li>Replace "&lt;Your Public API Key ...&gt;" in your new `config.js` file with your own API key from the Google Developer Console project.</li>
+      <li>Replace "&lt;Your Project Number ...&gt;" in your new `manifest.json` with your own project number from the Google Developer Console project.</li>
     </ol>
+
 
     <p>
         <button class="js-push-button" disabled>
@@ -74,6 +77,7 @@ limitations under the License.
     <h2>cURL Command to Send Push</h2>
     <div class="js-curl-command"></div>
     
+    <script src="config.js"></script>
     <script src="demo.js"></script>
     <script src="main.js"></script>
     <script>
