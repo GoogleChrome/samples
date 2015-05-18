@@ -17,10 +17,13 @@ limitations under the License.
 
 <html>
   <head>
+    <title>Web App Install Banner: Basic Prompt Sample</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="./manifest.json">
-    <script>
+    <script> 
     window.addEventListener('load', function() {
+
+      var outputElement = document.getElementById('output');
 
       navigator.serviceWorker.register('service-worker.js', { scope: './' })
         .then(function(r) {
@@ -30,11 +33,15 @@ limitations under the License.
           console.error('uh oh... ');
           console.error(whut);
         });
+       
+      window.addEventListener('beforeinstallprompt', function(e) {
+        outputElement.textContent = 'beforeinstallprompt Event fired';
+      });
     });
     </script>
   </head>
   <body>
-    <h1>Web App Install Banner Sample</h1>
+    <h1>Web App Install Banner: Basic Prompt Sample</h1>
 
     <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 42+ (for Android)</a></p>
 
