@@ -19,7 +19,7 @@ function endpointWorkaround(pushSubscription) {
   // Chrome 42 + 43 will not have the subscriptionId attached
   // to the endpoint.
   if (pushSubscription.subscriptionId &&
-    !pushSubscription.endpoint.indexOf(pushSubscription.subscriptionId) !== -1) {
+    pushSubscription.endpoint.indexOf(pushSubscription.subscriptionId) === -1) {
     // Handle version 42 where you have separate subId and Endpoint
     mergedEndpoint = pushSubscription.endpoint + '/' +
       pushSubscription.subscriptionId;
