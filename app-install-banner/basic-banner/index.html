@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Copyright 2014 Google Inc. All Rights Reserved.
+Copyright 2015 Google Inc. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ limitations under the License.
   <head>
     <title>Web App Install Banner: Basic Prompt Sample</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="./manifest.json">
+    <link rel="manifest" href="manifest.json">
     <script> 
     window.addEventListener('load', function() {
 
@@ -45,15 +45,15 @@ limitations under the License.
 
     <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 42+ (for Android)</a></p>
 
-    <p>The web app install banner will prompt the user to add your web app to the users home screen.
+    <p>The <a href="http://updates.html5rocks.com/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android">web app install banner</a> will prompt the user to add your web app to the users home screen.
     It will only prompt when a number of criteria have been met:
     </p>
 
     <ul>
-      <li>The app uses a service worker</li>
-      <li>The site is using SSL</li>
+      <li>The app uses a <a href="http://www.html5rocks.com/en/tutorials/service-worker/introduction/">service worker</a></li>
+      <li>The site is using HTTPS</li>
       <li>The app has a manifest declared</li>
-      <li>The manifest has a `short_name`, 144 pixel icon and a type of 'image/png'</li>
+      <li>The manifest has a <code>short_name</code>, 144 pixel icon and a type of 'image/png'</li>
     </ul>
 
     <p>To see if this example works, come back in another day and you will see the banner.</p>
