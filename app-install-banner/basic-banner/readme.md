@@ -1,7 +1,7 @@
 App Install Banner Sample
 ===
 
-See https://googlechrome.github.io/samples/app-install-banner/index.html for a live demo.
+See https://googlechrome.github.io/samples/app-install-banner/basic-banner/index.html for a live demo.
 
 
 #### Directions:
