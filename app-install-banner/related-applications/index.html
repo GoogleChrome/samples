@@ -17,47 +17,38 @@ limitations under the License.
 
 <html>
   <head>
-    <title>Web App Install Banner: Basic Prompt Sample</title>
+    <title>Web App Install Banner: Related Apps (Android currently) Sample</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/samples/styles/main.css">
     <link rel="manifest" href="manifest.json">
-    <script> 
-    window.addEventListener('load', function() {
-
-      var outputElement = document.getElementById('output');
-
-      navigator.serviceWorker.register('service-worker.js', { scope: './' })
-        .then(function(r) {
-          console.log('registered service worker');
-        })
-        .catch(function(whut) {
-          console.error('uh oh... ');
-          console.error(whut);
-        });
-       
-      window.addEventListener('beforeinstallprompt', function(e) {
-        outputElement.textContent = 'beforeinstallprompt Event fired';
-      });
-    });
-    </script>
   </head>
   <body>
-    <h1>Web App Install Banner: Basic Prompt Sample</h1>
+    <h1>Web App Install Banner: Related Apps (Android currently) Sample</h1>
 
-    <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 42+ (for Android)</a></p>
+    <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 44+ (for Android)</a></p>
 
-    <p>The <a href="http://updates.html5rocks.com/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android">web app install banner</a> will prompt the user to add your web app to the users home screen.
+    <p>The <a href="http://updates.html5rocks.com/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android">related (Native) app install banner</a> will prompt the user to add your web app to the users device.
     It will only prompt when a number of criteria have been met:
     </p>
 
     <ul>
-      <li>The app uses a <a href="http://www.html5rocks.com/en/tutorials/service-worker/introduction/">service worker</a></li>
       <li>The site is using HTTPS</li>
-      <li>The app has a manifest declared</li>
+      <li>The site has a manifest declared</li>
       <li>The manifest has a <code>short_name</code>, 144 pixel icon and a type of 'image/png'</li>
+      <li>The manifest has a <code>related_applications</code> section with an object that has the 'type': 'play' and a Google Play Store package ID.</li>
     </ul>
 
     <p>To see if this example works, come back in another day and you will see the banner.</p>
     <p>For testing we encourage you to force the banner to appear by setting the chrome://flags/#bypass-app-banner-engagement-checks flag.</p>
+    <script> 
+      window.addEventListener('load', function() {
+  
+        var outputElement = document.getElementById('output');
+               
+        window.addEventListener('beforeinstallprompt', function(e) {
+          outputElement.textContent = 'beforeinstallprompt Event fired';
+        });
+      });
+    </script>
   </body>
 </head>
