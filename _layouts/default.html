@@ -1,0 +1,22 @@
+<!doctype html>
+{% include license.html %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sample illustrating the use of {{ page.feature_name }}.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.feature_name }} Sample</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/main.css">
+    {% if page.https_redirect %}{% include https_redirect.html %}{% endif %}
+  </head>
+
+  <body>
+    <h1>{{ page.feature_name }} Sample</h1>
+    <p>Available in <a target="_blank" href="https://www.chromestatus.com/feature/{{ page.feature_id }}">Chrome {{ page.chrome_version }}+</a></p>
+    <p>View on <a target="_blank" href="{{ site.github_prefix }}{{ page.path }}">GitHub</a></p>
+    {{ content }}
+    {% include google_analytics.html %}
+  </body>
+</html>

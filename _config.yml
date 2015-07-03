@@ -1,0 +1,8 @@
+encoding: utf-8
+github_prefix: https://github.com/GoogleChrome/samples/tree/gh-pages/
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
