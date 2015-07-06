@@ -1,5 +1,7 @@
 encoding: utf-8
 github_prefix: https://github.com/GoogleChrome/samples/tree/gh-pages/
+gems:
+  - jekyll-sitemap
 defaults:
   -
     scope:
