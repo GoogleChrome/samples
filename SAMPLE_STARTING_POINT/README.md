@@ -5,4 +5,4 @@ PLACEHOLDER Sample
 See https://googlechrome.github.io/samples/PLACEHOLDER/index.html for a live demo.
 
 <!-- TODO: Replace PLACEHOLDER with the id from the chromestatus.com URL. -->
-Learn more at http://www.chromestatus.com/feature/PLACEHOLDER
+Learn more at https://www.chromestatus.com/feature/PLACEHOLDER

@@ -4,6 +4,8 @@ chrome_version: 40
 feature_id: 5433505009893376
 ---
 
+<h3>Background</h3>
+
 <p>
   This sample illustrates the use of
   <code><a href="https://html.spec.whatwg.org/multipage/forms.html#dom-cva-reportvalidity">reportValidity()</a></code>,
@@ -20,25 +22,22 @@ feature_id: 5433505009893376
   <code><a href="https://html.spec.whatwg.org/multipage/forms.html#attr-fe-minlength">minlength</a>="4"</code>.
 </p>
 
-<!-- // [START code-block] -->
-<div class="output">
-  <form id="sample-form">
-    <div>
-      <label for="year">Enter at least four characters (required):</label>
-      <input id="year" type="text" minlength="4" required>
-    </div>
-  </form>
+{% capture initial_output_content %}
+<form id="sample-form">
+  <div>
+    <label for="year">Enter at least four characters (required):</label>
+    <input id="year" type="text" minlength="4" required>
+  </div>
+</form>
 
-  <button id="report-validity">Report Validity</button>
+<button id="report-validity">Report Validity</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
 
-  <div id="status"></div>
-</div>
-
-<script>
-  document.querySelector('#report-validity').addEventListener('click', function() {
-    var isValid = document.querySelector('#sample-form').reportValidity();
-    document.querySelector('#status').textContent =
-      'The form ' + (isValid ? 'is' : 'is not') + ' valid.';
-  });
-</script>
-<!-- // [END code-block] -->
+{% capture js %}
+document.querySelector('#report-validity').addEventListener('click', function() {
+  var isValid = document.querySelector('#sample-form').reportValidity();
+  ChromeSamples.setStatus('The form ' + (isValid ? 'is' : 'is not') + ' valid.');
+});
+{% endcapture %}
+{% include js_snippet.html js=js %}

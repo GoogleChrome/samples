@@ -1,0 +1,32 @@
+---
+feature_name: REPLACE_ME
+chrome_version: REPLACE_ME
+feature_id: REPLACE_ME
+local_css_files:
+local_js_files:
+additional_head_content:
+---
+
+<h3>Background</h3>
+<p>Background info goes here.</p>
+<p>Any content here, outside of a capture block, is included verbatim on the resulting page.</p>
+
+{% capture initial_output_content %}
+<p>This can be used to set initial sample output.</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture js %}
+/*
+  Use this section for any JavaScript that shows off the feature's functionality.
+  Do not surround it with <script> tags.
+  If output_helper.html is included on this page, then ChromeSamples.log(),
+  ChromeSamples.setStatus(), and ChromeSamples.setContent() can be used here.
+*/
+{% endcapture %}
+{% include js_snippet.html js=js %}
+
+{% capture css %}
+/* Use this section for CSS that shows off the feature's functionality. */
+{% endcapture %}
+{% include css_snippet.html css=css %}
