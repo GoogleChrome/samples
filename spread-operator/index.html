@@ -19,28 +19,25 @@ limitations under the License.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <meta name="description" content="Sample illustrating the use of PLACEHOLDER.">
+    <meta name="description" content="Sample illustrating the use of spread calls.">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <title>PLACEHOLDER Sample</title>
+    <title>Spread Operator Sample</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <meta name="apple-mobile-web-app-title" content="PLACEHOLDER Sample">
+    <meta name="apple-mobile-web-app-title" content="Spread Operator Sample">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
     <link rel="icon" href="../images/favicon.ico">
@@ -49,17 +46,59 @@ limitations under the License.
   </head>
 
   <body>
-    <!-- TODO: Replace PLACEHOLDER with feature name. -->
-    <h1>PLACEHOLDER Sample</h1>
+    <h1>Spread Operator Sample</h1>
 
     <!-- TODO: Replace the PLACEHOLDERs with chromestatus.com feature id and Chrome milestone version. -->
-    <p>Available in <a href="http://www.chromestatus.com/feature/PLACEHOLDER">Chrome PLACEHOLDER+</a></p>
+    <!-- <p>Available in <a href="https://www.chromestatus.com/feature/PLACEHOLDER">Chrome PLACEHOLDER+</a></p> -->
+    <p>
+      Will be available in Chrome soon.
+      See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">MDN’s documentation</a>
+    </p>
 
     <!-- // [START code-block] -->
-    <!-- TODO: Replace PLACEHOLDER with HTML/JavaScript/CSS. -->
-    <p>PLACEHOLDER PLACEHOLDER PLACEHOLDER</p>
-    <p>PLACEHOLDER PLACEHOLDER PLACEHOLDER</p>
-    <p>PLACEHOLDER PLACEHOLDER PLACEHOLDER</p>
+    <p>
+      ES6’s spread operator “<code>...</code>” expands expression
+      <em>in-place</em> and can be applied to function arguments or array
+      expressions.
+    </p>
+    <p>
+      For now, this feature is behind Chrome’s “Experimental JavaScript” flag,
+      which can be enabled by browsing to <code>chrome://flags/#enable-javascript-harmony</code>.
+    </p>
+    <div class="output">
+        <pre id="log"></pre>
+    </div>
+    <!-- // [START code-block] -->
+    <script>
+    "use strict";
+
+    function log() {
+        document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    }
+
+
+    function saySentence(subject, predicate, object) {
+      log(subject, predicate, object);
+    }
+
+    var sentence = ['Chrome', 'is surfing', 'the modern web'];
+    // The following two function calls are equivalent
+    // ES5:
+    saySentence.apply(null, sentence);
+    // ES6:
+    saySentence(...sentence);
+
+    // Destructuring an array is now possible
+    var [subject, ...remainder] = sentence;
+    log(subject, remainder);
+
+    // ... as well as making array literals and push() more powerful
+    var newSentence = [...sentence, 'fast'];
+    var additions = ['and', 'secure'];
+    newSentence.push(...additions);
+    log(newSentence);
+
+    </script>
     <!-- // [END code-block] -->
 
     <script>
