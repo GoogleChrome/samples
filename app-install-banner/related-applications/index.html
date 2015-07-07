@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html>
+  <head>
+    <title>Web App Install Banner: Related Apps (Android currently) Sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/samples/styles/main.css">
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <h1>Web App Install Banner: Related Apps (Android currently) Sample</h1>
+
+    <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 44+ (for Android)</a></p>
+
+    <p>The <a href="http://updates.html5rocks.com/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android">related (Native) app install banner</a> will prompt the user to add your web app to the users device.
+    It will only prompt when a number of criteria have been met:
+    </p>
+
+    <ul>
+      <li>The site is using HTTPS</li>
+      <li>The site has a manifest declared</li>
+      <li>The manifest has a <code>short_name</code>, 144 pixel icon and a type of 'image/png'</li>
+      <li>The manifest has a <code>related_applications</code> section with an object that has the 'type': 'play' and a Google Play Store package ID.</li>
+    </ul>
+
+    <p>To see if this example works, come back in another day and you will see the banner.</p>
+    <p>For testing we encourage you to force the banner to appear by setting the chrome://flags/#bypass-app-banner-engagement-checks flag.</p>
+    <script> 
+      window.addEventListener('load', function() {
+  
+        var outputElement = document.getElementById('output');
+               
+        window.addEventListener('beforeinstallprompt', function(e) {
+          outputElement.textContent = 'beforeinstallprompt Event fired';
+        });
+      });
+    </script>
+  </body>
+</head>
