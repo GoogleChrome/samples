@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// @see http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html
 const LayoutTriggers = {
 
   'HTMLElement': {
