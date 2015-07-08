@@ -111,8 +111,8 @@ Then load the `index.html` file inside of `dist/`.
 
 **Please note:** _This is a work-in-progress._ As such, there are todos:
 
-[ ] Allow scoping of mutations, e.g. `@read('.main')`.
-[ ] Allow strict mode (throw errors over warnings).
-[ ] Write tests for all available properties.
+ - [ ] Allow scoping of mutations, e.g. `@read('.main')`.
+ - [ ] Allow strict mode (throw errors over warnings).
+ - [ ] Write tests for all available properties.
 
 Author: [@aerotwist](https://twitter.com/aerotwist)
