@@ -1,6 +1,6 @@
 # ES7 Decorator
 
-This is a decorator that reschedules code that reads and writes to the DOM, similarly to [FastDOM](https://github.com/wilsonpage/fastdom) (albeit with a smaller API surface).
+This is [an ES7 decorator](https://github.com/wycats/javascript-decorators) (very experimental!) that reschedules code that reads and writes to the DOM, similarly to [FastDOM](https://github.com/wilsonpage/fastdom) (albeit with a smaller API surface).
 
 It will also throw warnings if you call [layout-triggering methods or properties](http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html) during a `@write` block, or mutate the DOM during a `@read` block.
 
