@@ -1,0 +1,26 @@
+<script>
+  var ChromeSamples = {
+    log: function() {
+      document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
+    },
+
+    setStatus: function(status) {
+      document.querySelector('#status').textContent = status;
+    },
+
+    setContent: function(newContent) {
+      var content = document.querySelector('#content');
+      while(content.hasChildNodes()) {
+        content.removeChild(content.lastChild);
+      }
+      content.appendChild(newContent);
+    }
+  };
+</script>
+
+<h3>Live Output</h3>
+<div id="output" class="output">
+  <div id="content">{{ include.initial_output_content }}</div>
+  <div id="status"></div>
+  <pre id="log"></pre>
+</div>
