@@ -11,7 +11,12 @@ Please use [`SAMPLE_STARTING_POINT`](SAMPLE_STARTING_POINT) as a starting point.
 
 While it's possible to simply create a standard set of HTML/JS/CSS files within the new directory,
 you can take advantage of the [Jekyll](http://jekyllrb.com/)-based templating system to handle
-most of the boilerplate.
+most of the boilerplate. Any files that start with a [front matter](http://jekyllrb.com/docs/frontmatter/)
+block will be templated, and any other files will be served verbatim.
+
+If you're still unsure, two canonical samples that use templates are:
+- [image-rendering-pixelated](image-rendering-pixelated/index.html)
+- [report-validity](report-validity/index.html)
 
 Follow the [Using Jekyll with Pages](https://help.github.com/articles/using-jekyll-with-pages/)
 guide to mimic the production Jekyll environment during local development.
