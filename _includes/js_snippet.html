@@ -1,6 +1,10 @@
 {% if include.js %}
 <script>{{ include.js }}</script>
+{% if include.title != "" %}
+<h3>{{ include.title }}</h3>
+{% elsif include.title == null %}
 <h3>JavaScript Snippet</h3>
+{% endif %}
 {% highlight js %}
 {{ include.js }}
 {% endhighlight %}
