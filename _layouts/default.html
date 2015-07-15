@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+Copyright {{ site.time | date: "%Y" }} Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sample illustrating the use of {{ page.feature_name }}.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</title>
+    {% if page.https_redirect %}{% include https_redirect.html %}{% endif %}
+    {% assign sub_dirs = page.url | split: '/' | size | minus: 2 %}
+    {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}
+    <link rel="icon" href="{{ relative_path_to_root }}images/favicon.ico">
+    <link rel="stylesheet" href="{{ relative_path_to_root }}styles/main.css">
+    {% for local_css_file in page.local_css_files %}<link rel="stylesheet" href="{{ local_css_file }}">{% endfor %}
+    {% if page.additional_head_content %}{{ page.additional_head_content }}{% endif %}
+  </head>
+
+  <body>
+    <h1>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</h1>
+    <p>
+      Available in <a target="_blank" href="https://www.chromestatus.com/feature/{{ page.feature_id }}">Chrome {{ page.chrome_version }}+</a> |
+      <a target="_blank" href="view-source:{{ site.gh_pages_url_prefix }}{{ page.url }}">View Source</a> |
+      <a target="_blank" href="{{ site.gh_url_prefix }}{{ page.url | remove_first: 'index.html' }}">View on GitHub</a>
+    </p>
+    {{ content }}
+    {% for local_js_file in page.local_js_files %}<script src="{{ local_js_file }}"></script>{% endfor %}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53563471-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

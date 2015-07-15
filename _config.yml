@@ -1,0 +1,11 @@
+encoding: utf-8
+gh_pages_url_prefix: https://googlechrome.github.io/samples
+gh_url_prefix: https://github.com/googlechrome/samples/blob/gh-pages
+gems:
+  - jekyll-sitemap
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
