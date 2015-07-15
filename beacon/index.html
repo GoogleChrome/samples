@@ -74,14 +74,14 @@ limitations under the License.
 
 <!-- // [START code-block] -->
 <script>
-  function() {
+  (function() {
     window.addEventListener('pagehide', logData, false);
     function logData() {
         navigator.sendBeacon(
           'https://putsreq.herokuapp.com/Dt7t2QzUkG18aDTMMcop',
           'Sent by a beacon!');
     }
-  }();
+  })();
 </script>
 <!-- // [END code-block] -->
 
