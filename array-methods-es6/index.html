@@ -1,0 +1,112 @@
+---
+feature_name: Array Methods (ECMAScript 2015)
+chrome_version: 45
+feature_id: 6732923508097024
+---
+<p><a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0">ECMAScript 2015 specification</a> adds additional static methods on <code>Array</code> and instance
+methods on <code>Array.prototype</code>.</p>
+
+<h2>Array.from ( items [ , mapfn [ , thisArg ] ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.from">#</a></h2>
+<p>
+The <code>Array.from()</code> method converts an array-like object to a true
+array. It takes an optional second parameter, which can be used to execute a map
+function on each element of the array that is being created.
+</p>
+{% capture array_from_js1 %}
+Array.from(new Set([1, 1, 2, 3]));         // [1, 2, 3]
+Array.from('hello');                       // ["h", "e", "l", "l", "o"]
+Array.from('hello', x => x.charCodeAt(0)); // [104, 101, 108, 108, 111]
+{% endcapture %}
+{% include js_snippet.html js=array_from_js1 title='' %}
+<p>
+It comes in handy when dealing with the infamous <code>NodeList</code>
+returned by <code>document.querySelectorAll</code>.
+</p>
+{% capture array_from_js2 %}
+var divs = document.querySelectorAll("div");
+Array.from(divs).forEach(function(node) {
+  console.log(node);
+});
+{% endcapture %}
+{% include js_snippet.html js=array_from_js2 title='' %}
+
+<h2>Array.of ( ...items ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.of">#</a></h2>
+<p>
+The <code>Array.of()</code> method creates a new <code>Array</code> instance
+with any number of arguments, regardless of their type.
+</p>
+{% capture array_of_js %}
+Array.of('hello');      // ["hello"]
+Array.of(1, 2, 3);      // [1, 2, 3]
+Array.of('blink', 182); // ["blink", 182]
+{% endcapture %}
+{% include js_snippet.html js=array_of_js title='' %}
+
+<h2>Array.prototype.copyWithin (target, start [ , end ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.copywithin">#</a></h2>
+<p>
+The <code>copyWithin()</code> method copies the sequence of array elements
+within the array to the position starting at <code>target</code>. The copy is
+taken from the index positions of the second and third arguments
+<code>start</code> and <code>end</code>. The <code>end</code> argument is
+optional and defaults to the length of the array.
+</p>
+{% capture array_prototype_copywithin1 %}
+[0, 1, 2, 3, 4].copyWithin(target=4, start=0); // [0, 1, 2, 3, 0]
+[0, 1, 2, 3, 4].copyWithin(target=0, start=2); // [2, 3, 4, 3, 4]
+{% endcapture %}
+{% include js_snippet.html js=array_prototype_copywithin1 title='' %}
+<p>If <code>start</code> is negative, it will be treated as <code>length+start</code> where <code>length</code> is the length of the array. If <code>end</code> is negative, it will be treated as <code>length+end</code>.
+{% capture array_prototype_copywithin2 %}
+[0, 1, 2, 3, 4].copyWithin(target=0, start=3,  end=4);  // [3, 1, 2, 3, 4]
+[0, 1, 2, 3, 4].copyWithin(target=0, start=-2, end=-1); // [3, 1, 2, 3, 4]
+{% endcapture %}
+{% include js_snippet.html js=array_prototype_copywithin2 title='' %}
+
+<h2>Array.prototype.fill (value [ , start [ , end ] ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.fill">#</a></h2>
+<p>
+The <code>fill()</code> method fills all the elements of an array between an
+optional <code>start</code> index and an optional <code>end</code> index with a
+static <code>value</code>.
+The <code>start</code> argument defaults to 0. The <code>end</code>
+argument defaults to the length of the array.
+</p>
+{% capture array_prototype_fill %}
+[0, 1, 2, 3, 4].fill(5);                 // [5, 5, 5, 5, 5]
+[0, 1, 2, 3, 4].fill(5, start=2);        // [0, 1, 5, 5, 5]
+[0, 1, 2, 3, 4].fill(5, start=2, end=4); // [0, 1, 5, 5, 4]
+{% endcapture %}
+{% include js_snippet.html js=array_prototype_fill title='' %}
+
+<h2>Array.prototype.find ( predicate [ , thisArg ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.find">#</a></h2>
+<p>
+The <code>find()</code> method returns a value in the array, if at least one
+element in the array satisfies the provided <code>predicate</code> function. If
+not, <code> undefined</code> is returned. <code>find()</code> does not mutate
+the array on which it is called.
+</p>
+{% capture array_prototype_find %}
+function startsWithLetterA(element, index, array) {
+  if (element.startsWith('a')) return element;
+}
+var cuteNames = ['jeff', 'marc', 'addy', 'francois'];
+
+cuteNames.find(startsWithLetterA); // "addy"
+{% endcapture %}
+{% include js_snippet.html js=array_prototype_find title='' %}
+
+<h2>Array.prototype.findIndex ( predicate [ , thisArg ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.findindex">#</a></h2>
+<p>
+The <code>findIndex()</code> method returns an index in the array, if at least
+one element in the array satisfies the provided <code>predicate</code>
+function. If not, -1 is returned. <code>findIndex()</code> does not mutate the
+array on which it is called.
+</p>
+{% capture array_prototype_findIndex %}
+function startsWithLetterA(element, index, array) {
+  if (element.startsWith('a')) return element;
+}
+var cuteNames = ['jeff', 'marc', 'addy', 'francois'];
+
+cuteNames.findIndex(startsWithLetterA); // 2
+{% endcapture %}
+{% include js_snippet.html js=array_prototype_findIndex title='' %}
