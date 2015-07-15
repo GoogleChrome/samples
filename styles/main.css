@@ -4,6 +4,13 @@ body {
   font-family: sans-serif;
 }
 
+@media screen and (min-width: 832px) {
+  body {
+    width: 800px;
+    margin: 0 auto;
+  }
+}
+
 h1 {
   margin-bottom: -0.3em;
 }
