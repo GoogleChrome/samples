@@ -11,10 +11,6 @@
  limitations under the License.
 */
 
-// This polyfill provides Cache.add(), Cache.addAll(), and CacheStorage.match(),
-// which are not implemented in Chrome 40.
-importScripts('../serviceworker-cache-polyfill.js');
-
 // While overkill for this specific sample in which there is only one cache,
 // this is one best practice that can be followed in general to keep track of
 // multiple caches used by a given service worker, and keep them all versioned.
@@ -32,6 +28,17 @@ var CACHE_VERSION = 1;
 var CURRENT_CACHES = {
   'post-message': 'post-message-cache-v' + CACHE_VERSION
 };
+
+// This is a somewhat contrived example of using client.postMessage() to originate a message from
+// the service worker to each client (i.e. controlled page).
+// Here, we send a message when the service worker starts up, prior to when it's ready to start
+// handling events.
+self.clients.matchAll().then(function(clients) {
+  clients.forEach(function(client) {
+    console.log(client);
+    client.postMessage('The service worker just started up.');
+  });
+});
 
 self.addEventListener('activate', function(event) {
   // Delete all caches that aren't named in CURRENT_CACHES.
@@ -52,6 +59,17 @@ self.addEventListener('activate', function(event) {
           }
         })
       );
+    }).then(function() {
+      return clients.claim();
+    }).then(function() {
+      // After the activation and claiming is complete, send a message to each of the controlled
+      // pages letting it know that it's active.
+      // This will trigger navigator.serviceWorker.onmessage in each client.
+      return self.clients.matchAll().then(function(clients) {
+        return Promise.all(clients.map(function(client) {
+          return client.postMessage('The service worker has activated and taken control.');
+        }));
+      });
     })
   );
 });
@@ -69,13 +87,15 @@ self.addEventListener('message', function(event) {
             return request.url;
           });
 
+          return urls.sort();
+        }).then(function(urls) {
           // event.ports[0] corresponds to the MessagePort that was transferred as part of the controlled page's
           // call to controller.postMessage(). Therefore, event.ports[0].postMessage() will trigger the onmessage
           // handler from the controlled page.
           // It's up to you how to structure the messages that you send back; this is just one example.
           event.ports[0].postMessage({
             error: null,
-            urls: urls.sort()
+            urls: urls
           });
         });
       break;
@@ -96,7 +116,7 @@ self.addEventListener('message', function(event) {
 
       // This command removes a request/response pair from the cache (assuming it exists).
       case 'delete':
-        var request = new Request(event.data.url, {mode: 'no-cors'});
+        var request = new Request(event.data.url);
         cache.delete(request).then(function(success) {
           event.ports[0].postMessage({
             error: success ? null : 'Item was not found in the cache.'
