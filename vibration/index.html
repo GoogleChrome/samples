@@ -1,0 +1,50 @@
+---
+feature_name: Vibration API
+chrome_version: 32
+feature_id: 5698768766763008
+---
+
+<p>You can control the vibration capability of your device using the Vibration API. Chrome only supports this feature on Android devices.</p>
+
+{% capture js1 %}
+function example1() {
+  // Vibrate for 500ms
+  navigator.vibrate([500]);
+}
+{% endcapture %}
+
+
+{% capture js2 %}
+function example2() {
+  // For a single value you can pass in a Number rather than an Array
+  navigator.vibrate(500);
+}
+{% endcapture %}
+
+
+{% capture js3 %}
+function startPattern() {
+  // Values at even indices (0, 2, 4, ...) specify vibrations, while the odd
+  // indices specify pauses.
+  // Vibrate for 500ms 6 times, pausing for 250ms in between each one.
+  navigator.vibrate([500, 250, 500, 250, 500, 250, 500, 250, 500, 250, 500]);
+}
+{% endcapture %}
+
+
+{% capture js4 %}
+function stopVibrations() {
+  // You can also stop an ongoing vibration pattern by specifying a vibration
+  // length of zero.
+  navigator.vibrate(0);
+}
+{% endcapture %}
+
+{% include js_snippet.html js=js1 %}
+<div><button onclick="example1()">Vibrate</button></div>
+{% include js_snippet.html js=js2 %}
+<div><button onclick="example2()">Vibrate</button></div>
+{% include js_snippet.html js=js3 %}
+<div><button onclick="startPattern()">Play pattern</button></div>
+{% include js_snippet.html js=js4 %}
+<div><button onclick="stopVibrations()">Stop vibrations</button></div>
