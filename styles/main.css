@@ -2,6 +2,8 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
   font-family: sans-serif;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 h1 {
@@ -16,7 +18,7 @@ h3 {
 .output {
   background-color: #f0f0f0;
   border-radius: 0.75em;
-  display: inline-block;
+  display: block;
   margin: 0.5em;
   padding: 0.5em;
 }
@@ -33,7 +35,7 @@ h3 {
 .highlight {
   border-radius: 0.75em;
   border: 1px solid #f0f0f0;
-  display: inline-block;
+  display: block;
   margin: 0.5em;
   overflow-x: auto;
   padding: 0.5em;
