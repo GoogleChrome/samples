@@ -19,9 +19,11 @@ feature_id: 6183089948590080
 </p>
 
 <p>
-  This page attempts to load two external CSS resources. One is linked to with a valid hash, and the
-  other is linked to with an invalid hash. Browsers that support subresource integrity will refuse
-  to load the CSS resource with the invalid hash.
+  This page attempts to load two local CSS resources. One is linked to with a valid hash, and the
+  other is linked to with an invalid hash. Browsers that support subresource integrity will
+  refuse to load the CSS resource with the invalid hash. In a real-world application, this might be
+  more useful when you are calculating the hash of a third party, remote resource that you do not
+  control, but local resources are being used for illustrative purposes.
 </p>
 
 <p id="correct">
