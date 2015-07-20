@@ -1,0 +1,33 @@
+---
+feature_name: NotificationOptions.vibrate
+chrome_version: 45
+feature_id: 5727996321202176
+---
+
+<p>When displaying a system notification your device may vibrate to alert the user. You can specify the vibration pattern that should be used in the same way as for the <a href="./index.html">Vibration API</a>.</p>
+
+<p>When creating the notification, just set the 'vibrate' property of the notification options to be a Vibration API pattern.</p>
+
+<p>Chrome for Android only supports showing persistant notifications, which are associated with a service worker to handle the click event. We must first register a worker, and create the notification using the showNotification method of the registration object.</p>
+
+{% capture js %}
+navigator.serviceWorker.register('sw.js');
+
+function showNotification() {
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('Vibration Sample', {
+          body: 'Buzz! Buzz!',
+          icon: '../images/touch/chrome-touch-icon-192x192.png',
+          vibrate: [200, 100, 200, 100, 200, 100, 200],
+          tag: 'vibration-sample'
+        });
+      });
+    }
+  });
+}
+{% endcapture %}
+
+{% include js_snippet.html js=js %}
+<div><button onclick="showNotification()">Show notification</button></div>

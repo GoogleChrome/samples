@@ -4,8 +4,19 @@ body {
   font-family: sans-serif;
 }
 
+@media screen and (min-width: 832px) {
+  body {
+    width: 800px;
+    margin: 0 auto;
+  }
+}
+
 h1 {
   margin-bottom: -0.3em;
+}
+
+h2 {
+  margin-top: 2em;
 }
 
 h3 {
@@ -16,7 +27,7 @@ h3 {
 .output {
   background-color: #f0f0f0;
   border-radius: 0.75em;
-  display: inline-block;
+  display: block;
   margin: 0.5em;
   padding: 0.5em;
 }
@@ -33,7 +44,7 @@ h3 {
 .highlight {
   border-radius: 0.75em;
   border: 1px solid #f0f0f0;
-  display: inline-block;
+  display: block;
   margin: 0.5em;
   overflow-x: auto;
   padding: 0.5em;
