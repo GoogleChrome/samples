@@ -1,0 +1,48 @@
+---
+feature_name: Subresource Integrity
+chrome_version: 45
+feature_id: 6183089948590080
+---
+
+<p>
+  <a href="http://w3c.github.io/webappsec/specs/subresourceintegrity/">Subresource integrity</a>
+  defines a mechanism by which a browser can verify that a fetched resource has been delivered
+  without unexpected manipulation.
+  <a href="http://w3c.github.io/webappsec/specs/subresourceintegrity/#dfn-integrity-metadata">Metadata</a>
+  inlined into HTML elements allows the browser to determine whether the resource that was
+  downloaded matches the resource the page's author expected to download.
+</p>
+
+<p>
+  The current implementation covers only the two elements outlined in the spec:
+  <code>&lt;script></code> and <code>&lt;link rel="stylesheet"></code> elements.
+</p>
+
+<p>
+  This page attempts to load two local CSS resources. One is linked to with a valid hash, and the
+  other is linked to with an invalid hash. Browsers that support subresource integrity will
+  refuse to load the CSS resource with the invalid hash. In a real-world application, this might be
+  more useful when you are calculating the hash of a third party, remote resource that you do not
+  control, but local resources are being used for illustrative purposes.
+</p>
+
+<p id="correct">
+  This paragraph is styled via the CSS resource linked to with
+  <code>&lt;link rel="stylesheet" href="correct_hash.css" integrity="sha256-qvuZLpjL9TNV6yI1kNdGCPnSTrWM6Y0ILEzzyvA9hGY="></code>
+  Since that uses an <code>integrity</code> attribute that corresponds to the actual hash of the
+  file, it will be loaded successfully and this paragraph will be green.
+  <code>cat correct_hash.css | openssl dgst -sha256 -binary | openssl enc -base64 -A</code> was used
+  to generate the <code>sha256</code> hash value.
+</p>
+<link rel="stylesheet" href="correct_hash.css" integrity="sha256-qvuZLpjL9TNV6yI1kNdGCPnSTrWM6Y0ILEzzyvA9hGY=">
+
+<p id="incorrect">
+  This paragraph is styled via the CSS resource linked to with
+  <code>&lt;link rel="stylesheet" href="incorrect_hash.css" integrity="sha256-OBVIOUSLY_INCORRECT_HASH"></code>
+  Browsers that support subresource integrity will refuse to load the file, since the
+  <code>integrity</code> value  doesn't correspond to the actual <code>sha256</code> hash of the
+  file. You'll see an error message logged in the DevTool's console. Browsers that don't support
+  subresource integrity will, however, load the file, and in those browsers this paragraph will be
+  pink.
+</p>
+<link rel="stylesheet" href="incorrect_hash.css" integrity="sha256-OBVIOUSLY_INCORRECT_HASH">
