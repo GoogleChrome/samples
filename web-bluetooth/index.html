@@ -9,8 +9,8 @@ feature_id: 5264933985976320
 <p>This sample illustrates the use of the Web Bluetooth API to retrieve battery
 information from a nearby Bluetooth Device advertising Battery information with
 Bluetooth Low Energy. You may want to try this demo with the BLE Peripheral
-Simulator App from the <a href="_blank"
-target="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
+Simulator App from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
 Play Store</a>.</p>
 
 <button>Get Bluetooth Device Battery</button>
@@ -27,19 +27,20 @@ function onButtonClick() {
   .then(device => {
     log('> Found ' + device.name);
     log('Connecting to GATT Server...');
-    return device.connectGATT()
+    return device.connectGATT();
   })
   .then(server => {
     log('Getting Battery Service...');
-    return server.getPrimaryService('battery_service')
+    return server.getPrimaryService('battery_service');
   })
   .then(service => {
+    if (!service) throw 'Battery Service not found';
     log('Getting Battery Level Characteristic...');
-    return service.getCharacteristic('battery_level')
+    return service.getCharacteristic('battery_level');
   })
   .then(characteristic => {
      log('Reading Battery Level...');
-     return characteristic.readValue()
+     return characteristic.readValue();
   })
   .then(buffer => {
     let data = new DataView(buffer);
@@ -51,13 +52,14 @@ function onButtonClick() {
   });
 };
 {% endcapture %}
-{% include js_snippet.html js=js title='Javascript Snippet' %}
+{% include js_snippet.html js=js %}
 
 <script>
 document.querySelector('button').addEventListener('click', function() {
   document.querySelector('#log').textContent = '';
   if (!navigator.bluetooth) {
     log('Web Bluetooth API is not available.');
+    log('Please make sure you run Chrome OS M45 and Web Bluetooth flag is enabled.');
   } else {
     onButtonClick();
   }
