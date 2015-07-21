@@ -2,8 +2,6 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
   font-family: sans-serif;
-  margin: 0 auto;
-  max-width: 800px;
 }
 
 @media screen and (min-width: 832px) {
