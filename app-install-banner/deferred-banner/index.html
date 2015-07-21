@@ -21,63 +21,6 @@ limitations under the License.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/samples/styles/main.css">
     <link rel="manifest" href="manifest.json">
-    <script>
-    window.addEventListener('load', function() {
-
-      var outputElement = document.getElementById('output');
-      var btnSave = document.getElementById('btnSave');
-      var deferredPrompt;
-
-      navigator.serviceWorker.register('service-worker.js', { scope: './' })
-        .then(function(r) {
-          console.log('registered service worker');
-        })
-        .catch(function(whut) {
-          console.error('uh oh... ');
-          console.error(whut);
-        });
-      
-      window.addEventListener('beforeinstallprompt', function(e) {
-        console.log('beforeinstallprompt Event fired');
-        e.preventDefault();
-        
-        // Enable the button.
-        btnSave.removeAttribute('disabled');
-        
-        // Stash the event so it can be triggered later.
-        deferredPrompt = e;
-        
-        return false;
-      });
-      
-      btnSave.addEventListener('click', function() {
-        if(deferredPrompt !== undefined) {
-          // The user has had a postive interaction with our app and Chrome
-          // has tried to prompt previously, so let's show the prompt.
-          deferredPrompt.prompt();
-          
-          outputElement.textContent = 'Deferred Prompt shown';
-        
-          // Follow what the user has selected.
-          deferredPrompt.userChoice.then(function(choiceResult) {
-            
-        
-            console.log(choiceResult.outcome);
-            
-            if(choiceResult.outcome == 'dismissed') {
-              console.log('User cancelled homescreen install');
-            }
-            else {
-              console.log('User added to homescreen');
-            }
-            
-            // We no longer need the prompt.  Clear it up.
-            deferredPrompt = null;
-          });
-        }
-      });
-    });
-    </script>
   </head>
   <body>
     <h1>Web App Install Banner: Defer prompt of banner sample</h1>
@@ -109,5 +52,61 @@ limitations under the License.
     <p>For testing we encourage you to force the banner to appear by setting the chrome://flags/#bypass-app-banner-engagement-checks flag.</p>
     <p>To see if this example works, come back in another day and you will see the banner.</p>
  
+    <script>
+      window.addEventListener('load', function() {
+  
+        var outputElement = document.getElementById('output');
+        var btnSave = document.getElementById('btnSave');
+        var deferredPrompt;
+  
+        navigator.serviceWorker.register('service-worker.js', { scope: './' })
+          .then(function(r) {
+            console.log('registered service worker');
+          })
+          .catch(function(whut) {
+            console.error('uh oh... ');
+            console.error(whut);
+          });
+        
+        window.addEventListener('beforeinstallprompt', function(e) {
+          console.log('beforeinstallprompt Event fired');
+          e.preventDefault();
+          
+          // Enable the button.
+          btnSave.removeAttribute('disabled');
+          
+          // Stash the event so it can be triggered later.
+          deferredPrompt = e;
+          
+          return false;
+        });
+        
+        btnSave.addEventListener('click', function() {
+          if (deferredPrompt !== undefined) {
+            // The user has had a postive interaction with our app and Chrome
+            // has tried to prompt previously, so let's show the prompt.
+            deferredPrompt.prompt();
+            
+            outputElement.textContent = 'Deferred Prompt shown';
+          
+            // Follow what the user has selected.
+            deferredPrompt.userChoice.then(function(choiceResult) {
+              
+              console.log(choiceResult.outcome);
+              
+              if (choiceResult.outcome == 'dismissed') {
+                console.log('User cancelled homescreen install');
+              }
+              else {
+                console.log('User added to homescreen');
+              }
+              
+              // We no longer need the prompt.  Clear it up.
+              deferredPrompt = null;
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </head>
