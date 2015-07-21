@@ -1,11 +1,13 @@
 {% if include.css %}
-<style>{{ include.css }}</style>
-{% if include.title != "" %}
-<h3>{{ include.title }}</h3>
-{% elsif include.title == null %}
-<h3>CSS Snippet</h3>
-{% endif %}
-{% highlight css %}
-{{ include.css }}
-{% endhighlight %}
+  <style>{{ include.css }}</style>
+
+  {% if include.title == null %}
+    <h3>CSS Snippet</h3>
+  {% elsif include.title != "" %}
+    <h3>{{ include.title }}</h3>
+  {% endif %}
+
+  {% highlight css %}
+    {{ include.css }}
+  {% endhighlight %}
 {% endif %}
