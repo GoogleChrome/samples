@@ -1,0 +1,68 @@
+---
+feature_name: Web Bluetooth
+chrome_version: 45
+feature_id: 5264933985976320
+---
+
+<p>The <a href="https://github.com/WebBluetoothCG/web-bluetooth">Web Bluetooth API</a> aims to discover and communicate with devices over the Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is currently only partially implemented in Chrome OS behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.</p>
+
+<p>This sample illustrates the use of the Web Bluetooth API to retrieve battery
+information from a nearby Bluetooth Device advertising Battery information with
+Bluetooth Low Energy. You may want to try this demo with the BLE Peripheral
+Simulator App from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
+Play Store</a>.</p>
+
+<button>Get Bluetooth Device Battery</button>
+{% capture initial_output_content %}
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture js %}
+function onButtonClick() {
+  'use strict';
+
+  log('Requesting Bluetooth Device...');
+  navigator.bluetooth.requestDevice({filters:[{services:['battery_service']}]})
+  .then(device => {
+    log('> Found ' + device.name);
+    log('Connecting to GATT Server...');
+    return device.connectGATT();
+  })
+  .then(server => {
+    log('Getting Battery Service...');
+    return server.getPrimaryService('battery_service');
+  })
+  .then(service => {
+    if (!service) throw 'Battery Service not found';
+    log('Getting Battery Level Characteristic...');
+    return service.getCharacteristic('battery_level');
+  })
+  .then(characteristic => {
+     log('Reading Battery Level...');
+     return characteristic.readValue();
+  })
+  .then(buffer => {
+    let data = new DataView(buffer);
+    let batteryLevel = data.getUint8(0);
+    log('> Battery Level is ' + batteryLevel + '%');
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+};
+{% endcapture %}
+{% include js_snippet.html js=js %}
+
+<script>
+document.querySelector('button').addEventListener('click', function() {
+  document.querySelector('#log').textContent = '';
+  if (!navigator.bluetooth) {
+    log('Web Bluetooth API is not available.');
+    log('Please make sure you run Chrome OS M45 and Web Bluetooth flag is enabled.');
+  } else {
+    onButtonClick();
+  }
+});
+log = ChromeSamples.log;
+</script>
