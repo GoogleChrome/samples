@@ -1,0 +1,46 @@
+---
+feature_name: ES6 Object.assign()
+chrome_version: 45
+feature_id: REPLACE_ME
+additional_head_content: <meta name="optional" value="optional">
+---
+
+<h3>Background</h3>
+<p><code>Object.assign()</code> copies the values (of all enumerable own properties) from one or more source objects to a target object. It is useful for merging objects or cloning them shallowly.</p>
+
+{% capture initial_output_content %}
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture js %}
+'use strict';
+
+// Merge an object
+let first = { name: "Tony" };
+let last = { lastName: "Stark" };
+let person = Object.assign(first, last);
+ChromeSamples.log(JSON.stringify(person));
+// {name: "Tony", lastName: "Stark"}
+ChromeSamples.log(JSON.stringify(first));
+// first = {name: "Tony", lastName: "Stark"} as the target also changed
+
+// Merge multiple sources
+let a = Object.assign({foo: 0}, {bar: 1}, {baz: 2});
+ChromeSamples.log(JSON.stringify(a));
+// {foo: 0, bar: 1, baz: 2}
+
+// Merge and overwrite equal keys
+let b = Object.assign({foo: 0}, {foo: 1}, {foo: 2});
+ChromeSamples.log(JSON.stringify(b));
+// {foo: 2}
+
+// Clone an object
+let obj = { person: "Thor Odinson"};
+let clone = Object.assign({}, obj);
+ChromeSamples.log(JSON.stringify(clone));
+// {person: "Thor Odinson"}
+
+{% endcapture %}
+{% include js_snippet.html js=js %}
+
+{% include css_snippet.html css=css %}
