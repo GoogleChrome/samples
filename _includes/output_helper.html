@@ -8,6 +8,10 @@
       document.querySelector('#log').textContent += line + '\n';
     },
 
+    clearLog: function() {
+      document.querySelector('#log').textContent = '';
+    },
+
     setStatus: function(status) {
       document.querySelector('#status').textContent = status;
     },

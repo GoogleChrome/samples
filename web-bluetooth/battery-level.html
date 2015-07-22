@@ -57,14 +57,14 @@ function onButtonClick() {
 {% include js_snippet.html js=js %}
 
 <script>
-document.querySelector('button').addEventListener('click', function() {
-  document.querySelector('#log').textContent = '';
-  if (!navigator.bluetooth) {
-    log('Web Bluetooth API is not available.');
-    log('Please make sure you run Chrome OS M45 and the Web Bluetooth flag is enabled.');
-  } else {
-    onButtonClick();
-  }
-});
-log = ChromeSamples.log;
+  document.querySelector('button').addEventListener('click', function() {
+    if (!navigator.bluetooth) {
+      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
+        'Please make sure you run Chrome OS M45 and the Web Bluetooth flag is enabled.');
+    } else {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+  log = ChromeSamples.log;
 </script>
