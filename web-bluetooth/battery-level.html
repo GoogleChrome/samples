@@ -1,10 +1,10 @@
 ---
-feature_name: Battery Level Web Bluetooth
+feature_name: Web Bluetooth / Battery Level
 chrome_version: 45
 feature_id: 5264933985976320
 ---
 
-<p>The <a href="https://github.com/WebBluetoothCG/web-bluetooth">Web Bluetooth API</a> aims to discover and communicate with devices over the Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is currently only partially implemented in Chrome OS behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.</p>
+<p>The <a href="https://github.com/WebBluetoothCG/web-bluetooth">Web Bluetooth API</a> discovers and communicates with devices over the Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is currently only partially implemented in Chrome OS behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.</p>
 
 <p>This sample illustrates the use of the Web Bluetooth API to retrieve battery
 information from a nearby Bluetooth Device advertising Battery information with
@@ -13,7 +13,7 @@ Simulator App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
 Play Store</a>.</p>
 
-<button>Get Bluetooth Device Battery</button>
+<button>Get Bluetooth Device's Battery Level</button>
 {% capture initial_output_content %}
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
@@ -34,7 +34,9 @@ function onButtonClick() {
     return server.getPrimaryService('battery_service');
   })
   .then(service => {
-    if (!service) throw 'Battery Service not found';
+    if (!service) {
+      throw 'Battery Service not found';
+    }
     log('Getting Battery Level Characteristic...');
     return service.getCharacteristic('battery_level');
   })
@@ -59,7 +61,7 @@ document.querySelector('button').addEventListener('click', function() {
   document.querySelector('#log').textContent = '';
   if (!navigator.bluetooth) {
     log('Web Bluetooth API is not available.');
-    log('Please make sure you run Chrome OS M45 and Web Bluetooth flag is enabled.');
+    log('Please make sure you run Chrome OS M45 and the Web Bluetooth flag is enabled.');
   } else {
     onButtonClick();
   }

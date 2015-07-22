@@ -1,10 +1,10 @@
 ---
-feature_name: Device Info Web Bluetooth
+feature_name: Web Bluetooth / Device Info
 chrome_version: 45
 feature_id: 5264933985976320
 ---
 
-<p>The <a href="https://github.com/WebBluetoothCG/web-bluetooth">Web Bluetooth API</a> aims to discover and communicate with devices over the Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is currently only partially implemented in Chrome OS behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.</p>
+<p>The <a href="https://github.com/WebBluetoothCG/web-bluetooth">Web Bluetooth API</a> discovers and communicates with devices over the Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is currently only partially implemented in Chrome OS behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.</p>
 
 <p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
 device information from a nearby Bluetooth Low Energy Device.</p>
@@ -38,7 +38,7 @@ document.querySelector('button').addEventListener('click', function() {
   document.querySelector('#log').textContent = '';
   if (!navigator.bluetooth) {
     log('Web Bluetooth API is not available.');
-    log('Please make sure you run Chrome OS M45 and Web Bluetooth flag is enabled.');
+    log('Please make sure you run Chrome OS M45 and the Web Bluetooth flag is enabled.');
   } else {
     onButtonClick();
   }
