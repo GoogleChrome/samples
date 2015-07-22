@@ -2,16 +2,14 @@
 feature_name: ES6 Arrow functions
 chrome_version: 45
 feature_id: 5047308127305728
-additional_head_content: <meta name="optional" value="optional">
 ---
 
 <h3>Background</h3>
 
 <p>ES6 fat arrow functions have a shorter syntax compared to
 function expressions and lexically bind the <code>this</code> value. Arrow functions are always anonymous and effectively turn
-<code>function (arguments) { expression }</code> into arguments => expression. If using an expression after an arrow, the return is implicit, so no <code>return</code> is required.</p>
+<code>function (arguments) { expression }</code> into <code>arguments => expression</code>. If using an expression after an arrow, the return is implicit, so no <code>return</code> is required.</p>
 
-{% capture initial_output_content %}
 <p>This can be used to set initial sample output.</p>
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
@@ -81,5 +79,3 @@ setTimeout(() => ChromeSamples.log(counterB.seconds), 1200);
 
 {% endcapture %}
 {% include js_snippet.html js=js %}
-
-{% include css_snippet.html css=css %}
