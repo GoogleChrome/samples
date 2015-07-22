@@ -5,3 +5,4 @@ script: "bundle exec jekyll build"
 branches:
   only:
   - /.*/
+cache: bundler
