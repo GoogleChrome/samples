@@ -10,9 +10,7 @@ feature_id: 5047308127305728
 function expressions and lexically bind the <code>this</code> value. Arrow functions are always anonymous and effectively turn
 <code>function (arguments) { expression }</code> into <code>arguments => expression</code>. If using an expression after an arrow, the return is implicit, so no <code>return</code> is required.</p>
 
-<p>This can be used to set initial sample output.</p>
-{% endcapture %}
-{% include output_helper.html initial_output_content=initial_output_content %}
+{% include output_helper.html %}
 
 {% capture js %}
 'use strict';
