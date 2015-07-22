@@ -28,3 +28,20 @@ the functionality. The email address of the engineer who worked on a given featu
 the corresponding https://www.chromestatus.com/features entry. If you're unsure of the GitHub
 username corresponding to the engineer, an alternative is to email them a link to the pull request
 and ask for feedback directly.
+
+Style / Linting / CI
+===
+The samples ideally should follow the [Google JavaScript Style Guide](http://google.github.io/styleguide/javascriptguide.xml),
+though this is not automatically enforced. (See https://github.com/GoogleChrome/samples/issues/141)
+
+It's recommended that all new samples pass the [`jshint`](http://jshint.com/install/) linting
+process, using the customized [`.jshintrc`](.jshintrc) settings. To automate linting against
+JavaScript in the Jekyll-ized HTML output, [`linter.rb`](linter.rb) can be used. Regular
+contributors should set up a git pre-commit
+[hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to run [`linter.rb`](linter.rb)
+against all files that are being committed, via `ln -s -f ../../linter.rb .git/hooks/pre-commit`
+
+[Travis CI](https://travis-ci.org/GoogleChrome/samples) is currently being used to verify that the
+Jekyll build completes successfully, but doesn't currently lint/style check the full site.
+Once the all the older files in the project have been updated to pass `linter.rb` cleanly, that will
+be integrated into the Travis CI process.
