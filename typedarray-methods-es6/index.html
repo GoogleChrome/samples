@@ -1,0 +1,55 @@
+---
+feature_name: TypedArray Methods (ECMAScript 2015)
+chrome_version: 45
+feature_id: 4919908559224832
+---
+<p><a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0">ECMAScript 2015
+specification</a> adds additional static methods on <code>TypedArray</code>
+subclasses (<code>Int8Array</code>, <code>Float32Array</code>, ...) and instance
+methods on their prototype that mirror most <code>Array.prototype</code>
+methods.</p>
+
+<h2>TypedArray.from ( items [ , mapfn [ , thisArg ] ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-typedarrayfrom">#</a></h2>
+<p>
+The <code>TypedArray.from()</code> method creates a new way to make
+<code>TypedArrays</code> based on existing iterable or Array-like objects,
+analogous to <a href="https://googlechrome.github.io/samples/array-methods-es6"><code>Array.from</code></a>.
+</p>
+
+{% capture array_from_js1 %}
+Uint8Array.from(new Set([1, 1, 2, 3]));         // [1, 2, 3]
+Uint8Array.from('hello');                       // [0, 0, 0, 0, 0]
+Uint8Array.from('hello', x => x.charCodeAt(0)); // [104, 101, 108, 108, 111]
+{% endcapture %}
+{% include js_snippet.html js=array_from_js1 title='' %}
+
+<h2>TypedArray.of ( ...items ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-%typedarray%.of">#</a></h2>
+<p>
+The <code>TypedArray.of()</code> method is almost the same as <a href="https://googlechrome.github.io/samples/array-methods-es6"><code>Array.of()</code></a>.
+</p>
+{% capture array_of_js %}
+Uint8Array.of(1, 2, 3, 256 + 4); // [1, 2, 3, 4]
+{% endcapture %}
+{% include js_snippet.html js=array_of_js title='' %}
+
+<h2>Additional mirrored <code>Array.prototype</code> instance methods</h2>
+<ul>
+  <li><code>TypedArray.prototype.copyWithin</code></li>
+  <li><code>TypedArray.prototype.every</code></li>
+  <li><code>TypedArray.prototype.fill</code></li>
+  <li><code>TypedArray.prototype.filter</code></li>
+  <li><code>TypedArray.prototype.find</code></li>
+  <li><code>TypedArray.prototype.findIndex</code></li>
+  <li><code>TypedArray.prototype.forEach</code></li>
+  <li><code>TypedArray.prototype.indexOf</code></li>
+  <li><code>TypedArray.prototype.join</code></li>
+  <li><code>TypedArray.prototype.lastIndexOf</code></li>
+  <li><code>TypedArray.prototype.map</code></li>
+  <li><code>TypedArray.prototype.reduce</code></li>
+  <li><code>TypedArray.prototype.reduceRight</code></li>
+  <li><code>TypedArray.prototype.reverse</code></li>
+  <li><code>TypedArray.prototype.some</code></li>
+  <li><code>TypedArray.prototype.sort</code></li>
+  <li><code>TypedArray.prototype.toLocaleString</code></li>
+  <li><code>TypedArray.prototype.toString</code></li>
+</ul>
