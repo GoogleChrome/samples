@@ -8,3 +8,4 @@ branches:
 cache: bundler
 notifications:
   email: false
+sudo: false
