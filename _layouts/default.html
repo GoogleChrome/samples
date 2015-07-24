@@ -21,7 +21,14 @@ limitations under the License.
     <meta name="description" content="Sample illustrating the use of {{ page.feature_name }}.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</title>
-    {% if page.https_redirect %}{% include https_redirect.html %}{% endif %}
+    <script>
+      // If we're running on a real web server (as opposed to localhost on a custom port,
+      // which is whitelisted), then change the protocol to HTTPS.
+      // See https://goo.gl/lq4gCo for an explanation as to why this is needed for some features.
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
     {% assign sub_dirs = page.url | split: '/' | size | minus: 2 %}
     {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}
     <link rel="icon" href="{{ relative_path_to_root }}images/favicon.ico">
