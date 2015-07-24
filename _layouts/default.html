@@ -18,9 +18,9 @@ limitations under the License.
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sample illustrating the use of {{ page.feature_name }}.">
+    <meta name="description" content="Code Sample illustrating the use of {{ page.feature_name }}.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</title>
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Code Sample{% endif %}</title>
     {% if page.https_redirect %}{% include https_redirect.html %}{% endif %}
     {% assign sub_dirs = page.url | split: '/' | size | minus: 2 %}
     {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}
@@ -31,7 +31,7 @@ limitations under the License.
   </head>
 
   <body>
-    <h1>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</h1>
+    <h1>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Code Sample{% endif %}</h1>
     <p>
       Available in <a target="_blank" href="https://www.chromestatus.com/feature/{{ page.feature_id }}">Chrome {{ page.chrome_version }}+</a> |
       <a target="_blank" href="view-source:{{ site.gh_pages_url_prefix }}{{ page.url }}">View Source</a> |
