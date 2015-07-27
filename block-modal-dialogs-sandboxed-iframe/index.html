@@ -1,0 +1,46 @@
+---
+feature_name: Block modal dialogs in a sandboxed iframe
+chrome_version: 46
+feature_id: 4747009953103872
+---
+
+<p>From now on, <b>sandboxed frames will block modal dialogs by default</b> to
+prevent them from popping up confusing, modal messages to users. This includes the infamous
+<code>window.alert()</code>, <code>window.confirm()</code>,
+<code>window.print()</code> and <code>window.prompt()</code>.</p>
+
+<p>However if you really (really) want to allow modal dialogs inside a sandboxed
+frame, you can still add <code>"allow-modals"</code> to its
+<code>"sandbox"</code> attribute.</p>
+
+{% capture html %}
+<!-- No sandbox there... Modal dialogs will pop up -->
+<iframe id="red" src="iframe.html"></iframe>
+
+<!-- Sandbox frame will execute javascript but block modal dialogs -->
+<iframe id="green" src="iframe.html" sandbox="allow-scripts"></iframe>
+
+<!-- Sandbox frame will execute javascript and show modal dialogs -->
+<iframe id="blue" src="iframe.html"
+        sandbox="allow-scripts allow-modals"></iframe>
+{% endcapture %}
+{% include html_snippet.html html=html title='' %}
+
+<style>
+  iframe {
+    width: 259px;
+    border-color: #F44336;
+    background-color: #FFCDD2;
+    border-radius: 2px;
+  }
+
+  iframe[sandbox="allow-scripts"] {
+    border-color: #4CAF50;
+    background-color: #C8E6C9;
+  }
+
+  iframe[sandbox="allow-scripts allow-modals"] {
+    border-color: #2196F3;
+    background-color: #BBDEFB;
+  }
+</style>
