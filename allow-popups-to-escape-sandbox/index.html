@@ -1,0 +1,50 @@
+---
+feature_name: Allow popups to escape sandboxed iframe
+chrome_version: 46
+feature_id: 5708368589094912
+---
+
+<p>In order to mitigate the risks associated with ads when using sandboxed
+iframes, developers can now add <code>"allow-popups-to-escape-sandbox"</code>
+to the frame <code>"attribute"</code>. This allows the sandboxed document to
+spawn new windows without forcing the sandboxing flags upon them, hence
+creating a clean browsing context. For instance, a third-party
+advertisement could be safely <b>sandboxed without forcing the same restrictions
+upon a landing page</b>.</p>
+
+<p>Popup windows can be spawned with <code>window.open()</code> and
+<code>target="_blank"</code> links.</p>
+
+{% capture html %}
+<!-- No sandbox there... Popup window won't be sandboxed as well -->
+<iframe id="red" src="iframe.html"></iframe>
+
+<!-- This sandboxed frame will allow sandboxed popup window to open popups
+     but not to execute JavaScript for instance. -->
+<iframe id="green" src="iframe.html" sandbox="allow-popups"></iframe>
+
+<!-- This sandboxed frame will create a clean non sandboxed popup window,
+     allowed to execute JavaScript and open popups. -->
+<iframe id="blue" src="iframe.html"
+        sandbox="allow-popups allow-popups-to-escape-sandbox"></iframe>
+{% endcapture %}
+{% include html_snippet.html html=html title='' %}
+
+<style>
+  iframe {
+    width: 259px;
+    border-color: #F44336;
+    background-color: #FFCDD2;
+    border-radius: 2px;
+  }
+
+  iframe[sandbox="allow-popups"] {
+    border-color: #4CAF50;
+    background-color: #C8E6C9;
+  }
+
+  iframe[sandbox="allow-popups allow-popups-to-escape-sandbox"] {
+    border-color: #2196F3;
+    background-color: #BBDEFB;
+  }
+</style>
