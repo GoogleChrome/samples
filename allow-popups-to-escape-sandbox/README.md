@@ -1,0 +1,5 @@
+Allow popups to escape sandboxed iframe Sample
+==============================================
+See https://googlechrome.github.io/samples/allow-popups-to-escape-sandbox/index.html for a live demo.
+
+Learn more at https://www.chromestatus.com/feature/5708368589094912
