@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button id="alert">window.alert("Hello")</button>
+<button id="confirm">window.confirm("Hello")</button>
+<button id="print">window.print()</button>
+<button id="prompt">window.prompt("Hello")</button>
+
+<script>
+document.querySelector('#alert').addEventListener('click', event => {
+  alert('Hello');
+});
+document.querySelector('#confirm').addEventListener('click', event => {
+  confirm('Hello');
+});
+document.querySelector('#prompt').addEventListener('click', event => {
+  prompt('Hello');
+});
+document.querySelector('#print').addEventListener('click', event => {
+  print();
+});
+</script>
+
+<style>
+  button { display: block; margin-bottom: 6px; }
+</style>
+
+</body>
+</html>
