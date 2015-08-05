@@ -9,22 +9,63 @@ feature_id: 5264933985976320
 <p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
 device information from a nearby Bluetooth Low Energy Device.</p>
 
-<button>Get Bluetooth Device Info</button>
+<form>
+  <label for="service">
+    Enter a Bluetooth Service name:
+    <input id="service" type="text" list="services" autofocus />
+  </label>
+  <datalist id="services">
+    <option value="alert_notification">
+    <option value="automation_io">
+    <option value="battery_service">
+    <option value="blood_pressure">
+    <option value="body_composition">
+    <option value="bond_management">
+    <option value="continuous_glucose_monitoring">
+    <option value="current_time">
+    <option value="cycling_power">
+    <option value="cycling_speed_and_cadence">
+    <option value="device_information">
+    <option value="environmental_sensing">
+    <option value="generic_access">
+    <option value="generic_attribute">
+    <option value="glucose">
+    <option value="health_thermometer">
+    <option value="heart_rate">
+    <option value="human_interface_device">
+    <option value="immediate_alert">
+    <option value="indoor_positioning">
+    <option value="internet_protocol_support">
+    <option value="link_loss">
+    <option value="location_and_navigation">
+    <option value="next_dst_change">
+    <option value="phone_alert_status">
+    <option value="pulse_oximeter">
+    <option value="reference_time_update">
+    <option value="running_speed_and_cadence">
+    <option value="scan_parameters">
+    <option value="tx_power">
+    <option value="user_data">
+    <option value="weight_scale">
+  </datalist>
+  <button>Get Bluetooth Device Info</button>
+</form>
 {% capture initial_output_content %}
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
 {% capture js %}
-function onButtonClick() {
+function onFormSubmit() {
+  var filterService = document.getElementById('service').value.trim();
 
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters:[{services:['generic_access']}]})
+  navigator.bluetooth.requestDevice({filters:[{services:[ filterService ]}]})
   .then(device => {
     log('> Device Name:       ' + device.name);
     log('> Device InstanceID: ' + device.instanceID);
     log('> Device Paired:     ' + device.paired);
     log('> Device Class:      ' + device.deviceClass);
-    log('> Device UUIDs:      ' + device.uuids.join('\n'+'\x20'.repeat(21)));
+    log('> Device UUIDs:      ' + device.uuids.join('\n' + ' '.repeat(21)));
   })
   .catch(error => {
     log('Argh! ' + error);
@@ -34,13 +75,16 @@ function onButtonClick() {
 {% include js_snippet.html js=js %}
 
 <script>
-  document.querySelector('button').addEventListener('click', function() {
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
     if (!navigator.bluetooth) {
       ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
         'Please make sure you run Chrome OS M45 and the Web Bluetooth flag is enabled.');
     } else {
       ChromeSamples.clearLog();
-      onButtonClick();
+      onFormSubmit();
     }
   });
   log = ChromeSamples.log;
