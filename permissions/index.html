@@ -79,9 +79,9 @@ limitations under the License.
         document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
       }
 
-      function updatePermission(name, status) {
-        log('update permission for ' + name + ' with ' + status)
-        document.getElementById(name).textContent = status;
+      function updatePermission(name, state) {
+        log('update permission for ' + name + ' with ' + state)
+        document.getElementById(name).textContent = state;
       }
 
       function init() {
@@ -92,33 +92,33 @@ limitations under the License.
 
         // Check for Geolocation API permissions
         navigator.permissions.query({name:'geolocation'}).then(function(p) {
-          updatePermission('geolocation', p.status);
+          updatePermission('geolocation', p.state);
 
           p.onchange = function() {
-            updatePermission('geolocation', this.status);
+            updatePermission('geolocation', this.state);
           };
         });
 
         // Check for Notifications API permissions
         navigator.permissions.query({name:'notifications'}).then(function(p) {
-          updatePermission('notifications', p.status);
+          updatePermission('notifications', p.state);
           p.onchange = function() {
-            updatePermission('notifications', this.status);
+            updatePermission('notifications', this.state);
           };
         });
 
         // Check for Midi/Midi SysEx permissions
         navigator.permissions.query({name:'midi', sysex:false}).then(function(p) {
-          updatePermission('midi', p.status);
+          updatePermission('midi', p.state);
           p.onchange = function() {
-            updatePermission('midi', this.status);
+            updatePermission('midi', this.state);
           };
         });
 
         navigator.permissions.query({name:'midi', sysex:true}).then(function(p) {
-          updatePermission('midi-sysex', p.status);
+          updatePermission('midi-sysex', p.state);
           p.onchange = function() {
-            updatePermission('midi-sysex', this.status);
+            updatePermission('midi-sysex', this.state);
           };
         });
 
