@@ -12,7 +12,7 @@ device information from a nearby Bluetooth Low Energy Device.</p>
 <form>
   <label for="service">
     Enter a Bluetooth Service name:
-    <input id="service" type="text" list="services" autofocus />
+    <input id="service" type="text" list="services" autofocus>
   </label>
   <datalist id="services">
     <option value="alert_notification">
@@ -56,7 +56,7 @@ device information from a nearby Bluetooth Low Energy Device.</p>
 
 {% capture js %}
 function onFormSubmit() {
-  var filterService = document.getElementById('service').value.trim();
+  var filterService = document.getElementById('service').value;
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters:[{services:[ filterService ]}]})
