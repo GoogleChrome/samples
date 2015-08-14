@@ -21,7 +21,7 @@
 # The script checks for the following, and exits with a non-zero status if any condition fails:
 # - a successful Jekyll site build
 # - for each file, that all boilerplate content has been removed
-# - for each file, that the templated version of it under _site/ passes jshint
+# - for each file, that the templated version of it under _site/ passes JSHint
 
 # We need at least one file name as a parameter.
 files = ARGV.clone

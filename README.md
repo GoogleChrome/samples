@@ -41,6 +41,10 @@ contributors should set up a git pre-commit
 [hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to run [`linter.rb`](linter.rb)
 against all files that are being committed, via `ln -s -f ../../linter.rb .git/hooks/pre-commit`
 
+Various IDEs offer real-time JSHint integration (e.g. via
+[SublimeLinter-jshint](https://github.com/SublimeLinter/SublimeLinter-jshint)) and using those
+integrations that can help avoid errors before anything gets checked in.
+
 [Travis CI](https://travis-ci.org/GoogleChrome/samples) is currently being used to verify that the
 Jekyll build completes successfully, but doesn't currently lint/style check the full site.
 Once the all the older files in the project have been updated to pass `linter.rb` cleanly, that will
