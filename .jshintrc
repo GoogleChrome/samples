@@ -1,0 +1,13 @@
+{
+  "esnext": true,
+  "expr": true,
+  "globalstrict": true,
+  "strict": false,
+  "globals": {
+    "console": false,
+    "self": false,
+    "window": false,
+    "navigator": false,
+    "document": false
+  }
+}
