@@ -101,7 +101,7 @@ limitations under the License.
             }
 
             sayHistory() {
-                log('"Polygon" is derived from the Greek polus (many) and gonia (angle).')
+                log('"Polygon" is derived from the Greek polus (many) and gonia (angle).');
             }
 
             // We will look at static and subclassed methods shortly
@@ -123,7 +123,7 @@ limitations under the License.
             getPolyName() {
                 log('Hi. I was created with a Class expression. My name is ' + Poly.name);
             }
-        }
+        };
 
         let inst = new MyPoly();
         inst.getPolyName();
@@ -195,7 +195,7 @@ limitations under the License.
             // with a class, but not with an instance of the class.
             static tripple(n) {
                 n = n | 1;
-                return n * 3
+                return n * 3;
             }
         }
 
@@ -271,7 +271,7 @@ limitations under the License.
 
         // Note: The V8 in Chrome 42 supports subclassing built-ins but Arrays.
         // Subclassing arrays supported in Chrome 43.
-        
+
         class Stack extends Array {
             constructor() {
                 super();
@@ -291,12 +291,14 @@ limitations under the License.
     <!-- // [END code-block] -->
 
     <script>
+      /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-53563471-1', 'auto');
       ga('send', 'pageview');
+      /* jshint ignore:end */
     </script>
     <!-- Built with love using Web Starter Kit -->
   </body>

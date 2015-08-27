@@ -8,6 +8,9 @@
     "self": false,
     "window": false,
     "navigator": false,
-    "document": false
+    "document": false,
+    "fetch": false,
+    "Uint8Array": false,
+    "Audio": false
   }
 }

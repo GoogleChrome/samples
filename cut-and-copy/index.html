@@ -53,18 +53,18 @@ limitations under the License.
     <!-- // [START code-block] -->
     <h2>Simple Cut Example</h2>
     <p><textarea class="js-cuttextarea">Hello I'm some text</textarea></p>
-    
+
     <p><button class="js-textareacutbtn">Cut Textarea</button></p>
 
     <h2>Simple Copy Example</h2>
     <p>Email me at <a class="js-emaillink" href="mailto:matt@example.co.uk" >matt@example.co.uk</a></p>
     <p><button class="js-emailcopybtn">Copy Email Address</button></p>
-    
+
     <h1>Log</h1>
     <div class="output">
       <pre id="log"></pre>
     </div>
-    
+
     <script>
       function log() {
         document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
@@ -78,8 +78,8 @@ limitations under the License.
         var range = document.createRange();
         range.selectNode(emailLink);
         window.getSelection().addRange(range);
-    
-        try {  
+
+        try {
           var successful = document.execCommand('copy');
           var msg = successful ? 'successful' : 'unsuccessful';
           log('Copy email command was ' + msg);
@@ -93,7 +93,7 @@ limitations under the License.
         var hasSelection = document.queryCommandEnabled('cut');
         var cutTextarea = document.querySelector('.js-cuttextarea');
         cutTextarea.select();
-  
+
         try {
           var successful = document.execCommand('cut');
           var msg = successful ? 'successful' : 'unsuccessful';
@@ -101,7 +101,7 @@ limitations under the License.
         } catch(err) {
           log('execCommand Error', err);
         }
-      }  
+      }
 
       // Get the buttons
       var cutTextareaBtn = document.querySelector('.js-textareacutbtn');
@@ -114,8 +114,8 @@ limitations under the License.
       // TODO: The initial state should be disabled
       // then enable based on queryCommandSupported
       // This is currently a bug: crbug.com/476508
-      
-      // Set the initial state 
+
+      // Set the initial state
       /**
       cutTextareaBtn.disabled = !document.queryCommandSupported('cut');
       copyEmailBtn.disabled = !document.queryCommandSupported('copy');
@@ -125,12 +125,14 @@ limitations under the License.
     <!-- // [END code-block] -->
 
     <script>
+      /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-53563471-1', 'auto');
       ga('send', 'pageview');
+      /* jshint ignore:end */
     </script>
     <!-- Built with love using Web Starter Kit -->
   </body>
