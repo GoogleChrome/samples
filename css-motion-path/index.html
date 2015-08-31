@@ -1,0 +1,85 @@
+---
+feature_name: CSS Motion Path
+chrome_version: 46
+feature_id: 6190642178818048
+---
+
+<h3>Background</h3>
+<p>
+  <a href="https://drafts.fxtf.org/motion-1/">CSS Motion Paths</a> allow web pages to animate
+  graphical objects along paths, specified using CSS.
+</p>
+<p>
+  It introduces the following new CSS properties: <code>motion-offset</code>,
+  <code>motion-path</code>, and <code>motion-rotation</code>.
+</p>
+
+{% capture html %}
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="700"
+     height="450"
+     viewBox="350 0 1400 900">
+  <rect x="595"
+        y="423"
+        width="610"
+        height="377"
+        fill="blue" />
+  <polygon points="506,423 900,190 1294,423"
+           fill="yellow" />
+  <polygon points="993,245 993,190 1086,190 1086,300"
+           fill="red" />
+  <path d="M900,190 L993,245 V201 A11,11 0 0,1 1004,190 H1075 A11,11 0 0,1 1086,201 V300 L1294,423 H1216 A11,11 0 0,0 1205,434 V789 A11,11 0 0,1 1194,800 H606 A11,11 0 0,1 595,789 V434 A11,11 0 0,0 584,423 H506 L900,190"
+        fill="none"
+        stroke="black"
+        stroke-width="13"
+        stroke-linejoin="round"
+        stroke-linecap="round" />
+  <path id="firstScissorHalf"
+        d="M30,0 H-10 A10,10 0 0,0 -20,10 A20,20 0 1,1 -40,-10 H20 A10,10 0 0,1 30,0 M-40,20 A10,10 1 0,0 -40,0 A10,10 1 0,0 -40,20 M0,0"
+        transform="translate(0,0)"
+        fill="green"
+        stroke="black"
+        stroke-width="5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        fill-rule="evenodd" />
+  <path id="secondScissorHalf"
+        d="M30,0 H-10 A10,10 0 0,1 -20,-10 A20,20 0 1,0 -40,10 H20 A10,10 0 0,0 30,0 M-40,-20 A10,10 1 0,0 -40,0 A10,10 1 0,0 -40,-20 M0,0"
+        transform="translate(0,0)"
+        fill="forestgreen"
+        stroke="black"
+        stroke-width="5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        fill-rule="evenodd" />
+</svg>
+{% endcapture %}
+{% include html_snippet.html html=html %}
+
+{% capture css %}
+#firstScissorHalf {
+  motion-path: path('M900,190  L993,245 V201  A11,11 0 0,1 1004,190  H1075  A11,11 0 0,1 1086,201  V300  L1294,423 H1216  A11,11 0 0,0 1205,434  V789  A11,11 0 0,1 1194,800  H606  A11,11 0 0,1 595,789  V434  A11,11 0 0,0 584,423  H506 L900,190');
+}
+
+#secondScissorHalf {
+  motion-path: path('M900,190  L993,245 V201  A11,11 0 0,1 1004,190  H1075  A11,11 0 0,1 1086,201  V300  L1294,423 H1216  A11,11 0 0,0 1205,434  V789  A11,11 0 0,1 1194,800  H606  A11,11 0 0,1 595,789  V434  A11,11 0 0,0 584,423  H506 L900,190');
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+{% capture js %}
+var firstScissorHalf = document.querySelector('#firstScissorHalf');
+var secondScissorHalf = document.querySelector('#secondScissorHalf');
+
+var positionKeyframes = [{motionOffset: '0%'}, {motionOffset: '100%'}];
+var positionTiming = {duration: 12000, iterations: Infinity};
+firstScissorHalf.animate(positionKeyframes, positionTiming);
+secondScissorHalf.animate(positionKeyframes, positionTiming);
+
+var firstRotationKeyframes = [{motionRotation: 'auto 0deg'}, {motionRotation: 'auto -45deg'}, {motionRotation: 'auto 0deg'}];
+var secondRotationKeyframes = [{motionRotation: 'auto 0deg'}, {motionRotation: 'auto 45deg'}, {motionRotation: 'auto 0deg'}];
+var rotationTiming = {duration: 1000, iterations: Infinity};
+firstScissorHalf.animate(firstRotationKeyframes, rotationTiming);
+secondScissorHalf.animate(secondRotationKeyframes, rotationTiming);
+{% endcapture %}
+{% include js_snippet.html js=js %}
