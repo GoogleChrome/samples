@@ -34,7 +34,7 @@ feature_id: 6190642178818048
         stroke-width="13"
         stroke-linejoin="round"
         stroke-linecap="round" />
-  <path id="first"
+  <path id="firstScissorHalf"
         d="M30,0 H-10 A10,10 0 0,0 -20,10 A20,20 0 1,1 -40,-10 H20 A10,10 0 0,1 30,0 M-40,20 A10,10 1 0,0 -40,0 A10,10 1 0,0 -40,20 M0,0"
         transform="translate(0,0)"
         fill="green"
@@ -43,7 +43,7 @@ feature_id: 6190642178818048
         stroke-linejoin="round"
         stroke-linecap="round"
         fill-rule="evenodd" />
-  <path id="second"
+  <path id="secondScissorHalf"
         d="M30,0 H-10 A10,10 0 0,1 -20,-10 A20,20 0 1,0 -40,10 H20 A10,10 0 0,0 30,0 M-40,-20 A10,10 1 0,0 -40,0 A10,10 1 0,0 -40,-20 M0,0"
         transform="translate(0,0)"
         fill="forestgreen"
@@ -57,31 +57,29 @@ feature_id: 6190642178818048
 {% include html_snippet.html html=html %}
 
 {% capture css %}
-#first {
+#firstScissorHalf {
   motion-path: path('M900,190  L993,245 V201  A11,11 0 0,1 1004,190  H1075  A11,11 0 0,1 1086,201  V300  L1294,423 H1216  A11,11 0 0,0 1205,434  V789  A11,11 0 0,1 1194,800  H606  A11,11 0 0,1 595,789  V434  A11,11 0 0,0 584,423  H506 L900,190');
-  transform: translate(0px,0px);
 }
 
-#second {
+#secondScissorHalf {
   motion-path: path('M900,190  L993,245 V201  A11,11 0 0,1 1004,190  H1075  A11,11 0 0,1 1086,201  V300  L1294,423 H1216  A11,11 0 0,0 1205,434  V789  A11,11 0 0,1 1194,800  H606  A11,11 0 0,1 595,789  V434  A11,11 0 0,0 584,423  H506 L900,190');
-  transform: translate(0px,0px);
 }
 {% endcapture %}
 {% include css_snippet.html css=css %}
 
 {% capture js %}
-var first = document.querySelector('#first');
-var second = document.querySelector('#second');
+var firstScissorHalf = document.querySelector('#firstScissorHalf');
+var secondScissorHalf = document.querySelector('#secondScissorHalf');
 
 var positionKeyframes = [{motionOffset: '0%'}, {motionOffset: '100%'}];
 var positionTiming = {duration: 12000, iterations: Infinity};
-first.animate(positionKeyframes, positionTiming);
-second.animate(positionKeyframes, positionTiming);
+firstScissorHalf.animate(positionKeyframes, positionTiming);
+secondScissorHalf.animate(positionKeyframes, positionTiming);
 
 var firstRotationKeyframes = [{motionRotation: 'auto 0deg'}, {motionRotation: 'auto -45deg'}, {motionRotation: 'auto 0deg'}];
 var secondRotationKeyframes = [{motionRotation: 'auto 0deg'}, {motionRotation: 'auto 45deg'}, {motionRotation: 'auto 0deg'}];
 var rotationTiming = {duration: 1000, iterations: Infinity};
-first.animate(firstRotationKeyframes, rotationTiming);
-second.animate(secondRotationKeyframes, rotationTiming);
+firstScissorHalf.animate(firstRotationKeyframes, rotationTiming);
+secondScissorHalf.animate(secondRotationKeyframes, rotationTiming);
 {% endcapture %}
 {% include js_snippet.html js=js %}
