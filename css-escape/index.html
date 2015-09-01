@@ -14,7 +14,22 @@ feature_id: 6526863593701376
 </p>
 <p>
   The <code>CSS.escape()</code> method provides a convenient way to escape a string so that conforms
-  to the CSS selector requirements.
+  to the CSS selector requirements. This is especially useful when dynamically building a CSS
+  selector based on (untrusted) user input. For example:
+</p>
+<ul>
+  <li>
+    <code>document.querySelector(location.hash)</code> should be rewritten as<br>
+    <code>document.querySelector('#' + CSS.escape(location.hash.slice(1)))</code>
+  </li>
+  <li>
+    <code>document.querySelector('a[href="' + someValue + '"]')</code> should be rewritten as<br>
+    <code>document.querySelector('a[href="' + CSS.escape(someValue) + '"]')</code>
+  </li>
+</ul>
+<p>
+  A <a href="https://github.com/mathiasbynens/CSS.escape">polyfill</a> is available for browsers
+  that do not natively support <code>CSS.escape()</code>.
 </p>
 
 {% capture initial_output_content %}
