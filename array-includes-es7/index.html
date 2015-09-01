@@ -1,0 +1,42 @@
+---
+feature_name: Array Method includes (ES7)
+chrome_version: 47
+feature_id: 5964420647747584
+---
+
+<h3>Background</h3>
+<p>
+  The <a href='https://tc39.github.io/Array.prototype.includes/'><code>Array.prototype.includes</code></a>
+  method is an ECMAScript 2016 (ES7) proposal. It can be used to determine
+  whether an array includes a given element.
+</p>
+<p>
+  It compares first arguments to the elements of the array, in ascending order,
+  using the <a href='https://github.com/tc39/Array.prototype.includes/blob/master/README.md#why-samevaluezero'>SameValueZero algorithm</a>
+  and if found at any position, returns <code>true</code>; otherwise,
+  <code>false</code> is returned.
+</p>
+<p>
+  The optional second argument <code>fromIndex</code> defaults to
+  <code>0</code> (i.e. the whole array is searched). If it is negative, it is
+  used as the offset from the end of the array to compute
+  <code>fromIndex</code>.
+</p>
+
+{% include output_helper.html %}
+
+{% capture js %}
+var basketOfApples = ['🍎', '🍏', '🍎', '🍏', '🌰', '🍎', '🍏'];
+if (basketOfApples.includes('🌰')) {
+  ChromeSamples.log('Your basket of apples contains a chestnut.');
+}
+
+var buildingInFire = [' ', ' ', '🔥', '🔥', '🔥', ' '];
+if (buildingInFire.includes('🔥', 3)) {
+  ChromeSamples.log('A fire is burning after the 3rd floor.');
+}
+if (buildingInFire.includes('🔥', -2)) {
+  ChromeSamples.log('A fire is burning in the last 2 floors.');
+}
+{% endcapture %}
+{% include js_snippet.html js=js %}
