@@ -25,14 +25,18 @@ export default class SampleController {
     this.readSomeStuff();
   }
 
+  // start-es7
   @read
+  // end-es7
   readSomeStuff () {
     console.log('read');
     document.querySelector('.main').style.top = '100px';
     console.log(document.querySelector('.main').offsetTop);
   }
 
+  // start-es7
   @write
+  // end-es7
   writeSomeStuff () {
     console.log('write');
     document.querySelector('.main').focus();

@@ -3,12 +3,10 @@ self.onfetch = function(event) {
 
   var salutation = 'Hello, ';
   var whom = decodeURIComponent(event.request.url.match(/\/([^/]*)$/)[1]);
-  var energy_level = (whom == 'Cleveland')
-      ? '!!!' // take it up to 11
-      : '!';
+  var energyLevel = (whom == 'Cleveland') ? '!!!' : '!';
   var version = '\n\n(Version 1)';
 
-  var body = new Blob([salutation, whom, energy_level, version]);
+  var body = new Blob([salutation, whom, energyLevel, version]);
 
   event.respondWith(new Response(body));
 };

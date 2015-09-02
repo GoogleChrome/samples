@@ -10,3 +10,10 @@ defaults:
       path: ""
     values:
       layout: "default"
+exclude:
+  - package.json
+  - README.md
+  - node_modules
+  - Gemfile
+  - gulpfile.js
+  - linter.rb

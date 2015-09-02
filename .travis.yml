@@ -1,7 +1,9 @@
 language: ruby
 rvm:
 - 2.1
-script: bundle exec jekyll build
+script:
+  - bundle exec jekyll build
+  - gulp lint
 branches:
   only:
   - /.*/
