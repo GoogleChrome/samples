@@ -20,6 +20,8 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var runSequence = require('run-sequence');
 
+// vendor/ is added to excluded files since that is the
+// directory travis installs ruby dependencies
 gulp.task('lint', [], function(cb) {
   return gulp.src([
     '**/*.js',
@@ -28,7 +30,8 @@ gulp.task('lint', [], function(cb) {
     '!node_modules/**/*',
     '!_{layouts,includes}/**/*',
     '!**/third_party/*',
-    '!perf/dom-react-vs-vanilla/build/**/*'
+    '!perf/dom-react-vs-vanilla/build/**/*',
+    '!vendor/**/*.*'
   ])
     .pipe(jshint.extract('auto'))
     .pipe(jshint())

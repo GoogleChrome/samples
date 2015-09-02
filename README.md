@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gauntface/samples.svg?branch=gh-pages)](https://travis-ci.org/gauntface/samples)
+
 Google Chrome Samples
 ===
 Samples tied to new functionality in Google Chrome.
