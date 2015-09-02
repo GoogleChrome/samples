@@ -4,6 +4,7 @@ rvm:
 script:
   - bundle exec jekyll build
   - gulp lint
+
 branches:
   only:
   - /.*/
