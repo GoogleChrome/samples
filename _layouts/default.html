@@ -22,12 +22,20 @@ limitations under the License.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</title>
     <script>
-      // If we're running on a real web server (as opposed to localhost on a custom port,
-      // which is whitelisted), then change the protocol to HTTPS.
+      // If we're running on a real web server (as opposed to localhost, which is whitelisted),
+      // then change the protocol to HTTPS.
       // See https://goo.gl/lq4gCo for an explanation as to why this is needed for some features.
-      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
-        location.protocol = 'https:';
-      }
+      (function() {
+        var isLocalhost = !!(window.location.hostname === 'localhost' ||
+          // [::1] is the IPv6 localhost address.
+          window.location.hostname === '[::1]' ||
+          // 127.0.0.1/8 is considered localhost for IPv4.
+          window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
+        if (window.location.protocol === 'http:' && !isLocalhost) {
+          // Redirect to https: if we're currently using http: and we're not on localhost.
+          window.location.protocol = 'https:';
+        }
+      })();
     </script>
     {% assign sub_dirs = page.url | split: '/' | size | minus: 2 %}
     {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}

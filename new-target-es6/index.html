@@ -20,7 +20,7 @@ feature_id: 5210159227863040
 </ul>
 <p>
   <code>new.target</code> is useful for distinguishing at runtime whether code is being executed as
-  a constructor or as a function. It is also handy as a way to determine to the specific subclass
+  a constructor or as a function. It is also handy as a way to determine the specific subclass
   that was used with <code>new</code> from within a superclass constructor.
 </p>
 
@@ -30,7 +30,8 @@ feature_id: 5210159227863040
 class Parent {
   constructor() {
     // new.target is a constructor reference, and new.target.name is human-friendly name.
-    ChromeSamples.log('Hello from Parent! I was constructed via new ' + new.target.name + '()');
+    ChromeSamples.log('Hello from Parent! ' +
+                      'I was constructed via new ' + new.target.name + '()');
   }
 }
 
@@ -39,7 +40,7 @@ class FirstChild extends Parent {}
 class SecondChild extends Parent {}
 
 function notAConstructor() {
-  ChromeSamples.log('Hello from notAConstructor()! My new.target ' + new.target);
+  ChromeSamples.log('Hello from notAConstructor()! My new.target is ' + new.target);
 }
 
 // Call all the constructors and the function when the page loads.
