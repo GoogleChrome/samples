@@ -1,0 +1,56 @@
+---
+feature_name: CSS.escape()
+chrome_version: 46
+feature_id: 6526863593701376
+---
+
+<h3>Background</h3>
+<p>
+  There are certain strings that are valid as when used as an HTML element's <code>id</code> or
+  <code>class</code> attributes, but not valid as a CSS selector string. They include strings
+  that begin with numbers, contain spaces, or contain characters with special meaning in CSS.
+  Mathias Bynens's <a href="https://mathiasbynens.be/notes/css-escapes">explanation</a> delves into
+  the full details.
+</p>
+<p>
+  The <code>CSS.escape()</code> method provides a convenient way to escape a string so that conforms
+  to the CSS selector requirements. This is especially useful when dynamically building a CSS
+  selector based on (untrusted) user input. For example:
+</p>
+<ul>
+  <li>
+    <code>document.querySelector(location.hash)</code> should be rewritten as<br>
+    <code>document.querySelector('#' + CSS.escape(location.hash.slice(1)))</code>
+  </li>
+  <li>
+    <code>document.querySelector('a[href="' + someValue + '"]')</code> should be rewritten as<br>
+    <code>document.querySelector('a[href="' + CSS.escape(someValue) + '"]')</code>
+  </li>
+</ul>
+<p>
+  A <a href="https://github.com/mathiasbynens/CSS.escape">polyfill</a> is available for browsers
+  that do not natively support <code>CSS.escape()</code>.
+</p>
+
+{% capture initial_output_content %}
+<p>Clicking on a button will log the escaped value of its id.</p>
+<button id="1234">id="1234"</button>
+<button id="!hey!">id="!hey!"</button>
+<button id="one two">id="one two"</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture js %}
+function logEscapedId(e) {
+  ChromeSamples.log('My id is "' + e.target.id + '", and escaped id is "' +
+                    CSS.escape(e.target.id) + '"');
+}
+
+var buttons = document.querySelectorAll('button');
+for (var i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', logEscapedId);
+}
+{% endcapture %}
+{% include js_snippet.html js=js %}
+
+
