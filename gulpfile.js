@@ -18,11 +18,24 @@
 // Include Gulp & tools we'll use
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-var runSequence = require('run-sequence');
+var spawn = require('child_process').spawn;
+
+gulp.task('jekyll:build', function(cb) {
+  // Handle OS differences in executable name
+  var jekyllCommand = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
+  var params = ['exec', jekyllCommand, 'build'];
+  params.push('--trace');
+
+  var jekyllProcess = spawn('bundle', params, {
+      env: process.env,
+      stdio: 'inherit'
+    });
+  jekyllProcess.on('close', cb);
+});
 
 // vendor/ is added to excluded files since that is the
 // directory travis installs ruby dependencies
-gulp.task('lint', [], function(cb) {
+gulp.task('lint', ['jekyll:build'], function() {
   return gulp.src([
     '**/*.js',
     '_site/**/*.html',
@@ -35,7 +48,8 @@ gulp.task('lint', [], function(cb) {
   ])
     .pipe(jshint.extract('auto'))
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('lint:watch', function() {
