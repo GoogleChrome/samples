@@ -1,0 +1,67 @@
+---
+feature_name: CSS Intrinsic Sizing
+chrome_version: 46
+feature_id: 5901353784180736
+---
+
+<h3>Background</h3>
+<p>
+  This <a href="https://drafts.csswg.org/css-sizing-3/">new functionality</a> extends the CSS sizing
+  properties with keywords that represent content-based "intrinsic" sizes and context-based
+  "extrinsic" sizes, allowing CSS to more easily describe boxes that fit their content or fit into a
+  particular layout context. The new keyworks are:
+</p>
+<ul>
+  <li><a href="https://drafts.csswg.org/css-sizing-3/#valdef-width-min-content"><code>min-content</code></a></li>
+  <li><a href="https://drafts.csswg.org/css-sizing-3/#valdef-width-max-content"><code>max-content</code></a></li>
+  <li><a href="https://drafts.csswg.org/css-sizing-3/#valdef-width-fit-content"><code>fit-content</code></a></li>
+  <li><a href="https://drafts.csswg.org/css-sizing-3/#valdef-width-fill"><code>fill</code></a></li>
+</ul>
+<p>
+  Note that the <code>fill</code> keyword can currently only be used prefixed as
+  <code>-webkit-fill-available</code>, pending <a href="https://wiki.csswg.org/">CSSWG</a> agreement
+  to unprefix.
+</p>
+
+<h3>Live Samples</h3>
+{% capture html %}
+<div id="container">
+  <div>I use the default styles.</div>
+  <div class="min-content">I am styled with <code>width: min-content</code>.</div>
+  <div class="max-content">I am styled with <code>width: max-content</code>.</div>
+  <div class="fit-content">I am styled with <code>width: fit-content</code>.</div>
+  <div class="fill-available">I am styled with <code>width: -webkit-fill-available</code>.</div>
+</div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
+
+{% capture css %}
+#container {
+  border: 1px solid black;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+#container > div {
+  border: 1px solid blue;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.min-content {
+  width: min-content;
+}
+
+.max-content {
+  width: max-content;
+}
+
+.fit-content {
+  width: fit-content;
+}
+
+.fill-available {
+  width: -webkit-fill-available;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
