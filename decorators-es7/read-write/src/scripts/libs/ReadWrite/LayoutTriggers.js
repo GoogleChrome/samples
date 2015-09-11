@@ -46,6 +46,6 @@ const LayoutTriggers = {
       'scrollWidth'
     ]
   }
-}
+};
 
 export default LayoutTriggers;

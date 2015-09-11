@@ -81,8 +81,10 @@ limitations under the License.
         log('The initial value of var b is ' +  b);
 
         if (a === 5) {
+            /* jshint ignore:start */
             let a = 4; // The scope is inside the if-block
             var b = 1; // The scope is inside the function
+            /* jshint ignore:end */
             log('Inside an if-block, let a = 4 and var b = 1');
 
             log('The value of a is ' +  a);
@@ -93,12 +95,14 @@ limitations under the License.
         log('The value of a is ' +  a);
         log('The value of b is ' +  b);
 
-        log('\nlet can also be used to bind variables locally in the scope of for loops:')
+        log('\nlet can also be used to bind variables locally in the scope of for loops:');
         for (let i = 0; i < 3; i ++) {
             log('i = ' + i);
         }
         try {
+            /* jshint ignore:start */
             log(i);
+            /* jshint ignore:end */
         } catch (e) {
             log('i doesn\'t exist outside of the loop');
         }
@@ -115,7 +119,9 @@ limitations under the License.
 
     log('Attempt to overwrite favorite, setting it to 15');
     try {
-        favorite = 15;
+      /* jshint ignore:start */
+      favorite = 15;
+      /* jshint ignore:end */
     } catch (e) {
         log('Receive a "TypeError: Assignment to constant variable" exception');
         log('My favorite number is still ' + favorite);
@@ -124,12 +130,14 @@ limitations under the License.
 <!-- // [END code-block] -->
 
 <script>
+  /* jshint ignore:start */
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-53563471-1', 'auto');
     ga('send', 'pageview');
+  /* jshint ignore:end */
 </script>
 <!-- Built with love using Web Starter Kit -->
 </body>

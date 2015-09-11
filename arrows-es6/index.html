@@ -57,7 +57,7 @@ var counter_es5 = function() {
   setInterval(function() {
     that.seconds++;
   }, 1000); // or }.bind(this), 1000) and skip that = this
-}
+};
 
 var counterA = new counter_es5();
 setTimeout(function() {
@@ -70,7 +70,7 @@ setTimeout(function() {
 let counter_es6 = function() {
   this.seconds = 0;
   setInterval(() => this.seconds++, 1000);
-}
+};
 
 let counterB = new counter_es6();
 setTimeout(() => ChromeSamples.log(counterB.seconds), 1200);

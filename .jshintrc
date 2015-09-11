@@ -8,6 +8,17 @@
     "self": false,
     "window": false,
     "navigator": false,
-    "document": false
-  }
+    "document": false,
+    "fetch": false,
+    "Uint8Array": false,
+    "Audio": false,
+    "Request": false,
+    "caches": false,
+    "clients": false,
+    "Notification": false,
+    "ServiceWorkerRegistration": false
+  },
+  "ignoreDelimiters": [
+    { "start": "start-es7", "end": "end-es7" }
+  ]
 }
