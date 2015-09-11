@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gauntface/samples.svg?branch=gh-pages)](https://travis-ci.org/GoogleChrome/samples)
+[![Build Status](https://travis-ci.org/GoogleChrome/samples.svg?branch=gh-pages)](https://travis-ci.org/GoogleChrome/samples)
 
 Google Chrome Samples
 ===
