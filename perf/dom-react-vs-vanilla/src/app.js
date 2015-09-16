@@ -38,6 +38,7 @@ var FlickrImage = React.createClass({
     var fromNow = moment(this.props.image.lastUpdated).fromNow();
 
     // Render away!
+    /* jshint ignore:start */
     return (
       <div className="flickr-image">
         <h1>{this.props.image.title}</h1>
@@ -49,6 +50,7 @@ var FlickrImage = React.createClass({
         <a href={this.props.image.flickrUrl}>{this.props.image.flickrUrl}</a>
       </div>
     );
+    /* jshint ignore:end */
   }
 });
 
@@ -96,10 +98,10 @@ var FlickrImages = React.createClass({
         });
 
         refreshButton.disabled = false;
-      }
+      };
 
       requestAnimationFrame(onNextFrameDone.bind(this));
-    }
+    };
 
     // Search for 100 images and move to the next search term.
     flickr.search(searchTerms[searchIndex], 100)
@@ -145,6 +147,7 @@ var FlickrImages = React.createClass({
    * Render the `<FlickrImage>`s based on the current data set.
    */
   render: function () {
+    /* jshint ignore:start */
     return (
       <div className="flickr-image-list">
         <button className="refresh">Add images</button>
@@ -156,10 +159,13 @@ var FlickrImages = React.createClass({
       }
       </div>
     );
+    /* jshint ignore:end */
   }
 });
 
 // Fire up React.
+/* jshint ignore:start */
 React.render(
   <FlickrImages />, main
 );
+/* jshint ignore:end */

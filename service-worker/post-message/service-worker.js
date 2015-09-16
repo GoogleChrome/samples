@@ -67,7 +67,8 @@ self.addEventListener('activate', function(event) {
       // This will trigger navigator.serviceWorker.onmessage in each client.
       return self.clients.matchAll().then(function(clients) {
         return Promise.all(clients.map(function(client) {
-          return client.postMessage('The service worker has activated and taken control.');
+          return client.postMessage('The service worker has activated and ' +
+            'taken control.');
         }));
       });
     })
@@ -76,7 +77,7 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('message', function(event) {
   console.log('Handling message event:', event);
-
+  var request;
   caches.open(CURRENT_CACHES['post-message']).then(function(cache) {
     switch (event.data.command) {
       // This command returns a list of the URLs corresponding to the Request objects
@@ -106,7 +107,7 @@ self.addEventListener('message', function(event) {
         // by the outer .catch().
         // Hardcode {mode: 'no-cors} since the default for new Requests constructed from strings is to require
         // CORS, and we don't have any way of knowing whether an arbitrary URL that a user entered supports CORS.
-        var request = new Request(event.data.url, {mode: 'no-cors'});
+        request = new Request(event.data.url, {mode: 'no-cors'});
         cache.add(request).then(function() {
           event.ports[0].postMessage({
             error: null
@@ -116,7 +117,7 @@ self.addEventListener('message', function(event) {
 
       // This command removes a request/response pair from the cache (assuming it exists).
       case 'delete':
-        var request = new Request(event.data.url);
+        request = new Request(event.data.url);
         cache.delete(request).then(function(success) {
           event.ports[0].postMessage({
             error: success ? null : 'Item was not found in the cache.'

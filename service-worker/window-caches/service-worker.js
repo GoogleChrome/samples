@@ -42,10 +42,11 @@ self.addEventListener('install', function(event) {
 
   // All of these logging statements should be visible via the "Inspect" interface
   // for the relevant SW accessed via chrome://serviceworker-internals
-  console.log('Handling install event. Resources to pre-fetch:', urlsToPrefetch);
+  console.log('Handling install event. Resources to pre-fetch:',
+    urlsToPrefetch);
 
   event.waitUntil(
-    caches.open(CURRENT_CACHES['prefetch']).then(function(cache) {
+    caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
       return cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
         // It's very important to use {mode: 'no-cors'} if there is any chance that
         // the resources being fetched are served off of a server that doesn't support

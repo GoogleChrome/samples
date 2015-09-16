@@ -36,7 +36,7 @@ export function read (target, name, descriptor) {
     }
 
     jobLists.read.push(reader);
-  }
+  };
   scheduleJobRAFIfNeeded();
 }
 
@@ -56,7 +56,7 @@ export function write (target, name, descriptor) {
     }
 
     jobLists.write.push(writer);
-  }
+  };
   scheduleJobRAFIfNeeded();
 }
 

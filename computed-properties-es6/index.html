@@ -75,12 +75,14 @@ limitations under the License.
         [prefix + 'bar']: 'hello', [prefix + 'baz']: 'world', [prefix + prefix.toUpperCase()]: true
     };
 
+    /* jshint ignore:start */
     log(myObject['foobar']);
     // -> hello
     log(myObject['foobaz']);
     // -> world
     log(myObject['fooFOO']);
     // -> true
+    /* jshint ignore:end */
 
     // Example 2
     log('\nUsing Computed method names in an object literal:');
@@ -118,6 +120,7 @@ limitations under the License.
     <!-- // [END code-block] -->
 
     <script>
+    /* jshint ignore:start */
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function() {
@@ -131,6 +134,7 @@ limitations under the License.
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-53563471-1', 'auto');
     ga('send', 'pageview');
+    /* jshint ignore:end */
     </script>
     <!-- Built with love using Web Starter Kit -->
 </body>

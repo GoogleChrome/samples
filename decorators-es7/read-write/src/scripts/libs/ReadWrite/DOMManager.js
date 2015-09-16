@@ -78,12 +78,12 @@ class DOMManager {
         if (!fn)
           return;
 
-        window[candidatesKey].prototype[method] = function () {
+        window[candidatesKey].prototype[method] = function() {
           let warning = `DOM queried (${method}()) during write block`;
           let e = new Error(warning);
           console.warn (e.stack);
           return fn.apply(this);
-        }
+        };
 
       });
     });
