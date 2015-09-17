@@ -34,9 +34,11 @@ var CURRENT_CACHES = {
 };
 
 self.addEventListener('install', function(event) {
+  var now = Date.now();
+
   var urlsToPrefetch = [
-    './static/pre_fetched.txt',
-    './static/pre_fetched.html',
+    'static/pre_fetched.txt',
+    'static/pre_fetched.html',
     // This is an image that will be used in pre_fetched.html
     'https://www.chromium.org/_/rsrc/1302286216006/config/customLogo.gif'
   ];
@@ -47,7 +49,18 @@ self.addEventListener('install', function(event) {
 
   event.waitUntil(
     caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
-      return cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
+      var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
+        // This constructs a new URL object using the service worker's script location as the base
+        // for relative URLs.
+        var url = new URL(urlToPrefetch, location.href);
+        // Append a cache-bust=TIMESTAMP URL parameter to each URL's query string.
+        // This is particularly important when precaching resources that are later used in the
+        // fetch handler as responses directly, without consulting the network (i.e. cache-first).
+        // If we were to get back a response from the HTTP browser cache for this precaching request
+        // then that stale response would be used indefinitely, or at least until the next time
+        // the service worker script changes triggering the install flow.
+        url.search += (url.search ? '&' : '?') + 'cache-bust=' + now;
+
         // It's very important to use {mode: 'no-cors'} if there is any chance that
         // the resources being fetched are served off of a server that doesn't support
         // CORS (http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
@@ -58,12 +71,23 @@ self.addEventListener('install', function(event) {
         // (https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#cross-origin-resources)
         // and it is not possible to determine whether an opaque response represents a success or failure
         // (https://github.com/whatwg/fetch/issues/14).
-        return new Request(urlToPrefetch, {mode: 'no-cors'});
-      })).then(function() {
-        console.log('All resources have been fetched and cached.');
+        return fetch(new Request(url, {mode: 'no-cors'})).then(function(response) {
+          if (response.status >= 400) {
+            throw new Error('request for ' + urlToPrefetch +
+              ' failed with status ' + response.statusText);
+          }
+
+          // Use the original URL without the cache-busting parameter as the key for cache.put().
+          return cache.put(urlToPrefetch, response);
+        }).catch(function(error) {
+          console.error('Not caching ' + urlToPrefetch + ' due to ' + error);
+        });
+      });
+
+      return Promise.all(cachePromises).then(function() {
+        console.log('Pre-fetching complete.');
       });
     }).catch(function(error) {
-      // This catch() will handle any exceptions from the caches.open()/cache.addAll() steps.
       console.error('Pre-fetching failed:', error);
     })
   );
