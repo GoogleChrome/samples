@@ -27,11 +27,13 @@ listAnimals('🐯', '🐰', '🐘', '🐴', '🐥');
 // This allows you to just define a rest parameter, a real array
 // which is a snapshot of the arguments passed to the function
 
-function listAnimals(...animals) {
+function listAnimalsES2015(...animals) {
   animals.forEach(function(animal) {
     ChromeSamples.log(animal);
   });
 }
+
+listAnimalsES2015('🐯', '🐰', '🐘', '🐴', '🐥');
 
 // This approach becomes even simpler with ES2015 fat arrows
 function listAnimalsArrows(...animals) {
