@@ -1,0 +1,81 @@
+---
+feature_name: Rest parameters (ES6)
+chrome_version: 47
+feature_id: 5937087912083456
+---
+
+<h3>Background</h3>
+<p>
+Rest parameters allow your functions to have variable number of arguments without using the arguments object. The rest parameter is an instance of Array so all the array methods just work.
+</p>
+
+{% include output_helper.html %}
+
+{% capture js %}
+
+// The Old ES5 way
+function listAnimals() {
+  var animals = Array.prototype.slice.call(arguments);
+  animals.forEach(function(animal) {
+    ChromeSamples.log(animal);
+  });
+}
+
+listAnimals('🐯', '🐰', '🐘', '🐴', '🐥');
+
+// New ES2015 way
+// This allows you to just define a rest parameter, a real array
+// which is a snapshot of the arguments passed to the function
+
+function listAnimals(...animals) {
+  animals.forEach(function(animal) {
+    ChromeSamples.log(animal);
+  });
+}
+
+// This approach becomes even simpler with ES6 fat arrows
+function listAnimalsArrows(...animals) {
+  animals.forEach((animal) => ChromeSamples.log(animal));
+}
+
+listAnimalsArrows('🐯', '🐰', '🐘', '🐴', '🐥');
+
+// Get the count of elements using the length property
+function fun1(...theArgs) {
+  ChromeSamples.log(theArgs.length);
+}
+
+fun1();  // 0
+fun1('🐩'); // 1
+fun1('🐩', '🐘', '🐥'); // 3
+
+// Collect arguments from the second one to the end
+
+function multiply(multiplier, ...theArgs) {
+  return theArgs.map(function (element) {
+    return multiplier * element;
+  });
+}
+
+var arr = multiply(2, 1, 2, 3);
+ChromeSamples.log(arr);
+
+// Use the Array methods on rest parameters, but not
+// on the arguments object
+
+function sortRestArgs(...theArgs) {
+  var sortedArgs = theArgs.sort();
+  return sortedArgs;
+}
+
+ChromeSamples.log(sortRestArgs(5,3,7,1)); // shows 1,3,5,7
+
+function sortArguments() {
+  var sortedArgs = arguments.sort();
+  return sortedArgs; // this will never happen
+}
+
+// throws a TypeError: arguments.sort is not a function
+ChromeSamples.log(sortArguments(5,3,7,1));
+{% endcapture %}
+{% include js_snippet.html js=js %}
