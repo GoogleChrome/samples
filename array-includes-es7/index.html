@@ -6,9 +6,15 @@ feature_id: 5964420647747584
 
 <h3>Background</h3>
 <p>
-  The <a href='https://tc39.github.io/Array.prototype.includes/'><code>Array.prototype.includes</code></a>
+  To determine if an array includes an element, we could use the popular <code>if
+    (arr.indexOf(el) !== -1)</code> pattern which exhibits two problems: It fails to
+  "say what you mean", and also fails for <code>NaN</code>, as <code>indexOf</code> uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness">Strict Equality
+  Comparison</a> and thus <code>[NaN].indexOf(NaN) === -1</code>.
+</p>
+<p>
+  The new <a href='https://tc39.github.io/Array.prototype.includes/'><code>Array.prototype.includes</code></a>
   method is an ECMAScript 2016 (ES7) proposal. It can be used to determine
-  whether an array includes a given element.
+  whether an array includes a given element in an elegant way.
 </p>
 <p>
   It compares first arguments to the elements of the array, in ascending order,
@@ -28,6 +34,10 @@ feature_id: 5964420647747584
 {% capture js %}
 var basketOfApples = ['🍎', '🍏', '🍎', '🍏', '🌰', '🍎', '🍏'];
 if (basketOfApples.includes('🌰')) {
+  ChromeSamples.log('Your basket of apples contains a chestnut.');
+}
+// The old way still "works"...
+if (basketOfApples.indexOf('🌰') !== -1) {
   ChromeSamples.log('Your basket of apples contains a chestnut.');
 }
 
