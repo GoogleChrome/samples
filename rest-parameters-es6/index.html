@@ -6,8 +6,10 @@ feature_id: 5937087912083456
 
 <h3>Background</h3>
 <p>
-Rest parameters allow your functions to have variable number of arguments without using the arguments object. The rest parameter is an instance of Array so all the array methods just work.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">Rest parameters</a> allow your functions to have variable number of arguments without using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">arguments</a> object. The rest parameter is an instance of Array so all the array methods just work.
 </p>
+
+<p>Note that there can only be a single rest parameter for a given function. This means that `listAnimals(...cats, ...dogs)` will not work, whilst `listAnimals(...cats)` will work just fine.</p>
 
 {% include output_helper.html %}
 
@@ -37,19 +39,19 @@ listAnimalsES2015('🐯', '🐰', '🐘', '🐴', '🐥');
 
 // This approach becomes even simpler with ES2015 fat arrows
 function listAnimalsArrows(...animals) {
-  animals.forEach((animal) => ChromeSamples.log(animal));
+  animals.forEach(animal => ChromeSamples.log(animal));
 }
 
 listAnimalsArrows('🐯', '🐰', '🐘', '🐴', '🐥');
 
 // Get the count of elements using the length property
-function fun1(...theArgs) {
+function countArguments(...theArgs) {
   ChromeSamples.log(theArgs.length);
 }
 
-fun1();  // 0
-fun1('🐩'); // 1
-fun1('🐩', '🐘', '🐥'); // 3
+countArguments();  // 0
+countArguments('🐩'); // 1
+countArguments('🐩', '🐘', '🐥'); // 3
 
 // Collect arguments from the second one to the end
 
@@ -79,5 +81,13 @@ function sortArguments() {
 
 // throws a TypeError: arguments.sort is not a function
 ChromeSamples.log(sortArguments(5,3,7,1));
+
+/*
+We could alternatively have used Array.from here:
+
+function sortArguments() {
+  return Array.from(arguments).sort();
+};
+ */
 {% endcapture %}
 {% include js_snippet.html js=js %}
