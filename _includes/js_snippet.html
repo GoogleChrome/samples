@@ -1,10 +1,6 @@
 {% if include.filename %}
 
-  {{page.path}}
-
-  {{include.filename}}
-
-  <script>{% include_relative './{{include.filename}}' %}</script>
+  <script>{% include_relative {{include.filename}} %}</script>
 
   {% if include.title == null %}
     <h3>JavaScript Snippet</h3>
