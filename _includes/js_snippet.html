@@ -1,5 +1,5 @@
-{% if include.js %}
-  <script>{{ include.js }}</script>
+{% if include.filename %}
+  <script>{% include_relative {{include.filename}} %}</script>
 
   {% if include.title == null %}
     <h3>JavaScript Snippet</h3>
@@ -8,6 +8,6 @@
   {% endif %}
 
   {% highlight js %}
-    {{ include.js }}
+    {% include_relative {{include.filename}} %}
   {% endhighlight %}
 {% endif %}
