@@ -1,4 +1,9 @@
 {% if include.filename %}
+
+  {{page.path}}
+
+  {{include.filename}}
+
   {% comment %}<script>{% include_relative {{include.filename}} %}</script>{% endcomment %}
 
   {% if include.title == null %}
