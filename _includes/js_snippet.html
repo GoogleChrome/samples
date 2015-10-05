@@ -8,6 +8,6 @@
   {% endif %}
 
   {% highlight js %}
-    {% include_relative {{include.filename}} %}
+    {% comment %}{% include_relative {{include.filename}} %}{% endcomment %}
   {% endhighlight %}
 {% endif %}
