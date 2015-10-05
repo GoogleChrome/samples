@@ -3,31 +3,31 @@
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // Before...
-let es5_odd_numbers = numbers.filter(function(number) {
+let es5OddNumbers = numbers.filter(function(number) {
   return number % 2;
 });
-ChromeSamples.log(es5_odd_numbers);
+ChromeSamples.log(es5OddNumbers);
 
 // After...
-let es6_odd_numbers = numbers.filter(number => number % 2);
-ChromeSamples.log(es6_odd_numbers);
+let es6OddNumbers = numbers.filter(number => number % 2);
+ChromeSamples.log(es6OddNumbers);
 
 // Parens are optional depending on the number of arguments:
 let square = x => x * x;
 ChromeSamples.log(square(10));
 
 let add = (a, b) => a + b;
-ChromeSamples.log(add(3,4));
+ChromeSamples.log(add(3, 4));
 
 // `return` is implied if using an expression after an arrow.
-let developers = [{ name: 'Rob' }, { name: 'Jake' }];
+let developers = [{name: 'Rob'}, {name: 'Jake'}];
 // Before...
-let es5_output = developers.map(function(developer) { return developer.name; });
-ChromeSamples.log(es5_output);
+let es5Output = developers.map(function(developer) { return developer.name; });
+ChromeSamples.log(es5Output);
 
 // After...
-let es6_output = developers.map(developer => developer.name);
-ChromeSamples.log(es6_output);
+let es6Output = developers.map(developer => developer.name);
+ChromeSamples.log(es6Output);
 
 // Fat arrows change how `this` is handled.
 
@@ -36,26 +36,25 @@ ChromeSamples.log(es6_output);
 // create their own `this`. We need to store the parent `this` in
 // a variable that can be referenced in the callback or take care
 // of binding ourselves.
-var counter_es5 = function() {
+function CounterES5() {
   this.seconds = 0;
-  var that = this;
-  setInterval(function() {
-    that.seconds++;
-  }, 1000); // or }.bind(this), 1000) and skip that = this
-};
+  window.setInterval(function() {
+    this.seconds++;
+  }.bind(this), 1000); // or }.bind(this), 1000) and skip that = this
+}
 
-var counterA = new counter_es5();
-setTimeout(function() {
+var counterA = new CounterES5();
+window.setTimeout(function() {
   ChromeSamples.log(counterA.seconds);
 }, 1200);
 
 // After...
 // ES6 Arrows instead bind `this` to the immediate enclosing
 // lexical scope:
-let counter_es6 = function() {
+function CounterES6() {
   this.seconds = 0;
-  setInterval(() => this.seconds++, 1000);
-};
+  window.setInterval(() => this.seconds++, 1000);
+}
 
-let counterB = new counter_es6();
-setTimeout(() => ChromeSamples.log(counterB.seconds), 1200);
+let counterB = new CounterES6();
+window.setTimeout(() => ChromeSamples.log(counterB.seconds), 1200);

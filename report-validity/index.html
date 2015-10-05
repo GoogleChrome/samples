@@ -22,6 +22,7 @@ feature_id: 5433505009893376
   <code><a href="https://html.spec.whatwg.org/multipage/forms.html#attr-fe-minlength">minlength</a>="4"</code>.
 </p>
 
+
 {% capture initial_output_content %}
 <form id="sample-form">
   <div>
@@ -34,4 +35,10 @@ feature_id: 5433505009893376
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-{% include js_snippet.html filename='demo.js' %}
+{% capture js %}
+document.querySelector('#report-validity').addEventListener('click', function() {
+  var isValid = document.querySelector('#sample-form').reportValidity();
+  ChromeSamples.setStatus('The form ' + (isValid ? 'is' : 'is not') + ' valid.');
+});
+{% endcapture %}
+{% include js_snippet.html js=js %}
