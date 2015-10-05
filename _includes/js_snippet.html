@@ -1,5 +1,5 @@
 {% if include.filename %}
-  <script>{% include_relative {{include.filename}} %}</script>
+  {% comment %}<script>{% include_relative {{include.filename}} %}</script>{% endcomment %}
 
   {% if include.title == null %}
     <h3>JavaScript Snippet</h3>
