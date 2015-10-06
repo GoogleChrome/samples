@@ -1,0 +1,14 @@
+{% if include.filename %}
+
+  {% comment %}<script>{% include_relative {{include.filename}} %}</script>{% endcomment %}
+
+  {% if include.title == null %}
+    <h3>JavaScript Snippet</h3>
+  {% elsif include.title != "" %}
+    <h3>{{ include.title }}</h3>
+  {% endif %}
+
+  {% highlight js %}
+    {% include_relative {{include.filename}} %}
+  {% endhighlight %}
+{% endif %}
