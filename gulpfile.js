@@ -23,7 +23,7 @@ var spawn = require('child_process').spawn;
 gulp.task('jekyll:build', function(cb) {
   // Handle OS differences in executable name
   var jekyllCommand = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
-  var params = ['exec', jekyllCommand, 'build', '--trace'];
+  var params = ['exec', jekyllCommand, 'build', '--trace', '--safe'];
 
   var jekyllProcess = spawn('bundle', params, {
       env: process.env,
