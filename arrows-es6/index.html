@@ -12,4 +12,10 @@ function expressions and lexically bind the <code>this</code> value. Arrow funct
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='demo.js' %}
+  {% comment %}<script>{% include_relative demo.js %}</script>{% endcomment %}
+
+<h3>JavaScript Snippet</h3>
+
+{% highlight js %}
+  {% include_relative demo.js %}
+{% endhighlight %}
