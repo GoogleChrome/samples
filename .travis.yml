@@ -2,7 +2,6 @@ language: ruby
 rvm:
 - 2.1
 script:
-  - echo "Hello World"
   - bundle exec jekyll build
   - npm install
   - gulp lint
