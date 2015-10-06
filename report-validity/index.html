@@ -22,11 +22,7 @@ feature_id: 5433505009893376
   <code><a href="https://html.spec.whatwg.org/multipage/forms.html#attr-fe-minlength">minlength</a>="4"</code>.
 </p>
 
-{{ page.path }}
 
-{% include_relative test.txt %}
-
-{% comment %}
 {% capture initial_output_content %}
 <form id="sample-form">
   <div>
@@ -37,7 +33,6 @@ feature_id: 5433505009893376
 
 <button id="report-validity">Report Validity</button>
 {% endcapture %}
-{% endcomment %}
-{% comment %}{% include output_helper.html initial_output_content=initial_output_content %}{% endcomment %}
+{% include output_helper.html initial_output_content=initial_output_content %}
 
 {% comment %}{% include test_snippet.html filename='demo.js' %}{% endcomment %}
