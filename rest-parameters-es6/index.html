@@ -80,7 +80,11 @@ function sortArguments() {
 }
 
 // throws a TypeError: arguments.sort is not a function
-ChromeSamples.log(sortArguments(5,3,7,1));
+try {
+  ChromeSamples.log(sortArguments(5,3,7,1));
+} catch(error) {
+  ChromeSamples.log(error.message);
+}
 
 /*
 We could alternatively have used Array.from here:
