@@ -1,5 +1,4 @@
 'use strict';
-
 class Parent {
   constructor() {
     // new.target is a constructor reference, and new.target.name is human-friendly name.
