@@ -13,14 +13,14 @@ array. It takes an optional second parameter, which can be used to execute a map
 function on each element of the array that is being created.
 </p>
 
-{% include test_snippet.html filename='demo1.js' title='' %}
+{% include js_snippet.html filename='demo1.js' title='' %}
 
 <p>
 It comes in handy when dealing with the infamous <code>NodeList</code>
 returned by <code>document.querySelectorAll</code>.
 </p>
 
-{% include test_snippet.html filename='demo2.js' title='' %}
+{% include js_snippet.html filename='demo2.js' title='' %}
 
 <h2>Array.of ( ...items ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.of">#</a></h2>
 <p>
@@ -28,7 +28,7 @@ The <code>Array.of()</code> method creates a new <code>Array</code> instance
 with any number of arguments, regardless of their type.
 </p>
 
-{% include test_snippet.html filename='demo3.js' title='' %}
+{% include js_snippet.html filename='demo3.js' title='' %}
 
 <h2>Array.prototype.copyWithin (target, start [ , end ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.copywithin">#</a></h2>
 <p>
@@ -39,11 +39,11 @@ taken from the index positions of the second and third arguments
 optional and defaults to the length of the array.
 </p>
 
-{% include test_snippet.html filename='demo4.js' title='' %}
+{% include js_snippet.html filename='demo4.js' title='' %}
 
 <p>If <code>start</code> is negative, it will be treated as <code>length+start</code> where <code>length</code> is the length of the array. If <code>end</code> is negative, it will be treated as <code>length+end</code>.
 
-{% include test_snippet.html filename='demo5.js' title='' %}
+{% include js_snippet.html filename='demo5.js' title='' %}
 
 <h2>Array.prototype.fill (value [ , start [ , end ] ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.fill">#</a></h2>
 <p>
@@ -54,7 +54,7 @@ The <code>start</code> argument defaults to 0. The <code>end</code>
 argument defaults to the length of the array.
 </p>
 
-{% include test_snippet.html filename='demo6.js' title='' %}
+{% include js_snippet.html filename='demo6.js' title='' %}
 
 <h2>Array.prototype.find ( predicate [ , thisArg ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.find">#</a></h2>
 <p>
@@ -64,7 +64,7 @@ not, <code> undefined</code> is returned. <code>find()</code> does not mutate
 the array on which it is called.
 </p>
 
-{% include test_snippet.html filename='demo7.js' title='' %}
+{% include js_snippet.html filename='demo7.js' title='' %}
 
 <h2>Array.prototype.findIndex ( predicate [ , thisArg ] ) <a target="_blank" href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.findindex">#</a></h2>
 <p>
@@ -74,4 +74,4 @@ function. If not, -1 is returned. <code>findIndex()</code> does not mutate the
 array on which it is called.
 </p>
 
-{% include test_snippet.html filename='demo8.js' title='' %}
+{% include js_snippet.html filename='demo8.js' title='' %}

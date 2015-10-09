@@ -50,7 +50,3 @@ gulp.task('lint', ['jekyll:build'], function() {
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
 });
-
-gulp.task('lint:watch', function() {
-  gulp.watch(['**/**/*.{js,html}', '!node_modules/**/*'], ['lint']);
-});
