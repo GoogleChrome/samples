@@ -1,0 +1,44 @@
+---
+feature_name: MouseEvent.getModifierState()
+chrome_version: 47
+feature_id: 5662574238498816
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState"><code>MouseEvent.getModifierState()</code></a>
+  method returns information about which
+  <a href="https://w3c.github.io/uievents/#keys-modifiers">modifier keys</a> were pressed at the
+  time a <code>MouseEvent</code> was fired.
+</p>
+<p>
+  While the demo below illustrates its use with the <code>mousemove</code> event, any event that
+  uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent"><code>MouseEvent</code> interface</a>
+  supports <code>getModifierState()</code>.
+</p>
+
+{% capture initial_output_content %}
+<p>Move your mouse within this area while pressing one or more keyboard modifier keys.</p>
+<p>The keys you have pressed will appear in bold.</p>
+<ul>
+  <li id="Alt">Alt</li>
+  <li id="Control">Control</li>
+  <li id="Meta">Meta</li>
+  <li id="Shift">Shift</li>
+  <li id="AltGraph">AltGraph</li>
+</ul>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture js %}
+// A subset of keys from https://w3c.github.io/uievents/#keys-modifiers
+var modifierKeys = ['Alt', 'Control', 'Meta', 'Shift', 'AltGraph'];
+
+document.querySelector('#output').addEventListener('mousemove', function(event) {
+  modifierKeys.forEach(function(modifierKey) {
+    var pressed = event.getModifierState(modifierKey);
+    document.getElementById(modifierKey).style.fontWeight = pressed ? 'bold' : 'normal';
+  });
+});
+{% endcapture %}
+{% include js_snippet.html js=js %}
