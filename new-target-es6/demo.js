@@ -16,7 +16,8 @@ class SecondChild extends Parent {}
 
 function notAConstructor() {
   /* jshint ignore:start */
-  ChromeSamples.log('Hello from notAConstructor()! My new.target is ' + new.target);
+  ChromeSamples.log('Hello from notAConstructor()! My new.target is ' +
+    new.target);
   /* jshint ignore:end */
 }
 
