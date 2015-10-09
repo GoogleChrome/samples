@@ -41,8 +41,7 @@ limitations under the License.
       // which don't support specific functionality still end up displaying a meaningful message.
       window.addEventListener('error', function(error) {
         if (ChromeSamples && ChromeSamples.setStatus) {
-          ChromeSamples.setStatus(error.message +
-            ' (Your browser does not currently support this feature.)');
+          ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
           error.preventDefault();
         }
       });
