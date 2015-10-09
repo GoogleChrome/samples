@@ -65,7 +65,7 @@ function sortArguments() {
 // throws a TypeError: arguments.sort is not a function
 try {
   ChromeSamples.log(sortArguments(5,3,7,1));
-} catch(error) {
+} catch (error) {
   ChromeSamples.log(error.message);
 }
 
