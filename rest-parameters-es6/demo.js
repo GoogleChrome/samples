@@ -66,7 +66,7 @@ function sortArguments() {
 try {
   ChromeSamples.log(sortArguments(5,3,7,1));
 } catch(error) {
-  console.warn(error);
+  ChromeSamples.log(error.message);
 }
 
 /*
