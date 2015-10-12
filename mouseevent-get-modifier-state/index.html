@@ -30,15 +30,4 @@ feature_id: 5662574238498816
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
-// A subset of keys from https://w3c.github.io/uievents/#keys-modifiers
-var modifierKeys = ['Alt', 'Control', 'Meta', 'Shift', 'AltGraph'];
-
-document.querySelector('#output').addEventListener('mousemove', function(event) {
-  modifierKeys.forEach(function(modifierKey) {
-    var pressed = event.getModifierState(modifierKey);
-    document.getElementById(modifierKey).style.fontWeight = pressed ? 'bold' : 'normal';
-  });
-});
-{% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html filename='demo.js' %}
