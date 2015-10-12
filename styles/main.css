@@ -24,10 +24,6 @@ h3 {
   margin-top: 2em;
 }
 
-.capitalise {
-  text-transform: uppercase;
-}
-
 .output {
   background-color: #f0f0f0;
   border-radius: 0.75em;
