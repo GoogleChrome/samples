@@ -40,17 +40,4 @@ feature_id: 6526863593701376
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
-function logEscapedId(e) {
-  ChromeSamples.log('My id is "' + e.target.id + '", and escaped id is "' +
-                    CSS.escape(e.target.id) + '"');
-}
-
-var buttons = document.querySelectorAll('button');
-for (var i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', logEscapedId);
-}
-{% endcapture %}
-{% include js_snippet.html js=js %}
-
-
+{% include js_snippet.html filename='demo.js' %}
