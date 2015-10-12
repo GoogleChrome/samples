@@ -28,12 +28,4 @@ feature_id: 5681847971348480
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
-document.querySelector('#press-me').addEventListener('click', function(event) {
-  var status = 'The device that triggered this click event ' +
-               (event.sourceCapabilities.firesTouchEvents ? 'does' : 'does not') +
-               ' fire touch events.';
-  ChromeSamples.setStatus(status);
-});
-{% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html filename='demo.js' %}
