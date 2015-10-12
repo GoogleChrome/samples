@@ -3,6 +3,7 @@
   "expr": true,
   "globalstrict": true,
   "strict": false,
+  "browser": true,
   "globals": {
     "console": false,
     "self": false,
@@ -16,7 +17,8 @@
     "caches": false,
     "clients": false,
     "Notification": false,
-    "ServiceWorkerRegistration": false
+    "ServiceWorkerRegistration": false,
+    "ChromeSamples": true
   },
   "ignoreDelimiters": [
     { "start": "start-es7", "end": "end-es7" }

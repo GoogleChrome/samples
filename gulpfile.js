@@ -23,7 +23,7 @@ var spawn = require('child_process').spawn;
 gulp.task('jekyll:build', function(cb) {
   // Handle OS differences in executable name
   var jekyllCommand = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
-  var params = ['exec', jekyllCommand, 'build', '--trace'];
+  var params = ['exec', jekyllCommand, 'build', '--trace', '--safe'];
 
   var jekyllProcess = spawn('bundle', params, {
       env: process.env,
@@ -49,8 +49,4 @@ gulp.task('lint', ['jekyll:build'], function() {
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('lint:watch', function() {
-  gulp.watch(['**/**/*.{js,html}', '!node_modules/**/*'], ['lint']);
 });

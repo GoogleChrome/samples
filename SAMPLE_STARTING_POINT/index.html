@@ -16,15 +16,13 @@ additional_head_content: <meta name="optional" value="optional">
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
 /*
-  Use this optional capture/include for any JavaScript that shows off the feature's functionality.
-  Do not surround it with &lt;script> tags.
+  Use this optional include for any JavaScript that shows off the feature's functionality.
+  Do not surround it with &lt;script&gt; tags.
   If output_helper.html is included on this page, then ChromeSamples.log(),
   ChromeSamples.clearLog(), ChromeSamples.setStatus(), and ChromeSamples.setContent() can be used.
 */
-{% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html filename='demo.js' %}
 
 {% capture css %}
 /* Use this optional capture/include for CSS that shows off the feature's functionality. */

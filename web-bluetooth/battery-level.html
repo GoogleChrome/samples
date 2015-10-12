@@ -14,47 +14,10 @@ href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.ble
 Play Store</a>.</p>
 
 <button>Get Bluetooth Device's Battery Level</button>
-{% capture initial_output_content %}
-{% endcapture %}
-{% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
-function onButtonClick() {
-  'use strict';
+{% include output_helper.html %}
 
-  log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters:[{services:['battery_service']}]})
-  .then(device => {
-    log('> Found ' + device.name);
-    log('Connecting to GATT Server...');
-    return device.connectGATT();
-  })
-  .then(server => {
-    log('Getting Battery Service...');
-    return server.getPrimaryService('battery_service');
-  })
-  .then(service => {
-    if (!service) {
-      throw 'Battery Service not found';
-    }
-    log('Getting Battery Level Characteristic...');
-    return service.getCharacteristic('battery_level');
-  })
-  .then(characteristic => {
-     log('Reading Battery Level...');
-     return characteristic.readValue();
-  })
-  .then(buffer => {
-    let data = new DataView(buffer);
-    let batteryLevel = data.getUint8(0);
-    log('> Battery Level is ' + batteryLevel + '%');
-  })
-  .catch(error => {
-    log('Argh! ' + error);
-  });
-}
-{% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html filename='battery-level.js' %}
 
 <script>
   document.querySelector('button').addEventListener('click', function() {

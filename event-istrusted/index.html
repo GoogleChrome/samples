@@ -26,24 +26,7 @@ not.</p>
 
 <button id="greenButton">Generate Trusted Event</button>
 <button id="redButton">Generate Untrusted Event</button>
-{% capture initial_output_content %}
-{% endcapture %}
-{% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
-var greenButton = document.querySelector('#greenButton');
-var redButton = document.querySelector('#redButton');
+{% include output_helper.html %}
 
-greenButton.addEventListener('click', function(event) {
-  if (event.isTrusted) {
-    ChromeSamples.log('User clicked the green button. It is a trusted event.');
-  } else {
-    ChromeSamples.log('User did NOT click the green button.');
-  }
-});
-
-redButton.addEventListener('click', function(event) {
-  greenButton.click();
-});
-{% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html filename='demo.js' %}
