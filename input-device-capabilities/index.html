@@ -1,0 +1,31 @@
+---
+feature_name: Input Device Capabilities
+chrome_version: 47
+feature_id: 5681847971348480
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="http://rbyers.github.io/InputDevice/index.html">Input Device Capabilities API</a>
+  provides information about the capabilities of the physical device responsible for generating an
+  event.
+</p>
+<p>
+  This sample illustrates using <code>UIEvent.sourceCapabilities</code> to obtain the capabilities
+  of the device that triggered the event, and then checks the <code>firesTouchEvents</code> property
+  to determine whether that device can create a
+  <a href="http://www.w3.org/TR/touch-events/#touchevent-interface"><code>TouchEvent</code></a>.
+  Developers should note that this doesn't necessarily mean the device is a touch screen. For
+  example, stylus and mouse devices typically generate <code>TouchEvent</code>s on mobile browsers.
+</p>
+<p>
+  The <a href="http://www.html5rocks.com/en/mobile/touchandmouse/#toc-mostimp"><em>Touch and Mouse</em></a>
+  article provides some background on why that knowledge is important for developers.
+</p>
+
+{% capture initial_output_content %}
+<button id="press-me">Press Me!</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
