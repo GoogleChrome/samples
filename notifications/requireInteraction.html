@@ -1,0 +1,38 @@
+---
+feature_name: NotificationOptions.requireInteraction
+chrome_version: 47
+feature_id: 5641440986136576
+---
+
+<p>On Chrome desktop, prior to Chrome 47, a notification toast would stay on screen until the user interacted with it. As of Chrome 47 notifications will minimize to the notification center after approximately 8 seconds unless the 'requireInteraction' property of the notification options is set to true.</p>
+
+<p>Chrome for Android is not affected as all notifications are minimized to the notification tray.</p>
+
+{% capture js %}
+navigator.serviceWorker.register('sw.js');
+
+function showNotifications() {
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('requireInteraction: true', {
+          body: 'Requires interaction',
+          icon: '../images/touch/chrome-touch-icon-192x192.png',
+          requireInteraction: true,
+          tag: 'require-interaction'
+        });
+
+        registration.showNotification('requireInteraction: false', {
+          body: 'Does not require interaction',
+          icon: '../images/touch/chrome-touch-icon-192x192.png',
+          requireInteraction: false,
+          tag: 'no-require-interaction'
+        });
+      });
+    }
+  });
+}
+{% endcapture %}
+
+{% include js_snippet.html js=js %}
+<div><button onclick="showNotifications()">Show notifications</button></div>
