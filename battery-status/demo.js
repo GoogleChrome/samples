@@ -4,8 +4,6 @@ var dichargeTimeEl = document.getElementById('dischargeTime');
 var levelEl = document.getElementById('level');
 
 function updateBatteryUI(battery) {
-  battery = battery || this;
-
   levelEl.textContent = (battery.level * 100) + '%';
   chargingTimeEl.textContent = battery.chargingTime + ' Seconds';
   dichargeTimeEl.textContent = battery.dischargingTime + ' Seconds';
@@ -22,10 +20,10 @@ function monitorBattery(battery) {
   updateBatteryUI(battery);
 
   // Monitor for futher updates.
-  battery.addEventListener('levelchange', updateBatteryUI);
-  battery.addEventListener('chargingchange', updateBatteryUI);
-  battery.addEventListener('dischargingtimechange', updateBatteryUI);
-  battery.addEventListener('chargingtimechange', updateBatteryUI);
+  battery.addEventListener('levelchange', updateBatteryUI.bind(null, battery));
+  battery.addEventListener('chargingchange', updateBatteryUI.bind(null, battery));
+  battery.addEventListener('dischargingtimechange', updateBatteryUI.bind(null, battery));
+  battery.addEventListener('chargingtimechange', updateBatteryUI.bind(null, battery));
 }
 
 if('getBattery' in navigator) {
