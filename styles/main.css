@@ -41,6 +41,10 @@ h3 {
   margin-top: 1em;
 }
 
+#status:empty, #log:empty, #content:empty {
+  display: none;
+}
+
 .highlight {
   border-radius: 0.75em;
   border: 1px solid #f0f0f0;
