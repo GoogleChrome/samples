@@ -39,6 +39,7 @@ h3 {
 
 #log {
   margin-top: 1em;
+  white-space: pre-wrap;
 }
 
 #status:empty, #log:empty, #content:empty {
