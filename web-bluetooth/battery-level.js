@@ -13,9 +13,6 @@ function onButtonClick() {
     return server.getPrimaryService('battery_service');
   })
   .then(service => {
-    if (!service) {
-      throw 'Battery Service not found';
-    }
     log('Getting Battery Level Characteristic...');
     return service.getCharacteristic('battery_level');
   })
