@@ -11,7 +11,7 @@ Fetch API Samples
 * [Response body stream](https://googlechrome.github.io/samples/fetch-api/fetch-response-stream.html)
 * [Fetch success/error handlers](https://googlechrome.github.io/samples/fetch-api/fetch-success-error-handlers.html)
 
-Learn more at http://www.chromestatus.com/feature/6730533392351232
+Learn more at https://www.chromestatus.com/feature/6730533392351232
 
 ### Third party demos
 
