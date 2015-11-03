@@ -13,9 +13,6 @@ function onButtonClick() {
     return server.getPrimaryService('heart_rate');
   })
   .then(service => {
-    if (!service) {
-      throw 'Heart Rate service not found';
-    }
     log('Getting Heart Rate Control Point Characteristic...');
     return service.getCharacteristic('heart_rate_control_point');
   })

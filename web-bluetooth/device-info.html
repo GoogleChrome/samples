@@ -4,7 +4,7 @@ chrome_version: 45
 feature_id: 5264933985976320
 ---
 
-<p>The <a href="https://github.com/WebBluetoothCG/web-bluetooth">Web Bluetooth API</a> discovers and communicates with devices over the Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is currently only partially implemented in Chrome OS behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.</p>
+{% include_relative _includes/intro.html %}
 
 <p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
 device information from a nearby Bluetooth Low Energy Device.</p>
@@ -14,42 +14,10 @@ device information from a nearby Bluetooth Low Energy Device.</p>
     Enter a Bluetooth Service name:
     <input id="service" type="text" list="services" autofocus>
   </label>
-  <datalist id="services">
-    <option value="alert_notification">
-    <option value="automation_io">
-    <option value="battery_service">
-    <option value="blood_pressure">
-    <option value="body_composition">
-    <option value="bond_management">
-    <option value="continuous_glucose_monitoring">
-    <option value="current_time">
-    <option value="cycling_power">
-    <option value="cycling_speed_and_cadence">
-    <option value="device_information">
-    <option value="environmental_sensing">
-    <option value="generic_access">
-    <option value="generic_attribute">
-    <option value="glucose">
-    <option value="health_thermometer">
-    <option value="heart_rate">
-    <option value="human_interface_device">
-    <option value="immediate_alert">
-    <option value="indoor_positioning">
-    <option value="internet_protocol_support">
-    <option value="link_loss">
-    <option value="location_and_navigation">
-    <option value="next_dst_change">
-    <option value="phone_alert_status">
-    <option value="pulse_oximeter">
-    <option value="reference_time_update">
-    <option value="running_speed_and_cadence">
-    <option value="scan_parameters">
-    <option value="tx_power">
-    <option value="user_data">
-    <option value="weight_scale">
-  </datalist>
   <button>Get Bluetooth Device Info</button>
 </form>
+
+{% include_relative _includes/datalist-services.html %}
 
 {% include output_helper.html %}
 
@@ -62,7 +30,7 @@ device information from a nearby Bluetooth Low Energy Device.</p>
 
     if (!navigator.bluetooth) {
       ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
-        'Please make sure you run Chrome OS M45 and the Web Bluetooth flag is enabled.');
+        'Please make sure the Web Bluetooth flag is enabled.');
     } else {
       ChromeSamples.clearLog();
       onFormSubmit();
