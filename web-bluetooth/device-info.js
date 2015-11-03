@@ -7,11 +7,11 @@ function onFormSubmit() {
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters:[{services:[ filterService ]}]})
   .then(device => {
-    log('> Device Name:       ' + device.name);
-    log('> Device InstanceID: ' + device.instanceID);
-    log('> Device Paired:     ' + device.paired);
-    log('> Device Class:      ' + device.deviceClass);
-    log('> Device UUIDs:      ' + device.uuids.join('\n' + ' '.repeat(21)));
+    log('> Device Name:   ' + device.name);
+    log('> Device Id:     ' + device.id);
+    log('> Device Paired: ' + device.paired);
+    log('> Device Class:  ' + device.deviceClass);
+    log('> Device UUIDs:  ' + device.uuids.join('\n' + ' '.repeat(21)));
   })
   .catch(error => {
     log('Argh! ' + error);
