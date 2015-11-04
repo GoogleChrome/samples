@@ -1,10 +1,12 @@
 function onFormSubmit() {
-  var serviceUuid = document.getElementById('service').value;
+  'use strict';
+
+  let serviceUuid = document.getElementById('service').value;
   if (serviceUuid.startsWith('0x')) {
     serviceUuid = parseInt(serviceUuid, 16);
   }
 
-  var characteristicUuid = document.getElementById('characteristic').value;
+  let characteristicUuid = document.getElementById('characteristic').value;
   if (characteristicUuid.startsWith('0x')) {
     characteristicUuid = parseInt(characteristicUuid, 16);
   }
