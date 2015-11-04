@@ -18,7 +18,8 @@
     "clients": false,
     "Notification": false,
     "ServiceWorkerRegistration": false,
-    "ChromeSamples": true
+    "ChromeSamples": true,
+    "log": true
   },
   "ignoreDelimiters": [
     { "start": "start-es7", "end": "end-es7" }
