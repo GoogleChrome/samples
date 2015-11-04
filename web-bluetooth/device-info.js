@@ -1,5 +1,7 @@
 function onFormSubmit() {
-  var filterService = document.getElementById('service').value;
+  'use strict';
+
+  let filterService = document.getElementById('service').value;
   if (filterService.startsWith('0x')) {
     filterService = parseInt(filterService, 16);
   }
