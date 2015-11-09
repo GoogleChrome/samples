@@ -14,6 +14,10 @@ function onFormSubmit() {
     log('> Device Paired: ' + device.paired);
     log('> Device Class:  ' + device.deviceClass);
     log('> Device UUIDs:  ' + device.uuids.join('\n' + ' '.repeat(17)));
+    if (device.adData) {
+      log('> Tx Power:      ' + device.adData.txPower + ' dBm');
+      log('> RSSI:          ' + device.adData.rssi + ' dBm');
+    }
   })
   .catch(error => {
     log('Argh! ' + error);
