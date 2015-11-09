@@ -10,10 +10,9 @@ feature_id: 5264933985976320
 device information from a nearby Bluetooth Low Energy Device.</p>
 
 <form>
-  <label for="service">
-    Enter a Bluetooth Service name:
-    <input id="service" type="text" list="services" autofocus>
-  </label>
+  <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
+  <input id="name" type="text" placeholder="Bluetooth Device Name">
+  <input id="namePrefix" type="text" placeholder="Bluetooth Device Name Prefix">
   <button>Get Bluetooth Device Info</button>
 </form>
 
