@@ -13,7 +13,7 @@ function onFormSubmit() {
     log('> Device Id:     ' + device.id);
     log('> Device Paired: ' + device.paired);
     log('> Device Class:  ' + device.deviceClass);
-    log('> Device UUIDs:  ' + device.uuids.join('\n' + ' '.repeat(21)));
+    log('> Device UUIDs:  ' + device.uuids.join('\n' + ' '.repeat(17)));
   })
   .catch(error => {
     log('Argh! ' + error);
