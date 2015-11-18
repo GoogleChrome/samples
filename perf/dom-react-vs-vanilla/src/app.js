@@ -165,7 +165,7 @@ var FlickrImages = React.createClass({
 
 // Fire up React.
 /* jshint ignore:start */
-React.render(
+ReactDOM.render(
   <FlickrImages />, main
 );
 /* jshint ignore:end */
