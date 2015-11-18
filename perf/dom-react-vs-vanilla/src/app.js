@@ -35,7 +35,7 @@ var FlickrImage = React.createClass({
   render: function() {
 
     // Figure out how long ago this photo was taken.
-    var fromNow = moment(this.props.image.lastUpdated).fromNow();
+    var fromNow = moment.unix(this.props.image.lastUpdate).fromNow();
 
     // Render away!
     /* jshint ignore:start */
