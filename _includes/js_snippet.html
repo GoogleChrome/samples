@@ -1,24 +1,25 @@
-{% if include.filename or include.js%}
-
-  {% if include.filename %}
-  <script>{% include_relative {{include.filename}} %}</script>
-  {% else %}
-  <script>{{ include.js }}</script>
-  {% endif %}
+{% if include.filename or include.js %}
+  {% unless include.displayonly %}
+    {% if include.filename %}
+      <script>{% include_relative {{include.filename}} %}</script>
+    {% else %}
+      <script>{{include.js}}</script>
+    {% endif %}
+  {% endunless %}
 
   {% if include.title == null %}
     <h3>JavaScript Snippet</h3>
   {% elsif include.title != "" %}
-    <h3>{{ include.title }}</h3>
+    <h3>{{include.title}}</h3>
   {% endif %}
 
   {% if include.filename %}
-  {% highlight js %}
-    {% include_relative {{include.filename}} %}
-  {% endhighlight %}
+    {% highlight js %}
+      {% include_relative {{include.filename}} %}
+    {% endhighlight %}
   {% else %}
-  {% highlight js %}
-    {{ include.js }}
-  {% endhighlight %}
+    {% highlight js %}
+      {{include.js}}
+    {% endhighlight %}
   {% endif %}
 {% endif %}
