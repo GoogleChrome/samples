@@ -1,0 +1,32 @@
+---
+feature_name: KeyboardEvent code Attribute
+chrome_version: 48
+feature_id: 5228092293382144
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code"><code>KeyboardEvent.code</code></a>
+  attribute represents the physical key that was used to generate a
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent"><code>KeyboardEvent</code></a>.
+</p>
+<p>
+  The operating system-level keyboard layout does not affect the <code>KeyboardEvent.code</code>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Code_values">value</a>.
+  In other words, while the physical key <code>Q</code> represents the character
+  <code>q</code> in a <a href="https://en.wikipedia.org/wiki/QWERTY">QWERTY</a> keyboard layout
+  and represents the character <code>'</code> in a
+  <a href="https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak</a> keyboard layout,
+  pressing the <code>Q</code> key will always yield a <code>KeyboardEvent.code</code> value of
+  <code>'KeyQ'</code>.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  The <code>KeyboardEvent.code</code> values for any keys you press on the keyboard will be logged
+  here.
+</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
