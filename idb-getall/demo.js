@@ -29,6 +29,8 @@ document.querySelector('#add').addEventListener('click', function(event) {
     var transaction = db.transaction(STORE_NAME, 'readwrite');
     var objectStore = transaction.objectStore(STORE_NAME);
     objectStore.put(Date.now());
+  }).catch(function(error) {
+    ChromeSamples.setStatus(error);
   });
 });
 
@@ -42,5 +44,7 @@ document.querySelector('#display').addEventListener('click', function(event) {
       ChromeSamples.setStatus('There are ' + timestamps.length + ' timestamps saved in IndexedDB: '
         + timestamps.join(', '));
     };
+  }).catch(function(error) {
+    ChromeSamples.setStatus(error);
   });
 });
