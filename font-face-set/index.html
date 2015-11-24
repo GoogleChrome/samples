@@ -1,0 +1,56 @@
+---
+feature_name: CSS Font Loading API's FontFaceSet
+chrome_version: 48
+feature_id: 4594172182921216
+---
+
+<h3>Background</h3>
+<p>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet"><code>FontFaceSet</code></a>
+  is an interface defined as part of the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Font_Loading_API">CSS Font Loading API</a>.
+  It's used to load font faces, and check the status of previously requested fonts. The
+  <code>FontFaceSet</code> interface for the current HTML page is available in JavaScript as
+  <code>document.fonts</code>.
+</p>
+
+<p>
+  This sample shows equivalent techniques for defining a new <code>FontFace</code> and adding it to
+  the page's <code>FontFaceSet</code>. One technique is to use the <code>FontFaceSet.add()</code>
+  method via JavaScript, and the other technique is to use CSS's <code>@font-face</code> rule.
+</p>
+
+<p>
+  The sample also shows alternative approaches to the initial display of text before the custom
+  fonts are loaded. In one case, the text is displayed unconditionally, but will start out being
+  displayed using the page's default font until the custom <code>FontFace</code> loads. In the other
+  case, the text is styled with <code>visibility: hidden</code> initially, and then after the
+  <code>document.fonts.ready</code>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>
+  resolves, the text is displayed.
+</p>
+
+{% capture initial_output_content %}
+<p class="bitter">I'm using the font-family Bitter and am always visible!</p>
+<p class="oxygen">I'm using the font-family Oxygen and am visible once the font loads!</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture css %}
+@font-face {
+  font-family: Oxygen;
+  src: url(https://fonts.gstatic.com/s/oxygen/v5/qBSyz106i5ud7wkBU-FrPevvDin1pK8aKteLpeZ5c0A.woff2);
+}
+
+.bitter {
+  font-family: Bitter;
+}
+
+.oxygen {
+  font-family: Oxygen;
+  visibility: hidden;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+{% include js_snippet.html filename='demo.js' %}
