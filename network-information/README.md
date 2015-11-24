@@ -1,4 +1,4 @@
-Network Information Sample
+Network Information API Sample
 ===
 See https://googlechrome.github.io/samples/network-information/index.html for a live demo.
 
