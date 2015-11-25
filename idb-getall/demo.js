@@ -15,9 +15,8 @@ request.onupgradeneeded = function() {
 request.onsuccess = function() {
   db = request.result;
   // Enable our buttons once the IndexedDB instance is available.
-  [addButton, displayButton].forEach(function(button) {
-    button.disabled = false;
-  });
+  addButton.disabled = false;
+  displayButton.disabled = false;
 };
 
 addButton.addEventListener('click', function() {
@@ -36,6 +35,6 @@ displayButton.addEventListener('click', function() {
   objectStore.getAll().onsuccess = function(event) {
     var timestamps = event.target.result;
     ChromeSamples.setStatus('There are ' + timestamps.length +
-      ' timestamps saved in IndexedDB: ' + timestamps.join(', '));
+      ' timestamp(s) saved in IndexedDB: ' + timestamps.join(', '));
   };
 });
