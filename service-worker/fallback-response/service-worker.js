@@ -1,5 +1,5 @@
 /*
- Copyright 2014 Google Inc. All Rights Reserved.
+ Copyright 2015 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
@@ -11,53 +11,54 @@
  limitations under the License.
 */
 
-self.addEventListener('fetch', function(event) {
-  console.log('Handling fetch event for', event.request.url);
-
-  event.respondWith(
-    fetch(event.request).then(function(response) {
-      // At this point, we have some sort of response, but it might be an error response.
-      // Since the YouTube API calls we're making support CORS, the corresponding response will not be opaque, and
-      // response.status will contain a real value.
-      if (response.status >= 400) {
-        // Any 4xx or 5xx HTTP status code indicates an error, so this potentially is a situation
-        // in which we'd want to return a fallback response.
-
-        if (event.request.url.match(/https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/)) {
-          // We only want to return our fallback response if this is a specific type of API request.
-          // In a real application, you might have logic that returned different responses for different types of
-          // requests, using the request URL or the request headers (like Accept:) to determine if/how to fallback.
-          console.info('Returning fallback response to page...');
-          return fallbackResponse();
-        } else {
-          // If this is an error response not associated with the specific type API request we have a fallback for,
-          // then just return it to the browser and it will be treated like any other failed HTTP request.
-          console.error('Returning error response directly to page:', response);
-          return response;
-        }
-      } else {
-        // If the HTTP response code is less than 400, then it's either
-        //   a) a successful response (e.g. HTTP 20x)
-        //   b) an opaque filtered response (https://fetch.spec.whatwg.org/#concept-filtered-response-opaque) which
-        //      has a .status of 0. Since we can't detect whether it's an error or not, just return it directly to
-        //      the page.
-        console.log('Returning response directly to page:', response);
-        return response;
-      }
-    }).catch(function(error) {
-      // This catch() will handle exceptions that arise from the fetch() operation.
-      // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
-      console.error('fetch() failed:', error);
-
-      throw error;
-    })
-  );
+self.addEventListener('install', function(event) {
+  // Skip the 'waiting' lifecycle phase, to go directly from 'installed' to 'activated', even if
+  // there are still previous incarnations of this service worker registration active.
+  event.waitUntil(self.skipWaiting());
 });
 
-function fallbackResponse() {
-  // This particular implementation relies on fetch()ing a hardcoded response (that should hopefully not return
-  // an error) as a fallback. As an alternative, you can construct and return your own Response object using a
-  // Blob as the response body and with whatever headers and response status you'd like.
-  // See https://fetch.spec.whatwg.org/#response-class
-  return fetch('static/youtube_api_fallback.json');
-}
+self.addEventListener('activate', function(event) {
+  // Claim any clients immediately, so that the page will be under SW control without reloading.
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', function(event) {
+  if (event.request.url.match(/https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/)) {
+    // Only call event.respondWith() if this looks like a YouTube API request.
+    // Because we don't call event.respondWith() for non-YouTube API requests, they will not be
+    // handled by the service worker, and the default network behavior will apply.
+    event.respondWith(
+      fetch(event.request).then(function(response) {
+        if (!response.ok) {
+          // An HTTP error response code (40x, 50x) won't cause the fetch() promise to reject.
+          // We need to explicitly throw an exception to trigger the catch() clause.
+          throw Error('response status ' + response.status);
+        }
+
+        // If we got back a non-error HTTP response, return it to the page.
+        return response;
+      }).catch(function(error) {
+        console.warn('Constructing a fallback response, ' +
+          'due to an error while fetching the real response:', error);
+
+        // For demo purposes, use a pared-down, static YouTube API response as fallback.
+        var fallbackResponse = {
+          items: [{
+            snippet: {title: 'Fallback Title 1'}
+          }, {
+            snippet: {title: 'Fallback Title 2'}
+          }, {
+            snippet: {title: 'Fallback Title 3'}
+          }]
+        };
+
+        // Construct the fallback response via an in-memory variable. In a real application,
+        // you might use something like `return fetch(FALLBACK_URL)` instead,
+        // to retrieve the fallback response via the network.
+        return new Response(JSON.stringify(fallbackResponse), {
+          headers: {'Content-Type': 'application/json'}
+        });
+      })
+    );
+  }
+});
