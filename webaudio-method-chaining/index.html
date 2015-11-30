@@ -1,0 +1,127 @@
+<!doctype html>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Sample illustrating the use of Web Audio method chaining">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>WebAudio Method Chaining Sample</title>
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-title" content="Web Audio Method Chaining Sample">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <link rel="stylesheet" href="../styles/main.css">
+
+</head>
+
+<body>
+  <h1>Web Audio Method Chaining Sample</h1>
+
+  <p>Web Audio JavaScript syntax can be shortened and simplified with method chaining for <code>AudioNode.connect()</code> and <code>AudioParam.connect()</code> automation methods.</p>
+
+  <p>This sample does the following:</p>
+
+  <ol>
+    <li>Create an <code>AudioContext</code>.</li>
+    <li>Create an audio source node.</li>
+    <li>Create a gain node.</li>
+    <li>Create a filter node.</li>
+    <li>Connect nodes from the audio source to the <code>AudioContext</code> destination.</li>
+    <li>Play sound!</li>
+  </ol>
+
+  <p>Method chaining is used to connect nodes:</p>
+
+  <code>sourceNode.connect(gainNode).<br>
+    &nbsp;&nbsp;connect(filterNode).<br>
+    &nbsp;&nbsp;connect(context.destination);
+  </code>
+
+  <p>Available in <a href="https://www.chromestatus.com/feature/5706033670389760">Chrome 48+</a>.</p>
+
+  <audio autoplay controls mute>
+    <source src="audio.mp3" type="audio/mp3" />
+    This browser does not support the audio element.
+  </audio>
+
+  <!-- // [START code-block] -->
+  <script>
+    /* globals AudioContext, webkitAudioContext */
+
+    // create an AudioContext
+    // create an audio source node
+    // connect it to a filter node
+    // connect that a gain node
+    // play sound!
+
+    // cope with browser differences
+    var context;
+    if (typeof AudioContext === 'function') {
+      context = new AudioContext();
+    } else if (typeof webkitAudioContext === 'function') {
+      context = new webkitAudioContext(); // jshint ignore:line
+    } else {
+      alert('Sorry! Web Audio is not supported by this browser');
+    }
+
+    // use the audio element to create the source node
+    var audioElement = document.querySelector('audio');
+    var sourceNode = context.createMediaElementSource(audioElement);
+
+    var gainNode = context.createGain();
+    // default is 1 (no change)
+    // less than 1 means audio is attenuated — and vice versa
+    gainNode.gain.value = 0.5;
+
+    var filterNode = context.createBiquadFilter();
+    // see https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
+    filterNode.type = 'highpass';
+    // cutoff frequency: for highpass, audio is attenuated below this frequency
+    filterNode.frequency.value = 10000;
+
+    sourceNode.connect(gainNode).connect(filterNode).connect(context.destination);
+  </script>
+  <!-- // [END code-block] -->
+
+
+  <script>
+    /* jshint ignore:start */
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-53563471-1', 'auto');
+    ga('send', 'pageview');
+    /* jshint ignore:end */
+  </script>
+</body>
+</html>
