@@ -1,0 +1,36 @@
+---
+feature_name: Web Audio Method Chaining
+chrome_version: 48
+feature_id: 5706033670389760
+---
+
+<h3>Background</h3>
+<p>
+  Web Audio JavaScript syntax can be shortened and simplified with method chaining for the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode/connect(AudioNode)"><code>AudioNode.connect()</code></a>
+  and
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam"><code>AudioParam.connect()</code></a>
+  automation methods.
+</p>
+
+<p>This sample does the following:</p>
+
+<ol>
+  <li>Creates an <code>AudioContext</code>.</li>
+  <li>Creates an audio source node.</li>
+  <li>Creates a gain node.</li>
+  <li>Creates a filter node.</li>
+  <li>Connects nodes from the audio source to the <code>AudioContext</code> destination.</li>
+  <li>Plays sound!</li>
+</ol>
+
+{% capture initial_output_content %}
+<p>Audio playback:</p>
+<audio autoplay controls mute>
+  <source src="audio.mp3" type="audio/mp3">
+  This browser does not support the audio element.
+</audio>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
