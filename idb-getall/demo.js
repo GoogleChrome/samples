@@ -40,7 +40,7 @@ displayButton.addEventListener('click', function() {
   if ('getAll' in objectStore) {
     // IDBObjectStore.getAll() will return the full set of items in our store.
     objectStore.getAll().onsuccess = function(event) {
-      logTimestamps(event.target.result)
+      logTimestamps(event.target.result);
     };
   } else {
     // Fallback to the traditional cursor approach if getAll isn't supported.
