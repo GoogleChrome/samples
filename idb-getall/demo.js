@@ -28,13 +28,31 @@ addButton.addEventListener('click', function() {
   };
 });
 
+function logTimestamps(timestamps) {
+  ChromeSamples.setStatus('There are ' + timestamps.length +
+    ' timestamp(s) saved in IndexedDB: ' + timestamps.join(', '));
+}
+
 displayButton.addEventListener('click', function() {
   var transaction = db.transaction(STORE_NAME, 'readonly');
   var objectStore = transaction.objectStore(STORE_NAME);
-  // IDBObjectStore.getAll() will return the full set of items in our store.
-  objectStore.getAll().onsuccess = function(event) {
-    var timestamps = event.target.result;
-    ChromeSamples.setStatus('There are ' + timestamps.length +
-      ' timestamp(s) saved in IndexedDB: ' + timestamps.join(', '));
-  };
+
+  if ('getAll' in objectStore) {
+    // IDBObjectStore.getAll() will return the full set of items in our store.
+    objectStore.getAll().onsuccess = function(event) {
+      logTimestamps(event.target.result)
+    };
+  } else {
+    // Fallback to the traditional cursor approach if getAll isn't supported.
+    var timestamps = [];
+    objectStore.openCursor().onsuccess = function(event) {
+      var cursor = event.target.result;
+      if (cursor) {
+        timestamps.push(cursor.value);
+        cursor.continue();
+      } else {
+        logTimestamps(timestamps);
+      }
+    };
+  }
 });
