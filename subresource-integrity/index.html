@@ -41,7 +41,7 @@ feature_id: 6183089948590080
   <code>&lt;link rel="stylesheet" href="incorrect_hash.css" integrity="sha256-OBVIOUSLY_INCORRECT_HASH"></code>
   Browsers that support subresource integrity will refuse to load the file, since the
   <code>integrity</code> value  doesn't correspond to the actual <code>sha256</code> hash of the
-  file. You'll see an error message logged in the developer tools (i.e. Chrome DevTools) console. Browsers that don't support
+  file. You'll see an error message logged in the developer tools (for example, Chrome DevTools) console. Browsers that don't support
   subresource integrity will, however, load the file, and in those browsers this paragraph will be
   pink.
 </p>
