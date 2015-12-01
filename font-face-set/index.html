@@ -1,0 +1,51 @@
+---
+feature_name: CSS Font Loading API's FontFaceSet
+chrome_version: 48
+feature_id: 4594172182921216
+---
+
+<h3>Background</h3>
+<p>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet"><code>FontFaceSet</code></a>
+  is an interface defined as part of the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Font_Loading_API">CSS Font Loading API</a>.
+  It's used to load font faces, and check the status of previously requested fonts. The
+  <code>FontFaceSet</code> interface for the current HTML page is available in JavaScript as
+  <code>document.fonts</code>.
+</p>
+
+<p>
+  The sample illustrates constructing <code>FontFace</code> objects and explicitly adding them to
+  the page's <code>document.fonts</code> <code>FontFaceSet</code>, which is an alternative to the
+  more traditional approach of using CSS's
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face"><code>@font-face</code></a>
+  rule. It uses the
+  <a href="https://drafts.csswg.org/css-font-loading/#dom-fontface-loaded"><code>FontFace.loaded</code></a>
+  promise to keep track of when each individual font has been loaded.
+</p>
+
+<p>
+  The sample also shows off the newer
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set"><code>Set</code>-like</a>
+  functionality in <code>FontFaceSet</code>, by iterating over <code>document.fonts.values()</code>
+  once all the fonts are loaded, and displaying information about each <code>FontFace</code>.
+</p>
+
+{% capture initial_output_content %}
+<p class="bitter">I'm using the font-family Bitter!</p>
+<p class="oxygen">I'm using the font-family Oxygen!</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture css %}
+.bitter {
+  font-family: Bitter;
+}
+
+.oxygen {
+  font-family: Oxygen;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+{% include js_snippet.html filename='demo.js' %}
