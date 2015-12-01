@@ -1,0 +1,39 @@
+---
+feature_name: IndexedDB getAll() Methods
+chrome_version: 48
+feature_id: 6537756637396992
+---
+
+<h3>Background</h3>
+<p>
+  The
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB">IndexedDB</a>
+  "batched get" API allows you to retrieve several keys or values from IndexedDB in a single method
+  call. The "batched get" methods include:
+</p>
+<ul>
+  <li>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/getAll"><code>IDBObjectStore.getAll()</code></a>
+  </li>
+  <li>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/getAllKeys"><code>IDBObjectStore.getAllKeys()</code></a>
+  </li>
+  <li>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAll"><code>IDBIndex.getAll()</code></a>
+  </li>
+  <li>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAllKeys"><code>IDBIndex.getAllKeys()</code></a>
+  </li>
+</ul>
+
+{% capture initial_output_content %}
+<p>
+  You can use the buttons to add new timestamps to IndexedDB, and to display a full list of
+  timestamps that were previously set using <code>IDBObjectStore.getAll()</code>.
+</p>
+<button id="add" disabled>Add Timestamp</button>
+<button id="display" disabled>Display Timestamps</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
