@@ -43,6 +43,10 @@ take control of the page that just registered it.
 - [Using `window.caches`](https://googlechrome.github.io/samples/service-worker/window-caches/index.html) -
 a sample showing how `window.caches` provides access to the Cache Storage API.
 
+- ["Kill Switch"](https://googlechrome.github.io/samples/service-worker/kill-switch/index.html) -
+a sample showing how to register a "kill switch" `fetch` event handler that unregisters the active
+service worker when users visit a specific URL.
+
 # Related samples
 
 - Instructions for [registering for Push Messages and showing Notifications](https://github.com/GoogleChrome/samples/tree/gh-pages/push-messaging-and-notifications).

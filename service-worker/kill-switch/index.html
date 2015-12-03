@@ -1,0 +1,61 @@
+---
+feature_name: "Service Worker Sample: Kill Switch"
+chrome_version: 45
+feature_id: 6561526227927040
+---
+
+<h3>Background</h3>
+<p>
+  This samples demonstrates one approach to implementing a service worker
+  "<a href="https://en.wikipedia.org/wiki/Kill_switch">kill switch</a>". This pages registers a
+  service worker that has an undesirable <code>fetch</code> handler, which unconditionally
+  returns useless HTML in response to every fetch request. This simulates the "worst case scenario"
+  for a buggy or poorly implemented service worker. <strong>Once you reload this page, you'll see the
+  undesirable service worker in action.</strong>
+</p>
+
+<p>
+  Before getting into the technical details of the kill switch, it's worth pointing out that even
+  in this "worst case scenario", browsers offer built-in remediations that might prove sufficient.
+  One remediation is to
+  <a href="https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache">shift-reload</a>, which will
+  bypass the service worker and serve the page directly from the network.
+</p>
+
+<p>
+  Another remediation is simply to update your service worker script to resolve the bug, and
+  redeploy it to your web server. As soon as the service worker script is expired from a
+  browser's HTTP cache, the updated service worker script will end up being registered. You
+  can use the <a href="../immediate-control/">immediate control</a> pattern in your updated script
+  to ensure that the newly registered service worker takes control over existing tabs. Even if
+  you've inadvertently set the HTTP cache control headers to expire at some point in the far future,
+  a cached copy of the service worker script older than
+  <a href="https://github.com/slightlyoff/ServiceWorker/issues/514">24 hours</a> is automatically
+  ignored, and a call to <code>navigator.serviceWorker.register()</code> will fetch a fresh copy
+  from the network at that point. So the worst-case scenario is that users might have to wait a day
+  until their previously cached service worker script expires.
+</p>
+
+<p>
+  That being said, overly cautious developers might want to add in "kill switch" functionality
+  to their service worker, just in case. One approach to doing this is to call
+  <code>addEventListener('fetch', ...)</code> as early as possible in your service worker script,
+  and register a <code>fetch</code> event listener that will check the request for a special
+  URL pattern. If the request URL matches, it will call <code>event.respondWith()</code> to handle
+  the event (preventing any other <code>fetch</code> event listeners from executing), and
+  use <code>registration.unregister()</code> to deactivate itself.
+</p>
+
+<p>
+  At this point, the service worker will not longer control the pages under its previous scope,
+  but you need to be careful that the buggy service worker doesn't just get registered again.
+  For the purposes of this demo, this page will re-register the same service worker each time you
+  return, but in a real-world scenario you'd probably want to either temporarily remove the
+  <code>navigator.serviceWorker.register()</code> call from your pages, or change the service worker
+  script URL to include versioning information (e.g. <code>'service-worker.js?v=2'</code>) so that
+  the older, buggy script isn't immediately reused from the HTTP cache.
+</p>
+
+{% include js_snippet.html filename='index.js' title="This Page's JavaScript" %}
+{% include js_snippet.html filename='sw-kill-switch.js' displayonly=true title="\"Kill Switch\"'s JavaScript" %}
+{% include js_snippet.html filename='service-worker.js' displayonly=true title="Service Worker's JavaScript" %}
