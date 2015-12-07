@@ -24,14 +24,17 @@ function onFormSubmit() {
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(options)
   .then(device => {
-    log('> Device Name:   ' + device.name);
-    log('> Device Id:     ' + device.id);
-    log('> Device Paired: ' + device.paired);
-    log('> Device Class:  ' + device.deviceClass);
-    log('> Device UUIDs:  ' + device.uuids.join('\n' + ' '.repeat(17)));
+    log('> Name:             ' + device.name);
+    log('> Id:               ' + device.id);
+    log('> Device Class:     ' + device.deviceClass);
+    log('> Vendor Id Source: ' + device.vendorIDSource);
+    log('> Vendor Id:        ' + device.vendorID);
+    log('> Product Id:       ' + device.productID);
+    log('> Product Version:  ' + device.productVersion);
+    log('> UUIDs:            ' + device.uuids.join('\n' + ' '.repeat(20)));
     if (device.adData) {
-      log('> Tx Power:      ' + device.adData.txPower + ' dBm');
-      log('> RSSI:          ' + device.adData.rssi + ' dBm');
+      log('> Tx Power:         ' + device.adData.txPower + ' dBm');
+      log('> RSSI:             ' + device.adData.rssi + ' dBm');
     }
   })
   .catch(error => {
