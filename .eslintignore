@@ -1,3 +1,4 @@
 _site/
+vendor/
 service-worker/serviceworker-cache-polyfill.js
 decorators-es7/
