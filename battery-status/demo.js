@@ -8,9 +8,9 @@ function updateBatteryUI(battery) {
   chargingTimeEl.textContent = battery.chargingTime + ' Seconds';
   dichargeTimeEl.textContent = battery.dischargingTime + ' Seconds';
 
-  if(battery.charging === true) {
+  if (battery.charging === true) {
     chargingStateEl.textContent = 'Charging';
-  } else if(battery.charging === false) {
+  } else if (battery.charging === false) {
     chargingStateEl.textContent = 'Discharging';
   }
 }
@@ -20,14 +20,19 @@ function monitorBattery(battery) {
   updateBatteryUI(battery);
 
   // Monitor for futher updates.
-  battery.addEventListener('levelchange', updateBatteryUI.bind(null, battery));
-  battery.addEventListener('chargingchange', updateBatteryUI.bind(null, battery));
-  battery.addEventListener('dischargingtimechange', updateBatteryUI.bind(null, battery));
-  battery.addEventListener('chargingtimechange', updateBatteryUI.bind(null, battery));
+  battery.addEventListener('levelchange',
+    updateBatteryUI.bind(null, battery));
+  battery.addEventListener('chargingchange',
+    updateBatteryUI.bind(null, battery));
+  battery.addEventListener('dischargingtimechange',
+    updateBatteryUI.bind(null, battery));
+  battery.addEventListener('chargingtimechange',
+    updateBatteryUI.bind(null, battery));
 }
 
-if('getBattery' in navigator) {
+if ('getBattery' in navigator) {
   navigator.getBattery().then(monitorBattery);
 } else {
-  ChromeSamples.setStatus('The Battery Status API is not supported on this platform.');
+  ChromeSamples.setStatus('The Battery Status API is not supported on ' +
+    'this platform.');
 }

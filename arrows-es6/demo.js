@@ -22,7 +22,9 @@ ChromeSamples.log(add(3, 4));
 // `return` is implied if using an expression after an arrow.
 let developers = [{name: 'Rob'}, {name: 'Jake'}];
 // Before...
-let es5Output = developers.map(function(developer) { return developer.name; });
+let es5Output = developers.map(function(developer) {
+  return developer.name;
+});
 ChromeSamples.log(es5Output);
 
 // After...

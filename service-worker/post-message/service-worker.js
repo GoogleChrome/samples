@@ -52,7 +52,7 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
-          if (expectedCacheNames.indexOf(cacheName) == -1) {
+          if (expectedCacheNames.indexOf(cacheName) === -1) {
             // If this cache name isn't present in the array of "expected" cache names, then delete it.
             console.log('Deleting out of date cache:', cacheName);
             return caches.delete(cacheName);
@@ -127,7 +127,7 @@ self.addEventListener('message', function(event) {
 
       default:
         // This will be handled by the outer .catch().
-        throw 'Unknown command: ' + event.data.command;
+        throw Error('Unknown command: ' + event.data.command);
     }
   }).catch(function(error) {
     // If the promise rejects, handle it by returning a standardized error message to the controlled page.

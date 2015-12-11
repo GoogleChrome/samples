@@ -15,8 +15,8 @@ function enableRequestButtons() {
 }
 
 function makeApiRequest(apiKey) {
-  var url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=3&' +
-    'playlistId=UU_x5XG1OV2P6uZZ5FSM9Ttw&key=' + apiKey;
+  var url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet' +
+    '&maxResults=3&playlistId=UU_x5XG1OV2P6uZZ5FSM9Ttw&key=' + apiKey;
 
   fetch(url).then(function(response) {
     return response.json();
@@ -25,7 +25,7 @@ function makeApiRequest(apiKey) {
       return '"' + item.snippet.title + '"';
     }).join(', ');
 
-    ChromeSamples.setStatus('The three most recent videos in the channel are: ' + titles);
+    ChromeSamples.setStatus('The three most recent videos are: ' + titles);
   });
 }
 

@@ -19,7 +19,7 @@ function showCommands() {
     }).catch(ChromeSamples.setStatus); // If the promise rejects, show the error.
   });
 
-  document.querySelector('#list-contents').addEventListener('click', function() {
+  document.querySelector('#listcontents').addEventListener('click', function() {
     sendMessage({command: 'keys'})
       .then(function(data) {
         var contentsElement = document.querySelector('#contents');
@@ -59,7 +59,8 @@ function sendMessage(message) {
     // The service worker can then use the transferred port to reply via postMessage(), which
     // will in turn trigger the onmessage handler on messageChannel.port1.
     // See https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage
-    navigator.serviceWorker.controller.postMessage(message, [messageChannel.port2]);
+    navigator.serviceWorker.controller.postMessage(message,
+      [messageChannel.port2]);
   });
 }
 
@@ -83,5 +84,5 @@ if ('serviceWorker' in navigator) {
       ChromeSamples.setStatus(error);
     });
 } else {
-  ChromeSamples.setStatus('Service workers are not supported in the current browser.');
+  ChromeSamples.setStatus('This browser does not support service workers.');
 }

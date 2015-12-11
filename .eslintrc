@@ -1,0 +1,13 @@
+{
+  "extends": "google",
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "ChromeSamples": true
+  },
+  "rules": {
+    "require-jsdoc": 0,
+    "no-inline-comments": 0
+  }
+}

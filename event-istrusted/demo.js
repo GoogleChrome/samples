@@ -9,6 +9,6 @@ greenButton.addEventListener('click', function(event) {
   }
 });
 
-redButton.addEventListener('click', function(event) {
+redButton.addEventListener('click', function() {
   greenButton.click();
 });

@@ -32,7 +32,7 @@ function createCacheBustedRequest(url) {
 
   // If {cache: 'reload'} didn't have any effect, append a cache-busting URL parameter instead.
   let bustedUrl = new URL(url, self.location.href);
-  bustedUrl.search += (bustedUrl.search ? '&' : '') + 'cache-bust=' + Date.now();
+  bustedUrl.search += (bustedUrl.search ? '&' : '') + 'cachebust=' + Date.now();
   return new Request(bustedUrl);
 }
 

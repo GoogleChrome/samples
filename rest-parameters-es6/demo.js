@@ -39,7 +39,7 @@ countArguments('🐩', '🐘', '🐥'); // 3
 // Collect arguments from the second one to the end
 
 function multiply(multiplier, ...theArgs) {
-  return theArgs.map(function (element) {
+  return theArgs.map(function(element) {
     return multiplier * element;
   });
 }
@@ -55,7 +55,7 @@ function sortRestArgs(...theArgs) {
   return sortedArgs;
 }
 
-ChromeSamples.log(sortRestArgs(5,3,7,1)); // shows 1,3,5,7
+ChromeSamples.log(sortRestArgs(5, 3, 7, 1)); // shows 1,3,5,7
 
 function sortArguments() {
   var sortedArgs = arguments.sort();
@@ -64,7 +64,7 @@ function sortArguments() {
 
 // throws a TypeError: arguments.sort is not a function
 try {
-  ChromeSamples.log(sortArguments(5,3,7,1));
+  ChromeSamples.log(sortArguments(5, 3, 7, 1));
 } catch (error) {
   ChromeSamples.log(error.message);
 }
