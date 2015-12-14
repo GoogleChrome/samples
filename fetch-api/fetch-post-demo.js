@@ -14,11 +14,11 @@ function submitGist() {
   var content = document.querySelector('textarea').value;
   if (content) {
     createGist({
-      "description": 'Fetch API Post example',
-      "public": true,
-      "files": {
-        "test.js": {
-          "content": content
+      description: 'Fetch API Post example',
+      public: true,
+      files: {
+        'test.js': {
+          content: content
         }
       }
     });

@@ -13,7 +13,7 @@ function onStartButtonClick() {
   }
 
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters:[{services:[ serviceUuid ]}]})
+  navigator.bluetooth.requestDevice({filters: [{services: [serviceUuid]}]})
   .then(device => device.connectGATT())
   .then(server => server.getPrimaryService(serviceUuid))
   .then(service => service.getCharacteristic(characteristicUuid))
@@ -21,7 +21,8 @@ function onStartButtonClick() {
     myCharacteristic = characteristic;
     return myCharacteristic.startNotifications().then(() => {
       log('> Notifications started');
-      myCharacteristic.addEventListener('characteristicvaluechanged', handleNotifications);
+      myCharacteristic.addEventListener('characteristicvaluechanged',
+        handleNotifications);
     });
   })
   .catch(error => {
@@ -33,7 +34,8 @@ function onStopButtonClick() {
   if (myCharacteristic) {
     myCharacteristic.stopNotifications().then(() => {
       log('> Notifications stopped');
-      myCharacteristic.removeEventListener('characteristicvaluechanged', handleNotifications);
+      myCharacteristic.removeEventListener('characteristicvaluechanged',
+        handleNotifications);
     });
   }
 }
@@ -41,10 +43,11 @@ function onStopButtonClick() {
 function handleNotifications(event) {
   let buffer = event.target.value;
   let data = new DataView(buffer);
+  let a = [];
   // Convert raw data bytes to hex values just for the sake of showing something.
   // In the "real" world, you'd use data.getUint8, data.getUint16 or even
   // TextDecoder to process raw data bytes.
-  for (var i = 0, a = []; i < data.byteLength; i++) {
+  for (var i = 0; i < data.byteLength; i++) {
     a.push(('00' + data.getUint8(i).toString(16)).slice(-2));
   }
   log('> ' + a.join(''));

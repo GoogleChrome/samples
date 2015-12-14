@@ -2,7 +2,8 @@ function onButtonClick() {
   'use strict';
 
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters:[{services:['battery_service']}]})
+  navigator.bluetooth.requestDevice(
+    {filters: [{services: ['battery_service']}]})
   .then(device => {
     log('> Found ' + device.name);
     log('Connecting to GATT Server...');
@@ -17,8 +18,8 @@ function onButtonClick() {
     return service.getCharacteristic('battery_level');
   })
   .then(characteristic => {
-     log('Reading Battery Level...');
-     return characteristic.readValue();
+    log('Reading Battery Level...');
+    return characteristic.readValue();
   })
   .then(buffer => {
     let data = new DataView(buffer);

@@ -34,20 +34,14 @@ and ask for feedback directly.
 Style / Linting / CI
 ===
 The samples ideally should follow the [Google JavaScript Style Guide](http://google.github.io/styleguide/javascriptguide.xml),
-though this is not automatically enforced. (See https://github.com/GoogleChrome/samples/issues/141)
+and that's enforced via [ESLint](), using the [`eslint-config-google`](https://github.com/google/eslint-config-google)
+base configuration, with a few overrides as needed.
 
-It's recommended that all new samples pass the [`jshint`](http://jshint.com/install/) linting
-process, using the customized [`.jshintrc`](.jshintrc) settings. To automate linting against
-JavaScript in the Jekyll-ized HTML output, [`linter.rb`](linter.rb) can be used. Regular
-contributors should set up a git pre-commit
-[hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to run [`linter.rb`](linter.rb)
-against all files that are being committed, via `ln -s -f ../../linter.rb .git/hooks/pre-commit`
+Linting can be performed via `npm run lint` (make sure to `npm install` first).
 
-Various IDEs offer real-time JSHint integration (e.g. via
-[SublimeLinter-jshint](https://github.com/SublimeLinter/SublimeLinter-jshint)) and using those
-integrations that can help avoid errors before anything gets checked in.
+Various IDEs offer [real-time ESLint integration](http://eslint.org/docs/user-guide/integrations.html),
+and using those integrations that can help avoid errors before anything gets
+checked in.
 
 [Travis CI](https://travis-ci.org/GoogleChrome/samples) is currently being used to verify that the
-Jekyll build completes successfully, but doesn't currently lint/style check the full site.
-Once the all the older files in the project have been updated to pass `linter.rb` cleanly, that will
-be integrated into the Travis CI process.
+Jekyll build completes successfully and that linting passes without errors.

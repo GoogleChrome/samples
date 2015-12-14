@@ -41,7 +41,7 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
-          if (expectedCacheNames.indexOf(cacheName) == -1) {
+          if (expectedCacheNames.indexOf(cacheName) === -1) {
             // If this cache name isn't present in the array of "expected" cache names, then delete it.
             console.log('Deleting out of date cache:', cacheName);
             return caches.delete(cacheName);
@@ -71,35 +71,37 @@ self.addEventListener('fetch', function(event) {
           console.log(' Found response in cache:', response);
 
           return response;
-        } else {
-          // Otherwise, if there is no entry in the cache for event.request, response will be
-          // undefined, and we need to fetch() the resource.
-          console.log(' No response for %s found in cache. About to fetch from network...', event.request.url);
-
-          // We call .clone() on the request since we might use it in the call to cache.put() later on.
-          // Both fetch() and cache.put() "consume" the request, so we need to make a copy.
-          // (see https://fetch.spec.whatwg.org/#dom-request-clone)
-          return fetch(event.request.clone()).then(function(response) {
-            console.log('  Response for %s from network is: %O', event.request.url, response);
-
-            // Optional: add in extra conditions here, e.g. response.type == 'basic' to only cache
-            // responses from the same domain. See https://fetch.spec.whatwg.org/#concept-response-type
-            if (response.status < 400) {
-              // This avoids caching responses that we know are errors (i.e. HTTP status code of 4xx or 5xx).
-              // One limitation is that, for non-CORS requests, we get back a filtered opaque response
-              // (https://fetch.spec.whatwg.org/#concept-filtered-response-opaque) which will always have a
-              // .status of 0, regardless of whether the underlying HTTP call was successful. Since we're
-              // blindly caching those opaque responses, we run the risk of caching a transient error response.
-              //
-              // We need to call .clone() on the response object to save a copy of it to the cache.
-              // (https://fetch.spec.whatwg.org/#dom-request-clone)
-              cache.put(event.request, response.clone());
-            }
-
-            // Return the original response object, which will be used to fulfill the resource request.
-            return response;
-          });
         }
+
+        // Otherwise, if there is no entry in the cache for event.request, response will be
+        // undefined, and we need to fetch() the resource.
+        console.log(' No response for %s found in cache. ' +
+          'About to fetch from network...', event.request.url);
+
+        // We call .clone() on the request since we might use it in the call to cache.put() later on.
+        // Both fetch() and cache.put() "consume" the request, so we need to make a copy.
+        // (see https://fetch.spec.whatwg.org/#dom-request-clone)
+        return fetch(event.request.clone()).then(function(response) {
+          console.log('  Response for %s from network is: %O',
+            event.request.url, response);
+
+          // Optional: add in extra conditions here, e.g. response.type == 'basic' to only cache
+          // responses from the same domain. See https://fetch.spec.whatwg.org/#concept-response-type
+          if (response.status < 400) {
+            // This avoids caching responses that we know are errors (i.e. HTTP status code of 4xx or 5xx).
+            // One limitation is that, for non-CORS requests, we get back a filtered opaque response
+            // (https://fetch.spec.whatwg.org/#concept-filtered-response-opaque) which will always have a
+            // .status of 0, regardless of whether the underlying HTTP call was successful. Since we're
+            // blindly caching those opaque responses, we run the risk of caching a transient error response.
+            //
+            // We need to call .clone() on the response object to save a copy of it to the cache.
+            // (https://fetch.spec.whatwg.org/#dom-request-clone)
+            cache.put(event.request, response.clone());
+          }
+
+          // Return the original response object, which will be used to fulfill the resource request.
+          return response;
+        });
       }).catch(function(error) {
         // This catch() will handle exceptions that arise from the match() or fetch() operations.
         // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.

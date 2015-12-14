@@ -1,14 +1,14 @@
 function onFormSubmit() {
   'use strict';
 
-  let options = { filters : []};
+  let options = {filters: []};
 
   let filterService = document.getElementById('service').value;
   if (filterService.startsWith('0x')) {
     filterService = parseInt(filterService, 16);
   }
   if (filterService) {
-    options.filters.push({services: [ filterService ]});
+    options.filters.push({services: [filterService]});
   }
 
   let filterName = document.getElementById('name').value;

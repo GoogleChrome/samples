@@ -89,7 +89,7 @@ function unsubscribe() {
         // don't attempt to send them push messages anymore
 
         // We have a subcription, so call unsubscribe on it
-        pushSubscription.unsubscribe().then(function(successful) {
+        pushSubscription.unsubscribe().then(function() {
           pushButton.disabled = false;
           pushButton.textContent = 'Enable Push Messages';
           isPushEnabled = false;

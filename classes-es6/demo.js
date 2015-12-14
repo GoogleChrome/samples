@@ -21,17 +21,17 @@ class Polygon {
   }
 
   sayHistory() {
-    ChromeSamples.log('"Polygon" is derived from the Greek polus (many) and gonia (angle).');
+    ChromeSamples.log('"Polygon" is derived from the Greek polus (many) ' +
+      'and gonia (angle).');
   }
 
   // We will look at static and subclassed methods shortly
 }
 
 // Classes are used just like ES5 constructor functions:
-let p = new Polygon(300,400);
+let p = new Polygon(300, 400);
 p.sayName();
 ChromeSamples.log('The width of this polygon is ' + p.width);
-
 
 // Example 2: Creating a new class (expression-form)
 // ===============================================================
@@ -41,13 +41,13 @@ ChromeSamples.log('The width of this polygon is ' + p.width);
 // of defining a new class. For example:
 const MyPoly = class Poly {
   getPolyName() {
-    ChromeSamples.log('Hi. I was created with a Class expression. My name is ' + Poly.name);
+    ChromeSamples.log('Hi. I was created with a Class expression. My name is ' +
+      Poly.name);
   }
 };
 
 let inst = new MyPoly();
 inst.getPolyName();
-
 
 // Example 3: Extending an existing class
 // ===============================================================
@@ -114,7 +114,7 @@ class Tripple {
   // Using the 'static' keyword creates a method which is associated
   // with a class, but not with an instance of the class.
   static tripple(n) {
-    n = n | 1;
+    n = n || 1;
     return n * 3;
   }
 }
@@ -130,26 +130,27 @@ class BiggerTripple extends Tripple {
 ChromeSamples.log(Tripple.tripple());
 ChromeSamples.log(Tripple.tripple(6));
 ChromeSamples.log(BiggerTripple.tripple(3));
-var tp = new Tripple();
+// var tp = new Tripple();
 // ChromeSamples.log(tp.tripple()); tp.tripple is not a function
-
 
 // Example 6: Subclassing built-in classes and DOM
 // ===============================================================
 
 // Extend Date built-in
-class myDate extends Date {
+class MyDate extends Date {
   constructor() {
     super();
   }
 
   getFormattedDate() {
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return this.getDate() + "-" + months[this.getMonth()] + "-" + this.getFullYear();
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+      'Oct', 'Nov', 'Dec'];
+    return this.getDate() + '-' + months[this.getMonth()] + '-' +
+      this.getFullYear();
   }
 }
 
-var aDate = new myDate();
+var aDate = new MyDate();
 ChromeSamples.log(aDate.getTime());
 ChromeSamples.log(aDate.getFormattedDate());
 
@@ -166,7 +167,7 @@ var eua = new ExtendedUint8Array();
 ChromeSamples.log(eua.byteLength);
 
 // Extend DOM Audio element
-class myAudio extends Audio {
+class MyAudio extends Audio {
   constructor() {
     super();
     this._lyrics = '';
@@ -181,7 +182,7 @@ class myAudio extends Audio {
   }
 }
 
-var player = new myAudio();
+var player = new MyAudio();
 player.controls = true;
 player.lyrics = 'Never gonna give you up';
 document.querySelector('body').appendChild(player);

@@ -15,6 +15,4 @@ exclude:
   - README.md
   - node_modules
   - Gemfile
-  - gulpfile.js
-  - linter.rb
   - vendor

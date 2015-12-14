@@ -23,7 +23,8 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  if (event.request.url.match(/https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/)) {
+  var regex = /https:\/\/www.googleapis.com\/youtube\/v3\/playlistItems/;
+  if (event.request.url.match(regex)) {
     // Only call event.respondWith() if this looks like a YouTube API request.
     // Because we don't call event.respondWith() for non-YouTube API requests, they will not be
     // handled by the service worker, and the default network behavior will apply.

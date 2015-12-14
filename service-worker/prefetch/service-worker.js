@@ -45,7 +45,7 @@ self.addEventListener('install', function(event) {
 
   // All of these logging statements should be visible via the "Inspect" interface
   // for the relevant SW accessed via chrome://serviceworker-internals
-  console.log('Handling install event. Resources to pre-fetch:', urlsToPrefetch);
+  console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
 
   event.waitUntil(
     caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
@@ -71,7 +71,8 @@ self.addEventListener('install', function(event) {
         // (https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#cross-origin-resources)
         // and it is not possible to determine whether an opaque response represents a success or failure
         // (https://github.com/whatwg/fetch/issues/14).
-        return fetch(new Request(url, {mode: 'no-cors'})).then(function(response) {
+        var request = new Request(url, {mode: 'no-cors'});
+        return fetch(request).then(function(response) {
           if (response.status >= 400) {
             throw new Error('request for ' + urlToPrefetch +
               ' failed with status ' + response.statusText);
@@ -105,7 +106,7 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
-          if (expectedCacheNames.indexOf(cacheName) == -1) {
+          if (expectedCacheNames.indexOf(cacheName) === -1) {
             // If this cache name isn't present in the array of "expected" cache names, then delete it.
             console.log('Deleting out of date cache:', cacheName);
             return caches.delete(cacheName);

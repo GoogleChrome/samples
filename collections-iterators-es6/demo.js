@@ -7,14 +7,15 @@ for (var i = 0; i < 5; i++) {
 }
 
 ChromeSamples.log(randomIntegers.size, 'distinct integers were generated.');
-ChromeSamples.log('The number 10 was', randomIntegers.has(10) ? '' : 'not', 'one of them.');
+ChromeSamples.log('The number 10 was',
+  randomIntegers.has(10) ? '' : 'not', 'one of them.');
 ChromeSamples.log('Here\'s all of them:');
 
 // Use for...of to iterate over the items in the Set.
 // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements
 // The Set iterator yields a single value corresponding to each entry in the Set.
-for (var item of randomIntegers) {
-  ChromeSamples.log(item);
+for (var integer of randomIntegers) {
+  ChromeSamples.log(integer);
 }
 
 ChromeSamples.log('\nCreating and iterating over a Map:');

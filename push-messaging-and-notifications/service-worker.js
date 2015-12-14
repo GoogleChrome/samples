@@ -17,7 +17,6 @@ self.addEventListener('push', function(event) {
   );
 });
 
-
 self.addEventListener('notificationclick', function(event) {
   console.log('On notification click: ', event.notification.tag);
   // Android doesn’t close the notification when you click on it
@@ -27,15 +26,16 @@ self.addEventListener('notificationclick', function(event) {
   // This looks to see if the current is already open and
   // focuses if it is
   event.waitUntil(clients.matchAll({
-    type: "window"
+    type: 'window'
   }).then(function(clientList) {
     for (var i = 0; i < clientList.length; i++) {
       var client = clientList[i];
-      if (client.url == '/' && 'focus' in client)
+      if (client.url === '/' && 'focus' in client) {
         return client.focus();
+      }
     }
-    if (clients.openWindow)
+    if (clients.openWindow) {
       return clients.openWindow('/');
+    }
   }));
-
 });

@@ -21,7 +21,7 @@ function fetchAndDecode(file, encoding) {
   // rather than letting XMLHttpRequest decode the data first.
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    if (this.status == 200) {
+    if (this.status === 200) {
       // The decode() method takes a DataView as a parameter, which is a wrapper on top of the ArrayBuffer.
       var dataView = new DataView(this.response);
       // The TextDecoder interface is documented at http://encoding.spec.whatwg.org/#interface-textdecoder
@@ -29,7 +29,7 @@ function fetchAndDecode(file, encoding) {
       var decodedString = decoder.decode(dataView);
       ChromeSamples.log(decodedString);
     } else {
-      ChromeSample.setStatus('Error while requesting', file, this.status);
+      ChromeSamples.setStatus('Error while requesting', file, this.status);
     }
   };
   xhr.send();
