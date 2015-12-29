@@ -7,8 +7,8 @@ for (var i = 0; i < 5; i++) {
 }
 
 ChromeSamples.log(randomIntegers.size, 'distinct integers were generated.');
-ChromeSamples.log('The number 10 was',
-  randomIntegers.has(10) ? '' : 'not', 'one of them.');
+ChromeSamples.log('The number 10 was ' +
+  (randomIntegers.has(10) ? '' : 'not ') + 'one of them.');
 ChromeSamples.log('Here\'s all of them:');
 
 // Use for...of to iterate over the items in the Set.
