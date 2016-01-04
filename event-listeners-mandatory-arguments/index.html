@@ -1,0 +1,19 @@
+---
+feature_name: addEventListener/removeEventListener non-optional arguments
+chrome_version: 49
+feature_id: 5640816202612736
+---
+
+<h3>Background</h3>
+<p>Previously, Chrome treated the first two arguments (<code>type</code> and
+<code>listener</code>) of <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a></code>
+and <code><a
+href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener">removeEventListener</a></code>
+optional, while they are non-optional in the spec and other browsers. This has
+changed: Now calling these methods with zero or one argument throws an
+Exception.</p>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='demo.js' %}
+
