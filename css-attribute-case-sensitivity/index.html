@@ -1,0 +1,37 @@
+---
+feature_name: Case-insensitive Attribute Selector Matching
+chrome_version: 49
+feature_id: 5610936115134464
+---
+
+<h3>Background</h3>
+
+<p>By default, case-sensitivity of attribute names and values in selectors
+depends on the document language. That's why an additional modifier (<code>i</code>) for <a
+href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">CSS
+attribute selectors</a> has been added to allow an author to match an
+attribute's value case-insensitively within the ASCII range.</p>
+
+{% capture css %}
+/* All list items which have an id attribute with the ending `case`. */
+li[id$="case" i] {
+  color: green;
+}
+/* All list items which have an id attribute with the exact ending `case` but
+ * not the value endings `CASE` or `Case`. */
+li[id$="case"] {
+  font-weight: bold;
+}
+{% endcapture %}
+
+{% include css_snippet.html css=css %}
+{% capture html %}
+<ul>
+  <li id="foo">foo</li>
+  <li id="snake_case">snake_case</li>
+  <li id="camelCase">camelCase</li>
+  <li id="PascalCase">PascalCase</li>
+  <li id="bar">bar</li>
+</ul>
+{% endcapture %}
+{% include html_snippet.html html=html %}
