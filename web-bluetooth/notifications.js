@@ -1,5 +1,5 @@
 'use strict';
-let myCharacteristic;
+var myCharacteristic;
 
 function onStartButtonClick() {
   let serviceUuid = document.getElementById('service').value;
