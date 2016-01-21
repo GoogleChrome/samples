@@ -21,9 +21,10 @@ function onButtonClick() {
     log('Reading Battery Level...');
     return characteristic.readValue();
   })
-  .then(buffer => {
-    let data = new DataView(buffer);
-    let batteryLevel = data.getUint8(0);
+  .then(value => {
+    // In Chrome 50+, a DataView is returned instead of an ArrayBuffer.
+    value = value.buffer ? value : new DataView(value);
+    let batteryLevel = value.getUint8(0);
     log('> Battery Level is ' + batteryLevel + '%');
   })
   .catch(error => {
