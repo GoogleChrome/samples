@@ -1,28 +1,25 @@
-var dateNowAtLoad = Date.now();
-var offsetFromEpoch;
-
+var offsetFromEpoch = 0;
 var previousX = 0;
 var previousY = 0;
 var previousT = 0;
 
-function calculateDateForTimestamp(timestamp) {
-  if (offsetFromEpoch === undefined) {
-    // When we don't yet know what the offset should be, use a simple heuristic:
-    // If the timestamp value is less than the time this JS was first loaded,
-    // then it's almost certainly a DOMHighResTimeStamp. Adding timestamp to
-    // performance.timing.navigationStart should give a value relative to
-    // the epoch, which could be passed in to the Date constructor.
-    // Otherwise, it's a DOMTimeStamp, and is already relative to the epoch.
-    offsetFromEpoch = (timestamp < dateNowAtLoad) ?
-      performance.timing.navigationStart : 0;
+window.addEventListener('load', function(event) {
+  // Use a simple heuristic to determine the offset from the epoch:
+  // If the timestamp value is less than the current time,
+  // then it's almost certainly a DOMHighResTimeStamp. Adding timestamp to
+  // performance.timing.navigationStart should give a value relative to
+  // the epoch, which could be passed in to the Date constructor.
+  // Otherwise, it's a DOMTimeStamp, and is already relative to the epoch.
+  if (event.timeStamp < Date.now()) {
+    offsetFromEpoch = performance.timing.navigationStart;
   }
 
-  return new Date(offsetFromEpoch + timestamp);
-}
+  // While a 'mousemove' listener is being used for the purposes of this
+  // example, the new timeStamp resolution applies to all Event types.
+  window.addEventListener('mousemove', calculateVelocity);
+});
 
-// While a 'mousemove' listener is being used for the purposes of this
-// example, the new timeStamp resolution applies to all Event types.
-window.addEventListener('mousemove', function(event) {
+function calculateVelocity(event) {
   var Δx = event.screenX - previousX;
   var Δy = event.screenY - previousY;
   var Δd = Math.sqrt(Math.pow(Δx, 2) + Math.pow(Δy, 2));
@@ -37,8 +34,9 @@ window.addEventListener('mousemove', function(event) {
   // Multiply by 1000 to go from milliseconds to seconds.
   var velocityInPixelsPerSecond = Δd / Δt * 1000;
 
-  // Contrived example to illustrate how to convert event.timeStamp to a Date.
-  var date = calculateDateForTimestamp(event.timeStamp);
+  // Contrived example to illustrate how to use offsetFromEpoch to get a Date
+  // that corresponds to event.timeStamp.
+  var date = new Date(event.timeStamp + offsetFromEpoch);
 
   ChromeSamples.setStatus(velocityInPixelsPerSecond + ' as of ' +
     date.toLocaleTimeString());
@@ -46,4 +44,4 @@ window.addEventListener('mousemove', function(event) {
   previousX = event.screenX;
   previousY = event.screenY;
   previousT = event.timeStamp;
-});
+}
