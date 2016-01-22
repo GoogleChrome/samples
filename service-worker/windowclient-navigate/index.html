@@ -1,0 +1,31 @@
+---
+feature_name: "Service Worker: WindowClient.navigate()"
+chrome_version: 49
+feature_id: 5314750808326144
+---
+
+<h3>Background</h3>
+<p>
+  <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowClient">WindowClient</a>.navigate()</code> allows a service worker to cause a web
+  page to navigate to a specific URL.
+</p>
+
+<p>
+  This sample shows how <code>WindowClient.navigate()</code> can be called
+  within a service worker's <code>activate</code> handler, to navigate to
+  <code>activated.html</code>. If your browser supports service workers, and
+  supports <code>WindowClient.navigate()</code>, then you'll be automatically
+  navigated away from this page once the service worker activates.
+</p>
+
+<p>
+  Note that the <code>activate</code> event is only fired once per version of
+  a given service worker registration. If you'd like to trigger it again to
+  test out the <code>WindowClient.navigate()</code> behavior, you can revisit
+  this page in a Chrome
+  <a href="https://support.google.com/chrome/answer/95464?source=gsearch&hl=en">Incognito window</a>, which will trigger a fresh
+  service worker registration.
+</p>
+
+{% include js_snippet.html filename='index.js' title="This Page's JavaScript" %}
+{% include js_snippet.html filename='service-worker.js' displayonly=true title="Service Worker's JavaScript" %}

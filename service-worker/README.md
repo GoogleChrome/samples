@@ -43,6 +43,11 @@ take control of the page that just registered it.
 - [Using `window.caches`](https://googlechrome.github.io/samples/service-worker/window-caches/index.html) -
 a sample showing how `window.caches` provides access to the Cache Storage API.
 
+- [Using `WindowClient.navigate()`](https://googlechrome.github.io/samples/service-worker/windowclient-navigate/index.html) -
+a sample showing how a service worker can cause web page clients it controls to
+navigate to a given URL.
+
+
 # Related samples
 
 - Instructions for [registering for Push Messages and showing Notifications](https://github.com/GoogleChrome/samples/tree/gh-pages/push-messaging-and-notifications).
