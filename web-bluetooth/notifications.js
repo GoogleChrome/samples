@@ -41,14 +41,15 @@ function onStopButtonClick() {
 }
 
 function handleNotifications(event) {
-  let buffer = event.target.value;
-  let data = new DataView(buffer);
+  let value = event.target.value;
+  // In Chrome 50+, a DataView is returned instead of an ArrayBuffer.
+  value = value.buffer ? value : new DataView(value);
   let a = [];
   // Convert raw data bytes to hex values just for the sake of showing something.
   // In the "real" world, you'd use data.getUint8, data.getUint16 or even
   // TextDecoder to process raw data bytes.
-  for (var i = 0; i < data.byteLength; i++) {
-    a.push(('00' + data.getUint8(i).toString(16)).slice(-2));
+  for (var i = 0; i < value.byteLength; i++) {
+    a.push(('00' + value.getUint8(i).toString(16)).slice(-2));
   }
   log('> ' + a.join(''));
 }
