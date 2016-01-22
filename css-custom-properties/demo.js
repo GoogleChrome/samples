@@ -27,7 +27,7 @@ var chooseDefaultColor = function(event) {
 };
 
 // Initialise page controls.
-window.onload = function() {
+window.addEventListener('load', function() {
   // Get the styles for the document.
   // This is where we've chosen to store all the global variables we use.
   var styles = getComputedStyle(document.documentElement);
@@ -37,7 +37,7 @@ window.onload = function() {
   var columns = document.getElementById('columns');
 
   // Set up event handlers for buttons.
-  var buttons = document.getElementsByClassName('picker-button');
+  var buttons = document.querySelectorAll('.picker-button');
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', chooseDefaultColor);
   }
@@ -49,15 +49,15 @@ window.onload = function() {
 
   // Set up event handlers for having the sliders update the custom properties
   // at the document level.
-  quantum.addEventListener('change', function() {
+  quantum.addEventListener('input', function() {
     setDocumentVariable('--spacing-unit', quantum.value + 'px');
   });
 
-  gutter.addEventListener('change', function() {
+  gutter.addEventListener('input', function() {
     setDocumentVariable('--margins', gutter.value);
   });
 
-  columns.addEventListener('change', function() {
+  columns.addEventListener('input', function() {
     setDocumentVariable('--grid-columns', columns.value);
   });
-};
+});
