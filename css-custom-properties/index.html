@@ -2,7 +2,6 @@
 feature_name: CSS Custom Properties (CSS Variables)
 chrome_version: 49
 feature_id: 6401356696911872
-local_css_files: ['index.css']
 ---
 
 <h3>Background</h3>
@@ -142,9 +141,7 @@ local_css_files: ['index.css']
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-<h3>CSS Snippet</h3>
-
-{% highlight css %}
+{% capture css %}
 :root {
   /*************************** Page-wide variables ****************************/
 
@@ -177,7 +174,48 @@ local_css_files: ['index.css']
   --cell-margin: (var(--grid-gutter) / 2);
 }
 
+.header {
+  display: block;
+  position: relative;
+  height: calc(28 * var(--spacing-unit));
+  /* Use a default value for the background color, by passing it in as the 2nd
+     parameter to var(). We don't strictly need it in this case, since we've
+     defined it at the document level, but this illustrates common usage. */
+  background-color: var(--primary-color, #5E35B1);
+  padding-left: calc(4 * var(--spacing-unit));
+
+  transition: background-color 1s;
+}
+
+.title {
+  position: relative;
+  top: calc(8 * var(--spacing-unit));
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  font-size: calc(4 * var(--spacing-unit));
+  font-weight: 400;
+  color: var(--primary-color-text);
+
+  transition: color 1s;
+}
+
+.shade {
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  padding-left: calc(1 * var(--spacing-unit));
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(8 * var(--spacing-unit));
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .grid {
+  /* Resets */
+  margin: 0;
+  border: 0;
+  padding: 0;
+
   display: flex;
   flex-flow: row wrap;
   align-items: stretch;
@@ -188,13 +226,100 @@ local_css_files: ['index.css']
 }
 
 .cell {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  color: rgb(97, 97, 97);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   margin: calc(var(--cell-margin));
   background-color: var(--cell-color);
   width: calc(100% / var(--grid-columns) - var(--grid-gutter));
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),
+      0 3px 1px -2px rgba(0,0,0,.2),
+      0 1px 5px 0 rgba(0,0,0,.12);
 }
-{% endhighlight %}
+
+.cell-title {
+  font-size: calc(3 * var(--spacing-unit));
+}
+
+.cell-header {
+  display: flex;
+  align-items: center;
+  color: var(--primary-color-text);
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  padding-left: calc(var(--cell-padding));
+  height: calc(12 * var(--spacing-unit));
+}
+
+.cell-content {
+  font-size: calc(2.5 * var(--spacing-unit));
+  padding: calc(var(--cell-padding));
+  flex-grow: 1;
+}
+
+.cell-actions {
+  padding: calc(2 * var(--spacing-unit));
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.picker-button {
+  position: relative;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  font-size: calc(2 * var(--spacing-unit));
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 2px;
+  color: var(--primary-color);
+  text-decoration: none;
+  padding: calc(2 * var(--spacing-unit));
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  text-transform: uppercase;
+
+  transition: background-color 0.2s;
+}
+
+.picker-button:focus {
+  outline: none;
+}
+
+.picker-button:active {
+  background-color: #DDD;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-family: sans-serif;
+  font-size: 12px;
+  padding: 8px;
+  background-color: rgba(200, 200, 200, 0.8);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  margin: 0 0 8px 0;
+}
+
+.control-key {
+  flex-grow: 1;
+  margin-right: 16px;
+}
+
+.control-value {
+  width: 152px;
+}
+{% endcapture %}
+
+{% include css_snippet.html css=css %}
 
 {% include js_snippet.html filename='demo.js' %}
