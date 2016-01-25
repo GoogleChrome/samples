@@ -102,11 +102,11 @@ function updateURL() {
     }
   }
   let params = new URLSearchParams(location.search.slice(1));
-  params[func](paramName.value, paramVal.value);
+  var val = params[func](paramName.value, paramVal.value);
   if (!func.match(/^get|has/)) {
     window.history.replaceState({}, '', location.pathname + '?' + params);
   } else {
-    alert(paramName.value + '=' + params.getAll(paramName.value));
+    ChromeSamples.log(params[func].name + '(' + paramName.value + '): ' + val);
   }
 }
 
