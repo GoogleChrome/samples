@@ -7,7 +7,7 @@ additional_head_content: <link rel="stylesheet" href="https://fonts.googleapis.c
 ---
 
 <h3>Background</h3>
-<p>The <code>URLSearchParams</code> <a href="https://url.spec.whatwg.org/#urlsearchparams" target="_blank">spec</a> defines an interface and convenience methods for working with the query string of a URL (e.g. everything after "<code>?</code>"). This means no more UR regex'ing and string splitting!</p>
+<p>The <code>URLSearchParams</code> <a href="https://url.spec.whatwg.org/#urlsearchparams" target="_blank">spec</a> defines an interface and convenience methods for working with the query string of a URL (e.g. everything after "<code>?</code>"). This means no more regex'ing and string splitting URLs!</p>
 
 <p>A <code>URLSearchParams</code> object can be used directly in a <code>for...of</code> block.</p>
 
@@ -28,7 +28,7 @@ console.log(params.getAll('foo'));
 
 console.log(params.toString());
 
-// Update page's URL.
+// Also can choice to update the page's URL.
 // window.history.replaceState({}, '', '/?' + params);
 
 {% endcapture %}
