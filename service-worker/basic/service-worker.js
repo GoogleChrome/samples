@@ -1,4 +1,4 @@
-self.addEventListener('fetch',function(event) {
+self.addEventListener('fetch', function(event) {
   console.log('got a request');
 
   var salutation = 'Hello, ';
