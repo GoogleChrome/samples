@@ -1,0 +1,43 @@
+---
+feature_name: Promise Rejection Events
+chrome_version: 49
+feature_id: 4805872211460096
+---
+
+<h3>Background</h3>
+<p>
+  Two new global events, <code>unhandledrejection</code> and
+  <code>rejectionhandled</code>, can be used to keep track of
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>
+  rejections, including whether those rejections are handled after the fact.
+</p>
+<p>
+  The <code>unhandledrejection</code> event is the promise-equivalent of the
+  global <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror"><code>error</code></a>
+  event, which is fired for uncaught exceptions. Because a rejected promise
+  could be handled after the fact, by attaching <code>catch(onRejected)</code>
+  or <code>then(onResolved, onRejected)</code> to it, the additional
+  <code>rejectionhandled</code> event is needed to indicate that a promise which
+  was previously rejected should no longer be considered unhandled.
+</p>
+<p>
+  These two events can be used, for example, to keep track of unhandled
+  rejections as part of an error-reporting framework.
+</p>
+
+{% include js_snippet.html filename='demo.js' %}
+
+{% capture initial_output_content %}
+<p>
+  This sample generates a new rejected promise every second. Half of
+  the time, it <code>catch()</code>es that rejection after the fact to simulate
+  a handled error, and half of the time the promise remains uncaught.
+</p>
+<p>
+  Every five seconds, a "logging" function is invoked, which reports all the
+  promises that went uncaught. In a real-world system, this logging might
+  report back to a centralized database which kept track of all unhandled
+  errors, but for this example, it just logs the list of errors to the page.
+</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
