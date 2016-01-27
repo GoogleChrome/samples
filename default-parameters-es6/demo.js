@@ -5,7 +5,7 @@ function greetES5(message, to) {
   // Test parameter values in the function body, specifying a default
   to = to || 'DOM';
   // OR if (typeof to === undefined) { to = 'DOM'; }
-  // OR if (arguments.to === 1) { to = DOM'; '}
+  // OR if (arguments.length === 1) { to = 'DOM'; }
   ChromeSamples.log(message + ', ' + to);
 }
 greetES5('Good morning');
@@ -23,17 +23,21 @@ greet('Sup', 'CSS');
 // Another example
 function f(x, y = 12) {
   // y is 12 if not passed (or passed as undefined)
-  return x + y;
+  ChromeSamples.log(`${x} + ${y} = ${x + y}`);
 }
 
 f(3);
+
+// Here, the default parameter won't be used since we're passing in a value, even though 0 is false-y.
+f(7, 0);
+
 // For more info, read: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters#Passing_undefined
 
 // Default arguments are evaluated at call time. This means
 // a new array is created each time the function is called here:
 function append(value, array = []) {
   array.push(value);
-  return array;
+  ChromeSamples.log(array);
 }
 
 append(1);
