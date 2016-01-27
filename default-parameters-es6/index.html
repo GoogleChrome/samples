@@ -1,0 +1,15 @@
+---
+feature_name: Default parameters (ES2015)
+chrome_version: 49
+feature_id: 5275456790069248
+---
+
+<h3>Background</h3>
+
+<p><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters'>Default parameters</a> allow formal function parameters to be initialized with default values if no value (or <code>undefined</code>) is supplied.</p>
+
+<p>In ES5, one would test parameter values in the body of the function and assign a value if they were <code>undefined</code>. In ES2015, a check in the function body is no longer required and one can simply defined default values for parameters in the function head.</p>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='demo.js' %}
