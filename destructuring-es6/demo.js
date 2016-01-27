@@ -30,10 +30,9 @@ var {sam: cat1, passy: cat2, surma: cat3} = catAges;
 ChromeSamples.log(cat1, cat2, cat3);
 
 // Default values for function object parameters
-var request = ({
-  url: url = 'github.com', crossDomain: crossDomain = true},
-  ...data) => {
-  ChromeSamples.log(`url: ${url}, crossDomain: ${crossDomain}, data: ${data}`);
+// For more information, read  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters#Destructured_parameter_with_default_value_assignment
+var request = ({url: url = 'github.com', cors: cors = true}, ...data) => {
+  ChromeSamples.log(`url: ${url}, cors: ${cors}, data: ${data}`);
 };
 
 request({url: 'thecatapi.com'}, 'cute', 'kittens');
