@@ -25,19 +25,25 @@ feature_id: 4805872211460096
   rejections as part of an error-reporting framework.
 </p>
 
-{% include js_snippet.html filename='demo.js' %}
-
 {% capture initial_output_content %}
 <p>
-  This sample generates a new rejected promise every second. Half of
-  the time, it <code>catch()</code>es that rejection after the fact to simulate
-  a handled error, and half of the time the promise remains uncaught.
+  The buttons below can be used to create new rejected promises that are either
+  eventually handled, or just left unhandled. The corresponding
+  <code>unhandledrejection</code> events (and <code>rejectionhandled</code> if
+  the promise is eventually handled) are logged.
 </p>
 <p>
-  Every five seconds, a "logging" function is invoked, which reports all the
-  promises that went uncaught. In a real-world system, this logging might
-  report back to a centralized database which kept track of all unhandled
-  errors, but for this example, it just logs the list of errors to the page.
+  This sample also shows how a web app might keep a running tally of all
+  unhandled rejections in a <code>Map</code> object. This could come in handy
+  when working with a centralized error reporting infrastructure, where you
+  want to log all rejected promises that have gone unhandled up to that point.
 </p>
+<div>
+  <button id="handled">New Handled Rejection</button>
+  <button id="unhandled">New Unhandled Rejection</button>
+  <button id="report">Report Unhandled Rejection</button>
+</div>
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}

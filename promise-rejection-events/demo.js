@@ -3,22 +3,23 @@
 var unhandledRejections = new Map();
 
 window.addEventListener('unhandledrejection', event => {
+  ChromeSamples.log('unhandledrejection fired: ' + event.reason);
   // Keep track of rejected promises by adding them to the Map.
   unhandledRejections.set(event.promise, event.reason);
 });
 
 window.addEventListener('rejectionhandled', event => {
+  ChromeSamples.log('rejectionhandled fired: ' + event.reason);
   // If a previously rejected promise is handled, remove it from the Map.
   unhandledRejections.delete(event.promise);
 });
 
-function generateRejectedPromise() {
+function generateRejectedPromise(isEventuallyHandled) {
   // Create a promise which immediately rejects with a given reason.
-  var rejectedPromise = Promise.reject('Error at ' +
+  rejectedPromise = Promise.reject('Error at ' +
     new Date().toLocaleTimeString());
 
-  // 50% of the time, use .catch() to handle the rejection.
-  if (Math.random() > 0.5) {
+  if (isEventuallyHandled) {
     // We need to handle the rejection "after the fact" in order to trigger a
     // unhandledrejection followed by rejectionhandled. Here we simulate that
     // via a setTimeout(), but in a real-world system this might take place due
@@ -26,15 +27,13 @@ function generateRejectedPromise() {
     // requests at some point later on.
     setTimeout(() => {
       // We need to provide an actual function to .catch() or else the promise
-      // won't be considered handled. Let's just log the .catch().
-      rejectedPromise.catch(error => {
-        ChromeSamples.log(error, 'was handled via catch().');
-      });
+      // won't be considered handled.
+      rejectedPromise.catch(() => {});
     }, 1);
   }
 }
 
-function logUnhandledRejections() {
+function reportUnhandledRejections() {
   ChromeSamples.log('[Unhandled Rejections]');
   for (var reason of unhandledRejections.values()) {
     ChromeSamples.log(' ', reason);
@@ -42,5 +41,14 @@ function logUnhandledRejections() {
   unhandledRejections.clear();
 }
 
-setInterval(generateRejectedPromise, 1000);
-setInterval(logUnhandledRejections, 5000);
+document.querySelector('#handled').addEventListener('click', () => {
+  generateRejectedPromise(true);
+});
+
+document.querySelector('#unhandled').addEventListener('click', () => {
+  generateRejectedPromise(false);
+});
+
+document.querySelector('#report').addEventListener('click', () => {
+  reportUnhandledRejections();
+});
