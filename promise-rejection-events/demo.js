@@ -16,7 +16,7 @@ window.addEventListener('rejectionhandled', event => {
 
 function generateRejectedPromise(isEventuallyHandled) {
   // Create a promise which immediately rejects with a given reason.
-  rejectedPromise = Promise.reject('Error at ' +
+  var rejectedPromise = Promise.reject('Error at ' +
     new Date().toLocaleTimeString());
 
   if (isEventuallyHandled) {
