@@ -16,7 +16,7 @@ feature_id: 4805872211460096
   global <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror"><code>error</code></a>
   event, which is fired for uncaught exceptions. Because a rejected promise
   could be handled after the fact, by attaching <code>catch(onRejected)</code>
-  or <code>then(onResolved, onRejected)</code> to it, the additional
+  or <code>then(onFulfilled, onRejected)</code> to it, the additional
   <code>rejectionhandled</code> event is needed to indicate that a promise which
   was previously rejected should no longer be considered unhandled.
 </p>
