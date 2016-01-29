@@ -1,0 +1,115 @@
+---
+feature_name: URLSearchParams
+chrome_version: 49
+feature_id: 5632984866619392
+local_css_files: ['page.css']
+---
+
+<h3>Background</h3>
+<p>The <code>URLSearchParams</code> <a href="https://url.spec.whatwg.org/#urlsearchparams" target="_blank">spec</a> defines an interface and convenience methods for working with the query string of a URL (e.g. everything after "<code>?</code>"). This means no more regex'ing and string splitting URLs!</p>
+
+<p>A <code>URLSearchParams</code> object can be used directly in a <code>for...of</code> block.</p>
+
+{% capture js %}
+let url = new URL('https://example.com?foo=1&bar=2'); // or construct from window.location
+
+let params = new URLSearchParams(url.search.slice(1));
+
+for (let p of params) {
+  console.log(p);
+}
+
+params.set('baz', 3);
+console.log(params.has('baz'));
+
+params.append('foo', 4);
+console.log(params.getAll('foo'));
+
+console.log(params.toString());
+
+// Also can choose to update the page's URL.
+// window.history.replaceState({}, '', '/?' + params);
+
+{% endcapture %}
+{% include js_snippet.html js=js title="Basic example" %}
+
+{% include output_helper.html %}
+
+<p>The <code>URL</code> constructor integrates with <code>URLSearchParams</code> by adding a read-only property, <code>.searchParams</code>:</p>
+
+{% capture js2 %}
+// Note: .searchParams is currently not implemented in Chrome 49.
+let url = new URL('https://example.com?foo=1&bar=2');
+console.log(url.searchParams.get('foo')); // === 1
+{% endcapture %}
+{% include js_snippet.html js=js2 title="" displayonly=true %}
+
+<h3>Live Demo</h3>
+
+<p>Below, you can manipulate the URL of this page by changing the parameter name
+to get/set values. The URL will update using the <code>URLSearchParams</code> and <code>window.history</code> API.</p>
+
+<div>
+  <label>Parameter: <input type="text" id="paramName" value="foo"></label><label>value: <input type="text" id="paramVal" value="1"></label>
+
+  <div id="radios" class="flex vertical">
+    <label><input type="radio" id="get" name="func" value="get"> get()</label>
+    <label><input type="radio" id="has" name="func" value="has"> has()</label>
+    <label><input type="radio" id="set" name="func" value="set" checked> set()</label>
+    <label><input type="radio" id="getAll" name="func" value="getAll"> getAll()</label>
+    <label><input type="radio" id="append" name="func" value="append"> append()</label>
+    <label><input type="radio" id="delete" name="func" value="delete"> delete()</label>
+  </div>
+
+  <button id="update">Run/update URL</button> <button id="clear">Clear search params</button>
+</div>
+
+<script>
+// Basic sample.
+(function() {
+  'use strict';
+
+  let url = new URL('https://example.com?foo=1&bar=2');
+
+  let params = new URLSearchParams(url.search.slice(1));
+
+  for (let p of params) {
+    ChromeSamples.log(p);
+  }
+
+  params.set('baz', 3);
+  ChromeSamples.log(params.has('baz'));
+
+  params.append('foo', 4);
+  ChromeSamples.log(params.getAll('foo'));
+
+  ChromeSamples.log(params.toString())
+})();
+
+function clearURL() {
+  window.history.replaceState({}, '', location.pathname);
+}
+
+function updateURL() {
+  let paramName = document.querySelector('#paramName');
+  let paramVal = document.querySelector('#paramVal');
+  let radios = document.querySelectorAll('#radios [name="func"]');
+  let func = null;
+  for (let i = 0, radio; radio = radios[i]; ++i) {
+    if (radio.checked) {
+      func = radio.value;
+      break;
+    }
+  }
+  let params = new URLSearchParams(location.search.slice(1));
+  var val = params[func](paramName.value, paramVal.value);
+  if (!func.match(/^get|has/)) {
+    window.history.replaceState({}, '', location.pathname + '?' + params);
+  } else {
+    ChromeSamples.log(params[func].name + '(' + paramName.value + '): ' + val);
+  }
+}
+
+document.querySelector('#update').addEventListener('click', updateURL);
+document.querySelector('#clear').addEventListener('click', clearURL);
+</script>
