@@ -86,7 +86,7 @@ var mediaURLArray = [];
 var playIcon = '<span class="glyphicon glyphicon-play"></span>';
 var pauseIcon = '<span class="glyphicon glyphicon-pause"></span>';
 
-function loadMedia(name, thisParam, thisImg, thisVid, otherVid) {
+function loadMedia(name, thisParam, thisImg, thisVid) {
   var ext = name.split('.').pop();
 
   uri.setSearch(thisParam, name);
@@ -110,7 +110,7 @@ function loadMedia(name, thisParam, thisImg, thisVid, otherVid) {
 function loadLeftMedia(name) {
   loadMedia(name, 'left', leftImg, leftVid, rightVid);
 }
-function loadRightMedia(name, reload) {
+function loadRightMedia(name) {
   loadMedia(name, 'right', rightImg, rightVid, leftVid);
 }
 
@@ -259,7 +259,7 @@ $.fn.optGroups = function(labelText) {
 
 // Keyboard shortcuts
 
-Mousetrap.stopCallback = function(e, element, combo) {
+Mousetrap.stopCallback = function(e, element) {
   // Ignore the shortcuts for these elements only
   return element.tagName === 'SELECT' || element.tagName === 'TEXTAREA' ||
       (element.tagName === 'INPUT' && (element.type === 'number' ||
