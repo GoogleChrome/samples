@@ -2,3 +2,4 @@ _site/
 vendor/
 service-worker/serviceworker-cache-polyfill.js
 decorators-es7/
+webrtc-vp8-vp9/third_party
