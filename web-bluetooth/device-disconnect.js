@@ -3,8 +3,12 @@ var bluetoothGattServer;
 function onDisconnectButtonClick() {
   log('Disconnecting from Bluetooth Device...');
   if (bluetoothGattServer) {
-    bluetoothGattServer.disconnect();
-    log('Bluetooth Device connected: ' + bluetoothGattServer.connected);
+    if (bluetoothGattServer.connected) {
+      bluetoothGattServer.disconnect();
+      log('Bluetooth Device connected: ' + bluetoothGattServer.connected);
+    } else {
+      log('Bluetooth Device is already disconnected');
+    }
   }
 }
 
