@@ -15,11 +15,11 @@
 
   {% if include.filename %}
     {% highlight js %}
-      {% include_relative {{include.filename}} %}
+{% include_relative {{include.filename}} %}
     {% endhighlight %}
   {% else %}
     {% highlight js %}
-      {{include.js}}
+{{include.js}}
     {% endhighlight %}
   {% endif %}
 {% endif %}
