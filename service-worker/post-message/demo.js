@@ -75,7 +75,9 @@ if ('serviceWorker' in navigator) {
 
   navigator.serviceWorker.register('service-worker.js')
     // Wait until the service worker is active.
-    .then(navigator.serviceWorker.ready)
+    .then(function() {
+      return navigator.serviceWorker.ready;
+    })
     // ...and then show the interface for the commands once it's ready.
     .then(showCommands)
     .catch(function(error) {
