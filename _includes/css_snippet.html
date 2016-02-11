@@ -7,7 +7,5 @@
     <h3>{{ include.title }}</h3>
   {% endif %}
 
-  {% highlight css %}
-    {{ include.css }}
-  {% endhighlight %}
+  {% highlight css %}{{ include.css }}{% endhighlight %}
 {% endif %}
