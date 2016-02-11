@@ -46,7 +46,7 @@ limitations under the License.
         }
       });
     </script>
-    {% assign sub_dirs = page.url | split: '/' | size | minus: 1 %}
+    {% assign sub_dirs = page.path | split: '/' | size | minus: 1 %}
     {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}
     <link rel="icon" href="{{ relative_path_to_root }}images/favicon.ico">
     <link rel="stylesheet" href="{{ relative_path_to_root }}styles/main.css">
