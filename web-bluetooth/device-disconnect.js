@@ -13,7 +13,7 @@ function onDisconnectButtonClick() {
   }
 }
 
-function onGattServerDisconnected() {
+function onDisconnected() {
   log('Page is no longer visible...');
   log('> Bluetooth Device connected: ' + bluetoothDevice.gatt.connected);
 }
@@ -46,7 +46,7 @@ function onScanButtonClick() {
   navigator.bluetooth.requestDevice(options)
   .then(device => {
     bluetoothDevice = device;
-    bluetoothDevice.addEventListener('gattserverdisconnected', onGattServerDisconnected);
+    bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
     return connect();
   })
   .catch(error => {
@@ -73,5 +73,5 @@ function connect() {
   return bluetoothDevice.gatt.connect()
   .then(gattServer => {
     log('> Bluetooth Device connected: ' + bluetoothDevice.gatt.connected);
-  })
+  });
 }
