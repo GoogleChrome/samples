@@ -1,15 +1,21 @@
-var bluetoothGattServer;
+var bluetoothDevice;
 
 function onDisconnectButtonClick() {
-  log('Disconnecting from Bluetooth Device...');
-  if (bluetoothGattServer) {
-    if (bluetoothGattServer.connected) {
-      bluetoothGattServer.disconnect();
-      log('Bluetooth Device connected: ' + bluetoothGattServer.connected);
-    } else {
-      log('Bluetooth Device is already disconnected');
-    }
+  if (!bluetoothDevice) {
+    return;
   }
+  log('Disconnecting from Bluetooth Device...');
+  if (bluetoothDevice.gatt.connected) {
+    bluetoothDevice.gatt.disconnect();
+    log('> Bluetooth Device connected: ' + bluetoothDevice.gatt.connected);
+  } else {
+    log('> Bluetooth Device is already disconnected');
+  }
+}
+
+function onGattServerDisconnected() {
+  log('Page is no longer visible...');
+  log('> Bluetooth Device connected: ' + bluetoothDevice.gatt.connected);
 }
 
 function onScanButtonClick() {
@@ -35,17 +41,37 @@ function onScanButtonClick() {
     options.filters.push({namePrefix: filterNamePrefix});
   }
 
+  bluetoothDevice = null;
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(options)
   .then(device => {
-    log('Connecting to Bluetooth Device...');
-    return device.connectGATT();
-  })
-  .then(gattServer => {
-    bluetoothGattServer = gattServer;
-    log('Bluetooth Device connected: ' + bluetoothGattServer.connected);
+    bluetoothDevice = device;
+    bluetoothDevice.addEventListener('gattserverdisconnected', onGattServerDisconnected);
+    return connect();
   })
   .catch(error => {
     log('Argh! ' + error);
   });
+}
+
+function onReconnectButtonClick() {
+  if (!bluetoothDevice) {
+    return;
+  }
+  if (bluetoothDevice.gatt.connected) {
+    log('> Bluetooth Device is already connected');
+    return;
+  }
+  connect()
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+function connect() {
+  log('Connecting to Bluetooth Device...');
+  return bluetoothDevice.gatt.connect()
+  .then(gattServer => {
+    log('> Bluetooth Device connected: ' + bluetoothDevice.gatt.connected);
+  })
 }
