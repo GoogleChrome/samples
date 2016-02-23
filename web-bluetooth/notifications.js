@@ -49,7 +49,7 @@ function handleNotifications(event) {
   // In the "real" world, you'd use data.getUint8, data.getUint16 or even
   // TextDecoder to process raw data bytes.
   for (var i = 0; i < value.byteLength; i++) {
-    a.push(('00' + value.getUint8(i).toString(16)).slice(-2));
+    a.push('0x' + ('00' + value.getUint8(i).toString(16)).slice(-2));
   }
-  log('> ' + a.join(''));
+  log('> ' + a.join(' '));
 }
