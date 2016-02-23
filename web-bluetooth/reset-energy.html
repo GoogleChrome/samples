@@ -5,6 +5,7 @@ feature_id: 5264933985976320
 ---
 
 {% include_relative _includes/intro.html %}
+{% include_relative _includes/utils.html %}
 
 <p>This sample illustrates the use of the Web Bluetooth API to reset energy
 expended from a nearby Bluetooth Device advertising Heart Rate with Bluetooth
@@ -21,13 +22,9 @@ Play Store</a>.</p>
 
 <script>
   document.querySelector('button').addEventListener('click', function() {
-    if (!navigator.bluetooth) {
-      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
-        'Please make sure the Web Bluetooth flag is enabled.');
-    } else {
+    if (isWebBluetoothEnabled()) {
       ChromeSamples.clearLog();
       onButtonClick();
     }
   });
-  log = ChromeSamples.log;
 </script>
