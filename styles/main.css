@@ -1,7 +1,7 @@
 body {
   background-color: #ffffff;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 @media screen and (min-width: 832px) {
@@ -22,6 +22,10 @@ h2 {
 h3 {
   margin-bottom: -0.2em;
   margin-top: 2em;
+}
+
+.availability {
+  margin-bottom: 2em;
 }
 
 .output {
