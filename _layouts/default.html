@@ -56,7 +56,7 @@ limitations under the License.
 
   <body>
     <h1>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</h1>
-    <p>
+    <p class="availability">
       Available in <a target="_blank" href="https://www.chromestatus.com/feature/{{ page.feature_id }}">Chrome {{ page.chrome_version }}+</a> |
       <a target="_blank" href="view-source:{{ site.gh_pages_url_prefix }}{{ page.url }}">View Source</a> |
       <a target="_blank" href="{{ site.gh_url_prefix }}{{ page.url | remove_first: 'index.html' }}">View on GitHub</a> |
