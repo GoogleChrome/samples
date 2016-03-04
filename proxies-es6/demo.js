@@ -3,13 +3,15 @@
 // Proxying a normal object
 var target = {};
 var handler = {
-  get(receiver, name = 'world') {
-    return `Hello, ${name}!`;
+  get(target, property, receiver) {
+    return `Hello, ${property}!`;
   }
 };
 
-var p = new Proxy(target, handler);
-ChromeSamples.log(p.folks);
+var myProxy = new Proxy(target, handler);
+ChromeSamples.log(myProxy.folks);
+// myProxy.folks would normally be undefined, but the proxied get handler provides a value.
+// Outputs: Hello, folks!
 
 // Proxying a function object
 function sum(a, b) {
@@ -17,24 +19,31 @@ function sum(a, b) {
 }
 
 var handler2 = {
-  apply: function(target, thisArg, argumentsList) {
-    console.log(`Calculate sum: ${argumentsList}`);
+  apply(target, thisArg, argumentsList) {
+    ChromeSamples.log(`Calculate sum: ${argumentsList}`);
     return target.apply(thisArg, argumentsList);
   }
 };
 
 var proxy = new Proxy(sum, handler2);
 ChromeSamples.log(proxy(1, 2));
+// Calculate sum: 1,2
+// 3
 
-// Field interception with Proxy and the Reflect API
+// Field interception with Proxy and the Reflect object.
+//
+// Reflect is a built-in object that provides methods for interceptable
+// JavaScript operations. The methods are the same as those of proxy
+// handlers. Reflect is not a function object, so it's not constructible.
+
 var pioneer = new Proxy({}, {
-  get: function(target, name, receiver) {
-    ChromeSamples.log(`get called for field: ${name}`);
-    return Reflect.get(target, name, receiver);
+  get(target, property, receiver) {
+    ChromeSamples.log(`get called for field: ${property}`);
+    return Reflect.get(target, property, receiver);
   },
-  set: function(target, name, value, receiver) {
-    ChromeSamples.log(`set called for field: ${name}, and value: ${value}`);
-    return Reflect.set(target, name, value, receiver);
+  set(target, property, value, receiver) {
+    ChromeSamples.log(`set called for field: ${property} and value: ${value}`);
+    return Reflect.set(target, property, value, receiver);
   }
 });
 
