@@ -17,10 +17,12 @@ feature_id: 5920584248590336
   playback succeeded or failed.
 </p>
 
-{% capture initial_output_content %}
+{% capture html %}
 <audio id="music" src="../audio/techno.wav"></audio>
 <button id="play" hidden>Play</button>
 {% endcapture %}
-{% include output_helper.html initial_output_content=initial_output_content %}
 
+{% include output_helper.html %}
+
+{% include html_snippet.html html=html %}
 {% include js_snippet.html filename='demo.js' %}
