@@ -14,7 +14,7 @@ function onStartButtonClick() {
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters: [{services: [serviceUuid]}]})
-  .then(device => device.connectGATT())
+  .then(device => device.gatt.connect())
   .then(server => server.getPrimaryService(serviceUuid))
   .then(service => service.getCharacteristic(characteristicUuid))
   .then(characteristic => {
