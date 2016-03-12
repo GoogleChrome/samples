@@ -7,9 +7,9 @@ form.addEventListener('submit', function(ev) {
   var status = '';
 
   // Remove 'dob' from FormData if the user is <18.
-  var t = new Date();
-  t.setDate(t.getDate() - 365 * 18);
-  if (+dateOfBirth > +t) {
+  var date = new Date();
+  date.setDate(date.getDate() - 365 * 18);
+  if (Number(dateOfBirth) > Number(date)) {
     status = 'User is less than 18 years old!';
     formData.delete('dob');
     formData.set('underage', 'true');
