@@ -19,7 +19,7 @@ form.addEventListener('submit', function(ev) {
   status += ', keys=' + Array.from(formData.keys());
 
   // This could be sent to a server with-
-  //   window.fetch(url, {data: formData})
+  //   window.fetch(url, {body: formData, method: 'POST'})
 
   ChromeSamples.setContent(document.createTextNode(status));
 });
