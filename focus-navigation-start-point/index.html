@@ -44,7 +44,9 @@
           <div class="mdl-cell mdl-cell--12-col">
             <h2>Background</h2>
 
-            The 'sequential focus navigation starting point' feature defines where we start to search for focusable elements for sequential focus navigation (TAB or Shift-TAB) when there is no focused area.
+            The 'sequential focus navigation starting point' feature defines where we start to search for focusable elements for sequential focus navigation (Tab or Shift-Tab) when there is no focused area. Using the keyboard, Tab to the Recipes link in the table of contents and press Enter. The page will scroll to the linked section and automatically set a new focus navigation start point. Pressing Tab again will then move to the nearest anchor. Similarly you can click on the page near a focusble element and that too will move the focus start point.
+
+            In prior versions of Chrome you would need to manually manage this focus change yourself by setting tabindex=-1 on the linked header or calling the focus() method of a nearby element. Check out <a href="https://developers.google.com/web/updates/2016/03/focus-start-point">this article to learn more about sequential focus navigation start point</a>.
 
             <div style="margin-top: 16px;">
               Available in Chrome 50+ | <a href="view-source:https://googlechrome.github.io/samples/focus-navigation-start-point">View Source</a> | <a href="https://github.com/GoogleChrome/samples/focus-navigation-start-point">View on GitHub</a> | <a href="https://www.chromestatus.com/samples">Browse Samples</a>
