@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <mime-mapping>
+    <extension>js</extension>
+    <mime-type>application/x-javascript</mime-type>
+  </mime-mapping>
+  <mime-mapping>
+    <extension>css</extension>
+    <mime-type>text/css</mime-type>
+  </mime-mapping>
+  
+  <servlet>
+    <servlet-name>SignupServlet</servlet-name>
+    <servlet-class>com.google.account.internal.servlet.SignupServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.google.account.internal.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.google.account.internal.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TokenEndpoint</servlet-name>
+    <servlet-class>com.google.dosidos.TokenEndpoint</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SetBigAccountChangeTimeServlet</servlet-name>
+    <servlet-class>com.google.account.internal.servlet.SetBigAccountChangeTimeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SignupServlet</servlet-name>
+    <url-pattern>/account/action/signup</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/account/action/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/account/action/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TokenEndpoint</servlet-name>
+    <url-pattern>/token</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SetBigAccountChangeTimeServlet</servlet-name>
+    <url-pattern>/account/action/big</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>CookieParserFilter</filter-name>
+    <filter-class>com.google.account.filter.CookieParserFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>HasSessionFilter</filter-name>
+    <filter-class>com.google.account.filter.HasSessionFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>NoSessionFilter</filter-name>
+    <filter-class>com.google.account.filter.NoSessionFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CookieParserFilter</filter-name>
+    <url-pattern>/account/action/*</url-pattern>
+    <url-pattern>/account/page/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>NoSessionFilter</filter-name>
+    <url-pattern>/account/page/login.jsp</url-pattern>
+    <url-pattern>/account/page/signup.jsp</url-pattern>
+    <url-pattern>/account/action/login</url-pattern>
+    <url-pattern>/account/action/signup</url-pattern>
+  </filter-mapping>
+   
+  <filter-mapping>
+    <filter-name>HasSessionFilter</filter-name>
+    <url-pattern>/account/action/big</url-pattern>
+    <url-pattern>/account/page/home.jsp</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>com.google.websession.MyAppContextListener</listener-class>
+  </listener>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>all</web-resource-name>
+        <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+</web-app>
