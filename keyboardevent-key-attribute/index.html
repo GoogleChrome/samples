@@ -1,0 +1,31 @@
+---
+feature_name: KeyboardEvent key Attribute
+chrome_version: 51
+feature_id: 4748790720364544
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key"><code>KeyboardEvent.key</code></a>
+  attribute returns the string value of the key (or keys) pressed by the user to
+  generate a
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent"><code>KeyboardEvent</code></a>.
+</p>
+
+<p>
+  Special control keys that do not have a direct string representation are given
+  <code>key</code> values that can be found in
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key#Key_values">this chart</a>.
+  For example, pressing the caps lock key will result in a <code>key</code>
+  value of <code>"CapsLock"</code>.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  The <code>KeyboardEvent.key</code> values for any keys you press on the
+  keyboard will be logged here.
+</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
