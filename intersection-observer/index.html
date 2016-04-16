@@ -1,0 +1,40 @@
+---
+feature_name: IntersectionObserver
+chrome_version: 51
+feature_id: 5695342691483648
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://wicg.github.io/IntersectionObserver/">IntersectionObserver API</a>
+  provides an API to understand the visibility and position of DOM elements relative to
+  a containing element or to the top-level viewport.
+</p>
+<p>
+  This sample illustrates using <code>IntersectionObserver</code> to implement a infinite
+  scroller without having to rely on scroll events. A sentinel element triggers the loading
+  of additional elements once it comes into view and is being recycled after the new
+  elements have been attached to the list.
+<p>
+  The <a href="https://developers.google.com/web/updates/???"><em>Google Devloper Web Updates</em></a>
+  article provides more details on <code>IntersectionObserver</code>.
+</p>
+{% capture initial_output_content %}
+<p>This optional capture/include can be used to set initial sample output.</p>
+<div id="template" class="item"></div>
+<div id="sentinel"></div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+{% include js_snippet.html filename='demo.js' %}
+
+{% capture css %}
+.item {
+  background-color: #FFF;
+  border: 1px solid #666;
+  height: 200px
+}
+#sentinel {
+  width: 1px;
+  height: 1px;
+}
+{% endcapture %}
