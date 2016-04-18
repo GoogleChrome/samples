@@ -11,7 +11,12 @@ function loadItems(n) {
   }
 }
 
-var intersectionObserver = new IntersectionObserver(() => {
+var intersectionObserver = new IntersectionObserver((entries) => {
+  // If intersectionRatio is 0, the sentinel is out of view
+  // and we do not need to do anything.
+  if(entries[0].intersectionRatio <= 0) {
+    return;
+  }
   loadItems(10);
   // appendChild will move the existing element, so there is no need to
   // remove it first.
