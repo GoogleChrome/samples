@@ -109,9 +109,9 @@ self.addEventListener('message', function(event) {
         return fetch(request).then(function(response) {
           return cache.put(event.data.url, response);
         }).then(function() {
-            event.ports[0].postMessage({
-              error: null
-            });
+          event.ports[0].postMessage({
+            error: null
+          });
         });
 
       // This command removes a request/response pair from the cache (assuming it exists).
