@@ -1,3 +1,4 @@
+/* global IntersectionObserver */
 var scroller = document.querySelector('#scroller');
 var sentinel = document.querySelector('#sentinel');
 var counter = 1;
@@ -11,10 +12,10 @@ function loadItems(n) {
   }
 }
 
-var intersectionObserver = new IntersectionObserver((entries) => {
+var intersectionObserver = new IntersectionObserver(entries => {
   // If intersectionRatio is 0, the sentinel is out of view
   // and we do not need to do anything.
-  if(entries[0].intersectionRatio <= 0) {
+  if (entries[0].intersectionRatio <= 0) {
     return;
   }
   loadItems(10);
