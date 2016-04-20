@@ -26,12 +26,8 @@ function onFormSubmit() {
   .then(device => {
     log('> Name:             ' + device.name);
     log('> Id:               ' + device.id);
-    log('> Device Class:     ' + device.deviceClass);
-    log('> Vendor Id Source: ' + device.vendorIDSource);
-    log('> Vendor Id:        ' + device.vendorID);
-    log('> Product Id:       ' + device.productID);
-    log('> Product Version:  ' + device.productVersion);
     log('> UUIDs:            ' + device.uuids.join('\n' + ' '.repeat(20)));
+    log('> Connected:        ' + device.gatt.connected);
     if (device.adData) {
       log('> Tx Power:         ' + device.adData.txPower + ' dBm');
       log('> RSSI:             ' + device.adData.rssi + ' dBm');
