@@ -77,13 +77,12 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('message', function(event) {
   console.log('Handling message event:', event);
-  var request;
-  caches.open(CURRENT_CACHES['post-message']).then(function(cache) {
+  var p = caches.open(CURRENT_CACHES['post-message']).then(function(cache) {
     switch (event.data.command) {
       // This command returns a list of the URLs corresponding to the Request objects
       // that serve as keys for the current cache.
       case 'keys':
-        cache.keys().then(function(requests) {
+        return cache.keys().then(function(requests) {
           var urls = requests.map(function(request) {
             return request.url;
           });
@@ -99,7 +98,6 @@ self.addEventListener('message', function(event) {
             urls: urls
           });
         });
-        break;
 
       // This command adds a new request/response pair to the cache.
       case 'add':
@@ -107,23 +105,22 @@ self.addEventListener('message', function(event) {
         // by the outer .catch().
         // Hardcode {mode: 'no-cors} since the default for new Requests constructed from strings is to require
         // CORS, and we don't have any way of knowing whether an arbitrary URL that a user entered supports CORS.
-        request = new Request(event.data.url, {mode: 'no-cors'});
-        cache.add(request).then(function() {
+        var request = new Request(event.data.url, {mode: 'no-cors'});
+        return fetch(request).then(function(response) {
+          return cache.put(event.data.url, response);
+        }).then(function() {
           event.ports[0].postMessage({
             error: null
           });
         });
-        break;
 
       // This command removes a request/response pair from the cache (assuming it exists).
       case 'delete':
-        request = new Request(event.data.url);
-        cache.delete(request).then(function(success) {
+        return cache.delete(event.data.url).then(function(success) {
           event.ports[0].postMessage({
             error: success ? null : 'Item was not found in the cache.'
           });
         });
-        break;
 
       default:
         // This will be handled by the outer .catch().
@@ -137,4 +134,15 @@ self.addEventListener('message', function(event) {
       error: error.toString()
     });
   });
+
+  // Beginning in Chrome 51, event is an ExtendableMessageEvent, which supports
+  // the waitUntil() method for extending the lifetime of the event handler
+  // until the promise is resolved.
+  if ('waitUntil' in event) {
+    event.waitUntil(p);
+  }
+
+  // Without support for waitUntil(), there's a chance that if the promise chain
+  // takes "too long" to execute, the service worker might be automatically
+  // stopped before it's complete.
 });
