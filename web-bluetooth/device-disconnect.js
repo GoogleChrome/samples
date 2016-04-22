@@ -14,7 +14,7 @@ function onDisconnectButtonClick() {
 }
 
 function onDisconnected() {
-  log('> Bluetooth Device disconnected')
+  log('> Bluetooth Device disconnected');
 }
 
 function onScanButtonClick() {
