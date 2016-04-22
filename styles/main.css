@@ -24,6 +24,12 @@ h3 {
   margin-top: 2em;
 }
 
+.pageIcon {
+  height: 2.3em;
+  float: left;
+  margin-right: 0.5em;
+}
+
 .availability {
   margin-bottom: 2em;
 }
