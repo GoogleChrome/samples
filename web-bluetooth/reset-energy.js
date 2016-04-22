@@ -6,7 +6,7 @@ function onButtonClick() {
   .then(device => {
     log('> Found ' + device.name);
     log('Connecting to GATT Server...');
-    return device.connectGATT();
+    return device.gatt.connect();
   })
   .then(server => {
     log('Getting Heart Rate Service...');
