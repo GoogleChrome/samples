@@ -19,7 +19,7 @@ function onStartButtonClick() {
   .then(service => service.getCharacteristic(characteristicUuid))
   .then(characteristic => {
     myCharacteristic = characteristic;
-    return myCharacteristic.startNotifications().then(() => {
+    return myCharacteristic.startNotifications().then(_ => {
       log('> Notifications started');
       myCharacteristic.addEventListener('characteristicvaluechanged',
         handleNotifications);
@@ -32,7 +32,7 @@ function onStartButtonClick() {
 
 function onStopButtonClick() {
   if (myCharacteristic) {
-    myCharacteristic.stopNotifications().then(() => {
+    myCharacteristic.stopNotifications().then(_ => {
       log('> Notifications stopped');
       myCharacteristic.removeEventListener('characteristicvaluechanged',
         handleNotifications);
