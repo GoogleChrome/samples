@@ -23,7 +23,7 @@ function onButtonClick() {
     let resetEnergyExpended = new Uint8Array([1]);
     return characteristic.writeValue(resetEnergyExpended);
   })
-  .then(() => {
+  .then(_ => {
     log('> Energy expended has been reset.');
   })
   .catch(error => {
