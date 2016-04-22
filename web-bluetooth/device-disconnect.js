@@ -14,8 +14,7 @@ function onDisconnectButtonClick() {
 }
 
 function onDisconnected() {
-  log('Page is no longer visible...');
-  log('> Bluetooth Device connected: ' + bluetoothDevice.gatt.connected);
+  log('> Bluetooth Device disconnected')
 }
 
 function onScanButtonClick() {
