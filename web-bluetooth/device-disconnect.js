@@ -22,7 +22,7 @@ function onScanButtonClick() {
 
   let options = {filters: []};
 
-  let filterService = document.getElementById('service').value;
+  let filterService = document.querySelector('#service').value;
   if (filterService.startsWith('0x')) {
     filterService = parseInt(filterService, 16);
   }
@@ -30,12 +30,12 @@ function onScanButtonClick() {
     options.filters.push({services: [filterService]});
   }
 
-  let filterName = document.getElementById('name').value;
+  let filterName = document.querySelector('#name').value;
   if (filterName) {
     options.filters.push({name: filterName});
   }
 
-  let filterNamePrefix = document.getElementById('namePrefix').value;
+  let filterNamePrefix = document.querySelector('#namePrefix').value;
   if (filterNamePrefix) {
     options.filters.push({namePrefix: filterNamePrefix});
   }

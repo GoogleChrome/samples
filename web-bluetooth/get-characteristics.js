@@ -1,7 +1,7 @@
 function onFormSubmit() {
   'use strict';
 
-  let serviceUuid = document.getElementById('service').value;
+  let serviceUuid = document.querySelector('#service').value;
   if (serviceUuid.startsWith('0x')) {
     serviceUuid = parseInt(serviceUuid, 16);
   }
