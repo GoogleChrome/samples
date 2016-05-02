@@ -1,28 +1,28 @@
 function onFormSubmit() {
   'use strict';
 
-  let options = {filters: []};
+  let filters = [];
 
   let filterService = document.querySelector('#service').value;
   if (filterService.startsWith('0x')) {
     filterService = parseInt(filterService, 16);
   }
   if (filterService) {
-    options.filters.push({services: [filterService]});
+    filters.push({services: [filterService]});
   }
 
   let filterName = document.querySelector('#name').value;
   if (filterName) {
-    options.filters.push({name: filterName});
+    filters.push({name: filterName});
   }
 
   let filterNamePrefix = document.querySelector('#namePrefix').value;
   if (filterNamePrefix) {
-    options.filters.push({namePrefix: filterNamePrefix});
+    filters.push({namePrefix: filterNamePrefix});
   }
 
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice(options)
+  navigator.bluetooth.requestDevice({filters: filters})
   .then(device => {
     log('> Name:             ' + device.name);
     log('> Id:               ' + device.id);
