@@ -2,12 +2,12 @@
 var myCharacteristic;
 
 function onStartButtonClick() {
-  let serviceUuid = document.getElementById('service').value;
+  let serviceUuid = document.querySelector('#service').value;
   if (serviceUuid.startsWith('0x')) {
     serviceUuid = parseInt(serviceUuid, 16);
   }
 
-  let characteristicUuid = document.getElementById('characteristic').value;
+  let characteristicUuid = document.querySelector('#characteristic').value;
   if (characteristicUuid.startsWith('0x')) {
     characteristicUuid = parseInt(characteristicUuid, 16);
   }
