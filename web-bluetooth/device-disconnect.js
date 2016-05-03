@@ -18,8 +18,6 @@ function onDisconnected() {
 }
 
 function onScanButtonClick() {
-  'use strict';
-
   let options = {filters: []};
 
   let filterService = document.querySelector('#service').value;
