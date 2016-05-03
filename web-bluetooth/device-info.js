@@ -1,6 +1,4 @@
 function onFormSubmit() {
-  'use strict';
-
   let filters = [];
 
   let filterService = document.querySelector('#service').value;

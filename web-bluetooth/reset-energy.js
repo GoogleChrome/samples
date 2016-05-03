@@ -1,6 +1,4 @@
 function onButtonClick() {
-  'use strict';
-
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters: [{services: ['heart_rate']}]})
   .then(device => {
