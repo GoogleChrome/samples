@@ -26,10 +26,6 @@ function onFormSubmit() {
     log('> Id:               ' + device.id);
     log('> UUIDs:            ' + device.uuids.join('\n' + ' '.repeat(20)));
     log('> Connected:        ' + device.gatt.connected);
-    if (device.adData) {
-      log('> Tx Power:         ' + device.adData.txPower + ' dBm');
-      log('> RSSI:             ' + device.adData.rssi + ' dBm');
-    }
   })
   .catch(error => {
     log('Argh! ' + error);
