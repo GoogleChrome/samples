@@ -1,0 +1,12 @@
+#splitSlider {
+    display: none;
+}
+
+#leftVidDiv, #leftImgDiv, #rightVidDiv, #rightImgDiv {
+    display: inline-block;
+}
+
+#leftVidDiv, #leftImgDiv {
+    /* override width set by splitSlider */
+    width: auto !important;
+}

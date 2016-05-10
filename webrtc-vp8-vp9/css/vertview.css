@@ -1,0 +1,15 @@
+#splitSlider {
+    display: none;
+}
+
+#leftVidDiv, #leftImgDiv {
+    /* override width set by splitSlider */
+    width: auto !important;
+}
+
+/* Center the images */
+#leftVidDivImg, #rightVidDivImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
