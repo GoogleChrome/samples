@@ -2,11 +2,12 @@
 feature_name: Web Bluetooth / Device Disconnect
 chrome_version: 50
 feature_id: 5264933985976320
+icon_url: icon.png
 ---
 
 {% include_relative _includes/intro.html %}
 
-<p>This sample illustrates the use of the Web Bluetooth API to <a href="http://webbluetoothcg.github.io/web-bluetooth/#dom-bluetoothgattremoteserver-disconnect">disconnect<a/> from a nearby Bluetooth Low Energy Device after connecting to it.</p>
+<p>This sample illustrates the use of the Web Bluetooth API to <a href="http://webbluetoothcg.github.io/web-bluetooth/#dom-bluetoothgattremoteserver-disconnect">disconnect</a> and get notified from a disconnection of a nearby Bluetooth Low Energy Device after connecting to it.</p>
 
 <form>
   <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
@@ -14,6 +15,7 @@ feature_id: 5264933985976320
   <input id="namePrefix" type="text" placeholder="Device Name Prefix">
   <button id="scan">Scan</button>
   <button id="disconnect">Disconnect</button>
+  <button id="reconnect">Reconnect</button>
 </form>
 
 {% include_relative _includes/datalist-services.html %}
@@ -27,10 +29,7 @@ feature_id: 5264933985976320
     event.stopPropagation();
     event.preventDefault();
 
-    if (!navigator.bluetooth) {
-      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
-        'Please make sure the Web Bluetooth flag is enabled.');
-    } else {
+    if (isWebBluetoothEnabled()) {
       ChromeSamples.clearLog();
       onScanButtonClick();
     }
@@ -39,12 +38,18 @@ feature_id: 5264933985976320
     event.stopPropagation();
     event.preventDefault();
 
-    if (!navigator.bluetooth) {
-      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
-        'Please make sure the Web Bluetooth flag is enabled.');
-    } else {
+    if (isWebBluetoothEnabled()) {
       onDisconnectButtonClick();
     }
   });
-  log = ChromeSamples.log;
+  document.querySelector('#reconnect').addEventListener('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      onReconnectButtonClick();
+    }
+  });
 </script>
+
+{% include_relative _includes/utils.html %}

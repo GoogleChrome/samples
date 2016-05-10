@@ -48,8 +48,7 @@ limitations under the License.
     var isSecureOrigin = location.protocol === 'https:' ||
       location.host === 'localhost';
     if (!isSecureOrigin) {
-      alert('Service Worker must be run from a secure origin: HTTPS or localhost.' +
-            '\n\nChanging protocol to HTTPS');
+      alert('Service Worker must be run from a secure origin: HTTPS or localhost.' + '\n\nChanging protocol to HTTPS');
       location.protocol = 'HTTPS';
     }
     </script>
@@ -86,9 +85,9 @@ limitations under the License.
     </div>
 
     <script>
-      function showFilesList() {
-        document.querySelector('#files').style.display = 'block';
-      }
+      // function showFilesList() {
+      //   document.querySelector('#files').style.display = 'block';
+      // }
 
       // Helper function which returns a promise which resolves once the service worker registration
       // is past the "installing" state.
@@ -117,7 +116,7 @@ limitations under the License.
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js', {scope: './'})
         .then(waitUntilInstalled)
-        .then(showFilesList)
+        // .then(showFilesList)
         .catch(function(error) {
             // Something went wrong during registration. The service-worker.js file
             // might be unavailable or contain a syntax error.

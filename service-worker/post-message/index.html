@@ -27,6 +27,13 @@ feature_id: 5163630974730240
   work lifecycle events on the underlying registration.
 </p>
 
+<p>
+  (Note that the Cache Storage API is also exposed via <code>window.caches</code>,
+  so in a real-world web application, you could just manage cache entries
+  directly from your web page, without having to coordinate caches by passing
+  messages to the service worker.)
+</p>
+
 {% capture initial_output_content %}
 <div id="commands" style="display: none">
   <div>

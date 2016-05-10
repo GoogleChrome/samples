@@ -1,13 +1,11 @@
 function onButtonClick() {
-  'use strict';
-
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(
     {filters: [{services: ['battery_service']}]})
   .then(device => {
     log('> Found ' + device.name);
     log('Connecting to GATT Server...');
-    return device.connectGATT();
+    return device.gatt.connect();
   })
   .then(server => {
     log('Getting Battery Service...');
@@ -22,8 +20,6 @@ function onButtonClick() {
     return characteristic.readValue();
   })
   .then(value => {
-    // In Chrome 50+, a DataView is returned instead of an ArrayBuffer.
-    value = value.buffer ? value : new DataView(value);
     let batteryLevel = value.getUint8(0);
     log('> Battery Level is ' + batteryLevel + '%');
   })
