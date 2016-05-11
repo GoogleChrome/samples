@@ -37,7 +37,7 @@ self.addEventListener('install', function(event) {
   var now = Date.now();
 
   var urlsToPrefetch = [
-    'static/video.webm', 'static/poster.jpg',
+    'static/video.webm', 'static/poster.jpg'
   ];
 
   // All of these logging statements should be visible via the "Inspect" interface

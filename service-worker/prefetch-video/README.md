@@ -1,5 +1,8 @@
-Service Worker Sample: Prefetching Resources During Registration
+<!-- TODO: Replace PLACEHOLDER with feature name. -->
+PLACEHOLDER Sample
 ===
-See https://googlechrome.github.io/samples/service-worker/prefetch/index.html for a live demo.
+<!-- TODO: Replace PLACEHOLDER in the path to correspond to the real github.io URL. -->
+See https://googlechrome.github.io/samples/PLACEHOLDER/index.html for a live demo.
 
-Learn more at https://www.chromestatus.com/feature/6561526227927040
+<!-- TODO: Replace PLACEHOLDER with the id from the chromestatus.com URL. -->
+Learn more at https://www.chromestatus.com/feature/PLACEHOLDER
