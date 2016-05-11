@@ -16,10 +16,12 @@ Play Store</a>.</p>
 
 <form>
   <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
+  <input id="characteristic" type="text" list="characteristics" placeholder="Optional Bluetooth Characteristic">
   <button>Get characteristics</button>
 </form>
 
 {% include_relative _includes/datalist-services.html %}
+{% include_relative _includes/datalist-characteristics.html %}
 
 {% include output_helper.html %}
 
