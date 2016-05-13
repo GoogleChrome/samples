@@ -1,8 +1,11 @@
 {
   "globals": {
+    "BluetoothUUID": true,
     "log": true
   },
   "rules": {
-    "no-unused-vars": 0
+    "max-len": 0,
+    "no-unused-vars": 0,
+    "no-undef": 0
   }
 }
