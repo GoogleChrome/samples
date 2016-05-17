@@ -33,8 +33,7 @@ function onBuyClicked() {
   var options = {requestShipping: true};
 
   try {
-    // eslint-disable-next-line no-undef
-    var request = new PaymentRequest(supportedInstruments, details, options);
+    var request = new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
 
     request.addEventListener('shippingaddresschange', function(evt) {
       evt.updateWith(new Promise(function(resolve, reject) {

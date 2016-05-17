@@ -31,8 +31,7 @@ function onBuyClicked() {
   };
 
   try {
-    // eslint-disable-next-line no-undef
-    new PaymentRequest(supportedInstruments, details)
+    new PaymentRequest(supportedInstruments, details) // eslint-disable-line no-undef
         .show()
         .then(function(instrumentResponse) {
           // Simulate server-side processing with a 2 second delay.

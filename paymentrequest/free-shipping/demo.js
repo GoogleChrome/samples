@@ -45,8 +45,7 @@ function onBuyClicked() {
   var options = {requestShipping: true};
 
   try {
-    // eslint-disable-next-line no-undef
-    var request = new PaymentRequest(supportedInstruments, details, options);
+    var request = new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
     request.show().then(function(instrumentResponse) {
       // Simulate server-side processing with a 2 second delay.
       window.setTimeout(function() {
