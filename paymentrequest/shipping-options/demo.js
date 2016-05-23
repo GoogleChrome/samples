@@ -76,16 +76,18 @@ function onBuyClicked() {
       ChromeSamples.setStatus(err.message);
     });
   } catch (e) {
-    ChromeSamples.status('Developer mistake: \'' + e.message + '\'');
+    ChromeSamples.setStatus('Developer mistake: \'' + e.message + '\'');
   }
 }
 
 var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window) {
+if ('PaymentRequest' in window && navigator.userAgent.match(/Android/i)) {
   buyButton.addEventListener('click', onBuyClicked);
 } else {
   buyButton.setAttribute('style', 'display: none;');
-  ChromeSamples.setStatus('PaymentRequest is not supported on this platform.');
+  ChromeSamples.setStatus(
+      'PaymentRequest is supported only on Android for now. ' +
+      'Enable chrome://flags/#enable-experimental-web-platform-features');
 }
 
 function updateDetails(details, shippingOption, resolve, reject) {
