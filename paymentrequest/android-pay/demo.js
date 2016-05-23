@@ -57,7 +57,7 @@ function onBuyClicked() {
 }
 
 var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window) {
+if ('PaymentRequest' in window && navigator.userAgent.match(/Android/i)) {
   buyButton.addEventListener('click', onBuyClicked);
 } else {
   buyButton.setAttribute('style', 'display: none;');
