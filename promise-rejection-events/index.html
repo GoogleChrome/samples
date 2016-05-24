@@ -1,0 +1,49 @@
+---
+feature_name: Promise Rejection Events
+chrome_version: 49
+feature_id: 4805872211460096
+---
+
+<h3>Background</h3>
+<p>
+  Two new global events, <code>unhandledrejection</code> and
+  <code>rejectionhandled</code>, can be used to keep track of
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>
+  rejections, including whether those rejections are handled after the fact.
+</p>
+<p>
+  The <code>unhandledrejection</code> event is the promise-equivalent of the
+  global <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror"><code>error</code></a>
+  event, which is fired for uncaught exceptions. Because a rejected promise
+  could be handled after the fact, by attaching <code>catch(onRejected)</code>
+  or <code>then(onFulfilled, onRejected)</code> to it, the additional
+  <code>rejectionhandled</code> event is needed to indicate that a promise which
+  was previously rejected should no longer be considered unhandled.
+</p>
+<p>
+  These two events can be used, for example, to keep track of unhandled
+  rejections as part of an error-reporting framework.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  The buttons below can be used to create new rejected promises that are either
+  eventually handled, or just left unhandled. The corresponding
+  <code>unhandledrejection</code> events (and <code>rejectionhandled</code> if
+  the promise is eventually handled) are logged.
+</p>
+<p>
+  This sample also shows how a web app might keep a running tally of all
+  unhandled rejections in a <code>Map</code> object. This could come in handy
+  when working with a centralized error reporting infrastructure, where you
+  want to log all rejected promises that have gone unhandled up to that point.
+</p>
+<div>
+  <button id="handled">New Handled Rejection</button>
+  <button id="unhandled">New Unhandled Rejection</button>
+  <button id="report">Report Unhandled Rejection</button>
+</div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}

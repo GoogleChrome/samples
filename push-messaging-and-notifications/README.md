@@ -5,7 +5,7 @@ Learn more at https://www.chromestatus.com/feature/5416033485586432 and https://
 
 To use this sample please do the following:
 
-1. Create a project in the [Google Developer Console](https://console.developers.google.com) (detailed instructions are availabl at https://developer.android.com/google/gcm/gs.html)
+1. Create a project in the [Google Developer Console](https://console.developers.google.com) (detailed instructions are available at https://developer.android.com/google/gcm/gs.html)
 1. Enable GCM support
 1. Create a copy of [config.sample.js](config.sample.js) called config.js
 1. Create a copy of [manifest.sample.json](manifest.sample.json) called manifest.json

@@ -73,11 +73,14 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // We only want to call event.respondWith() if this is a GET request for an HTML document.
-  // This would ideally check event.request.mode === 'navigate', but that isn't supported in
-  // Chrome as of M48. See https://fetch.spec.whatwg.org/#concept-request-mode
-  if (event.request.method === 'GET' &&
-      event.request.headers.get('accept').includes('text/html')) {
+  // We only want to call event.respondWith() if this is a navigation request
+  // for an HTML page.
+  // request.mode of 'navigate' is unfortunately not supported in Chrome
+  // versions older than 49, so we need to include a less precise fallback,
+  // which checks for a GET request with an Accept: text/html header.
+  if (event.request.mode === 'navigate' ||
+      (event.request.method === 'GET' &&
+       event.request.headers.get('accept').includes('text/html'))) {
     console.log('Handling fetch event for', event.request.url);
     event.respondWith(
       fetch(createCacheBustedRequest(event.request.url)).catch(error => {

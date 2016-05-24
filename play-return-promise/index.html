@@ -1,0 +1,28 @@
+---
+feature_name: HTMLMediaElement.play() Returns a Promise
+chrome_version: 50
+feature_id: 5920584248590336
+---
+
+<h3>Background</h3>
+<p>
+  Many mobile browsers prevent JavaScript from initiating playback of media elements
+  unless it's in response to user interaction.
+</p>
+<p>
+  It's historically been difficult to detect failed playbacks due to mobile browser
+  restrictions, but the new
+  <a href="http://www.html5rocks.com/en/tutorials/es6/promises/"><code>Promise</code></a>-based
+  interface to the <code>play()</code> method provides a friendly way of detecting whether
+  playback succeeded or failed.
+</p>
+
+{% capture html %}
+<audio id="music" src="../audio/techno.wav"></audio>
+<button id="play" hidden>Play</button>
+{% endcapture %}
+
+{% include output_helper.html %}
+
+{% include html_snippet.html html=html %}
+{% include js_snippet.html filename='demo.js' %}

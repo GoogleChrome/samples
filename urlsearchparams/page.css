@@ -1,0 +1,18 @@
+body {
+  margin-bottom: 2em;
+}
+.flex {
+  display: flex;
+}
+.vertical {
+  flex-direction: column;
+}
+input[type="text"] {
+  padding: 8px;
+  font-size: 18px;
+  width: 75px;
+  margin-right: 18px;
+}
+#radios {
+  margin: 16px 0;
+}

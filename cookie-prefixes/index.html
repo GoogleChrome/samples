@@ -1,0 +1,48 @@
+---
+feature_name: Cookie Prefixes
+chrome_version: 49
+feature_id: 4952188392570880
+---
+
+<h3>Background</h3>
+<p>
+  As described in an <a href="https://tools.ietf.org/html/draft-west-cookie-prefixes">Internet Engineering Task Force draft</a>,
+  Cookie Prefixes are a way of "smuggling" information in the name prefix of a
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">cookie</a>
+  to ensure that certain attributes accompany the request to set a cookie.
+  The supported prefixes are:
+</p>
+
+<ul>
+  <li>
+    <code>__Secure-</code>, which signals to the browser that the
+    <a href="http://tools.ietf.org/html/rfc6265#section-4.1.2.5"><code>Secure</code> attribute</a>
+    is required.
+  </li>
+  <li>
+    <code>__Host-</code>, which signals to the browser that both the
+    <a href="http://tools.ietf.org/html/rfc6265#section-4.1.2.4"><code>Path=/</code></a>
+    and <a href="http://tools.ietf.org/html/rfc6265#section-4.1.2.5"><code>Secure</code></a> attributes
+    are required, and at the same time, that the <a href="http://tools.ietf.org/html/rfc6265#section-4.1.2.3"><code>Domain</code> attribute</a>
+    must not be present.
+  </li>
+</ul>
+
+<p>
+  The <code>__Secure-</code> and <code>__Host-</code> name prefixes do not
+  have any special meaning to browsers that don't support Cookie Prefixes, so
+  you cannot count on those prefixes providing assurances across all browsers.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  This contrived example uses
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie"><code>document.cookie</code></a>
+  to modify the page's cookies via JavaScript, as an alternative to using the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Basics_of_cookies"><code>Set-Cookie:</code> HTTP response header</a>.
+</p>
+<p>Here are the cookies set for the current page:</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}

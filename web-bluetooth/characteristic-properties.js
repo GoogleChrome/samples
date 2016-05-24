@@ -1,19 +1,17 @@
 function onFormSubmit() {
-  'use strict';
-
-  let serviceUuid = document.getElementById('service').value;
+  let serviceUuid = document.querySelector('#service').value;
   if (serviceUuid.startsWith('0x')) {
     serviceUuid = parseInt(serviceUuid, 16);
   }
 
-  let characteristicUuid = document.getElementById('characteristic').value;
+  let characteristicUuid = document.querySelector('#characteristic').value;
   if (characteristicUuid.startsWith('0x')) {
     characteristicUuid = parseInt(characteristicUuid, 16);
   }
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters: [{services: [serviceUuid]}]})
-  .then(device => device.connectGATT())
+  .then(device => device.gatt.connect())
   .then(server => server.getPrimaryService(serviceUuid))
   .then(service => service.getCharacteristic(characteristicUuid))
   .then(characteristic => {

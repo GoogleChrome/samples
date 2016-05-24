@@ -2,6 +2,7 @@
 feature_name: Web Bluetooth / Device Info
 chrome_version: 45
 feature_id: 5264933985976320
+icon_url: icon.png
 ---
 
 {% include_relative _includes/intro.html %}
@@ -27,13 +28,11 @@ device information from a nearby Bluetooth Low Energy Device.</p>
     event.stopPropagation();
     event.preventDefault();
 
-    if (!navigator.bluetooth) {
-      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
-        'Please make sure the Web Bluetooth flag is enabled.');
-    } else {
+    if (isWebBluetoothEnabled()) {
       ChromeSamples.clearLog();
       onFormSubmit();
     }
   });
-  log = ChromeSamples.log;
 </script>
+
+{% include_relative _includes/utils.html %}

@@ -1,41 +1,31 @@
 function onFormSubmit() {
-  'use strict';
+  let filters = [];
 
-  let options = {filters: []};
-
-  let filterService = document.getElementById('service').value;
+  let filterService = document.querySelector('#service').value;
   if (filterService.startsWith('0x')) {
     filterService = parseInt(filterService, 16);
   }
   if (filterService) {
-    options.filters.push({services: [filterService]});
+    filters.push({services: [filterService]});
   }
 
-  let filterName = document.getElementById('name').value;
+  let filterName = document.querySelector('#name').value;
   if (filterName) {
-    options.filters.push({name: filterName});
+    filters.push({name: filterName});
   }
 
-  let filterNamePrefix = document.getElementById('namePrefix').value;
+  let filterNamePrefix = document.querySelector('#namePrefix').value;
   if (filterNamePrefix) {
-    options.filters.push({namePrefix: filterNamePrefix});
+    filters.push({namePrefix: filterNamePrefix});
   }
 
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice(options)
+  navigator.bluetooth.requestDevice({filters: filters})
   .then(device => {
     log('> Name:             ' + device.name);
     log('> Id:               ' + device.id);
-    log('> Device Class:     ' + device.deviceClass);
-    log('> Vendor Id Source: ' + device.vendorIDSource);
-    log('> Vendor Id:        ' + device.vendorID);
-    log('> Product Id:       ' + device.productID);
-    log('> Product Version:  ' + device.productVersion);
     log('> UUIDs:            ' + device.uuids.join('\n' + ' '.repeat(20)));
-    if (device.adData) {
-      log('> Tx Power:         ' + device.adData.txPower + ' dBm');
-      log('> RSSI:             ' + device.adData.rssi + ' dBm');
-    }
+    log('> Connected:        ' + device.gatt.connected);
   })
   .catch(error => {
     log('Argh! ' + error);

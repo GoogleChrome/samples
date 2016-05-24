@@ -1,0 +1,32 @@
+---
+feature_name: FormData methods for inspection and modification
+chrome_version: 50
+feature_id: 5701572055007232
+---
+
+<h3>Background</h3>
+<p>The <code><a href="https://developer.mozilla.org/en/docs/Web/API/FormData" target="_blank">FormData</a></code> object helps to programatically send encoded form data to a server with an `XMLHttpRequest` or `fetch()`. You can even generate it from a real <code>&lt;form&gt;</code>.</p>
+<p>These methods allow inspection and modification of the content of the <code>FormData</code>. Previously, this object could only be appended to, and never inspected.</p>
+
+{% capture initial_output_content %}
+Submit the form to see its content from a <code>FormData</code>.
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+<form style="border: 1px solid #777; padding: 20px; border-radius: 2px;" id="form">
+  <input name="username" type="text" value="alpha" placeholder="Username"><br>
+  <select name="title">
+    <option>Mx</option>
+    <option>Ms</option>
+    <option>Mr</option>
+    <option selected>Dr</option>
+  </select>
+  <input type="text" name="name" value="Alpha Sparks" placeholder="Name"><br>
+  <label>Date of Birth
+    <input type="date" name="dob" value="1999-01-07">
+  </label>
+  <input type="submit">
+</form>
+
+{% include js_snippet.html filename='demo.js' %}
+

@@ -1,0 +1,53 @@
+---
+feature_name: High Resolution Time Stamp for Events
+chrome_version: 49
+feature_id: 5523910145605632
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp"><code>timeStamp</code></a>
+  property of the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event"><code>Event</code></a>
+  interface indicates the time at which a given event took place.
+</p>
+
+<p>
+  Previously, this <code>timeStamp</code> value was represented as a
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp"><code>DOMTimeStamp</code></a>,
+  which was a whole number of milliseconds since the
+  <a href="https://en.wikipedia.org/wiki/Epoch_(reference_date)#Computing">system epoch</a>.
+</p>
+
+<p>
+  Starting with Chrome 49, <code>timeStamp</code> is a
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a>
+  value. This value is still a number of milliseconds, but with microsecond
+  resolution, meaning the value will include a decimal component.
+  Additionally, instead of the value being relative to the epoch, the value is
+  relative to the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/navigationStart"><code>PerformanceTiming.navigationStart</code></a>,
+  i.e. the time at which the user navigated to the page.
+</p>
+
+<p>
+  To convert the a <code>DOMHighResTimeStamp</code> value to an absolute number
+  of milliseconds since the epoch (e.g., to get a value to pass to the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date()</code></a> constructor),
+  use <code>event.timeStamp + performance.timing.navigationStart</code>.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  The following sample provides a rough approximation of mouse pointer velocity,
+  with a higher precision on browsers that support
+  <code>DOMHighResTimeStamp</code>. (In this contrived example, the difference
+  in resolution between <code>DOMHighResTimeStamp</code> and
+  <code>DOMTimeStamp</code> won't make a significantly affect the calculations,
+  since the change in pixel positions are relatively coarse.)
+</p>
+<p>Your mouse velocity, in pixels per second:</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}

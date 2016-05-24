@@ -1,0 +1,25 @@
+---
+feature_name: "Service Worker: WindowClient.navigate()"
+chrome_version: 49
+feature_id: 5314750808326144
+---
+
+<h3>Background</h3>
+<p>
+  If you're seeing this page, you've most likely been navigated here from
+  <a href="index.html">index.html</a> following the service worker activation.
+</p>
+
+<p>
+  The service worker called <code>client.navigate('activated.html')</code> on
+  each window that it controlled, which caused all of them to navigate to this
+  page.
+</p>
+
+<p>
+  When you revisit <a href="index.html">index.html</a>, you'll remain on that
+  page, since the <code>activate</code> event is only fired once for each
+  service worker version.
+</p>
+
+{% include js_snippet.html filename='service-worker.js' displayonly=true title="Service Worker's JavaScript" %}

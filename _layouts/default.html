@@ -46,20 +46,22 @@ limitations under the License.
         }
       });
     </script>
-    {% assign sub_dirs = page.url | split: '/' | size | minus: 1 %}
-    <!-- {{ sub_dirs }} -->
-    <!-- {{ page.url }} -->
-    <!-- {{ page.url | split: '/' }} -->
+    {% assign sub_dirs = page.path | split: '/' | size | minus: 1 %}
     {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}
+    {% if page.icon_url %}
+    <link rel="icon" href="{{ page.icon_url }}">
+    {% else %}
     <link rel="icon" href="{{ relative_path_to_root }}images/favicon.ico">
+    {% endif %}
     <link rel="stylesheet" href="{{ relative_path_to_root }}styles/main.css">
     {% for local_css_file in page.local_css_files %}<link rel="stylesheet" href="{{ local_css_file }}">{% endfor %}
     {% if page.additional_head_content %}{{ page.additional_head_content }}{% endif %}
   </head>
 
   <body>
+    {% if page.icon_url %}<img class="pageIcon" src="{{ page.icon_url }}">{% endif %}
     <h1>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</h1>
-    <p>
+    <p class="availability">
       Available in <a target="_blank" href="https://www.chromestatus.com/feature/{{ page.feature_id }}">Chrome {{ page.chrome_version }}+</a> |
       <a target="_blank" href="view-source:{{ site.gh_pages_url_prefix }}{{ page.url }}">View Source</a> |
       <a target="_blank" href="{{ site.gh_url_prefix }}{{ page.url | remove_first: 'index.html' }}">View on GitHub</a> |
