@@ -112,7 +112,7 @@ self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
   var pos =
     Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
-  console.log('event.request.headers.get(\'range\')', event.request.headers.get('range'));
+  console.log('event.request.headers', event.request.headers);
   event.respondWith(
     caches.open(CURRENT_CACHES.prefetch)
     .then(function(cache) {
