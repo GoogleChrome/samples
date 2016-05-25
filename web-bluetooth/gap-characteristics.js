@@ -20,23 +20,23 @@ function onButtonClick() {
       switch (characteristic.uuid) {
 
         case BluetoothUUID.getCharacteristic('gap.appearance'):
-          queue.then(readAppearanceValue(characteristic));
+          queue.then(_ => readAppearanceValue(characteristic));
           break;
 
         case BluetoothUUID.getCharacteristic('gap.device_name'):
-          queue.then(readDeviceNameValue(characteristic));
+          queue.then(_ => readDeviceNameValue(characteristic));
           break;
 
         case BluetoothUUID.getCharacteristic('gap.peripheral_preferred_connection_parameters'):
-          queue.then(readPPCPValue(characteristic));
+          queue.then(_ => readPPCPValue(characteristic));
           break;
 
         case BluetoothUUID.getCharacteristic('gap.central_address_resolution_support'):
-          queue.then(readCentralAddressResolutionSupportValue(characteristic));
+          queue.then(_ => readCentralAddressResolutionSupportValue(characteristic));
           break;
 
         case BluetoothUUID.getCharacteristic('gap.peripheral_privacy_flag'):
-          queue.then(readPeripheralPrivacyFlagValue(characteristic));
+          queue.then(_ => readPeripheralPrivacyFlagValue(characteristic));
           break;
 
         default: log('> Unknown Characteristic: ' + characteristic.uuid);
