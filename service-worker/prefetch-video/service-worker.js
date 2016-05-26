@@ -133,7 +133,7 @@ self.addEventListener('fetch', function(event) {
             status: 206,
             statusText: 'Partial Content',
             headers: [
-//            ['Content-Type', 'video/webm'],
+              // ['Content-Type', 'video/webm'],
               ['Content-Range', 'bytes ' + pos + '-' +
               (ab.byteLength - 1) + '/' + ab.byteLength]]
           });
