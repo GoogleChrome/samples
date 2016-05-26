@@ -33,8 +33,9 @@ self.addEventListener('install', function(event) {
   var now = Date.now();
 
   var urlsToPrefetch = [
-    '/',
-    '/index.js',
+    '/service-worker/prefetch-video/',
+    '/service-worker/prefetch-video/index.js',
+    '/css/main.css',
     'static/video.webm',
     'static/poster.jpg'];
 
