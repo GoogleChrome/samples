@@ -2,7 +2,6 @@ function onButtonClick() {
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters: [{services: ['heart_rate']}]})
   .then(device => {
-    log('> Found ' + device.name);
     log('Connecting to GATT Server...');
     return device.gatt.connect();
   })
