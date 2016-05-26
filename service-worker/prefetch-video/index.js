@@ -42,3 +42,8 @@ if ('serviceWorker' in navigator) {
     'Service workers are not supported in the current browser.';
   document.querySelector('#status').appendChild(aElement);
 }
+
+document.querySelector('video').onloadedmetadata = function() {
+  var fileName = this.currentSrc.replace(/^.*[\\\/]/, '');
+  document.querySelector('#currentSrc').textContent = 'Video src: ' + fileName;
+};
