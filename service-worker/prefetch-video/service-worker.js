@@ -35,7 +35,8 @@ self.addEventListener('install', function(event) {
   var urlsToPrefetch = [
     '/service-worker/prefetch-video/',
     '/service-worker/prefetch-video/index.js',
-    '/css/main.css',
+    '../../styles/main.css',
+    'static/video.mp4',
     'static/video.webm',
     'static/poster.jpg'];
 
@@ -119,12 +120,19 @@ self.addEventListener('fetch', function(event) {
   if (event.request.headers.get('range')) {
     var pos =
     Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
-    console.log('Range request, starting position:', pos);
+    console.log('Range request for', event.request.url,
+      ', starting position:', pos);
     event.respondWith(
       caches.open(CURRENT_CACHES.prefetch)
       .then(function(cache) {
         return cache.match(event.request.url);
       }).then(function(res) {
+        if (!res) {
+          return fetch(event.request)
+          .then(res => {
+            return res.arrayBuffer();
+          });
+        }
         return res.arrayBuffer();
       }).then(function(ab) {
         return new Response(
@@ -135,10 +143,11 @@ self.addEventListener('fetch', function(event) {
             headers: [
               // ['Content-Type', 'video/webm'],
               ['Content-Range', 'bytes ' + pos + '-' +
-              (ab.byteLength - 1) + '/' + ab.byteLength]]
+                (ab.byteLength - 1) + '/' + ab.byteLength]]
           });
       }));
   } else {
+    console.log('Non-range request for', event.request.url);
     event.respondWith(
     // caches.match() will look for a cache entry in all of the caches available to the service worker.
     // It's an alternative to first opening a specific named cache and then matching on that.
