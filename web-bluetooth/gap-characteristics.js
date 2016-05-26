@@ -112,5 +112,6 @@ function anyDevice() {
   // This is the closest we can get for now to get all devices.
   // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
   return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-      .map(c => ({namePrefix: c}));
+      .map(c => ({namePrefix: c}))
+      .concat({name: ''});
 }
