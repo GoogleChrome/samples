@@ -1,7 +1,7 @@
 function onButtonClick() {
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(
-    {filters: [{name: ''}], optionalServices: ['generic_access']})
+    {filters: anyDevice(), optionalServices: ['generic_access']})
   .then(device => {
     log('Connecting to GATT Server...');
     return device.gatt.connect();
@@ -100,8 +100,17 @@ function readPeripheralPrivacyFlagValue(characteristic) {
   });
 }
 
+/* Utils */
+
 function getDeviceType(value) {
-  // Check out page source to see what is the valueToDeviceType object.
+  // Check out page source to see what valueToDeviceType object is.
   return value +
       (value in valueToDeviceType ? ' (' + valueToDeviceType[value] + ')' : '');
+}
+
+function anyDevice() {
+  // This is the closest we can get for now to get all devices.
+  // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
+  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+      .map(c => ({namePrefix: c}));
 }
