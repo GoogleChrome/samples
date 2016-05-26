@@ -1,0 +1,27 @@
+---
+feature_name: "Service Worker Sample: Cache Video"
+chrome_version: 52
+feature_id: 6561526227927040
+local_js_files: ['index.js', 'service-worker.js']
+---
+
+<video controls  poster="static/poster.jpg"
+  style="margin: 0 0 1em 0; max-width: 100%; width: 480px;">
+  <source src="static/gbike.webm" type="video/webm" />
+  <source src="static/gbike.mp4" type="video/mp4" />
+  <p>Your browser does not support the video element.</p>
+</video>
+
+<div id="currentSrc"></div>
+
+<h3>Background</h3>
+
+<p>This sample demonstrates basic service worker registration, in conjunction with pre-fetching a video and its poster image.</p>
+
+<p>Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below the registered service worker to view logging statements for the various actions the <code><a href="service-worker.js">service-worker.js</a></code> script is performing. Since most of the action takes place during the service worker's install handler, and that is only executed the very first time you visit this page (unless the service worker script changes), it can be helpful to inspect the logging in a <a href="https://support.google.com/chrome/answer/95464">Chrome Incognito window</a>.</p>
+
+<p>To try out caching, disconnect from your network then reload this page.</p>
+
+
+{% include js_snippet.html filename='index.js' title='index.js' %}
+{% include js_snippet.html filename='service-worker.js' displayonly=true title='service-worker.js' %}
