@@ -6,17 +6,17 @@ function onBuyClicked() {
       {
         id: 'original',
         label: 'Original donation amount',
-        amount: {currencyCode: 'USD', value: '65.00'}
+        amount: {currency: 'USD', value: '65.00'}
       },
       {
         id: 'discount',
         label: 'Friends and family discount',
-        amount: {currencyCode: 'USD', value: '-10.00'}
+        amount: {currency: 'USD', value: '-10.00'}
       },
       {
         id: 'total',
         label: 'Donation',
-        amount: {currencyCode: 'USD', value: '55.00'}
+        amount: {currency: 'USD', value: '55.00'}
       }
     ]
   };
