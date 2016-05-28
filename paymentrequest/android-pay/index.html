@@ -1,0 +1,29 @@
+---
+feature_name: PaymentRequest Android Pay
+chrome_version: 52
+feature_id: 5639348045217792
+---
+
+<h3>Background</h3>
+<p>
+  <a href="https://github.com/w3c/browser-payment-api">PaymentRequest</a> lets
+  you accept payment from different payment methods.
+</p>
+
+<p>
+  This sample accepts Android Pay payments and does not request shipping
+  information.
+</p>
+
+<p>
+  Note, Android Pay is not yet supported through PaymentRequest.  This is
+  is intended to serve as an example implementation.
+</p>
+
+{% capture initial_output_content %}
+<div><button id="buyButton">Buy</button></div>
+<div><pre id="result"></pre></div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}

@@ -3,7 +3,6 @@ function onButtonClick() {
   navigator.bluetooth.requestDevice(
     {filters: [{services: ['battery_service']}]})
   .then(device => {
-    log('> Found ' + device.name);
     log('Connecting to GATT Server...');
     return device.gatt.connect();
   })
