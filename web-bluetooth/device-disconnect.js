@@ -21,7 +21,7 @@ function onScanButtonClick() {
 
   let filterService = document.querySelector('#service').value;
   if (filterService.startsWith('0x')) {
-    filterService = parseInt(filterService, 16);
+    filterService = parseInt(filterService);
   }
   if (filterService) {
     options.filters.push({services: [filterService]});
