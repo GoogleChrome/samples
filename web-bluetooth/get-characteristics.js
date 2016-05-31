@@ -1,4 +1,4 @@
-function onButtonClick() {
+function onFormSubmit() {
   let serviceUuid = document.querySelector('#service').value;
   if (serviceUuid.startsWith('0x')) {
     serviceUuid = parseInt(serviceUuid);
@@ -11,16 +11,9 @@ function onButtonClick() {
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice({filters: [{services: [serviceUuid]}]})
-  .then(device => {
-    log('Connecting to GATT Server...');
-    return device.gatt.connect();
-  })
-  .then(server => {
-    log('Getting Service...');
-    return server.getPrimaryService(serviceUuid);
-  })
+  .then(device => device.gatt.connect())
+  .then(server => server.getPrimaryService(serviceUuid))
   .then(service => {
-    log('Getting Characteristics...');
     if (characteristicUuid) {
       // Get all characteristics that match this UUID.
       return service.getCharacteristics(characteristicUuid);
