@@ -1,0 +1,25 @@
+---
+feature_name: Fetch Referrer Policy
+chrome_version: 52
+feature_id: 5692236742262784
+---
+
+<h3>Background</h3>
+<p>
+  This sample shows how requests made via the  Fetch API can use a specific
+  <a href="https://hacks.mozilla.org/2016/03/referrer-and-cache-control-apis-for-fetch/">referrer policy</a>,
+  which affects the value of the <code>Referer</code> HTTP header that's sent
+  to remote servers.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  Multiple <code>fetch()</code> requests are made for a local resource, each with a
+  different <code>referrerPolicy</code> set. You can see the requests and the
+  <code>Referer</code> header associated with each in
+  <a href="https://developer.chrome.com/devtools/docs/network">Chrome DevTools</a>.
+</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='fetch-referrer-policy.js' %}

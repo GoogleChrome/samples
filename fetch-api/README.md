@@ -10,6 +10,7 @@ Fetch API Samples
 * [Response metadata](https://googlechrome.github.io/samples/fetch-api/fetch-response-metadata.html)
 * [Response body stream](https://googlechrome.github.io/samples/fetch-api/fetch-response-stream.html)
 * [Fetch success/error handlers](https://googlechrome.github.io/samples/fetch-api/fetch-success-error-handlers.html)
+* [Control over referrer policy](https://googlechrome.github.io/samples/fetch-api/fetch-referrer-policy.html)
 
 Learn more at https://www.chromestatus.com/feature/6730533392351232
 
