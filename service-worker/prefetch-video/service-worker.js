@@ -55,7 +55,7 @@ self.addEventListener('install', function(event) {
         // Append a cache-bust=TIMESTAMP URL parameter to each URL's query string.
         // This is particularly important when precaching resources that are later used in the
         // fetch handler as responses directly, without consulting the network (i.e. cache-first).
-        // If we were to get back a response from the HTTP browser cache for this precaching request
+        // If we were to get back a response from the HTTP browser cache for tgbikhis precaching request
         // then that stale response would be used indefinitely, or at least until the next time
         // the service worker script changes triggering the install flow.
         url.search += (url.search ? '&' : '?') + 'cache-bust=' + now;
@@ -70,7 +70,7 @@ self.addEventListener('install', function(event) {
         // (https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#cross-origin-resources)
         // and it is not possible to determine whether an opaque response represents a success or failure
         // (https://github.com/whatwg/fetch/issues/14).
-        var request = new Request(url/* , {mode: 'no-cors'} */);
+        var request = new Request(url, {mode: 'cors'}); // NB: mode is 'cors'
         return fetch(request).then(function(response) {
           if (response.status >= 400) {
             throw new Error('request for ' + urlToPrefetch +
