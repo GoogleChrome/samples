@@ -36,8 +36,8 @@ self.addEventListener('install', function(event) {
     '/service-worker/prefetch-video/',
     '/service-worker/prefetch-video/index.js',
     '../../styles/main.css',
-    'static/video.mp4',
-    'static/video.webm',
+    'https://prefetch-video-sample.storage.googleapis.com/gbike.webm',
+    'https://prefetch-video-sample.storage.googleapis.com/gbike.mp4',
     'static/poster.jpg'];
 
   // All of these logging statements should be visible via the "Inspect" interface
