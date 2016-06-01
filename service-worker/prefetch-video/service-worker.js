@@ -36,9 +36,11 @@ self.addEventListener('install', function(event) {
     '/service-worker/prefetch-video/',
     '/service-worker/prefetch-video/index.js',
     '../../styles/main.css',
+    'static/poster.jpg',
+    // The videos are stored remotely with CORS enabled.
     'https://prefetch-video-sample.storage.googleapis.com/gbike.webm',
-    'https://prefetch-video-sample.storage.googleapis.com/gbike.mp4',
-    'static/poster.jpg'];
+    'https://prefetch-video-sample.storage.googleapis.com/gbike.mp4'
+  ];
 
   // All of these logging statements should be visible via the "Inspect" interface
   // for the relevant SW accessed via chrome://serviceworker-internals
