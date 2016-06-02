@@ -1,0 +1,59 @@
+---
+feature_name: Alpha Channel Support in CSS Color Parser
+chrome_version: 52
+feature_id: 5685348285808640
+local_css_files: ['optional_relative_path.css', 'anotheroptional_relative_path.css']
+local_js_files: ['optional_relative_path.js', 'anotheroptional_relative_path.js']
+additional_head_content: <meta name="optional" value="optional">
+---
+
+<h3>Background</h3>
+<p>Background info goes here.</p>
+<p>Any content here, outside of a capture block, is included verbatim on the resulting page.</p>
+
+{% capture css %}
+.background {
+  background: #f44336; 
+  width: 200px; 
+  height: 200px;
+  margin: 2%
+}
+
+.solid {
+  background:#FFEB3B;
+  width: 92%;
+  height: 92%;
+  margin: 4%;
+  transform: translateY(4%);
+}
+
+.solid2 {
+  background:#fa7d1e;
+  width: 92%;
+  height: 92%;
+  margin: 4%;
+  transform: translateY(4%);
+}
+
+#demo {
+  background:#FFEB3B77;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+
+{% capture html %}
+ <div class="background">
+    <div class="solid"></div>
+  </div>
+  
+  <div class="background">
+    <div class="solid2" id="demo"></div>
+  </div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
+
+
+
+
+
