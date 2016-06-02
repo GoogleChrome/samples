@@ -1,0 +1,32 @@
+---
+feature_name: Web Bluetooth / Device Information Characteristics
+chrome_version: 50
+feature_id: 5264933985976320
+icon_url: icon.png
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to read <a
+target="_blank"
+href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">Device
+Information Service</a> characteristics from a nearby Bluetooth Device.</p>
+
+<p>Note: The <a target="_blank" href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.serial_number_string.xml">Serial Number String</a> characteristic is <a target="_blank" href="https://github.com/WebBluetoothCG/registries/blob/7b46fd5d58ea98fa098372a774fd7b981f0bdb0d/gatt_blacklist.txt#L34-L36">blacklisted</a> and forbidden from being accessed.</p>
+
+<button>Get Bluetooth Device Information Characteristics</button>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='device-information-characteristics.js' %}
+
+<script>
+  document.querySelector('button').addEventListener('click', function() {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}
