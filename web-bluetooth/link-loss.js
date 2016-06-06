@@ -23,7 +23,7 @@ function onReadButtonClick() {
     return characteristic.readValue();
   })
   .then(value => {
-    log('> Alert Level changed to: ' + getAlertLevel(value));
+    log('> Alert Level: ' + getAlertLevel(value));
   })
   .catch(error => {
     document.querySelector('#writeButton').disabled = true;
@@ -39,7 +39,7 @@ function onWriteButtonClick() {
   let value = [document.querySelector('#alertLevelValue').value];
   alertLevelCharacteristic.writeValue(new Uint8Array([value]))
   .then(_ => {
-    log('> Alert Level: ' +
+    log('> Alert Level changed to: ' +
         getAlertLevel(alertLevelCharacteristic.value));
   })
   .catch(error => {
