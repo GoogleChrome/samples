@@ -11,14 +11,17 @@ icon_url: icon.png
 target="_blank"
 href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.alert_level.xml">Alert Level</a> characteristic from a nearby Bluetooth
 Device used to expose the current link loss alert level that determines how the
-device alerts when the link is lost.</p>
+device alerts when the link is lost. You may want to try this demo with the nRF
+Master Control App from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">Google
+Play Store</a> and advertise the pre-configured Link Loss service.</p>
 
 <button id="readButton">Get Bluetooth Device Alert Level</button>
 
 <p>
   <select id="alertLevelValue">
     <option value="0x00">0x00 (No Alert)</option>
-    <option value="0x01">0x01 (Mid Alert)</option>
+    <option value="0x01">0x01 (Mild Alert)</option>
     <option value="0x02">0x02 (High Alert)</option>
   </select>
   <button id="writeButton" disabled>Set Alert Level</button>

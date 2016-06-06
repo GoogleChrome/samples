@@ -23,7 +23,7 @@ function onReadButtonClick() {
     return characteristic.readValue();
   })
   .then(value => {
-    log('> Alert Level: ' + getAlertLevel(value));
+    log('> Alert Level changed to: ' + getAlertLevel(value));
   })
   .catch(error => {
     document.querySelector('#writeButton').disabled = true;
@@ -51,13 +51,14 @@ function onWriteButtonClick() {
 
 const valueToAlertLevel = {
     0x00: 'No Alert',
-    0x01: 'Mid Alert',
+    0x01: 'Mild Alert',
     0x02: 'High Alert',
 };
 
 function getAlertLevel(value) {
   let v = value.getUint8(0);
-  return v + (v in valueToAlertLevel ? ' (' + valueToAlertLevel[v] + ')' : '');
+  return v + (v in valueToAlertLevel ?
+      ' (' + valueToAlertLevel[v] + ')' : 'Unknown');
 }
 
 function anyDevice() {
