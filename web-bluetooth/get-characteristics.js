@@ -1,12 +1,12 @@
 function onButtonClick() {
   let serviceUuid = document.querySelector('#service').value;
   if (serviceUuid.startsWith('0x')) {
-    serviceUuid = parseInt(serviceUuid, 16);
+    serviceUuid = parseInt(serviceUuid);
   }
 
   let characteristicUuid = document.querySelector('#characteristic').value;
   if (characteristicUuid.startsWith('0x')) {
-    characteristicUuid = parseInt(characteristicUuid, 16);
+    characteristicUuid = parseInt(characteristicUuid);
   }
 
   log('Requesting Bluetooth Device...');
