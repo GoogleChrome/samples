@@ -2,8 +2,7 @@ var alertLevelCharacteristic;
 
 function onReadButtonClick() {
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice(
-    {filters: anyDevice(), optionalServices: ['link_loss']})
+  navigator.bluetooth.requestDevice({filters: [{services: ['link_loss']}]})
   .then(device => {
     log('Connecting to GATT Server...');
     return device.gatt.connect();
@@ -36,7 +35,7 @@ function onWriteButtonClick() {
     return;
   }
   log('Setting Alert Level...');
-  let value = [document.querySelector('#alertLevelValue').value];
+  let value = document.querySelector('#alertLevelValue').value;
   alertLevelCharacteristic.writeValue(new Uint8Array([value]))
   .then(_ => {
     log('> Alert Level changed to: ' +
@@ -50,21 +49,13 @@ function onWriteButtonClick() {
 /* Utils */
 
 const valueToAlertLevel = {
-    0x00: 'No Alert',
-    0x01: 'Mild Alert',
-    0x02: 'High Alert',
+  0x00: 'No Alert',
+  0x01: 'Mild Alert',
+  0x02: 'High Alert'
 };
 
 function getAlertLevel(value) {
   let v = value.getUint8(0);
   return v + (v in valueToAlertLevel ?
       ' (' + valueToAlertLevel[v] + ')' : 'Unknown');
-}
-
-function anyDevice() {
-  // This is the closest we can get for now to get all devices.
-  // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
-  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-      .map(c => ({namePrefix: c}))
-      .concat({name: ''});
 }
