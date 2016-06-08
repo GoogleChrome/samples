@@ -1,0 +1,31 @@
+---
+feature_name: New CSS Flexbox behavior for absolute-positioned children
+chrome_version: 52
+feature_id: 6600926009753600
+---
+
+<h3>Background</h3>
+<p>A previous version of the CSS Flexible Box Layout specification set the static position of absolute-positioned children as though they were a 0x0 flex item. The latest version of the spec takes them fully out of flow and sets the static position based on <code>align</code> and <code>justify</code> properties.</p>
+
+<p>The sample CSS and HTML below demonstrate this. Starting with Chrome 52, the green box will be perfectly centered in the red box. In earlier versions of Chrome, the top left corner of the green box will be in the top center of the red box.</p>
+
+{% capture css %}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container > * {
+  position: absolute;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+{% capture html %}
+<div class="container" style="background:red; width: 200px; height: 200px;">
+  <div style="width: 180px; height: 180px; background: green;">
+    In Chrome 52 and later, the green box should be centered vertically and horizontally in the red box.
+  </div>
+</div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
