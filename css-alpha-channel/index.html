@@ -1,18 +1,16 @@
 ---
-feature_name: Alpha Channel Support in CSS Color Parsing
+feature_name: Alpha Channel Support for CSS Hex Syntax
 chrome_version: 52
 feature_id: 5685348285808640
 ---
 
 <h3>Background</h3>
-<p>Starting with Chrome 52, CSS rules now accept an alpha (transparency) channel for color values. Do this by specifying a fourth number in contexts that take an RGB value. Alpha channel support takes several forms.</p>
+<p>Starting with Chrome 52, hex color values can include an alpha (transparency) value. This capability has two forms. </p>
 <ul>
   <li><code>#RRGGBBAA</code></li>
   <li><code>#RGBA</code></li>
-  <li><code>rgba(RRR, GGG, BBB, A.A)</code></li>
 </ul>
-<p>Consider the example code below. All three <code>.bottom</code> <code>&lt;div&gt;</code> elements have a red background overlaid with yellow box. <code>.overlay1</code> shows what all the examples would look like without an alpha channel. Yellow overlays red.</p>
-<p>The ramaining <code>&lt;div&gt;</code> elements show what you would see using two methods of specifying an alpha channel. <code>.overlay2</code> shows the new syntax using two-character hex values. The value <code>#ff07</code> would accomplish the same thing.) <code>.overlay3</code> uses the <code>rgba()</code> function. Note that last argument for that function is a decimal value between 0 and 1, not an integer between 0 and 255.</p>
+<p>Consider the example code below. Both <code>.bottom</code> <code>&lt;div&gt;</code> elements have a red background overlaid with yellow box. <code>.overlay1</code> shows what all the examples would look like without an alpha channel. Yellow overlays red. <code>.overlay2</code> shows the new syntax using two-character hex values. (The value <code>#ff07</code> would accomplish the same thing.)</p>
 
 <p>To approximate the alpha channel results in older browsers, the example uses <code>@supports not</code> to set a color that approximates the result of placing yellow over red with a 50% transparency.</p>
 
@@ -26,7 +24,7 @@ feature_id: 5685348285808640
 }
 
 .overlay1 {
-  background:yellow;
+  background: yellow;
   width: 92%;
   height: 92%;
   margin: 4%;
@@ -34,15 +32,7 @@ feature_id: 5685348285808640
 }
 
 .overlay2 {
-  background:#ffff0077;
-  width: 92%;
-  height: 92%;
-  margin: 4%;
-  transform: translateY(4%);
-}
-
-.overlay3 {
-  background:rgba(255,255,00,.5);
+  background: #ffff0077;
   width: 92%;
   height: 92%;
   margin: 4%;
@@ -50,8 +40,8 @@ feature_id: 5685348285808640
 }
 
 @supports not (color:#rgba) {
-  .overlay2, .overlay3 {
-    background:#fa7d1e;
+  .overlay2 {
+    background: #fa7d1e;
   }
 }
 {% endcapture %}
@@ -65,10 +55,6 @@ feature_id: 5685348285808640
   
   <div class="bottom">
     <div class="overlay2" id="demo"></div>
-  </div>
-  
-  <div class="bottom">
-    <div class="overlay3" id="demo"></div>
   </div>
 {% endcapture %}
 {% include html_snippet.html html=html %}
