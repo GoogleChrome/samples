@@ -1,0 +1,41 @@
+---
+feature_name: Web Bluetooth / Get Primary Services
+chrome_version: 53
+feature_id: 5264933985976320
+icon_url: icon.png
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to get all
+accessible primary services from a nearby Bluetooth Low Energy
+Device. You may want to try this demo with the BLE Peripheral Simulator App
+from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
+Play Store</a>.</p>
+
+<form>
+  <input id="name" type="text" autofocus placeholder="Device Name">
+  <input id="services" type="text" list="services" size=40 placeholder="Bluetooth Services (e.g. generic_access, 0x1234)">
+  <button>Get services</button>
+</form>
+
+{% include_relative _includes/datalist-services.html %}
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='get-primary-services.js' %}
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}
