@@ -1,0 +1,65 @@
+---
+feature_name: Alpha Channel Support for CSS Hex Syntax
+chrome_version: 52
+feature_id: 5685348285808640
+---
+
+<h3>Background</h3>
+<p>Starting with Chrome 52, hex color values can include an alpha (transparency) value. This capability has two forms. </p>
+<ul>
+  <li><code>#RRGGBBAA</code></li>
+  <li><code>#RGBA</code></li>
+</ul>
+<p>Consider the example code below. Both <code>.bottom</code> <code>&lt;div&gt;</code> elements have a red background overlaid with yellow box. <code>.overlay1</code> shows what all the examples would look like without an alpha channel. Yellow overlays red. <code>.overlay2</code> shows the new syntax using two-character hex values. (The value <code>#ff07</code> would accomplish the same thing.)</p>
+
+<p>To approximate the alpha channel results in older browsers, the example uses <code>@supports not</code> to set a color that approximates the result of placing yellow over red with a 50% transparency.</p>
+
+{% capture css %}
+
+.bottom {
+  background: red; 
+  width: 200px; 
+  height: 200px;
+  margin: 2%;
+}
+
+.overlay1 {
+  background: yellow;
+  width: 92%;
+  height: 92%;
+  margin: 4%;
+  transform: translateY(4%);
+}
+
+.overlay2 {
+  background: #ffff0077;
+  width: 92%;
+  height: 92%;
+  margin: 4%;
+  transform: translateY(4%);
+}
+
+@supports not (color:#rgba) {
+  .overlay2 {
+    background: #fa7d1e;
+  }
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+
+{% capture html %}
+  <div class="bottom">
+    <div class="overlay1"></div>
+  </div>
+  
+  <div class="bottom">
+    <div class="overlay2" id="demo"></div>
+  </div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
+
+
+
+
+
