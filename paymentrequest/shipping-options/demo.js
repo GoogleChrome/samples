@@ -11,28 +11,27 @@ function onBuyClicked() {
   ];
 
   var details = {
-    items: [
+    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    displayItems: [
       {
-        id: 'original',
         label: 'Original donation amount',
         amount: {currency: 'USD', value: '65.00'}
       },
       {
-        id: 'discount',
         label: 'Friends and family discount',
         amount: {currency: 'USD', value: '-10.00'}
       },
       {
-        id: 'total',
-        label: 'Donation',
-        amount: {currency: 'USD', value: '55.00'}
+        label: 'Standard shipping',
+        amount: {currency: 'USD', value: '0.00'}
       }
     ],
     shippingOptions: [
       {
         id: 'standard',
         label: 'Standard shipping',
-        amount: {currency: 'USD', value: '0.00'}
+        amount: {currency: 'USD', value: '0.00'},
+        selected: true
       },
       {
         id: 'express',
@@ -61,8 +60,9 @@ function onBuyClicked() {
               document.getElementById('result').innerHTML =
                   'shippingOption: ' + request.shippingOption +
                   '<br>shippingAddress:<br>' +
-                  JSON.stringify(toDictionary(request.shippingAddress),
-                                 undefined, 2) +
+                  JSON.stringify(
+                      toDictionary(instrumentResponse.shippingAddress),
+                      undefined, 2) +
                   '<br>methodName: ' + instrumentResponse.methodName +
                   '<br>details:<br>' +
                   JSON.stringify(instrumentResponse.details, undefined, 2);
@@ -81,45 +81,47 @@ function onBuyClicked() {
 }
 
 var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window && navigator.userAgent.match(/Android/i)) {
-  buyButton.addEventListener('click', onBuyClicked);
-} else {
-  buyButton.setAttribute('style', 'display: none;');
+buyButton.setAttribute('style', 'display: none;');
+if (!('PaymentRequest' in window)) {
   ChromeSamples.setStatus(
-      'PaymentRequest is supported only on Android for now. ' +
       'Enable chrome://flags/#enable-experimental-web-platform-features');
+} else if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus(
+      'PaymentRequest is supported only on Android for now.');
+} else if (!navigator.userAgent.match(/Chrome\/53/i)) {
+  ChromeSamples.setStatus('These tests are for Chrome Dev 53.');
+} else {
+  buyButton.setAttribute('style', 'display: inline;');
+  buyButton.addEventListener('click', onBuyClicked);
 }
 
 function updateDetails(details, shippingOption, resolve, reject) {
   var selectedShippingOption;
+  var otherShippingOption;
   if (shippingOption === 'standard') {
     selectedShippingOption = details.shippingOptions[0];
-    details.items[details.items.length - 1].amount.value = '55.00';
+    otherShippingOption = details.shippingOptions[1];
+    details.total.amount.value = '55.00';
   } else if (shippingOption === 'express') {
     selectedShippingOption = details.shippingOptions[1];
-    details.items[details.items.length - 1].amount.value = '67.00';
+    otherShippingOption = details.shippingOptions[0];
+    details.total.amount.value = '67.00';
   } else {
     reject('Unknown shipping option \'' + shippingOption + '\'');
     return;
   }
-  if (details.items.length === 3) {
-    details.items.splice(-1, 0, selectedShippingOption);
-  } else if (details.items.length === 4) {
-    details.items.splice(-2, 1, selectedShippingOption);
-  } else {
-    reject('There should ever be only 3 or 4 line items. ' +
-           'Don\'t know how to handle ' + details.items.length.toString());
-    return;
-  }
+  selectedShippingOption.selected = true;
+  otherShippingOption.selected = false;
+  details.displayItems.splice(2, 1, selectedShippingOption);
   resolve(details);
 }
 
 function toDictionary(addr) {
   var dict = {};
   if (addr) {
-    dict.regionCode = addr.regionCode;
-    dict.administrativeArea = addr.administrativeArea;
-    dict.locality = addr.locality;
+    dict.country = addr.country;
+    dict.region = addr.region;
+    dict.city = addr.city;
     dict.dependentLocality = addr.dependentLocality;
     dict.addressLine = addr.addressLine;
     dict.postalCode = addr.postalCode;
@@ -127,6 +129,8 @@ function toDictionary(addr) {
     dict.languageCode = addr.languageCode;
     dict.organization = addr.organization;
     dict.recipient = addr.recipient;
+    dict.careOf = addr.careOf;
+    dict.phone = addr.phone;
   }
   return dict;
 }
