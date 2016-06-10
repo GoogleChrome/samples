@@ -11,35 +11,27 @@ function onBuyClicked() {
   ];
 
   var details = {
-    items: [
+    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    displayItems: [
       {
-        id: 'original',
         label: 'Original donation amount',
         amount: {currency: 'USD', value: '65.00'}
       },
       {
-        id: 'discount',
         label: 'Friends and family discount',
         amount: {currency: 'USD', value: '-10.00'}
       },
       {
-        id: 'shipping',
         label: 'Free shipping worldwide',
         amount: {currency: 'USD', value: '0.00'}
-      },
-      {
-        id: 'total',
-        label: 'Donation',
-        amount: {currency: 'USD', value: '55.00'}
       }
     ],
-    shippingOptions: [
-      {
-        id: 'freeWorldwideShipping',
-        label: 'Free shipping worldwide',
-        amount: {currency: 'USD', value: '0.00'}
-      }
-    ]
+    shippingOptions: [{
+      id: 'freeWorldwideShipping',
+      label: 'Free shipping worldwide',
+      amount: {currency: 'USD', value: '0.00'},
+      selected: true
+    }]
   };
 
   var options = {requestShipping: true};
@@ -54,8 +46,9 @@ function onBuyClicked() {
               document.getElementById('result').innerHTML =
                   'shippingOption: ' + request.shippingOption +
                   '<br>shippingAddress:<br>' +
-                  JSON.stringify(toDictionary(request.shippingAddress),
-                                 undefined, 2) +
+                  JSON.stringify(
+                      toDictionary(instrumentResponse.shippingAddress),
+                      undefined, 2) +
                   '<br>methodName: ' + instrumentResponse.methodName +
                   '<br>details:<br>' +
                   JSON.stringify(instrumentResponse.details, undefined, 2);
@@ -74,21 +67,25 @@ function onBuyClicked() {
 }
 
 var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window && navigator.userAgent.match(/Android/i)) {
-  buyButton.addEventListener('click', onBuyClicked);
-} else {
-  buyButton.setAttribute('style', 'display: none;');
+if (!('PaymentRequest' in window)) {
   ChromeSamples.setStatus(
-      'PaymentRequest is supported only on Android for now. ' +
       'Enable chrome://flags/#enable-experimental-web-platform-features');
+} else if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus(
+      'PaymentRequest is supported only on Android for now.');
+} else if (!navigator.userAgent.match(/Chrome\/53/i)) {
+  ChromeSamples.setStatus('These tests are for Chrome Dev 53.');
+} else {
+  buyButton.setAttribute('style', 'display: inline;');
+  buyButton.addEventListener('click', onBuyClicked);
 }
 
 function toDictionary(addr) {
   var dict = {};
   if (addr) {
-    dict.regionCode = addr.regionCode;
-    dict.administrativeArea = addr.administrativeArea;
-    dict.locality = addr.locality;
+    dict.country = addr.country;
+    dict.region = addr.region;
+    dict.city = addr.city;
     dict.dependentLocality = addr.dependentLocality;
     dict.addressLine = addr.addressLine;
     dict.postalCode = addr.postalCode;
@@ -96,6 +93,8 @@ function toDictionary(addr) {
     dict.languageCode = addr.languageCode;
     dict.organization = addr.organization;
     dict.recipient = addr.recipient;
+    dict.careOf = addr.careOf;
+    dict.phone = addr.phone;
   }
   return dict;
 }
