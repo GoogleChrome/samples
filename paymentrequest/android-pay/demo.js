@@ -2,21 +2,15 @@ function onBuyClicked() {
   var supportedInstruments = ['https://android.com/pay'];
 
   var details = {
-    items: [
+    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    displayItems: [
       {
-        id: 'original',
         label: 'Original donation amount',
         amount: {currency: 'USD', value: '65.00'}
       },
       {
-        id: 'discount',
         label: 'Friends and family discount',
         amount: {currency: 'USD', value: '-10.00'}
-      },
-      {
-        id: 'total',
-        label: 'Donation',
-        amount: {currency: 'USD', value: '55.00'}
       }
     ]
   };
@@ -57,11 +51,16 @@ function onBuyClicked() {
 }
 
 var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window && navigator.userAgent.match(/Android/i)) {
-  buyButton.addEventListener('click', onBuyClicked);
-} else {
-  buyButton.setAttribute('style', 'display: none;');
+buyButton.setAttribute('style', 'display: none;');
+if (!('PaymentRequest' in window)) {
   ChromeSamples.setStatus(
-      'PaymentRequest is supported only on Android for now. ' +
       'Enable chrome://flags/#enable-experimental-web-platform-features');
+} else if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus(
+      'PaymentRequest is supported only on Android for now.');
+} else if (!navigator.userAgent.match(/Chrome\/53/i)) { // eslint-disable-line no-negated-condition
+  ChromeSamples.setStatus('These tests are for Chrome Dev 53.');
+} else {
+  buyButton.setAttribute('style', 'display: inline;');
+  buyButton.addEventListener('click', onBuyClicked);
 }

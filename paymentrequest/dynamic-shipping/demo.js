@@ -11,21 +11,15 @@ function onBuyClicked() {
   ];
 
   var details = {
-    items: [
+    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    displayItems: [
       {
-        id: 'original',
         label: 'Original donation amount',
         amount: {currency: 'USD', value: '65.00'}
       },
       {
-        id: 'discount',
         label: 'Friends and family discount',
         amount: {currency: 'USD', value: '-10.00'}
-      },
-      {
-        id: 'total',
-        label: 'Donation',
-        amount: {currency: 'USD', value: '55.00'}
       }
     ]
   };
@@ -36,8 +30,8 @@ function onBuyClicked() {
     var request = new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
 
     request.addEventListener('shippingaddresschange', function(evt) {
-      evt.updateWith(new Promise(function(resolve, reject) {
-        updateDetails(details, request.shippingAddress, resolve, reject);
+      evt.updateWith(new Promise(function(resolve) {
+        updateDetails(details, request.shippingAddress, resolve);
       }));
     });
 
@@ -49,8 +43,9 @@ function onBuyClicked() {
               document.getElementById('result').innerHTML =
                   'shippingOption: ' + request.shippingOption +
                   '<br>shippingAddress:<br>' +
-                  JSON.stringify(toDictionary(request.shippingAddress),
-                                 undefined, 2) +
+                  JSON.stringify(
+                      toDictionary(instrumentResponse.shippingAddress),
+                      undefined, 2) +
                   '<br>methodName: ' + instrumentResponse.methodName +
                   '<br>details:<br>' +
                   JSON.stringify(instrumentResponse.details, undefined, 2);
@@ -69,41 +64,39 @@ function onBuyClicked() {
 }
 
 var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window && navigator.userAgent.match(/Android/i)) {
-  buyButton.addEventListener('click', onBuyClicked);
-} else {
-  buyButton.setAttribute('style', 'display: none;');
+buyButton.setAttribute('style', 'display: none;');
+if (!('PaymentRequest' in window)) {
   ChromeSamples.setStatus(
-      'PaymentRequest is supported only on Android for now. ' +
       'Enable chrome://flags/#enable-experimental-web-platform-features');
+} else if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus(
+      'PaymentRequest is supported only on Android for now.');
+} else if (!navigator.userAgent.match(/Chrome\/53/i)) { // eslint-disable-line no-negated-condition
+  ChromeSamples.setStatus('These tests are for Chrome Dev 53.');
+} else {
+  buyButton.setAttribute('style', 'display: inline;');
+  buyButton.addEventListener('click', onBuyClicked);
 }
 
-function updateDetails(details, shippingAddress, resolve, reject) {
-  if (shippingAddress.regionCode === 'US') {
+function updateDetails(details, shippingAddress, resolve) {
+  if (shippingAddress.country === 'US') {
     var shippingOption = {
       id: '',
       label: '',
-      amount: {currency: 'USD', value: '0.00'}
+      amount: {currency: 'USD', value: '0.00'},
+      selected: true
     };
-    if (shippingAddress.administrativeArea === 'CA') {
+    if (shippingAddress.region === 'CA') {
       shippingOption.id = 'ca';
       shippingOption.label = 'Free shipping in California';
-      details.items[details.items.length - 1].amount.value = '55.00';
+      details.total.amount.value = '55.00';
     } else {
       shippingOption.id = 'us';
       shippingOption.label = 'Standard shipping in US';
       shippingOption.amount.value = '5.00';
-      details.items[details.items.length - 1].amount.value = '60.00';
+      details.total.amount.value = '60.00';
     }
-    if (details.items.length === 3) {
-      details.items.splice(-1, 0, shippingOption);
-    } else if (details.items.length === 4) {
-      details.items.splice(-2, 1, shippingOption);
-    } else {
-      reject('There should ever be only 3 or 4 line items. ' +
-             'Don\'t know how to handle ' + details.items.length.toString());
-      return;
-    }
+    details.displayItems.splice(2, 1, shippingOption);
     details.shippingOptions = [shippingOption];
   } else {
     delete details.shippingOptions;
@@ -114,9 +107,9 @@ function updateDetails(details, shippingAddress, resolve, reject) {
 function toDictionary(addr) {
   var dict = {};
   if (addr) {
-    dict.regionCode = addr.regionCode;
-    dict.administrativeArea = addr.administrativeArea;
-    dict.locality = addr.locality;
+    dict.country = addr.country;
+    dict.region = addr.region;
+    dict.city = addr.city;
     dict.dependentLocality = addr.dependentLocality;
     dict.addressLine = addr.addressLine;
     dict.postalCode = addr.postalCode;
@@ -124,6 +117,8 @@ function toDictionary(addr) {
     dict.languageCode = addr.languageCode;
     dict.organization = addr.organization;
     dict.recipient = addr.recipient;
+    dict.careOf = addr.careOf;
+    dict.phone = addr.phone;
   }
   return dict;
 }
