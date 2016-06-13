@@ -22,7 +22,7 @@ function onButtonClick() {
   })
   .then(services => {
     log('> Services: ' +
-      services.map(s => s.uuid).join('\n' + ' '.repeat(19)));
+      services.map(s => s.uuid).join('\n' + ' '.repeat(12)));
   })
   .catch(error => {
     log('Argh! ' + error);
