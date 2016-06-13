@@ -1,5 +1,5 @@
 function onButtonClick() {
-  log('Requesting Bluetooth Device...');
+  log('Requesting any Bluetooth Device...');
   navigator.bluetooth.requestDevice(
     {filters: anyDevice(), optionalServices: ['device_information']})
   .then(device => {
