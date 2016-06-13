@@ -13,25 +13,24 @@ function onButtonClick() {
     return device.gatt.connect();
   })
   .then(server => {
+    if (!services.length) {
+      return Promise.reject('Please enter some services first!');
+    }
     // Note that we could also get all services that match a specific UUID by
     // simply passing it to getPrimaryServices().
     log('Getting Services...');
-    // FIXME: Replace with `return server.getPrimaryServices()` when
-    // https://codereview.chromium.org/2027973002/ lands.
-    return Promise.all(services.map(service => server.getPrimaryService(service)));
+    return server.getPrimaryServices();
   })
   .then(services => {
     log('Getting Characteristics...');
     return Promise.all(services.map(service => service.getCharacteristics()))
     .then(allCharacteristics => {
-
       // Looping through all services to print their characteristics.
       services.forEach((service, i) => {
         log('> Service: ' + service.uuid);
         allCharacteristics[i].forEach(characteristic => {
           let supportedProperties = [];
           // We only want to print supported properties.
-          // FIXME: crbug.com/619559
           for (const p in characteristic.properties) {
             if (characteristic.properties[p]) {
               supportedProperties.push(p);
