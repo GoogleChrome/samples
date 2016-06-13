@@ -17,12 +17,29 @@ function onButtonClick() {
   .then(server => {
     // Note that we could also get all services that match a specific UUID by
     // simply passing it to getPrimaryServices().
-    log('Getting Services...');
-    return server.getPrimaryServices();
+    log('Getting Primary Services...');
+    //return server.getPrimaryServices();
+    // TODO: Replace with above once getPrimaryServices land.
+    return Promise.all([server.getPrimaryService('battery_service'),
+                        server.getPrimaryService(0xff02)]);
   })
   .then(services => {
-    log('> Services: ' +
-      services.map(s => s.uuid).join('\n' + ' '.repeat(12)));
+    log('Getting Characteristics...');
+    return Promise.all(services.map(service => service.getCharacteristics()))
+    .then(characteristics => {
+      services.forEach((service, i) => {
+        log('> Service: ' + service.uuid);
+        characteristics[i].forEach(characteristic => {
+          let supportedProperties = [];
+          // TODO: Fix when Object.keys works on BluetoothCharacteristicProperties.
+          for (p in characteristic.properties) { 
+            if (characteristic.properties[p]) { supportedProperties.push(p); }
+          }
+          log('> Characteristic: ' + characteristic.uuid +
+            ' - ' + supportedProperties.join(', '));
+        });
+      });
+    });
   })
   .catch(error => {
     log('Argh! ' + error);
