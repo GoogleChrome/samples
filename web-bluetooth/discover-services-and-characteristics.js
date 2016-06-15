@@ -24,15 +24,17 @@ function onButtonClick() {
   })
   .then(services => {
     log('Getting Characteristics...');
+    let queue = Promise.resolve();
     services.forEach(service => {
-      service.getCharacteristics().then(characteristics => {
+      queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
         log('> Service: ' + service.uuid);
         characteristics.forEach(characteristic => {
           log('>> Characteristic: ' + characteristic.uuid + ' ' +
               getSupportedProperties(characteristic));
         });
-      });
+      }));
     });
+    return queue;
   })
   .catch(error => {
     log('Argh! ' + error);
