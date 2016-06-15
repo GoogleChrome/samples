@@ -52,18 +52,6 @@ function updatePresentationAvailability(displaysAvailable) {
       (displaysAvailable ? 'available' : 'unavailable') + '.');
 }
 
-function setConnection(connection) {
-  presentationConnection = connection;
-  document.querySelector('#close').disabled = false;
-  document.querySelector('#terminate').disabled = false;
-  presentationConnection.onclose = function() {
-    ChromeSamples.log('Connection closed.');
-  };
-  presentationConnection.onterminate = function() {
-    ChromeSamples.log('Connection terminated.');
-  };
-}
-
 document.querySelector('#createRequest').addEventListener('click', function() {
   presentationRequest = new PresentationRequest(presentationUrl);
   document.querySelector('#createRequest').disabled = true;
@@ -77,6 +65,18 @@ document.querySelector('#createRequest').addEventListener('click', function() {
   });
 });
 
+function setConnection(connection) {
+  presentationConnection = connection;
+  document.querySelector('#close').disabled = false;
+  document.querySelector('#terminate').disabled = false;
+  presentationConnection.onclose = function() {
+    ChromeSamples.log('Connection closed.');
+  };
+  presentationConnection.onterminate = function() {
+    ChromeSamples.log('Connection terminated.');
+  };
+}
+
 document.querySelector('#start').addEventListener('click', function() {
   presentationRequest.start().then(function(connection) {
     ChromeSamples.log('Connected to presentation: ' + connection.id);
@@ -88,11 +88,11 @@ document.querySelector('#start').addEventListener('click', function() {
 
 document.querySelector('#reconnect').addEventListener('click', function() {
   var presentationId = document.querySelector('#presentationId').value.trim();
-  if (presentationId != '') {
+  if (presentationId.length) {
     presentationRequest.reconnect(presentationId).then(function(connection) {
       ChromeSamples.log('Reconnected to presentation: ' + connection.id);
       setConnection(connection);
-    }).catch(function(error){
+    }).catch(function(error) {
       ChromeSamples.log(error.name + ': ' + error.message);
     });
   }
