@@ -1,4 +1,5 @@
 function onButtonClick() {
+  // Validate services UUID entered by user first.
   let services = document.querySelector('#optionalServices').value.split(/, ?/)
     .map(s => s.startsWith('0x') ? parseInt(s) : s)
     .filter(s => s && BluetoothUUID.getService);
@@ -14,30 +15,21 @@ function onButtonClick() {
   })
   .then(server => {
     if (!services.length) {
-      return Promise.reject('Please enter some services first!');
+      return Promise.reject('Please enter some services first.');
     }
     // Note that we could also get all services that match a specific UUID by
-    // simply passing it to getPrimaryServices().
+    // passing it to getPrimaryServices().
     log('Getting Services...');
     return server.getPrimaryServices();
   })
   .then(services => {
     log('Getting Characteristics...');
-    return Promise.all(services.map(service => service.getCharacteristics()))
-    .then(allCharacteristics => {
-      // Looping through all services to print their characteristics.
-      services.forEach((service, i) => {
+    services.forEach(service => {
+      service.getCharacteristics().then(characteristics => {
         log('> Service: ' + service.uuid);
-        allCharacteristics[i].forEach(characteristic => {
-          let supportedProperties = [];
-          // We only want to print supported properties.
-          for (const p in characteristic.properties) {
-            if (characteristic.properties[p]) {
-              supportedProperties.push(p);
-            }
-          }
-          log('> Characteristic: ' + characteristic.uuid +
-            ' - ' + supportedProperties.join(', '));
+        characteristics.forEach(characteristic => {
+          log('>> Characteristic: ' + characteristic.uuid + ' ' +
+              getSupportedProperties(characteristic));
         });
       });
     });
@@ -48,6 +40,16 @@ function onButtonClick() {
 }
 
 /* Utils */
+
+function getSupportedProperties(characteristic) {
+  let supportedProperties = [];
+  for (const p in characteristic.properties) {
+    if (characteristic.properties[p] === true) {
+      supportedProperties.push(p.toUpperCase());
+    }
+  }
+  return '[' + supportedProperties.join(', ') + ']';
+}
 
 function anyDevice() {
   // This is the closest we can get for now to get all devices.
