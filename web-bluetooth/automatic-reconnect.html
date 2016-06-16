@@ -1,0 +1,35 @@
+---
+feature_name: Web Bluetooth / Automatic Reconnect
+chrome_version: 50
+feature_id: 5264933985976320
+icon_url: icon.png
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to reconnect to a
+disconnected Bluetooth device using a simple <a
+href="https://en.wikipedia.org/wiki/Exponential_backoff">exponential backoff
+algorithm</a></p>
+
+<form>
+  <button>Scan</button>
+</form>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='automatic-reconnect.js' %}
+
+<script>
+  document.querySelector('button').addEventListener('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}
