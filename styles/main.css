@@ -43,12 +43,12 @@ h3 {
 }
 
 #status {
-  margin-top: 1em;
+  margin: .5em 0;
   font-style: italic;
 }
 
 #log {
-  margin-top: 1em;
+  margin: .5em 0;
   white-space: pre-wrap;
 }
 
