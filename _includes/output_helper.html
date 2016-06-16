@@ -33,12 +33,14 @@
   <pre id="log"></pre>
 </div>
 
+{% if page.check_min_version %}
 <script>
   if (/Chrome\/(\d+\.\d+.\d+.\d+)/.test(navigator.userAgent)){
     // Let's log a warning if the sample is not supposed to execute on this
     // version of Chrome.
     if ({{ page.chrome_version }} > parseInt(RegExp.$1)) {
-      ChromeSamples.setStatus('Warning! This sample requires Chrome ' + {{ page.chrome_version }} + '.');
+      ChromeSamples.setStatus('Warning! Keep in mind this sample has been tested with Chrome ' + {{ page.chrome_version }} + '.');
     }
   }
 </script>
+{% endif %}
