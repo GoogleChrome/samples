@@ -1,14 +1,10 @@
 function onBuyClicked() {
-  var supportedInstruments = [
-    'visa',
-    'mastercard',
-    'amex',
-    'discover',
-    'maestro',
-    'diners',
-    'jcb',
-    'unionpay'
-  ];
+  var supportedInstruments = [{
+    supportedMethods: [
+      'amex', 'diners', 'discover', 'jcb', 'maestro', 'mastercard', 'unionpay',
+      'visa'
+    ]
+  }];
 
   var details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
@@ -42,12 +38,14 @@ function onBuyClicked() {
             .then(function() {
               document.getElementById('result').innerHTML =
                   'shippingOption: ' + request.shippingOption +
-                  '<br>shippingAddress:<br>' +
+                  '<br>shippingAddress: ' +
                   JSON.stringify(
                       toDictionary(instrumentResponse.shippingAddress),
                       undefined, 2) +
                   '<br>methodName: ' + instrumentResponse.methodName +
-                  '<br>details:<br>' +
+                  '<br>totalAmount: ' +
+                  JSON.stringify(instrumentResponse.totalAmount, undefined, 2) +
+                  '<br>details: ' +
                   JSON.stringify(instrumentResponse.details, undefined, 2);
             })
             .catch(function(err) {

@@ -1,5 +1,15 @@
 function onBuyClicked() {
-  var supportedInstruments = ['https://android.com/pay'];
+  var supportedInstruments = [
+    {
+      supportedMethods: ['https://android.com/pay'],
+      data: {
+        'gateway': 'stripe',
+        // Place your own Stripe publishable key here.
+        'stripe:publishableKey': 'pk_test_VKUbaXb3LHE7GdxyOBMNwXqa',
+        'stripe:version': '2016-03-07'
+      }
+    }
+  ];
 
   var details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
@@ -15,17 +25,8 @@ function onBuyClicked() {
     ]
   };
 
-  var schemeData = {
-    'https://android.com/pay': {
-      'gateway': 'stripe',
-       // Place your own Stripe publishable key here.
-      'stripe:publishableKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo',
-      'stripe:version': '2016-03-07'
-    }
-  };
-
   try {
-    new PaymentRequest(supportedInstruments, details, null, schemeData) // eslint-disable-line no-undef
+    new PaymentRequest(supportedInstruments, details) // eslint-disable-line no-undef
         .show()
         .then(function(instrumentResponse) {
           // Simulate server-side processing with a 2 second delay.
@@ -34,7 +35,10 @@ function onBuyClicked() {
                 .then(function() {
                   document.getElementById('result').innerHTML =
                       'methodName: ' + instrumentResponse.methodName +
-                      '<br>details:<br>' +
+                      '<br>totalAmount: ' +
+                      JSON.stringify(
+                          instrumentResponse.totalAmount, undefined, 2) +
+                      '<br>details: ' +
                       JSON.stringify(instrumentResponse.details, undefined, 2);
                 })
                 .catch(function(err) {
