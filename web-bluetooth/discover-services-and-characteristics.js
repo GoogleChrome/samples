@@ -10,13 +10,12 @@ function onButtonClick() {
     optionalServices: services
   })
   .then(device => {
+    log('> Name:             ' + device.name);
+    log('> Allowed Services: ' + device.uuids.join('\n' + ' '.repeat(20)));
     log('Connecting to GATT Server...');
     return device.gatt.connect();
   })
   .then(server => {
-    if (!services.length) {
-      return Promise.reject('Please enter some services first.');
-    }
     // Note that we could also get all services that match a specific UUID by
     // passing it to getPrimaryServices().
     log('Getting Services...');
