@@ -25,7 +25,7 @@ function onReadBatteryLevelButtonClick() {
   })
   .then(_ => {
     document.querySelector('#startNotifications').disabled = false;
-    document.querySelector('#stopNotifications').disabled = false;
+    document.querySelector('#stopNotifications').disabled = true;
   })
   .catch(error => {
     log('Argh! ' + error);
@@ -45,6 +45,8 @@ function onStartNotificationsButtonClick() {
   batteryLevelCharacteristic.startNotifications()
   .then(_ => {
     log('> Notifications started');
+    document.querySelector('#startNotifications').disabled = true;
+    document.querySelector('#stopNotifications').disabled = false;
   })
   .catch(error => {
     log('Argh! ' + error);
@@ -56,6 +58,8 @@ function onStopNotificationsButtonClick() {
   batteryLevelCharacteristic.stopNotifications()
   .then(_ => {
     log('> Notifications stopped');
+    document.querySelector('#startNotifications').disabled = false;
+    document.querySelector('#stopNotifications').disabled = true;
   })
   .catch(error => {
     log('Argh! ' + error);
