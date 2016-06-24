@@ -20,34 +20,36 @@ function onBuyClicked() {
     ]
   };
 
+  var options = {requestPayerPhone: true, requestPayerEmail: true};
+
   try {
-    new PaymentRequest(supportedInstruments, details) // eslint-disable-line no-undef
-        .show()
-        .then(function(instrumentResponse) {
-          // Simulate server-side processing with a 2 second delay.
-          window.setTimeout(function() {
-            instrumentResponse.complete('success')
-                .then(function() {
-                  document.getElementById('result').innerHTML =
-                      'methodName: ' + instrumentResponse.methodName +
-                      '<br>details: ' +
-                      JSON.stringify(instrumentResponse.details, undefined, 2);
-                })
-                .catch(function(err) {
-                  ChromeSamples.setStatus(err.message);
-                });
-          }, 2000);
-        })
-        .catch(function(err) {
-          ChromeSamples.setStatus(err.message);
-        });
+    var request = new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
+    request.show().then(function(instrumentResponse) {
+      // Simulate server-side processing with a 2 second delay.
+      window.setTimeout(function() {
+        instrumentResponse.complete('success')
+            .then(function() {
+              document.getElementById('result').innerHTML =
+                  'payerPhone: ' + instrumentResponse.payerPhone +
+                  '<br>payerEmail: ' + instrumentResponse.payerEmail +
+                  '<br>methodName: ' + instrumentResponse.methodName +
+                  '<br>details: ' +
+                  JSON.stringify(instrumentResponse.details, undefined, 2);
+            })
+            .catch(function(err) {
+              ChromeSamples.setStatus(err.message);
+            });
+      }, 2000);
+    })
+    .catch(function(err) {
+      ChromeSamples.setStatus(err.message);
+    });
   } catch (e) {
     ChromeSamples.setStatus('Developer mistake: \'' + e.message + '\'');
   }
 }
 
 var buyButton = document.getElementById('buyButton');
-buyButton.setAttribute('style', 'display: none;');
 if (!('PaymentRequest' in window)) {
   ChromeSamples.setStatus(
       'Enable chrome://flags/#enable-experimental-web-platform-features');

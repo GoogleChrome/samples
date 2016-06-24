@@ -51,7 +51,7 @@ function onBuyClicked() {
     request.show().then(function(instrumentResponse) {
       // Simulate server-side processing with a 2 second delay.
       window.setTimeout(function() {
-        instrumentResponse.complete(true)
+        instrumentResponse.complete('success')
             .then(function() {
               document.getElementById('result').innerHTML =
                   'shippingOption: ' + request.shippingOption +
@@ -60,8 +60,6 @@ function onBuyClicked() {
                       toDictionary(instrumentResponse.shippingAddress),
                       undefined, 2) +
                   '<br>methodName: ' + instrumentResponse.methodName +
-                  '<br>totalAmount: ' +
-                  JSON.stringify(instrumentResponse.totalAmount, undefined, 2) +
                   '<br>details: ' +
                   JSON.stringify(instrumentResponse.details, undefined, 2);
             })

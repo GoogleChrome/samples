@@ -3,10 +3,17 @@ function onBuyClicked() {
     {
       supportedMethods: ['https://android.com/pay'],
       data: {
-        'gateway': 'stripe',
-        // Place your own Stripe publishable key here.
-        'stripe:publishableKey': 'pk_test_VKUbaXb3LHE7GdxyOBMNwXqa',
-        'stripe:version': '2016-03-07'
+        merchantId: '123456',
+        allowedCardNetworks: ['AMEX', 'MASTERCARD', 'VISA'],
+        paymentMethodTokenizationParameters: {
+          tokenizationType: 'GATEWAY_TOKEN',
+          parameters: {
+            'gateway': 'stripe',
+            // Place your own Stripe publishable key here.
+            'stripe:publishableKey': 'pk_test_VKUbaXb3LHE7GdxyOBMNwXqa',
+            'stripe:version': '2016-03-07'
+          }
+        }
       }
     }
   ];
@@ -31,13 +38,10 @@ function onBuyClicked() {
         .then(function(instrumentResponse) {
           // Simulate server-side processing with a 2 second delay.
           window.setTimeout(function() {
-            instrumentResponse.complete(true)
+            instrumentResponse.complete('success')
                 .then(function() {
                   document.getElementById('result').innerHTML =
                       'methodName: ' + instrumentResponse.methodName +
-                      '<br>totalAmount: ' +
-                      JSON.stringify(
-                          instrumentResponse.totalAmount, undefined, 2) +
                       '<br>details: ' +
                       JSON.stringify(instrumentResponse.details, undefined, 2);
                 })
