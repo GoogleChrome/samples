@@ -14,8 +14,11 @@ Battery information with Bluetooth Low Energy. You may want
 to try this demo with the BLE Peripheral
 Simulator App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a>. Note that a <a href="battery-level.html">simpler demo for retrieving battery level
-information</a> is also available.</p>
+Play Store</a>.</p>
+
+<p>Here, we use the <code>characteristicvaluechanged</code> event listener to
+handle reading battery level characteristic value. This event listener will
+optionally handle upcoming notifications as well.</p>
 
 <button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
 <button id="startNotifications" disabled>Start Notifications</button>
