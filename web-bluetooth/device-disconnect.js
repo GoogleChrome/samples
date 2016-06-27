@@ -12,7 +12,8 @@ function onDisconnectButtonClick() {
   }
 }
 
-function onDisconnected() {
+function onDisconnected(event) {
+  // Object event.target is Bluetooth Device getting disconnected.
   log('> Bluetooth Device disconnected');
 }
 
