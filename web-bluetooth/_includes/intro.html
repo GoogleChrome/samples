@@ -10,3 +10,14 @@ Check out <a href="index.html">all Web Bluetooth Samples</a>.</p>
     navigator.serviceWorker.register('service-worker.js');
   }
 </script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    const searchParams = new URL(location).searchParams;
+    const inputs = Array.from(document.querySelectorAll('input'));
+
+    inputs.filter(input => searchParams.has(input.id)).forEach(input => {
+      input.value = searchParams.get(input.id);
+    });
+  });
+</script>
