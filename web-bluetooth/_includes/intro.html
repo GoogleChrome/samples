@@ -4,3 +4,9 @@ Bluetooth 4 wireless standard using the Generic Attribute Profile (GATT). It is
 currently partially implemented in Chrome OS, Chrome for Android M and Linux
 behind the experimental flag <code>chrome://flags/#enable-web-bluetooth</code>.<br/>
 Check out <a href="index.html">all Web Bluetooth Samples</a>.</p>
+
+<script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
