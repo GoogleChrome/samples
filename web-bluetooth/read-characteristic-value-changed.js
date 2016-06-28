@@ -34,7 +34,7 @@ function onReadBatteryLevelButtonClick() {
 
 /* This function will be called when `readValue` resolves and
  * characteristic value changes since `characteristicvaluechanged` event
- * listener has been added. Note that it would also work with `writeValue`. */
+ * listener has been added. */
 function handleBatteryLevelChanged(event) {
   let batteryLevel = event.target.value.getUint8(0);
   log('> Battery Level is ' + batteryLevel + '%');
