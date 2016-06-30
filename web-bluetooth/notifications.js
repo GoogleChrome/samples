@@ -40,10 +40,14 @@ function onStartButtonClick() {
 
 function onStopButtonClick() {
   if (myCharacteristic) {
-    myCharacteristic.stopNotifications().then(_ => {
+    myCharacteristic.stopNotifications()
+    .then(_ => {
       log('> Notifications stopped');
       myCharacteristic.removeEventListener('characteristicvaluechanged',
         handleNotifications);
+    })
+    .catch(error => {
+      log('Argh! ' + error);
     });
   }
 }
