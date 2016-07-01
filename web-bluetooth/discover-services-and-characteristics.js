@@ -5,10 +5,8 @@ function onButtonClick() {
     .filter(s => s && BluetoothUUID.getService);
 
   log('Requesting any Bluetooth Device...');
-  navigator.bluetooth.requestDevice({
-    filters: anyDevice(),
-    optionalServices: services
-  })
+  navigator.bluetooth.requestDevice(
+    {filters: anyDevice(), optionalServices: services})
   .then(device => {
     log('> Name:             ' + device.name);
     log('> Allowed Services: ' + device.uuids.join('\n' + ' '.repeat(20)));
