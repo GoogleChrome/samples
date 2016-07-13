@@ -18,3 +18,7 @@ options regardless of shipping address.
 - [Dynamic shipping options](https://googlechrome.github.io/samples/paymentrequest/dynamic-shipping/index.html) -
 a sample that accepts credit card payments and varies the availability and price
 of shipping options depending on the shipping address.
+
+- [Contact info](https://googlechrome.github.io/samples/paymentrequest/contact-info/index.html) -
+a sample that accepts credit card payments and requests user's contact
+information: phone number and email address.
