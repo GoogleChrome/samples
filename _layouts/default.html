@@ -20,6 +20,9 @@ limitations under the License.
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sample illustrating the use of {{ page.feature_name }}.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if page.origin_trial %}
+    <meta http-equiv="origin-trial" content="{{ page.origin_trial }}">
+    {% endif %}
     <title>{% if page.title %}{{ page.title }}{% else %}{{ page.feature_name }} Sample{% endif %}</title>
     <script>
       // Add a global error event listener early on in the page load, to help ensure that browsers
