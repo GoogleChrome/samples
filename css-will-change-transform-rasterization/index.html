@@ -1,0 +1,64 @@
+---
+feature_name: "Rasterization &amp; will-change: transform"
+chrome_version: 53
+feature_id: 5637351992721408
+---
+
+<style>
+  #container {
+    margin-left: 50px;
+    margin-top: 100px;
+  }
+
+  #container > div {
+    height: 50px;
+    width: 300px;
+  }
+</style>
+
+<h3>Background</h3>
+<p>
+  All content that does not have the <code>will-change: transform</code> CSS
+  property will be re-rastered when its transform scale changes. In other words,
+  <code>will-change: transform</code> effectively means "please apply the transformation quickly"
+  without taking the additional time for rasterization. This only applies to
+  scaling that happen via JavaScript manipulation, and does not apply to CSS
+  animations.
+</p>
+
+<p>
+  More detailed background information is available in the
+  <a href="https://docs.google.com/document/d/1f8WS99F9GORWP_m74l_JfsTHgCrHkbEorHYu72D4Xag/edit">Intent to Ship</a> document.
+</p>
+
+<h3>Live Output</h3>
+<p>
+  You can see the impact in the sample text below:
+</p>
+
+{% capture html %}
+<div id="container">
+  <div id="remainsBlurry">always blurry</div>
+  <div id="noLongerBlurry">blurry before Chrome 53</div>
+  <div id="alwaysCrisp">always crisp</div>
+</div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
+
+{% capture css %}
+#remainsBlurry {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+#noLongerBlurry {
+  transform: translate3d(0, 0, 0);
+}
+
+#alwaysCrisp {
+  transform: scale(2, 2) translate3d(50px, 0, 0);
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+{% include js_snippet.html filename='demo.js' %}
