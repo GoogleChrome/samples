@@ -4,6 +4,14 @@ chrome_version: 53
 feature_id: 5671480339726336
 ---
 
+<style>
+  #flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+</style>
+
 <h3>Background</h3>
 <p>
   "Flattening" is the process of drawing 3D-positioned children into the
@@ -28,7 +36,28 @@ feature_id: 5671480339726336
   positioned in 3D space rather than everything as a group.
 </p>
 
-<h3>Live Output</h3>
+<h3>Visualizing the Change</h3>
+
+<p>
+  The images below are screenshots illustrating the difference in the expected
+  rendering before and after the change introduced in Chrome 53. You can compare
+  it to the <a href="#live-output">Live Output</a> section, which shows what
+  your current browser actually renders.
+</p>
+
+<div id="flex-container">
+  <div>
+    <p>Before Chrome 53</p>
+    <img src="before-chrome-53.png">
+  </div>
+
+  <div>
+    <p>After Chrome 53</p>
+    <img src="after-chrome-53.png">
+  </div>
+</div>
+
+<h3 id="live-output">Live Output</h3>
 
 <p>
   The relative layering and blending of each of the colored boxes below will
