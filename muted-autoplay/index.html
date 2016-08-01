@@ -1,0 +1,37 @@
+---
+feature_name: Autoplay Muted Videos on Android
+chrome_version: 53
+feature_id: 4864052794753024
+local_css_files: ['styles.css']
+---
+
+<h3>Background</h3>
+<p>
+  As of Chrome 53 on Android, <code>video</code> elements that have the
+  <code>muted</code> attribute set can play back automatically, either via the
+  <code>autoplay</code> attribute or via the
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play"><code>play()</code></a>
+  method.
+</p>
+
+<p>
+  Below is an example of two videos. On desktop browsers which do not feature
+  the same restrictions, playback of both should automatically start. On
+  Android Chrome 53 or later, playback of the first will begin automatically
+  (since it uses the <code>muted</code> attribute).
+</p>
+
+{% capture html %}
+<h4>autoplay, with muted</h4>
+<video autoplay muted loop>
+  <source src="chrome-clip.mp4" type="video/mp4">
+  <p>Your browser does not support the video element.</p>
+</video>
+
+<h4>autoplay, without muted</h4>
+<video autoplay loop>
+  <source src="chrome-clip.mp4" type="video/mp4">
+  <p>Your browser does not support the video element.</p>
+</video>
+{% endcapture %}
+{% include html_snippet.html html=html %}
