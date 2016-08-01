@@ -110,10 +110,10 @@ r.sayName();
 
 // Classes support static members which can be accessed without an
 // instance being present.
-class Tripple {
+class Triple {
   // Using the 'static' keyword creates a method which is associated
   // with a class, but not with an instance of the class.
-  static tripple(n) {
+  static triple(n) {
     n = n || 1;
     return n * 3;
   }
@@ -121,17 +121,17 @@ class Tripple {
 
 // super.prop in this example is used for accessing super-properties from
 // a parent class. This works fine in static methods too:
-class BiggerTripple extends Tripple {
-  static tripple(n) {
-    return super.tripple(n) * super.tripple(n);
+class BiggerTriple extends Triple {
+  static triple(n) {
+    return super.triple(n) * super.triple(n);
   }
 }
 
-ChromeSamples.log(Tripple.tripple());
-ChromeSamples.log(Tripple.tripple(6));
-ChromeSamples.log(BiggerTripple.tripple(3));
-// var tp = new Tripple();
-// ChromeSamples.log(tp.tripple()); tp.tripple is not a function
+ChromeSamples.log(Triple.triple());
+ChromeSamples.log(Triple.triple(6));
+ChromeSamples.log(BiggerTriple.triple(3));
+// var tp = new Triple();
+// ChromeSamples.log(tp.triple()); tp.triple is not a function
 
 // Example 6: Subclassing built-in classes and DOM
 // ===============================================================
