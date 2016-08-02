@@ -1,0 +1,113 @@
+---
+feature_name: Force Flattening When Ancestor Has Opacity
+chrome_version: 53
+feature_id: 5671480339726336
+---
+
+<style>
+  #flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+</style>
+
+<h3>Background</h3>
+<p>
+  "Flattening" is the process of drawing 3D-positioned children into the
+  parent's rendering plane. HTML elements flatten by default, but can prevent
+  this by applying the <code>transform-style: preserve-3d</code> CSS rule.
+  This only has an effect if children are actually positioned in 3D.
+</p>
+
+<p>
+  Flattening is required/strongly desired, however, if elements have style which
+  require filter-like rendering or clipping. Flattening is already forced for a
+  number of the situations mentioned in the
+  <a href="https://drafts.csswg.org/css-transforms/#grouping-property-values">specification draft</a>
+  as "grouping properties".
+</p>
+
+<p>
+  This particular change is motivated by the simplifications it yields for how
+  3D-positioned elements with opacity are composited. Currently, opacity is the
+  only post-processing effect which does not force flattening. Without this
+  change, the browser is forced to apply opacity individually to elements
+  positioned in 3D space rather than everything as a group.
+</p>
+
+<h3>Visualizing the Change</h3>
+
+<p>
+  The images below are screenshots illustrating the difference in the expected
+  rendering before and after the change introduced in Chrome 53. You can compare
+  it to the <a href="#live-output">Live Output</a> section, which shows what
+  your current browser actually renders.
+</p>
+
+<div id="flex-container">
+  <div>
+    <p>Before Chrome 53</p>
+    <img src="before-chrome-53.png">
+  </div>
+
+  <div>
+    <p>After Chrome 53</p>
+    <img src="after-chrome-53.png">
+  </div>
+</div>
+
+<h3 id="live-output">Live Output</h3>
+
+<p>
+  The relative layering and blending of each of the colored boxes below will
+  vary depending on whether the browser supports the old or new behavior.
+</p>
+
+{% capture html %}
+<div id="outer-container">
+  <div id="inner-container">
+    <div id="first-inner-child"></div>
+    <div id="second-inner-child"></div>
+  </div>
+  <div id="outer-child"></div>
+</div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
+
+{% capture css %}
+#outer-container {
+  transform-style: preserve-3d;
+}
+
+#inner-container {
+  background: red;
+  height: 100px;
+  opacity: 0.5;
+  transform-style: preserve-3d;
+  transform: translate3d(0, 0, 30px);
+  width: 100px;
+}
+
+#first-inner-child {
+  background: green;
+  height: 100px;
+  transform: translate3d(50px, 0, -20px);
+  width: 100px;
+}
+
+#second-inner-child {
+  background: black;
+  height: 80px;
+  transform: translate3d(35px, -60px, -30px);
+  width: 80px;
+}
+
+#outer-child {
+  background: blue;
+  height: 100px;
+  transform: translate3d(25px, -50px, 20px);
+  width: 100px;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
