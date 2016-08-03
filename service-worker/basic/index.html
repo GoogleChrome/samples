@@ -1,49 +1,100 @@
-<!DOCTYPE html>
-<!--
-Copyright 2014 Google Inc. All Rights Reserved.
+---
+feature_name: Basic Service Worker
+chrome_version: 40
+feature_id: 6561526227927040
+local_css_files: ['styles.css']
+---
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+<h3>Background</h3>
+<p>
+  This sample demonstrates a basic service worker that could be used as-is, or
+  as a starting point for further customization.
+</p>
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-<script>
-var scope = 'hello/';
-var registration;
-
-function register() {
-  navigator.serviceWorker.register('service-worker.js', {scope: scope})
-    .then(function(r) {
-      console.log('registered: ');
-      registration = r;
-      console.log(registration);
-    })
-    .catch(function(whut) {
-      console.error('uh oh... ');
-      console.error(whut);
-    });
-}
-
-function unregister() {
-  registration.unregister()
-    .then(function() {
-      console.log('unregistered');
-    });
-}
-</script>
-<button onclick="register()">Register</button>
-<button onclick="unregister()">Unregister</button>
-
-<p>Some nice places to visit:
-
+<h4>What It Does</h4>
 <ul>
-<li><a href="hello/world">world</a>
-<li><a href="hello/Cleveland">Cleveland</a>
+  <li>
+    Precaches the HTML, JavaScript, and CSS files needed to display this page offline.
+    (Try it out by reloading the page without a network connection!)
+  </li>
+  <li>Cleans up the previously precached entries when the cache name is updated.</li>
+  <li>Intercepts network requests, returning a cached response when available.</li>
+  <li>
+    If there's no cached response, fetches the response from the network and
+    adds it to the cache for future use.
+  </li>
 </ul>
+<p>
+  You can confirm the service worker's behavior using the
+  <a href="https://developers.google.com/web/tools/chrome-devtools/debug/progressive-web-apps/">Application panel</a>
+  of Chrome's DevTools.
+</p>
+
+<h4>What It Doesn't Do</h4>
+<ul>
+  <li>
+    Automatically version any of the precached resources.<br>
+    <em>
+      You must manually update the <code>CACHES.PRECACHE</code> name to pick up
+      new versions after updating anything!
+    </em>
+  </li>
+  <li>
+    Cache-bust the precaching requests.<br>
+    <em>
+      The <code>cache.addAll()</code> call may be fulfilled with responses from
+      the HTTP cache, depending on the HTTP caching headers you use. If you
+      are using
+      <a href="https://jakearchibald.com/2016/caching-best-practices/">HTTP caching</a>
+      and unversioned resources, it can be safer to
+      <a href="https://github.com/GoogleChrome/samples/blob/5c20f8d74d890fad3d867747d2c3fc853727700c/service-worker/prefetch/service-worker.js#L56">cache-bust</a>
+      your precaching requests.
+    </em>
+  </li>
+  <li>
+    Refresh the entries in the runtime cache.<br>
+    <em>
+      Once an entry is added to the runtime cache, it's used indefinitely,
+      without consulting the network to check for updates. If your runtime cache
+      is used for resources that might be updated, a different strategy, like
+      <a href="https://jakearchibald.com/2014/offline-cookbook/#stale-while-revalidate">stale-while-revalidate</a>
+      could be more appropriate.
+    </em>
+  </li>
+  <li>
+    Clean out the runtime cache.<br>
+    <em>
+      The runtime cache will grow as new resource URLs are requested. In this
+      example, there are only 5 different images that might be loaded, so the
+      cache size isn't a concern. If your web app might request an arbitrary
+      number of unique resource URLs, then using a library like
+      <a href="https://github.com/GoogleChrome/sw-toolbox"><code>sw-toolbox</code></a>
+      which provides
+      <a href="https://github.com/GoogleChrome/sw-toolbox/tree/master/recipes/cache-expiration-options">cache-expiration</a>
+      is recommended.
+    </em>
+  </li>
+</ul>
+
+<h3>Live Demo</h3>
+<p>
+  The following demo illustrates the service worker's runtime caching by loading
+  images in response to clicking the button below.
+</p>
+<p>
+  The first time a given image is requested, the service worker will be load it
+  from the network, but each subsequent time, it will be retrieved from the cache.
+</p>
+<label for="icons">Icons:</label>
+<select id="icons">
+  <option value="icons/ic_create_new_folder_black_48dp.png">New Folder</option>
+  <option value="icons/ic_file_upload_black_48dp.png">File Upload</option>
+  <option value="icons/ic_folder_black_48dp.png">Closed Folder</option>
+  <option value="icons/ic_folder_open_black_48dp.png">Open Folder</option>
+  <option value="icons/ic_folder_shared_black_48dp.png">Shared Folder</option>
+</select>
+<button id="show">Show Icon</button>
+<div id="container"></div>
+
+{% include js_snippet.html filename='demo.js' %}
+{% include js_snippet.html filename='service-worker.js' displayonly=true title="Service Worker's JavaScript" %}

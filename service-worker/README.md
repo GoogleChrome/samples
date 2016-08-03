@@ -1,6 +1,11 @@
 # Service Worker Recipes
 
-- [Basic registration](https://googlechrome.github.io/samples/service-worker/registration/index.html) -
+- [Basic Demo](https://googlechrome.github.io/samples/service-worker/basic/index.html) -
+a sample covering a basic, common use case. It precaches a set of local resources in a
+versioned cache, and maintains another cache that's populated at runtime as additional
+resources are requested.
+
+- [Simple registration](https://googlechrome.github.io/samples/service-worker/registration/index.html) -
 a bare-bones sample that simply performs service worker registration, with placeholders for various event handlers.
 
 - [Detailed registration](https://googlechrome.github.io/samples/service-worker/registration-events/index.html) -

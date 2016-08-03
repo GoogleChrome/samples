@@ -1,0 +1,10 @@
+#container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+li {
+  margin-bottom: 1em;
+}
