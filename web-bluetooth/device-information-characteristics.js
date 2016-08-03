@@ -68,8 +68,13 @@ function onButtonClick() {
             log('> PnP ID:');
             log('  > Vendor ID Source: ' +
                 (value.getUint8(0) === 1 ? 'Bluetooth' : 'USB'));
-            log('  > Vendor ID: ' +
-                (value.getUint8(1) | value.getUint8(2) << 8));
+            if (value.getUint8(0) === 1) {
+              log('  > Vendor ID: ' +
+                  (value.getUint8(1) | value.getUint8(2) << 8));
+            } else {
+              log('  > Vendor ID: ' +
+                  getUsbVendorName(value.getUint8(1) | value.getUint8(2) << 8));
+            }
             log('  > Product ID: ' +
                 (value.getUint8(3) | value.getUint8(4) << 8));
             log('  > Product Version: ' +
@@ -88,6 +93,12 @@ function onButtonClick() {
 }
 
 /* Utils */
+
+function getUsbVendorName(value) {
+  // Check out page source to see what valueToUsbVendorName object is.
+  return value +
+      (value in valueToUsbVendorName ? ' (' + valueToUsbVendorName[value] + ')' : '');
+}
 
 function anyDevice() {
   // This is the closest we can get for now to get all devices.
