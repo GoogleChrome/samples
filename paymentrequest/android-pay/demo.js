@@ -1,19 +1,27 @@
 /**
- * Invokes PaymentRequest for Android Pay.
+ * Invokes PaymentRequest for Android Pay. If you encounter issues when running
+ * your own copy of this sample, run 'adb logcat | grep Wallet' to see detailed
+ * error messages.
  */
 function onBuyClicked() {
   var supportedInstruments = [{
     supportedMethods: ['https://android.com/pay'],
     data: {
-      environment: 'TEST',
-      merchantId: '123456',
+      merchantName: 'Android Pay Demo',
+      // Place your own Android Pay merchant ID here. The merchant ID is tied to
+      // the origin of the website.
+      merchantId: '00184145120947117657',
+      // If you do not yet have a merchant ID, uncomment the following line.
+      // environment: 'TEST',
       allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
       paymentMethodTokenizationParameters: {
         tokenizationType: 'GATEWAY_TOKEN',
         parameters: {
           'gateway': 'stripe',
-          'stripe:publishableKey': '<PLACE_YOUR_STRIPE_PUBLISHABLE_KEY_HERE>',
-          'stripe:version': '2016-03-07'
+          // Place your own Stripe publishable key here. Use a matching Stripe
+          // secret key on the server to initiate a transaction.
+          'stripe:publishableKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo',
+          'stripe:version': '2016-07-06'
         }
       }
     }
@@ -82,16 +90,10 @@ function instrumentToJsonString(instrument) {
 }
 
 var buyButton = document.getElementById('buyButton');
-buyButton.setAttribute('style', 'display: none;');
-if (!('PaymentRequest' in window)) {
-  ChromeSamples.setStatus(
-      'Enable chrome://flags/#enable-experimental-web-platform-features');
-} else if (!navigator.userAgent.match(/Android/i)) {
-  ChromeSamples.setStatus(
-      'PaymentRequest is supported only on Android for now.');
-} else if (!navigator.userAgent.match(/Chrome\/5[3-4]/i)) { // eslint-disable-line no-negated-condition
-  ChromeSamples.setStatus('These tests are for Chrome 53 and 54.');
-} else {
+if ('PaymentRequest' in window) {
   buyButton.setAttribute('style', 'display: inline;');
   buyButton.addEventListener('click', onBuyClicked);
+} else {
+  buyButton.setAttribute('style', 'display: none;');
+  ChromeSamples.setStatus('This browser does not support web payments');
 }
