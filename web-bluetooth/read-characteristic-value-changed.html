@@ -24,6 +24,7 @@ optionally handle upcoming notifications as well.</p>
 <button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
 <button id="startNotifications" disabled>Start Notifications</button>
 <button id="stopNotifications" disabled>Stop Notifications</button>
+<button id="reset">Reset Bluetooth Device</button>
 
 {% include output_helper.html %}
 
@@ -32,26 +33,26 @@ optionally handle upcoming notifications as well.</p>
 <script>
   document.querySelector('#readBatteryLevel').addEventListener('click', function() {
     if (isWebBluetoothEnabled()) {
-      ChromeSamples.clearLog();
       onReadBatteryLevelButtonClick();
     }
   });
 
   document.querySelector('#startNotifications').addEventListener('click', function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
     if (isWebBluetoothEnabled()) {
       onStartNotificationsButtonClick();
     }
   });
 
   document.querySelector('#stopNotifications').addEventListener('click', function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
     if (isWebBluetoothEnabled()) {
       onStopNotificationsButtonClick();
+    }
+  });
+
+  document.querySelector('#reset').addEventListener('click', function(event) {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onResetButtonClick();
     }
   });
 </script>
