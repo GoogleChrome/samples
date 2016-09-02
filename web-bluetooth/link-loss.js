@@ -38,8 +38,7 @@ function onWriteButtonClick() {
   let value = document.querySelector('#alertLevelValue').value;
   alertLevelCharacteristic.writeValue(new Uint8Array([value]))
   .then(_ => {
-    log('> Alert Level changed to: ' +
-        getAlertLevel(alertLevelCharacteristic.value));
+    log('> Alert Level changed to: ' + getAlertLevel(value));
   })
   .catch(error => {
     log('Argh! ' + error);
