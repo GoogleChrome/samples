@@ -33,8 +33,13 @@ function onBuyClicked() {
 
   var options = {requestShipping: true};
 
-  new PaymentRequest(supportedInstruments, details, options) // eslint-disable-line no-undef
-      .show()
+  var request = new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
+
+  request.addEventListener('shippingaddresschange', function(evt) {
+    evt.updateWith(Promise.resolve(details));
+  });
+
+  request.show()
       .then(function(instrumentResponse) {
         sendPaymentToServer(instrumentResponse);
       })
@@ -107,21 +112,16 @@ function addressToDictionary(address) {
     postalCode: address.postalCode,
     sortingCode: address.sortingCode,
     country: address.country,
+    languageCode: address.languageCode,
     phone: address.phone
   };
 }
 
 var buyButton = document.getElementById('buyButton');
-buyButton.setAttribute('style', 'display: none;');
-if (!('PaymentRequest' in window)) {
-  ChromeSamples.setStatus(
-      'Enable chrome://flags/#enable-experimental-web-platform-features');
-} else if (!navigator.userAgent.match(/Android/i)) {
-  ChromeSamples.setStatus(
-      'PaymentRequest is supported only on Android for now.');
-} else if (!navigator.userAgent.match(/Chrome\/5[3-4]/i)) { // eslint-disable-line no-negated-condition
-  ChromeSamples.setStatus('These tests are for Chrome 53 and 54.');
-} else {
+if ('PaymentRequest' in window) {
   buyButton.setAttribute('style', 'display: inline;');
   buyButton.addEventListener('click', onBuyClicked);
+} else {
+  buyButton.setAttribute('style', 'display: none;');
+  ChromeSamples.setStatus('This browser does not support web payments');
 }

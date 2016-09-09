@@ -1,13 +1,38 @@
+var bluetoothDevice;
 var batteryLevelCharacteristic;
 
 function onReadBatteryLevelButtonClick() {
-  log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice(
-    {filters: anyDevice(), optionalServices: ['battery_service']})
-  .then(device => {
-    log('Connecting to GATT Server...');
-    return device.gatt.connect();
+  requestDevice()
+  .then(connectDeviceAndCacheCharacteristics)
+  .then(_ => {
+    log('Reading Battery Level...');
+    return batteryLevelCharacteristic.readValue();
   })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+function requestDevice() {
+  let result = Promise.resolve();
+  if (!bluetoothDevice) {
+    log('Requesting Bluetooth Device...');
+    result = navigator.bluetooth.requestDevice(
+      {filters: anyDevice(), optionalServices: ['battery_service']})
+    .then(device => {
+      bluetoothDevice = device;
+    });
+  }
+  return result;
+}
+
+function connectDeviceAndCacheCharacteristics() {
+  if (bluetoothDevice.gatt.connected && batteryLevelCharacteristic) {
+    return Promise.resolve();
+  }
+
+  log('Connecting to GATT Server...');
+  return bluetoothDevice.gatt.connect()
   .then(server => {
     log('Getting Battery Service...');
     return server.getPrimaryService('battery_service');
@@ -17,18 +42,11 @@ function onReadBatteryLevelButtonClick() {
     return service.getCharacteristic('battery_level');
   })
   .then(characteristic => {
-    log('Reading Battery Level...');
     batteryLevelCharacteristic = characteristic;
     batteryLevelCharacteristic.addEventListener('characteristicvaluechanged',
         handleBatteryLevelChanged);
-    return batteryLevelCharacteristic.readValue();
-  })
-  .then(_ => {
     document.querySelector('#startNotifications').disabled = false;
     document.querySelector('#stopNotifications').disabled = true;
-  })
-  .catch(error => {
-    log('Argh! ' + error);
   });
 }
 
@@ -64,6 +82,12 @@ function onStopNotificationsButtonClick() {
   .catch(error => {
     log('Argh! ' + error);
   });
+}
+
+function onResetButtonClick() {
+  log('> Bluetooth Device reset');
+  // Note that it doesn't disconnect device.
+  bluetoothDevice = null;
 }
 
 /* Utils */
