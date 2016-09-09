@@ -52,6 +52,10 @@ a sample showing how `window.caches` provides access to the Cache Storage API.
 a sample showing how a service worker can cause web page clients it controls to
 navigate to a given URL.
 
+- [Foreign Fetch](https://googlechrome.github.io/samples/service-worker/foreign-fetch/index.html) -
+a sample showing a client making use of the foreign fetch service worker
+deployed by a third-party service.
+
 
 # Related samples
 
