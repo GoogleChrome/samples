@@ -3,7 +3,7 @@
 self.addEventListener('install', event => {
   event.registerForeignFetch({
     scopes: ['/random'], // or self.registration.scope to handle everything
-    origins: ['*'] // or ['https://client1.com'] to limit the remote origins
+    origins: ['*'] // or ['https://example.com'] to limit the remote origins
   });
 });
 

@@ -1,0 +1,17 @@
+{
+  "name": "foreign-fetch-demo",
+  "version": "1.0.0",
+  "description": "Demo of a /random service that implements foreign fetch.",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Jeff Posnick <jeffy@google.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "engines": {
+    "node": ">=6.5.0"
+  }
+}
