@@ -14,7 +14,7 @@ app.use((req, res, next) => {
   // chrome://flags/#enable-experimental-web-platform-features
   // on all of the Chrome clients used for testing.
   // The deployment at https://foreign-fetch-demo.appspot.com has a
-  // token, so it's foreign fetch service worker does not require the flag.
+  // token, so its foreign fetch service worker does not require the flag.
   // res.setHeader('Origin-Trial', 'your-token-here');
   return next();
 });
