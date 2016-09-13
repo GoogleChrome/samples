@@ -1,0 +1,51 @@
+---
+feature_name: Foreign Fetch Service Worker
+chrome_version: 54
+feature_id: 5684130679357440
+---
+
+<h3>Background</h3>
+
+<p>
+  Third-party service providers can deploy
+  <a href="https://developers.google.com/web/updates/2016/09/foreign-fetch">foreign fetch service workers</a>
+  to intercept cross-origin requests from any client. For example, a web font
+  provider might want to register a foreign fetch service worker to implement an
+  advanced offline-first strategy for font requests, with a common cache shared
+  amongst all its clients.
+</p>
+
+<p>
+  A new <code>Link: rel="serviceworker"</code> response header facilitates
+  registering these third-party service workers.
+</p>
+
+<p>
+  Both foreign fetch itself and the <code>Link: rel="serviceworker"</code>
+  header are part of an
+  <a href="https://github.com/jpchase/OriginTrials/blob/gh-pages/developer-guide.md">Origin Trial</a>
+  starting with Chrome 54, and running through March 2017. To test out a foreign
+  fetch service worker without requiring the third-party service to sign up for
+  an origin trial token, you can enable
+  <code>chrome://flags/#enable-experimental-web-platform-features</code>. (This
+  is not required to test the demo on this page, which makes a request against
+  a service that has a valid Origin Trial token.)
+</p>
+
+<p>
+  You can read about the new functionality in more detail in <a href="https://developers.google.com/web/updates/2016/09/foreign-fetch">this post</a>.
+</p>
+
+{% capture initial_output_content %}
+<div>
+  Try disabling your network connection and then requesting a new number. The
+  foreign fetch service worker should handle the network failure for you,
+  and return a hardcoded value of <code>34</code>.
+</div>
+<button id="random">New Number, Please</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='local-client.js' title="Client JavaScript" %}
+{% include js_snippet.html filename='remote-server.js' displayonly=true title="Server Implementation" %}
+{% include js_snippet.html filename='foreign-fetch-sw.js' displayonly=true title="Foreign Fetch Service Worker" %}
