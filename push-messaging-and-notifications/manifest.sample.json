@@ -7,8 +7,5 @@
       }],
   "start_url": "./index.html?homescreen=1",
   "display": "standalone",
-  "gcm_sender_id": "<Your Project Number from https://console.developers.google.com>",
-  
-  "//": "gcm_user_visible_only is only needed until Chrome 44 is in stable ",
-  "gcm_user_visible_only": true
+  "gcm_sender_id": "<Your Project Number from https://console.developers.google.com>"
 }
