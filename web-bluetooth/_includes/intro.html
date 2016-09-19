@@ -17,10 +17,22 @@ for trials</a> so that websites can use it without any flag.</p>
 <script>
   window.addEventListener('DOMContentLoaded', function() {
     const searchParams = new URL(location).searchParams;
-    const inputs = Array.from(document.querySelectorAll('input'));
+    const inputs = Array.from(document.querySelectorAll('input[id]'));
 
-    inputs.filter(input => searchParams.has(input.id)).forEach(input => {
-      input.value = searchParams.get(input.id);
+    inputs.forEach(input => {
+      if (searchParams.has(input.id)) {
+        input.value = searchParams.get(input.id);
+      }
+      input.addEventListener('input', function(event) {
+        const newSearchParams = new URL(location).searchParams;
+        if (event.target.value) {
+          newSearchParams.set(input.id, event.target.value);
+        } else {
+          newSearchParams.delete(input.id);
+        }
+        history.replaceState({}, '', Array.from(newSearchParams).length ?
+            location.pathname + '?' + newSearchParams : location.pathname);
+      });
     });
   });
 </script>
