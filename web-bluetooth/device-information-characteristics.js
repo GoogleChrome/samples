@@ -52,7 +52,14 @@ function onButtonClick() {
 
         case BluetoothUUID.getCharacteristic('system_id'):
           queue = queue.then(_ => characteristic.readValue()).then(value => {
-            log('> System ID: ' + decoder.decode(value));
+            log('> System ID: ');
+            log('  > Manufacturer Identifier: ' +
+                padHex(value.getUint8(4)) + padHex(value.getUint8(3)) +
+                padHex(value.getUint8(2)) + padHex(value.getUint8(1)) +
+                padHex(value.getUint8(0)));
+            log('  > Organizationally Unique Identifier: ' +
+                padHex(value.getUint8(7)) + padHex(value.getUint8(6)) +
+                padHex(value.getUint8(5)));
           });
           break;
 
@@ -93,6 +100,10 @@ function onButtonClick() {
 }
 
 /* Utils */
+
+function padHex(value) {
+  return ('00' + value.toString(16).toUpperCase()).slice(-2);
+}
 
 function getUsbVendorName(value) {
   // Check out page source to see what valueToUsbVendorName object is.
