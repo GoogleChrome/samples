@@ -1,0 +1,52 @@
+---
+feature_name: ResizeObserver
+chrome_version: 54
+feature_id: 5705346022637568
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://wicg.github.io/ResizeObserver/">ResizeObserver API</a>
+  provides an API to get notified whenever an element changes its size.
+</p>
+<p>
+  This sample illustrates how to use <code>ResizeObserver</code> to implement
+  media query-like behavior on a per-element basis.
+<p>
+  The <a href="https://developers.google.com/web/updates/2016/10/resizeobserver"><em>Google Developers Web Updates</em></a>
+  article provides more details on <code>ResizeObserver</code>.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  On browsers that support <code>ResizeObserver</code>, you should see a border
+  appear around the green box when resizing the window.
+</p>
+<div class="boxes">
+  <div class="box" style="background: hsl(0, 100%, 50%)"></div>
+  <div class="box" style="background: hsl(60, 100%, 50%)"></div>
+  <div class="box" style="background: hsl(120, 100%, 50%)"></div>
+  <div class="box" style="background: hsl(180, 100%, 50%)"></div>
+  <div class="box" style="background: hsl(240, 100%, 50%)"></div>
+  <div class="box" style="background: hsl(300, 100%, 50%)"></div>
+</div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% capture css %}
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+.box {
+  height: 200px;
+  flex-basis: 200px;
+  flex-shrink: 1;
+  flex-grow: 1;
+  margin: 10px;
+  box-sizing: border-box;
+}
+{% endcapture %}
+{% include css_snippet.html css=css %}
+
+{% include js_snippet.html filename='demo.js' %}
