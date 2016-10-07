@@ -7,5 +7,5 @@
       }],
   "start_url": "./index.html?homescreen=1",
   "display": "standalone",
-  "gcm_sender_id": "<Your Project Number from https://console.developers.google.com>"
+  "gcm_sender_id": "<Your Sender ID from https://console.firebase.google.com>"
 }
