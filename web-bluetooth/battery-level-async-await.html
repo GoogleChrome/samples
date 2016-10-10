@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / Battery Level
-chrome_version: 45
+feature_name: Web Bluetooth / Battery Level (ES7 Async)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -14,13 +14,13 @@ information from a nearby Bluetooth Device advertising Battery information with
 Bluetooth Low Energy. You may want to try this demo with the BLE Peripheral
 Simulator App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a> and check out the <a href="battery-level-async-await.html">Battery Level (ES7 Async)</a> sample.</p>
+Play Store</a> and check out the <a href="battery-level.html">Battery Level (Promises)</a> sample.</p>
 
 <button>Get Bluetooth Device's Battery Level</button>
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='battery-level.js' %}
+{% include js_snippet.html filename='battery-level-async-await.js' %}
 
 <script>
   document.querySelector('button').addEventListener('click', function() {
