@@ -2,8 +2,8 @@
 
 const ro = new ResizeObserver(entries => {
   for (let entry of entries) {
-    entry.target.classList.toggle('stripes', entry.contentRect.width < 250);
+    entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
   }
 });
-// Only observe the green box (which is the third box).
+// Only observe the 2nd box
 ro.observe(document.querySelector('.box:nth-child(2)'));
