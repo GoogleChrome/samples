@@ -1,0 +1,48 @@
+---
+feature_name: ResizeObserver
+chrome_version: 54
+feature_id: 5705346022637568
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://wicg.github.io/ResizeObserver/">ResizeObserver API</a>
+  provides an API to get notified whenever an element changes its size.
+</p>
+<p>
+  This sample illustrates how to use <code>ResizeObserver</code> to implement
+  [media query](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
+  -like behavior on a per-element basis.
+<p>
+  The <a href="https://developers.google.com/web/updates/2016/10/resizeobserver"><em>Google Developers Web Updates</em></a>
+  article provides more details on <code>ResizeObserver</code>. As of Chrome 54, it is behind the `chrome://flags/#enable-experimental-web-platform-features` flag.
+</p>
+
+{% capture initial_output_content %}
+<p>
+  On browsers that support <code>ResizeObserver</code>, you should see the border
+  radius of the second box change when resizing the window.
+</p>
+<style>
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  width: 40vw;
+}
+.box {
+  height: 200px;
+  flex-shrink: 1;
+  flex-grow: 1;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 3px solid black;
+}
+</style>
+<div class="boxes">
+  <div class="box"></div>
+  <div class="box"></div>
+</div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
