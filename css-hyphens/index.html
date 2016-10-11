@@ -1,0 +1,48 @@
+---
+feature_name: CSS hyphens property
+chrome_version: 55
+feature_id: 5642121184804864
+---
+
+<h3>Background</h3>
+<p>Background info goes here.</p>
+<p>Any content here, outside of a capture block, is included verbatim on the resulting page.</p>
+
+{% capture css %}
+div {
+  font: 18px Times;
+  margin-bottom: 2.5%;
+}
+
+div.none {
+   -webkit-hyphens: none;
+   hyphens: none;
+}
+
+div.manual {
+   -webkit-hyphens: manual;
+   hyphens: manual;
+}
+
+div.auto {
+   -webkit-hyphens: auto;
+   hyphens: auto;
+}
+{% endcapture %}
+
+{% include css_snippet.html css=css %}
+
+{% capture html %}
+  <div class="none">
+    Google ipsum dolor sit amet, consectetur adipiscing e&shy;lit.
+  </div>
+  
+  <div class="manual">
+    Google ipsum dolor sit amet, consectetur adipiscing e&shy;lit.
+  </div>
+  
+  <div class="auto">
+    Google ipsum dolor sit amet, consectetur adipiscing e&shy;lit.
+  </div>
+{% endcapture %}
+{% include html_snippet.html html=html %}
