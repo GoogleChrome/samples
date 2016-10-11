@@ -17,7 +17,7 @@ async function onButtonClick() {
     const value = await characteristic.readValue();
 
     log('> Battery Level is ' + value.getUint8(0) + '%');
-  } catch(e) {
+  } catch(error) {
     log('Argh! ' + error);
   }
 }
