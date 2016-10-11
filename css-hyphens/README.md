@@ -1,5 +1,5 @@
 <!-- TODO: Replace PLACEHOLDER with feature name. -->
-PLACEHOLDER Sample
+CSS Hyphens Property Sample
 ===
 <!-- TODO: Replace PLACEHOLDER in the path to correspond to the real github.io URL. -->
 See https://googlechrome.github.io/samples/css-hyphens/index.html for a live demo.
