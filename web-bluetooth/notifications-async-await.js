@@ -1,6 +1,6 @@
 var myCharacteristic;
 
-function onStartButtonClick() {
+async function onStartButtonClick() {
   let serviceUuid = document.querySelector('#service').value;
   if (serviceUuid.startsWith('0x')) {
     serviceUuid = parseInt(serviceUuid);
@@ -11,44 +11,40 @@ function onStartButtonClick() {
     characteristicUuid = parseInt(characteristicUuid);
   }
 
-  log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters: [{services: [serviceUuid]}]})
-  .then(device => {
+  try {
+    log('Requesting Bluetooth Device...');
+    const device = await navigator.bluetooth.requestDevice({
+        filters: [{services: [serviceUuid]}]});
+
     log('Connecting to GATT Server...');
-    return device.gatt.connect();
-  })
-  .then(server => {
+    const server = await device.gatt.connect();
+
     log('Getting Service...');
-    return server.getPrimaryService(serviceUuid);
-  })
-  .then(service => {
+    const service = await server.getPrimaryService(serviceUuid);
+
     log('Getting Characteristic...');
-    return service.getCharacteristic(characteristicUuid);
-  })
-  .then(characteristic => {
-    myCharacteristic = characteristic;
-    return myCharacteristic.startNotifications().then(_ => {
-      log('> Notifications started');
-      myCharacteristic.addEventListener('characteristicvaluechanged',
-          handleNotifications);
-    });
-  })
-  .catch(error => {
+    myCharacteristic = await service.getCharacteristic(characteristicUuid);
+
+    await myCharacteristic.startNotifications();
+
+    log('> Notifications started');
+    myCharacteristic.addEventListener('characteristicvaluechanged',
+        handleNotifications);
+  } catch(error) {
     log('Argh! ' + error);
-  });
+  }
 }
 
-function onStopButtonClick() {
+async function onStopButtonClick() {
   if (myCharacteristic) {
-    myCharacteristic.stopNotifications()
-    .then(_ => {
+    try {
+      await myCharacteristic.stopNotifications();
       log('> Notifications stopped');
       myCharacteristic.removeEventListener('characteristicvaluechanged',
           handleNotifications);
-    })
-    .catch(error => {
+    } catch(error) {
       log('Argh! ' + error);
-    });
+    }
   }
 }
 

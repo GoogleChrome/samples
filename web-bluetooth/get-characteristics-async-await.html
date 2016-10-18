@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / Characteristic Properties
-chrome_version: 48
+feature_name: Web Bluetooth / Get Characteristics (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -9,18 +9,18 @@ origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAV
 
 {% include_relative _includes/intro.html %}
 
-<p>This sample illustrates the use of the Web Bluetooth API to display all
-properties of a specific characteristic from a nearby Bluetooth Low Energy
+<p>This sample illustrates the use of the Web Bluetooth API to get all
+characteristics of an advertised service from a nearby Bluetooth Low Energy
 Device. You may want to try this demo with the BLE Peripheral Simulator App
 from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a> and check out the <a href="characteristic-properties-async-await.html">Characteristic Properties
-(Async Await)</a> sample.</p>
+Play Store</a> and check out the <a href="get-characteristics.html">Get
+Characteristics (Promises)</a> sample.</p>
 
 <form>
   <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
-  <input id="characteristic" type="text" list="characteristics" placeholder="Bluetooth Characteristic">
-  <button>Get Bluetooth characteristic properties</button>
+  <input id="characteristic" type="text" list="characteristics" placeholder="Optional Bluetooth Characteristic">
+  <button>Get characteristics</button>
 </form>
 
 {% include_relative _includes/datalist-services.html %}
@@ -28,7 +28,7 @@ Play Store</a> and check out the <a href="characteristic-properties-async-await.
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='characteristic-properties.js' %}
+{% include js_snippet.html filename='get-characteristics-async-await.js' %}
 
 <script>
   document.querySelector('form').addEventListener('submit', function(event) {

@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / Device Disconnect
-chrome_version: 50
+feature_name: Web Bluetooth / Device Disconnect (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -13,7 +13,7 @@ origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAV
 href="http://webbluetoothcg.github.io/web-bluetooth/#dom-bluetoothgattremoteserver-disconnect">disconnect</a>
 and get notified from a disconnection of a nearby Bluetooth Low Energy Device
 after connecting to it. You may want to check out the <a
-href="device-disconnect-async-await.html">Device Disconnect (Async Await)</a> sample.</p>
+href="device-disconnect.html">Device Disconnect (Promises)</a> sample.</p>
 
 <form>
   <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
@@ -28,7 +28,7 @@ href="device-disconnect-async-await.html">Device Disconnect (Async Await)</a> sa
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='device-disconnect.js' %}
+{% include js_snippet.html filename='device-disconnect-async-await.js' %}
 
 <script>
   document.querySelector('#scan').addEventListener('click', function(event) {

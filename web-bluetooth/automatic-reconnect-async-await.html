@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / Automatic Reconnect
-chrome_version: 52
+feature_name: Web Bluetooth / Automatic Reconnect (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -13,7 +13,7 @@ origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAV
 disconnected Bluetooth device using a simple <a
 href="https://en.wikipedia.org/wiki/Exponential_backoff">exponential backoff
 algorithm</a>. You may want to check out the <a
-href="automatic-reconnect-async-await.html">Automatic Reconnect (Async Await)</a> sample.</p>
+href="automatic-reconnect.html">Automatic Reconnect (Promises)</a> sample.</p>
 
 <form>
   <button>Scan</button>
@@ -21,7 +21,7 @@ href="automatic-reconnect-async-await.html">Automatic Reconnect (Async Await)</a
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='automatic-reconnect.js' %}
+{% include js_snippet.html filename='automatic-reconnect-async-await.js' %}
 
 <script>
   document.querySelector('button').addEventListener('click', function(event) {
