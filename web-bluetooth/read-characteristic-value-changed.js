@@ -85,9 +85,12 @@ function onStopNotificationsButtonClick() {
 }
 
 function onResetButtonClick() {
-  log('> Bluetooth Device reset');
+  batteryLevelCharacteristic.removeEventListener('characteristicvaluechanged',
+      handleBatteryLevelChanged);
+  batteryLevelCharacteristic = null;
   // Note that it doesn't disconnect device.
   bluetoothDevice = null;
+  log('> Bluetooth Device reset');
 }
 
 /* Utils */
