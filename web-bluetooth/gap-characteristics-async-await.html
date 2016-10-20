@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / GAP Characteristics
-chrome_version: 50
+feature_name: Web Bluetooth / GAP Characteristics (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -13,8 +13,8 @@ origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAV
 characteristics from a nearby Bluetooth Device. You may want to try this demo
 with the BLE Peripheral Simulator App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a> and check out the <a href="gap-characteristics-async-await.html">GAP
-Characteristics (Async Await)</a> sample.</p>
+Play Store</a> and check out the <a href="gap-characteristics.html">GAP
+Characteristics (Promises)</a> sample.</p>
 
 <p>Note: The <a target="_blank" href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.gap.reconnection_address.xml">Reconnection Address</a> characteristic is <a target="_blank" href="https://github.com/WebBluetoothCG/registries/blob/7b46fd5d58ea98fa098372a774fd7b981f0bdb0d/gatt_blacklist.txt#L30-L32">blacklisted</a> and forbidden from being accessed.</p>
 
@@ -22,7 +22,7 @@ Characteristics (Async Await)</a> sample.</p>
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='gap-characteristics.js' %}
+{% include js_snippet.html filename='gap-characteristics-async-await.js' %}
 
 <script>
   document.querySelector('button').addEventListener('click', function() {

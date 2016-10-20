@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / Link Loss
-chrome_version: 50
+feature_name: Web Bluetooth / Link Loss (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -17,7 +17,7 @@ device alerts when the link is lost. You may want to try this demo with the nRF
 Connect for Mobile App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">Google
 Play Store</a> and its pre-configured Link Loss service, and check out the <a
-href="link-loss-async-await.html">Link Loss (Async Await)</a> sample.</p>
+href="link-loss.html">Link Loss (Promises)</a> sample.</p>
 
 <button id="readButton">Get Bluetooth Device Alert Level</button>
 
@@ -33,7 +33,7 @@ href="link-loss-async-await.html">Link Loss (Async Await)</a> sample.</p>
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='link-loss.js' %}
+{% include js_snippet.html filename='link-loss-async-await.js' %}
 
 <script>
   document.querySelector('#readButton').addEventListener('click', function() {

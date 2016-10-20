@@ -1,48 +1,44 @@
 var alertLevelCharacteristic;
 
-function onReadButtonClick() {
-  log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters: [{services: ['link_loss']}]})
-  .then(device => {
+async function onReadButtonClick() {
+  try {
+    log('Requesting Bluetooth Device...');
+    const device = await navigator.bluetooth.requestDevice({
+        filters: [{services: ['link_loss']}]});
+
     log('Connecting to GATT Server...');
-    return device.gatt.connect();
-  })
-  .then(server => {
+    const server = await device.gatt.connect();
+
     log('Getting Link Loss Service...');
-    return server.getPrimaryService('link_loss');
-  })
-  .then(service => {
+    const service = await server.getPrimaryService('link_loss');
+
     log('Getting Alert Level Characteristic...');
-    return service.getCharacteristic('alert_level');
-  })
-  .then(characteristic => {
-    alertLevelCharacteristic = characteristic;
+    alertLevelCharacteristic = await service.getCharacteristic('alert_level');
+
     document.querySelector('#writeButton').disabled = false;
     log('Reading Alert Level...');
-    return characteristic.readValue();
-  })
-  .then(value => {
+    const value = await alertLevelCharacteristic.readValue();
+
     log('> Alert Level: ' + getAlertLevel(value));
-  })
-  .catch(error => {
+  } catch(error) {
     document.querySelector('#writeButton').disabled = true;
     log('Argh! ' + error);
-  });
+  }
 }
 
-function onWriteButtonClick() {
+async function onWriteButtonClick() {
   if (!alertLevelCharacteristic) {
     return;
   }
-  log('Setting Alert Level...');
   let value = new Uint8Array([document.querySelector('#alertLevelValue').value]);
-  alertLevelCharacteristic.writeValue(value)
-  .then(_ => {
+  try {
+    log('Setting Alert Level...');
+    await alertLevelCharacteristic.writeValue(value);
+
     log('> Alert Level changed to: ' + getAlertLevel(new DataView(value.buffer)));
-  })
-  .catch(error => {
+  } catch(error) {
     log('Argh! ' + error);
-  });
+  }
 }
 
 /* Utils */

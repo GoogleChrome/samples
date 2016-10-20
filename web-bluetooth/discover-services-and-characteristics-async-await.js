@@ -1,39 +1,35 @@
-function onButtonClick() {
+async function onButtonClick() {
   // Validate services UUID entered by user first.
   let optionalServices = document.querySelector('#optionalServices').value
     .split(/, ?/).map(s => s.startsWith('0x') ? parseInt(s) : s)
     .filter(s => s && BluetoothUUID.getService);
 
-  log('Requesting any Bluetooth Device...');
-  navigator.bluetooth.requestDevice(
-    {filters: anyDevice(), optionalServices: optionalServices})
-  .then(device => {
+  try {
+    log('Requesting any Bluetooth Device...');
+    const device = await navigator.bluetooth.requestDevice({
+        filters: anyDevice(), optionalServices: optionalServices});
+
     log('Connecting to GATT Server...');
-    return device.gatt.connect();
-  })
-  .then(server => {
+    const server = await device.gatt.connect();
+
     // Note that we could also get all services that match a specific UUID by
     // passing it to getPrimaryServices().
     log('Getting Services...');
-    return server.getPrimaryServices();
-  })
-  .then(services => {
+    const services = await server.getPrimaryServices();
+
     log('Getting Characteristics...');
-    let queue = Promise.resolve();
-    services.forEach(service => {
-      queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
-        log('> Service: ' + service.uuid);
-        characteristics.forEach(characteristic => {
-          log('>> Characteristic: ' + characteristic.uuid + ' ' +
-              getSupportedProperties(characteristic));
-        });
-      }));
-    });
-    return queue;
-  })
-  .catch(error => {
+    for (const service of services) {
+      log('> Service: ' + service.uuid);
+      const characteristics = await service.getCharacteristics();
+
+      characteristics.forEach(characteristic => {
+        log('>> Characteristic: ' + characteristic.uuid + ' ' +
+            getSupportedProperties(characteristic));
+      });
+    }
+  } catch(error) {
     log('Argh! ' + error);
-  });
+  }
 }
 
 /* Utils */

@@ -1,10 +1,10 @@
 ---
-feature_name: Web Bluetooth / Characteristic Properties
-chrome_version: 48
+feature_name: Web Bluetooth / Characteristic Properties (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
-origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAVMbuCQqelnYE5kzKjC6sQ0AAABheyJvcmlnaW4iOiAiaHR0cHM6Ly9nb29nbGVjaHJvbWUuZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDgwMzQ1ODU2fQ==
+origin_trial: AnLdgsfq0LCSh86RKcjZxXxRcP0rMTeMBwFNDF/6EIvxrjRARVPMbmJJ7MVIrqkWScDGT1rkdIR07hteek98SQkAAABheyJvcmlnaW4iOiAiaHR0cHM6Ly9nb29nbGVjaHJvbWUuZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDc2ODE1NjMwfQ==
 ---
 
 {% include_relative _includes/intro.html %}
@@ -14,8 +14,8 @@ properties of a specific characteristic from a nearby Bluetooth Low Energy
 Device. You may want to try this demo with the BLE Peripheral Simulator App
 from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a> and check out the <a href="characteristic-properties-async-await.html">Characteristic Properties
-(Async Await)</a> sample.</p>
+Play Store</a> and check out the <a href="characteristic-properties.html">Characteristic Properties (Promises)</a>
+sample.</p>
 
 <form>
   <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
@@ -28,7 +28,7 @@ Play Store</a> and check out the <a href="characteristic-properties-async-await.
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='characteristic-properties.js' %}
+{% include js_snippet.html filename='characteristic-properties-async-await.js' %}
 
 <script>
   document.querySelector('form').addEventListener('submit', function(event) {

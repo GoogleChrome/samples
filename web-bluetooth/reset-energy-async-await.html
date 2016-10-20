@@ -1,10 +1,10 @@
 ---
-feature_name: Web Bluetooth / Reset Energy Expended
+feature_name: Web Bluetooth / Reset Energy Expended (Async Await)
 chrome_version: 45
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
-origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAVMbuCQqelnYE5kzKjC6sQ0AAABheyJvcmlnaW4iOiAiaHR0cHM6Ly9nb29nbGVjaHJvbWUuZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDgwMzQ1ODU2fQ==
+origin_trial: AnLdgsfq0LCSh86RKcjZxXxRcP0rMTeMBwFNDF/6EIvxrjRARVPMbmJJ7MVIrqkWScDGT1rkdIR07hteek98SQkAAABheyJvcmlnaW4iOiAiaHR0cHM6Ly9nb29nbGVjaHJvbWUuZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDc2ODE1NjMwfQ==
 ---
 
 {% include_relative _includes/intro.html %}
@@ -14,14 +14,14 @@ expended from a nearby Bluetooth Device advertising Heart Rate with Bluetooth
 Low Energy. You may want to try this demo with the BLE Peripheral Simulator
 App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
-Play Store</a> and check out the <a href="reset-energy-async-await.html">Reset
-Energy (Async Await)</a> sample.</p>
+Play Store</a> and check out the <a href="reset-energy.html">Reset Energy
+(Promises)</a> sample.</p>
 
 <button>Reset Energy Expended</button>
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='reset-energy.js' %}
+{% include js_snippet.html filename='reset-energy-async-await.js' %}
 
 <script>
   document.querySelector('button').addEventListener('click', function() {

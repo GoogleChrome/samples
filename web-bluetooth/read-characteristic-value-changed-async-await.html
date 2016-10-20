@@ -1,6 +1,6 @@
 ---
-feature_name: Web Bluetooth / Read Characteristic Value Changed
-chrome_version: 48
+feature_name: Web Bluetooth / Read Characteristic Value Changed (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
@@ -16,8 +16,8 @@ to try this demo with the BLE Peripheral
 Simulator App from the <a target="_blank"
 href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
 Play Store</a> and check out the <a
-href="read-characteristic-value-changed-async-await.html">Read Characteristic Value Changed
-Sample (Async Await)</a> sample.</p>
+href="read-characteristic-value-changed.html">Read Characteristic Value Changed
+Sample (Promises)</a> sample.</p>
 
 <p>Here, we use the <code>characteristicvaluechanged</code> event listener to
 handle reading battery level characteristic value. This event listener will
@@ -30,7 +30,7 @@ optionally handle upcoming notifications as well.</p>
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='read-characteristic-value-changed.js' %}
+{% include js_snippet.html filename='read-characteristic-value-changed-async-await.js' %}
 
 <script>
   document.querySelector('#readBatteryLevel').addEventListener('click', function() {

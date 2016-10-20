@@ -1,18 +1,17 @@
 ---
-feature_name: Web Bluetooth / Device Info
-chrome_version: 45
+feature_name: Web Bluetooth / Device Info (Async Await)
+chrome_version: 55
 check_min_version: true
 feature_id: 5264933985976320
 icon_url: icon.png
-origin_trial: ApmuBcRyiq3qe8VTsn2PzHQEgPZyZby+/54rVKFxsGMhaTw62E1pyMwknN+MFLmaAVMbuCQqelnYE5kzKjC6sQ0AAABheyJvcmlnaW4iOiAiaHR0cHM6Ly9nb29nbGVjaHJvbWUuZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDgwMzQ1ODU2fQ==
+origin_trial: AnLdgsfq0LCSh86RKcjZxXxRcP0rMTeMBwFNDF/6EIvxrjRARVPMbmJJ7MVIrqkWScDGT1rkdIR07hteek98SQkAAABheyJvcmlnaW4iOiAiaHR0cHM6Ly9nb29nbGVjaHJvbWUuZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDc2ODE1NjMwfQ==
 ---
 
 {% include_relative _includes/intro.html %}
 
 <p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
 device information from a nearby Bluetooth Low Energy Device. You may want to
-check out the <a href="device-info-async-await.html">Device Info (Async
-Await)</a> sample.</p>
+check out the <a href="device-info.html">Device Info (Promises)</a> sample.</p>
 
 <form>
   <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
@@ -25,7 +24,7 @@ Await)</a> sample.</p>
 
 {% include output_helper.html %}
 
-{% include js_snippet.html filename='device-info.js' %}
+{% include js_snippet.html filename='device-info-async-await.js' %}
 
 <script>
   document.querySelector('form').addEventListener('submit', function(event) {
