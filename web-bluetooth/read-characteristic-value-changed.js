@@ -2,7 +2,7 @@ var bluetoothDevice;
 var batteryLevelCharacteristic;
 
 function onReadBatteryLevelButtonClick() {
-  requestDevice()
+  return (bluetoothDevice ? Promise.resolve() : requestDevice())
   .then(connectDeviceAndCacheCharacteristics)
   .then(_ => {
     log('Reading Battery Level...');
@@ -14,18 +14,13 @@ function onReadBatteryLevelButtonClick() {
 }
 
 function requestDevice() {
-  let result = Promise.resolve();
-  if (!bluetoothDevice) {
-    log('Requesting Bluetooth Device...');
-    result = navigator.bluetooth.requestDevice(
-      {filters: anyDevice(), optionalServices: ['battery_service']})
-    .then(device => {
-      bluetoothDevice = device;
-      bluetoothDevice.addEventListener('gattserverdisconnected',
-          onDisconnected);
-    });
-  }
-  return result;
+  log('Requesting Bluetooth Device...');
+  return navigator.bluetooth.requestDevice(
+    {filters: anyDevice(), optionalServices: ['battery_service']})
+  .then(device => {
+    bluetoothDevice = device;
+    bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+  });
 }
 
 function connectDeviceAndCacheCharacteristics() {
