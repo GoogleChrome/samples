@@ -22,7 +22,6 @@ async function onButtonClick() {
 
     log('Getting Characteristic...');
     const characteristic = await service.getCharacteristic(characteristicUuid);
-console.log(characteristic);
 
     log('> Characteristic UUID:  ' + characteristic.uuid);
     log('> Broadcast:            ' + characteristic.properties.broadcast);
