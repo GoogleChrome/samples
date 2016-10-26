@@ -21,6 +21,8 @@ function requestDevice() {
       {filters: anyDevice(), optionalServices: ['battery_service']})
     .then(device => {
       bluetoothDevice = device;
+      bluetoothDevice.addEventListener('gattserverdisconnected',
+          onDisconnected);
     });
   }
   return result;
@@ -91,6 +93,14 @@ function onResetButtonClick() {
   // Note that it doesn't disconnect device.
   bluetoothDevice = null;
   log('> Bluetooth Device reset');
+}
+
+function onDisconnected() {
+  log('> Bluetooth Device disconnected');
+  connectDeviceAndCacheCharacteristics()
+  .catch(error => {
+    log('Argh! ' + error);
+  });
 }
 
 /* Utils */

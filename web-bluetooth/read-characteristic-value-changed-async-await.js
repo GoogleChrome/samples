@@ -18,6 +18,7 @@ async function requestDevice() {
     log('Requesting Bluetooth Device...');
     bluetoothDevice = await navigator.bluetooth.requestDevice({
         filters: anyDevice(), optionalServices: ['battery_service']});
+    bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
   }
 }
 
@@ -83,6 +84,16 @@ function onResetButtonClick() {
   bluetoothDevice = null;
   log('> Bluetooth Device reset');
 }
+
+async function onDisconnected() {
+  log('> Bluetooth Device disconnected');
+  try {
+    await connectDeviceAndCacheCharacteristics()
+  } catch(error) {
+    log('Argh! ' + error);
+  }
+}
+
 
 /* Utils */
 
