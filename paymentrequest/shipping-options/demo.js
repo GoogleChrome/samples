@@ -147,7 +147,6 @@ function instrumentToJsonString(instrument) {
 function addressToDictionary(address) {
   return {
     recipient: address.recipient,
-    careOf: address.careOf,
     organization: address.organization,
     addressLine: address.addressLine,
     dependentLocality: address.dependentLocality,
