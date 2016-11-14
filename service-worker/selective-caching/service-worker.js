@@ -33,9 +33,7 @@ self.addEventListener('activate', function(event) {
   // Delete all caches that aren't named in CURRENT_CACHES.
   // While there is only one cache in this example, the same logic will handle the case where
   // there are multiple versioned caches.
-  var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
-    return CURRENT_CACHES[key];
-  });
+  var expectedCacheNames = Object.values(CURRENT_CACHES);
 
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
