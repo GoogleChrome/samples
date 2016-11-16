@@ -16,7 +16,7 @@ function onReadBatteryLevelButtonClick() {
 function requestDevice() {
   log('Requesting Bluetooth Device...');
   return navigator.bluetooth.requestDevice(
-    {filters: anyDevice(), optionalServices: ['battery_service']})
+    {filters: anyNamedDevice(), optionalServices: ['battery_service']})
   .then(device => {
     bluetoothDevice = device;
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
@@ -102,7 +102,7 @@ function onDisconnected() {
 
 /* Utils */
 
-function anyDevice() {
+function anyNamedDevice() {
   // This is the closest we can get for now to get all devices.
   // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
   return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
