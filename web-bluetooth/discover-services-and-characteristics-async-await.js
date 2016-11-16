@@ -7,7 +7,7 @@ async function onButtonClick() {
   try {
     log('Requesting any Bluetooth Device...');
     const device = await navigator.bluetooth.requestDevice({
-        filters: anyDevice(), optionalServices: optionalServices});
+        filters: anyNamedDevice(), optionalServices: optionalServices});
 
     log('Connecting to GATT Server...');
     const server = await device.gatt.connect();
@@ -44,7 +44,7 @@ function getSupportedProperties(characteristic) {
   return '[' + supportedProperties.join(', ') + ']';
 }
 
-function anyDevice() {
+function anyNamedDevice() {
   // This is the closest we can get for now to get all devices.
   // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
   return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')

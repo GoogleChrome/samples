@@ -1,7 +1,7 @@
 function onButtonClick() {
   log('Requesting any Bluetooth Device...');
   navigator.bluetooth.requestDevice(
-    {filters: anyDevice(), optionalServices: ['device_information']})
+    {filters: anyNamedDevice(), optionalServices: ['device_information']})
   .then(device => {
     log('Connecting to GATT Server...');
     return device.gatt.connect();
@@ -111,7 +111,7 @@ function getUsbVendorName(value) {
       (value in valueToUsbVendorName ? ' (' + valueToUsbVendorName[value] + ')' : '');
 }
 
-function anyDevice() {
+function anyNamedDevice() {
   // This is the closest we can get for now to get all devices.
   // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
   return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
