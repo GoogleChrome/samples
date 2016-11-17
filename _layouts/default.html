@@ -53,7 +53,7 @@ limitations under the License.
     <p class="availability">
       Available in <a target="_blank" href="https://www.chromestatus.com/feature/{{ page.feature_id }}">Chrome {{ page.chrome_version }}+</a> |
       <a target="_blank" href="{{ site.gh_url_prefix }}{{ page.url | remove_first: 'index.html' }}">View on GitHub</a> |
-      <a target="_blank" href="https://www.chromestatus.com/samples">Browse Samples</a>
+      <a {% if page.index == null %}target="_blank"{% endif %} href="{% if page.index %}{{ page.index }}{% else %}https://www.chromestatus.com/samples{% endif %}">Browse Samples</a>
     </p>
     {{ content }}
     {% for local_js_file in page.local_js_files %}<script src="{{ local_js_file }}"></script>{% endfor %}
