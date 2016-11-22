@@ -1,6 +1,6 @@
 function addToCache(request, networkResponse) {
   return caches.open('web-bluetooth')
-    .then(cache => cache.put(request, networkResponse.clone()));
+    .then(cache => cache.put(request, networkResponse));
 }
 
 function getCacheResponse(request) {
@@ -11,7 +11,7 @@ function getCacheResponse(request) {
 
 function getNetworkOrCacheResponse(request) {
   return fetch(request).then(networkResponse => {
-    addToCache(request, networkResponse);
+    addToCache(request, networkResponse.clone());
     return networkResponse;
   }).catch(_ => {
     return getCacheResponse(request)
@@ -20,5 +20,7 @@ function getNetworkOrCacheResponse(request) {
 }
 
 self.addEventListener('fetch', event => {
-  event.respondWith(getNetworkOrCacheResponse(event.request));
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(getNetworkOrCacheResponse(event.request));
+  }
 });
