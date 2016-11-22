@@ -1,0 +1,31 @@
+#results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#results > div {
+  width: 33%;
+  text-align: center;
+  line-height: 24px;
+}
+
+@media (max-width: 814px) {
+
+  #results {
+    flex-flow: column;
+  }
+  
+  #results > div {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+}
+
+video, canvas {
+  border: 2px solid rgba(255, 255, 255, 1);
+  background: #263238;
+  height: 198px;
+  width: 100%;
+}
