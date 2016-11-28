@@ -26,7 +26,7 @@ class DemoVR extends Demo {
     this._disabled = false;
     if (typeof VRFrameData === 'undefined') {
       this._disabled = true;
-      this._showError();
+      this._showWebVRNotSupportedError();
       return;
     }
 
@@ -54,27 +54,30 @@ class DemoVR extends Demo {
 
   _getDisplays () {
     return navigator.getVRDisplays().then(displays => {
+      // If there are no devices available, quit out.
       if (displays.length === 0) {
         return;
       }
 
+      // Store the first display we find. A more production-ready version should
+      // allow the user to choose from their available displays.
       this._vr.display = displays[0];
       this._vr.depthNear = DemoVR.CAMERA_SETTINGS.near;
       this._vr.depthFar = DemoVR.CAMERA_SETTINGS.far;
 
       if (!this._vr.display.capabilities.canPresent) {
-        return this._showNoPresent();
+        return this._showNoPresentError();
       }
 
       this._createPresentationButton();
     });
   }
 
-  _showNoPresent () {
-    console.warn(`Unable to present with this device ${this._vr.display}`);
+  _showNoPresentError () {
+    console.error(`Unable to present with this device ${this._vr.display}`);
   }
 
-  _showError () {
+  _showWebVRNotSupportedError () {
     console.error('WebVR not supported');
   }
 
@@ -184,6 +187,17 @@ class DemoVR extends Demo {
     // the default browser one).
     this._vr.display.requestAnimationFrame(this._update);
 
+    // Call submitFrame to ensure that the device surfaces new data through
+    // getFrameData. If this isn't called you'll always get the same data.
+    this._vr.display.submitFrame();
+
+    console.clear();
+    console.log(
+      `${this._scene.matrix.elements[0]}, ${this._scene.matrix.elements[1]}, ${this._scene.matrix.elements[2]}, ${this._scene.matrix.elements[3]},
+${this._scene.matrix.elements[4]}, ${this._scene.matrix.elements[5]}, ${this._scene.matrix.elements[6]}, ${this._scene.matrix.elements[7]},
+${this._scene.matrix.elements[8]}, ${this._scene.matrix.elements[9]}, ${this._scene.matrix.elements[10]}, ${this._scene.matrix.elements[11]},
+${this._scene.matrix.elements[12]}, ${this._scene.matrix.elements[13]}, ${this._scene.matrix.elements[14]}, ${this._scene.matrix.elements[15]},`
+    );
   }
 
   _renderEye (viewMatrix, projectionMatrix, viewport) {
