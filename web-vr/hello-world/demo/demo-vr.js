@@ -42,12 +42,10 @@ class DemoVR extends Demo {
 
   _addVREventListeners () {
     window.addEventListener('vrdisplayactivate', evt => {
-      evt.preventDefault();
       this._activateVR();
     });
 
     window.addEventListener('vrdisplaydeactivate', evt => {
-      evt.preventDefault();
       this._deactivateVR();
     });
   }
@@ -103,9 +101,14 @@ class DemoVR extends Demo {
       return;
     }
 
+    if (!this._vr.display.isPresenting) {
+      this._updateButtonLabel();
+      return;
+    }
+
     this._vr.display.exitPresent();
     this._updateButtonLabel();
-    return Promise.resolve();
+    return;
   }
 
   _activateVR () {
@@ -121,6 +124,7 @@ class DemoVR extends Demo {
     })
     .catch(e => {
       console.error(`Unable to init VR: ${e}`);
+      this._updateButtonLabel();
     });
   }
 
@@ -187,17 +191,9 @@ class DemoVR extends Demo {
     // the default browser one).
     this._vr.display.requestAnimationFrame(this._update);
 
-    // Call submitFrame to ensure that the device surfaces new data through
-    // getFrameData. If this isn't called you'll always get the same data.
+    // Call submitFrame to ensure that the device renders the latest image from
+    // the WebGL context.
     this._vr.display.submitFrame();
-
-    console.clear();
-    console.log(
-      `${this._scene.matrix.elements[0]}, ${this._scene.matrix.elements[1]}, ${this._scene.matrix.elements[2]}, ${this._scene.matrix.elements[3]},
-${this._scene.matrix.elements[4]}, ${this._scene.matrix.elements[5]}, ${this._scene.matrix.elements[6]}, ${this._scene.matrix.elements[7]},
-${this._scene.matrix.elements[8]}, ${this._scene.matrix.elements[9]}, ${this._scene.matrix.elements[10]}, ${this._scene.matrix.elements[11]},
-${this._scene.matrix.elements[12]}, ${this._scene.matrix.elements[13]}, ${this._scene.matrix.elements[14]}, ${this._scene.matrix.elements[15]},`
-    );
   }
 
   _renderEye (viewMatrix, projectionMatrix, viewport) {
