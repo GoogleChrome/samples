@@ -52,8 +52,12 @@ class DemoVR extends Demo {
 
   _getDisplays () {
     return navigator.getVRDisplays().then(displays => {
+      // Filter down to devices that can present.
+      displays = displays.filter(display => display.capabilities.canPresent);
+
       // If there are no devices available, quit out.
       if (displays.length === 0) {
+        console.warn('No devices available able to present.');
         return;
       }
 
@@ -62,10 +66,6 @@ class DemoVR extends Demo {
       this._vr.display = displays[0];
       this._vr.depthNear = DemoVR.CAMERA_SETTINGS.near;
       this._vr.depthFar = DemoVR.CAMERA_SETTINGS.far;
-
-      if (!this._vr.display.capabilities.canPresent) {
-        return this._showNoPresentError();
-      }
 
       this._createPresentationButton();
     });
