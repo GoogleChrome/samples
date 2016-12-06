@@ -16,9 +16,11 @@ check out the <a href="device-info-async-await.html">Device Info (Async
 Await)</a> sample.</p>
 
 <form>
-  <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
-  <input id="name" type="text" placeholder="Device Name">
-  <input id="namePrefix" type="text" placeholder="Device Name Prefix">
+  <label for="allDevices">All Devices</label>
+  <input id="allDevices" type="checkbox">
+  <input id="service" type="text" size=17 list="services" placeholder="Bluetooth Service">
+  <input id="name" type="text" size=17 placeholder="Device Name">
+  <input id="namePrefix" type="text" size=17 placeholder="Device Name Prefix">
   <button>Get Bluetooth Device Info</button>
 </form>
 

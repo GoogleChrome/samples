@@ -18,7 +18,7 @@ async function onReadBatteryLevelButtonClick() {
 async function requestDevice() {
   log('Requesting Bluetooth Device...');
   bluetoothDevice = await navigator.bluetooth.requestDevice({
-      filters: anyNamedDevice(), optionalServices: ['battery_service']});
+      acceptAllDevices: true, optionalServices: ['battery_service']});
   bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
 }
 
@@ -94,15 +94,4 @@ async function onDisconnected() {
   } catch(error) {
     log('Argh! ' + error);
   }
-}
-
-
-/* Utils */
-
-function anyNamedDevice() {
-  // This is the closest we can get for now to get all devices.
-  // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
-  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-      .map(c => ({namePrefix: c}))
-      .concat({name: ''});
 }

@@ -19,18 +19,35 @@ for trials</a> so that websites can use it without any experimental flag.</p>
 
     inputs.forEach(input => {
       if (searchParams.has(input.id)) {
-        input.value = searchParams.get(input.id);
-      }
-      input.addEventListener('input', function(event) {
-        const newSearchParams = new URL(location).searchParams;
-        if (event.target.value) {
-          newSearchParams.set(input.id, event.target.value);
+        if (input.type == 'checkbox') {
+          input.checked = searchParams.get(input.id);
         } else {
-          newSearchParams.delete(input.id);
+          input.value = searchParams.get(input.id);
         }
-        history.replaceState({}, '', Array.from(newSearchParams).length ?
-            location.pathname + '?' + newSearchParams : location.pathname);
-      });
+      }
+      if (input.type == 'checkbox') {
+        input.addEventListener('change', function(event) {
+          const newSearchParams = new URL(location).searchParams;
+          if (event.target.checked) {
+            newSearchParams.set(input.id, event.target.checked);
+          } else {
+            newSearchParams.delete(input.id);
+          }
+          history.replaceState({}, '', Array.from(newSearchParams).length ?
+              location.pathname + '?' + newSearchParams : location.pathname);
+        });
+      } else {
+        input.addEventListener('input', function(event) {
+          const newSearchParams = new URL(location).searchParams;
+          if (event.target.value) {
+            newSearchParams.set(input.id, event.target.value);
+          } else {
+            newSearchParams.delete(input.id);
+          }
+          history.replaceState({}, '', Array.from(newSearchParams).length ?
+              location.pathname + '?' + newSearchParams : location.pathname);
+        });
+      }
     });
   });
 </script>

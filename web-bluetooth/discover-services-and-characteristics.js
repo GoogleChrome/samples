@@ -5,8 +5,8 @@ function onButtonClick() {
     .filter(s => s && BluetoothUUID.getService);
 
   log('Requesting any Bluetooth Device...');
-  navigator.bluetooth.requestDevice(
-    {filters: anyNamedDevice(), optionalServices: optionalServices})
+  navigator.bluetooth.requestDevice({
+      acceptAllDevices: true, optionalServices: optionalServices})
   .then(device => {
     log('Connecting to GATT Server...');
     return device.gatt.connect();
@@ -46,12 +46,4 @@ function getSupportedProperties(characteristic) {
     }
   }
   return '[' + supportedProperties.join(', ') + ']';
-}
-
-function anyNamedDevice() {
-  // This is the closest we can get for now to get all devices.
-  // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
-  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-      .map(c => ({namePrefix: c}))
-      .concat({name: ''});
 }

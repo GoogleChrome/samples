@@ -19,9 +19,17 @@ async function onButtonClick() {
     filters.push({namePrefix: filterNamePrefix});
   }
 
+  let options = {
+    acceptAllDevices: document.querySelector('#allDevices').checked
+  };
+  if (filters.length) {
+    options.filters = filters;
+  }
+
   try {
     log('Requesting Bluetooth Device...');
-    const device = await navigator.bluetooth.requestDevice({filters: filters});
+    log('with ' + JSON.stringify(options));
+    const device = await navigator.bluetooth.requestDevice(options);
 
     log('> Name:             ' + device.name);
     log('> Id:               ' + device.id);
