@@ -19,10 +19,10 @@ function onButtonClick() {
     filters.push({namePrefix: filterNamePrefix});
   }
 
-  let options = {
-    acceptAllDevices: document.querySelector('#allDevices').checked
-  };
-  if (filters.length) {
+  let options = {};
+  if (document.querySelector('#allDevices').checked) {
+    options.acceptAllDevices = true;
+  } else {
     options.filters = filters;
   }
 
