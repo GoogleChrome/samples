@@ -1,0 +1,98 @@
+---
+feature_name: Touch-action pinch-zoom CSS property
+chrome_version: 56
+feature_id: 5670200775016448
+---
+
+<h3>Background</h3>
+<p><code>touch-action</code> allows you to define which browser actions are allowed over an element.</p>
+<p>With the <code>pinch-zoom</code> value, user agents MAY consider touches that begin on the element for
+  the purposes of continuous zooming and immediately execute the default action instead of waiting for
+  an event handler to not cancel it.</p>
+
+<style>
+.scroll-box {
+  display:flex;
+  flex-direction: row;
+  width: 100%;
+  height: 200px;
+  overflow: auto;
+}
+
+.scroll-box div {
+  min-width: 100%;
+  height: 400px;
+}
+
+.scroll-box div div {
+  min-width: 100%;
+  height: 200px;
+}
+
+.scroll-box div:nth-child(1) {
+  background-color: #1abc9c;
+}
+
+.scroll-box div:nth-child(1) div {
+  background-color: #9B59B6;
+}
+
+.scroll-box div:nth-child(2) {
+  background-color: #2ecc71;
+}
+
+.scroll-box div:nth-child(2) div {
+  background-color: #34495E;
+}
+
+.scroll-box div:nth-child(3) {
+  background-color: #3498db;
+}
+
+.scroll-box div:nth-child(3) div {
+  background-color: #F1C40F;
+}
+</style>
+
+<p>Default behaviour</p>
+<section class="scroll-box">
+  <div><div></div></div>
+  <div><div></div></div>
+  <div><div></div></div>
+</section>
+
+<p>touch-action: pan-x</p>
+<section class="scroll-box" style="touch-action: pan-x;">
+  <div><div></div></div>
+  <div><div></div></div>
+  <div><div></div></div>
+</section>
+
+<p>touch-action: pan-x pinch-zoom</p>
+<section class="scroll-box" style="touch-action: pan-x pinch-zoom;">
+  <div><div></div></div>
+  <div><div></div></div>
+  <div><div></div></div>
+</section>
+
+<p>touch-action: pan-y</p>
+
+<section class="scroll-box" style="touch-action: pan-y;">
+  <div><div></div></div>
+  <div><div></div></div>
+  <div><div></div></div>
+</section>
+
+<p>touch-action: pan-right</p>
+<section class="scroll-box" style="touch-action: pan-right;">
+  <div><div></div></div>
+  <div><div></div></div>
+  <div><div></div></div>
+</section>
+
+<p>touch-action: pan-down</p>
+<section class="scroll-box" style="touch-action: pan-down;">
+  <div><div></div></div>
+  <div><div></div></div>
+  <div><div></div></div>
+</section>
