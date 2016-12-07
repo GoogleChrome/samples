@@ -1,0 +1,19 @@
+---
+feature_name: Image Capture / Update Camera Zoom
+chrome_version: 56
+feature_id: 4843864737185792
+local_css_files: ['update-camera-zoom.css']
+check_min_version: true
+index: index.html
+---
+
+<h3>Background</h3>
+<p>The ImageCapture Web API allows web developers to change the zoom setting of
+the camera.</p>
+
+<video autoplay></video>
+<input type="range">
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='update-camera-zoom.js' %}

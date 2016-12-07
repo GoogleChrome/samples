@@ -1,0 +1,38 @@
+---
+feature_name: Image Capture / Grab Frame - Take Photo
+chrome_version: 56
+feature_id: 4843864737185792
+local_css_files: ['grab-frame-take-photo.css']
+check_min_version: true
+index: index.html
+---
+
+<h3>Background</h3>
+<p>The ImageCapture Web API allows web developers to capture images from camera
+in the form of a Blob with <code>takePhoto()</code> or as a ImageBitmap with
+<code>grabFrame()</code>.</p>
+
+<div id='results'>
+  <div>
+    <video autoplay></video>
+    <button id='getUserMediaButton'>Get User Media</button>
+  </div>
+  <div>
+    <canvas id='grabFrameCanvas'></canvas>
+    <button id='grabFrameButton' disabled>Grab Frame</button>
+  </div>
+  <div>
+    <canvas id='takePhotoCanvas'></canvas>
+    <button id='takePhotoButton' disabled>Take Photo</button>
+  </div>
+</div>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='grab-frame-take-photo.js' %}
+
+<script>
+  document.querySelector('#getUserMediaButton').addEventListener('click', onGetUserMediaButtonClick);
+  document.querySelector('#grabFrameButton').addEventListener('click', onGrabFrameButtonClick);
+  document.querySelector('#takePhotoButton').addEventListener('click', onTakePhotoButtonClick);
+</script>
