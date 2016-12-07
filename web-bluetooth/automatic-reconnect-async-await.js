@@ -5,6 +5,7 @@ async function onButtonClick() {
   try {
     log('Requesting any Bluetooth Device...');
     bluetoothDevice = await navigator.bluetooth.requestDevice({
+     // filters: [...] <- Prefer filters to save energy & show relevant devices.
         acceptAllDevices: true});
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
     connect();

@@ -2,7 +2,9 @@ async function onButtonClick() {
   try {
     log('Requesting any Bluetooth Device...');
     const device = await navigator.bluetooth.requestDevice({
-        acceptAllDevices: true, optionalServices: ['generic_access']});
+     // filters: [...] <- Prefer filters to save energy & show relevant devices.
+        acceptAllDevices: true,
+        optionalServices: ['generic_access']});
 
     log('Connecting to GATT Server...');
     const server = await device.gatt.connect();

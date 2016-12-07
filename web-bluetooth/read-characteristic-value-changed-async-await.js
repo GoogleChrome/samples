@@ -16,9 +16,11 @@ async function onReadBatteryLevelButtonClick() {
 }
 
 async function requestDevice() {
-  log('Requesting Bluetooth Device...');
+  log('Requesting any Bluetooth Device...');
   bluetoothDevice = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true, optionalServices: ['battery_service']});
+   // filters: [...] <- Prefer filters to save energy & show relevant devices.
+      acceptAllDevices: true,
+      optionalServices: ['battery_service']});
   bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
 }
 

@@ -3,7 +3,9 @@ var bluetoothDevice;
 function onButtonClick() {
   bluetoothDevice = null;
   log('Requesting any Bluetooth Device...');
-  navigator.bluetooth.requestDevice({acceptAllDevices: true})
+  navigator.bluetooth.requestDevice({
+     // filters: [...] <- Prefer filters to save energy & show relevant devices.
+     acceptAllDevices: true})
   .then(device => {
     bluetoothDevice = device;
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);

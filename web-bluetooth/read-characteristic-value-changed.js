@@ -14,9 +14,11 @@ function onReadBatteryLevelButtonClick() {
 }
 
 function requestDevice() {
-  log('Requesting Bluetooth Device...');
+  log('Requesting any Bluetooth Device...');
   return navigator.bluetooth.requestDevice({
-      acceptAllDevices: true, optionalServices: ['battery_service']})
+   // filters: [...] <- Prefer filters to save energy & show relevant devices.
+      acceptAllDevices: true,
+      optionalServices: ['battery_service']})
   .then(device => {
     bluetoothDevice = device;
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
