@@ -23,6 +23,8 @@ class DemoVR extends Demo {
   constructor () {
     super();
 
+    this._onResize = this._onResize.bind(this);
+
     this._disabled = false;
     if (typeof VRFrameData === 'undefined') {
       this._disabled = true;
@@ -30,6 +32,7 @@ class DemoVR extends Demo {
       return;
     }
 
+    this._firstVRFrame = false;
     this._button = undefined;
     this._vr = {
       display: null,
@@ -41,11 +44,11 @@ class DemoVR extends Demo {
   }
 
   _addVREventListeners () {
-    window.addEventListener('vrdisplayactivate', evt => {
+    window.addEventListener('vrdisplayactivate', _ => {
       this._activateVR();
     });
 
-    window.addEventListener('vrdisplaydeactivate', evt => {
+    window.addEventListener('vrdisplaydeactivate', _ => {
       this._deactivateVR();
     });
   }
@@ -82,18 +85,11 @@ class DemoVR extends Demo {
   _createPresentationButton () {
     this._button = document.createElement('button');
     this._button.classList.add('vr-toggle');
+    this._button.textContent = 'Enable VR';
     this._button.addEventListener('click', _ => {
       this._toggleVR();
     });
     document.body.appendChild(this._button);
-
-    this._updateButtonLabel();
-  }
-
-  _updateButtonLabel () {
-    this._button.textContent = this._vr.display.isPresenting ?
-        'Disable VR' :
-        'Enable VR';
   }
 
   _deactivateVR () {
@@ -102,12 +98,10 @@ class DemoVR extends Demo {
     }
 
     if (!this._vr.display.isPresenting) {
-      this._updateButtonLabel();
       return;
     }
 
     this._vr.display.exitPresent();
-    this._updateButtonLabel();
     return;
   }
 
@@ -119,12 +113,8 @@ class DemoVR extends Demo {
     this._vr.display.requestPresent([{
       source: this._renderer.domElement
     }])
-    .then(_ => {
-      this._updateButtonLabel();
-    })
     .catch(e => {
       console.error(`Unable to init VR: ${e}`);
-      this._updateButtonLabel();
     });
   }
 
@@ -144,6 +134,15 @@ class DemoVR extends Demo {
       this._scene.matrixAutoUpdate = true;
 
       return super._render();
+    }
+
+    // When this is called the first time, it will be using the standard
+    // window.requestAnimationFrame API, which will throw a warning when we call
+    // display.submitFrame. So for the first frame that this is called we will
+    // exit early and request a new frame from the VR device instead.
+    if (this._firstVRFrame) {
+      this._firstVRFrame = false;
+      return this._vr.display.requestAnimationFrame(this._update);
     }
 
     const EYE_WIDTH = this._width * 0.5;
