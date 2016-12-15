@@ -1,0 +1,38 @@
+---
+feature_name: IndexedDB Observers
+chrome_version: 57
+feature_id: 5669292892749824
+---
+
+<style>
+  #data {
+    background-color: #C8E6C9;
+    font-size: 2em;
+  }
+  #name {
+    background-color: #C8E6C9;
+    font-size: 2em;
+  }
+</style>
+
+<h3>Background</h3>
+<p>Background info goes here.</p>
+<p>Any content here, outside of a capture block, is included verbatim on the resulting page.</p>
+
+
+<h4>Tab Name: <span id='name'></span></h4>
+<h4>Data number: <span id='data'></span></h4>
+<button id="incrementButton">Increment data number</button>
+
+<script>
+var names = ['Toby', 'Fred', 'George', 'Bob', 'Bill', 'Buster', 'Jenn', 'Zoe', 'Carla', 'Stacy', 'Alyssa', 'Catherine', 'Sally', 'Austin', 'Jackson', 'Grace'];
+var nameField = document.querySelector('#name');
+nameField.innerHTML = names[Math.floor(Math.random()*names.length)];
+</script>
+
+{% capture initial_output_content %}
+<p>Database changes appear here.</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content%}
+
+{% include js_snippet.html filename='demo.js' %}
