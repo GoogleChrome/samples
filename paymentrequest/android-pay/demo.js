@@ -1,10 +1,12 @@
 /**
- * Invokes PaymentRequest for Android Pay. If you encounter issues when running
- * your own copy of this sample, run 'adb logcat | grep Wallet' to see detailed
- * error messages.
+ * Builds PaymentRequest for Android Pay, but does not show any UI yet. If you
+ * encounter issues when running your own copy of this sample, run 'adb logcat |
+ * grep Wallet' to see detailed error messages.
+ *
+ * @return {PaymentRequest} The PaymentRequest object.
  */
-function onBuyClicked() {
-  var supportedInstruments = [{
+function initPaymentRequest() {
+  let supportedInstruments = [{
     supportedMethods: ['https://android.com/pay'],
     data: {
       merchantName: 'Android Pay Demo',
@@ -21,34 +23,41 @@ function onBuyClicked() {
           // Place your own Stripe publishable key here. Use a matching Stripe
           // secret key on the server to initiate a transaction.
           'stripe:publishableKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo',
-          'stripe:version': '2016-07-06'
-        }
-      }
-    }
+          'stripe:version': '2016-07-06',
+        },
+      },
+    },
   }];
 
-  var details = {
+  let details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
     displayItems: [
       {
         label: 'Original donation amount',
-        amount: {currency: 'USD', value: '65.00'}
+        amount: {currency: 'USD', value: '65.00'},
       },
       {
         label: 'Friends and family discount',
-        amount: {currency: 'USD', value: '-10.00'}
-      }
-    ]
+        amount: {currency: 'USD', value: '-10.00'},
+      },
+    ],
   };
 
-  new PaymentRequest(supportedInstruments, details) // eslint-disable-line no-undef
-      .show()
-      .then(function(instrumentResponse) {
-        sendPaymentToServer(instrumentResponse);
-      })
-      .catch(function(err) {
-        ChromeSamples.setStatus(err);
-      });
+  return new PaymentRequest(supportedInstruments, details);
+}
+
+/**
+ * Invokes PaymentRequest for Android Pay.
+ *
+ * @param {PaymentRequest} request The PaymentRequest object.
+ */
+function onBuyClicked(request) {
+  request.show().then(function(instrumentResponse) {
+    sendPaymentToServer(instrumentResponse);
+  })
+  .catch(function(err) {
+    ChromeSamples.setStatus(err);
+  });
 }
 
 /**
@@ -58,7 +67,7 @@ function onBuyClicked() {
  * process.
  */
 function sendPaymentToServer(instrumentResponse) {
-  // There's no server-side component of these samples. Not transactions are
+  // There's no server-side component of these samples. No transactions are
   // processed and no money exchanged hands. Instantaneous transactions are not
   // realistic. Add a 2 second delay to make it seem more real.
   window.setTimeout(function() {
@@ -76,24 +85,31 @@ function sendPaymentToServer(instrumentResponse) {
 /**
  * Converts the payment instrument into a JSON string.
  *
- * @private
  * @param {PaymentResponse} instrument The instrument to convert.
  * @return {string} The JSON string representation of the instrument.
  */
 function instrumentToJsonString(instrument) {
-  // PaymentInsrument is an interface, but JSON.stringify works only on
-  // dictionaries.
-  return JSON.stringify({
-    methodName: instrument.methodName,
-    details: instrument.details
-  }, undefined, 2);
+  if (instrument.toJSON) {
+    return JSON.stringify(instrument, undefined, 2);
+  } else {
+    return JSON.stringify({
+      methodName: instrument.methodName,
+      details: instrument.details,
+    }, undefined, 2);
+  }
 }
 
-var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window) {
+const buyButton = document.getElementById('buyButton');
+buyButton.setAttribute('style', 'display: none;');
+if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus('Supported only on Android for now.');
+} else if ('PaymentRequest' in window) {
+  let request = initPaymentRequest();
   buyButton.setAttribute('style', 'display: inline;');
-  buyButton.addEventListener('click', onBuyClicked);
+  buyButton.addEventListener('click', function() {
+    onBuyClicked(request);
+    request = initPaymentRequest();
+  });
 } else {
-  buyButton.setAttribute('style', 'display: none;');
   ChromeSamples.setStatus('This browser does not support web payments');
 }

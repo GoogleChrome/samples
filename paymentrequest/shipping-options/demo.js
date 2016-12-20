@@ -1,46 +1,54 @@
 /**
- * Invokes PaymentRequest with multiple shipping options.
+ * Builds PaymentRequest with multiple shipping options, but does not show any
+ * UI yet.
+ *
+ * @return {PaymentRequest} The PaymentRequest object.
  */
-function onBuyClicked() {
-  var supportedInstruments = [{
-    supportedMethods: ['amex', 'diners', 'discover', 'jcb', 'mastercard',
-        'unionpay', 'visa']
+function initPaymentRequest() {
+  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
+      'visa', 'mir'];
+  let types = ['debit', 'credit', 'prepaid'];
+  let supportedInstruments = [{
+    supportedMethods: networks,
+  }, {
+    supportedMethods: ['basic-card'],
+    data: {supportedNetworks: networks, supportedTypes: types},
   }];
 
-  var details = {
+  let details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
     displayItems: [
       {
         label: 'Original donation amount',
-        amount: {currency: 'USD', value: '65.00'}
+        amount: {currency: 'USD', value: '65.00'},
       },
       {
         label: 'Friends and family discount',
-        amount: {currency: 'USD', value: '-10.00'}
+        amount: {currency: 'USD', value: '-10.00'},
       },
       {
         label: 'Standard shipping',
-        amount: {currency: 'USD', value: '0.00'}
-      }
+        amount: {currency: 'USD', value: '0.00'},
+      },
     ],
     shippingOptions: [
       {
         id: 'standard',
         label: 'Standard shipping',
         amount: {currency: 'USD', value: '0.00'},
-        selected: true
+        selected: true,
       },
       {
         id: 'express',
         label: 'Express shipping',
-        amount: {currency: 'USD', value: '12.00'}
-      }
-    ]
+        amount: {currency: 'USD', value: '12.00'},
+      },
+    ],
   };
 
-  var options = {requestShipping: true};
+  let options = {requestShipping: true};
 
-  var request = new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
+  let request = new PaymentRequest(supportedInstruments, details, options);
 
   request.addEventListener('shippingaddresschange', function(evt) {
     evt.updateWith(Promise.resolve(details));
@@ -52,6 +60,15 @@ function onBuyClicked() {
     }));
   });
 
+  return request;
+}
+
+/**
+ * Invokes PaymentRequest with multiple shipping options.
+ *
+ * @param {PaymentRequest} request The PaymentRequest object.
+ */
+function onBuyClicked(request) {
   request.show().then(function(instrumentResponse) {
     sendPaymentToServer(instrumentResponse);
   })
@@ -72,8 +89,6 @@ function onBuyClicked() {
  * @param {function} reject The callback to invoke in case of failure.
  */
 function updateDetails(details, shippingOption, resolve, reject) {
-  var selectedShippingOption;
-  var otherShippingOption;
   if (shippingOption === 'standard') {
     selectedShippingOption = details.shippingOptions[0];
     otherShippingOption = details.shippingOptions[1];
@@ -100,7 +115,7 @@ function updateDetails(details, shippingOption, resolve, reject) {
  * process.
  */
 function sendPaymentToServer(instrumentResponse) {
-  // There's no server-side component of these samples. Not transactions are
+  // There's no server-side component of these samples. No transactions are
   // processed and no money exchanged hands. Instantaneous transactions are not
   // realistic. Add a 2 second delay to make it seem more real.
   window.setTimeout(function() {
@@ -123,17 +138,15 @@ function sendPaymentToServer(instrumentResponse) {
  * @return {string} The JSON string representation of the instrument.
  */
 function instrumentToJsonString(instrument) {
-  var details = instrument.details;
+  details = instrument.details;
   details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
   details.cardSecurityCode = '***';
 
-  // PaymentInsrument is an interface, but JSON.stringify works only on
-  // dictionaries.
   return JSON.stringify({
     methodName: instrument.methodName,
     details: details,
     shippingAddress: addressToDictionary(instrument.shippingAddress),
-    shippingOption: instrument.shippingOption
+    shippingOption: instrument.shippingOption,
   }, undefined, 2);
 }
 
@@ -145,6 +158,10 @@ function instrumentToJsonString(instrument) {
  * @return {object} The dictionary representation of the shipping address.
  */
 function addressToDictionary(address) {
+  if (address.toJSON) {
+    return address.toJSON();
+  }
+
   return {
     recipient: address.recipient,
     organization: address.organization,
@@ -156,15 +173,21 @@ function addressToDictionary(address) {
     sortingCode: address.sortingCode,
     country: address.country,
     languageCode: address.languageCode,
-    phone: address.phone
+    phone: address.phone,
   };
 }
 
-var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window) {
+const buyButton = document.getElementById('buyButton');
+buyButton.setAttribute('style', 'display: none;');
+if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus('Supported only on Android for now.');
+} else if ('PaymentRequest' in window) {
+  let request = initPaymentRequest();
   buyButton.setAttribute('style', 'display: inline;');
-  buyButton.addEventListener('click', onBuyClicked);
+  buyButton.addEventListener('click', function() {
+    onBuyClicked(request);
+    request = initPaymentRequest();
+  });
 } else {
-  buyButton.setAttribute('style', 'display: none;');
   ChromeSamples.setStatus('This browser does not support web payments');
 }
