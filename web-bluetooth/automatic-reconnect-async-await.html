@@ -1,0 +1,39 @@
+---
+feature_name: Web Bluetooth / Automatic Reconnect (Async Await)
+chrome_version: 55
+check_min_version: true
+feature_id: 5264933985976320
+icon_url: icon.png
+index: index.html
+origin_trial: AnIphF8Ovk92bpJzkA3YdhmVb6pTZugUhgOvF0lomfQc6EiSN4F7SVB8bkssj2FBsLrxRfOysKknpt96bORS4QIAAABceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IldlYkJsdWV0b290aCIsImV4cGlyeSI6MTQ4MzQ2MjY3OX0=
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to reconnect to a
+disconnected Bluetooth device using a simple <a
+href="https://en.wikipedia.org/wiki/Exponential_backoff">exponential backoff
+algorithm</a>. You may want to check out the <a
+href="automatic-reconnect.html">Automatic Reconnect (Promises)</a> sample.</p>
+
+<form>
+  <button>Scan</button>
+</form>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='automatic-reconnect-async-await.js' %}
+
+<script>
+  document.querySelector('button').addEventListener('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}

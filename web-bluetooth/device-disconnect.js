@@ -1,22 +1,5 @@
 var bluetoothDevice;
 
-function onDisconnectButtonClick() {
-  if (!bluetoothDevice) {
-    return;
-  }
-  log('Disconnecting from Bluetooth Device...');
-  if (bluetoothDevice.gatt.connected) {
-    bluetoothDevice.gatt.disconnect();
-  } else {
-    log('> Bluetooth Device is already disconnected');
-  }
-}
-
-function onDisconnected(event) {
-  // Object event.target is Bluetooth Device getting disconnected.
-  log('> Bluetooth Device disconnected');
-}
-
 function onScanButtonClick() {
   let options = {filters: []};
 
@@ -51,6 +34,32 @@ function onScanButtonClick() {
   });
 }
 
+function connect() {
+  log('Connecting to Bluetooth Device...');
+  return bluetoothDevice.gatt.connect()
+  .then(server => {
+    log('> Bluetooth Device connected');
+  });
+}
+
+function onDisconnectButtonClick() {
+  if (!bluetoothDevice) {
+    return;
+  }
+  log('Disconnecting from Bluetooth Device...');
+  if (bluetoothDevice.gatt.connected) {
+    bluetoothDevice.gatt.disconnect();
+  } else {
+    log('> Bluetooth Device is already disconnected');
+  }
+}
+
+function onDisconnected(event) {
+  // Object event.target is Bluetooth Device getting disconnected.
+  log('> Bluetooth Device disconnected');
+}
+
+
 function onReconnectButtonClick() {
   if (!bluetoothDevice) {
     return;
@@ -62,13 +71,5 @@ function onReconnectButtonClick() {
   connect()
   .catch(error => {
     log('Argh! ' + error);
-  });
-}
-
-function connect() {
-  log('Connecting to Bluetooth Device...');
-  return bluetoothDevice.gatt.connect()
-  .then(gattServer => {
-    log('> Bluetooth Device connected');
   });
 }

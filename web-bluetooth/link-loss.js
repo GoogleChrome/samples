@@ -35,10 +35,10 @@ function onWriteButtonClick() {
     return;
   }
   log('Setting Alert Level...');
-  let value = document.querySelector('#alertLevelValue').value;
-  alertLevelCharacteristic.writeValue(new Uint8Array([value]))
+  let value = new Uint8Array([document.querySelector('#alertLevelValue').value]);
+  alertLevelCharacteristic.writeValue(value)
   .then(_ => {
-    log('> Alert Level changed to: ' + getAlertLevel(value));
+    log('> Alert Level changed to: ' + getAlertLevel(new DataView(value.buffer)));
   })
   .catch(error => {
     log('Argh! ' + error);

@@ -1,4 +1,4 @@
 window.GoogleSamples = window.GoogleSamples || {};
 window.GoogleSamples.Config = window.GoogleSamples.Config || {
-  gcmAPIKey: '<Your Public API Key from https://console.developers.google.com>'
+  gcmAPIKey: '<Your Cloud Messaging API Key from https://console.firebase.google.com>'
 };

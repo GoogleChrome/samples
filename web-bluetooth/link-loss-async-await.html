@@ -1,0 +1,51 @@
+---
+feature_name: Web Bluetooth / Link Loss (Async Await)
+chrome_version: 55
+check_min_version: true
+feature_id: 5264933985976320
+icon_url: icon.png
+index: index.html
+origin_trial: AnIphF8Ovk92bpJzkA3YdhmVb6pTZugUhgOvF0lomfQc6EiSN4F7SVB8bkssj2FBsLrxRfOysKknpt96bORS4QIAAABceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IldlYkJsdWV0b290aCIsImV4cGlyeSI6MTQ4MzQ2MjY3OX0=
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to read and write the standardized <a
+target="_blank"
+href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.alert_level.xml">Alert Level</a> characteristic from a nearby Bluetooth
+Device used to expose the current link loss alert level that determines how the
+device alerts when the link is lost. You may want to try this demo with the nRF
+Connect for Mobile App from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">Google
+Play Store</a> and its pre-configured Link Loss service, and check out the <a
+href="link-loss.html">Link Loss (Promises)</a> sample.</p>
+
+<button id="readButton">Get Bluetooth Device Alert Level</button>
+
+<p>
+  <select id="alertLevelValue">
+    <option selected disabled hidden>Choose...</option>
+    <option value="0x00">0x00 (No Alert)</option>
+    <option value="0x01">0x01 (Mild Alert)</option>
+    <option value="0x02">0x02 (High Alert)</option>
+  </select>
+  <button id="writeButton" disabled>Set Alert Level</button>
+</p>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='link-loss-async-await.js' %}
+
+<script>
+  document.querySelector('#readButton').addEventListener('click', function() {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onReadButtonClick();
+    }
+  });
+  document.querySelector('#writeButton').addEventListener('click', function() {
+    onWriteButtonClick();
+  });
+</script>
+
+{% include_relative _includes/utils.html %}

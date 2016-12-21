@@ -1,0 +1,35 @@
+---
+feature_name: Web Bluetooth / Battery Level (Async Await)
+chrome_version: 55
+check_min_version: true
+feature_id: 5264933985976320
+icon_url: icon.png
+index: index.html
+origin_trial: AnIphF8Ovk92bpJzkA3YdhmVb6pTZugUhgOvF0lomfQc6EiSN4F7SVB8bkssj2FBsLrxRfOysKknpt96bORS4QIAAABceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IldlYkJsdWV0b290aCIsImV4cGlyeSI6MTQ4MzQ2MjY3OX0=
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to retrieve battery
+information from a nearby Bluetooth Device advertising Battery information with
+Bluetooth Low Energy. You may want to try this demo with the BLE Peripheral
+Simulator App from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
+Play Store</a> and check out the <a href="battery-level.html">Battery Level (Promises)</a> sample.</p>
+
+<button>Get Bluetooth Device's Battery Level</button>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='battery-level-async-await.js' %}
+
+<script>
+  document.querySelector('button').addEventListener('click', function() {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}

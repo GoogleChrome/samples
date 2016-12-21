@@ -2,7 +2,7 @@ var bluetoothDevice;
 var batteryLevelCharacteristic;
 
 function onReadBatteryLevelButtonClick() {
-  requestDevice()
+  return (bluetoothDevice ? Promise.resolve() : requestDevice())
   .then(connectDeviceAndCacheCharacteristics)
   .then(_ => {
     log('Reading Battery Level...');
@@ -14,16 +14,13 @@ function onReadBatteryLevelButtonClick() {
 }
 
 function requestDevice() {
-  let result = Promise.resolve();
-  if (!bluetoothDevice) {
-    log('Requesting Bluetooth Device...');
-    result = navigator.bluetooth.requestDevice(
-      {filters: anyDevice(), optionalServices: ['battery_service']})
-    .then(device => {
-      bluetoothDevice = device;
-    });
-  }
-  return result;
+  log('Requesting Bluetooth Device...');
+  return navigator.bluetooth.requestDevice(
+    {filters: anyNamedDevice(), optionalServices: ['battery_service']})
+  .then(device => {
+    bluetoothDevice = device;
+    bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+  });
 }
 
 function connectDeviceAndCacheCharacteristics() {
@@ -85,14 +82,27 @@ function onStopNotificationsButtonClick() {
 }
 
 function onResetButtonClick() {
-  log('> Bluetooth Device reset');
+  if (batteryLevelCharacteristic) {
+    batteryLevelCharacteristic.removeEventListener('characteristicvaluechanged',
+        handleBatteryLevelChanged);
+    batteryLevelCharacteristic = null;
+  }
   // Note that it doesn't disconnect device.
   bluetoothDevice = null;
+  log('> Bluetooth Device reset');
+}
+
+function onDisconnected() {
+  log('> Bluetooth Device disconnected');
+  connectDeviceAndCacheCharacteristics()
+  .catch(error => {
+    log('Argh! ' + error);
+  });
 }
 
 /* Utils */
 
-function anyDevice() {
+function anyNamedDevice() {
   // This is the closest we can get for now to get all devices.
   // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
   return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')

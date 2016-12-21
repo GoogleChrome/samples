@@ -24,7 +24,6 @@ function onButtonClick() {
   .then(device => {
     log('> Name:             ' + device.name);
     log('> Id:               ' + device.id);
-    log('> Allowed Services: ' + device.uuids.join('\n' + ' '.repeat(20)));
     log('> Connected:        ' + device.gatt.connected);
   })
   .catch(error => {

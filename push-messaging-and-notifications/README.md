@@ -5,12 +5,12 @@ Learn more at https://www.chromestatus.com/feature/5416033485586432 and https://
 
 To use this sample please do the following:
 
-1. Create a project in the [Google Developer Console](https://console.developers.google.com) (detailed instructions are available at https://developer.android.com/google/gcm/gs.html)
-1. Enable GCM support
-1. Create a copy of [config.sample.js](config.sample.js) called config.js
-1. Create a copy of [manifest.sample.json](manifest.sample.json) called manifest.json
-1. Replace `<Your Public API Key ...>` in your new `config.js` file with your own API key from the Google Developer Console project
-4. Replace `<Your Project Number ...>` in your new `manifest.json` with your own project number from the Google Developer Console project
+1. Create a project on the [Firebase Developer Console](https://console.firebase.google.com).
+1. Go to Settings (The cog near the top left corner), click the 'Cloud Messaging Tab'.
+1. Create a copy of [config.sample.js](config.sample.js) called config.js.
+1. Create a copy of [manifest.sample.json](manifest.sample.json) called manifest.json.
+1. Replace `<Your Cloud Messaging API Key ...>` in your new `config.js` file with your own API key from your new project on Firebase Developer Console.
+4. Replace `<Your Cloud Sender ID ...>` in your new `manifest.json` with your own sender ID from the Firebase Developer Console project.
 
 # Related Samples
   Push messaging and notifications are built on [service workers](https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker). 

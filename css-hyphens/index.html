@@ -1,0 +1,56 @@
+---
+feature_name: CSS Hyphens Property
+chrome_version: 55
+feature_id: 5642121184804864
+---
+
+<h3>Background</h3>
+
+<p>In many written languages, it's possible to break lines between syllables as well as between words. This is often done so that more characters may be placed on a line of text with the goal of having fewer lines in a text area, and thus saving space. In such languages the break is indicated visually with a hyphen ('-'). </p>
+
+<p>The <a href="https://drafts.csswg.org/css-text-3">CSS Text Module Level 3</a> defines a <code>hyphens</code> property to control when hyphens are shown to users and how they behave when shown. Per the specification, the <code>hyphens</code> property has three values: <code>none</code>, <code>manual</code>, and <code>auto</code>. The use and behavior of each is shown and illustrated below.</p>
+
+<p>Notice that two of the text samples contain a soft hyphen (<code>&amp;shy&semi;</code>) between the syllables of <i>elit</i>. A soft hyphen is one that will only be shown when it occurs at the trailing margin. In the first example, the <code>hyphens</code> property is set to <code>none</code>. This prevents the soft hyphen from ever being displayed. You can confirm this by adjusting the window size so that the word 'elit' will not fit in the visible line of text.</p>
+
+<p>In the second example, the <code>hyphens</code> property is set to <code>manual</code> meaning the soft hyphen will only appear when the margin breaks the word 'elit'. Again, you can confirm this by adjusting the window size.</p>
+
+<p>In the third example, the <code>hyphens</code> property is set to <code>auto</code>. In this case, no soft hyphen is needed since the user agent will determine hyphen locations automatically. If you resize the window, you'll see that the browser hyphenates the third example in the same place as in the second example, though no soft hyphen is present. If you continue to shrink the window, you'll see that your browser is able to break lines between any two syllables in the text.<p>
+
+{% capture css %}
+div {
+  font: 18px serif;
+  margin-bottom: 2.5%;
+}
+
+div.none {
+   -webkit-hyphens: none;
+   hyphens: none;
+}
+
+div.manual {
+   -webkit-hyphens: manual;
+   hyphens: manual;
+}
+
+div.auto {
+   -webkit-hyphens: auto;
+   hyphens: auto;
+}
+{% endcapture %}
+
+{% include css_snippet.html css=css %}
+
+{% capture html %}
+  <div class="none">
+    Google ipsum dolor sit amet, consectetur adipiscing e&shy;lit.
+  </div>
+  
+  <div class="manual">
+    Google ipsum dolor sit amet, consectetur adipiscing e&shy;lit.
+  </div>
+  
+  <div class="auto">
+    Google ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+{% endcapture %}
+{% include html_snippet.html html=html %}

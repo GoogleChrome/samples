@@ -30,7 +30,7 @@ function onStartButtonClick() {
     return myCharacteristic.startNotifications().then(_ => {
       log('> Notifications started');
       myCharacteristic.addEventListener('characteristicvaluechanged',
-        handleNotifications);
+          handleNotifications);
     });
   })
   .catch(error => {
@@ -44,7 +44,7 @@ function onStopButtonClick() {
     .then(_ => {
       log('> Notifications stopped');
       myCharacteristic.removeEventListener('characteristicvaluechanged',
-        handleNotifications);
+          handleNotifications);
     })
     .catch(error => {
       log('Argh! ' + error);

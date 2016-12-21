@@ -1,7 +1,7 @@
 function onButtonClick() {
   log('Requesting any Bluetooth Device...');
   navigator.bluetooth.requestDevice(
-    {filters: anyDevice(), optionalServices: ['device_information']})
+    {filters: anyNamedDevice(), optionalServices: ['device_information']})
   .then(device => {
     log('Connecting to GATT Server...');
     return device.gatt.connect();
@@ -52,7 +52,14 @@ function onButtonClick() {
 
         case BluetoothUUID.getCharacteristic('system_id'):
           queue = queue.then(_ => characteristic.readValue()).then(value => {
-            log('> System ID: ' + decoder.decode(value));
+            log('> System ID: ');
+            log('  > Manufacturer Identifier: ' +
+                padHex(value.getUint8(4)) + padHex(value.getUint8(3)) +
+                padHex(value.getUint8(2)) + padHex(value.getUint8(1)) +
+                padHex(value.getUint8(0)));
+            log('  > Organizationally Unique Identifier: ' +
+                padHex(value.getUint8(7)) + padHex(value.getUint8(6)) +
+                padHex(value.getUint8(5)));
           });
           break;
 
@@ -94,13 +101,17 @@ function onButtonClick() {
 
 /* Utils */
 
+function padHex(value) {
+  return ('00' + value.toString(16).toUpperCase()).slice(-2);
+}
+
 function getUsbVendorName(value) {
   // Check out page source to see what valueToUsbVendorName object is.
   return value +
       (value in valueToUsbVendorName ? ' (' + valueToUsbVendorName[value] + ')' : '');
 }
 
-function anyDevice() {
+function anyNamedDevice() {
   // This is the closest we can get for now to get all devices.
   // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
   return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
