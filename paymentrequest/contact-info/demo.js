@@ -1,36 +1,55 @@
 /**
- * Invokes PaymentRequest that also gathers user's contact information.
+ * Builds PaymentRequest that also gathers user's contact information, but does
+ * not show any UI yet.
+ *
+ * @return {PaymentRequest} The PaymentRequest object.
  */
-function onBuyClicked() {
-  var supportedInstruments = [{
-    supportedMethods: ['amex', 'diners', 'discover', 'jcb', 'mastercard',
-        'unionpay', 'visa']
+function initPaymentRequest() {
+  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
+      'visa', 'mir'];
+  let types = ['debit', 'credit', 'prepaid'];
+  let supportedInstruments = [{
+    supportedMethods: networks,
+  }, {
+    supportedMethods: ['basic-card'],
+    data: {supportedNetworks: networks, supportedTypes: types},
   }];
 
-  var details = {
+  let details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
     displayItems: [
       {
         label: 'Original donation amount',
-        amount: {currency: 'USD', value: '65.00'}
+        amount: {currency: 'USD', value: '65.00'},
       },
       {
         label: 'Friends and family discount',
-        amount: {currency: 'USD', value: '-10.00'}
-      }
-    ]
+        amount: {currency: 'USD', value: '-10.00'},
+      },
+    ],
   };
 
-  var options = {requestPayerPhone: true, requestPayerEmail: true};
+  let options = {
+    requestPayerName: true,
+    requestPayerPhone: true,
+    requestPayerEmail: true,
+  };
 
-  new PaymentRequest(supportedInstruments, details, options) // eslint-disable-line no-undef
-      .show()
-      .then(function(instrumentResponse) {
-        sendPaymentToServer(instrumentResponse);
-      })
-      .catch(function(err) {
-        ChromeSamples.setStatus(err);
-      });
+  return new PaymentRequest(supportedInstruments, details, options);
+}
+
+/**
+ * Invokes PaymentRequest that also gathers user's contact information.
+ *
+ * @param {PaymentRequest} request The PaymentRequest object.
+ */
+function onBuyClicked(request) {
+  request.show().then(function(instrumentResponse) {
+    sendPaymentToServer(instrumentResponse);
+  })
+  .catch(function(err) {
+    ChromeSamples.setStatus(err);
+  });
 }
 
 /**
@@ -41,7 +60,7 @@ function onBuyClicked() {
  * process.
  */
 function sendPaymentToServer(instrumentResponse) {
-  // There's no server-side component of these samples. Not transactions are
+  // There's no server-side component of these samples. No transactions are
   // processed and no money exchanged hands. Instantaneous transactions are not
   // realistic. Add a 2 second delay to make it seem more real.
   window.setTimeout(function() {
@@ -64,25 +83,30 @@ function sendPaymentToServer(instrumentResponse) {
  * @return {string} The JSON string representation of the instrument.
  */
 function instrumentToJsonString(instrument) {
-  var details = instrument.details;
+  let details = instrument.details;
   details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
   details.cardSecurityCode = '***';
 
-  // PaymentInsrument is an interface, but JSON.stringify works only on
-  // dictionaries.
   return JSON.stringify({
     methodName: instrument.methodName,
     details: details,
+    payerName: instrument.payerName,
     payerPhone: instrument.payerPhone,
-    payerEmail: instrument.payerEmail
+    payerEmail: instrument.payerEmail,
   }, undefined, 2);
 }
 
-var buyButton = document.getElementById('buyButton');
-if ('PaymentRequest' in window) {
+const buyButton = document.getElementById('buyButton');
+buyButton.setAttribute('style', 'display: none;');
+if (!navigator.userAgent.match(/Android/i)) {
+  ChromeSamples.setStatus('Supported only on Android for now.');
+} else if ('PaymentRequest' in window) {
+  let request = initPaymentRequest();
   buyButton.setAttribute('style', 'display: inline;');
-  buyButton.addEventListener('click', onBuyClicked);
+  buyButton.addEventListener('click', function() {
+    onBuyClicked(request);
+    request = initPaymentRequest();
+  });
 } else {
-  buyButton.setAttribute('style', 'display: none;');
   ChromeSamples.setStatus('This browser does not support web payments');
 }
