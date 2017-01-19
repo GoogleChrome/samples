@@ -5,6 +5,7 @@ var resetButton = document.querySelector('#resetButton');
 
 var dataNumber = 0;
 var db = null;
+var dataKey = 'dataKey';
 
 var setDataNumber = function(number) {
   dataNumber = number;
@@ -19,7 +20,7 @@ var observer = new IDBObserver(function(changes) {
     setDataNumber(0);
     return;
   }
-  var newDataValue = changes.records.get('data')[0].key.lower;
+  var newDataValue = changes.records.get('data')[0].value;
   ChromeSamples.log('Tab "' + originTab + '" set the data value to ' + newDataValue + '.');
   setDataNumber(newDataValue);
 });
@@ -37,7 +38,7 @@ incrementButton.addEventListener('click', function(event) {
   var request = nameStore.put(nameField.innerHTML, nameField.innerHTML);
   request.onsuccess = function() {
     var newDataNumber = dataNumber + 1;
-    dataStore.put(newDataNumber, newDataNumber);
+    dataStore.put(dataKey, newDataNumber);
     transaction.oncomplete = function() {
       setDataNumber(newDataNumber);
     }
@@ -72,22 +73,18 @@ openRequest.onsuccess = function(event) {
   db = event.target.result;
   var transaction = db.transaction(['data', 'name'], 'readonly');
   // Observe starting after this transaction!
-  observer.observe(db, transaction, { operationTypes: ['put', 'clear'] });
+  // Note: Including values can be a performance hit if they are large.
+  observer.observe(db, transaction, { operationTypes: ['put', 'clear'], values: true });
 
-  // This is ugly because we have to use the keys. When value or
-  // transaction support is available we will use that.
   var dataStore = transaction.objectStore('data');
-  dataStore.getAllKeys().onsuccess = function(event) {
-    var maxNumber = 0;
-    if (event.target.result.length == 0) {
+  var getRequest = dataStore.get(dataKey);
+  getRequest.onsuccess = function() {
+    if (getRequest.result == undefined) {
       setDataNumber(0);
       ChromeSamples.log('Database is empty, starting at 0.');
       return;
     }
-    event.target.result.forEach(function(number) {
-      maxNumber = maxNumber > number ? maxNumber : number;
-    });
-    setDataNumber(maxNumber);
-    ChromeSamples.log('Database has starting value of ' + maxNumber + '.');
+    setDataNumber(getRequest.result);
+    ChromeSamples.log('Database has starting value of ' + getRequest.result + '.');
   }
 }
