@@ -38,7 +38,7 @@ incrementButton.addEventListener('click', function(event) {
   var request = nameStore.put(nameField.innerHTML, nameField.innerHTML);
   request.onsuccess = function() {
     var newDataNumber = dataNumber + 1;
-    dataStore.put(dataKey, newDataNumber);
+    dataStore.put(newDataNumber, dataKey);
     transaction.oncomplete = function() {
       setDataNumber(newDataNumber);
     }
