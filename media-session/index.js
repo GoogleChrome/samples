@@ -3,7 +3,7 @@ let audio = document.createElement('audio');
 let playlist = getPlaylist();
 let index = 0;
 
-function onPlayButtonClick(event) {
+function onPlayButtonClick() {
   playAudio();
 }
 
@@ -42,7 +42,7 @@ navigator.mediaSession.setActionHandler('nexttrack', function() {
 
 /* Seek Backward & Seek Forward */
 
-let skipTime= 10; /* Time to skip in seconds */
+let skipTime = 10; /* Time to skip in seconds */
 
 navigator.mediaSession.setActionHandler('seekbackward', function() {
   log('> User clicked "Seek Backward" icon.');
@@ -92,27 +92,27 @@ function getPlaylist() {
 
 function getArtwork(text) {
   return [{
-      src: 'https://dummyimage.com/96x96?text='+text,
+      src: 'https://dummyimage.com/96x96?text=' + text,
       sizes: '96x96',
       type: 'image/png'
     }, {
-      src: 'https://dummyimage.com/128x128?text='+text,
+      src: 'https://dummyimage.com/128x128?text=' + text,
       sizes: '128x128',
       type: 'image/png'
     }, {
-      src: 'https://dummyimage.com/192x192?text='+text,
+      src: 'https://dummyimage.com/192x192?text=' + text,
       sizes: '192x192',
       type: 'image/png'
     }, {
-      src: 'https://dummyimage.com/256x256?text='+text,
+      src: 'https://dummyimage.com/256x256?text=' + text,
       sizes: '256x256',
       type: 'image/png'
     }, {
-      src: 'https://dummyimage.com/384x384?text='+text,
+      src: 'https://dummyimage.com/384x384?text=' + text,
       sizes: '384x384',
       type: 'image/png'
     }, {
-      src: 'https://dummyimage.com/512x512?text='+text,
+      src: 'https://dummyimage.com/512x512?text=' + text,
       sizes: '512x512',
       type: 'image/png'
     }];
