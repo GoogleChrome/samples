@@ -20,16 +20,14 @@ async function onButtonClick() {
     log('Getting Service...');
     const service = await server.getPrimaryService(serviceUuid);
 
-    log('Getting Characteristics...');
-    let characteristics;
-    if (characteristicUuid) {
-      characteristics = await service.getCharacteristics(characteristicUuid);
-    } else {
-      characteristics = await service.getCharacteristics();
-    }
+    log('Getting Characteristic...');
+    const characteristic = await service.getCharacteristic(characteristicUuid);
 
-    log('> Characteristics: ' +
-      characteristics.map(c => c.uuid).join('\n' + ' '.repeat(19)));
+    log('Getting Descriptors...');
+    const descriptors = await characteristic.getDescriptors();
+
+    log('> Descriptors: ' +
+      descriptors.map(c => c.uuid).join('\n' + ' '.repeat(19)));
   } catch(error) {
     log('Argh! ' + error);
   }
