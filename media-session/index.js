@@ -1,6 +1,6 @@
 let audio = document.createElement('audio');
 
-let playlist = getPlaylist();
+let playlist = getAwesomePlaylist();
 let index = 0;
 
 function onPlayButtonClick() {
@@ -40,6 +40,12 @@ navigator.mediaSession.setActionHandler('nexttrack', function() {
   playAudio();
 });
 
+audio.addEventListener('ended', function() {
+  // Play automatically the next track when audio ends.
+  index = (index - 1 + playlist.length) % playlist.length;
+  playAudio();
+});
+
 /* Seek Backward & Seek Forward */
 
 let skipTime = 10; /* Time to skip in seconds */
@@ -56,64 +62,58 @@ navigator.mediaSession.setActionHandler('seekforward', function() {
 
 /* Utils */
 
-function getPlaylist() {
+function getAwesomePlaylist() {
   return [{
-      src: 'jam.ogg',
-      title: 'Title #1',
-      artist: 'Artist #1',
-      album: 'Album #1',
-      artwork: getArtwork('1')
+      src: 'https://storage.googleapis.com/media-session/sintel/snow-fight.mp3',
+      title: 'Snow Fight',
+      artist: 'Jan Morgenstern',
+      album: 'Sintel',
+      artwork: [
+        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-512.png', sizes: '512x512', type: 'image/png' },
+      ]
     }, {
-      src: 'jam.ogg',
-      title: 'Title #2',
-      artist: 'Artist #2',
-      album: 'Album #2',
-      artwork: getArtwork('2')
+      src: 'https://storage.googleapis.com/media-session/big-buck-bunny/prelude.mp3',
+      title: 'Prelude',
+      artist: 'Jan Morgenstern',
+      album: 'Big Buck Bunny',
+      artwork: [
+        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-512.png', sizes: '512x512', type: 'image/png' },
+      ]
     }, {
-      src: 'jam.ogg',
-      title: 'Title #3',
-      artist: 'Artist #3',
-      album: 'Album #3',
-      artwork: getArtwork('3')
+      src: 'https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3',
+      title: 'The Wires',
+      artist: 'Jan Morgenstern',
+      album: 'Elephants Dream',
+      artwork: [
+        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-512.png', sizes: '512x512', type: 'image/png' },
+      ]
     }, {
-      src: 'jam.ogg',
-      title: 'Title #4',
-      artist: 'Artist #4',
-      album: 'Album #4',
-      artwork: getArtwork('4')
-    }, {
-      src: 'jam.ogg',
-      title: 'Title #5',
-      artist: 'Artist #5',
-      album: 'Album #5',
-      artwork: getArtwork('5')
-    }];
-}
-
-function getArtwork(text) {
-  return [{
-      src: 'https://dummyimage.com/96x96?text=' + text,
-      sizes: '96x96',
-      type: 'image/png'
-    }, {
-      src: 'https://dummyimage.com/128x128?text=' + text,
-      sizes: '128x128',
-      type: 'image/png'
-    }, {
-      src: 'https://dummyimage.com/192x192?text=' + text,
-      sizes: '192x192',
-      type: 'image/png'
-    }, {
-      src: 'https://dummyimage.com/256x256?text=' + text,
-      sizes: '256x256',
-      type: 'image/png'
-    }, {
-      src: 'https://dummyimage.com/384x384?text=' + text,
-      sizes: '384x384',
-      type: 'image/png'
-    }, {
-      src: 'https://dummyimage.com/512x512?text=' + text,
-      sizes: '512x512',
-      type: 'image/png'
+      src: 'https://storage.googleapis.com/media-session/caminandes/original-score.mp3',
+      title: 'Original Score',
+      artist: 'Jan Morgenstern',
+      album: 'Caminandes 2: Gran Dillama',
+      artwork: [
+        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-512.png', sizes: '512x512', type: 'image/png' },
+      ]
     }];
 }

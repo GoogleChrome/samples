@@ -6,19 +6,22 @@ check_min_version: true
 ---
 
 <h3>Background</h3>
-<p>The Media Session API lets you customize media notifications by providing
-metadata information such as the title, artist, album name, and artwork of the
-media (audio or video) your web app is playing. It also allows you to handle
-media related events such as seeking or track changing which may come from
-notifications or media keys.</p>
+<p>The <a href="https://developers.google.com/web/updates/2017/02/media-session">Media Session API</a> 
+lets you customize media notifications by providing metadata information for
+the media your web app is playing. It also allows you to handle media related
+events such as seeking or track changing which may come from notifications or
+media keys.</p>
 
-<button id="playButton">Let's play</button>
+<p>Credits: Media files are the works of <a href="http://www.wavemage.com/category/music/">Jan Morgenstern<a> and are
+licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/">CC BY-NC-ND 3.0</a>.</p>
+
+<button id="playButton">▶ PLAY</button>
 
 {% include output_helper.html %}
 
 <script>
   if (!('mediaSession' in navigator)) {
-    ChromeSamples.setStatus('Media Session API is not yet available.');
+    ChromeSamples.setStatus('The Media Session API is not yet available.');
   }
 
   // This prevents unnecessary errors when Media Session API is not available.
