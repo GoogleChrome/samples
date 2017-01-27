@@ -1,0 +1,63 @@
+---
+feature_name: Web Assembly
+chrome_version: 57
+feature_id: 5453022515691520
+---
+
+<h3>Background</h3>
+<p>Web Assembly is a binary code format for the web.</p>
+
+<script>
+  function log(id, ...args) {
+    const el = document.getElementById(id);
+
+    if (!el) {
+      document.addEventListener('DOMContentLoaded', () => log(id, ...args));
+      return;
+    }
+
+    el.innerHTML += args.join(' ') + '<br/>';
+  }
+</script>
+
+{% capture detect %}
+let wasmSupported = 'WebAssembly' in window;
+
+if (wasmSupported) {
+  log('detect', 'Web Assembly is supported');
+} else {
+  log('detect', 'Web Assembly is not supported. Try using Chrome 57 or newer.');
+}
+{% endcapture %}
+
+<h3>Feature detection</h3>
+<p>You can detect the presence of the feature by looking for the <code>WebAssembly</code> object in <code>window</code></p>
+
+{% include js_snippet.html title="" js=detect %}
+<div id="detect" class="output"></div>
+
+<h3>Modules and instances</h3>
+<p>A binary file is compiled into a <code>Module</code>, which is analagous to a class in object-oriented programming. You can then create <code>Instance</code>s of the <code>Module</code>, which is analagous to creating instance objects of a class.</p>
+
+{% capture compile %}
+const instancePromise = fetch('demo.wasm')
+  .then(response => response.arrayBuffer())
+  .then(buffer => WebAssembly.compile(buffer))
+  .then(module => new WebAssembly.Instance(module));
+{% endcapture %}
+
+{% include js_snippet.html title="" js=compile %}
+
+<h3>Calling exported functions</h3>
+<p>Each instance has an <code>exports</code> property that gives you the public interface of the module. In this example there is only one export, which is a function.</p>
+
+{% capture call %}
+instancePromise.then(instance => {
+  log('call', 'Exports:', Object.keys(instance.exports));
+
+  log('call', 'Answer:', instance.exports.sum(13, 29));
+})
+{% endcapture %}
+
+{% include js_snippet.html title="" js=call %}
+<div id="call" class="output"></div>
