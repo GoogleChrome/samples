@@ -63,57 +63,59 @@ navigator.mediaSession.setActionHandler('seekforward', function() {
 /* Utils */
 
 function getAwesomePlaylist() {
+  const BASE_URL = 'https://storage.googleapis.com/media-session/';
+
   return [{
-      src: 'https://storage.googleapis.com/media-session/sintel/snow-fight.mp3',
+      src: BASE_URL + 'sintel/snow-fight.mp3',
       title: 'Snow Fight',
       artist: 'Jan Morgenstern',
       album: 'Sintel',
       artwork: [
-        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-128.png', sizes: '128x128', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-192.png', sizes: '192x192', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-256.png', sizes: '256x256', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-384.png', sizes: '384x384', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/sintel/artwork-512.png', sizes: '512x512', type: 'image/png' },
+        { src: BASE_URL + 'sintel/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: BASE_URL + 'sintel/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: BASE_URL + 'sintel/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: BASE_URL + 'sintel/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: BASE_URL + 'sintel/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: BASE_URL + 'sintel/artwork-512.png', sizes: '512x512', type: 'image/png' },
       ]
     }, {
-      src: 'https://storage.googleapis.com/media-session/big-buck-bunny/prelude.mp3',
+      src: BASE_URL + 'big-buck-bunny/prelude.mp3',
       title: 'Prelude',
       artist: 'Jan Morgenstern',
       album: 'Big Buck Bunny',
       artwork: [
-        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-128.png', sizes: '128x128', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-192.png', sizes: '192x192', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-256.png', sizes: '256x256', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-384.png', sizes: '384x384', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/big-buck-bunny/artwork-512.png', sizes: '512x512', type: 'image/png' },
+        { src: BASE_URL + 'big-buck-bunny/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: BASE_URL + 'big-buck-bunny/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: BASE_URL + 'big-buck-bunny/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: BASE_URL + 'big-buck-bunny/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: BASE_URL + 'big-buck-bunny/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: BASE_URL + 'big-buck-bunny/artwork-512.png', sizes: '512x512', type: 'image/png' },
       ]
     }, {
-      src: 'https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3',
+      src: BASE_URL + 'elephants-dream/the-wires.mp3',
       title: 'The Wires',
       artist: 'Jan Morgenstern',
       album: 'Elephants Dream',
       artwork: [
-        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-128.png', sizes: '128x128', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-192.png', sizes: '192x192', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-256.png', sizes: '256x256', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-384.png', sizes: '384x384', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/elephants-dream/artwork-512.png', sizes: '512x512', type: 'image/png' },
+        { src: BASE_URL + 'elephants-dream/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: BASE_URL + 'elephants-dream/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: BASE_URL + 'elephants-dream/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: BASE_URL + 'elephants-dream/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: BASE_URL + 'elephants-dream/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: BASE_URL + 'elephants-dream/artwork-512.png', sizes: '512x512', type: 'image/png' },
       ]
     }, {
-      src: 'https://storage.googleapis.com/media-session/caminandes/original-score.mp3',
+      src: BASE_URL + 'caminandes/original-score.mp3',
       title: 'Original Score',
       artist: 'Jan Morgenstern',
       album: 'Caminandes 2: Gran Dillama',
       artwork: [
-        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-128.png', sizes: '128x128', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-192.png', sizes: '192x192', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-256.png', sizes: '256x256', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-384.png', sizes: '384x384', type: 'image/png' },
-        { src: 'https://storage.googleapis.com/media-session/caminandes/artwork-512.png', sizes: '512x512', type: 'image/png' },
+        { src: BASE_URL + 'caminandes/artwork-96.png',  sizes: '96x96',   type: 'image/png' },
+        { src: BASE_URL + 'caminandes/artwork-128.png', sizes: '128x128', type: 'image/png' },
+        { src: BASE_URL + 'caminandes/artwork-192.png', sizes: '192x192', type: 'image/png' },
+        { src: BASE_URL + 'caminandes/artwork-256.png', sizes: '256x256', type: 'image/png' },
+        { src: BASE_URL + 'caminandes/artwork-384.png', sizes: '384x384', type: 'image/png' },
+        { src: BASE_URL + 'caminandes/artwork-512.png', sizes: '512x512', type: 'image/png' },
       ]
     }];
 }
