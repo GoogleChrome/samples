@@ -53,8 +53,8 @@ function onResetButtonClick() {
 var openRequest = indexedDB.open('demoDB');
 
 openRequest.onupgradeneeded = function() {
-  db.createObjectStore('data');
-  db.createObjectStore('name');
+  openRequest.result.createObjectStore('data');
+  openRequest.result.createObjectStore('name');
 };
 
 openRequest.onsuccess = function(event) {
@@ -80,5 +80,5 @@ openRequest.onsuccess = function(event) {
 };
 
 openRequest.onerror = function(event) {
-  ChromeSamples.log('Error opening database: ', event.target.result.error);
+  ChromeSamples.log('Error opening database: ', event.target.error);
 };
