@@ -33,8 +33,10 @@ async function onButtonClick() {
         case BluetoothUUID.getDescriptor('gatt.client_characteristic_configuration'):
           await descriptor.readValue().then(value => {
             log('> Client Characteristic Configuration:');
-            log('  > Notifications: ' + (value.getUint8(0) ? 'ON' : 'OFF'));
-            log('  > Indications: ' + (value.getUint8(1) ? 'ON' : 'OFF'));
+            let notificationsBit = value.getUint8(0) & 0b01;
+            log('  > Notifications: ' + (notificationsBit ? 'ON' : 'OFF'));
+            let indicationsBit = value.getUint8(0) & 0b10;
+            log('  > Indications: ' + (indicationsBit ? 'ON' : 'OFF'));
           });
           break;
 
