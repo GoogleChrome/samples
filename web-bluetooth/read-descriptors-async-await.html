@@ -1,0 +1,45 @@
+---
+feature_name: Web Bluetooth / Read Descriptors (Async Await)
+chrome_version: 58
+check_min_version: true
+feature_id: 5264933985976320
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to read all
+characteristic's descriptors of a service from a nearby Bluetooth Low Energy
+Device. You may want to try this demo with the BLE Peripheral Simulator App
+from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
+Play Store</a> and check out the <a href="read-descriptors.html">Read
+Descriptors (Promises)</a> sample.</p>
+
+<form>
+  <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
+  <input id="characteristic" type="text" list="characteristics" placeholder="Bluetooth Characteristic">
+  <button>Read descriptors</button>
+</form>
+
+{% include_relative _includes/datalist-services.html %}
+{% include_relative _includes/datalist-characteristics.html %}
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='read-descriptors-async-await.js' %}
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}
