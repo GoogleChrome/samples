@@ -30,7 +30,7 @@ async function onWriteButtonClick() {
   if (!alertLevelCharacteristic) {
     return;
   }
-  let value = new Uint8Array([document.querySelector('#alertLevelValue').value]);
+  let value = Uint8Array.of(document.querySelector('#alertLevelValue').value);
   try {
     log('Setting Alert Level...');
     await alertLevelCharacteristic.writeValue(value);
