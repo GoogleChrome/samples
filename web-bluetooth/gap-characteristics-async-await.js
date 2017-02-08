@@ -2,7 +2,9 @@ async function onButtonClick() {
   try {
     log('Requesting any Bluetooth Device...');
     const device = await navigator.bluetooth.requestDevice({
-        filters: anyNamedDevice(), optionalServices: ['generic_access']});
+     // filters: [...] <- Prefer filters to save energy & show relevant devices.
+        acceptAllDevices: true,
+        optionalServices: ['generic_access']});
 
     log('Connecting to GATT Server...');
     const server = await device.gatt.connect();
@@ -96,12 +98,4 @@ function getDeviceType(value) {
   // Check out page source to see what valueToDeviceType object is.
   return value +
       (value in valueToDeviceType ? ' (' + valueToDeviceType[value] + ')' : '');
-}
-
-function anyNamedDevice() {
-  // This is the closest we can get for now to get all devices.
-  // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
-  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-      .map(c => ({namePrefix: c}))
-      .concat({name: ''});
 }
