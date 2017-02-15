@@ -21,7 +21,6 @@ function updateMetadata() {
   navigator.mediaSession.metadata = new MediaMetadata({
     title: track.title,
     artist: track.artist,
-    album: track.album,
     artwork: track.artwork
   });
 }
