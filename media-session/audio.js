@@ -17,7 +17,7 @@ function playAudio() {
 function updateMetadata() {
   let track = playlist[index];
 
-  log('Playing "' + track.title + '" track...');
+  log('Playing ' + track.title + ' track...');
   navigator.mediaSession.metadata = new MediaMetadata({
     title: track.title,
     artist: track.artist,
