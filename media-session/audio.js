@@ -60,6 +60,20 @@ navigator.mediaSession.setActionHandler('seekforward', function() {
   audio.currentTime = Math.min(audio.currentTime + skipTime, audio.duration);
 });
 
+/* Play & Pause */
+
+navigator.mediaSession.setActionHandler('play', function() {
+  log('> User clicked "Play" icon.');
+  audio.play();
+  // Do something more than just playing audio...
+});
+
+navigator.mediaSession.setActionHandler('pause', function() {
+  log('> User clicked "Pause" icon.');
+  audio.pause();
+  // Do something more than just pausing audio...
+});
+
 /* Utils */
 
 function getAwesomePlaylist() {
