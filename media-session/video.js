@@ -59,6 +59,20 @@ navigator.mediaSession.setActionHandler('seekforward', function() {
   video.currentTime = Math.min(video.currentTime + skipTime, video.duration);
 });
 
+/* Play & Pause */
+
+navigator.mediaSession.setActionHandler('play', function() {
+  log('> User clicked "Play" icon.');
+  video.play();
+  // Do something more than just playing video...
+});
+
+navigator.mediaSession.setActionHandler('pause', function() {
+  log('> User clicked "Pause" icon.');
+  video.pause();
+  // Do something more than just pausing video...
+});
+
 /* Utils */
 
 function getAwesomePlaylist() {
