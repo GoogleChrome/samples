@@ -29,6 +29,10 @@ feature_id: 5414209298890752
   <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
 </p>
 <p>
+  <input id="message" type="text" placeholder="Try a fruit!">
+  <button id="send" disabled>presentationRequest.send(message)</button>
+</p>
+<p>
   <button id="close" disabled>presentationRequest.close()</button>
   <button id="terminate" disabled>presentationRequest.terminate()</button>
 </p>
@@ -38,6 +42,7 @@ feature_id: 5414209298890752
 {% capture js %}
 const presentationUrls =
   ['https://googlechrome.github.io/samples/presentation-api/receiver/index.html'];
+
 let presentationRequest;
 let presentationConnection;
 
@@ -67,8 +72,10 @@ function setConnection(connection) {
   presentationConnection = connection;
   document.querySelector('#close').disabled = false;
   document.querySelector('#terminate').disabled = false;
+  document.querySelector('#send').disabled = false;
   presentationConnection.onclose = () => {
     ChromeSamples.log('Connection closed.');
+    document.querySelector('#send').disabled = true;
   };
   presentationConnection.onterminate = () => {
     ChromeSamples.log('Connection terminated.');
@@ -94,6 +101,15 @@ document.querySelector('#reconnect').addEventListener('click', () => {
       ChromeSamples.log('Presentation.reconnect() error, ' + error.name + ': ' +
                         error.message);
     });
+  }
+});
+
+document.querySelector('#send').addEventListener('click', () => {
+  if (presentationConnection && presentationConnection.state == 'connected') {
+    const message = document.querySelector('#message').value.trim();
+    const lang = document.body.lang || 'en-US';
+    ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
+    presentationConnection.send(JSON.stringify({string: message, lang: lang}));
   }
 });
 

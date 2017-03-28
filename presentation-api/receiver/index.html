@@ -17,15 +17,81 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        font-size: 75px;
+        font-size: 150px;
       }
     </style>
+    <script type="text/javascript">
+      (() => {
+        let connectionIdx = 0;
+        let messageIdx = 0;
+        const fruitEmoji = {
+          'grapes':      '\u{1F347}',
+          'watermelon':  '\u{1F349}',
+          'melon':       '\u{1F348}',
+          'tangerine':   '\u{1F34A}',
+          'lemon':       '\u{1F34B}',
+          'banana':      '\u{1F34C}',
+          'pineapple':   '\u{1F34D}',
+          'green apple': '\u{1F35F}',
+          'apple':       '\u{1F34E}',
+          'pear':        '\u{1F350}',
+          'peach':       '\u{1F351}',
+          'cherries':    '\u{1F352}',
+          'strawberry':  '\u{1F353}'
+        };
+        const addConnection = (connection) => {
+          connection.connectionId = ++connectionIdx;
+
+          addMessage('New connection #' + connectionIdx);
+
+          connection.onmessage = (message) => {
+            messageIdx++;
+            const messageObj = JSON.parse(message.data);
+            const logString = 'Message ' + messageIdx + ' from connection #' +
+                connection.connectionId + ': ' + messageObj.string;
+            addMessage(logString, messageObj.lang);
+            maybeSetFruit(messageObj.string.toLowerCase());
+            connection.send('Received message ' + messageIdx);
+          };
+
+          connection.onclose = closeEvent) => {
+            addMessage('Connection #' + connection.connectionId + ' closed, reason = ' +
+                       closeEvent.reason + ', message = ' + closeEvent.message); 
+          };
+        };
+
+        const addMessage = (content, language) => {
+          const listElt = document.getElementById("message-list");
+          const listItem = document.createElement("LI");
+          if (language) listItem.lang = language;
+          listItem.textContent = content;
+          listElt.appendChild(listItem);
+        };
+
+        const maybeSetFruit = (message) => {
+          const fruit = Object.entries(fruitEmoji).find(
+            ([name, character]) => {return message.indexOf(name) > -1}
+          );
+          if (fruit) {
+            document.getElementById("main").textContent = fruit[1];
+          }
+        };
+
+        navigator.presentation.receiver &&
+            navigator.presentation.receiver.connectionList.then(list => {
+          list.connections.map(connection => {
+            addConnection(connection);
+          });
+          list.onconnectionavailable = (evt) => {
+            addConnection(evt.connection);
+          };
+        });
+      })();
+    <script>
   </head>
   <body>
-    <heading
     <div id="main">Hello World!</div>
-    <script type="text/javascript"
-        src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js">
-    </script>
+    <ul id="message-list">
+    </ul>
   </body>
 </html>
