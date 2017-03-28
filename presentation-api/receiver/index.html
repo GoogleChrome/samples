@@ -54,7 +54,7 @@
             connection.send('Received message ' + messageIdx);
           };
 
-          connection.onclose = closeEvent) => {
+          connection.onclose = (closeEvent) => {
             addMessage('Connection #' + connection.connectionId + ' closed, reason = ' +
                        closeEvent.reason + ', message = ' + closeEvent.message); 
           };
