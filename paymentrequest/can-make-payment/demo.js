@@ -28,12 +28,7 @@
  * is finished with failure.
  */
 function initPaymentRequest(onSuccess, onFailure) {
-  if (!navigator.userAgent.match(/Android/i)) {
-    onFailure('Supported only on Android for now.');
-    return;
-  }
-
-  if (!('PaymentRequest' in window)) {
+  if (!window.PaymentRequest) {
     onFailure('This browser does not support web payments.');
     return;
   }
