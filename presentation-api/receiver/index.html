@@ -27,5 +27,10 @@
     <script type="text/javascript"
         src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js">
     </script>
+    <script>
+      // From https://developers.google.com/cast/docs/custom_receiver#initialization--readiness
+      window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+      window.castReceiverManager.start();
+    </script>
   </body>
 </html>
