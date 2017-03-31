@@ -1,6 +1,9 @@
 navigator.mediaDevices.getUserMedia({video: true})
-.then(mediaStream => {
+.then(async mediaStream => {
   document.querySelector('video').srcObject = mediaStream;
+
+  // Needed because getCapabilities may be null if accessed too early...
+  await sleep(1000);
 
   const track = mediaStream.getVideoTracks()[0];
   const capabilities = track.getCapabilities();
@@ -24,3 +27,9 @@ navigator.mediaDevices.getUserMedia({video: true})
   input.hidden = false;
 })
 .catch(error => ChromeSamples.log('Argh!', error.name || error));
+
+/* Utils */
+
+function sleep(ms = 0) {
+  return new Promise(r => setTimeout(r, ms));
+}
