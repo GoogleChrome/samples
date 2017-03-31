@@ -41,15 +41,15 @@ feature_id: 5414209298890752
     <option value="cherries">
     <option value="strawberry">
   </datalist>
-  <button id="send" disabled>presentationRequest.send(message)</button>
+  <button id="send" disabled>presentationConnection.send(message)</button>
 </p>
 <p>
   <input id="presentationId" type="text" placeholder="presentationId">
   <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
 </p>
 <p>
-  <button id="close" disabled>presentationRequest.close()</button>
-  <button id="terminate" disabled>presentationRequest.terminate()</button>
+  <button id="close" disabled>presentationConnection.close()</button>
+  <button id="terminate" disabled>presentationConnection.terminate()</button>
 </p>
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
