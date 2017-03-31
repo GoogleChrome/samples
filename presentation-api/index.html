@@ -25,12 +25,27 @@ feature_id: 5414209298890752
   <button id="start" disabled>presentationRequest.start()</button>
 </p>
 <p>
-  <input id="presentationId" type="text" placeholder="presentationId">
-  <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
+  <input id="message" type="text" placeholder="Try a fruit!">
+  <datalist id="message">
+    <option value="grapes">
+    <option value="watermelon">
+    <option value="melon">
+    <option value="tangerine">
+    <option value="lemon">
+    <option value="banana">
+    <option value="pineapple">
+    <option value="green apple">
+    <option value="apple">
+    <option value="pear">
+    <option value="peach">
+    <option value="cherries">
+    <option value="strawberry">
+  </datalist>
+  <button id="send" disabled>presentationRequest.send(message)</button>
 </p>
 <p>
-  <input id="message" type="text" placeholder="Try a fruit!">
-  <button id="send" disabled>presentationRequest.send(message)</button>
+  <input id="presentationId" type="text" placeholder="presentationId">
+  <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
 </p>
 <p>
   <button id="close" disabled>presentationRequest.close()</button>
@@ -40,8 +55,7 @@ feature_id: 5414209298890752
 {% include output_helper.html initial_output_content=initial_output_content %}
 
 {% capture js %}
-const presentationUrls =
-  ['https://googlechrome.github.io/samples/presentation-api/receiver/index.html'];
+const presentationUrls = ['receiver/index.html'];
 
 let presentationRequest;
 let presentationConnection;
@@ -84,7 +98,8 @@ function setConnection(connection) {
 
 document.querySelector('#start').addEventListener('click', () => {
   presentationRequest.start().then(connection => {
-    ChromeSamples.log('Connected to presentation: ' + connection.id);
+  ChromeSamples.log('Connected to presentation ' + connection.url + ', id: ' +
+      connection.id);
     setConnection(connection);
   }).catch(error => {
     ChromeSamples.log(error.name + ': ' + error.message);
