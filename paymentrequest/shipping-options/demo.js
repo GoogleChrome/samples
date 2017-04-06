@@ -177,12 +177,12 @@ function addressToDictionary(address) {
   };
 }
 
-const buyButton = document.getElementById('buyButton');
-buyButton.setAttribute('style', 'display: none;');
+const payButton = document.getElementById('buyButton');
+payButton.setAttribute('style', 'display: none;');
 if (window.PaymentRequest) {
   let request = initPaymentRequest();
-  buyButton.setAttribute('style', 'display: inline;');
-  buyButton.addEventListener('click', function() {
+  payButton.setAttribute('style', 'display: inline;');
+  payButton.addEventListener('click', function() {
     onBuyClicked(request);
     request = initPaymentRequest();
   });
