@@ -152,24 +152,24 @@ function instrumentToJsonString(instrument) {
 /**
  * Initializes the buy button.
  *
- * @param {HTMLElement} buyButton The "Buy" button to initialize.
+ * @param {HTMLElement} payButton The "Buy" button to initialize.
  */
-function initBuyButton(buyButton) {
+function initBuyButton(payButton) {
   initPaymentRequest(function(request, optionalWarning) {
-    buyButton.setAttribute('style', 'display: inline;');
+    payButton.setAttribute('style', 'display: inline;');
     ChromeSamples.setStatus(optionalWarning ? optionalWarning : '');
-    buyButton.addEventListener('click', function handleClick() {
-      buyButton.removeEventListener('click', handleClick);
+    payButton.addEventListener('click', function handleClick() {
+      payButton.removeEventListener('click', handleClick);
       onBuyClicked(request);
-      initBuyButton(buyButton);
+      initBuyButton(payButton);
     });
   }, function(error) {
-    buyButton.setAttribute('style', 'display: none;');
+    payButton.setAttribute('style', 'display: none;');
     ChromeSamples.setStatus(error);
   });
 }
 
-const buyButton = document.getElementById('buyButton');
-buyButton.setAttribute('style', 'display: none;');
+const payButton = document.getElementById('buyButton');
+payButton.setAttribute('style', 'display: none;');
 ChromeSamples.setStatus('Checking...');
-initBuyButton(buyButton);
+initBuyButton(payButton);
