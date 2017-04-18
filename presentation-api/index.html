@@ -25,8 +25,8 @@ feature_id: 5414209298890752
   <button id="start" disabled>presentationRequest.start()</button>
 </p>
 <p>
-  <input id="message" type="text" placeholder="Try a fruit!">
-  <datalist id="message">
+  <input id="fruit" type="text" placeholder="Send a fruit!" list="fruits" >
+  <datalist id="fruits">
     <option value="grapes">
     <option value="watermelon">
     <option value="melon">
@@ -41,7 +41,11 @@ feature_id: 5414209298890752
     <option value="cherries">
     <option value="strawberry">
   </datalist>
-  <button id="send" disabled>presentationConnection.send(message)</button>
+  <button id="sendFruit" disabled>presentationConnection.send(message)</button>
+</p>
+<p>
+  <input id="message" type="text" placeholder="Send a message!">
+  <button id="sendMessage" disabled>presentationConnection.send(message)</button>
 </p>
 <p>
   <input id="presentationId" type="text" placeholder="presentationId">
@@ -86,10 +90,12 @@ function setConnection(connection) {
   presentationConnection = connection;
   document.querySelector('#close').disabled = false;
   document.querySelector('#terminate').disabled = false;
-  document.querySelector('#send').disabled = false;
+  document.querySelector('#sendFruit').disabled = false;
+  document.querySelector('#sendMessage').disabled = false;
   presentationConnection.onclose = () => {
     ChromeSamples.log('Connection closed.');
-    document.querySelector('#send').disabled = true;
+    document.querySelector('#sendFruit').disabled = true;
+    document.querySelector('#sendMessage').disabled = true;
   };
   presentationConnection.onterminate = () => {
     ChromeSamples.log('Connection terminated.');
@@ -119,12 +125,20 @@ document.querySelector('#reconnect').addEventListener('click', () => {
   }
 });
 
-document.querySelector('#send').addEventListener('click', () => {
+document.querySelector('#sendFruit').addEventListener('click', () => {
+  if (presentationConnection && presentationConnection.state == 'connected') {
+    const message = document.querySelector('#fruit').value.trim();
+    ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
+    presentationConnection.send(JSON.stringify({message}));
+  }
+});
+
+document.querySelector('#sendMessage').addEventListener('click', () => {
   if (presentationConnection && presentationConnection.state == 'connected') {
     const message = document.querySelector('#message').value.trim();
-    const lang = document.body.lang || 'en-US';
     ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
-    presentationConnection.send(JSON.stringify({string: message, lang: lang}));
+    const lang = document.body.lang || 'en-US';
+    presentationConnection.send(JSON.stringify({message, lang}));
   }
 });
 
