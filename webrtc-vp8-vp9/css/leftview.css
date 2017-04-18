@@ -1,0 +1,14 @@
+#splitSlider {
+    display: none;
+}
+
+#elems {
+    position: relative;
+    display: inline-block;
+}
+
+#leftVidDiv, #leftImgDiv {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+}
