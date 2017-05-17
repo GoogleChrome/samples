@@ -1,0 +1,115 @@
+input {
+  font-size:83%;
+}
+a {
+  color:#00c;
+}
+#login-box {
+  background-color: #FFFFFF;
+  border: 4px solid #E8EEFA;
+  width: 300px;
+}
+
+#login-box-inner {
+  background-color: #E8EEFA;
+  border: 1px solid #E8EEFA;
+  font-family: arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 3px;
+  padding: 10px 20px;
+  text-align: left;
+}
+#login-box-inner .error {
+  color: red;
+}
+
+#login-box-inner .input-box {
+  width: 240px;
+  font-size: 14px;
+  margin-bottom: 4px;
+  margin-top: 2px;
+}
+
+#login-box-inner .input-button {
+  cursor: pointer;
+  font-family: arial,sans-serif;
+  font-size: 12px;
+  padding: 0 6px;
+  margin-bottom: 12px;
+  margin-top: 5px;
+  position: relative;
+}
+#login-box-inner .new-account {
+  color: #0000CC;
+  font-size: 11px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 6px;
+  text-decoration: underline;
+}
+  
+#reg_box {
+  background-color: #FFFFFF;
+  border: 4px solid #E8EEFA;
+  width: 480px;
+}
+
+#reg_area {
+  margin: 4px;
+  padding: 10px;
+  background-color: #E8EEFA
+}
+
+#reg_box input {
+  font-size: 16px;
+  margin-top: 2px;
+  padding: 6px;
+  width: 280px;
+}
+#reg_box select {
+  font-size: 13px;
+  margin-top: 2px;
+  padding: 6px;
+  height: 30px;
+}
+#reg_box td.label {
+  color: #1D2A5B;
+  font-size: 13px;
+  padding-right: 3px;
+  text-align: right;
+  width: 105px;
+}
+.widget-button td.widget-button-right {
+  background: url("../image/dl_button_right.jpg") repeat scroll 0 0 transparent;
+  height: 36px;
+  margin-right: 0;
+  width: 9px;
+}
+.widget-button td.widget-button-middle {
+  background: url("../image/dl_button_middle.jpg") repeat scroll 0 0 transparent;
+  cursor: pointer;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.widget-button td.widget-button-left {
+  background: url("../image/dl_button_left.jpg") repeat scroll 0 0 transparent;
+  height: 36px;
+  margin-left: 0;
+  width: 9px;
+}
+
+.widget-button td.widget-button-middle a.widget-button-link,
+.widget-button td.widget-button-middle a.widget-button-link a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.widget-error {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+}
