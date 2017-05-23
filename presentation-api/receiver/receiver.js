@@ -16,7 +16,7 @@
     'cherries':    '\u{1F352}',
     'strawberry':  '\u{1F353}'
   };
-  
+
   function addConnection(connection) {
     connection.connectionId = ++connectionIdx;
 
@@ -34,7 +34,7 @@
 
     connection.onclose = (closeEvent) => {
       addMessage('Connection #' + connection.connectionId + ' closed, reason = ' +
-                 closeEvent.reason + ', message = ' + closeEvent.message); 
+                 closeEvent.reason + ', message = ' + closeEvent.message);
     };
   };
 
@@ -48,8 +48,8 @@
 
   function maybeSetFruit(message) {
     if (message in fruitEmoji) {
-      document.querySelector('#main').textContent = fruitEmoji[message.toLowerCase()]; 
-    }    
+      document.querySelector('#main').textContent = fruitEmoji[message.toLowerCase()];
+    }
   };
 
   if (navigator.presentation.receiver) {
