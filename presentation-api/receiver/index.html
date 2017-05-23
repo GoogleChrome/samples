@@ -17,20 +17,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        font-size: 75px;
+        font-size: 128px;
       }
     </style>
+    <script type="text/javascript" src="receiver.js"></script>
   </head>
   <body>
-    <heading
     <div id="main">Hello World!</div>
-    <script type="text/javascript"
-        src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js">
-    </script>
-    <script>
-      // From https://developers.google.com/cast/docs/custom_receiver#initialization--readiness
-      window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-      window.castReceiverManager.start();
-    </script>
+    <ul id="message-list">
+    </ul>
   </body>
 </html>

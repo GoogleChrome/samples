@@ -25,19 +25,42 @@ feature_id: 5414209298890752
   <button id="start" disabled>presentationRequest.start()</button>
 </p>
 <p>
+  <input id="fruit" type="text" placeholder="Send a fruit!" list="fruits" >
+  <datalist id="fruits">
+    <option value="grapes">
+    <option value="watermelon">
+    <option value="melon">
+    <option value="tangerine">
+    <option value="lemon">
+    <option value="banana">
+    <option value="pineapple">
+    <option value="green apple">
+    <option value="apple">
+    <option value="pear">
+    <option value="peach">
+    <option value="cherries">
+    <option value="strawberry">
+  </datalist>
+  <button id="sendFruit" disabled>presentationConnection.send(message)</button>
+</p>
+<p>
+  <input id="message" type="text" placeholder="Send a message!">
+  <button id="sendMessage" disabled>presentationConnection.send(message)</button>
+</p>
+<p>
   <input id="presentationId" type="text" placeholder="presentationId">
   <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
 </p>
 <p>
-  <button id="close" disabled>presentationRequest.close()</button>
-  <button id="terminate" disabled>presentationRequest.terminate()</button>
+  <button id="close" disabled>presentationConnection.close()</button>
+  <button id="terminate" disabled>presentationConnection.terminate()</button>
 </p>
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
 {% capture js %}
-const presentationUrls =
-  ['https://googlechrome.github.io/samples/presentation-api/receiver/index.html'];
+const presentationUrls = ['receiver/index.html'];
+
 let presentationRequest;
 let presentationConnection;
 
@@ -67,8 +90,12 @@ function setConnection(connection) {
   presentationConnection = connection;
   document.querySelector('#close').disabled = false;
   document.querySelector('#terminate').disabled = false;
+  document.querySelector('#sendFruit').disabled = false;
+  document.querySelector('#sendMessage').disabled = false;
   presentationConnection.onclose = () => {
     ChromeSamples.log('Connection closed.');
+    document.querySelector('#sendFruit').disabled = true;
+    document.querySelector('#sendMessage').disabled = true;
   };
   presentationConnection.onterminate = () => {
     ChromeSamples.log('Connection terminated.');
@@ -77,7 +104,8 @@ function setConnection(connection) {
 
 document.querySelector('#start').addEventListener('click', () => {
   presentationRequest.start().then(connection => {
-    ChromeSamples.log('Connected to presentation: ' + connection.id);
+  ChromeSamples.log('Connected to presentation ' + connection.url + ', id: ' +
+      connection.id);
     setConnection(connection);
   }).catch(error => {
     ChromeSamples.log(error.name + ': ' + error.message);
@@ -94,6 +122,23 @@ document.querySelector('#reconnect').addEventListener('click', () => {
       ChromeSamples.log('Presentation.reconnect() error, ' + error.name + ': ' +
                         error.message);
     });
+  }
+});
+
+document.querySelector('#sendFruit').addEventListener('click', () => {
+  if (presentationConnection && presentationConnection.state == 'connected') {
+    const message = document.querySelector('#fruit').value.trim();
+    ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
+    presentationConnection.send(JSON.stringify({message}));
+  }
+});
+
+document.querySelector('#sendMessage').addEventListener('click', () => {
+  if (presentationConnection && presentationConnection.state == 'connected') {
+    const message = document.querySelector('#message').value.trim();
+    ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
+    const lang = document.body.lang || 'en-US';
+    presentationConnection.send(JSON.stringify({message, lang}));
   }
 });
 
