@@ -1,0 +1,33 @@
+---
+feature_name: New VP9 codec string and Profile 2 support
+chrome_version: 60
+feature_id: 6230726177456128
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+VP9 is an open and royalty-free video codec that has been supported in Chromium
+since 2013. An update adds <a href="https://www.webmproject.org/vp9/mp4/">a new
+string format</a> for describing the encoding properties, such as the profile,
+level, etc. Such properties are common in video codecs but are not exposed in
+the current VP9 string format.
+<p>
+</p>
+In addition, this update includes a new format to advertise support for VP9
+Profile 2. This profile is needed to enable higher bit-depth video and the new
+binding allows higher granularity in the query for specific features of the VP9
+bitstream. The string format is accepted by media-related APIs such as
+<code>MediaSource.isTypeSupported()</code>, <code>HTMLMediaElement.canPlayType()</code>, and 
+<code>navigator.requestMediaKeySystemAccess()</code>.
+</p>
+
+{% include output_helper.html %}
+
+<script>
+  log = ChromeSamples.log;
+  log('Your browser supports:');
+</script>
+
+{% include js_snippet.html filename='vp9-codec-string.js' %}
+
