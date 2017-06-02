@@ -2,7 +2,10 @@ navigator.mediaDevices.getUserMedia({video: true})
 .then(async mediaStream => {
   document.querySelector('video').srcObject = mediaStream;
 
-  // Needed because getCapabilities may be null if accessed too early...
+  // Once crbug.com/711524 is fixed, we won't need to wait anymore. This is
+  // currently needed because capabilities can only be retrieved after the
+  // device starts streaming. This happens after and asynchronously w.r.t.
+  // getUserMedia() returns.
   await sleep(1000);
 
   const track = mediaStream.getVideoTracks()[0];
