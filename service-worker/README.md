@@ -1,3 +1,11 @@
+# Before you begin
+
+>For security reasons, a service worker can only control the pages that are in the same directory level or below it. This means that if you place the service worker file in a scripts directory it will be only able to be attached to pages inside the /scripts directory and below (/scripts/test/ for example). It is unlikely that your pages for your site will live there.
+
+[By](https://developers.google.com/web/fundamentals/getting-started/your-first-offline-web-app/step-5?hl=en) @paulirish
+
+Make sure you've read the above quote.
+
 # Service Worker Recipes
 
 - [Basic Demo](https://googlechrome.github.io/samples/service-worker/basic/index.html) -
