@@ -26,3 +26,6 @@ information: name, phone number, and email address.
 - [Can make payment](https://googlechrome.github.io/samples/paymentrequest/can-make-payment/) -
 a sample that accepts both Android Pay and credit card payments and checks
 whether the browser can make payment.
+
+- [Sketch App Stickersheet](https://googlechrome.github.io/samples/paymentrequest/stickersheet/) -
+A stickersheet that allows you to design a payments flow in Sketch App.
