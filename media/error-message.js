@@ -24,6 +24,6 @@ chooseFileButton.addEventListener('change', function() {
 });
 
 video.addEventListener('canplay', function() {
-  ChromeSamples.log('Video can play!');
+  ChromeSamples.log('"canplay" event received');
 });
 
