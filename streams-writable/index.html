@@ -1,0 +1,30 @@
+---
+feature_name: WritableStream
+chrome_version: WritableStream
+feature_id: 5928498656968704
+local_css_files: ['optional_relative_path.css', 'anotheroptional_relative_path.css']
+local_js_files: ['optional_relative_path.js', 'anotheroptional_relative_path.js']
+additional_head_content: <meta name="optional" value="optional">
+---
+
+<h3>Background</h3>
+<p>Background info goes here.</p>
+<p>Any content here, outside of a capture block, is included verbatim on the resulting page.</p>
+
+{% capture initial_output_content %}
+<p>This optional capture/include can be used to set initial sample output.</p>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+/*
+  Use this optional include for any JavaScript that shows off the feature's functionality.
+  Do not surround it with &lt;script&gt; tags.
+  If output_helper.html is included on this page, then ChromeSamples.log(),
+  ChromeSamples.clearLog(), ChromeSamples.setStatus(), and ChromeSamples.setContent() can be used.
+*/
+{% include js_snippet.html filename='demo.js' %}
+
+{% capture css %}
+/* Use this optional capture/include for CSS that shows off the feature's functionality. */
+{% endcapture %}
+{% include css_snippet.html css=css %}
