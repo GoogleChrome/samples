@@ -1,18 +1,20 @@
-function logConnectionType() {
-  var connectionType = 'not supported';
-  var downlinkMax = 'not supported';
+function logConnectionInfo() {
+  var properties = [
+    'type',
+    'effectiveType',
+    'downlinkMax',
+    'downlink',
+    'rtt'
+  ];
 
-  if ('connection' in navigator) {
-    connectionType = navigator.connection.type;
-
-    if ('downlinkMax' in navigator.connection) {
-      downlinkMax = navigator.connection.downlinkMax;
-    }
-  }
-
-  ChromeSamples.log('Current connection type: ' + connectionType +
-    ' (downlink max: ' + downlinkMax + ')');
+  ChromeSamples.log('Current Connection Status:');
+  properties.forEach(function(property) {
+    ChromeSamples.log('  ' + property + ':' +
+      (navigator.connection[property] || '[unknown]'));
+  });
 }
 
-logConnectionType();
-navigator.connection.addEventListener('change', logConnectionType);
+// Log the connection info once at startup.
+logConnectionInfo();
+// Log the new connection info whenever it changes.
+navigator.connection.addEventListener('change', logConnectionInfo);
