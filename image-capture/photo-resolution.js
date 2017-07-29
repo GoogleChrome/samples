@@ -17,7 +17,11 @@ navigator.mediaDevices.getUserMedia({video: true})
   input.min = photoCapabilities.imageWidth.min;
   input.max = photoCapabilities.imageWidth.max;
   input.step = photoCapabilities.imageWidth.step;
-  input.value = settings.width;
+
+  return imageCapture.getPhotoSettings();
+})
+.then(photoSettings => {
+  input.value = photoSettings.imageWidth;
 })
 .catch(error => ChromeSamples.log('Argh!', error.name || error));
 
