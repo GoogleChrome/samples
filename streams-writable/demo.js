@@ -1,44 +1,37 @@
 'use strict';
 
-const sink = {
-	result: "",
+let result = "";
+const decoder = new TextDecoder("utf-8");
+const writable = new WritableStream({
 	write(chunk) {
-		this.result += String.fromCharCode(parseInt(chunk, 10));
+		let buffer = new ArrayBuffer(2);
+		let view = new Uint16Array(buffer);
+		view[0] = chunk;
+		let decoded = decoder.decode(view, {stream: true});
+		ChromeSamples.log(decoded);
+		result += decoded
 	},
 	close() {
-		ChromeSamples.log(this.result);
+		ChromeSamples.log(result);
 	},
 	abort(e) {
 		ChromeSamples.log("[SINK] Error: " + e);
 	}
-}
+});
 
-const ws = new WritableStream(sink);
-var msgArray = buffer("[STREAMED CONTENT]: This is only a test.");
-textToStream(msgArray, ws)
+const message = "[STREAMED CONTENT]: This is only a test.";
+textToStream(message, writable)
 	.then(() => ChromeSamples.log("All chunks written. Stream closed."))
 	.catch(e => ChromeSamples.log("[STREAM] Error: " + e));
 
-function buffer(string) {
-	var utf8 = unescape(encodeURIComponent(string));
-
-	var arr = [];
-	for (var i = 0; i < utf8.length; i++) {
-	    arr.push(utf8.charCodeAt(i));
-	}
-	return arr;
-}
-
-function textToStream(buffer, writableStream) {
-	var writer = writableStream.getWriter();
-	buffer.forEach(chunk => { 
+function textToStream(message, writableStream) {
+	const writer = writableStream.getWriter();
+	const encoder = new TextEncoder();
+	const encoded = encoder.encode(message, {stream: true});
+	encoded.forEach(chunk => {
 		writer.write(chunk)
-		.then(() => {
-			ChromeSamples.log("Chunk written to sink.");
-		})
-		.catch(e => {
-			ChromeSamples.log("[CHUNK] Error: " + e);
-		});
+		.then(() => ChromeSamples.log("Chunk written to sink."))
+		.catch(e => ChromeSamples.log("[CHUNK] Error: " + e));
 	});
 	return writer.close();
 }
