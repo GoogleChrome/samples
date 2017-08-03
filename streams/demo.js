@@ -38,6 +38,6 @@ function sendMessage(message) {
 document.querySelector('#sendMessage').addEventListener('click', function() {
 	ChromeSamples.clearLog();
 	let entry = document.querySelector('#input');
-	passStream(entry.value);
+	sendMessage(entry.value);
 	entry.value = "";
 });
