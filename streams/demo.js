@@ -1,28 +1,31 @@
 'use strict';
 
-let result = "";
-const decoder = new TextDecoder("utf-8");
-const writable = new WritableStream({
-	// Implement the sink
-	write(chunk) {
-		return new Promise((resolve, reject) => {
-			let buffer = new ArrayBuffer(2);
-			let view = new Uint16Array(buffer);
-			view[0] = chunk;
-			let decoded = decoder.decode(view, {stream: true});
-			ChromeSamples.log("Chunk decoded: " + decoded);
-			result += decoded
-			resolve();
-		});
-	},
-	close() {
-		result = "[MESSAGE RECEIVED] " + result;
-		ChromeSamples.log(result);
-	},
-	abort(e) {
-		ChromeSamples.log("[SINK] Error: " + e);
-	}
-}, new CountQueuingStrategy({highWaterMark: 2}));
+let result;
+function getWritableStream(queuingStrategy) {
+	const decoder = new TextDecoder("utf-8");
+	result = "";
+	return new WritableStream({
+		// Implement the sink
+		write(chunk) {
+			return new Promise((resolve, reject) => {
+				let buffer = new ArrayBuffer(2);
+				let view = new Uint16Array(buffer);
+				view[0] = chunk;
+				let decoded = decoder.decode(view, {stream: true});
+				ChromeSamples.log("Chunk decoded: " + decoded);
+				result += decoded
+				resolve();
+			});
+		},
+		close() {
+			result = "[MESSAGE RECEIVED] " + result;
+			ChromeSamples.log(result);
+		},
+		abort(e) {
+			ChromeSamples.log("[SINK] Error: " + e);
+		}
+	}, queuingStrategy);
+}
 
 function sendMessage(message) {
 	// defaultWriter is of type WritableStreamDefaultWriter
@@ -44,10 +47,12 @@ function sendMessage(message) {
 	});
 }
 
-
+let writable;
 document.querySelector('#sendMessage').addEventListener('click', function() {
 	ChromeSamples.clearLog();
-	let entry = document.querySelector('#input');
-	sendMessage(entry.value);
-	entry.value = "";
-});
+	// Streams are only meant be used once. Get a stream for each message.
+	writable = getWritableStream(new CountQueuingStrategy({highWaterMark: 2}));
+	let message = document.querySelector('#input');
+	sendMessage(message.value);
+	message.value = "";
+})
