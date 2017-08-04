@@ -32,26 +32,29 @@ function sendMessage(message) {
 	const defaultWriter = writable.getWriter();
 	const encoder = new TextEncoder();
 	const encoded = encoder.encode(message, {stream: true});
+	encoded.forEach(chunk => {
+		defaultWriter.ready
+		.then(() => {
+			defaultWriter.write(chunk)
+			.then(() => ChromeSamples.log("Chunk written to sink. 'defaultWriter.write()' promise resolved."))
+			.catch(e => ChromeSamples.log("[CHUNK] Error: " + e));
+		});
+	})
+	// Calling ready insures that all chunks are written to the sink before the writer is closed.
 	defaultWriter.ready
 	.then(() => {
-		encoded.forEach(chunk => {
-			if ((defaultWriter.desiredSize != null) && (defaultWriter.desiredSize != 0)) {
-				defaultWriter.write(chunk)
-				.then(() => ChromeSamples.log("Chunk written to sink. 'defaultWriter.write()` promise resolved."))
-				.catch(e => ChromeSamples.log("[CHUNK] Error: " + e));
-			}
-		});
 		defaultWriter.close()
-		.then(() => ChromeSamples.log("All chunks written. 'defaultWriter.close()` promise resolved."))
+		.then(() => ChromeSamples.log("All chunks written. 'defaultWriter.close()' promise resolved."))
 		.catch(e => ChromeSamples.log("[STREAM] Error: " + e));
 	});
 }
 
 let writable;
 document.querySelector('#sendMessage').addEventListener('click', function() {
+	// Clear the output from the previous call to sendMessage().
 	ChromeSamples.clearLog();
 	// Streams are only meant be used once. Get a stream for each message.
-	writable = getWritableStream(new CountQueuingStrategy({highWaterMark: 2}));
+	writable = getWritableStream(new CountQueuingStrategy({highWaterMark: 1}));
 	let message = document.querySelector('#input');
 	sendMessage(message.value);
 	message.value = "";
