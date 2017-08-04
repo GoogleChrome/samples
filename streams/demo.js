@@ -21,17 +21,21 @@ const writable = new WritableStream({
 });
 
 function sendMessage(message) {
-	const writer = writable.getWriter();
+	// defaultWriter is of type WritableStreamDefaultWriter
+	const defaultWriter = writable.getWriter();
 	const encoder = new TextEncoder();
 	const encoded = encoder.encode(message, {stream: true});
-	encoded.forEach(chunk => {
-		writer.write(chunk)
-		.then(() => ChromeSamples.log("Chunk written to sink. 'writer.write()` promise resolved."))
-		.catch(e => ChromeSamples.log("[CHUNK] Error: " + e));
+	defaultWriter.ready
+	.then(() => {
+		encoded.forEach(chunk => {
+			defaultWriter.write(chunk)
+			.then(() => ChromeSamples.log("Chunk written to sink. 'defaultWriter.write()` promise resolved."))
+			.catch(e => ChromeSamples.log("[CHUNK] Error: " + e));
+		});
+		defaultWriter.close()
+		.then(() => ChromeSamples.log("All chunks written. 'defaultWriter.close()` promise resolved."))
+		.catch(e => ChromeSamples.log("[STREAM] Error: " + e));
 	});
-	writer.close()
-	.then(() => ChromeSamples.log("All chunks written. 'writer.close()` promise resolved."))
-	.catch(e => ChromeSamples.log("[STREAM] Error: " + e));
 }
 
 
