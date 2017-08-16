@@ -8,8 +8,6 @@ function initPaymentRequest() {
       'visa', 'mir'];
   let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{
-    supportedMethods: networks,
-  }, {
     supportedMethods: ['basic-card'],
     data: {supportedNetworks: networks, supportedTypes: types},
   }];
