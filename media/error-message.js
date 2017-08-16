@@ -17,3 +17,13 @@ nonExistentFileButton.addEventListener('click', function() {
 invalidFileButton.addEventListener('click', function() {
   video.src = 'https://storage.googleapis.com/media-error/no_streams.webm';
 });
+
+chooseFileButton.addEventListener('change', function() {
+  const file = chooseFileButton.files[0];
+  video.src = URL.createObjectURL(file);
+});
+
+video.addEventListener('canplay', function() {
+  ChromeSamples.log('"canplay" event received');
+});
+
