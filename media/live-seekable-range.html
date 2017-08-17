@@ -1,0 +1,37 @@
+---
+feature_name: MediaSource.setLiveSeekableRange
+chrome_version: 62
+feature_id: 5671401352593408
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+This API lets MediaSource apps more effectively customize the
+<code>HTMLMediaElement.seekable</code> range logic by providing (or removing) a
+single seekable range that is union'ed with the current buffered ranges to
+result in a single seekable range which fits both, when media duration is
+<code>+Infinite</code>.
+</p>
+
+<button id="setButton">mediaSource.setLiveSeekableRange(40, 42)</button>
+<button id="clearButton">mediaSource.clearLiveSeekableRange()</button>
+<button id="removeButton">sourceBuffer.remove(3, 6)</button>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='live-seekable-range.js' %}
+
+<script>
+  document.querySelector('#setButton').addEventListener('click', function() {
+    onSetLiveSeekableRangeButtonClick();
+  });
+  document.querySelector('#clearButton').addEventListener('click', function() {
+    onClearLiveSeekableRangeButtonClick();
+  });
+  document.querySelector('#removeButton').addEventListener('click', function() {
+    onRemoveMediaSegmentButtonClick();
+  });
+
+  log = ChromeSamples.log;
+</script>
