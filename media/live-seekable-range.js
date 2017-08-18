@@ -1,4 +1,4 @@
-const video = document.createElement('video');
+const video = document.querySelector('video');
 
 const mediaSource = new MediaSource();
 video.src = URL.createObjectURL(mediaSource);
@@ -6,63 +6,83 @@ video.src = URL.createObjectURL(mediaSource);
 mediaSource.addEventListener('sourceopen', function() {
   URL.revokeObjectURL(video.src);
 
-  const videoUrl = 'https://storage.googleapis.com/media-session/sample.webm';
-  const sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp9"');
-
-  // Makes video behave like a live stream.
-  mediaSource.duration = +Infinity;
+  mediaSource.addSourceBuffer('video/webm; codecs="vp9"');
 
   log('Fetching video init segment...');
-  fetch(videoUrl, { headers: { range: 'bytes=0-299' } })
-  .then(response => response.arrayBuffer())
-  .then(data => {
-
-    // Append video init segment.
-    sourceBuffer.appendBuffer(data);
-    sourceBuffer.addEventListener('updateend', function() {
-      logTimeRanges();
-
-      log('Fetching video segment that starts at 3 seconds...');
-      fetch(videoUrl, { headers: { range: 'bytes=567140-1196488' } })
-      .then(response => response.arrayBuffer())
-      .then(data => {
-
-        // Append video segment that starts at 3 seconds.
-        sourceBuffer.appendBuffer(data);
-        sourceBuffer.addEventListener('updateend', function() {
-          logTimeRanges();
-        }, { once: true });
-
-      });
-    }, { once: true });
-  });
+  fetchAndAppendMediaSegment('bytes=0-299');
 });
 
-function onSetLiveSeekableRangeButtonClick() {
-  log('User clicked "mediaSource.setLiveSeekableRange(40, 42)" button');
-  mediaSource.setLiveSeekableRange(40 /* start */, 42 /* end */);
-  logTimeRanges();
+function onSetInfiniteDurationButtonClick() {
+  log('User clicked "mediaSource.duration = +Infinity" button');
+  // Makes video behave like a live stream.
+  mediaSource.duration = +Infinity;
+  logMediaInfo();
+}
+
+function onFetchAndAppend3To6MediaButtonClick() {
+  log('Fetching video segment that starts at 3 seconds...');
+  fetchAndAppendMediaSegment('bytes=567140-1196488');
+}
+
+function onSetLiveSeekableRangeButtonClick(event) {
+  const re = /mediaSource\.setLiveSeekableRange\((\d+), (\d+)\)/;
+  const start = Number(re.exec(event.target.textContent)[1]);
+  const end = Number(re.exec(event.target.textContent)[2]);
+  log(`User clicked "mediaSource.setLiveSeekableRange(${start}, ${end})" button`);
+  mediaSource.setLiveSeekableRange(start, end);
+  logMediaInfo();
 }
 
 function onClearLiveSeekableRangeButtonClick() {
   log('User clicked "mediaSource.clearLiveSeekableRange()" button');
   mediaSource.clearLiveSeekableRange();
-  logTimeRanges();
+  logMediaInfo();
 }
 
 function onRemoveMediaSegmentButtonClick() {
+  const sourceBuffer = mediaSource.sourceBuffers[0];
+
   log('User clicked "sourceBuffer.remove(3, 6)" button');
-  mediaSource.sourceBuffers[0].remove(3 /* start */, 6 /* end*/);
-  mediaSource.sourceBuffers[0].addEventListener('updateend', function() {
-    logTimeRanges();
+  sourceBuffer.remove(3 /* start */, 6 /* end*/);
+  sourceBuffer.addEventListener('updateend', function() {
+    logMediaInfo();
   }, { once: true });
 }
 
-/* Util */
+function onSetFiniteDurationButtonClick() {
+  log('User clicked "mediaSource.duration = 6" button');
+  mediaSource.duration = 6;
+  logMediaInfo();
+}
 
-function logTimeRanges() {
+function onEndOfStreamButtonClick() {
+  log('User clicked "mediaSource.endOfStream()" button');
+  mediaSource.endOfStream();
+  mediaSource.addEventListener('sourceended', function() {
+    logMediaInfo();
+  }, { once: true });
+}
+
+/* Utils */
+
+function fetchAndAppendMediaSegment(range) {
+  const videoUrl = 'https://storage.googleapis.com/media-session/sample.webm';
+  const sourceBuffer = mediaSource.sourceBuffers[0];
+
+  fetch(videoUrl, { headers: { range } })
+  .then(response => response.arrayBuffer())
+  .then(data => {
+    sourceBuffer.appendBuffer(data);
+    sourceBuffer.addEventListener('updateend', function() {
+      logMediaInfo();
+    }, { once: true });
+  });
+}
+
+function logMediaInfo() {
   log(`> Seekable time ranges: ${timeRangesToString(video.seekable)}`);
   log(`> Buffered time ranges: ${timeRangesToString(video.buffered)}`);
+  log(`> MediaSource duration: ${mediaSource.duration}`);
   log('');
 }
 
