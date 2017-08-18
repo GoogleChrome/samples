@@ -9,7 +9,7 @@ mediaSource.addEventListener('sourceopen', function() {
   mediaSource.addSourceBuffer('video/webm; codecs="vp9"');
 
   log('Fetching video init segment...');
-  fetchAndAppendMediaSegment('bytes=0-299');
+  fetchAndAppendSegment('bytes=0-299');
 });
 
 function onSetInfiniteDurationButtonClick() {
@@ -21,7 +21,7 @@ function onSetInfiniteDurationButtonClick() {
 
 function onFetchAndAppend3To6MediaButtonClick() {
   log('Fetching video segment that starts at 3 seconds...');
-  fetchAndAppendMediaSegment('bytes=567140-1196488');
+  fetchAndAppendSegment('bytes=567140-1196488');
 }
 
 function onSetLiveSeekableRangeButtonClick(event) {
@@ -65,7 +65,7 @@ function onEndOfStreamButtonClick() {
 
 /* Utils */
 
-function fetchAndAppendMediaSegment(range) {
+function fetchAndAppendSegment(range) {
   const videoUrl = 'https://storage.googleapis.com/media-session/sample.webm';
   const sourceBuffer = mediaSource.sourceBuffers[0];
 
