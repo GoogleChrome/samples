@@ -10,7 +10,7 @@ mediaSource.addEventListener('sourceopen', function() {
 
   log('Fetching video init segment...');
   fetchAndAppendSegment('bytes=0-299');
-});
+}, { once: true });
 
 function onSetInfiniteDurationButtonClick() {
   log('User clicked "mediaSource.duration = +Infinity" button');

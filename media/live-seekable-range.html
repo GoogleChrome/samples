@@ -41,29 +41,65 @@ result in a single seekable range which fits both, when media duration is
 
 <script>
   document.querySelector('#setInfiniteDurationButton').addEventListener('click', function() {
-    onSetInfiniteDurationButtonClick();
+    try {
+      onSetInfiniteDurationButtonClick();
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#fetchAndAppend3To6MediaButton').addEventListener('click', function() {
-    onFetchAndAppend3To6MediaButtonClick();
+    try {
+      onFetchAndAppend3To6MediaButtonClick();
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#set1Button').addEventListener('click', function(event) {
-    onSetLiveSeekableRangeButtonClick(event);
+    try {
+      onSetLiveSeekableRangeButtonClick(event);
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#set2Button').addEventListener('click', function(event) {
-    onSetLiveSeekableRangeButtonClick(event);
+    try {
+      onSetLiveSeekableRangeButtonClick(event);
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#clearButton').addEventListener('click', function() {
-    onClearLiveSeekableRangeButtonClick();
+    try {
+      onClearLiveSeekableRangeButtonClick();
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#removeButton').addEventListener('click', function() {
-    onRemoveMediaSegmentButtonClick();
+    try {
+      onRemoveMediaSegmentButtonClick();
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#setFiniteDurationButton').addEventListener('click', function() {
-    onSetFiniteDurationButtonClick();
+    try {
+      onSetFiniteDurationButtonClick();
+    } catch(error) {
+      logError(error);
+    }
   });
   document.querySelector('#endOfStreamButton').addEventListener('click', function() {
-    onEndOfStreamButtonClick();
+    try {
+      onEndOfStreamButtonClick();
+    } catch(error) {
+      logError(error);
+    }
   });
+
+  function logError(error) {
+    log(`> Error: ${error.message}\n`);
+  }
 
   log = ChromeSamples.log;
 </script>
