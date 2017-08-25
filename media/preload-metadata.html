@@ -9,8 +9,10 @@ check_min_version: true
 <p>
 Chrome now sets the default <code>preload</code> value for
 <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> elements to
-<code>metadata</code> in order to reduce bandwidth and resource usage.
-Note that this only applies to cases where no preload value is set.
+<code>metadata</code> in order to reduce bandwidth and resource usage. This new
+behaviour only applies to cases where no preload value is set.
+Note that the preload attribute's hint is still ignored when a <code>MediaSource</code>
+is attached to the media element.
 </p>
 
 <p>Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org </a>.</p>
