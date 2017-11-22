@@ -12,9 +12,11 @@ The <a href="https://wicg.github.io/media-capabilities/">Media Capabilities
 abilities of the device/system/browser. This enables web developers to make
 optimal decisions when selecting media streams for the user.
 </p>
-<p>Note that the <code>result</code> will always be supported if the
-<code>mediaConfiguration</code> playback stats have not been recorded yet by
-the browser.</p>
+<p>
+Note that Chrome will always say that a supported media configuration is
+<code>smooth</code> and <code>powerEfficient</code> until stats on this device
+have been recorded.
+</p>
 
 {% include output_helper.html %}
 
