@@ -27,8 +27,11 @@ that websites can use it without any experimental flag.</p>
 
 <script>
   log = ChromeSamples.log;
+</script>
 
+{% include js_snippet.html filename='decoding-info.js' %}
 
+<script>
   if (!('mediaCapabilities' in navigator)) {
     ChromeSamples.setStatus('Media Capabilities Decoding Info API is not available.\n' +
         'Please make sure the "Experimental Web Platform features" flag is enabled.');
@@ -38,4 +41,3 @@ that websites can use it without any experimental flag.</p>
   }
 </script>
 
-{% include js_snippet.html filename='decoding-info.js' %}
