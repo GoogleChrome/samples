@@ -16,6 +16,10 @@ function logNetworkInfo() {
   // Effective connection type determined using a combination of recently
   // observed rtt and downlink values: ' +
   log('effectiveType: ' + navigator.connection.effectiveType);
+  
+  // True if the user has requested a reduced data usage mode from the user
+  // agent.
+  log('     saveData: ' + navigator.connection.saveData);
 }
 
 logNetworkInfo();
