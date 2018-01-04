@@ -17,15 +17,11 @@ feature_id: 5414209298890752
   <code>start()</code> method on the <code>PresentationRequest</code> object.
 </p>
 
-{% capture initial_output_content %}
 <p>
-  <button id="createRequest">new PresentationRequest()</button>
+  <button id="start">presentationRequest.start()</button>
 </p>
 <p>
-  <button id="start" disabled>presentationRequest.start()</button>
-</p>
-<p>
-  <input id="fruit" type="text" placeholder="Send a fruit!" list="fruits" >
+  <input id="message" type="text" placeholder="Enter a message..." list="fruits" >
   <datalist id="fruits">
     <option value="grapes">
     <option value="watermelon">
@@ -41,122 +37,97 @@ feature_id: 5414209298890752
     <option value="cherries">
     <option value="strawberry">
   </datalist>
-  <button id="sendFruit" disabled>presentationConnection.send(message)</button>
+  <button id="sendMessage">presentationConnection.send(message)</button>
 </p>
 <p>
-  <input id="message" type="text" placeholder="Send a message!">
-  <button id="sendMessage" disabled>presentationConnection.send(message)</button>
+  <button id="close">presentationConnection.close()</button>
+  <button id="terminate">presentationConnection.terminate()</button>
 </p>
 <p>
-  <input id="presentationId" type="text" placeholder="presentationId">
-  <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
+  <input id="presentationId" type="text" placeholder="Enter a presentation ID...">
+  <button id="reconnect">presentationRequest.reconnect(presentationId)</button>
 </p>
-<p>
-  <button id="close" disabled>presentationConnection.close()</button>
-  <button id="terminate" disabled>presentationConnection.terminate()</button>
-</p>
-{% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
-{% capture js %}
-const presentationUrls = ['receiver/index.html'];
+<script>
+  log = ChromeSamples.log;
+</script>
 
-let presentationRequest;
+{% capture js %}
+const presentationRequest = new PresentationRequest(['receiver/index.html']);
+
 let presentationConnection;
 
-function updatePresentationAvailability(displaysAvailable) {
-  ChromeSamples.log('Presentation displays are ' +
-      (displaysAvailable ? 'available' : 'unavailable') + '.');
-}
-
-document.querySelector('#createRequest').addEventListener('click', () => {
-  presentationRequest = new PresentationRequest(presentationUrls);
-  document.querySelector('#createRequest').disabled = true;
-  document.querySelector('#start').disabled = false;
-  document.querySelector('#reconnect').disabled = false;
-  presentationRequest.getAvailability().then(availability => {
-    updatePresentationAvailability(availability.value);
-    availability.onchange = () => {
-      updatePresentationAvailability(availability.value);
-    };
-  }).catch(error => {
-    ChromeSamples.log('Presentation availability not supported, ' +
-                      error.name + ': ' + error.message);
-    updatePresentationAvailability(false);
+document.querySelector('#start').addEventListener('click', function() {
+  log('Starting presentation request...');
+  presentationRequest.start()
+  .then(connection => {
+    log('> Connected to ' + connection.url + ', id: ' + connection.id);
+  })
+  .catch(error => {
+    log('> ' + error.name + ': ' + error.message);
   });
 });
 
-function setConnection(connection) {
-  presentationConnection = connection;
-  document.querySelector('#close').disabled = false;
-  document.querySelector('#terminate').disabled = false;
-  document.querySelector('#sendFruit').disabled = false;
-  document.querySelector('#sendMessage').disabled = false;
-  presentationConnection.onclose = () => {
-    ChromeSamples.log('Connection closed.');
-    document.querySelector('#sendFruit').disabled = true;
-    document.querySelector('#sendMessage').disabled = true;
-  };
-  presentationConnection.onterminate = () => {
-    ChromeSamples.log('Connection terminated.');
-  };
-}
-
-document.querySelector('#start').addEventListener('click', () => {
-  presentationRequest.start().then(connection => {
-  ChromeSamples.log('Connected to presentation ' + connection.url + ', id: ' +
-      connection.id);
-    setConnection(connection);
-  }).catch(error => {
-    ChromeSamples.log(error.name + ': ' + error.message);
+presentationRequest.addEventListener('connectionavailable', function(event) {
+  presentationConnection = event.connection;
+  presentationConnection.addEventListener('close', function() {
+    log('> Connection closed.');
   });
+  presentationConnection.addEventListener('terminate', function() {
+    log('> Connection terminated.');
+  });
+  presentationConnection.addEventListener('message', function(event) {
+    log('> ' + event.data);
+  });
+});
+
+document.querySelector('#sendMessage').addEventListener('click', function() {
+  const message = document.querySelector('#message').value.trim();
+  const lang = document.body.lang || 'en-US';
+
+  log('Sending "' + message + '"...');
+  presentationConnection.send(JSON.stringify({message, lang}));
+});
+
+document.querySelector('#close').addEventListener('click', function() {
+  log('Closing connection...');
+  presentationConnection.close();
+});
+
+document.querySelector('#terminate').addEventListener('click', function() {
+  log('Terminating connection...');
+  presentationConnection.terminate();
 });
 
 document.querySelector('#reconnect').addEventListener('click', () => {
   const presentationId = document.querySelector('#presentationId').value.trim();
-  if (presentationId.length) {
-    presentationRequest.reconnect(presentationId).then(connection => {
-      ChromeSamples.log('Reconnected to presentation: ' + connection.id);
-      setConnection(connection);
-    }).catch(error => {
-      ChromeSamples.log('Presentation.reconnect() error, ' + error.name + ': ' +
-                        error.message);
-    });
-  }
+
+  presentationRequest.reconnect(presentationId)
+  .then(connection => {
+    log('Reconnected to ' + connection.id);
+  })
+  .catch(error => {
+    log('Presentation.reconnect() error, ' + error.name + ': ' + error.message);
+  });
 });
 
-document.querySelector('#sendFruit').addEventListener('click', () => {
-  if (presentationConnection && presentationConnection.state == 'connected') {
-    const message = document.querySelector('#fruit').value.trim();
-    ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
-    presentationConnection.send(JSON.stringify({message}));
-  }
-});
+/* Availability monitoring */
 
-document.querySelector('#sendMessage').addEventListener('click', () => {
-  if (presentationConnection && presentationConnection.state == 'connected') {
-    const message = document.querySelector('#message').value.trim();
-    ChromeSamples.log('Sending ' + message + ' to ' + presentationConnection.id);
-    const lang = document.body.lang || 'en-US';
-    presentationConnection.send(JSON.stringify({message, lang}));
-  }
-});
-
-document.querySelector('#close').addEventListener('click', () => {
-  if (presentationConnection) {
-    presentationConnection.close();
-    document.querySelector('#close').disabled = true;
-    document.querySelector('#terminate').disabled = true;
-  }
-});
-
-document.querySelector('#terminate').addEventListener('click', () => {
-  if (presentationConnection) {
-    presentationConnection.terminate();
-    document.querySelector('#close').disabled = true;
-    document.querySelector('#terminate').disabled = true;
-  }
+presentationRequest.getAvailability()
+.then(availability => {
+  log('Available presentation displays: ' + availability.value);
+  availability.addEventListener('change', function() {
+    log('> Available presentation displays: ' + availability.value);
+  });
+})
+.catch(error => {
+  log('Presentation availability not supported, ' + error.name + ': ' +
+      error.message);
 });
 
 {% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html title="Controller" js=js %}
+
+{% include js_snippet.html displayonly=true title="Receiver" filename='receiver/receiver.js' %}
+
