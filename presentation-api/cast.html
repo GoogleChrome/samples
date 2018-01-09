@@ -11,22 +11,16 @@ feature_id: 6676265876586496
   <a href="https://w3c.github.io/presentation-api/">Presentation API</a>,
   which gives the ability to access external presentation-type displays and use
   them for presenting web content. The <code>PresentationRequest</code> object
-  is associated with a request to initiate or reconnect to a presentation made
-  by a controlling browsing context and it takes in a presentation request URL
-  when constructed. A presentation can be started by calling the
+  is associated with a request to initiate to a presentation made by a
+  controlling browsing context and it takes in a presentation request URL when
+  constructed. A presentation can be started by calling the
   <code>start()</code> method on the <code>PresentationRequest</code> object.
 </p>
 
 <p>
   <button id="start">presentationRequest.start()</button>
-</p>
-<p>
   <button id="close">presentationConnection.close()</button>
   <button id="terminate">presentationConnection.terminate()</button>
-</p>
-<p>
-  <input id="presentationId" type="text" placeholder="Enter a presentation ID...">
-  <button id="reconnect">presentationRequest.reconnect(presentationId)</button>
 </p>
 {% include output_helper.html initial_output_content=initial_output_content %}
 
@@ -39,6 +33,9 @@ feature_id: 6676265876586496
 // Console and points to the following custom receiver:
 // https://googlechrome.github.io/samples/presentation-api/receiver/index.html
 const presentationRequest = new PresentationRequest('cast:EF1A139F');
+
+// Make this presentation the default one when using the "Cast" browser menu.
+navigator.presentation.defaultRequest = presentationRequest;
 
 let presentationConnection;
 
@@ -71,18 +68,6 @@ document.querySelector('#close').addEventListener('click', function() {
 document.querySelector('#terminate').addEventListener('click', function() {
   log('Terminating connection...');
   presentationConnection.terminate();
-});
-
-document.querySelector('#reconnect').addEventListener('click', () => {
-  const presentationId = document.querySelector('#presentationId').value.trim();
-
-  presentationRequest.reconnect(presentationId)
-  .then(connection => {
-    log('Reconnected to ' + connection.id);
-  })
-  .catch(error => {
-    log('Presentation.reconnect() error, ' + error.name + ': ' + error.message);
-  });
 });
 
 /* Availability monitoring */

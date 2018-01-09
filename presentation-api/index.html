@@ -56,6 +56,9 @@ feature_id: 5414209298890752
 {% capture js %}
 const presentationRequest = new PresentationRequest(['receiver/index.html']);
 
+// Make this presentation the default one when using the "Cast" browser menu.
+navigator.presentation.defaultRequest = presentationRequest;
+
 let presentationConnection;
 
 document.querySelector('#start').addEventListener('click', function() {

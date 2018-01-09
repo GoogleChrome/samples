@@ -21,10 +21,7 @@ function addConnection(connection) {
     const logString = 'Message ' + messageIdx + ' from connection #' +
         connection.connectionId + ': ' + data.message;
     addMessage(logString, data.lang);
-    const fruit = data.message.toLowerCase();
-    if (fruit in fruitEmoji) {
-      document.querySelector('#main').textContent = fruitEmoji[fruit];
-    }
+    maybeSetFruit(data.message);
     connection.send('Received message ' + messageIdx);
   });
 
@@ -59,4 +56,11 @@ function addMessage(content, language) {
   }
   listItem.textContent = content;
   document.querySelector("#message-list").appendChild(listItem);
+};
+
+function maybeSetFruit(message) {
+  const fruit = message.toLowerCase();
+  if (fruit in fruitEmoji) {
+    document.querySelector('#main').textContent = fruitEmoji[fruit];
+  }
 };
