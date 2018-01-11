@@ -7,5 +7,5 @@ See https://googlechrome.github.io/samples/app-install-banner/basic-banner/index
 #### Directions:
 
 * Install Chrome, or another browser that supports Service Workers and manifest
-* Visit the site over two separate days.
+* Visit the site over several minutes.
 * Or, more usefully, enable chrome://flags/#bypass-app-banner-engagement-checks
