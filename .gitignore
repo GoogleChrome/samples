@@ -11,3 +11,4 @@ dist/
 .vscode/
 variable-type-experiments/.git/
 variable-type-experiments/.gitignore/
+package-lock.json
