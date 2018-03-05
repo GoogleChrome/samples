@@ -1,0 +1,313 @@
+/*
+		Copyright 2018 Google Inc. All Rights Reserved.
+		Licensed under the Apache License, Version 2.0 
+		(the "License"); you may not use this file 
+		except in compliance with the License.
+		You may obtain a copy of the License at
+		http://www.apache.org/licenses/LICENSE-2.0
+		Unless required by applicable law or agreed to 
+		in writing, software distributed under the License
+		is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+		either express or implied.
+		See the License for the specific language governing
+		permissions and limitations under the License.
+		Licensed under the Apache License, 
+		Version 2.0 (the "License");
+*/
+@font-face { 
+	/* koe.berlin/variablefont/ */
+	font-family: 'Gingham'; 
+	src: url('../fonts/Gingham.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+@font-face { 
+	/* https://github.com/TypeNetwork/fb-Decovar */
+	font-family: 'Decovar'; 
+	src: url('../fonts/DecovarAlpha-VF.ttf'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+@font-face { 
+	/* https://github.com/TypeNetwork/Amstelvar */
+	font-family: 'AmstelvarAlpha'; 
+	src: url('../fonts/AmstelvarAlpha-VF.ttf'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+:root {
+	font-family: system-ui, san-serif;
+	line-height: 1.32;
+	padding: 0;
+	margin: 0;
+	/* https://webgradients.com/ */
+	background-image: radial-gradient(73% 147%, #EADFDF 59%, #ECE2DF 100%), radial-gradient(91% 146%, rgba(255,255,255,0.50) 47%, rgba(0,0,0,0.50) 100%);
+ 	background-blend-mode: screen;
+}
+
+h1, h2, h3, p {
+	margin: 1px 0;
+}
+
+p {
+	margin: 0.5em 0;
+}
+
+label {
+	font-size: 14px;
+	display: block;
+}
+
+input {
+	display: inline-block;
+}
+
+input[type=range] {
+	cursor: pointer;
+}
+
+input[type=number] {
+	max-width: 48px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding: 0;
+    height: 19px;
+		font-weight: bold;
+		box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.33);
+    border: 0;
+}
+
+input[type=range].slider {
+	-webkit-appearance: none;
+	background-color: transparent;
+	width: 100%;
+	margin: 5.15px 0;
+	z-index: 1;
+	position: relative;
+  }
+  input[type=range].slider:focus {
+	outline: none;
+  }
+
+
+/* This is the track */
+  input[type=range].slider::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 12px;
+	cursor: pointer;
+	box-shadow: 1.8px 1.8px 2px rgba(175, 64, 64, 0.22), 0px 0px 1.8px rgba(189, 75, 75, 0.22);
+	background: #dc6262;
+	border-radius: 25px;
+	border: 3.2px solid #ef9090;
+  }
+
+/* this is the thumb */
+  input[type=range].slider::-webkit-slider-thumb {
+	box-shadow: inset 0px 1px 3px #af4040, 0px 0px 1.1px #bd4b4b;
+	border: 1px solid #e20000;
+	height: 18px;
+	width: 18px;
+	border-radius: 50px;
+	background: radial-gradient(ellipse at center, #ff0202 0%, #EF9090 30%, #ffffff 40%,#ffffff 100%);
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -7.05px;
+  }
+  input[type=range].slider:focus::-webkit-slider-runnable-track {
+	background: #f1c2c2;
+  }
+
+  input[type=range].slider::-moz-range-track {
+	width: 100%;
+	height: 12px;
+	cursor: pointer;
+	box-shadow: 1.8px 1.8px 2px rgba(175, 64, 64, 0.22), 0px 0px 1.8px rgba(189, 75, 75, 0.22);
+	background: #dc6262;
+	border-radius: 25px;
+	border: 3.2px solid #ef9090;
+  }
+  input[type=range].slider::-moz-range-thumb {
+	box-shadow: inset 0px 1px 3px #af4040, 0px 0px 1.1px #bd4b4b;
+	border: 1px solid #e20000;
+	height: 18px;
+	width: 18px;
+	border-radius: 50px;
+	background: radial-gradient(ellipse at center, #ff0202 0%, #EF9090 30%, #ffffff 40%,#ffffff 100%);
+	cursor: pointer;
+  }
+  input[type=range].slider::-ms-track {
+	width: 100%;
+	height: 12px;
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+  }
+  input[type=range].slider::-ms-fill-lower {
+	background: #a42525;
+	border: 3.9px solid #ef9090;
+	border-radius: 50px;
+	box-shadow: 1.8px 1.8px 2px rgba(175, 64, 64, 0.22), 0px 0px 1.8px rgba(189, 75, 75, 0.22);
+  }
+  input[type=range].slider::-ms-fill-upper {
+	background: #dc6262;
+	border: 3.9px solid #ef9090;
+	border-radius: 50px;
+	box-shadow: 1.8px 1.8px 2px rgba(175, 64, 64, 0.22), 0px 0px 1.8px rgba(189, 75, 75, 0.22);
+  }
+  input[type=range].slider::-ms-thumb {
+	box-shadow: inset 0px 1px 3px #af4040, 0px 0px 1.1px #bd4b4b;
+	border: 1px solid #e20000;
+	height: 18px;
+	width: 18px;
+	border-radius: 50px;
+	background: radial-gradient(ellipse at center, #ff0202 0%, #EF9090 30%, #ffffff 40%,#ffffff 100%);
+	cursor: pointer;
+  }
+  input[type=range].slider:focus::-ms-fill-lower {
+	background: #dc6262;
+  }
+  input[type=range].slider:focus::-ms-fill-upper {
+	background: #f1c2c2;
+  }
+  
+
+.form-row {
+	position: relative;
+	margin: 8px 16px;
+}
+
+.clickable {
+	cursor: pointer;
+	user-select: none;
+	margin-bottom: 20px;
+	border-radius: 3px;
+	background-color: #fff;
+	padding: 8px 16px;
+}
+
+.clickable p {
+	font-size: 1.5em;
+	position: relative;
+}
+
+.clickable p:before, .clickable p:after  {
+	width: auto;
+	position: relative;
+	font-size: 4rem;
+	height: 10px;
+	top: 15px;
+	line-height: 0;
+}
+.clickable p:before {
+	content: '\201C';
+}
+
+.clickable p:after {
+	content:'\201D';
+}
+
+
+#grid {
+	display: grid;
+	grid-template-columns: 214px 3fr;
+	grid-column-gap: 10px;
+	grid-template-rows: 1fr;
+	height: 100%;
+	max-width: 960px;
+	margin: auto;
+}
+
+#rightcol {
+	grid-column: 1;
+	grid-row: 1;
+}
+
+#formcontainer {
+	font-family: "Avenir Next";
+	position: relative;
+	z-index: 1;
+	color: #4A4A4A;
+	font-weight: 300;	
+	background:rgba(255, 255, 255, 0.51);
+	padding-bottom: 1px;
+}
+
+#formcontainer h2 {
+	font-weight: 600;
+	font-size: 14px;
+
+	text-transform: uppercase;
+	color: #860000;
+	background: radial-gradient(100% 100%,#a777778f -3%,#ece2df80 100%);
+	padding: 12px;
+	overflow: auto;
+
+}
+
+#textcontainer {
+	font-size: 1.5em;
+	grid-column: 2;
+	grid-row: 1;
+	overflow: auto;
+}
+
+#font-gingham {
+	font-family: 'Gingham';
+	--wdth: 10;
+	--wght: 100;
+	font-variation-settings: 'wdth' var(--wdth), 'wght' var(--wght);
+}
+
+#font-decorvar {
+	font-family: 'Decovar';
+	--BLDA: 0;
+	--BLDB: 0;
+	--WMX2: 0;
+	--SKLA: 0;
+	--SKLB: 0;
+	--SKLD: 0;
+	--TRMA: 0;
+	--TRMB: 0;
+	--TRMC: 0;
+	--TRMD: 0;
+	--TRME: 0;
+	--TRMF: 0;
+	--TRMG: 0;
+	--TRMK: 0;
+	--TRML: 0;
+	
+	font-variation-settings: 'BLDA' var(--BLDB), 'BLDB' var(--BLDA), 'WMX2' var(--WMX2), 'SKLA' var(--SKLA), 'SKLB' var(--SKLB), 'SKLD' var(--SKLD), 'TRMA' var(--TRMA), 'TRMB' var(--TRMB), 'TRMC' var(--TRMC), 'TRMD' var(--TRMD), 'TRME' var(--TRME), 'TRMF' var(--TRMF), 'TRMG' var(--TRMG), 'TRMK' var(--TRMK), 'TRML' var(--TRML);
+}
+
+#font-amstelvar {
+	font-family: 'AmstelvarAlpha';
+	--wdth: 500;
+	--wght: 100;
+	--opsz: 19;
+	--GRAD: 88;
+	font-variation-settings: 'wdth' var(--wdth), 'wght' var(--wght), 'opsz' var(--opsz), 'GRAD' var(--GRAD);
+}
+
+.unselected {
+	box-shadow: #670000 0 0 0;
+	border: 1px solid #fff;
+	opacity: 0.5;
+}
+
+.selected {
+	box-shadow: #670000 1px 1px 9px; 
+	border: 1px solid #670000;
+	opacity: 1;
+}
+
+.disabled {
+	display: none;
+}
+.enabled {
+	display: block;
+}
