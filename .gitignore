@@ -9,3 +9,5 @@ node_modules
 *.pyc
 dist/
 .vscode/
+variable-type-experiments/.git/
+variable-type-experiments/.gitignore/
