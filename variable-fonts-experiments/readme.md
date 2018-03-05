@@ -1,6 +1,11 @@
 # Project Title
 
-This is a collection of experiements inspired by [axis-praxis.org](https://www.axis-praxis.org/specimens/__DEFAULT__) and [typetools.typenetwork.com/](https://typetools.typenetwork.com/typespec/). The goal is to demonstrate the flexability of Variable Fonts and the potential they hold for designers and developers. 
+You can read the full article at  
+[Web Fundamentals](https://developers.google.com/web/fundamentals/design-and-ux/typography/variable-fonts/). 
+
+
+This is a collection of experiements inspired by [axis-praxis.org](https://www.axis-praxis.org/specimens/__DEFAULT__) and [typetools.typenetwork.com/](https://typetools.typenetwork.com/typespec/). The goal is to demonstrate the flexability of Variable Fonts and the potential they hold for designers and developers.
+
 
 ## Getting Started
 
