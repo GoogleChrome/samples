@@ -6,6 +6,8 @@ This is a collection of experiements inspired by [axis-praxis.org](https://www.a
 
 These are standalone HTML files and can be run in a browser. 
 
+Working Demo be seen at [https://variable-font-experiments.glitch.me/](variable-font-experiments.glitch.me/)
+
 ## Authors
 
 * **Mustafa Kurtuldu** - *Initial work*
