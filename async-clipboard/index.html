@@ -1,0 +1,23 @@
+---
+feature_name: Asynchronous Clipboard API
+chrome_version: 66
+feature_id: 5861289330999296
+local_css_files: ['demo.css']
+additional_head_content: <meta name="optional" value="optional">
+---
+
+<h3>Background</h3>
+<p>This is a demonstration of the text portions of the <a href="https://w3c.github.io/clipboard-apis/">Asynchronous Clipboard API</a>, shipping in Chrome 66.</p>
+
+{% capture initial_output_content %}
+<textarea id="out" placeholder="Text to copy"></textarea>
+<button id="copy">Copy</button>
+<button id="paste">Paste</button>
+<br>
+Permissions:
+<button data-permission="clipboard-read">Read</button>
+<button data-permission="clipboard-write">Write</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
