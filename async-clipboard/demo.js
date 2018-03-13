@@ -1,6 +1,6 @@
-let copy = document.querySelector('#copy');
-let paste = document.querySelector('#paste');
-let out = document.querySelector('#out');
+const copy = document.querySelector('#copy');
+const paste = document.querySelector('#paste');
+const out = document.querySelector('#out');
 
 /** Write contents of the textarea to the clipboard when clicking "Copy" */
 copy.onclick = () => {
