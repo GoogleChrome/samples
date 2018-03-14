@@ -35,7 +35,7 @@ document.addEventListener('paste', e => {
 
 /** Set up buttons to request permissions and display status: */
 document.querySelectorAll('data-permission').forEach(btn => {
-  let permission = btn.getAttribute('data-permission');
+  const permission = btn.getAttribute('data-permission');
   navigator.permissions.query({name: permission})
     .then(status => {
       status.onchange = () => {
