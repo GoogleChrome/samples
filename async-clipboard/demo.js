@@ -1,5 +1,5 @@
 /** Write contents of the textarea to the clipboard when clicking "Copy" */
-document.querySelector('#copy').onclick = () => {
+document.querySelector('#copy').addEventListener('click', () => {
   navigator.clipboard.writeText(document.querySelector('#out').value)
     .then(() => {
       ChromeSamples.log('Text copied.');
@@ -7,10 +7,10 @@ document.querySelector('#copy').onclick = () => {
     .catch(() => {
       ChromeSamples.log('Failed to copy text.');
     });
-};
+});
 
 /** Read from clipboard when clicking the Paste button */
-document.querySelector('#paste').onclick = () => {
+document.querySelector('#paste').addEventListener('click', () => {
   navigator.clipboard.readText()
     .then(text => {
       document.querySelector('#out').value = text;
@@ -19,7 +19,7 @@ document.querySelector('#paste').onclick = () => {
     .catch(() => {
       ChromeSamples.log('Failed to read from clipboard.');
     });
-};
+});
 
 /** Watch for pastes */
 document.addEventListener('paste', e => {
@@ -43,7 +43,7 @@ document.querySelectorAll('[data-permission]').forEach(btn => {
       btn.setAttribute('data-state', 'unavailable');
       btn.title = 'Permissions API unavailable.';
     });
-  btn.onclick = () => {
+  btn.addEventListener('click', () => {
     Promise.resolve().then(() => {
       return navigator.permissions.request({name: permission});
     })
@@ -53,5 +53,5 @@ document.querySelectorAll('[data-permission]').forEach(btn => {
       .catch(err => {
         ChromeSamples.log('Permission request failed: ' + err);
       });
-  };
+  });
 });
