@@ -1,21 +1,36 @@
 textarea {
   display: block;
+  border: 1px solid #555;
+  padding: 5px;
+  width: 16em;
+  height: 3em;
+  margin: 0 0 5px;
+  font-size: 100%;
 }
-
-button[data-permission] {
-  padding: 5px 5px 5px 40px;
-  background: #777;
-  color: #fff;
-  border: 2px solid #333;
+h4 {
+  margin: 1em 0 0;
+}
+button {
+  padding: 5px 10px;
+  background: #666;
+  border: 1px solid #333;
   border-radius: 5px;
+  font-size: 100%;
+  color: #fff;
+  cursor: pointer;
+}
+button[data-permission] {
+  position: relative;
+  padding-left: 30px;
   text-align: left;
 }
 button[data-permission]:before {
+  content: '...';
   position: absolute;
-  left: 10px;
+  left: 5px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 130%;
+  font-size: 120%;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
 }
 
@@ -31,6 +46,16 @@ button[data-permission][data-state="denied"] {
   background: #945;
   border-color: #501;
 }
-button[data-permission][data-state="denied"]:before {
+button[data-permission][data-state="denied"]:before,
+button[data-permission][disabled]:before {
   content: '\1f6ab';
+}
+
+button[data-permission][data-state="unavailable"] {
+  background: #886a33;
+  border-color: #493b21;
+  opacity: .7;
+}
+button[data-permission][data-state="unavailable"]:before {
+  content: '\1f47b';
 }
