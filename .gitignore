@@ -9,4 +9,3 @@ node_modules
 *.pyc
 dist/
 .vscode/
-package-lock.json
