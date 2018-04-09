@@ -1,0 +1,174 @@
+<!doctype html>
+<!--
+    Copyright 2018 Google Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 
+    (the "License"); you may not use this file 
+    except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to 
+    in writing, software distributed under the License
+    is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    either express or implied.
+    See the License for the specific language governing
+    permissions and limitations under the License.
+    Licensed under the Apache License, 
+    Version 2.0 (the "License");
+-->
+
+<html>
+<head>
+    <title>Variable font experiment</title>
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+</head>
+
+<body>
+    <div id="grid">  
+
+        <nav></nav>
+        <header></header>
+        <div id="rightcol">
+        <div id="formcontainer">
+            <h2>Font Variation Settings</h2>
+            <div class="form-row font-ging enabled">
+                <label for="slider">Font Weight:</label>
+                <input type="range" class="slider " id="wght" min="10" max="700" step="1" value="100">
+                <input type="number" min="0" class="textbox" value="100">
+            </div>
+            <div class="form-row font-ging enabled">
+                <label for="slider-width">Font Width:</label>
+                <input type="range" class="slider " id="wdth" min="10" max="100" step="1" value="0">
+                <input type="number" min="0" class="textbox" value="0">
+            </div>
+
+
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-WMX2" class="">Font Weight:</label>
+                <input type="range" class="slider " id="WMX2" min="0" max="2000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-width" class="">Font Inline:</label>
+                <input type="range" class="slider " id="BLDA" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-width" class="">Font Worm:</label>
+                <input type="range" class="slider " id="BLDB" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-SKLA" class="">Inline Skeleton:</label>
+                <input type="range" class="slider " id="SKLA" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-SKLB" class="">Worm Skeleton:</label>
+                <input type="range" class="slider " id="SKLB" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-SKLD" class="">Stripes:</label>
+                <input type="range" class="slider " id="SKLD" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMA" class="">Rounded:</label>
+                <input type="range" class="slider " id="TRMA" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMB" class="">Flared:</label>
+                <input type="range" class="slider " id="TRMB" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMC" class="">Rounded Slab:</label>
+                <input type="range" class="slider " id="TRMC" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMD" class="">Sheared:</label>
+                <input type="range" class="slider " id="TRMD" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRME" class="">Bifurcated:</label>
+                <input type="range" class="slider " id="TRME" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMF" class="">Open Inline Terminal:</label>
+                <input type="range" class="slider " id="TRMF" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMG" class="">Slab:</label>
+                <input type="range" class="slider " id="TRMG" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRMK" class="">Inline Terminal:</label>
+                <input type="range" class="slider " id="TRMK" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+            <div class="form-row font-decorvar disabled">
+                <label for="slider-TRML" class="">Worm Terminal:</label>
+                <input type="range" class="slider " id="TRML" min="0" max="1000" step="1" value="0">
+                <input type="number" min="0" class="textbox " value="0">
+            </div>
+
+            <div class="form-row font-amstel disabled">
+                    <label for="slider">Font Weight:</label>
+                    <input type="range" class="slider " id="wght" min="10" max="200" step="1" value="100">
+                    <input type="number" min="0" class="textbox" value="100">
+                </div>
+                <div class="form-row font-amstel disabled">
+                    <label for="slider-width">Font Width:</label>
+                    <input type="range" class="slider " id="wdth" min="10" max="500" step="1" value="500">
+                    <input type="number" min="0" class="textbox" value="500">
+                </div>
+                <div class="form-row font-amstel disabled">
+                        <label for="slider-width">Optical Size:</label>
+                        <input type="range" class="slider " id="opsz" min="10" max="72" step="1" value="18">
+                        <input type="number" min="0" class="textbox" value="18">
+                    </div>
+                    <div class="form-row font-amstel disabled">
+                        <label for="slider-width">Grade:</label>
+                        <input type="range" class="slider " id="GRAD" min="88" max="160" step="1" value="88">
+                        <input type="number" min="0" class="textbox" value="88">
+                    </div>
+
+        </div>
+    </div>
+
+        <div id="textcontainer">
+            <div id="font-gingham" class="clickable selected">
+                <h1>Gingham</h1>
+                <h3><a href="http://koe.berlin/variablefont/">Gingham</a> is an experimental variable font by <a href="http://christoph.koe.berlin/" target="_blank">Christoph Koeberlin</a>.</h3>
+                <p>The quick brown fox jumps over the lazy dog.</p>
+            </div>
+          
+            <div id="font-decorvar" class="clickable unselected">
+                <h1>Decorvar</h1>
+                <h3>A multistyle decorative variable font by <a href="https://www.typenetwork.com/brochure/decovar-a-decorative-variable-font-by-david-berlow/#?skelID=SA&skel=1&termID=TA&term=1" target="_blank">David Berlow</a>.
+                    </h3>
+                <p>The quick brown fox jumps over the lazy dog.</p>
+            </div>
+
+            <div id="font-amstelvar" class="clickable unselected">
+                    <h1>Amstelvar Alpha</h1>
+                    <h3>AmstelvarAlpha-Variations.ttf is an <a href="https://github.com/TypeNetwork/Amstelvar/" target="_blank">exploratory OpenType 1.8 font</a> made with a combination of Font Bureau's python font tools and the fontmake tool developed by Google.
+                        </h3>
+                    <p>The quick brown fox jumps over the lazy dog.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
