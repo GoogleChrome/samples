@@ -1,0 +1,44 @@
+<!doctype html>
+<!--
+	Copyright 2018 Google Inc. All Rights Reserved.
+	Licensed under the Apache License, Version 2.0 
+	(the "License"); you may not use this file 
+	except in compliance with the License.
+	You may obtain a copy of the License at
+	http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to 
+	in writing, software distributed under the License
+	is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+	either express or implied.
+	See the License for the specific language governing
+	permissions and limitations under the License.
+	Licensed under the Apache License, 
+	Version 2.0 (the "License");
+-->
+<html>
+<head>
+	<title>Simple Slider Custom Property Variable Font</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+
+<div class="formcontainer"> 
+<label for="slider">Font Weight:</label>
+<input type="range" id="slider" min="10" max="1000" step="1" value="3">
+<input type="text" id="textbox" value="10">
+</div>
+
+<div class="formcontainer"> 
+<label for="slider-width">Font Width:</label>
+<input type="range" id="slider-width" min="10" max="1000" step="1" value="3">
+<input type="text" id="textbox-width" value="10">
+</div>
+
+<p id="theP" style="font-variation-settings: 'wght' 1100, 'wdth' 200;">
+	This is some text
+</p>
+<script src="script.js"></script>
+</body>
+</html>
