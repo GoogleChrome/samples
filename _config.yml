@@ -1,7 +1,7 @@
 encoding: utf-8
 exclude: [vendor]
-gh_pages_url_prefix: https://googlechrome.github.io/samples
-gh_url_prefix: https://github.com/googlechrome/samples/blob/gh-pages
+gh_pages_url_prefix: https://mfoltzgoogle.github.io/samples
+gh_url_prefix: https://github.com/mfoltzgoogle/samples/blob/gh-pages
 gems:
   - jekyll-sitemap
 defaults:
