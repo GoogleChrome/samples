@@ -1,16 +1,6 @@
 let connectionIdx = 0;
 let messageIdx = 0;
 
-if (navigator.presentation.receiver) {
-  navigator.presentation.receiver.connectionList
-  .then(list => {
-    list.connections.map(connection => addConnection(connection));
-    list.addEventListener('connectionavailable', function(event) {
-      addConnection(event.connection);
-    });
-  });
-}
-
 function addConnection(connection) {
   connection.connectionId = ++connectionIdx;
   addMessage('New connection #' + connectionIdx);
@@ -64,3 +54,14 @@ function maybeSetFruit(message) {
     document.querySelector('#main').textContent = fruitEmoji[fruit];
   }
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (navigator.presentation.receiver) {
+    navigator.presentation.receiver.connectionList.then(list => {
+      list.connections.map(connection => addConnection(connection));
+      list.addEventListener('connectionavailable', function(event) {
+        addConnection(event.connection);
+      });
+    });
+  }
+});
