@@ -2,7 +2,7 @@
   "name": "google-chrome-samples",
   "version": "0.0.1",
   "license": "Apache-2.0",
-  "repository": "https://github.com/mfoltzgoogle/samples",
+  "repository": "https://github.com/GoogleChrome/samples",
   "devDependencies": {
     "eslint": "^1.10.3",
     "eslint-config-google": "^0.3.0"
