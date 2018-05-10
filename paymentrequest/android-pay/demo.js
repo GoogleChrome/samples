@@ -7,7 +7,7 @@
  */
 function initPaymentRequest() {
   let supportedInstruments = [{
-    supportedMethods: ['https://android.com/pay'],
+    supportedMethods: 'https://android.com/pay',
     data: {
       merchantName: 'Android Pay Demo',
       // Place your own Android Pay merchant ID here. The merchant ID is tied to
@@ -102,11 +102,9 @@ function instrumentToJsonString(instrument) {
 const payButton = document.getElementById('buyButton');
 payButton.setAttribute('style', 'display: none;');
 if (window.PaymentRequest) {
-  let request = initPaymentRequest();
   payButton.setAttribute('style', 'display: inline;');
   payButton.addEventListener('click', function() {
-    onBuyClicked(request);
-    request = initPaymentRequest();
+    onBuyClicked(initPaymentRequest());
   });
 } else {
   ChromeSamples.setStatus('This browser does not support web payments');
