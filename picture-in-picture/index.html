@@ -1,0 +1,42 @@
+---
+feature_name: Picture-in-Picture
+chrome_version: 68
+feature_id: 5729206566649856
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://wicg.github.io/picture-in-picture/">Picture-in-Picture
+API</a> allows websites to create a floating video window that is always on top
+of other windows so that users may continue consuming media while they interact
+with other sites or applications on their device.
+</p>
+<p>
+Note: In Chrome 68, it is <a
+href="http://bit.ly/HdcpPolicyCheckOriginTrials">available for trials</a> so
+that websites can use it without any experimental flag.
+</p>
+
+<p>
+Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org </a>.
+</p>
+
+<style>
+  video { background: #1e2327; border-radius: 4px; width: 100%; } 
+</style>
+
+<video id="video" controls playsinline src="https://storage.googleapis.com/media-session/sintel/trailer.mp4"></video>
+<button id="togglePipButton">Toggle Picture-in-Picture</button>
+
+{% include output_helper.html %}
+
+<script>
+  if (!('pictureInPictureEnabled' in document)) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is not available.');
+  }
+
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='index.js' %}
