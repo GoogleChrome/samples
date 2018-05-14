@@ -14,7 +14,7 @@ with other sites or applications on their device.
 </p>
 <p>
 Note: In Chrome 68, it is <a
-href="http://bit.ly/HdcpPolicyCheckOriginTrials">available for trials</a> so
+href="http://bit.ly/PipOriginTrials">available for trials</a> so
 that websites can use it without any experimental flag.
 </p>
 
@@ -24,6 +24,7 @@ Credits: Media files are © copyright Blender Foundation | <a href="http://www.b
 
 <style>
   video { background: #1e2327; border-radius: 4px; width: 100%; } 
+  button { margin: 4px 0; }
 </style>
 
 <video id="video" controls playsinline src="https://storage.googleapis.com/media-session/sintel/trailer.mp4"></video>
@@ -34,6 +35,8 @@ Credits: Media files are © copyright Blender Foundation | <a href="http://www.b
 <script>
   if (!('pictureInPictureEnabled' in document)) {
     ChromeSamples.setStatus('The Picture-in-Picture API is not available.');
+  } else if (!document.pictureInPictureEnabled) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is disabled by system.');
   }
 
   log = ChromeSamples.log;
