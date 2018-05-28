@@ -30,17 +30,20 @@ function onPipWindowResize(event) {
   log(`> Window size is ${pipWindow.width}x${pipWindow.height}`);
 }
 
+/* Feature support */
 
-// Hide button if Picture-in-Picture is not supported.
-togglePipButton.hidden = !('pictureInPictureEnabled' in document);
-
-// Set button ability if Picture-in-Picture can be used.
-setPipButton();
-
-video.addEventListener('loadedmetadata', setPipButton);
-video.addEventListener('emptied', setPipButton);
+if ('pictureInPictureEnabled' in document) {
+  // Set button ability depending on whether Picture-in-Picture can be used.
+  setPipButton();
+  video.addEventListener('loadedmetadata', setPipButton);
+  video.addEventListener('emptied', setPipButton);
+} else {
+  // Hide button if Picture-in-Picture is not supported.
+  togglePipButton.hidden = true;
+}
 
 function setPipButton() {
-  togglePipButton.disabled = true ? (video.readyState === 0) :
-      !document.pictureInPictureEnabled || video.disablePictureInPicture;
+  togglePipButton.disabled = (video.readyState === 0) ||
+                             !document.pictureInPictureEnabled ||
+                             video.disablePictureInPicture;
 }
