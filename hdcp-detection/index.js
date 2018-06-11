@@ -1,4 +1,5 @@
 function onButtonClick() {
+  const minHdcpVersion = document.querySelector('#minHdcpVersion').value;
   const config = [{
     videoCapabilities: [{
       contentType: 'video/webm; codecs="vp09.00.10.08"',
@@ -12,19 +13,18 @@ function onButtonClick() {
   .then(mediaKeys => {
     log('Getting HDCP status...');
     if (!('getStatusForPolicy' in mediaKeys)) {
-      return Promise.reject('HDCP Policy Check API is not available');
+      return Promise.reject('HDCP Policy Check API is not available.');
     }
 
     /* This is where the real magic happens... */
-    const minHdcpVersion = document.querySelector('#minHdcpVersion').value;
     return mediaKeys.getStatusForPolicy({ minHdcpVersion });
   })
   .then(status => {
-    if (status === 'usable') {
-      log('> HDCP is available at the specified version.');
-    } else {
-      log('> HDCP is NOT available at the specified version: ' + status);
+    if (status !== 'usable') {
+      return Promise.reject(status);
     }
+
+    log('> HDCP is available for ' + minHdcpVersion);
   })
   .catch(error => {
     log('Argh! ' + error);
