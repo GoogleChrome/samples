@@ -1,56 +1,4 @@
 /**
- * Builds PaymentRequest for credit cards & Android Pay, but does not show any UI yet.
- *
- * @return {PaymentRequest} The PaymentRequest oject.
- */
-function initPaymentRequest() {
-  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-      'visa', 'mir'];
-  let types = ['debit', 'credit', 'prepaid'];
-  let supportedInstruments = [{
-    supportedMethods: 'https://android.com/pay',
-    data: {
-      merchantName: 'Android Pay Demo',
-      // Place your own Android Pay merchant ID here. The merchant ID is tied to
-      // the origin of the website.
-      merchantId: '00184145120947117657',
-      // If you do not yet have a merchant ID, uncomment the following line.
-      // environment: 'TEST',
-      allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
-      paymentMethodTokenizationParameters: {
-        tokenizationType: 'GATEWAY_TOKEN',
-        parameters: {
-          'gateway': 'stripe',
-          // Place your own Stripe publishable key here. Use a matching Stripe
-          // secret key on the server to initiate a transaction.
-          'stripe:publishableKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo',
-          'stripe:version': '2016-07-06',
-        },
-      },
-    },
-  }, {
-    supportedMethods: 'basic-card',
-    data: {supportedNetworks: networks, supportedTypes: types},
-  }];
-
-  let details = {
-    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
-    displayItems: [
-      {
-        label: 'Original donation amount',
-        amount: {currency: 'USD', value: '65.00'},
-      },
-      {
-        label: 'Friends and family discount',
-        amount: {currency: 'USD', value: '-10.00'},
-      },
-    ],
-  };
-
-  return new PaymentRequest(supportedInstruments, details);
-}
-
-/**
  * The callback for successful creation of PaymentRequest.
  *
  * @callback successCallback
@@ -79,27 +27,72 @@ function initPaymentRequest() {
  * @param {failureCallback} onFailure The callback to invoke when this function
  * is finished with failure.
  */
-function testCanPaymentRequest(onSuccess, onFailure) {
+function initPaymentRequest(onSuccess, onFailure) {
   if (!window.PaymentRequest) {
     onFailure('This browser does not support web payments.');
     return;
   }
 
-  let request = initPaymentRequest();
+  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
+      'visa', 'mir'];
+  let types = ['debit', 'credit', 'prepaid'];
+  let supportedInstruments = [{
+    supportedMethods: ['https://android.com/pay'],
+    data: {
+      merchantName: 'Android Pay Demo',
+      // Place your own Android Pay merchant ID here. The merchant ID is tied to
+      // the origin of the website.
+      merchantId: '00184145120947117657',
+      // If you do not yet have a merchant ID, uncomment the following line.
+      // environment: 'TEST',
+      allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
+      paymentMethodTokenizationParameters: {
+        tokenizationType: 'GATEWAY_TOKEN',
+        parameters: {
+          'gateway': 'stripe',
+          // Place your own Stripe publishable key here. Use a matching Stripe
+          // secret key on the server to initiate a transaction.
+          'stripe:publishableKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo',
+          'stripe:version': '2016-07-06',
+        },
+      },
+    },
+  }, {
+    supportedMethods: networks,
+  }, {
+    supportedMethods: ['basic-card'],
+    data: {supportedNetworks: networks, supportedTypes: types},
+  }];
+
+  let details = {
+    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    displayItems: [
+      {
+        label: 'Original donation amount',
+        amount: {currency: 'USD', value: '65.00'},
+      },
+      {
+        label: 'Friends and family discount',
+        amount: {currency: 'USD', value: '-10.00'},
+      },
+    ],
+  };
+
+  let request = new PaymentRequest(supportedInstruments, details);
 
   if (request.canMakePayment) {
     request.canMakePayment().then(function(result) {
       if (result) {
-        onSuccess();
+        onSuccess(request);
       } else {
         onFailure('Cannot make payment');
       }
     }).catch(function(err) {
-      onSuccess(err);
+      onSuccess(request, err);
     });
   } else {
     onSuccess(
-        'This browser does not support "can make payment" query');
+        request, 'This browser does not support "can make payment" query');
   }
 }
 
@@ -162,11 +155,13 @@ function instrumentToJsonString(instrument) {
  * @param {HTMLElement} payButton The "Buy" button to initialize.
  */
 function initBuyButton(payButton) {
-  testCanPaymentRequest(function(optionalWarning) {
+  initPaymentRequest(function(request, optionalWarning) {
     payButton.setAttribute('style', 'display: inline;');
     ChromeSamples.setStatus(optionalWarning ? optionalWarning : '');
     payButton.addEventListener('click', function handleClick() {
-      onBuyClicked(initPaymentRequest());
+      payButton.removeEventListener('click', handleClick);
+      onBuyClicked(request);
+      initBuyButton(payButton);
     });
   }, function(error) {
     payButton.setAttribute('style', 'display: none;');

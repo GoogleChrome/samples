@@ -9,7 +9,9 @@ function initPaymentRequest() {
       'visa', 'mir'];
   let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{
-    supportedMethods: 'basic-card',
+    supportedMethods: networks,
+  }, {
+    supportedMethods: ['basic-card'],
     data: {supportedNetworks: networks, supportedTypes: types},
   }];
 
@@ -135,9 +137,11 @@ function addressToDictionary(address) {
 const payButton = document.getElementById('buyButton');
 payButton.setAttribute('style', 'display: none;');
 if (window.PaymentRequest) {
+  let request = initPaymentRequest();
   payButton.setAttribute('style', 'display: inline;');
   payButton.addEventListener('click', function() {
-    onBuyClicked(initPaymentRequest());
+    onBuyClicked(request);
+    request = initPaymentRequest();
   });
 } else {
   ChromeSamples.setStatus('This browser does not support web payments');
