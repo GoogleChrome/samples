@@ -7,7 +7,7 @@
  */
 function initPaymentRequest() {
   let supportedInstruments = [{
-    supportedMethods: ['https://android.com/pay'],
+    supportedMethods: 'https://android.com/pay',
     data: {
       merchantName: 'Android Pay Demo',
       // Place your own Android Pay merchant ID here. The merchant ID is tied to

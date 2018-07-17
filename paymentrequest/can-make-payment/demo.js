@@ -37,7 +37,7 @@ function initPaymentRequest(onSuccess, onFailure) {
       'visa', 'mir'];
   let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{
-    supportedMethods: ['https://android.com/pay'],
+    supportedMethods: 'https://android.com/pay',
     data: {
       merchantName: 'Android Pay Demo',
       // Place your own Android Pay merchant ID here. The merchant ID is tied to
@@ -58,9 +58,7 @@ function initPaymentRequest(onSuccess, onFailure) {
       },
     },
   }, {
-    supportedMethods: networks,
-  }, {
-    supportedMethods: ['basic-card'],
+    supportedMethods: 'basic-card',
     data: {supportedNetworks: networks, supportedTypes: types},
   }];
 
