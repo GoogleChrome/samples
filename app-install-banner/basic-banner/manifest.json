@@ -33,6 +33,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/index.html",
   "display": "standalone"
 }
