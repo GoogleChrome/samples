@@ -18,16 +18,16 @@ togglePipButton.addEventListener('click', async function(event) {
 });
 
 video.addEventListener('enterpictureinpicture', function(event) {
-  log('> Video entered Picture-in-Picture.');
+  log('> Video entered Picture-in-Picture');
 });
 
 video.addEventListener('leavepictureinpicture', function(event) {
-  log('> Video left Picture-in-Picture.');
+  log('> Video left Picture-in-Picture');
 });
 
 function onPipWindowResize(event) {
   const pipWindow = event.target;
-  log(`> Window size is ${pipWindow.width}x${pipWindow.height}`);
+  log(`> Window size changed to ${pipWindow.width}x${pipWindow.height}`);
 }
 
 /* Feature support */
