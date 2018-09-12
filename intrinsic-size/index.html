@@ -19,8 +19,6 @@ on images would return the value specified in this attribute. On video elements,
 <a href="https://html.spec.whatwg.org/multipage/media.html#dom-video-videowidth">videoWidth/videoHeight</a> on the video would return the intrinsicsize values.
 </p>
 
-{% include output_helper.html %}
-
 <h3>Case 1</h3>
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
@@ -71,6 +69,7 @@ function toggleDemo(button) {
 
 <style>
 .demoContent {
+    padding-top: 20px;
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
