@@ -61,6 +61,7 @@ if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
 }
 
 function toggleDemo(button) {
+  button.classList.toggle("active");
   var demo = button.nextElementSibling;
   if (demo.style.display === "block") {
     demo.style.display = "none";
@@ -86,4 +87,7 @@ function toggleDemo(button) {
     outline: none;
     font-size: 15px;
  }
+.active, .demoButton:hover {
+    background-color: #555;
+}
 </style>
