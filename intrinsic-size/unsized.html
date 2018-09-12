@@ -4,12 +4,14 @@
 <div>
 <button id="unsizedButton">Get Image Sizing Info</button>
 </div>
+<div id="unsizedOutput" class="output">
+  <pre id="log"></pre>
+</div>
 <script>
  document.querySelector('#unsizedButton').addEventListener('click', function() {
   var img = document.querySelector('#unsizedImage');
   var output = "width = " + img.width + ", height = " + img.height + 
                "\nnaturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
-  ChromeSamples.clearLog();
-  ChromeSamples.log(output);
+  document.querySelector('#unsizedOutput').textContent = output;
  });
 </script>
