@@ -19,13 +19,15 @@ on images would return the value specified in this attribute. On video elements,
 <a href="https://html.spec.whatwg.org/multipage/media.html#dom-video-videowidth">videoWidth/videoHeight</a> on the video would return the intrinsicsize values.
 </p>
 
-<h3>Case 1</h3> 
+<button class="collapse"><h3>Case 1</h3></button>
+<div class="content">
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
-{% highlight html %}
-<img intrinsicsize="250 x 200" src="cat.jpg">
-{% endhighlight %}
-<iframe style="width:100%;" src="unsized.html">
-</iframe>
+  {% highlight html %}
+    <img intrinsicsize="250 x 200" src="cat.jpg">
+  {% endhighlight %}
+  {% include_relative unsized.html %}
+  {% include output_helper.html %}
+</div>
 
 <h3>Case 2</h3>
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
@@ -35,6 +37,7 @@ on images would return the value specified in this attribute. On video elements,
 <img intrinsicsize="250 x 200" src="cat.jpg">
 </div>
 {% endhighlight %}
+
 
 <!--
 {% capture unsized %}
@@ -110,4 +113,27 @@ if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
   ChromeSamples.setStatus('Intrinsic Size Attribute is not available.\n' +
     'Please make sure the "Experimental Web Platform features" flag is enabled.');
 }
+ 
+var coll = document.getElementsByClassName("collapse");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
 </script>
+
+<style>
+.content {
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+</style>
