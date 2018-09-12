@@ -21,11 +21,14 @@ on images would return the value specified in this attribute. On video elements,
 
 <h3>Case 1</h3> 
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
-
+{% include_relative unsized.html %}
+<!--
 {% capture unsized %}
 <div>
 <img style="float:left;" intrinsicsize="250 x 200" src="cat.jpg">
-<button style="float:left;" id='getImageSizeButton'>Get Image Sizing Info</button>
+</div>
+<div>
+<button style="float:left; "onclick=">Get Image Sizing Info</button>
 </div>
 {% include output_helper.html %}
 <script>
@@ -37,6 +40,7 @@ on images would return the value specified in this attribute. On video elements,
  });
 </script>
 {% endcapture %}
+                                                                           
 
 {{ unsized }}
 {% highlight html %}
@@ -92,7 +96,8 @@ on images would return the value specified in this attribute. On video elements,
 {% highlight html %}
 <img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
 {% endhighlight %}
-
+-->
+                                                                     
 <script>
 if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
   ChromeSamples.setStatus('Intrinsic Size Attribute is not available.\n' +
