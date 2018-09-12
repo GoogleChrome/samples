@@ -1,0 +1,15 @@
+<div>
+<img style="float:left;" intrinsicsize="250 x 200" src="cat.jpg">
+</div>
+<div>
+<button style="float:left; "onclick=">Get Image Sizing Info</button>
+</div>
+{% include output_helper.html %}
+<script>
+ document.querySelector('#button').addEventListener('click', function() {
+  var img = document.querySelector('img');
+  var output = "width = " + img.width + ", height = " + img.height + 
+               "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+  ChromeSamples.log(output);
+ });
+</script>
