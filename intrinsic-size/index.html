@@ -8,7 +8,7 @@ check_min_version: true
 <h3>Background</h3>
 <p>
 The <a href="https://github.com/ojanvafai/intrinsicsize-attribute">Intrinsic Size Attribute</a>
-allows web developers to specify the intrinsic size of a media element (<img>, <video>, and <svg:image>).
+allows web developers to specify the intrinsic size of a media element (&lt;img&gt;, &lt;video&gt;, and &lt;svg:image&gt;).
 This enables a media element to maintain some aspect ratio while being proportional to the width of the screen, for example.
 <br>
 This attribute overrides the actual intrinsic size of an media element. Specifically, the image would raster at these
@@ -17,72 +17,36 @@ on images would return the value specified in this attribute. On video elements,
 <a href="https://html.spec.whatwg.org/multipage/media.html#dom-video-videowidth">videoWidth/videoHeight</a> on the video would return the intrinsicsize values.
 </p>
 
-
-<p>If no width/height are otherwise set, the image uses the size specified by "intrinsicsize"</p>
+<h4>If no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</h4>
 {% capture unsized_html %}
-<img intrinsicsize="300 x 200" src="cat.jpg">
+<img intrinsicsize="250 x 200" src="cat.jpg">
 <!-- cat.jps is a 600px x 400px image -->
-<!-- img.width => 300, img.heigh => 200, img.naturalWidth => 300, img.naturalHeight => 200 -->
+<!-- img.width => 250, img.heigh => 200 -->
+<!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
 {% endcapture %}
 {% include html_snippet.html html=unsized_html %}
+
+<h4>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</h4>
+{% capture width_only_html %}
+<div width="300">
+<img intrinsicsize="250 x 200" style="width: 100%" src="cat.jpg">
+<!-- cat.jps is a 600px x 400px image -->
+<!-- img.width => 300, img.heigh => 240 -->
+<!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
+</div>
+{% endcapture %}
+{% include html_snippet.html html=width_only_html %}
+ 
   
-<!--
-{% capture unsized %}
-<img intrinsicsize="300 x 200" src="cat.jpg">
-<img src="cat.jpg">
-{% endcapture %}
-{% highlight html %}{{ unsized }}{% endhighlight %}
-
-
-{% capture one_dimension_html %}
-<figure>
-<img intrinsicsize="300 x 300" width="450" src="cat.jpg">
-<figcaption>
-cat.jpg 600px x 400px
-img.width => 450, img.heigh => 450, img.naturalWidth => 300, img.naturalHeight => 300
-<figcaption>
-</figure>
-<figure>
-<img width="450" src="cat.jpg">
-<figcaption>
-cat.jpg 600px x 400px
-img.width => 450, img.heigh => 300, img.naturalWidth => 600, img.naturalHeight => 400
-<figcaption>
-</figure>
-{% endcapture %}
-{{ one_dimension }}
-
-{% capture one_dimension %}
-<img intrinsicsize="300 x 300" width="450" src="cat.jpg">
-<img width="450" src="cat.jpg">
-{% endcapture %}
-
-{% include html_snippet.html %}
-
+<h4>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
+&quot;intrinsicsize&quot; attribute</h4>
 {% capture sized_html %}
-<figure>
-<img intrinsicsize="450 x 300" style="width:300px; height:200px;" src="cat.jpg">
-<figcaption>
-cat.jpg 600px x 400px
-img.width => 300, img.heigh => 200, img.naturalWidth => 450, img.naturalHeight => 300
-<figcaption>
-</figure>
-<figure>
-<img style="width:300px; height:200px;" src="cat.jpg">
-<figcaption>
-cat.jpg 600px x 400px
-img.width => 300, img.heigh => 200, img.naturalWidth => 600, img.naturalHeight => 400
-<figcaption>
-</figure>
+<img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
+<!-- cat.jps is a 600px x 400px image -->
+<!-- img.width => 450, img.heigh => 400 -->
+<!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
 {% endcapture %}
-{{ sized }}
-
-{% capture sized %}
-<img intrinsicsize="450 x 300" style="width:300px; height:200px;" src="cat.jpg">
-<img style="width:300px; height:200px;" src="cat.jpg">
-{% endcapture %}
-{% include html_snippet.html %}
-  -->
+{% include html_snippet.html html=sized_html %}
 
 <script>
 if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
