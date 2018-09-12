@@ -23,20 +23,23 @@ on images would return the value specified in this attribute. On video elements,
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
 {% capture unsized_html %}
 <div>
-<img id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
-<button id='getImageSizeButton'>Get Image Sizing Info</button>
+<img style="float:left;" id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
+<button style="float:left;" id='getImageSizeButton'>Get Image Sizing Info</button>
 </div>
-{% endcapture %}
 {% include output_helper.html %}
 <script>
  document.querySelector('#getImageSizeButton').addEventListener('click', function() {
     var img = document.querySelector('#unsizedImage');
     var output = "width = " + img.width + ", height = " + img.height + 
-                 "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+                 "\nnaturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
     ChromeSamples.log(output);
  });
 </script>
-{% include html_snippet.html html=unsized_html %}
+{% endcapture %}
+{{ unsized_html }}
+{% highlight html}
+<img style="float:left;" id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
+{% endhighlight %}
 
 <h3>Case 2</h3>
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
@@ -67,9 +70,3 @@ if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
     'Please make sure the "Experimental Web Platform features" flag is enabled.');
 }
 </script>
-
-<style>
-img,button {
- float: left;
- }
-</style>
