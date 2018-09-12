@@ -26,10 +26,7 @@ on images would return the value specified in this attribute. On video elements,
 <img id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
 <button id='getImageSizeButton'>Get Image Sizing Info</button>
 </div>
-<% include output_helper.html %}
-<!-- cat.jps is a 600px x 400px image -->
-<!-- img.width => 250, img.heigh => 200 -->
-<!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
+{% include output_helper.html %}
 <script>
  document.querySelector('#getImageSizeButton').addEventListener('click', function() {
     var img = document.querySelector('#unsizedImage');
