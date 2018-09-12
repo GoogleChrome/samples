@@ -11,30 +11,20 @@ The <a href="https://github.com/ojanvafai/intrinsicsize-attribute">Intrinsic Siz
 allows web developer 
 </p>
 
-{% capture unsized_html %}
+
 <!-- cat.jps is a 600px x 400px image -->
-<figure>
-<img intrinsicsize="300 x 200" src="cat.jpg">
-<figcaption>
+
+{{ <img intrinsicsize="300 x 200" src="cat.jpg">  }}
+{% highlight %}
 cat.jpg 600px x 400px
 img.width => 300, img.heigh => 200, img.naturalWidth => 300, img.naturalHeight => 200
-<figcaption>
-</figure>
-<figure>
-<img src="cat.jpg">
-<figcaption>
-cat.jpg 600px x 400px
-img.width => 600, img.heigh => 400, img.naturalWidth => 600, img.naturalHeight => 400
-<figcaption>
-</figure>
-{% endcapture %}
-{{ unsized_html }}
+{% endhightlight %}
 
 {% capture unsized %}
 <img intrinsicsize="300 x 200" src="cat.jpg">
 <img src="cat.jpg">
 {% endcapture %}
-{% include html_snippet.html %}
+{% highlight html %}{{ unsized }}{% endhighlight %}
 
 {% capture one_dimension_html %}
 <!-- cat.jps is a 600px x 400px image -->
