@@ -1,0 +1,97 @@
+---
+feature_name: Intrinsic Size Attribute
+chrome_version: 71
+feature_id: 4704436815396864
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://github.com/ojanvafai/intrinsicsize-attribute">Intrinsic Size Attribute</a>
+allows web developer 
+</p>
+
+{% capture unsized_html %}
+<!-- cat.jps is a 600px x 400px image -->
+<figure>
+<img intrinsicsize="300 x 200" src="cat.jpg">
+<figcaption>
+cat.jpg 600px x 400px
+img.width => 300, img.heigh => 200, img.naturalWidth => 300, img.naturalHeight => 200
+<figcaption>
+</figure>
+<figure>
+<img src="cat.jpg">
+<figcaption>
+cat.jpg 600px x 400px
+img.width => 600, img.heigh => 400, img.naturalWidth => 600, img.naturalHeight => 400
+<figcaption>
+</figure>
+{% endcapture %}
+
+{% capture unsized %}
+<img intrinsicsize="300 x 200" src="cat.jpg">
+<img src="cat.jpg">
+{% endcapture %}
+
+{{ unsized_html }}
+{% include html_snippet.html html=unsized %}
+
+{% capture one_dimension_html %}
+<!-- cat.jps is a 600px x 400px image -->
+<figure>
+<img intrinsicsize="300 x 300" width="450" src="cat.jpg">
+<figcaption>
+cat.jpg 600px x 400px
+img.width => 450, img.heigh => 450, img.naturalWidth => 300, img.naturalHeight => 300
+<figcaption>
+</figure>
+<figure>
+<img width="450" src="cat.jpg">
+<figcaption>
+cat.jpg 600px x 400px
+img.width => 450, img.heigh => 300, img.naturalWidth => 600, img.naturalHeight => 400
+<figcaption>
+</figure>
+
+{% endcapture %}
+{% capture one_dimension %}
+<img intrinsicsize="300 x 300" width="450" src="cat.jpg">
+<img width="450" src="cat.jpg">
+{% endcapture %}
+
+{{ one_dimension }}
+{% include html_snippet.html html=one_dimension_html %}
+
+{% capture sized_html %}
+<!-- cat.jps is a 600px x 400px image -->
+<figure>
+<img intrinsicsize="450 x 300" style="width:300px; height:200px;" src="cat.jpg">
+<figcaption>
+cat.jpg 600px x 400px
+img.width => 300, img.heigh => 200, img.naturalWidth => 450, img.naturalHeight => 300
+<figcaption>
+</figure>
+<figure>
+<img style="width:300px; height:200px;" src="cat.jpg">
+<figcaption>
+cat.jpg 600px x 400px
+img.width => 300, img.heigh => 200, img.naturalWidth => 600, img.naturalHeight => 400
+<figcaption>
+</figure>
+
+{% endcapture %}
+{% capture sized %}
+<img intrinsicsize="450 x 300" style="width:300px; height:200px;" src="cat.jpg">
+<img style="width:300px; height:200px;" src="cat.jpg">
+{% endcapture %}
+
+{{ sized }}
+{% include html_snippet.html html=sized_html %}
+
+<script>
+if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
+  ChromeSamples.setStatus('Intrinsic Size Attribute is not available.\n' +
+    'Please make sure the "Experimental Web Platform features" flag is enabled.');
+</script>
+
