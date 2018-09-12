@@ -21,47 +21,77 @@ on images would return the value specified in this attribute. On video elements,
 
 <h3>Case 1</h3> 
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
-{% capture unsized_html %}
+
+{% capture unsized %}
 <div>
-<img style="float:left;" id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
+<img style="float:left;" intrinsicsize="250 x 200" src="cat.jpg">
 <button style="float:left;" id='getImageSizeButton'>Get Image Sizing Info</button>
 </div>
 {% include output_helper.html %}
 <script>
  document.querySelector('#getImageSizeButton').addEventListener('click', function() {
-    var img = document.querySelector('#unsizedImage');
-     var output = "width = " + img.width + ", height = " + img.height + 
-                  "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
-     ChromeSamples.log(output);
-  });
- </script>
+  var img = document.querySelector('img');
+  var output = "width = " + img.width + ", height = " + img.height + 
+               "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+  ChromeSamples.log(output);
+ });
+</script>
 {% endcapture %}
+
+{{ unsized }}
 {% highlight html %}
-<img style="float:left;" id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
+<img intrinsicsize="250 x 200" src="cat.jpg">
 {% endhighlight %}
 
 <h3>Case 2</h3>
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
-{% capture width_only_html %}
+
+{% capture width_only %}
 <div style="300px;">
-<img intrinsicsize="250 x 200" style="width: 100%" src="cat.jpg">
-<!-- cat.jps is a 600px x 400px image -->
-<!-- img.width => 300, img.heigh => 240 -->
-<!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
+<img style="float:left;" intrinsicsize="250 x 200" style="width: 100%" src="cat.jpg">
+<button style="float:left;" id='getImageSizeButton'>Get Image Sizing Info</button>
 </div>
+<script>
+ document.querySelector('#getImageSizeButton').addEventListener('click', function() {
+  var img = document.querySelector('img');
+  var output = "width = " + img.width + ", height = " + img.height + 
+               "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+  ChromeSamples.log(output);
+ });
+</script>
 {% endcapture %}
-{% include html_snippet.html html=width_only_html %}
-  
+
+{{ width_only }}
+{% highlight html %}
+<div style="300px;">
+<img intrinsicsize="250 x 200" src="cat.jpg">
+</div>
+{% endhighlight %}
+
 <h3>Case 3</h3>
 <p>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
 &quot;intrinsicsize&quot; attribute</p>
-{% capture sized_html %}
-<img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
-<!-- cat.jps is a 600px x 400px image -->
-<!-- img.width => 450, img.heigh => 400 -->
-<!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
+
+{% capture sized %}
+<div>
+<img style="float:left;" intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
+<button style="float:left;" id='getImageSizeButton'>Get Image Sizing Info</button>
+</div>
+{% include output_helper.html %}
+<script>
+ document.querySelector('#getImageSizeButton').addEventListener('click', function() {
+  var img = document.querySelector('img');
+  var output = "width = " + img.width + ", height = " + img.height + 
+               "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+  ChromeSamples.log(output);
+ });
+</script>
 {% endcapture %}
-{% include html_snippet.html html=sized_html %}
+
+{{ sized }}
+{% highlight html %}
+<img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
+{% endhighlight %}
 
 <script>
 if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
