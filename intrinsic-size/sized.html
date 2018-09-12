@@ -5,7 +5,7 @@
 <div>
 <button id="sizedButton">Get Image Sizing Info</button>
 </div>
-<div id="unsizedOutput" class="output">
+<div id="sizedOutput" class="output">
   <pre id="log"></pre>
 </div>
 <script>
@@ -13,6 +13,6 @@
   var img = document.querySelector('#sizedImage');
   var output = "width = " + img.width + ", height = " + img.height + 
                ", naturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
-  document.querySelector('#unsizedOutput').textContent = output;
+  document.querySelector('#sizedOutput').textContent = output;
  });
 </script>
