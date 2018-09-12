@@ -26,6 +26,7 @@ on images would return the value specified in this attribute. On video elements,
 <img id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
 <button id='getImageSizeButton'>Get Image Sizing Info</button>
 </div>
+{% endcapture %}
 {% include output_helper.html %}
 <script>
  document.querySelector('#getImageSizeButton').addEventListener('click', function() {
@@ -35,7 +36,6 @@ on images would return the value specified in this attribute. On video elements,
     ChromeSamples.log(output);
  });
 </script>
-{% endcapture %}
 {% include html_snippet.html html=unsized_html %}
 
 <h3>Case 2</h3>
@@ -68,3 +68,8 @@ if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
 }
 </script>
 
+<style>
+img,button {
+ float: left;
+ }
+</style>
