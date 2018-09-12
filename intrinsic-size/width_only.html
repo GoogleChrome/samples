@@ -4,12 +4,12 @@
 <div>
 <button id="widthOnlyButton">Get Image Sizing Info</button>
 </div>
-{% include output_helper.html %}
 <script>
  document.querySelector('#widthOnlyButton').addEventListener('click', function() {
   var img = document.querySelector('#widthOnlyImage');
   var output = "width = " + img.width + ", height = " + img.height + 
                "\nnaturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
+  ChromeSamples.clearLog();
   ChromeSamples.log(output);
  });
 </script>
