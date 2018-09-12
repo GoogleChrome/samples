@@ -19,26 +19,40 @@ on images would return the value specified in this attribute. On video elements,
 <a href="https://html.spec.whatwg.org/multipage/media.html#dom-video-videowidth">videoWidth/videoHeight</a> on the video would return the intrinsicsize values.
 </p>
 
-<button class="collapse"><h3>Case 1</h3></button>
-<div class="content">
+<h3>Case 1</h3>
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
+<button class="demoButton">See Demo</button>
+<div class="demoContent">
   {% highlight html %}
     <img intrinsicsize="250 x 200" src="cat.jpg">
   {% endhighlight %}
   {% include_relative unsized.html %}
-  {% include output_helper.html %}
 </div>
 
 <h3>Case 2</h3>
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
-{% include_relative width_only.html %}
-{% highlight html %}
-<div style="300px;">
-<img intrinsicsize="250 x 200" src="cat.jpg">
+<button class="demoButton">See Demo</button>
+<div class="demoContent">
+  {% highlight html %}
+    <div style="300px;">
+    <img intrinsicsize="250 x 200" src="cat.jpg">
+    </div>
+  {% endhighlight %}
+  {% include_relative width_only.html %}
 </div>
-{% endhighlight %}
 
+<h3>Case 3</h3>
+<p>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
+&quot;intrinsicsize&quot; attribute</p>
+<button class="demoButton">See Demo</button>
+<div class="demoContent">
+  {% highlight html %}
+    <img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
+  {% endhighlight %}
+  {% include_relative width_only.html %}
+</div>
 
+{% include output_helper.html %}
 <!--
 {% capture unsized %}
 <div>
@@ -114,7 +128,7 @@ if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
     'Please make sure the "Experimental Web Platform features" flag is enabled.');
 }
  
-var coll = document.getElementsByClassName("collapse");
+var coll = document.getElementsByClassName("demoButton");
 var i;
 
 for (i = 0; i < coll.length; i++) {
@@ -131,9 +145,19 @@ for (i = 0; i < coll.length; i++) {
 </script>
 
 <style>
-.content {
+.demoContent {
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
 }
+.demoButton {
+    background-color: #777;
+    color: white;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+ }
 </style>
