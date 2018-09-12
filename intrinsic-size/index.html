@@ -30,14 +30,13 @@ on images would return the value specified in this attribute. On video elements,
 <script>
  document.querySelector('#getImageSizeButton').addEventListener('click', function() {
     var img = document.querySelector('#unsizedImage');
-    var output = "width = " + img.width + ", height = " + img.height + 
-                 "\nnaturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
-    ChromeSamples.log(output);
- });
-</script>
+     var output = "width = " + img.width + ", height = " + img.height + 
+                  "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+     ChromeSamples.log(output);
+  });
+ </script>
 {% endcapture %}
-{{ unsized_html }}
-{% highlight html}
+{% highlight html %}
 <img style="float:left;" id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
 {% endhighlight %}
 
