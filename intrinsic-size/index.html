@@ -23,7 +23,7 @@ on images would return the value specified in this attribute. On video elements,
 
 <h3>Case 1</h3>
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
-<button class="demoButton" onclick="toggleDemo">See Demo</button>
+<button class="demoButton" onclick="toggleDemo()">See Demo</button>
 <center class="demoContent">
   {% include_relative unsized.html %}
   {% highlight html %}
@@ -33,7 +33,7 @@ on images would return the value specified in this attribute. On video elements,
 
 <h3>Case 2</h3>
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
-<button class="demoButton" onclick="toggleDemo">See Demo</button>
+<button class="demoButton" onclick="toggleDemo()">See Demo</button>
 <center class="demoContent">
   {% include_relative width_only.html %}
   {% highlight html %}
@@ -46,7 +46,7 @@ on images would return the value specified in this attribute. On video elements,
 <h3>Case 3</h3>
 <p>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
 &quot;intrinsicsize&quot; attribute</p>
-<button class="demoButton" onclick="toggleDemo">See Demo</button>
+<button class="demoButton" onclick="toggleDemo()">See Demo</button>
 <center class="demoContent">
   {% include_relative sized.html %}
   {% highlight html %}
