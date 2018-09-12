@@ -7,28 +7,44 @@ check_min_version: true
 
 <h3>Background</h3>
 <p>
-The <a href="https://github.com/ojanvafai/intrinsicsize-attribute">Intrinsic Size Attribute</a>
+The <a href="https://github.com/ojanvafai/intrinsicsize-attribute">intrinsic size attribute</a>
 allows web developers to specify the intrinsic size of a media element (&lt;img&gt;, &lt;video&gt;, and &lt;svg:image&gt;).
-This enables a media element to maintain some aspect ratio while being proportional to the width of the screen, for example.
-<br>
+This enables a media element to maintain aspect ratio while being proportional to the width of the screen, for example, without
+causing a visual reflow.
+</p>
+<p>
 This attribute overrides the actual intrinsic size of an media element. Specifically, the image would raster at these
 dimensions and <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalwidth">naturalWidth/naturalHeight</a> 
 on images would return the value specified in this attribute. On video elements, the video would raster at this size and
 <a href="https://html.spec.whatwg.org/multipage/media.html#dom-video-videowidth">videoWidth/videoHeight</a> on the video would return the intrinsicsize values.
 </p>
 
-<h4>If no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</h4>
+<h3>Case 1</h3> 
+<p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
 {% capture unsized_html %}
-<img intrinsicsize="250 x 200" src="cat.jpg">
+<div>
+<img id='unsizedImage' intrinsicsize="250 x 200" src="cat.jpg">
+<button id='getImageSizeButton'>Get Image Sizing Info</button>
+</div>
+<% include output_helper.html %}
 <!-- cat.jps is a 600px x 400px image -->
 <!-- img.width => 250, img.heigh => 200 -->
 <!-- img.naturalWidth => 250, img.naturalHeight => 200 -->
+<script>
+ document.querySelector('#getImageSizeButton').addEventListener('click', function() {
+    var img = document.querySelector('#unsizedImage');
+    var output = "width = " + img.width + ", height = " + img.height + 
+                 "\nnaturalWidth = " + img.naturalWidth + " naturalHeight = " + img.naturalHeight;
+    ChromeSamples.log(output);
+ });
+</script>
 {% endcapture %}
 {% include html_snippet.html html=unsized_html %}
 
-<h4>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</h4>
+<h3>Case 2</h3>
+<p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
 {% capture width_only_html %}
-<div width="300">
+<div style="300px;">
 <img intrinsicsize="250 x 200" style="width: 100%" src="cat.jpg">
 <!-- cat.jps is a 600px x 400px image -->
 <!-- img.width => 300, img.heigh => 240 -->
@@ -36,10 +52,10 @@ on images would return the value specified in this attribute. On video elements,
 </div>
 {% endcapture %}
 {% include html_snippet.html html=width_only_html %}
- 
   
-<h4>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
-&quot;intrinsicsize&quot; attribute</h4>
+<h3>Case 3</h3>
+<p>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
+&quot;intrinsicsize&quot; attribute</p>
 {% capture sized_html %}
 <img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
 <!-- cat.jps is a 600px x 400px image -->
