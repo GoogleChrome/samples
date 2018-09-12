@@ -22,6 +22,19 @@ on images would return the value specified in this attribute. On video elements,
 <h3>Case 1</h3> 
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
 {% include_relative unsized.html %}
+{% highlight html %}
+<img intrinsicsize="250 x 200" src="cat.jpg">
+{% endhighlight %}
+
+<h3>Case 2</h3>
+<p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
+{% include_relative width_only.html %}
+{% highlight html %}
+<div style="300px;">
+<img intrinsicsize="250 x 200" src="cat.jpg">
+</div>
+{% endhighlight %}
+
 <!--
 {% capture unsized %}
 <div>
@@ -43,12 +56,9 @@ on images would return the value specified in this attribute. On video elements,
                                                                            
 
 {{ unsized }}
-{% highlight html %}
-<img intrinsicsize="250 x 200" src="cat.jpg">
-{% endhighlight %}
 
-<h3>Case 2</h3>
-<p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
+
+
 
 {% capture width_only %}
 <div style="300px;">
@@ -66,11 +76,7 @@ on images would return the value specified in this attribute. On video elements,
 {% endcapture %}
 
 {{ width_only }}
-{% highlight html %}
-<div style="300px;">
-<img intrinsicsize="250 x 200" src="cat.jpg">
-</div>
-{% endhighlight %}
+
 
 <h3>Case 3</h3>
 <p>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
