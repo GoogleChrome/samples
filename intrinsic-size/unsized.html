@@ -9,9 +9,8 @@
 </div>
 <script>
  document.querySelector('#unsizedButton').addEventListener('click', function() {
-  var img = document.querySelector('#unsizedImage');
-  var output = "width = " + img.width + ", height = " + img.height + 
-               ", naturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
-  document.querySelector('#unsizedOutput').textContent = output;
+  const img = document.querySelector('#unsizedImage');
+  document.querySelector('#unsizedOutput').textContent =
+    `width = ${img.width}, height = ${img.height}, naturalWidth = ${img.naturalWidth}, naturalHeight = ${img.naturalHeight}`;
  });
 </script>
