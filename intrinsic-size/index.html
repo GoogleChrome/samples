@@ -5,6 +5,27 @@ feature_id: 4704436815396864
 check_min_version: true
 ---
 
+<style>
+.demoContent {
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+.demoButton {
+    background-color: #777;
+    color: white;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+ }
+.active, .demoButton:hover {
+    background-color: #555;
+}
+</style>
+
 <h3>Background</h3>
 <p>
 &quot;intrinsicSize&quot; attribute tells the browser to ignore the actual intrinsic size
@@ -34,9 +55,13 @@ on images would return the value specified in this attribute. On video elements,
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
+  <div align="left">
   {% highlight html %}
-    <div style="width:300px;"> <img intrinsicsize="250 x 200" style="width:100%" src="cat.jpg"> </div>
+    <div style="width:300px;">
+      <img intrinsicsize="250 x 200" style="width:100%" src="cat.jpg">
+    </div>
   {% endhighlight %}
+  </div>
   {% include_relative width_only.html %}
 </center>
 
@@ -49,7 +74,7 @@ on images would return the value specified in this attribute. On video elements,
   {% endhighlight %}
   {% include_relative sized.html %}
 </center>
-                                                                     
+
 <script>
 if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
   ChromeSamples.setStatus('Intrinsic Size Attribute is not available.\n' +
@@ -57,33 +82,12 @@ if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
 }
 
 function toggleDemo(button) {
-  button.classList.toggle("active");
-  var demo = button.nextElementSibling;
-  if (demo.style.display === "block") {
-    demo.style.display = "none";
+  button.classList.toggle('active');
+  const demo = button.nextElementSibling;
+  if (demo.style.display === 'block') {
+    demo.style.display = 'none';
   } else {
-    demo.style.display = "block";
+    demo.style.display = 'block';
   }
 }
 </script>
-
-<style>
-.demoContent {
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-}
-.demoButton {
-    background-color: #777;
-    color: white;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
- }
-.active, .demoButton:hover {
-    background-color: #555;
-}
-</style>

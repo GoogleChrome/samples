@@ -10,9 +10,8 @@
 </div>
 <script>
  document.querySelector('#sizedButton').addEventListener('click', function() {
-  var img = document.querySelector('#sizedImage');
-  var output = "width = " + img.width + ", height = " + img.height + 
-               ", naturalWidth = " + img.naturalWidth + ", naturalHeight = " + img.naturalHeight;
-  document.querySelector('#sizedOutput').textContent = output;
+  const img = document.querySelector('#sizedImage');
+  var output = template`width = ${0}, height = ${1}, naturalWidth = ${2}, naturalHeight = ${3}`;
+  document.querySelector('#sizedOutput').textContent = output(img.width, img.height, img.naturalWidth, img.naturalHeight);
  });
 </script>
