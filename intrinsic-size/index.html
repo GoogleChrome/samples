@@ -7,10 +7,11 @@ check_min_version: true
 
 <h3>Background</h3>
 <p>
-The <a href="https://github.com/ojanvafai/intrinsicsize-attribute">intrinsic size attribute</a>
-allows web developers to specify the intrinsic size of a media element (&lt;img&gt;, &lt;video&gt;, and &lt;svg:image&gt;).
-This enables a media element to maintain aspect ratio while being proportional to the width of the screen, for example, without
-causing a visual reflow.
+&quot;intrinsicSize&quot; attribute tells the browser to ignore the actual intrinsic size
+of the image and pretend it&apos;s the size specified in the attribute. This is useful in
+combination with <a hred="https://github.com/WICG/feature-policy/blob/master/policies/unsized-media.md">&quot;unsized-media&quot; policy</a>
+because it allows for images proportional to window width without causing layout instability.
+Please read <a href="https://github.com/ojanvafai/intrinsicsize-attribute">the explainer for &quot;intrinsicSize&quot; attribute</a> for more details.
 </p>
 <p>
 This attribute overrides the actual intrinsic size of an media element. Specifically, the image would raster at these
@@ -23,30 +24,30 @@ on images would return the value specified in this attribute. On video elements,
 <p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
-  {% include_relative unsized.html %}
   {% highlight html %}
    <img intrinsicsize="250 x 200" src="cat.jpg">
   {% endhighlight %}
+  {% include_relative unsized.html %}
 </center>
 
 <h3>Case 2</h3>
 <p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
-  {% include_relative width_only.html %}
   {% highlight html %}
     <div style="width:300px;"> <img intrinsicsize="250 x 200" style="width:100%" src="cat.jpg"> </div>
   {% endhighlight %}
+  {% include_relative width_only.html %}
 </center>
 
 <h3>Case 3</h3>
 <p>If width and height are set on an image, then value of the &quot;intrinsicsize&quot; attribute only affects the values of naturalWidth/naturalHeight, but not the rendered size of the image.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
-  {% include_relative sized.html %}
   {% highlight html %}
     <img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
   {% endhighlight %}
+  {% include_relative sized.html %}
 </center>
                                                                      
 <script>
@@ -68,7 +69,6 @@ function toggleDemo(button) {
 
 <style>
 .demoContent {
-    padding-top: 20px;
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
