@@ -20,7 +20,7 @@ on images would return the value specified in this attribute. On video elements,
 </p>
 
 <h3>Case 1</h3>
-<p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;</p>
+<p>if no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
   {% include_relative unsized.html %}
@@ -30,7 +30,7 @@ on images would return the value specified in this attribute. On video elements,
 </center>
 
 <h3>Case 2</h3>
-<p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;</p>
+<p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
   {% include_relative width_only.html %}
@@ -40,8 +40,8 @@ on images would return the value specified in this attribute. On video elements,
 </center>
 
 <h3>Case 3</h3>
-<p>If width and height are set on an image, the intrinsic size of an image is still overridden by the value of the 
-&quot;intrinsicsize&quot; attribute</p>
+<p>If width and height are set on an image, then value of the &quot;intrinsicsize&quot; attribute only affects the values of 
+naturalWidth/naturalHeight, but not the rendered size of the image.</p>
 <button class="demoButton" onclick="toggleDemo(this)">See Demo</button>
 <center class="demoContent">
   {% include_relative sized.html %}
