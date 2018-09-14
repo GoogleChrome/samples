@@ -23,9 +23,9 @@ of the image and pretend it&apos;s the size specified in the attribute. This is 
 combination with <a href="https://github.com/WICG/feature-policy/blob/master/policies/unsized-media.md">&quot;unsized-media&quot; feature policy</a>
 because it allows for images proportional to window width without causing layout instability. In addition, 
 &quot;intrinsicSize&quot; attribute is useful to reduce excesive layout, especially helpful for responsive images where one or
-more dimensions are missing. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">object-fit</a> serves a similar
-purpose by preserving the aspect ratio.
-Please read <a href="https://github.com/ojanvafai/intrinsicsize-attribute">the explainer for &quot;intrinsicSize&quot; attribute</a> for more details.
+more dimensions are missing. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">object-fit</a> serves a similar purpose by preserving the
+aspect ratio, but does not alter element size. Please read <a href="https://github.com/ojanvafai/intrinsicsize-attribute">the
+explainer for &quot;intrinsicSize&quot; attribute</a> for more details.
 </p>
 <p>
 This attribute overrides the actual intrinsic size of a media element. Specifically, the image would raster at these
