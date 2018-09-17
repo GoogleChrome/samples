@@ -1,0 +1,50 @@
+---
+feature_name: EME Extension - Policy Check
+chrome_version: 69
+feature_id: 5652917147140096
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The EME Extension, Policy Check API allows web developers to query the status
+of a hypothetical key associated with an HDCP policy, without the need to
+create a <code>MediaKeySession</code> or fetch a real license. It does not
+require the <code>MediaKeys</code> to be attached to any
+<code>HTMLMediaElement</code> either. If HDCP is available at the specified
+version, the promise should return a <code>MediaKeyStatus</code> of "usable".
+</p>
+<p>
+Note: In Chrome 69, it is <a
+href="http://bit.ly/HdcpPolicyCheckOriginTrials">available for trials</a> so
+that websites can use it without any experimental flag.
+</p>
+
+<p>
+  <select id="minHdcpVersion">
+    <option value="hdcp-1.0">hdcp-1.0</option>
+    <option value="hdcp-1.1">hdcp-1.1</option>
+    <option value="hdcp-1.2">hdcp-1.2</option>
+    <option value="hdcp-1.3">hdcp-1.3</option>
+    <option value="hdcp-1.4">hdcp-1.4</option>
+    <option value="hdcp-2.0">hdcp-2.0</option>
+    <option value="hdcp-2.1">hdcp-2.1</option>
+    <option value="hdcp-2.2">hdcp-2.2</option>
+    <option value="hdcp-2.3">hdcp-2.3 (Chrome 71+)</option>
+  </select>
+  <button>Get HDCP status</button>
+</p>
+
+{% include output_helper.html %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+<script>
+  document.querySelector('button').addEventListener('click', function(event) {
+    onButtonClick();
+  });
+</script>
+
+{% include js_snippet.html filename='index.js' %}
