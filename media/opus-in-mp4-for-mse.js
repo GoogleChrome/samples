@@ -10,7 +10,7 @@ if (MediaSource.isTypeSupported('audio/mp4; codecs="opus"')) {
     const sourceBuffer = mediaSource.addSourceBuffer('audio/mp4; codecs="opus"');
 
     log('Fetching audio file...');
-    fetch('bear-opus.mp4')
+    fetch('https://storage.googleapis.com/media-session/bear-opus.mp4')
     .then(response => response.arrayBuffer())
     .then(data => {
       sourceBuffer.appendBuffer(data);
