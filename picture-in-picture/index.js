@@ -4,7 +4,6 @@ togglePipButton.addEventListener('click', async function(event) {
     if (video !== document.pictureInPictureElement) {
       log('Requesting Picture-in-Picture...');
       const pipWindow = await video.requestPictureInPicture();
-      log(`> Window size is ${pipWindow.width}x${pipWindow.height}`);
       pipWindow.addEventListener('resize', onPipWindowResize);
     } else {
       log('Exiting Picture-in-Picture...');
@@ -19,6 +18,9 @@ togglePipButton.addEventListener('click', async function(event) {
 
 video.addEventListener('enterpictureinpicture', function(event) {
   log('> Video entered Picture-in-Picture');
+
+  const pipWindow = event.pictureInPictureWindow;
+  log(`> Window size is ${pipWindow.width}x${pipWindow.height}`);
 });
 
 video.addEventListener('leavepictureinpicture', function(event) {
