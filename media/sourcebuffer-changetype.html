@@ -1,0 +1,29 @@
+---
+feature_name: Codec and container switching in MSE
+chrome_version: 70
+feature_id: 5719220952236032
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+Chrome adds support for improved cross-codec or cross-bytestream transitions in
+Media Source Extensions (MSE) playback using a new <code>changeType()</code>
+method on SourceBuffer. It basically allows the type of media bytes
+subsequently appended to the SourceBuffer to be changed.
+</p>
+<p>
+This sample demonstrates the use of this new method by appending different
+types of media bytes to a single SourceBuffer of a MediaSource attached to an
+audio element.
+</p>
+
+<audio controls></audio>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='sourcebuffer-changetype.js' %}

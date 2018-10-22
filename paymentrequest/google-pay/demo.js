@@ -1,16 +1,16 @@
 /**
- * Builds PaymentRequest for Android Pay, but does not show any UI yet. If you
+ * Builds PaymentRequest for Google Pay, but does not show any UI yet. If you
  * encounter issues when running your own copy of this sample, run 'adb logcat |
- * grep Wallet' to see detailed error messages.
+ * grep Wallet' to see detailed error messages or watch Chrome DevTools console.
  *
  * @return {PaymentRequest} The PaymentRequest object.
  */
 function initPaymentRequest() {
   let supportedInstruments = [{
-    supportedMethods: ['https://android.com/pay'],
+    supportedMethods: 'https://google.com/pay',
     data: {
-      merchantName: 'Android Pay Demo',
-      // Place your own Android Pay merchant ID here. The merchant ID is tied to
+      merchantName: 'Google Pay Demo',
+      // Place your own Google Pay merchant ID here. The merchant ID is tied to
       // the origin of the website.
       merchantId: '00184145120947117657',
       // If you do not yet have a merchant ID, uncomment the following line.
@@ -47,7 +47,7 @@ function initPaymentRequest() {
 }
 
 /**
- * Invokes PaymentRequest for Android Pay.
+ * Invokes PaymentRequest for Google Pay.
  *
  * @param {PaymentRequest} request The PaymentRequest object.
  */
