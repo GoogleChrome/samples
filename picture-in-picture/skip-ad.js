@@ -1,8 +1,13 @@
 try {
-  navigator.mediaSession.setActionHandler('skipad', onSkipAdButtonClick);
-  log('The Picture-in-Picture window will show a "Skip Ad" button.');
+  navigator.mediaSession.setActionHandler('skipad', null);
+  showSkipAdButton();
 } catch(error) {
   log('Argh! The "Skip Ad" media session action is not supported.');
+}
+
+function showSkipAdButton() {
+  log('The Picture-in-Picture window will show a "Skip Ad" button.');
+  navigator.mediaSession.setActionHandler('skipad', onSkipAdButtonClick);
 }
 
 // Hide "Skip Ad" button when user clicks it and play another video.
