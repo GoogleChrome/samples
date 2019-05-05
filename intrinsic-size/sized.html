@@ -1,0 +1,17 @@
+
+<div>
+<img id="sizedImage" intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
+</div>
+<div>
+<button id="sizedButton">Get Image Sizing Info</button>
+</div>
+<div id="sizedOutput" class="output">
+  <pre id="log"></pre>
+</div>
+<script>
+ document.querySelector('#sizedButton').addEventListener('click', function() {
+  const img = document.querySelector('#sizedImage');
+  document.querySelector('#sizedOutput').textContent =
+    `width = ${img.width}, height = ${img.height}, naturalWidth = ${img.naturalWidth}, naturalHeight = ${img.naturalHeight}`;
+ });
+</script>

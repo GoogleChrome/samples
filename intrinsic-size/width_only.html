@@ -1,0 +1,16 @@
+<div style="width:300px; margin:auto;">
+<img id="widthOnlyImage" intrinsicsize="250 x 200" style="width: 100%;" src="cat.jpg">
+</div>
+<div>
+<button id="widthOnlyButton">Get Image Sizing Info</button>
+</div>
+<div id="widthOnlyOutput" class="output">
+  <pre id="log"></pre>
+</div>
+<script>
+ document.querySelector('#widthOnlyButton').addEventListener('click', function() {
+  const img = document.querySelector('#widthOnlyImage');
+  document.querySelector('#widthOnlyOutput').textContent =
+    `width = ${img.width}, height = ${img.height}, naturalWidth = ${img.naturalWidth}, naturalHeight = ${img.naturalHeight}`;
+ });
+</script>

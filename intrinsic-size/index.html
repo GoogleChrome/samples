@@ -1,0 +1,73 @@
+---
+feature_name: Intrinsic Size Attribute
+chrome_version: 71
+feature_id: 4704436815396864
+check_min_version: true
+---
+
+<style>
+.demoContent {
+  overflow: auto;
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+</style>
+
+{% include output_helper.html %}
+
+<h3>Background</h3>
+<p>
+&quot;intrinsicSize&quot; attribute tells the browser to ignore the actual intrinsic size
+of the image and pretend it&apos;s the size specified in the attribute. This is useful in
+combination with <a href="https://github.com/WICG/feature-policy/blob/master/policies/unsized-media.md">&quot;unsized-media&quot; feature policy</a>
+because it allows for images proportional to window width without causing layout instability. In addition, 
+&quot;intrinsicSize&quot; attribute is useful to reduce excesive layout, especially helpful for responsive images where one or
+more dimensions are missing. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">object-fit</a> serves a similar purpose by preserving the
+aspect ratio, but does not alter element size. Please read <a href="https://github.com/ojanvafai/intrinsicsize-attribute">the
+explainer for &quot;intrinsicSize&quot; attribute</a> for more details.
+</p>
+<p>
+This attribute overrides the actual intrinsic size of a media element. Specifically, the image would raster at these
+dimensions and <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalwidth">naturalWidth/naturalHeight</a> 
+on images would return the value specified in this attribute. On video elements, the video would raster at this size and
+<a href="https://html.spec.whatwg.org/multipage/media.html#dom-video-videowidth">videoWidth/videoHeight</a> on the video would return the intrinsicsize values.
+</p>
+
+<h3>Case 1</h3>
+<p>If no width/height are otherwise set on an image, then the size is specified by &quot;intrinsicsize&quot;.</p>
+<div class="demoContent output">
+  {% highlight html %}
+    <img intrinsicsize="250 x 200" src="cat.jpg">
+  {% endhighlight %}
+  {% include_relative unsized.html %}
+</div>
+
+<h3>Case 2</h3>
+<p>If the width is set on an image, then the height is set to maintain the aspect ratio defined in &quot;intrinsicsize&quot;.</p>
+<div class="demoContent output">
+  <div style="text-align:left">
+  {% highlight html %}
+    <div style="width:300px;">
+      <img intrinsicsize="250 x 200" style="width:100%" src="cat.jpg">
+    </div>
+  {% endhighlight %}
+  </div>
+  {% include_relative width_only.html %}
+</div>
+
+<h3>Case 3</h3>
+<p>If width and height are set on an image, then value of the &quot;intrinsicsize&quot; attribute only affects the values of naturalWidth/naturalHeight, but not the rendered size of the image.</p>
+<div class="demoContent output">
+  {% highlight html %}
+    <img intrinsicsize="250 x 200" width="450" height="400" src="cat.jpg">
+  {% endhighlight %}
+  {% include_relative sized.html %}
+</div>
+
+<script>
+if ( !(HTMLImageElement.prototype.hasOwnProperty('intrinsicSize')) ) {
+  ChromeSamples.setStatus('Intrinsic Size Attribute is not available.\n' +
+    'Please make sure the "Experimental Web Platform features" flag is enabled.');
+}
+</script>

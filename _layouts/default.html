@@ -37,6 +37,9 @@ limitations under the License.
     </script>
     {% assign sub_dirs = page.path | split: '/' | size | minus: 1 %}
     {% capture relative_path_to_root %}{% for i in (1..sub_dirs) %}../{% endfor %}{% endcapture %}
+    {% if page.manifest_url %}
+    <link rel="manifest" href="{{ page.manifest_url }}">
+    {% endif %}
     {% if page.icon_url %}
     <link rel="icon" href="{{ page.icon_url }}">
     {% else %}
