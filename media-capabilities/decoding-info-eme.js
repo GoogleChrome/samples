@@ -35,5 +35,5 @@ navigator.mediaCapabilities.decodingInfo(encryptedMediaConfig).then(result => {
       (result.smooth ? '' : ' NOT') + ' smooth and' +
       (result.powerEfficient ? '' : ' NOT') + ' power efficient.');
 
-  // TODO: Call `keySystemAccess.createMediaKeys()` as you would do in EME.
+  // TODO: Use `result.keySystemAccess.createMediaKeys()` to setup EME playback.
 });
