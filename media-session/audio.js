@@ -74,6 +74,17 @@ navigator.mediaSession.setActionHandler('pause', function() {
   // Do something more than just pausing audio...
 });
 
+/* Stop (supported since Chrome 77) */
+
+try {
+  navigator.mediaSession.setActionHandler('stop', function() {
+    log('> User clicked "Stop" icon.');
+    // TODO: Clear UI playback...
+  });
+} catch(error) {
+  log('Warning! The "stop" media session action is not supported.');
+}
+
 /* Utils */
 
 function getAwesomePlaylist() {
