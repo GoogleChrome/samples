@@ -29,12 +29,12 @@ licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/">CC B
   navigator.mediaSession = navigator.mediaSession || {};
   navigator.mediaSession.setActionHandler = navigator.mediaSession.setActionHandler || function() {};
   window.MediaMetadata = window.MediaMetadata || function() {};
+
+  log = ChromeSamples.log;
 </script>
 
 {% include js_snippet.html filename='audio.js' %}
 
 <script>
-  log = ChromeSamples.log;
-
   document.querySelector('#playButton').addEventListener('click', onPlayButtonClick);
 </script>
