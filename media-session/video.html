@@ -32,13 +32,13 @@ media keys.</p>
   navigator.mediaSession = navigator.mediaSession || {};
   navigator.mediaSession.setActionHandler = navigator.mediaSession.setActionHandler || function() {};
   window.MediaMetadata = window.MediaMetadata || function() {};
+
+  log = ChromeSamples.log;
 </script>
 
 {% include js_snippet.html filename='video.js' %}
 
 <script>
-  log = ChromeSamples.log;
-
   document.querySelector('video').addEventListener('play', onPlayButtonClick, { once: true });
   document.querySelector('video').src = playlist[0].src;
 </script>
