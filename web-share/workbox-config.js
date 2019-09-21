@@ -18,7 +18,7 @@ const shareTargetHandler = async ({event}) => {
 module.exports = {
   clientsClaim: true,
   globDirectory: '.',
-  globPatterns: ['**/*'],
+  globPatterns: ['**/*.{js,html,json,css}'],
   mode: 'production',
   runtimeCaching: [{
     // Create a 'fake' route to handle the incoming POST.
