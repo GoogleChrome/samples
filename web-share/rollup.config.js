@@ -28,5 +28,6 @@ export default {
 			browser: true,
 			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
 		}),
+		// We can't use terser; see https://github.com/terser/terser/issues/443
 	],
 };
