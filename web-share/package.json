@@ -9,9 +9,15 @@
     "rollup": "^1.12.0",
     "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "svelte": "^3.0.0",
-    "workbox-cli": "^5.0.0-beta.0"
+    "workbox-cli": "^5.0.0-beta.0",
+    "workbox-core": "^5.0.0-beta.0",
+    "workbox-precaching": "^5.0.0-beta.0",
+    "workbox-range-requests": "^5.0.0-beta.0",
+    "workbox-routing": "^5.0.0-beta.0",
+    "workbox-strategies": "^5.0.0-beta.0"
   },
   "scripts": {
     "build": "run-s clean rollup workbox",
@@ -20,6 +26,6 @@
     "netlify": "netlify deploy --dir=dist --prod",
     "rollup": "rollup -c",
     "serve": "dhost --port=8080 dist",
-    "workbox": "cd dist && workbox generateSW ../workbox-config.js && cd -"
+    "workbox": "workbox injectManifest workbox-config.js && rm dist/service-worker-sans-manifest.js"
   }
 }

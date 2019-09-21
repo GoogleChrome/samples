@@ -14,13 +14,17 @@
   "name": "Scrapbook PWA",
   "scope": "/",
   "share_target": {
-    "action": "/share-target",
+    "action": "/_share-target",
     "enctype": "multipart/form-data",
     "method": "POST",
     "params": {
       "files": [{
-        "name": "image",
-        "accept": ["image/*"]
+        "name": "media",
+        "accept": [
+          "audio/*",
+          "image/*",
+          "video/*"
+        ]
       }]
     }
   },
