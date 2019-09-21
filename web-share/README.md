@@ -1,69 +1,51 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Web Share Demo
 
----
+This is a small [progressive web app](https://developers.google.com/web/progressive-web-apps/)
+demo that shows off the use of two emerging web platform features:
 
-# svelte app
+- [Web Share Target API Level 2](https://developers.google.com/web/updates/2018/12/web-share-target),
+for receiving incoming media files shared **by** other installed applications.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+- [Web Share Level 2](https://developers.google.com/web/updates/2019/05/web-share-files),
+for taking local media files and natively sharing them **to** other installed applications.
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## Requirements
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+To fully use this web app, you need a combination of browser and operating
+system that supports the underlying APIs. As of Sept. 2019, that's limited to
+Chrome on Android.
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+Before you can receive incoming media files via the Web Share Target API Level
+2, you need to add the web app to your home screen. This will register it as a
+share target with the operating system, and you'll start seeing it in the list
+of available share targets when you attempt to share supported media from a
+local application (e.g. a photo gallery).
 
+## Technologies Used
 
-## Get started
+- [Svelte](https://svelte.dev) powers the HTML generation.
+[This template](https://github.com/sveltejs/template) was used as a starting point.
 
-Install the dependencies...
+- [Workbox](https://developers.google.com/web/tools/workbox/) powers the
+[service worker](workbox-config.js), allowing the web app to cache incoming
+media files, and allowing it to work while offline.
 
-```bash
-cd svelte-app
-npm install
-```
+- [Roman Nurik](https://twitter.com/romannurik)'s
+[Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/)
+was used to generate the icons.
 
-...then start [Rollup](https://rollupjs.org):
+## License
 
-```bash
-npm run dev
-```
+Copyright 2019 Google, Inc.
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Licensed under the [Apache License, Version 2.0](LICENSE) (the "License");
+you may not use this file except in compliance with the License. You may
+obtain a copy of the License at
 
+  http://www.apache.org/licenses/LICENSE-2.0
 
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-now
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public
-```
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
