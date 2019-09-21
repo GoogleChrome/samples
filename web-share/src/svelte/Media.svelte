@@ -14,21 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	export let src;
-	export const canShare = 'canShare' in navigator;
+	export let contentType = '';
+	export let src = '';
+
+	const canShare = 'canShare' in navigator;
 
 	function handleView() {
 		window.location.href = src;
 	}
 
 	async function handleDelete() {
-		const cache = await caches.open('images');
+		const cache = await caches.open('media');
 		await cache.delete(src);
 		window.location.reload();
 	}
 
 	async function handleShare() {
-		const cache = await caches.open('images');
+		const cache = await caches.open('media');
 		const response = await cache.match(src);
 		const blob = await response.blob();
 		const file = new  File([blob], src, {
@@ -59,14 +61,22 @@ limitations under the License.
 		width: 100%;
 	}
 
-	img {
+	audio, img, video {
 		height: auto;
 		max-width: 100%;
 	}
 </style>
 
 <div class="card">
-	<img {src} alt="An image in the scrapbook.">
+	{#if contentType.startsWith('image/')}
+		<img {src} alt="An image in the scrapbook.">
+	{:else if contentType.startsWith('video/')}
+		<video {src} controls alt="A video in the scrapbook."></video>
+	{:else if contentType.startsWith('audio/')}
+		<audio {src} controls alt="A sound in the scrapbook."></audio>
+	{:else}
+		<p>Unable to display media with MIME type <code>{contentType}</code>.</p>
+	{/if}
 	<div class="buttons">
 		<button on:click={handleView}>View</button>
 		{#if canShare}

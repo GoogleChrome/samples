@@ -14,14 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	import Image from './Image.svelte';
+	import Media from './Media.svelte';
 
-	async function getImageUrls() {
-		const cache = await caches.open('images');
-		const cachedRequests = await cache.keys();
-		return cachedRequests.map(request => request.url).reverse();
+	async function getCachedMediaMetadata() {
+		const cache = await caches.open('media');
+		const requests = await cache.keys();
+		return Promise.all(requests.reverse().map(async (request) => {
+			const response = await cache.match(request);
+			return {
+				contentType: response.headers.get('content-type'),
+				src: request.url,
+			};
+		}));
 	}
-	const imageUrlsPromise = getImageUrls();
+	const cachedMediaMetadataPromise = getCachedMediaMetadata();
 </script>
 
 <style>
@@ -32,18 +38,18 @@ limitations under the License.
 	}
 </style>
 
-{#await imageUrlsPromise then imageUrls}
-	{#if imageUrls.length > 0}
+{#await cachedMediaMetadataPromise then cachedMediaMetadatas}
+	{#if cachedMediaMetadatas.length > 0}
 		<div>
-			{#each imageUrls as src}
-				<Image {src}/>
+			{#each cachedMediaMetadatas as metadata}
+				<Media {...metadata}/>
 			{/each}
 		</div>
 	{:else}
-		<p>You don't have any saved images.</p>
+		<p>You don't have any saved media.</p>
 		<ol>
 			<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-			<li>Find an image in an another app (like Google Photos) and share it.</li>
+			<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
 			<li>Choose "Scrapbook PWA" as the share destination.</li>
 		</ol>
 	{/if}
