@@ -32,6 +32,7 @@ limitations under the License.
 	}
 </style>
 
+<h1>Scrapbook PWA</h1>
 {#await imageUrlsPromise then imageUrls}
 	{#if imageUrls.length > 0}
 		<div>
@@ -39,11 +40,10 @@ limitations under the License.
 				<Image {src}/>
 			{/each}
 		</div>
-	{/if}
-	{#if imageUrls.length === 0}
+	{:else}
 		<p>You don't have any saved images.</p>
 		<ol>
-			<li>Please <a href="https://developers.google.com/web/fundamentals/app-install-banners/">add</a> this web app to your homescreen on Android.</li>
+			<li>Please <a href="https://developers.google.com/web/fundamentals/app-install-banners/">add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
 			<li>Find an image in an another app (like Google Photos) and share it.</li>
 			<li>Choose "Scrapbook PWA" as the share destination.</li>
 		</ol>
