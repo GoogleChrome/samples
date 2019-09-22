@@ -32,8 +32,8 @@ limitations under the License.
 
 	let message = '';
 	if (BroadcastChannel) {
-		const channel = new BroadcastChannel('message');
-		channel.addEventListener('message', (event) => message = event.data);
+		const brodcastChannel = new BroadcastChannel('message');
+		brodcastChannel.addEventListener('message', (event) => message = event.data);
 	};
 </script>
 

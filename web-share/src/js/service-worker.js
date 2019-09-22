@@ -7,12 +7,26 @@ import {registerRoute} from 'workbox-routing';
 const MEDIA_CACHE_NAME = 'media';
 const MEDIA_URL_PREFIX = '/_media/';
 
+const broadcastChannel = BroadcastChannel ? new BroadcastChannel('message') : null;
+
 const shareTargetHandler = async ({event}) => {
+  if (broadcastChannel) {
+    broadcastChannel.postMessage('Saving media locally...');
+  }
+
   const formData = await event.request.formData();
   const mediaFiles = formData.getAll('media');
   const cache = await caches.open(MEDIA_CACHE_NAME);
 
   for (const mediaFile of mediaFiles) {
+    // TODO: Instead of bailing, come up with a
+    // default name for each possible MIME type.
+    if (!mediaFile.name) {
+      if (broadcastChannel) {
+        broadcastChannel.postMessage('Sorry! No name found on incoming media.');
+      }
+      continue;
+    }
     await cache.put(
       // TODO: Handle scenarios in which mediaFile.name isn't set,
       // or doesn't include a proper extension.
