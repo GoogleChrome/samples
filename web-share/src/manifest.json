@@ -7,6 +7,11 @@
     "sizes": "512x512",
     "type": "image/png"
   }, {
+    "purpose": "maskable",
+    "src": "images/splash.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }, {
     "src": "images/icon.png",
     "sizes": "192x192",
     "type": "image/png"
