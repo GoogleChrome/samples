@@ -16,21 +16,22 @@ limitations under the License.
 <script>
 	export let active = false;
 	export let href = '';
-	export let src = '';
+	export let svg = '';
 	export let text = '';
 	export let title ='';
 </script>
 
 <style>
 	.active {
-		filter: invert(9%) sepia(100%) saturate(7131%) hue-rotate(250deg) brightness(81%) contrast(138%);
+		filter: inherit;
 	}
 
 	a {
 		align-items: center;
-		color: black;
+		color: var(--background-color);
 		display: flex;
-		filter: invert(66%) sepia(1%) saturate(0%) hue-rotate(6deg) brightness(91%) contrast(96%);;
+		fill: var(--background-color);
+		filter: brightness(0.6);
 		flex-direction: column;
 		font-size: 12px;
 		justify-content: center;
@@ -40,6 +41,6 @@ limitations under the License.
 </style>
 
 <a {href} {title} class:active="{active}">
-	<img {src} alt='icon'>
+	<span class="svg">{@html svg}</span>
 	<span>{text}</span>
 </a>

@@ -21,7 +21,7 @@ limitations under the License.
 <style>
 	div {
 		align-items: center;
-		background-color: #666666;
+		background-color: var(--secondary-color);
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;

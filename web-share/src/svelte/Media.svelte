@@ -45,8 +45,7 @@ limitations under the License.
 
 <style>
 	.card {
-		background-color: #ecfcff;
-		border: 1px solid #b2fcff;
+		border: 1px solid var(--icon-color);
 		display: flex;
 		flex-direction: column;
 		margin: 8px;
