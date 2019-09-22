@@ -14,28 +14,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	export let message = '';
+	export let active = false;
+	export let href = '';
+	export let src = '';
+	export let text = '';
+	export let title ='';
 </script>
 
 <style>
-	.visible {
-		display: flex;
+	.active {
+		filter: invert(9%) sepia(100%) saturate(7131%) hue-rotate(250deg) brightness(81%) contrast(138%);
 	}
 
-	div {
+	a {
 		align-items: center;
-		background-color: #323232;
-		border-radius: 4px;
-		bottom: 72px;
-		color: #e1e1e1;
-		display: none;
-		left: 8px;
-		padding: 16px;
-		position: fixed;
-		right: 8px;
+		color: black;
+		display: flex;
+		filter: invert(66%) sepia(1%) saturate(0%) hue-rotate(6deg) brightness(91%) contrast(96%);;
+		flex-direction: column;
+		font-size: 12px;
+		justify-content: center;
+		padding: 12px;
+		text-decoration: none;
 	}
 </style>
 
-<div class:visible="{message}">
-	<span>{message}</span>
-</div>
+<a {href} {title} class:active="{active}">
+	<img {src} alt='icon'>
+	<span>{text}</span>
+</a>

@@ -15,7 +15,30 @@ limitations under the License.
 -->
 <script>
 	import Media from './Media.svelte';
+	import Navbar from './Navbar.svelte';
 	import Snackbar from './Snackbar.svelte';
+
+	const icons = [{
+		href: '#images',
+		src: 'images/image.svg',
+		text: 'Images',
+		title: 'View saved images.',
+	}, {
+		href: '#videos',
+		src: 'images/video.svg',
+		text: 'Videos',
+		title: 'View saved videos.',
+	}, {
+		href: '#audio',
+		src: 'images/audio.svg',
+		text: 'Audio',
+		title: 'View saved videos.',
+	}, {
+		href: '#help',
+		src: 'images/help.svg',
+		text: 'Help',
+		title: 'Learn more about this web app.',
+	}];
 
 	async function getCachedMediaMetadata() {
 		const cache = await caches.open('media');
@@ -38,27 +61,91 @@ limitations under the License.
 </script>
 
 <style>
-	div {
+	#app {
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: 0;
+	}
+
+	main {
+		flex-grow: 1;
+		margin: 16px;
+		overflow-y: auto;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	.media {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
+
+	footer {
+		flex-shrink: 0;
+		margin: 0;
+	}
 </style>
 
-{#await cachedMediaMetadataPromise then cachedMediaMetadatas}
-	{#if cachedMediaMetadatas.length > 0}
-		<div>
-			{#each cachedMediaMetadatas as metadata}
-				<Media {...metadata}/>
-			{/each}
-		</div>
-	{:else}
-		<p>You don't have any saved media.</p>
-		<ol>
-			<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-			<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-			<li>Choose "Scrapbook PWA" as the share destination.</li>
-		</ol>
-	{/if}
-{/await}
-<Snackbar {message}/>
+<div id="app">
+	<main>
+		{#await cachedMediaMetadataPromise then cachedMediaMetadatas}
+			{#if cachedMediaMetadatas.length > 0}
+				<div class="media">
+					{#each cachedMediaMetadatas as metadata}
+						<Media {...metadata}/>
+					{/each}
+				</div>
+			{:else}
+				<p>You don't have any saved media.</p>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+				<ol>
+					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
+					<li>Choose "Scrapbook PWA" as the share destination.</li>
+				</ol>
+			{/if}
+		{/await}
+		<Snackbar {message}/>
+	</main>
+
+	<footer>
+		<Navbar {icons}/>
+	</footer>
+</div>
+

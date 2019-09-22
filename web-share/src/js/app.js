@@ -27,7 +27,7 @@ if ('serviceWorker' in navigator) {
 }
 
 const app = new App({
-	target: document.querySelector('main'),
+	target: document.body,
 });
 
 export default app;

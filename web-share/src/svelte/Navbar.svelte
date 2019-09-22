@@ -14,28 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	export let message = '';
+	import Icon from './Icon.svelte';
+	export let icons = [];
 </script>
 
 <style>
-	.visible {
-		display: flex;
-	}
-
 	div {
 		align-items: center;
-		background-color: #323232;
-		border-radius: 4px;
-		bottom: 72px;
-		color: #e1e1e1;
-		display: none;
-		left: 8px;
-		padding: 16px;
-		position: fixed;
-		right: 8px;
+		background-color: #666666;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
 	}
 </style>
 
-<div class:visible="{message}">
-	<span>{message}</span>
+<div>
+	{#each icons as icon}
+		<Icon {...icon}/>
+	{/each}
 </div>
