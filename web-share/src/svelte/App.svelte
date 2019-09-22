@@ -80,19 +80,14 @@ limitations under the License.
 		overflow-y: auto;
 	}
 
-	p {
-		margin: 0;
+	main a {
+		color: var(--text-color);
 	}
 
 	.media {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-	}
-
-	footer {
-		flex-shrink: 0;
-		margin: 0;
 	}
 </style>
 
@@ -107,36 +102,6 @@ limitations under the License.
 				</div>
 			{:else}
 				<p>You don't have any saved media.</p>
-				<ol>
-					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-					<li>Choose "Scrapbook PWA" as the share destination.</li>
-				</ol>
-				<ol>
-					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-					<li>Choose "Scrapbook PWA" as the share destination.</li>
-				</ol>
-				<ol>
-					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-					<li>Choose "Scrapbook PWA" as the share destination.</li>
-				</ol>
-				<ol>
-					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-					<li>Choose "Scrapbook PWA" as the share destination.</li>
-				</ol>
-				<ol>
-					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-					<li>Choose "Scrapbook PWA" as the share destination.</li>
-				</ol>
-				<ol>
-					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
-					<li>Choose "Scrapbook PWA" as the share destination.</li>
-				</ol>
 				<ol>
 					<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
 					<li>Find an image, movie, or audio file in an another app (like Google Photos) and share it.</li>
