@@ -24,10 +24,10 @@ limitations under the License.
 
 	div {
 		align-items: center;
-		background-color: #323232;
+		background-color: var(--secondary-color);
 		border-radius: 4px;
 		bottom: 72px;
-		color: #e1e1e1;
+		color: var(--background-color);
 		display: none;
 		left: 8px;
 		padding: 16px;
