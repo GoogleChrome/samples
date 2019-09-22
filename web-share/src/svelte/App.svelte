@@ -15,6 +15,7 @@ limitations under the License.
 -->
 <script>
 	import Media from './Media.svelte';
+	import Snackbar from './Snackbar.svelte';
 
 	async function getCachedMediaMetadata() {
 		const cache = await caches.open('media');
@@ -28,6 +29,12 @@ limitations under the License.
 		}));
 	}
 	const cachedMediaMetadataPromise = getCachedMediaMetadata();
+
+	let message = '';
+	if (BroadcastChannel) {
+		const channel = new BroadcastChannel('message');
+		channel.addEventListener('message', (event) => message = event.data);
+	};
 </script>
 
 <style>
@@ -54,3 +61,4 @@ limitations under the License.
 		</ol>
 	{/if}
 {/await}
+<Snackbar {message}/>
