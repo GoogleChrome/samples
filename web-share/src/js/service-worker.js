@@ -4,10 +4,9 @@ import {precacheAndRoute} from 'workbox-precaching';
 import {RangeRequestsPlugin} from 'workbox-range-requests';
 import {registerRoute} from 'workbox-routing';
 
-const MEDIA_CACHE_NAME = 'media';
-const MEDIA_URL_PREFIX = '/_media/';
+import {cacheName, channelName, urlPrefix} from './constants';
 
-const broadcastChannel = BroadcastChannel ? new BroadcastChannel('message') : null;
+const broadcastChannel = BroadcastChannel ? new BroadcastChannel(channelName) : null;
 
 const shareTargetHandler = async ({event}) => {
   if (broadcastChannel) {
@@ -16,7 +15,7 @@ const shareTargetHandler = async ({event}) => {
 
   const formData = await event.request.formData();
   const mediaFiles = formData.getAll('media');
-  const cache = await caches.open(MEDIA_CACHE_NAME);
+  const cache = await caches.open(cacheName);
 
   for (const mediaFile of mediaFiles) {
     // TODO: Instead of bailing, come up with a
@@ -30,7 +29,7 @@ const shareTargetHandler = async ({event}) => {
     await cache.put(
       // TODO: Handle scenarios in which mediaFile.name isn't set,
       // or doesn't include a proper extension.
-      `${MEDIA_URL_PREFIX}${Date.now()}-${mediaFile.name}`,
+      `${urlPrefix}${Date.now()}-${mediaFile.name}`,
       new Response(mediaFile)
     );
   }
@@ -40,7 +39,7 @@ const shareTargetHandler = async ({event}) => {
 };
 
 const cachedMediaHandler = new CacheOnly({
-  cacheName: MEDIA_CACHE_NAME,
+  cacheName,
   plugins: [
     // Support for cache requests that include a Range: header.
     new RangeRequestsPlugin(),
@@ -61,6 +60,6 @@ registerRoute(
 );
 
 registerRoute(
-  new RegExp(MEDIA_URL_PREFIX),
+  new RegExp(urlPrefix),
   cachedMediaHandler
 );

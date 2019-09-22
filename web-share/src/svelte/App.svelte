@@ -18,6 +18,8 @@ limitations under the License.
 	import Navbar from './Navbar.svelte';
 	import Snackbar from './Snackbar.svelte';
 
+	import {cacheName, channelName} from '../js/constants';
+
 	const icons = [{
 		href: '#images',
 		src: 'images/image.svg',
@@ -41,7 +43,7 @@ limitations under the License.
 	}];
 
 	async function getCachedMediaMetadata() {
-		const cache = await caches.open('media');
+		const cache = await caches.open(cacheName);
 		const requests = await cache.keys();
 		return Promise.all(requests.reverse().map(async (request) => {
 			const response = await cache.match(request);
@@ -55,7 +57,7 @@ limitations under the License.
 
 	let message = '';
 	if (BroadcastChannel) {
-		const brodcastChannel = new BroadcastChannel('message');
+		const brodcastChannel = new BroadcastChannel(channelName);
 		brodcastChannel.addEventListener('message', (event) => message = event.data);
 	};
 </script>
