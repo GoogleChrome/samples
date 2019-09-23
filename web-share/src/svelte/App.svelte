@@ -17,10 +17,12 @@ limitations under the License.
 	import Router from 'svelte-spa-router'
 
 	import {channelName} from '../js/constants';
+	import Audio from './routes/Audio.svelte';
 	import Help from './routes/Help.svelte';
 	import Images from './routes/Images.svelte';
 	import Navbar from './components/Navbar.svelte';
 	import Snackbar from './components/Snackbar.svelte';
+	import Videos from './routes/Videos.svelte';
 
 	const icons = [{
 		href: '/images',
@@ -52,8 +54,8 @@ limitations under the License.
 
 	const routes = {
 		'/images': Images,
-		'/videos': Images,
-		'/audio': Images,
+		'/videos': Videos,
+		'/audio': Audio,
 		'/': Help,
 	};
 </script>

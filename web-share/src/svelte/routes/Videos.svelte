@@ -19,7 +19,7 @@ limitations under the License.
 	import {getCachedMediaMetadata} from '../../js/getCachedMediaMetadata';
   import Media from '../components/Media.svelte';
 
-  const cachedMediaMetadataPromise = getCachedMediaMetadata('image');
+  const cachedMediaMetadataPromise = getCachedMediaMetadata('video');
 </script>
 
 <style>
@@ -38,10 +38,10 @@ limitations under the License.
       {/each}
     </div>
   {:else}
-    <span>You don't have any saved images.</span>
+    <span>You don't have any saved videos.</span>
     <ol>
       <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-      <li>Find an image in an another app (like Google Photos) and share it.</li>
+      <li>Find a video in an another app (like Google Photos) and share it.</li>
       <li>Choose "Scrapbook PWA" as the share destination.</li>
     </ol>
   {/if}
