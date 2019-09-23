@@ -14,7 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	export let active = false;
+	import {link} from 'svelte-spa-router';
+	import active from 'svelte-spa-router/active';
+
 	export let href = '';
 	export let svg = '';
 	export let text = '';
@@ -22,8 +24,8 @@ limitations under the License.
 </script>
 
 <style>
-	.active {
-		filter: inherit;
+	:global(a.active) {
+		filter: inherit !important;
 	}
 
 	a {
@@ -40,7 +42,7 @@ limitations under the License.
 	}
 </style>
 
-<a {href} {title} class:active="{active}">
+<a {href} {title} use:link use:active>
 	<span class="svg">{@html svg}</span>
 	<span>{text}</span>
 </a>
