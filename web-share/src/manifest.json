@@ -1,5 +1,5 @@
 {
-  "background_color": "#ecfcff",
+  "background_color": "#ECEFF1",
   "description": "An offline-first PWA that acts as a share source and target.",
   "display": "standalone",
   "icons": [{
@@ -35,5 +35,5 @@
   },
   "short_name": "Scrapbook PWA",
   "start_url": "/?utm_source=installed",
-  "theme_color": "#b2fcff"
+  "theme_color": "#37474F"
 }
