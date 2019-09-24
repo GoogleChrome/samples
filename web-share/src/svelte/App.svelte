@@ -59,10 +59,6 @@ limitations under the License.
 		padding: 0 16px 0 16px;
 		overflow-y: auto;
 	}
-
-	:global(a) {
-		color: var(--text-color);
-	}
 </style>
 
 <div id="app">
