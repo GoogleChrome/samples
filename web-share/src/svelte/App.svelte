@@ -56,7 +56,7 @@ limitations under the License.
 
 	main {
 		flex-grow: 1;
-		margin: 0 16px 0 16px;
+		padding: 0 16px 0 16px;
 		overflow-y: auto;
 	}
 
