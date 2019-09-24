@@ -1,3 +1,4 @@
+import {terser} from 'rollup-plugin-terser';
 import copy from 'rollup-plugin-copy';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
@@ -29,7 +30,7 @@ export default [{
 			browser: true,
 			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
 		}),
-		// We can't use terser; see https://github.com/terser/terser/issues/443
+		terser(),
 	],
 }, {
 	input: 'src/js/service-worker.js',
@@ -42,7 +43,8 @@ export default [{
 	plugins: [
 		resolve(),
 		replace({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
 		}),
+		terser(),
 	],
 }];
