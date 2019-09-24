@@ -51,7 +51,7 @@ limitations under the License.
 		box-shadow: 1px 1px 1px var(--secondary-color);
 		display: flex;
 		flex-direction: column;
-		margin: 8px;
+		margin: 16px;
 		padding: 8px;
 	}
 

@@ -14,6 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+<script context="module">
+  export const href = '/videos';
+	export const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>';
+  export const text = 'Videos';
+	export const title = 'View saved videos.';
+</script>
+
 <script>
 	import {cacheName} from '../../js/constants';
 	import {getCachedMediaMetadata} from '../../js/getCachedMediaMetadata';
@@ -38,7 +45,7 @@ limitations under the License.
       {/each}
     </div>
   {:else}
-    <span>You don't have any saved videos.</span>
+    <p>You don't have any saved videos.</p>
     <ol>
       <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
       <li>Find a video in an another app (like Google Photos) and share it.</li>

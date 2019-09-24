@@ -14,6 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+<script context="module">
+  export const href = '/images';
+	export const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>';
+  export const text = 'Images';
+	export const title = 'View saved images.';
+</script>
+
 <script>
 	import {cacheName} from '../../js/constants';
 	import {getCachedMediaMetadata} from '../../js/getCachedMediaMetadata';
@@ -38,7 +45,7 @@ limitations under the License.
       {/each}
     </div>
   {:else}
-    <span>You don't have any saved images.</span>
+    <p>You don't have any saved images.</p>
     <ol>
       <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
       <li>Find an image in an another app (like Google Photos) and share it.</li>
