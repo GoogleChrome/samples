@@ -21,6 +21,12 @@ limitations under the License.
 	export const title = 'Learn more about this web app.';
 </script>
 
-<p>
+<script>
+  import {fade} from 'svelte/transition';
+
+  import {fadeConfig} from '../../js/constants';
+</script>
+
+<p in:fade={fadeConfig}>
 	Learn more about this project <a href="https://github.com/jeffposnick/samples/tree/web-share/web-share#web-share-demo">on GitHub</a>.
 </p>

@@ -24,13 +24,18 @@ limitations under the License.
 </script>
 
 <script>
+  import {fade} from 'svelte/transition';
+
+  import {fadeConfig} from '../../js/constants';
 	import {getCachedMediaMetadata} from '../../js/getCachedMediaMetadata';
   import MediaList from '../components/MediaList.svelte';
 
   const cachedMediaMetadataPromise = getCachedMediaMetadata(mimePrefix);
 </script>
 
-{#await cachedMediaMetadataPromise then cachedMediaMetadatas}
-  <MediaList {cachedMediaMetadatas} typeOfMedia={text.toLowerCase()}/>
-{/await}
+<div in:fade={fadeConfig}>
+  {#await cachedMediaMetadataPromise then cachedMediaMetadatas}
+    <MediaList {cachedMediaMetadatas} typeOfMedia={text.toLowerCase()}/>
+  {/await}
+</div>
 

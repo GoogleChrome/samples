@@ -26,6 +26,10 @@ limitations under the License.
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
+
+	li {
+		margin-bottom: 16px;
+	}
 </style>
 
 {#if cachedMediaMetadatas.length > 0}
