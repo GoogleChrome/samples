@@ -47,15 +47,17 @@ video.addEventListener('ended', function() {
 
 /* Seek Backward & Seek Forward */
 
-let skipTime = 10; /* Time to skip in seconds */
+let defaultSkipTime = 10; /* Time to skip in seconds by default */
 
-navigator.mediaSession.setActionHandler('seekbackward', function() {
+navigator.mediaSession.setActionHandler('seekbackward', function(event) {
   log('> User clicked "Seek Backward" icon.');
+  const skipTime = event.seekOffset || defaultSkipTime;
   video.currentTime = Math.max(video.currentTime - skipTime, 0);
 });
 
-navigator.mediaSession.setActionHandler('seekforward', function() {
+navigator.mediaSession.setActionHandler('seekforward', function(event) {
   log('> User clicked "Seek Forward" icon.');
+  const skipTime = event.seekOffset || defaultSkipTime;
   video.currentTime = Math.min(video.currentTime + skipTime, video.duration);
 });
 
@@ -82,6 +84,20 @@ try {
   });
 } catch(error) {
   log('Warning! The "stop" media session action is not supported.');
+}
+
+/* Seek To (supported since Chrome 78) */
+
+try {
+  navigator.mediaSession.setActionHandler('seekto', function(event) {
+    log('> User clicked "Seek To" icon.');
+    if (event.fastSeek) {
+      return;
+    }
+    video.currentTime = event.seekTime;
+  });
+} catch(error) {
+  log('Warning! The "seekto" media session action is not supported.');
 }
 
 /* Utils */
