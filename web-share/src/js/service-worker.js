@@ -30,7 +30,12 @@ const shareTargetHandler = async ({event}) => {
       // TODO: Handle scenarios in which mediaFile.name isn't set,
       // or doesn't include a proper extension.
       `${urlPrefix}${Date.now()}-${mediaFile.name}`,
-      new Response(mediaFile)
+      new Response(mediaFile, {
+        headers: {
+          'content-length': mediaFile.size,
+          'content-type': mediaFile.type,
+        },
+      })
     );
   }
   
