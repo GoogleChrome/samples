@@ -14,6 +14,7 @@
  * limitations under the License.
  **/
 
+import {cacheName} from './constants';
 import App from '../svelte/App.svelte';
 
 if ('serviceWorker' in navigator) {
@@ -32,6 +33,19 @@ if ('serviceWorker' in navigator) {
 			}
 		});
 	});
+}
+
+const testFileURLs = {
+	image: '/testfiles/image.jpg',
+	video: '/testfiles/video.mp4',
+	audio: '/testfiles/audio.mp3',
+};
+window.addTestFiles = async (type, number) => {
+	const cache = await caches.open(cacheName);
+	for (let i = 0; i < number; i++) {
+		await cache.add(`${testFileURLs[type]}?${Math.random()}`);
+	}
+	window.location.reload();
 }
 
 const app = new App({

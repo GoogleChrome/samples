@@ -18,6 +18,7 @@ export default [{
 				{src: 'src/*.{json,html}', dest: 'dist'},
 				{src: 'src/css/**/*', dest: 'dist/css'},
 				{src: 'src/images/**/*', dest: 'dist/images'},
+				{src: 'testfiles/*', dest: 'dist/testfiles'},
 			],
 		}),
 		svelte({
