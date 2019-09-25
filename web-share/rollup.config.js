@@ -42,6 +42,9 @@ export default [{
 		file: 'dist/service-worker-sans-manifest.js'
 	},
 	plugins: [
+		svelte({
+			dev: false,
+		}),
 		resolve(),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),

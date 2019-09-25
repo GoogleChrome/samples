@@ -24,7 +24,7 @@ limitations under the License.
 
 	div {
 		align-items: center;
-		background-color: var(--secondary-color);
+		background-color: #323232;
 		border-radius: 4px;
 		bottom: 72px;
 		color: var(--background-color);
