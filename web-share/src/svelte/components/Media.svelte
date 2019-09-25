@@ -65,8 +65,11 @@ limitations under the License.
 		width: 100%;
 	}
 
-	audio, img, video {
+	img, video {
 		height: auto;
+	}
+
+	audio, img, video {
 		max-width: 100%;
 	}
 </style>
