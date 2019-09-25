@@ -68,7 +68,7 @@ limitations under the License.
 	</main>
 
 	<footer>
-		<Navbar icons={orderedRoutes}/>
+		<Navbar buttons={orderedRoutes}/>
 	</footer>
 </div>
 

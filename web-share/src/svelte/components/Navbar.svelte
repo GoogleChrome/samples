@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	import Icon from './Icon.svelte';
+	import NavbarButton from './NavbarButton.svelte';
 
-	export let icons = [];
+	export let buttons = [];
 </script>
 
 <style>
@@ -30,7 +30,7 @@ limitations under the License.
 </style>
 
 <div>
-	{#each icons as icon}
-		<Icon {...icon}/>
+	{#each buttons as button}
+		<NavbarButton {...button}/>
 	{/each}
 </div>
