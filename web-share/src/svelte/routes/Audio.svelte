@@ -24,34 +24,12 @@ limitations under the License.
 </script>
 
 <script>
-	import {cacheName} from '../../js/constants';
 	import {getCachedMediaMetadata} from '../../js/getCachedMediaMetadata';
-  import Media from '../components/Media.svelte';
+  import MediaList from '../components/MediaList.svelte';
 
-  const cachedMediaMetadataPromise = getCachedMediaMetadata('audio');
+  const cachedMediaMetadataPromise = getCachedMediaMetadata(mimePrefix);
 </script>
 
-<style>
-	div {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-</style>
-
 {#await cachedMediaMetadataPromise then cachedMediaMetadatas}
-  {#if cachedMediaMetadatas.length > 0}
-    <div>
-      {#each cachedMediaMetadatas as metadata}
-        <Media {...metadata}/>
-      {/each}
-    </div>
-  {:else}
-    <p>You don't have any saved audio.</p>
-    <ol>
-      <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-      <li>Find a sound an another app and share it.</li>
-      <li>Choose "Scrapbook PWA" as the share destination.</li>
-    </ol>
-  {/if}
+  <MediaList {cachedMediaMetadatas} typeOfMedia={text.toLowerCase()}/>
 {/await}
