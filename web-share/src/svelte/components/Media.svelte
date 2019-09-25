@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
+	import Button from './Button.svelte';
+
 	export let contentType = '';
 	export let src = '';
 
@@ -80,10 +82,10 @@ limitations under the License.
 		<p>Unable to display media with MIME type <code>{contentType}</code>.</p>
 	{/if}
 	<div class="buttons">
-		<button on:click={handleView}>View</button>
+		<Button handleClick={handleView}>View</Button>
 		{#if canShare}
-			<button on:click={handleShare}>Share</button>
+			<Button handleClick={handleShare}>Share</Button>
 		{/if}
-		<button on:click={handleDelete}>Delete</button>
+		<Button handleClick={handleDelete}>Delete</Button>
 	</div>
 </div>
