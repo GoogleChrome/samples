@@ -19,15 +19,25 @@ async function onButtonClick() {
   }
 
   try {
-    log('Requesting Bluetooth Scan...');
-    log('with ' + JSON.stringify(options));
-    await navigator.bluetooth.requestLEScan(options);
+    log('Requesting Bluetooth Scan with options: ' + JSON.stringify(options));
+    const scan = await navigator.bluetooth.requestLEScan(options);
 
-    log('Scan started...');
+    log('Scan started with:');
+    log(' acceptAllAdvertisements: ' + JSON.stringify(scan.acceptAllAdvertisements));
+    log(' active: ' + JSON.stringify(scan.active));
+    log(' keepRepeatedDevices: ' + JSON.stringify(scan.keepRepeatedDevices));
+    log(' filters: ' + JSON.stringify(scan.filters));
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       log("Advertisement received.");
     });
+
+    setTimeout(stopScan, 10000);
+    function stopScan() {
+      log('Stopping scan...');
+      scan.stop();
+      log('Stopped.');
+    }
   } catch(error)  {
     log('Argh! ' + error);
   }
