@@ -23,9 +23,9 @@ async function onButtonClick() {
     const scan = await navigator.bluetooth.requestLEScan(options);
 
     log('Scan started with:');
-    log(' acceptAllAdvertisements: ' + JSON.stringify(scan.acceptAllAdvertisements));
-    log(' active: ' + JSON.stringify(scan.active));
-    log(' keepRepeatedDevices: ' + JSON.stringify(scan.keepRepeatedDevices));
+    log(' acceptAllAdvertisements: ' + scan.acceptAllAdvertisements);
+    log(' active: ' + scan.active);
+    log(' keepRepeatedDevices: ' + scan.keepRepeatedDevices);
     log(' filters: ' + JSON.stringify(scan.filters));
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
@@ -36,7 +36,7 @@ async function onButtonClick() {
     function stopScan() {
       log('Stopping scan...');
       scan.stop();
-      log('Stopped.');
+      log('Stopped.  scan.active = ' + scan.active);
     }
   } catch(error)  {
     log('Argh! ' + error);
