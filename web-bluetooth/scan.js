@@ -29,7 +29,7 @@ async function onButtonClick() {
     log(' filters: ' + JSON.stringify(scan.filters));
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
-      log("Advertisement received.");
+      log('Advertisement received.');
     });
 
     setTimeout(stopScan, 10000);
