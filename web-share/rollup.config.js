@@ -36,10 +36,10 @@ export default [{
 }, {
 	input: 'src/js/service-worker.js',
 	output: {
-		sourcemap: false,
+		sourcemap: true,
 		format: 'iife',
 		name: 'workbox',
-		file: 'dist/service-worker-sans-manifest.js'
+		file: 'dist/service-worker.js'
 	},
 	plugins: [
 		svelte({
