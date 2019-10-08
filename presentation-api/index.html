@@ -1,7 +1,7 @@
 ---
-feature_name: Presentation API
-chrome_version: 51
-feature_id: 6676265876586496
+feature_name: Presentation Receiver API
+chrome_version: 59
+feature_id: 5414209298890752
 ---
 
 <h3>Background</h3>
@@ -10,109 +10,127 @@ feature_id: 6676265876586496
   This sample illustrates the use of
   <a href="https://w3c.github.io/presentation-api/">Presentation API</a>,
   which gives the ability to access external presentation-type displays and use
-  them for presenting web content. The <code>PresentationRequest</code> object
+  them for presenting Web content. The <code>PresentationRequest</code> object
   is associated with a request to initiate or reconnect to a presentation made
   by a controlling browsing context and it takes in a presentation request URL
   when constructed. A presentation can be started by calling the
   <code>start()</code> method on the <code>PresentationRequest</code> object.
 </p>
-<p>
-  Presentation API is supported only on desktop for now. Media Router has to be
-  enabled for the demo to work: <code>chrome://flags/#media-router</code>.
-</p>
 
-{% capture initial_output_content %}
 <p>
-  <button id="createRequest">new PresentationRequest()</button>
+  <button id="start">presentationRequest.start()</button>
 </p>
 <p>
-  <button id="start" disabled>presentationRequest.start()</button>
+  <input id="message" type="text" placeholder="Enter a message..." list="fruits" >
+  <datalist id="fruits">
+    <option value="grapes">
+    <option value="watermelon">
+    <option value="melon">
+    <option value="tangerine">
+    <option value="lemon">
+    <option value="banana">
+    <option value="pineapple">
+    <option value="green apple">
+    <option value="apple">
+    <option value="pear">
+    <option value="peach">
+    <option value="cherries">
+    <option value="strawberry">
+  </datalist>
+  <button id="sendMessage">presentationConnection.send(message)</button>
 </p>
 <p>
-  <input id="presentationId" type="text" placeholder="presentationId">
-  <button id="reconnect" disabled>presentationRequest.reconnect(presentationId)</button>
+  <button id="close">presentationConnection.close()</button>
+  <button id="terminate">presentationConnection.terminate()</button>
 </p>
 <p>
-  <button id="close" disabled>presentationRequest.close()</button>
-  <button id="terminate" disabled>presentationRequest.terminate()</button>
+  <input id="presentationId" type="text" placeholder="Enter a presentation ID...">
+  <button id="reconnect">presentationRequest.reconnect(presentationId)</button>
 </p>
-{% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
+<script>
+  log = ChromeSamples.log;
+</script>
+
 {% capture js %}
-// App ID EF1A139F is registered in the Google Cast SDK Developer
-// Console and points to the following custom receiver:
-// https://googlechrome.github.io/samples/presentation-api/receiver/index.html
-var presentationUrl = 'http://google.com/cast/#__castAppId__=EF1A139F';
-var presentationRequest;
-var presentationConnection;
+const presentationRequest = new PresentationRequest(['receiver/index.html']);
 
-function updatePresentationAvailability(displaysAvailable) {
-  ChromeSamples.log('Presentation displays are ' +
-      (displaysAvailable ? 'available' : 'unavailable') + '.');
-}
+// Make this presentation the default one when using the "Cast" browser menu.
+navigator.presentation.defaultRequest = presentationRequest;
 
-document.querySelector('#createRequest').addEventListener('click', function() {
-  presentationRequest = new PresentationRequest(presentationUrl);
-  document.querySelector('#createRequest').disabled = true;
-  document.querySelector('#start').disabled = false;
-  document.querySelector('#reconnect').disabled = false;
-  presentationRequest.getAvailability().then(function(availability) {
-    updatePresentationAvailability(availability.value);
-    availability.onchange = function() {
-      updatePresentationAvailability(availability.value);
-    };
-  });
-});
-
-function setConnection(connection) {
-  presentationConnection = connection;
-  document.querySelector('#close').disabled = false;
-  document.querySelector('#terminate').disabled = false;
-  presentationConnection.onclose = function() {
-    ChromeSamples.log('Connection closed.');
-  };
-  presentationConnection.onterminate = function() {
-    ChromeSamples.log('Connection terminated.');
-  };
-}
+let presentationConnection;
 
 document.querySelector('#start').addEventListener('click', function() {
-  presentationRequest.start().then(function(connection) {
-    ChromeSamples.log('Connected to presentation: ' + connection.id);
-    setConnection(connection);
-  }).catch(function(error) {
-    ChromeSamples.log(error.name + ': ' + error.message);
+  log('Starting presentation request...');
+  presentationRequest.start()
+  .then(connection => {
+    log('> Connected to ' + connection.url + ', id: ' + connection.id);
+  })
+  .catch(error => {
+    log('> ' + error.name + ': ' + error.message);
   });
 });
 
-document.querySelector('#reconnect').addEventListener('click', function() {
-  var presentationId = document.querySelector('#presentationId').value.trim();
-  if (presentationId.length) {
-    presentationRequest.reconnect(presentationId).then(function(connection) {
-      ChromeSamples.log('Reconnected to presentation: ' + connection.id);
-      setConnection(connection);
-    }).catch(function(error) {
-      ChromeSamples.log(error.name + ': ' + error.message);
-    });
-  }
+presentationRequest.addEventListener('connectionavailable', function(event) {
+  presentationConnection = event.connection;
+  presentationConnection.addEventListener('close', function() {
+    log('> Connection closed.');
+  });
+  presentationConnection.addEventListener('terminate', function() {
+    log('> Connection terminated.');
+  });
+  presentationConnection.addEventListener('message', function(event) {
+    log('> ' + event.data);
+  });
+});
+
+document.querySelector('#sendMessage').addEventListener('click', function() {
+  const message = document.querySelector('#message').value.trim();
+  const lang = document.body.lang || 'en-US';
+
+  log('Sending "' + message + '"...');
+  presentationConnection.send(JSON.stringify({message, lang}));
 });
 
 document.querySelector('#close').addEventListener('click', function() {
-  if (presentationConnection) {
-    presentationConnection.close();
-    document.querySelector('#close').disabled = true;
-    document.querySelector('#terminate').disabled = true;
-  }
+  log('Closing connection...');
+  presentationConnection.close();
 });
 
 document.querySelector('#terminate').addEventListener('click', function() {
-  if (presentationConnection) {
-    presentationConnection.terminate();
-    document.querySelector('#close').disabled = true;
-    document.querySelector('#terminate').disabled = true;
-  }
+  log('Terminating connection...');
+  presentationConnection.terminate();
+});
+
+document.querySelector('#reconnect').addEventListener('click', () => {
+  const presentationId = document.querySelector('#presentationId').value.trim();
+
+  presentationRequest.reconnect(presentationId)
+  .then(connection => {
+    log('Reconnected to ' + connection.id);
+  })
+  .catch(error => {
+    log('Presentation.reconnect() error, ' + error.name + ': ' + error.message);
+  });
+});
+
+/* Availability monitoring */
+
+presentationRequest.getAvailability()
+.then(availability => {
+  log('Available presentation displays: ' + availability.value);
+  availability.addEventListener('change', function() {
+    log('> Available presentation displays: ' + availability.value);
+  });
+})
+.catch(error => {
+  log('Presentation availability not supported, ' + error.name + ': ' +
+      error.message);
 });
 
 {% endcapture %}
-{% include js_snippet.html js=js %}
+{% include js_snippet.html title="Controller" js=js %}
+
+{% include js_snippet.html displayonly=true title="Receiver" filename='receiver/receiver.js' %}
+

@@ -1,0 +1,40 @@
+---
+feature_name: Media Capabilities - Decoding Info EME
+chrome_version: 75
+feature_id: 5765900795904000
+check_min_version: true
+origin_trial: Aur2x+PG6grirlO5YFauXRavBE1oiGNd286QLzY1VfhQhr/dzkMBST43sSQdDpyIsPrAh+AwRcLpTbDr8F7J+QEAAABveyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6Ik1lZGlhQ2FwYWJpbGl0aWVzRW5jcnlwdGVkTWVkaWEiLCJleHBpcnkiOjE1NzA0NDE4NTR9
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://wicg.github.io/media-capabilities/">Media Capabilities
+ API</a> allows websites to get more information about the decoding
+abilities of the device/system/browser. This enables web developers to make
+optimal decisions when selecting media streams for the user.
+</p>
+<p>
+This sample is showing how to use this API for encrypted media.
+</p>
+<p>Note: In Chrome 75, it is also <a
+  href="https://developers.chrome.com/origintrials/#/view_trial/1103381908705771521">available for trials</a> so
+  that websites can use it without any experimental flag.</p>
+
+{% include output_helper.html %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='decoding-info-eme.js' %}
+
+<script>
+  if (!('mediaCapabilities' in navigator)) {
+    ChromeSamples.setStatus('Media Capabilities Decoding Info API is not available.\n' +
+        'Please make sure the "Experimental Web Platform features" flag is enabled.');
+  } else if (!('decodingInfo' in navigator.mediaCapabilities)) {
+    ChromeSamples.setStatus('Media Capabilities Decoding Info API is not available.\n' +
+        'Please make sure the "Experimental Web Platform features" flag is enabled.');
+  }
+</script>
+

@@ -28,7 +28,6 @@ async function onButtonClick() {
       characteristics = await service.getCharacteristics();
     }
 
-    console.log(characteristics);
     log('> Characteristics: ' +
       characteristics.map(c => c.uuid).join('\n' + ' '.repeat(19)));
   } catch(error) {

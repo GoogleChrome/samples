@@ -8,6 +8,5 @@ node_modules
 .DS_Store
 *.pyc
 dist/
-
-# Local Netlify folder
 .netlify
+.vscode/

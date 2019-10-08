@@ -1,0 +1,55 @@
+---
+feature_name: IndexedDB Observers
+chrome_version: 57
+feature_id: 5669292892749824
+---
+
+<style>
+  #data, #name {
+    background-color: #C8E6C9;
+    font-size: 2em;
+    padding: 0 .5em;
+  }
+</style>
+
+<h3>Background</h3>
+<p>IndexedDB Observers allow one to observe changes to indexeddb in an
+efficient and data-consistant way.  Open this page in multiple tabs or windows,
+and observe how the data consistantly updates.  See <a href="https://github.com/WICG/indexed-db-observers/blob/gh-pages/EXPLAINER.md">this
+explainer</a> for more info and the proposed specification changes.</a></p>
+<p>Note that you must be using Chrome 57+ with the <code>#enable-experimental-web-platform-features</code> flag enabled.</p>
+
+<h4>
+  Tab Name: <span id="name"></span>
+  Data number: <span id="data"></span>
+</h4>
+
+<button id="incrementButton">Increment Data Number</button>
+<button id="resetButton">Reset Data Number</button>
+
+{% capture initial_output_content %}
+<pre>Database changes appear here:</pre>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content%}
+
+{% include js_snippet.html filename='demo.js' %}
+
+<script>
+(function() {
+  var names = ['Toby', 'Fred', 'George', 'Bob', 'Bill', 'Buster',
+               'Jenn', 'Zoe', 'Carla', 'Stacy', 'Alyssa', 'Catherine',
+               'Sally', 'Austin', 'Jackson', 'Grace',
+               'Tasha', 'Arthur', 'Michael', 'Echo', 'Topher', 'Sierra',
+               'Whisky', 'DeWitt'];
+  document.querySelector('#name').textContent = names[Math.floor(
+      Math.random() * names.length)];
+})();
+
+document.querySelector('#incrementButton').addEventListener('click', function() {
+  onIncrementButtonClick();
+});
+
+document.querySelector('#resetButton').addEventListener('click', function() {
+  onResetButtonClick();
+});
+</script>

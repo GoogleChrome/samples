@@ -1,0 +1,22 @@
+---
+feature_name: MediaError.message
+chrome_version: 59
+feature_id: 4996058069336064
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>The <code>MediaError.message</code> string provides, if available, any additional error
+message detail to help web developers debugging media player errors. Note that
+this sample demonstrates only a tiny fraction of such messages.</p>
+
+Set video with:
+<button id="emptySrcButton">Empty src</button>
+<button id="nonExistentFileButton">Non existent file</button>
+<button id="invalidFileButton">Invalid file</button>
+Or
+<input id="chooseFileButton" type="file"/>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='error-message.js' %}

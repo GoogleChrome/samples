@@ -1,18 +1,25 @@
-function logConnectionType() {
-  var connectionType = 'not supported';
-  var downlinkMax = 'not supported';
+navigator.connection.addEventListener('change', logNetworkInfo);
 
-  if ('connection' in navigator) {
-    connectionType = navigator.connection.type;
+function logNetworkInfo() {
+  // Network type that browser uses
+  log('         type: ' + navigator.connection.type);
 
-    if ('downlinkMax' in navigator.connection) {
-      downlinkMax = navigator.connection.downlinkMax;
-    }
-  }
+  // Effective bandwidth estimate
+  log('     downlink: ' + navigator.connection.downlink + 'Mb/s');
 
-  ChromeSamples.log('Current connection type: ' + connectionType +
-    ' (downlink max: ' + downlinkMax + ')');
+  // Effective round-trip time estimate
+  log('          rtt: ' + navigator.connection.rtt + 'ms');
+
+  // Upper bound on the downlink speed of the first network hop
+  log('  downlinkMax: ' + navigator.connection.downlinkMax + 'Mb/s');
+
+  // Effective connection type determined using a combination of recently
+  // observed rtt and downlink values: ' +
+  log('effectiveType: ' + navigator.connection.effectiveType);
+  
+  // True if the user has requested a reduced data usage mode from the user
+  // agent.
+  log('     saveData: ' + navigator.connection.saveData);
 }
 
-logConnectionType();
-navigator.connection.addEventListener('change', logConnectionType);
+logNetworkInfo();

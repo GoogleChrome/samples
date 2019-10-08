@@ -1,0 +1,43 @@
+---
+feature_name: Web Bluetooth / Scanning
+chrome_version: 79
+check_min_version: true
+feature_id: 5346724402954240
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates basic use of the Web Bluetooth Scanning API to
+report advertising packets from nearby Bluetooth Low Energy Devices.</p>
+
+<p>Note: Scanning is still under development. You must be using Chrome 79+
+with the <code>chrome://flags/#enable-experimental-web-platform-features</code>
+flag enabled.</p>
+
+<form>
+  <label for="allAdvertisements">All Advertisements</label>
+  <input id="allAdvertisements" type="checkbox">
+  <input id="name" type="text" size=17 placeholder="Device Name">
+  <input id="namePrefix" type="text" size=17 placeholder="Device Name Prefix">
+  <button>Scan for Bluetooth Advertisements</button>
+</form>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='scan.js' %}
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}

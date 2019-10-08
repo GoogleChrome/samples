@@ -138,7 +138,7 @@ limitations under the License.
 
       document.querySelector('#add-many-words').addEventListener('click', function() {
         // This will iterate over an infinite sequence of words.
-        var infiniteIpsumIterator = new loremIpsumGenerator();
+        var infiniteIpsumIterator = loremIpsumGenerator();
         var manyWordsElement = document.querySelector('#many-words');
 
         for (var word of infiniteIpsumIterator) {
@@ -167,7 +167,7 @@ limitations under the License.
           // Create an iterator from the generator if it doesn't already exist.
           // The iterator will yield 5 words, and whether the first word is in uppercase
           // or not depends on the value of the 'uppercase' parameter.
-          fiveWordIpsumIterator = new loremIpsumGenerator(5, uppercase);
+          fiveWordIpsumIterator = loremIpsumGenerator(5, uppercase);
         }
 
         // Get the next value from the iterator.

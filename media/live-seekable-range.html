@@ -1,0 +1,105 @@
+---
+feature_name: MediaSource.setLiveSeekableRange
+chrome_version: 62
+feature_id: 5671401352593408
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+This API lets MediaSource apps more effectively customize the
+<code>HTMLMediaElement.seekable</code> range logic by providing (or removing) a
+single seekable range that is union'ed with the current buffered ranges to
+result in a single seekable range which fits both, when media duration is
+<code>+Infinity</code>.
+</p>
+
+<style>
+  video {
+    background: #1e2327;
+    border-radius: 4px;
+    width: 100%;
+  }
+  button {
+    margin: 4px 0;
+  }
+</style>
+
+<video controls></video>
+<button id="setInfiniteDurationButton">mediaSource.duration = +Infinity</button>
+<button id="fetchAndAppend3To6MediaButton">fetch & append 3 to 6 seconds media segment</button>
+<button id="set1Button">mediaSource.setLiveSeekableRange(40, 42)</button>
+<button id="set2Button">mediaSource.setLiveSeekableRange(1, 4)</button>
+<button id="clearButton">mediaSource.clearLiveSeekableRange()</button>
+<button id="removeButton">sourceBuffer.remove(3, 6)</button>
+<button id="setFiniteDurationButton">mediaSource.duration = 6</button>
+<button id="endOfStreamButton">mediaSource.endOfStream()</button>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='live-seekable-range.js' %}
+
+<script>
+  document.querySelector('#setInfiniteDurationButton').addEventListener('click', function() {
+    try {
+      onSetInfiniteDurationButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#fetchAndAppend3To6MediaButton').addEventListener('click', function() {
+    try {
+      onFetchAndAppend3To6MediaButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#set1Button').addEventListener('click', function(event) {
+    try {
+      onSetLiveSeekableRangeButtonClick(event);
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#set2Button').addEventListener('click', function(event) {
+    try {
+      onSetLiveSeekableRangeButtonClick(event);
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#clearButton').addEventListener('click', function() {
+    try {
+      onClearLiveSeekableRangeButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#removeButton').addEventListener('click', function() {
+    try {
+      onRemoveMediaSegmentButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#setFiniteDurationButton').addEventListener('click', function() {
+    try {
+      onSetFiniteDurationButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+  document.querySelector('#endOfStreamButton').addEventListener('click', function() {
+    try {
+      onEndOfStreamButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+
+  function logError(error) {
+    log(`> Error: ${error.message}\n`);
+  }
+
+  log = ChromeSamples.log;
+</script>

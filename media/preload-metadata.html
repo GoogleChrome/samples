@@ -1,0 +1,59 @@
+---
+feature_name: Media preload defaults to metadata
+chrome_version: 64
+feature_id: 5682169347309568
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+Chrome now sets the default <code>preload</code> value for
+<code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> elements to
+<code>metadata</code> in order to reduce bandwidth and resource usage. This new
+behaviour only applies to cases where no preload value is set.
+Note that the preload attribute's hint is still ignored when a <code>MediaSource</code>
+is attached to the media element.
+</p>
+
+<p>Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org </a>.</p>
+
+<style>
+  .wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 12px;
+  }
+  .wrapper div {
+    text-align: center;
+  }
+  video {
+    background: #1e2327;
+    border-radius: 4px;
+    width: 100%;
+  }
+  .wrapper pre {
+    padding-top: 12px;
+    margin: 0;
+    word-break: break-word;
+    white-space: normal;
+  }
+</style>
+
+<div class="wrapper">
+  <div>
+    <video id="videoWithNoPreload" controls src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=80"></video>
+    <pre>&lt;video&gt;</pre>
+  </div>
+  <div>
+    <video id="videoWithAutoPreload" controls preload="auto" src="//storage.googleapis.com/media-session/sintel/trailer.mp4#t=25"></video>
+    <pre>&lt;video preload="auto"&gt;</pre>
+  </div>
+</div>
+
+{% include output_helper.html %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='preload-metadata.js' %}

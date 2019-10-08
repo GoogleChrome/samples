@@ -1,0 +1,47 @@
+---
+feature_name: Skip Ad in Picture-in-Picture window
+chrome_version: 73
+feature_id: 4749278882824192
+check_min_version: true
+origin_trial: AilkunA5HTylHCieUVKgMGnLiXeBWCddehKQjXp4C5nxU74LyVx57TGqKCjaHm7jqBX2GTv85FgSSY1+PKNYKgoAAABpeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IlNraXBBZCIsImV4cGlyeSI6MTU1OTA4Nzk5OSwiaXNTdWJkb21haW4iOnRydWV9
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://wicg.github.io/media-session/">Media Session API</a> has
+a <code>skipad</code> action handler web developers can use to show a "Skip Ad"
+button in the Picture-in-Picture window and be notified when user a interacts
+with it.
+</p>
+<p>
+Note: In Chrome 73, it is <a
+href="https://developers.chrome.com/origintrials">available for trials</a> so
+that websites can use it without any experimental flag.
+</p>
+<p>
+Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org</a>.
+</p>
+
+<style>
+  video { background: #1e2327; border-radius: 4px; width: 100%; }
+  button { margin: 4px 0; }
+</style>
+
+<video id="video" controls playsinline
+    src="https://storage.googleapis.com/media-session/big-buck-bunny/trailer.mov"
+    poster="https://storage.googleapis.com/media-session/caminandes/artwork-512.png"></video>
+<button id="enterPictureInPictureButton">Enter Picture-in-Picture</button>
+
+{% include output_helper.html %}
+
+<script>
+  if (!('pictureInPictureEnabled' in document)) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is not available.');
+  } else if (!document.pictureInPictureEnabled) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is disabled.');
+  }
+
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='skip-ad.js' %}

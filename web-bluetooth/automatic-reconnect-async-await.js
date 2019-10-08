@@ -5,7 +5,8 @@ async function onButtonClick() {
   try {
     log('Requesting any Bluetooth Device...');
     bluetoothDevice = await navigator.bluetooth.requestDevice({
-        filters: anyNamedDevice()});
+     // filters: [...] <- Prefer filters to save energy & show relevant devices.
+        acceptAllDevices: true});
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
     connect();
   } catch(error) {
@@ -50,14 +51,6 @@ async function exponentialBackoff(max, delay, toTry, success, fail) {
       exponentialBackoff(--max, delay * 2, toTry, success, fail);
     }, delay * 1000);
   }
-}
-
-function anyNamedDevice() {
-  // This is the closest we can get for now to get all devices.
-  // https://github.com/WebBluetoothCG/web-bluetooth/issues/234
-  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-      .map(c => ({namePrefix: c}))
-      .concat({name: ''});
 }
 
 function time(text) {

@@ -1,0 +1,44 @@
+---
+feature_name: Video / Media Session
+chrome_version: 57
+feature_id: 5639924124483584
+check_min_version: true
+index: index.html
+---
+
+<h3>Background</h3>
+<p>The <a href="https://developers.google.com/web/updates/2017/02/media-session">Media Session API</a> 
+lets you customize media notifications by providing metadata information for
+the media your web app is playing. It also allows you to handle media related
+events such as seeking or track changing which may come from notifications or
+media keys.</p>
+
+<p>Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org </a>.</p>
+
+<style>
+  video { background: #1e2327; border-radius: 4px; width: 100%; } 
+</style>
+
+<video preload="none" controls></video>
+
+{% include output_helper.html %}
+
+<script>
+  if (!('mediaSession' in navigator)) {
+    ChromeSamples.setStatus('The Media Session API is not yet available. Try Chrome for Android.');
+  }
+
+  // This prevents unnecessary errors when Media Session API is not available.
+  navigator.mediaSession = navigator.mediaSession || {};
+  navigator.mediaSession.setActionHandler = navigator.mediaSession.setActionHandler || function() {};
+  window.MediaMetadata = window.MediaMetadata || function() {};
+
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='video.js' %}
+
+<script>
+  document.querySelector('video').addEventListener('play', onPlayButtonClick, { once: true });
+  document.querySelector('video').src = playlist[0].src;
+</script>

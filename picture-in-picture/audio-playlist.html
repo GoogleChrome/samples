@@ -1,0 +1,51 @@
+---
+feature_name: Picture-in-Picture - Audio Playlist
+chrome_version: 74
+feature_id: 5729206566649856
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://wicg.github.io/picture-in-picture/">Picture-in-Picture
+API</a> allows websites to create a floating video window that is always on top
+of other windows so that users may continue consuming media while they interact
+with other sites or applications on their device. Combining this with
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/captureStream">HTMLCanvasElement.captureStream()</a>
+and the <a href="https://developers.google.com/web/updates/2017/02/media-session">Media Session API</a>,
+web developers can create an audio playlist window.
+</p>
+
+<p>
+Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org</a>.
+</p>
+
+<button id="playButton">▶ PLAY</button>
+
+{% include output_helper.html %}
+
+<script>
+  if (!('mediaSession' in navigator)) {
+    ChromeSamples.setStatus('The Media Session API is not available.');
+  }
+
+  // This prevents unnecessary errors when Media Session API is not available.
+  navigator.mediaSession = navigator.mediaSession || {};
+  navigator.mediaSession.setActionHandler = navigator.mediaSession.setActionHandler || function() {};
+  window.MediaMetadata = window.MediaMetadata || function() {};
+
+  if (!('pictureInPictureEnabled' in document)) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is not available.');
+  } else if (!document.pictureInPictureEnabled) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is disabled.');
+  }
+
+</script>
+
+{% include js_snippet.html filename='audio-playlist.js' %}
+
+<script>
+  log = ChromeSamples.log;
+
+  document.querySelector('#playButton').addEventListener('click', onPlayButtonClick);
+</script>

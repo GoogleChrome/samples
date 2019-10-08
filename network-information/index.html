@@ -1,6 +1,6 @@
 ---
 feature_name: Network Information API
-chrome_version: 48
+chrome_version: 65
 feature_id: 6338383617982464
 ---
 
@@ -12,22 +12,32 @@ feature_id: 6338383617982464
 </p>
 
 <p>
-  The Network Information API is
-  <a href="https://code.google.com/p/chromium/issues/detail?id=368358#c18">not currently available</a>
-  on all platforms. For best results, try this demo using Chrome on Android, or ChromeOS.
+  While it was previously limited to Chrome on Android or on ChromeOS, the
+  Network Information API is now available for Chrome on all platforms, though
+  meaningful values for
+  <a href="http://wicg.github.io/netinfo/#-dfn-networkinformation-dfn-interface">all of the properties</a>
+  might not be available on every platform.
 </p>
 
 <p>
-  While the Network Information API was initially added to
-  <a href="https://www.chromestatus.com/feature/6338383617982464">Chrome 38</a>, this sample
-  illustrates additional functionality that was added in
-  <a href="https://www.chromestatus.com/feature/5857463882481664">Chrome 48</a>. The updates include
-  a new <code>connection.downlinkMax</code> attribute, support for the
-  <code>'wimax'</code> connection type, and <code>connection.onchange</code> event listener.
-  The older <code>connection.ontypechange</code> event listener will be deprecated in a future
-  release.
+  This code sample reflects the most recent implementation of the API, including
+  the <code>connection.downlinkMax</code> attribute, support for the
+  <code>'wimax'</code> connection type, and <code>connection.onchange</code>
+  event listener. (The older <code>connection.ontypechange</code> event listener
+  should no longer be used.)
 </p>
 
 {% include output_helper.html %}
+
+<script>
+  var times = 1;
+  var log = function(args) {
+    ChromeSamples.log(args);
+    if (times % 5 == 0) {
+      ChromeSamples.log('');
+    }
+    times++;
+  }
+</script>
 
 {% include js_snippet.html filename='demo.js' %}

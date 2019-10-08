@@ -1,0 +1,44 @@
+---
+feature_name: Unsupported playbackRate exception
+chrome_version: 63
+feature_id: 5750156230131712
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+When media elements's <code>playbackRate</code> is set to a value not supported
+by Chrome (eg. negative value), a "NotSupportedError" <code>DOMException</code>
+is thrown.
+</p>
+
+<p>Credits: Audio file is © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org </a>.</p>
+
+<style>
+  audio {
+    display: block;
+    margin-bottom: 12px;
+  }
+</style>
+
+<audio controls controlsList="nodownload" loop src="https://storage.googleapis.com/media-session/caminandes/original-score.mp3"></audio>
+
+<button>playbackRate = -1</button>
+<button>playbackRate = 0</button>
+<button>playbackRate = 0.01</button>
+<button>playbackRate = 1</button>
+<button>playbackRate = 2</button>
+<button>playbackRate = 1000</button>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='playback-rate-exception.js' %}
+
+<script>
+  log = ChromeSamples.log;
+
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', onButtonClick);
+  });
+</script>
+
