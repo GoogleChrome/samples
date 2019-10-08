@@ -3,6 +3,8 @@ navigator.bluetooth.getAvailability()
   log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
 });
 
-navigator.bluetooth.addEventListener('availabilitychanged', function(event) {
-  log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
-});
+if ('onavailabilitychanged' in navigator.bluetooth) {
+  navigator.bluetooth.addEventListener('availabilitychanged', function(event) {
+    log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
+  });
+}
