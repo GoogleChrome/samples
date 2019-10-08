@@ -91,7 +91,8 @@ try {
 try {
   navigator.mediaSession.setActionHandler('seekto', function(event) {
     log('> User clicked "Seek To" icon.');
-    if (event.fastSeek) {
+    if (event.fastSeek && ('fastSeek' in video)) {
+      video.fastSeek(event.seekTime);
       return;
     }
     video.currentTime = event.seekTime;
