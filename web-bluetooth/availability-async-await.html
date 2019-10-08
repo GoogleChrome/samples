@@ -1,0 +1,20 @@
+---
+feature_name: Web Bluetooth / Availability (Async Await)
+chrome_version: 78
+check_min_version: true
+feature_id: 6229592081694720
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to determine whether
+Bluetooth is available. You may want to check out the <a
+href="availability.html">Availability (Promises)</a> sample.</p>
+
+{% include output_helper.html %}
+
+{% include_relative _includes/utils.html %}
+
+{% include js_snippet.html filename='availability-async-await.js' %}
