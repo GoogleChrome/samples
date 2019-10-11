@@ -14,61 +14,61 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	import Router from 'svelte-spa-router'
+  import Router from 'svelte-spa-router'
 
-	import {channelName} from '../js/constants';
-	import * as audioRoute from './routes/Audio.svelte';
-	import * as helpRoute from './routes/Help.svelte';
-	import * as imagesRoute from './routes/Images.svelte';
-	import * as videosRoute from './routes/Videos.svelte';
-	import Navbar from './components/Navbar.svelte';
-	import Snackbar from './components/Snackbar.svelte';
+  import {channelName} from '../js/constants';
+  import * as audioRoute from './routes/Audio.svelte';
+  import * as helpRoute from './routes/Help.svelte';
+  import * as imagesRoute from './routes/Images.svelte';
+  import * as videosRoute from './routes/Videos.svelte';
+  import Navbar from './components/Navbar.svelte';
+  import Snackbar from './components/Snackbar.svelte';
 
-	const orderedRoutes = [
-		imagesRoute,
-		videosRoute,
-		audioRoute,
-		helpRoute,
-	];
+  const orderedRoutes = [
+    imagesRoute,
+    videosRoute,
+    audioRoute,
+    helpRoute,
+  ];
 
-	let message = '';
-	if (BroadcastChannel) {
-		const brodcastChannel = new BroadcastChannel(channelName);
-		brodcastChannel.addEventListener('message', (event) => message = event.data);
-	};
+  let message = '';
+  if (BroadcastChannel) {
+    const brodcastChannel = new BroadcastChannel(channelName);
+    brodcastChannel.addEventListener('message', (event) => message = event.data);
+  };
 
-	const routes = {};
-	for (const route of orderedRoutes) {
-		routes[route.href] = route.default;
-	}
+  const routes = {};
+  for (const route of orderedRoutes) {
+    routes[route.href] = route.default;
+  }
 </script>
 
 <style>
-	#app {
-		bottom: 0;
-		display: flex;
-		flex-direction: column;
-		left: 0;
-		position: fixed;
-		right: 0;
-		top: 0;
-	}
+  #app {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
 
-	main {
-		flex-grow: 1;
-		padding: 0 16px 0 16px;
-		overflow-y: auto;
-	}
+  main {
+    flex-grow: 1;
+    padding: 0 16px 0 16px;
+    overflow-y: auto;
+  }
 </style>
 
 <div id="app">
-	<main>
-		<Router {routes}/>
-		<Snackbar {message}/>
-	</main>
+  <main>
+    <Router {routes}/>
+    <Snackbar {message}/>
+  </main>
 
-	<footer>
-		<Navbar buttons={orderedRoutes}/>
-	</footer>
+  <footer>
+    <Navbar buttons={orderedRoutes}/>
+  </footer>
 </div>
 

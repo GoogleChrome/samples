@@ -14,30 +14,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	export let handleClick;
+  export let handleClick;
 </script>
 
 <style>
-	button {
-		background-color: transparent;
-		border-radius: 4px;
-		border: 1px solid var(--secondary-color);
-		color: var(--text-color);
-		cursor: pointer;
-		font-size: 14px;
-		font-weight: 500;
-		height: 36px;
-		letter-spacing: 1.25px;
-		min-width: 64px;
-		padding: 0 15px 0 15px;
-		text-transform: uppercase;
-	}
+  button {
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    height: 36px;
+    letter-spacing: 1.25px;
+    min-width: 64px;
+    padding: 0 15px 0 15px;
+    text-transform: uppercase;
+  }
 
-	button:active {
-		filter: drop-shadow(1px 1px 7px var(--secondary-color));
-	}
+  button:active {
+    filter: drop-shadow(1px 1px 7px var(--secondary-color));
+  }
 </style>
 
 <button on:click={handleClick}>
-	<slot></slot>
+  <slot></slot>
 </button>

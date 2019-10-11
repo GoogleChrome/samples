@@ -18,7 +18,7 @@ a more permanent location.
 ## Requirements
 
 To fully use this web app, you need a combination of browser and operating
-system that supports the underlying APIs. As of Sept. 2019, that's limited to
+system that supports the underlying APIs. As of Oct. 2019, that's limited to
 Chrome on Android.
 
 Before you can receive incoming media files via the Web Share Target API Level

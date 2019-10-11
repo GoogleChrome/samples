@@ -14,28 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	export let message = '';
+  export let message = '';
 </script>
 
 <style>
-	.visible {
-		display: flex;
-	}
+  .visible {
+    display: flex;
+  }
 
-	div {
-		align-items: center;
-		background-color: #323232;
-		border-radius: 4px;
-		bottom: 72px;
-		color: var(--background-color);
-		display: none;
-		left: 8px;
-		padding: 16px;
-		position: fixed;
-		right: 8px;
-	}
+  div {
+    align-items: center;
+    background-color: #323232;
+    border-radius: 4px;
+    bottom: 72px;
+    color: var(--background-color);
+    display: none;
+    left: 8px;
+    padding: 16px;
+    position: fixed;
+    right: 8px;
+  }
 </style>
 
 <div class:visible="{message}">
-	<span>{message}</span>
+  <span>{message}</span>
 </div>

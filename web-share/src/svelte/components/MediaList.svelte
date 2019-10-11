@@ -14,35 +14,35 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	import Media from './Media.svelte';
+  import Media from './Media.svelte';
 
-	export let cachedMediaMetadatas;
-	export let typeOfMedia;
+  export let cachedMediaMetadatas;
+  export let typeOfMedia;
 </script>
 
 <style>
-	div {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
+  div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-	li {
-		margin-bottom: 16px;
-	}
+  li {
+    margin-bottom: 16px;
+  }
 </style>
 
 {#if cachedMediaMetadatas.length > 0}
-	<div>
-		{#each cachedMediaMetadatas as metadata}
-			<Media {...metadata}/>
-		{/each}
-	</div>
+  <div>
+    {#each cachedMediaMetadatas as metadata}
+      <Media {...metadata}/>
+    {/each}
+  </div>
 {:else}
-	<p>You don't have any saved {typeOfMedia}.</p>
-	<ol>
-		<li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
-		<li>Find some {typeOfMedia} in an another app and share it.</li>
-		<li>Choose "Scrapbook PWA" as the share destination.</li>
-	</ol>
+  <p>You don't have any saved {typeOfMedia}.</p>
+  <ol>
+    <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+    <li>Find some {typeOfMedia} in an another app and share it.</li>
+    <li>Choose "Scrapbook PWA" as the share destination.</li>
+  </ol>
 {/if}

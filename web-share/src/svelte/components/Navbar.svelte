@@ -14,23 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
-	import NavbarButton from './NavbarButton.svelte';
+  import NavbarButton from './NavbarButton.svelte';
 
-	export let buttons = [];
+  export let buttons = [];
 </script>
 
 <style>
-	div {
-		align-items: center;
-		background-color: var(--secondary-color);
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-	}
+  div {
+    align-items: center;
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
 </style>
 
 <div>
-	{#each buttons as button}
-		<NavbarButton {...button}/>
-	{/each}
+  {#each buttons as button}
+    <NavbarButton {...button}/>
+  {/each}
 </div>
