@@ -18,6 +18,8 @@ limitations under the License.
 
   export let cachedMediaMetadatas;
   export let typeOfMedia;
+
+  const isDisplayModeStandalone = window && window.matchMedia('(display-mode: standalone)').matches;
 </script>
 
 <style>
@@ -41,7 +43,9 @@ limitations under the License.
 {:else}
   <p>You don't have any saved {typeOfMedia}.</p>
   <ol>
-    <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+    {#if !isDisplayModeStandalone}
+      <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
+    {/if}
     <li>Find some {typeOfMedia} in an another app and share it.</li>
     <li>Choose "Scrapbook PWA" as the share destination.</li>
   </ol>
