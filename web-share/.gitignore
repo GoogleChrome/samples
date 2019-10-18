@@ -1,0 +1,6 @@
+.DS_Store
+.netlify
+dev
+dist
+node_modules
+testfiles
