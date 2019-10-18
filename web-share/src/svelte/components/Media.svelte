@@ -19,12 +19,13 @@ limitations under the License.
   import {cacheName} from '../../js/constants';
 
   export let contentType = '';
+  export let showButtons = true;
   export let src = '';
 
   const canShare = 'canShare' in navigator;
 
   function handleView() {
-    window.location.href = src;
+    window.location.href = `#/view/${src}`;
   }
 
   async function handleDelete() {
@@ -86,11 +87,13 @@ limitations under the License.
   {:else}
     <p>Unable to display media with MIME type <code>{contentType}</code>.</p>
   {/if}
-  <div class="buttons">
-    <Button handleClick={handleView}>View</Button>
-    {#if canShare}
-      <Button handleClick={handleShare}>Share</Button>
-    {/if}
-    <Button handleClick={handleDelete}>Delete</Button>
-  </div>
+  {#if showButtons}
+    <div class="buttons">
+      <Button handleClick={handleView}>View</Button>
+      {#if canShare}
+        <Button handleClick={handleShare}>Share</Button>
+      {/if}
+      <Button handleClick={handleDelete}>Delete</Button>
+    </div>
+  {/if}
 </div>

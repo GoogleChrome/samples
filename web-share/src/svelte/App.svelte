@@ -21,6 +21,7 @@ limitations under the License.
   import * as helpRoute from './routes/Help.svelte';
   import * as imagesRoute from './routes/Images.svelte';
   import * as videosRoute from './routes/Videos.svelte';
+  import * as viewRoute from './routes/View.svelte';
   import Navbar from './components/Navbar.svelte';
   import Snackbar from './components/Snackbar.svelte';
 
@@ -41,6 +42,8 @@ limitations under the License.
   for (const route of orderedRoutes) {
     routes[route.href] = route.default;
   }
+  // Explicitly add in the /view route, which isn't in the Navbar.
+  routes[viewRoute.href] = viewRoute.default;
 </script>
 
 <style>

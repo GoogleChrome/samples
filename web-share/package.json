@@ -14,12 +14,12 @@
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.0.0",
     "svelte-spa-router": "^1.2.0",
-    "workbox-cli": "^5.0.0-beta.1",
-    "workbox-core": "^5.0.0-beta.1",
-    "workbox-precaching": "^5.0.0-beta.1",
-    "workbox-range-requests": "^5.0.0-beta.1",
-    "workbox-routing": "^5.0.0-beta.1",
-    "workbox-strategies": "^5.0.0-beta.1"
+    "workbox-cli": "^5.0.0-rc.0",
+    "workbox-core": "^5.0.0-rc.0",
+    "workbox-precaching": "^5.0.0-rc.0",
+    "workbox-range-requests": "^5.0.0-rc.0",
+    "workbox-routing": "^5.0.0-rc.0",
+    "workbox-strategies": "^5.0.0-rc.0"
   },
   "scripts": {
     "build": "run-s clean rollup workbox",

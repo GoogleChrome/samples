@@ -34,3 +34,8 @@ export async function getCachedMediaMetadata(contentTypePrefix) {
   return cachedMetadata.filter((metadata) =>  metadata.contentType.startsWith(contentTypePrefix));
 }
 
+export async function getCachedMediaMetadataForURL(url) {
+  const cachedMetadata = await cachedMediaMetadataPromise;
+  return cachedMetadata.find((metadata) => metadata.src === url);
+}
+
