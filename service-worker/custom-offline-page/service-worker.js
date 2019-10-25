@@ -11,11 +11,11 @@
  limitations under the License.
 */
 
-const CACHE_PREFIX = 'offline-v';
-// Incrementing CACHE_VERSION will kick off the install event and force
+// Incrementing OFFLINE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
-const CACHE_VERSION = 1;
-const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
+const OFFLINE_VERSION = 1;
+const CACHE_NAME = 'offline';
+// Customize this with a different URL if needed.
 const OFFLINE_URL = 'offline.html';
 
 self.addEventListener('install', (event) => {
