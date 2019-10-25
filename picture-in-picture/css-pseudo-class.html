@@ -1,0 +1,70 @@
+---
+feature_name: CSS pseudo-class ":picture-in-picture"
+chrome_version: 76
+feature_id: 6259534815297536
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://wicg.github.io/picture-in-picture/">Picture-in-Picture
+API</a> allows websites to create a floating video window that is always on top
+of other windows so that users may continue consuming media while they interact
+with other sites or applications on their device. In Chrome 76, a CSS
+pseudo-class is added to help web developers customize the media player when
+videos enter and exit Picture-in-Picture.
+</p>
+<p>
+Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org</a>.
+</p>
+
+<style>
+  button { margin: 4px 0; }
+</style>
+
+{% capture css %}
+#video {
+  display: block;
+  width: 100%;
+  will-change: opacity;
+}
+
+#video:not([controls]):picture-in-picture {
+  opacity: 0;
+}
+
+#video-container {
+  background: linear-gradient(to bottom right, #888, #000);
+  position: relative;
+}
+
+#video-container::before {
+  bottom: 36px;
+  color: #ddd;
+  content: 'Video is now playing in a Picture-in-Picture window';
+  position: absolute;
+  right: 36px;
+}
+{% endcapture %}
+
+<div id="video-container">
+<video id="video" autoplay muted loop playsinline
+    src="https://storage.googleapis.com/media-session/caminandes/short.mp4"></video>
+</div>
+<button id="togglePipButton">Toggle Picture-in-Picture</button>
+
+{% include output_helper.html title='' %}
+
+<script>
+  if (!('pictureInPictureEnabled' in document)) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is not available.');
+  } else if (!document.pictureInPictureEnabled) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is disabled.');
+  }
+
+  log = ChromeSamples.log;
+</script>
+
+{% include css_snippet.html css=css %}
+
+{% include js_snippet.html filename='css-pseudo-class.js' %}

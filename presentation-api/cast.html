@@ -1,0 +1,88 @@
+---
+feature_name: Presentation Controller API (Google Cast)
+chrome_version: 63
+feature_id: 6676265876586496
+---
+
+<h3>Background</h3>
+
+<p>
+  This sample illustrates the use of
+  <a href="https://w3c.github.io/presentation-api/">Presentation API</a>,
+  which gives the ability to access external presentation-type displays and use
+  them for presenting web content. The <code>PresentationRequest</code> object
+  is associated with a request to initiate to a presentation made by a
+  controlling browsing context and it takes in a presentation request URL when
+  constructed. A presentation can be started by calling the
+  <code>start()</code> method on the <code>PresentationRequest</code> object.
+</p>
+
+<p>
+  <button id="start">presentationRequest.start()</button>
+  <button id="close">presentationConnection.close()</button>
+  <button id="terminate">presentationConnection.terminate()</button>
+</p>
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+{% capture js %}
+// App ID EF1A139F is registered in the Google Cast SDK Developer
+// Console and points to the following custom receiver:
+// https://googlechrome.github.io/samples/presentation-api/receiver/index.html
+const presentationRequest = new PresentationRequest('cast:EF1A139F');
+
+// Make this presentation the default one when using the "Cast" browser menu.
+navigator.presentation.defaultRequest = presentationRequest;
+
+let presentationConnection;
+
+document.querySelector('#start').addEventListener('click', function() {
+  log('Starting presentation request...');
+  presentationRequest.start()
+  .then(connection => {
+    log('> Connected to ' + connection.url + ', id: ' + connection.id);
+  })
+  .catch(error => {
+    log('> ' + error.name + ': ' + error.message);
+  });
+});
+
+presentationRequest.addEventListener('connectionavailable', function(event) {
+  presentationConnection = event.connection;
+  presentationConnection.addEventListener('close', function() {
+    log('> Connection closed.');
+  });
+  presentationConnection.addEventListener('terminate', function() {
+    log('> Connection terminated.');
+  });
+});
+
+document.querySelector('#close').addEventListener('click', function() {
+  log('Closing connection...');
+  presentationConnection.close();
+});
+
+document.querySelector('#terminate').addEventListener('click', function() {
+  log('Terminating connection...');
+  presentationConnection.terminate();
+});
+
+/* Availability monitoring */
+
+presentationRequest.getAvailability()
+.then(availability => {
+  log('Available presentation displays: ' + availability.value);
+  availability.addEventListener('change', function() {
+    log('> Available presentation displays: ' + availability.value);
+  });
+})
+.catch(error => {
+  log('Presentation availability not supported, ' + error.name + ': ' +
+      error.message);
+});
+
+{% endcapture %}
+{% include js_snippet.html js=js %}

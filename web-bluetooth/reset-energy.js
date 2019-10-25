@@ -17,7 +17,7 @@ function onButtonClick() {
     log('Writing Heart Rate Control Point Characteristic...');
 
     // Writing 1 is the signal to reset energy expended.
-    let resetEnergyExpended = new Uint8Array([1]);
+    let resetEnergyExpended = Uint8Array.of(1);
     return characteristic.writeValue(resetEnergyExpended);
   })
   .then(_ => {

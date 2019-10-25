@@ -1,0 +1,38 @@
+---
+feature_name: Media Capabilities - Decoding Info
+chrome_version: 66
+feature_id: 5869632707624960
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The <a href="https://wicg.github.io/media-capabilities/">Media Capabilities
+ API</a> allows websites to get more information about the decoding
+abilities of the device/system/browser. This enables web developers to make
+optimal decisions when selecting media streams for the user.
+</p>
+<p>
+Chrome will always say that a supported media configuration is
+<code>smooth</code> and <code>powerEfficient</code> until stats on this device
+have been recorded.
+</p>
+
+{% include output_helper.html %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='decoding-info.js' %}
+
+<script>
+  if (!('mediaCapabilities' in navigator)) {
+    ChromeSamples.setStatus('Media Capabilities Decoding Info API is not available.\n' +
+        'Please make sure the "Experimental Web Platform features" flag is enabled.');
+  } else if (!('decodingInfo' in navigator.mediaCapabilities)) {
+    ChromeSamples.setStatus('Media Capabilities Decoding Info API is not available.\n' +
+        'Please make sure the "Experimental Web Platform features" flag is enabled.');
+  }
+</script>
+

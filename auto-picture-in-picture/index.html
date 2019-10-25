@@ -1,0 +1,61 @@
+---
+feature_name: Auto Picture-in-Picture
+chrome_version: 73
+feature_id: 5317876315586560
+check_min_version: true
+manifest_url: manifest.json
+origin_trial: ArXErv6HQrbQCFv8abszkuUr5nijbvrEA9WZ6yrpvAkpfydlFelajq8jOn8lTYEdlBjG59iVqznGhjBs/GAhlwEAAAB3eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IkF1dG9QaWN0dXJlSW5QaWN0dXJlIiwiZXhwaXJ5IjoxNTU5MDg3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=
+---
+
+<h3>Background</h3>
+<p>
+Web apps for video meetings will benefit by allowing picture-in-picture when
+users switch back and forth between web apps and other applications or tabs.
+This is currently not possible because a user gesture is required to enter
+picture-in-picture.
+</p>
+<p>
+To support these use cases, a new <code>autopictureinpicture</code> attribute
+is added to the list of content attributes for video elements. This feature
+applies only to Progressive Web Apps users have installed on Desktop.
+</p>
+<p>
+Note: In Chrome 73, it is <a
+href="https://developers.chrome.com/origintrials">available for trials</a> so
+that websites can use it without any experimental flag.
+</p>
+
+<style>
+  video { background: #1e2327; border-radius: 4px; width: 100%; height: 360px; }
+</style>
+
+
+{% capture html %}
+<video id="video" autopictureinpicture></video>
+{% endcapture %}
+
+{% include html_snippet.html html=html %}
+{% include output_helper.html %}
+
+<script>
+  if (!('pictureInPictureEnabled' in document)) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is not available.');
+  } else if (!document.pictureInPictureEnabled) {
+    ChromeSamples.setStatus('The Picture-in-Picture API is disabled.');
+  }
+
+  log = ChromeSamples.log;
+</script>
+
+<script>
+  navigator.serviceWorker.register('service-worker.js');
+</script>
+
+<script>
+  window.addEventListener('appinstalled', function() {
+    // Reload to trigger camera prompt if needed.
+    location.reload();
+  });
+</script>
+
+{% include js_snippet.html filename='index.js' %}

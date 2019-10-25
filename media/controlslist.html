@@ -1,0 +1,57 @@
+---
+feature_name: HTMLMediaElement controlsList
+chrome_version: 58
+feature_id: 5737006365671424
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>Using the ControlsList API, developers can now customize Chrome's native
+media controls such as the download, fullscreen and remoteplayback buttons. The
+current implementation for now is a blacklist mechanism on native controls with
+the ability to set them directly from HTML content using the new attribute
+<code>controlsList</code>. 
+</p>
+
+<p>Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org <a>.</p>
+
+<style>
+  div {
+      padding: 36px 12px;
+      text-align: center;
+  }
+  video {
+      max-width: 100%;
+  }
+  pre {
+      padding-top: 12px;
+      margin: 0;
+      word-break: break-word;
+      white-space: normal;
+  }
+</style>
+
+<div>
+  <video controls src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=80"></video>
+  <pre>&lt;video controls&gt;</pre>
+</div>
+<div>
+  <video controls controlsList="nofullscreen" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=82"></video>
+  <pre>&lt;video controls controlsList="nofullscreen"&gt;</pre>
+</div>
+<div>
+  <video controls controlsList="nodownload" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=84"></video>
+  <pre>&lt;video controls controlsList="nodownload"&gt;</pre>
+</div>
+<div>
+  <video controls controlsList="noremoteplayback" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=86"></video>
+  <pre>&lt;video controls controlsList="noremoteplayback"&gt;</pre>
+</div>
+<div>
+  <video controls controlsList="nodownload nofullscreen noremoteplayback" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=88"></video>
+  <pre>&lt;video controls controlsList="nodownload nofullscreen noremoteplayback"&gt;</pre>
+</div>
+<div>
+  <video controlsList="nodownload nofullscreen noremoteplayback" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=90"></video>
+  <pre>&lt;video controlsList="nodownload nofullscreen noremoteplayback"&gt;</pre>
+</div>

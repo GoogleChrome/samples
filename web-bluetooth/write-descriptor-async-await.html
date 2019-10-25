@@ -1,0 +1,50 @@
+---
+feature_name: Web Bluetooth / Write Descriptor (Async Await)
+chrome_version: 58
+check_min_version: true
+feature_id: 5264933985976320
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to write to the
+descriptor "Characteristic User Description" on a nearby Bluetooth Low Energy
+Device. You may want to try this demo with the BLE Peripheral Simulator App
+from the <a target="_blank"
+href="https://play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral">Google
+Play Store</a> and check out the <a
+href="write-descriptor.html">Write Descriptor (Promises)</a> sample.</p>
+
+<p>
+  <input id="service" type="text" list="services" autofocus placeholder="Bluetooth Service">
+  <input id="characteristic" type="text" list="characteristics" placeholder="Bluetooth Characteristic">
+  <button id="readButton">Get Characteristic User Description</button>
+</p>
+
+{% include_relative _includes/datalist-services.html %}
+{% include_relative _includes/datalist-characteristics.html %}
+
+<p>
+  <input id="description" type="text" placeholder="Characteristic User Description">
+  <button id="writeButton" disabled>Set Characteristic User Description</button>
+</p>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='write-descriptor-async-await.js' %}
+
+<script>
+  document.querySelector('#readButton').addEventListener('click', function() {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onReadButtonClick();
+    }
+  });
+  document.querySelector('#writeButton').addEventListener('click', function() {
+    onWriteButtonClick();
+  });
+</script>
+
+{% include_relative _includes/utils.html %}

@@ -1,0 +1,24 @@
+---
+feature_name: PaymentRequest Can Make Payment
+chrome_version: 56
+feature_id: 5639348045217792
+---
+
+<h3>Background</h3>
+<p>
+  <a href="https://github.com/w3c/browser-payment-api">PaymentRequest</a> lets
+  you accept payment from different payment methods.
+</p>
+
+<p>
+  This sample accepts both Android Pay and credit card payments and checks
+  whether the browser can make payment.
+</p>
+
+{% capture initial_output_content %}
+<div><button id="buyButton">Buy</button></div>
+<div><pre id="result"></pre></div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}

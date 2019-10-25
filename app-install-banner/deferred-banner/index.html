@@ -27,12 +27,12 @@ limitations under the License.
     
     <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 45+ (for Android)</a></p>
 
-    <p>The <a href="https://developers.google.com/web/updates/2014/11/Support-for-installable-web-apps-with-webapp-manifest-in-chrome-38-for-Android">web app install banner</a> will prompt the user to add your web app to the users home screen.
+    <p>The <a href="https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/">web app install banner</a> will prompt the user to add your web app to the users home screen.
     It will only prompt when a number of criteria have been met:
     </p>
 
     <ul>
-      <li>The app uses a <a href="http://www.html5rocks.com/en/tutorials/service-worker/introduction/">service worker</a></li>
+      <li>The app uses a <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service worker</a></li>
       <li>The site is using HTTPS</li>
       <li>The app has a manifest declared</li>
       <li>The manifest has a <code>short_name</code>, 144 pixel icon and a type of 'image/png'</li>
@@ -50,7 +50,7 @@ limitations under the License.
     <pre id=output></pre>
 
     <p>For testing we encourage you to force the banner to appear by setting the chrome://flags/#bypass-app-banner-engagement-checks flag.</p>
-    <p>To see if this example works, come back in another day and you will see the banner.</p>
+    <p>To see if this example works, come back after a few minutes and you will see the banner.</p>
  
     <script>
       window.addEventListener('load', function() {

@@ -1,0 +1,28 @@
+---
+feature_name: Image Capture / Photo Resolution
+chrome_version: 61
+feature_id: 5104908176982016
+local_css_files: ['photo-resolution.css']
+check_min_version: true
+index: index.html
+---
+
+<h3>Background</h3>
+<p>The ImageCapture Web API allows web developers to manipulate "Non-Live"
+camera capabilities and settings such as the photo resolution, red eye
+reduction, and flash mode.</p>
+<p>This sample demonstrates the use of setting the image width of the
+photo.</p>
+
+<video autoplay></video>
+<input type="range">
+<button id="takePhotoButton" disabled>Take Photo</button>
+<canvas></canvas>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='photo-resolution.js' %}
+
+<script>
+  document.querySelector('#takePhotoButton').addEventListener('click', onTakePhotoButtonClick);
+</script>

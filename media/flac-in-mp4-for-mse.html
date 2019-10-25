@@ -1,0 +1,24 @@
+---
+feature_name: FLAC in ISO-BMFF with MSE
+chrome_version: 62
+feature_id: 5713014258925568
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+FLAC is a lossless audio coding format, already supported in regular Chrome
+HTML5 playback. Support for FLAC in ISO-BMFF to Chrome HTML5 Media Source
+Extensions (MSE) is added in Chrome 62.
+</p>
+
+<audio controls></audio>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+<script>
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='flac-in-mp4-for-mse.js' %}
+
