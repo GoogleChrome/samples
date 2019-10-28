@@ -57,7 +57,7 @@ self.addEventListener('fetch', (event) => {
       } catch (error) {
         // catch is only triggered if an exception is thrown, which is likely
         // due to a network error.
-        // If fetch() returns a valid HTTP response with an response code in
+        // If fetch() returns a valid HTTP response with a response code in
         // the 4xx or 5xx range, the catch() will NOT be called.
         console.log('Fetch failed; returning offline page instead.', error);
 
