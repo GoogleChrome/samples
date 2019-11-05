@@ -30,6 +30,16 @@ async function onButtonClick() {
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       log('Advertisement received.');
+      log('  Device ID: ' + event.device.id);
+      log('  RSSI: ' + event.rssi);
+      log('  TX Power: ' + event.txPower);
+      log('  UUIDs: ' + event.uuids);
+      event.manufacturerData.forEach((_, key) => {
+        log('  Manufacturer Data: ' + key);
+      });
+      event.serviceData.forEach((_, key) => {
+        log('  Service Data: ' + key);
+      });
     });
 
     setTimeout(stopScan, 10000);
