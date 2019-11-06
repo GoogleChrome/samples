@@ -36,20 +36,6 @@ async function onButtonClick() {
       log('  TX Power: ' + event.txPower);
       log('  UUIDs: ' + event.uuids);
 
-      const valueDataLogger = (key, valueDataView, whatData) => {
-        const uInt8Array = [...new Uint8Array(valueDataView.buffer)];
-        const hexString = uInt8Array.map(b => {
-          return b.toString(16).padStart(2, '0');
-        }).join('');
-        const asciiString = hexString.match(/.{1,2}/g).reduce((acc,char) => {
-          return acc + String.fromCharCode(parseInt(char, 16))
-        }, '');
-        log(`  ${whatData} Data: ` + key +
-            '\n    (Raw) ' + uInt8Array +
-            '\n    (Hex) ' + hexString +
-            '\n    (ASCII) ' + asciiString);
-      };
-
       event.manufacturerData.forEach((valueDataView, key) => {
         valueDataLogger(key, valueDataView, 'Manufacturer');
       });
@@ -68,3 +54,16 @@ async function onButtonClick() {
     log('Argh! ' + error);
   }
 }
+
+/* Utils */
+
+const valueDataLogger = (key, valueDataView, whatData) => {
+  const hexString = [...new Uint8Array(valueDataView.buffer)].map(b => {
+    return b.toString(16).padStart(2, '0');
+  }).join('');
+  const textDecoder = new TextDecoder('ascii');
+  const asciiString = textDecoder.decode(valueDataView.buffer);
+  log(`  ${whatData} Data: ` + key +
+      '\n    (Hex) ' + hexString +
+      '\n    (ASCII) ' + asciiString);
+};
