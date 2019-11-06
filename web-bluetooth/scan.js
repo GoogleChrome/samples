@@ -30,15 +30,31 @@ async function onButtonClick() {
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       log('Advertisement received.');
+      log('Device Name: ' + event.device.name);
       log('  Device ID: ' + event.device.id);
       log('  RSSI: ' + event.rssi);
       log('  TX Power: ' + event.txPower);
       log('  UUIDs: ' + event.uuids);
-      event.manufacturerData.forEach((_, key) => {
-        log('  Manufacturer Data: ' + key);
+
+      const valueDataLogger = (key, valueDataView, whatData) => {
+        const uInt8Array = [...new Uint8Array(valueDataView.buffer)];
+        const hexString = uInt8Array.map(b => {
+          return b.toString(16).padStart(2, '0');
+        }).join('');
+        const asciiString = hexString.match(/.{1,2}/g).reduce((acc,char) => {
+          return acc + String.fromCharCode(parseInt(char, 16))
+        }, '');
+        log(`  ${whatData} Data: ` + key +
+            '\n    (Raw) ' + uInt8Array +
+            '\n    (Hex) ' + hexString +
+            '\n    (ASCII) ' + asciiString);
+      };
+
+      event.manufacturerData.forEach((valueDataView, key) => {
+        valueDataLogger(key, valueDataView, 'Manufacturer');
       });
-      event.serviceData.forEach((_, key) => {
-        log('  Service Data: ' + key);
+      event.serviceData.forEach((valueDataView, key) => {
+        valueDataLogger(key, valueDataView, 'Service');
       });
     });
 
