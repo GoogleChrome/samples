@@ -30,6 +30,17 @@ async function onButtonClick() {
 
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
       log('Advertisement received.');
+      log('  Device Name: ' + event.device.name);
+      log('  Device ID: ' + event.device.id);
+      log('  RSSI: ' + event.rssi);
+      log('  TX Power: ' + event.txPower);
+      log('  UUIDs: ' + event.uuids);
+      event.manufacturerData.forEach((valueDataView, key) => {
+        logDataView('Manufacturer', key, valueDataView);
+      });
+      event.serviceData.forEach((valueDataView, key) => {
+        logDataView('Service', key, valueDataView);
+      });
     });
 
     setTimeout(stopScan, 10000);
@@ -42,3 +53,16 @@ async function onButtonClick() {
     log('Argh! ' + error);
   }
 }
+
+/* Utils */
+
+const logDataView = (labelOfDataSource, key, valueDataView) => {
+  const hexString = [...new Uint8Array(valueDataView.buffer)].map(b => {
+    return b.toString(16).padStart(2, '0');
+  }).join(' ');
+  const textDecoder = new TextDecoder('ascii');
+  const asciiString = textDecoder.decode(valueDataView.buffer);
+  log(`  ${labelOfDataSource} Data: ` + key +
+      '\n    (Hex) ' + hexString +
+      '\n    (ASCII) ' + asciiString);
+};
