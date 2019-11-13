@@ -9,7 +9,7 @@ import {mimeRoute as audioRoute} from '../svelte/routes/Audio.svelte';
 import {mimeRoute as imagesRoute} from '../svelte/routes/Images.svelte';
 import {mimeRoute as videosRoute} from '../svelte/routes/Videos.svelte';
 
-const broadcastChannel = BroadcastChannel ? new BroadcastChannel(channelName) : null;
+const broadcastChannel = 'BroadcastChannel' in self ? new BroadcastChannel(channelName) : null;
 
 const shareTargetHandler = async ({event}) => {
   if (broadcastChannel) {
