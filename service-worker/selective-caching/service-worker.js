@@ -29,25 +29,13 @@ var CURRENT_CACHES = {
   font: 'font-cache-v' + CACHE_VERSION
 };
 
-self.addEventListener('activate', function(event) {
-  // Delete all caches that aren't named in CURRENT_CACHES.
+self.addEventListener('activate', async event => {
+ // Delete all caches that aren't named in CURRENT_CACHES.
   // While there is only one cache in this example, the same logic will handle the case where
   // there are multiple versioned caches.
-  var expectedCacheNamesSet = new Set(Object.values(CURRENT_CACHES));
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (!expectedCacheNamesSet.has(cacheName)) {
-            // If this cache name isn't present in the set of "expected" cache names, then delete it.
-            console.log('Deleting out of date cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
+  const keys = await caches.keys();
+  keys.map(key =>key!=CURRENT_CACHES.font? caches.delete(key):'');
+})
 
 self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
