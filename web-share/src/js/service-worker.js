@@ -4,12 +4,21 @@ import {precacheAndRoute} from 'workbox-precaching';
 import {RangeRequestsPlugin} from 'workbox-range-requests';
 import {registerRoute} from 'workbox-routing';
 
-import {cacheName, channelName, urlPrefix} from './constants';
+import {cacheName, channelName, iconSrcs, urlPrefix} from './constants';
 import {mimeRoute as audioRoute} from '../svelte/routes/Audio.svelte';
 import {mimeRoute as imagesRoute} from '../svelte/routes/Images.svelte';
 import {mimeRoute as videosRoute} from '../svelte/routes/Videos.svelte';
 
 const broadcastChannel = 'BroadcastChannel' in self ? new BroadcastChannel(channelName) : null;
+
+self.addEventListener('contentdelete', async (event) => {
+  const cacheKey = event.id;
+
+  event.waitUntil((async () => {
+    const cache = await caches.open(cacheName);
+    await cache.delete(cacheKey);
+  })());
+});
 
 const shareTargetHandler = async ({event}) => {
   if (broadcastChannel) {
@@ -29,10 +38,10 @@ const shareTargetHandler = async ({event}) => {
       }
       continue;
     }
+
+    const cacheKey = new URL(`${urlPrefix}${Date.now()}-${mediaFile.name}`, self.location).href;
     await cache.put(
-      // TODO: Handle scenarios in which mediaFile.name isn't set,
-      // or doesn't include a proper extension.
-      `${urlPrefix}${Date.now()}-${mediaFile.name}`,
+      cacheKey,
       new Response(mediaFile, {
         headers: {
           'content-length': mediaFile.size,
@@ -40,6 +49,25 @@ const shareTargetHandler = async ({event}) => {
         },
       })
     );
+
+    if (('index' in self.registration)) {
+      // This should end up being one of 'image', 'audio', or 'video'.
+      const [category] = mediaFile.type.split('/');
+
+      await registration.index.add({
+        // See https://github.com/rayankans/content-index/issues/7#issuecomment-561761805
+        category: category === 'image' ? 'article' : category,
+        description: 'Via Scrapbook PWA',
+        id: cacheKey,
+        launchUrl: `/#/view/${cacheKey}`,
+        title: `Saved ${category}`,
+        icons: [{
+          sizes: '192x192',
+          src: iconSrcs[category],
+          type: 'image/png',
+        }],
+      });
+    }
   }
 
   // Use the MIME type of the first file shared to determine where we redirect.

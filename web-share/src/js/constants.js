@@ -17,4 +17,9 @@
 export const cacheName = 'media';
 export const channelName = 'messages';
 export const fadeConfig = {duration: 200};
+export const iconSrcs = {
+  audio: 'images/audio.png',
+  image: 'images/image.png',
+  video: 'images/video.png',
+};
 export const urlPrefix = '/_media/';
