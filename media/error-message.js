@@ -15,7 +15,12 @@ nonExistentFileButton.addEventListener('click', function() {
 });
 
 invalidFileButton.addEventListener('click', function() {
+  video.src = 'no_streams.webm';
+});
+
+crossOriginInvalidFileButton.addEventListener('click', function() {
   video.src = 'https://storage.googleapis.com/media-error/no_streams.webm';
+  // Error message will be cleared out because file is cross-origin.
 });
 
 chooseFileButton.addEventListener('change', function() {
