@@ -32,11 +32,6 @@ limitations under the License.
     const cache = await caches.open(cacheName);
     await cache.delete(src);
 
-    const registration = await navigator.serviceWorker.ready;
-    if ('index' in registration) {
-      await registration.index.delete(src);
-    }
-
     window.location.reload();
   }
 

@@ -4,7 +4,7 @@ import {precacheAndRoute} from 'workbox-precaching';
 import {RangeRequestsPlugin} from 'workbox-range-requests';
 import {registerRoute} from 'workbox-routing';
 
-import {cacheName, channelName, iconSrcs, urlPrefix} from './constants';
+import {cacheName, channelName, urlPrefix} from './constants';
 import {mimeRoute as audioRoute} from '../svelte/routes/Audio.svelte';
 import {mimeRoute as imagesRoute} from '../svelte/routes/Images.svelte';
 import {mimeRoute as videosRoute} from '../svelte/routes/Videos.svelte';
@@ -49,25 +49,6 @@ const shareTargetHandler = async ({event}) => {
         },
       })
     );
-
-    if (('index' in self.registration)) {
-      // This should end up being one of 'image', 'audio', or 'video'.
-      const [category] = mediaFile.type.split('/');
-
-      await registration.index.add({
-        // See https://github.com/rayankans/content-index/issues/7#issuecomment-561761805
-        category: category === 'image' ? 'article' : category,
-        description: 'Via Scrapbook PWA',
-        id: cacheKey,
-        launchUrl: `/#/view/${cacheKey}`,
-        title: `Saved ${category}`,
-        icons: [{
-          sizes: '192x192',
-          src: iconSrcs[category],
-          type: 'image/png',
-        }],
-      });
-    }
   }
 
   // Use the MIME type of the first file shared to determine where we redirect.

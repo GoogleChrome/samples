@@ -15,6 +15,7 @@
  **/
 
 import App from '../svelte/App.svelte';
+import {syncContentIndex} from './contentIndexing.js';
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('controllerchange', () => {
@@ -31,6 +32,8 @@ if ('serviceWorker' in navigator) {
         registration.update();
       }
     });
+
+    await syncContentIndex(registration);
   });
 }
 

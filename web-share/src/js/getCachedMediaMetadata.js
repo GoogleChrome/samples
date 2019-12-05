@@ -27,7 +27,7 @@ async function _getCachedMediaMetadata() {
     };
   }));
 }
-const cachedMediaMetadataPromise = _getCachedMediaMetadata();
+export const cachedMediaMetadataPromise = _getCachedMediaMetadata();
 
 export async function getCachedMediaMetadata(contentTypePrefix) {
   const cachedMetadata = await cachedMediaMetadataPromise;
