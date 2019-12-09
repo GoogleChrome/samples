@@ -1,4 +1,5 @@
 import {terser} from 'rollup-plugin-terser';
+import commonjs from 'rollup-plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
@@ -31,6 +32,11 @@ export default [{
 			browser: true,
 			dedupe: (importee) => importee === 'svelte' || importee.startsWith('svelte/'),
 		}),
+		commonjs({
+			namedExports: {
+				'pretty-bytes': ['default'],
+			},
+		}),
 		terser(),
 	],
 }, {
@@ -46,6 +52,11 @@ export default [{
 			dev: false,
 		}),
 		resolve(),
+		commonjs({
+			namedExports: {
+				'pretty-bytes': ['default'],
+			},
+		}),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
 		}),
