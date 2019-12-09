@@ -1,4 +1,6 @@
 .DS_Store
+.firebase
+.firebaserc
 .netlify
 dev
 dist

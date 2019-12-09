@@ -3,14 +3,14 @@
   "description": "An offline-first PWA that acts as a share source and target.",
   "display": "standalone",
   "icons": [{
-    "src": "images/splash.png",
+    "src": "images/splash.jpg",
     "sizes": "512x512",
-    "type": "image/png"
+    "type": "image/jpg"
   }, {
     "purpose": "maskable",
-    "src": "images/splash.png",
+    "src": "images/splash.jpg",
     "sizes": "512x512",
-    "type": "image/png"
+    "type": "image/jpg"
   }, {
     "src": "images/icon.png",
     "sizes": "192x192",
