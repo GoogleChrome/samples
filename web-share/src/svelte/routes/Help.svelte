@@ -28,5 +28,5 @@ limitations under the License.
 </script>
 
 <p in:fade={fadeConfig}>
-  Learn more about this project <a href="https://github.com/GoogleChrome/samples/tree/gh-pages/web-share#web-share-demo">on GitHub</a>.
+  Learn more about this project <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/web-share/README.md#web-share-demo">on GitHub</a>.
 </p>
