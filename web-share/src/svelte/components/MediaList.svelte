@@ -46,7 +46,7 @@ limitations under the License.
     {#if !isDisplayModeStandalone}
       <li><a href="https://developers.google.com/web/fundamentals/app-install-banners/">Add</a> this web app to your homescreen on Android, using Chrome 76+.</li>
     {/if}
-    <li>Find some {typeOfMedia} in an another app and share it.</li>
+    <li>Find some {typeOfMedia} in another app and share it.</li>
     <li>Choose "Scrapbook PWA" as the share destination.</li>
   </ol>
 {/if}

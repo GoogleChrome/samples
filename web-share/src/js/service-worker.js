@@ -11,7 +11,10 @@ import {mimeRoute as videosRoute} from '../svelte/routes/Videos.svelte';
 
 const broadcastChannel = 'BroadcastChannel' in self ? new BroadcastChannel(channelName) : null;
 
-self.addEventListener('contentdelete', async (event) => {
+// This event is fired when a user has taken action in the browser to remove
+// an item that was previously added to the content index.
+// In Android Chrome, this is triggered by a deletion from the Downloads screen.
+self.addEventListener('contentdelete', (event) => {
   const cacheKey = event.id;
 
   event.waitUntil((async () => {
