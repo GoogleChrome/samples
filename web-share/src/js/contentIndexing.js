@@ -36,7 +36,7 @@ export async function syncContentIndex(registration) {
   for (const metadata of cachedMediaMetadata) {
     if (idsInIndex.has(metadata.src)) {
       // If a given id/URL is in both the content index and currently in our
-      // cached, remove it from the set.
+      // cache, remove it from the set.
       idsInIndex.delete(metadata.src);
     } else {
       // Otherwise, if the id/URL is cached but not currently in the index, add
