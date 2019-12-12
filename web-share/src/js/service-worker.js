@@ -11,6 +11,18 @@ import {mimeRoute as videosRoute} from '../svelte/routes/Videos.svelte';
 
 const broadcastChannel = 'BroadcastChannel' in self ? new BroadcastChannel(channelName) : null;
 
+// This event is fired when a user has taken action in the browser to remove
+// an item that was previously added to the content index.
+// In Android Chrome, this is triggered by a deletion from the Downloads screen.
+self.addEventListener('contentdelete', (event) => {
+  const cacheKey = event.id;
+
+  event.waitUntil((async () => {
+    const cache = await caches.open(cacheName);
+    await cache.delete(cacheKey);
+  })());
+});
+
 const shareTargetHandler = async ({event}) => {
   if (broadcastChannel) {
     broadcastChannel.postMessage('Saving media locally...');
@@ -29,10 +41,10 @@ const shareTargetHandler = async ({event}) => {
       }
       continue;
     }
+
+    const cacheKey = new URL(`${urlPrefix}${Date.now()}-${mediaFile.name}`, self.location).href;
     await cache.put(
-      // TODO: Handle scenarios in which mediaFile.name isn't set,
-      // or doesn't include a proper extension.
-      `${urlPrefix}${Date.now()}-${mediaFile.name}`,
+      cacheKey,
       new Response(mediaFile, {
         headers: {
           'content-length': mediaFile.size,

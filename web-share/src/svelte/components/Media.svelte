@@ -14,12 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <script>
+  import prettyBytes from 'pretty-bytes'; 
+
   import Button from './Button.svelte';
 
   import {cacheName} from '../../js/constants';
 
   export let contentType = '';
   export let showButtons = true;
+  export let showSize = false;
+  export let size = 0;
   export let src = '';
 
   const canShare = 'canShare' in navigator;
@@ -31,6 +35,7 @@ limitations under the License.
   async function handleDelete() {
     const cache = await caches.open(cacheName);
     await cache.delete(src);
+
     window.location.reload();
   }
 
@@ -68,6 +73,11 @@ limitations under the License.
     width: 100%;
   }
 
+  .size {
+    margin-top: 8px;
+    text-align: right;
+  }
+
   img, video {
     height: auto;
   }
@@ -95,5 +105,8 @@ limitations under the License.
       {/if}
       <Button handleClick={handleDelete}>Delete</Button>
     </div>
+  {/if}
+  {#if showSize}
+    <div class="size">{prettyBytes(size)}</div>
   {/if}
 </div>

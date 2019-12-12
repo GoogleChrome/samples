@@ -1,13 +1,18 @@
 # Web Share Demo
 
+**Try it out:** https://scrapbook-pwa.web.app/
+
 This is a small [progressive web app](https://developers.google.com/web/progressive-web-apps/)
-demo that shows off the use of two emerging web platform features:
+demo that shows off the use of three emerging web platform features:
 
 - [Web Share Target API Level 2](https://developers.google.com/web/updates/2018/12/web-share-target),
 for receiving incoming media files shared **by** other installed applications.
 
 - [Web Share Level 2](https://developers.google.com/web/updates/2019/05/web-share-files),
 for taking local media files and natively sharing them **to** other installed applications.
+
+- [Content Indexing API](https://chromestatus.com/feature/5658416729030656),
+for letting browsers know about offline-viewable content that's saved locally.
 
 All media files are stored locally in the browser using the
 [Cache Storage API](https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/cache-api).

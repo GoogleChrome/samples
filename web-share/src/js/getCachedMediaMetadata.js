@@ -21,13 +21,17 @@ async function _getCachedMediaMetadata() {
   const requests = await cache.keys();
   return Promise.all(requests.reverse().map(async (request) => {
     const response = await cache.match(request);
+    const responseBlob = await response.blob();
+    const size = responseBlob.size;
+
     return {
+      size,
       contentType: response.headers.get('content-type'),
       src: request.url,
     };
   }));
 }
-const cachedMediaMetadataPromise = _getCachedMediaMetadata();
+export const cachedMediaMetadataPromise = _getCachedMediaMetadata();
 
 export async function getCachedMediaMetadata(contentTypePrefix) {
   const cachedMetadata = await cachedMediaMetadataPromise;

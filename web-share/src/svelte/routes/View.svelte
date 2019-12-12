@@ -29,7 +29,7 @@ limitations under the License.
 
 {#await metadataPromise then metadata}
   {#if metadata}
-    <Media {...metadata} showButtons={false}/>
+    <Media {...metadata} showSize={true} showButtons={false}/>
   {:else}
     <p>Can't display cached media with URL <code>{params.wild}</code>.</p>
   {/if}

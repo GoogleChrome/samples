@@ -2,11 +2,12 @@
   "name": "scrapbook-pwa",
   "version": "1.0.0",
   "devDependencies": {
-    "dhost": "^0.1.7",
-    "netlify-cli": "^2.15.0",
+    "firebase-tools": "^7.9.0",
     "npm-run-all": "^4.1.5",
+    "pretty-bytes": "^5.3.0",
     "rimraf": "^3.0.0",
     "rollup": "^1.12.0",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-replace": "^2.2.0",
@@ -24,10 +25,10 @@
   "scripts": {
     "build": "run-s clean rollup workbox",
     "clean": "rimraf dist",
-    "deploy": "run-s build netlify",
-    "netlify": "netlify deploy --dir=dist --prod",
+    "deploy": "run-s build firebase-deploy",
+    "firebase-deploy": "firebase deploy --only hosting",
     "rollup": "rollup -c",
-    "serve": "dhost --port=8080 dist",
+    "serve": "firebase serve --only hosting",
     "workbox": "workbox injectManifest workbox-config.js"
   }
 }
