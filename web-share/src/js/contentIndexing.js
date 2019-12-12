@@ -47,7 +47,7 @@ export async function syncContentIndex(registration) {
         // Use the cached media URL as the id.
         id: metadata.src,
         // Our web app has a route for viewing a specific cached media URL.
-        // Note that this needs to be the URL for an HTML that will display the
+        // Note that this needs to be the URL for a page that will display the
         // cached media; *not* the URL for the media itself.
         launchUrl: `/#/view/${metadata.src}`,
         // Use a generic title and description.
