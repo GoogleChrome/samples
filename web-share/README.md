@@ -11,7 +11,7 @@ for receiving incoming media files shared **by** other installed applications.
 - [Web Share Level 2](https://developers.google.com/web/updates/2019/05/web-share-files),
 for taking local media files and natively sharing them **to** other installed applications.
 
-- [Content Indexing API](https://chromestatus.com/feature/5658416729030656),
+- [Content Indexing API](https://web.dev/content-indexing-api/),
 for letting browsers know about offline-viewable content that's saved locally.
 
 All media files are stored locally in the browser using the
