@@ -22,6 +22,12 @@ Card Emulation (HCE) are not supported within the current scope.
 
 <script>
 log = ChromeSamples.log;
+
+if (!("NDEFReader" in window))
+  ChromeSamples.setStatus(
+    "Web NFC is not available.\n" +
+      'Please make sure the "Web NFC" flag is enabled on Android.'
+  );
 </script>
 
 {% include js_snippet.html filename='index.js' %}
