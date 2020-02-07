@@ -34,15 +34,11 @@ function updateMetadata() {
 function updatePositionState() {
   if ('setPositionState' in navigator.mediaSession) {
     log('Updating position state...');
-    if (audio.paused) {
-      navigator.mediaSession.setPositionState(null);
-    } else {
-      navigator.mediaSession.setPositionState({
-        duration: audio.duration,
-        playbackRate: audio.playbackRate,
-        position: audio.currentTime
-      });
-    }
+    navigator.mediaSession.setPositionState({
+      duration: audio.duration,
+      playbackRate: audio.playbackRate,
+      position: audio.currentTime
+    });
   }
 }
 
@@ -86,16 +82,17 @@ navigator.mediaSession.setActionHandler('seekforward', function(event) {
 
 /* Play & Pause */
 
-navigator.mediaSession.setActionHandler('play', function() {
+navigator.mediaSession.setActionHandler('play', async function() {
   log('> User clicked "Play" icon.');
-  audio.play();
+  await audio.play();
+  navigator.mediaSession.playbackState = "playing";
   // Do something more than just playing audio...
 });
 
 navigator.mediaSession.setActionHandler('pause', function() {
   log('> User clicked "Pause" icon.');
   audio.pause();
-  updatePositionState();
+  navigator.mediaSession.playbackState = "paused";
   // Do something more than just pausing audio...
 });
 
