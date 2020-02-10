@@ -23,6 +23,22 @@ function updateMetadata() {
     artist: track.artist,
     artwork: track.artwork
   });
+
+  // Media is loaded, set the duration.
+  updatePositionState();
+}
+
+/* Position state (supported since Chrome 81) */
+
+function updatePositionState() {
+  if ('setPositionState' in navigator.mediaSession) {
+    log('Updating position state...');
+    navigator.mediaSession.setPositionState({
+      duration: video.duration,
+      playbackRate: video.playbackRate,
+      position: video.currentTime
+    });
+  }
 }
 
 /* Previous Track & Next Track */
@@ -53,25 +69,29 @@ navigator.mediaSession.setActionHandler('seekbackward', function(event) {
   log('> User clicked "Seek Backward" icon.');
   const skipTime = event.seekOffset || defaultSkipTime;
   video.currentTime = Math.max(video.currentTime - skipTime, 0);
+  updatePositionState();
 });
 
 navigator.mediaSession.setActionHandler('seekforward', function(event) {
   log('> User clicked "Seek Forward" icon.');
   const skipTime = event.seekOffset || defaultSkipTime;
   video.currentTime = Math.min(video.currentTime + skipTime, video.duration);
+  updatePositionState();
 });
 
 /* Play & Pause */
 
-navigator.mediaSession.setActionHandler('play', function() {
+navigator.mediaSession.setActionHandler('play', async function() {
   log('> User clicked "Play" icon.');
-  video.play();
+  await video.play();
+  navigator.mediaSession.playbackState = "playing";
   // Do something more than just playing video...
 });
 
 navigator.mediaSession.setActionHandler('pause', function() {
   log('> User clicked "Pause" icon.');
   video.pause();
+  navigator.mediaSession.playbackState = "paused";
   // Do something more than just pausing video...
 });
 
@@ -96,6 +116,7 @@ try {
       return;
     }
     video.currentTime = event.seekTime;
+    updatePositionState();
   });
 } catch(error) {
   log('Warning! The "seekto" media session action is not supported.');
