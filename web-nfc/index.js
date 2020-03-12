@@ -7,7 +7,7 @@ scanButton.addEventListener("click", async () => {
     log("> Scan started");
 
     reader.addEventListener("error", () => {
-      log("Argh! Cannot read data from the NFC tag. Try a different one?");
+      log(`Argh! ${error.message}`);
     });
 
     reader.addEventListener("reading", ({ message, serialNumber }) => {
