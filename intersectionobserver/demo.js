@@ -13,16 +13,17 @@ function loadItems(n) {
 }
 
 var intersectionObserver = new IntersectionObserver(entries => {
-  // If intersectionRatio is 0, the sentinel is out of view
-  // and we do not need to do anything.
-  if (entries[0].intersectionRatio <= 0) {
-    return;
+  // If the browser is busy while scrolling happens, multiple entries can
+  // accumulate between invocations of this callback. As long as any one
+  // of the notifications reports the sentinel within the scrolling viewport,
+  // we add more content.
+  if (entries.some(entry => entry.intersectionRatio > 0)) {
+    loadItems(10);
+    // appendChild will move the existing element, so there is no need to
+    // remove it first.
+    scroller.appendChild(sentinel);
+    loadItems(5);
+    ChromeSamples.setStatus('Loaded up to item ' + counter);
   }
-  loadItems(10);
-  // appendChild will move the existing element, so there is no need to
-  // remove it first.
-  scroller.appendChild(sentinel);
-  loadItems(5);
-  ChromeSamples.setStatus('Loaded up to item ' + counter);
 });
 intersectionObserver.observe(sentinel);
