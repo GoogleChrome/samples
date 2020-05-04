@@ -6,8 +6,8 @@ scanButton.addEventListener("click", async () => {
     await reader.scan();
     log("> Scan started");
 
-    reader.addEventListener("error", (error) => {
-      log(`Argh! ${error.message}`);
+    reader.addEventListener("error", (event) => {
+      log(`Argh! ${event.message}`);
     });
 
     reader.addEventListener("reading", ({ message, serialNumber }) => {
