@@ -35,6 +35,48 @@ Example use from JavaScript:
 This will output "13" (the length of "Hello, world!") into the console.
 """
 
+# ---- Dependencies ----
+#
+# This server only depends on Python standard library and aioquic.  See
+# https://github.com/aiortc/aioquic for instructions on how to install
+# aioquic.
+#
+# ---- Certificates ----
+#
+# QUIC always operates using TLS, meaning that running a QuicTransport server
+# requires a valid TLS certificate.  The easiest way to do this is to get a
+# certificate from a real publicly trusted CA like <https://letsencrypt.org/>.
+# https://developers.google.com/web/fundamentals/security/encrypt-in-transit/enable-https
+# contains a detailed explanation of how to achieve that.
+#
+# As an alternative, Chromium can be instructed to trust a self-signed
+# certificate using command-line flags.  Here are step-by-step instructions on
+# how to do that:
+#
+#   1. Generate a certificate and a private key:
+#         openssl req -newkey rsa:2048 -nodes -keyout certificate.key \
+#                   -x509 -out certificate.pem -subj '/CN=Test Certificate' \
+#                   -addext "subjectAltName = DNS:localhost"
+#
+#   2. Compute the fingerprint of the certificate:
+#         openssl x509 -pubkey -noout -in certificate.pem |
+#                   openssl rsa -pubin -outform der |
+#                   openssl dgst -sha256 -binary | base64
+#      The result should be a base64-encoded blob that looks like this:
+#          "Gi/HIwdiMcPZo2KBjnstF5kQdLI5bPrYJ8i3Vi6Ybck="
+#
+#   3. Pass a flag to Chromium indicating what host and port should be allowed
+#      to use the self-signed certificate.  For instance, if the host is
+#      localhost, and the port is 4433, the flag would be:
+#         --origin-to-force-quic-on=localhost:4433
+#
+#   4. Pass a flag to Chromium indicating which certificate needs to be trusted.
+#      For the example above, that flag would be:
+#         --ignore-certificate-errors-spki-list=Gi/HIwdiMcPZo2KBjnstF5kQdLI5bPrYJ8i3Vi6Ybck=
+#
+# See https://www.chromium.org/developers/how-tos/run-chromium-with-flags for
+# details on how to run Chromium with flags.
+
 import argparse
 import asyncio
 import io
