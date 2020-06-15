@@ -13,11 +13,11 @@ function onGetBluetoothDevicesButtonClick() {
 }
 
 function onRequestBluetoothDeviceButtonClick() {
-  // Caution: This may result in a bunch of unrelated devices being shown in the
-  // chooser and energy being wasted as there are no filters. Use it with
-  // caution.
-  log('Requesting any Bluetooth device...'); 
-  navigator.bluetooth.requestDevice({ acceptAllDevices: true })
+  log('Requesting any Bluetooth device...');
+  navigator.bluetooth.requestDevice({
+ // filters: [...] <- Prefer filters to save energy & show relevant devices.
+    acceptAllDevices: true
+  })
   .then(device => {
     log('> Requested ' + device.name + ' (' + device.id + ')');
   })
