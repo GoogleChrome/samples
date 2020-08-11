@@ -1,57 +1,44 @@
-async function onConnectToBluetoothDevicesButtonClick() {
-  try {
-    log('Getting existing permitted Bluetooth devices...');
-    const devices = await navigator.bluetooth.getDevices();
-
-    log('> Got ' + devices.length + ' Bluetooth devices.');
-    // These devices may not be powered on or in range, so scan for
-    // advertisement packets from them before connecting.
-    for (const device of devices) {
-      connectToBluetoothDevice(device);
-    }
-  }
-  catch(error) {
-    log('Argh! ' + error);
-  }
-}
-
-async function connectToBluetoothDevice(device) {
-  const abortController = new AbortController();
-
-  device.addEventListener('advertisementreceived', async (event) => {
-    log('> Received advertisement from "' + device.name + '"...');
-    // Stop watching advertisements to conserve battery life.
-    abortController.abort();
-    log('Connecting to GATT Server from "' + device.name + '"...');
-    try {
-      await device.gatt.connect()
-      log('> Bluetooth device "' +  device.name + ' connected.');
-    }
-    catch(error) {
-      log('Argh! ' + error);
-    }
-  }, { once: true });
-
-  try {
-    log('Watching advertisements from "' + device.name + '"...');
-    await device.watchAdvertisements({ signal: abortController.signal });
-  }
-  catch(error) {
-    log('Argh! ' + error);
-  }
-}
-
-async function onRequestBluetoothDeviceButtonClick() {
+async function onWatchAdvertisementsButtonClick() {
   try {
     log('Requesting any Bluetooth device...');
     const device = await navigator.bluetooth.requestDevice({
-   // filters: [...] <- Prefer filters to save energy & show relevant devices.
-      acceptAllDevices: true
-    });
+     // filters: [...] <- Prefer filters to save energy & show relevant devices.
+        acceptAllDevices: true});
 
     log('> Requested ' + device.name);
-  }
-  catch(error) {
+
+    device.addEventListener('advertisementreceived', (event) => {
+      log('Advertisement received.');
+      log('  Device Name: ' + event.device.name);
+      log('  Device ID: ' + event.device.id);
+      log('  RSSI: ' + event.rssi);
+      log('  TX Power: ' + event.txPower);
+      log('  UUIDs: ' + event.uuids);
+      event.manufacturerData.forEach((valueDataView, key) => {
+        logDataView('Manufacturer', key, valueDataView);
+      });
+      event.serviceData.forEach((valueDataView, key) => {
+        logDataView('Service', key, valueDataView);
+      });
+    });
+
+    log('Watching advertisements from "' + device.name + '"...');
+    await device.watchAdvertisements();  
+  } catch(error) {
     log('Argh! ' + error);
   }
 }
+
+/* Utils */
+
+const logDataView = (labelOfDataSource, key, valueDataView) => {
+  const hexString = [...new Uint8Array(valueDataView.buffer)].map(b => {
+    return b.toString(16).padStart(2, '0');
+  }).join(' ');
+  const textDecoder = new TextDecoder('ascii');
+  const asciiString = textDecoder.decode(valueDataView.buffer);
+  log(`  ${labelOfDataSource} Data: ` + key +
+      '\n    (Hex) ' + hexString +
+      '\n    (ASCII) ' + asciiString);
+};
+
