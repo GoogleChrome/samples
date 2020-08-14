@@ -94,6 +94,7 @@ from aioquic.tls import SessionTicket
 
 BIND_ADDRESS = '::1'
 BIND_PORT = 4433
+ALLOWED_ORIGINS = {'localhost', 'googlechrome.github.io'}
 
 
 # QUIC uses two lowest bits of the stream ID to indicate whether the stream is:
@@ -222,7 +223,7 @@ class QuicTransportProtocol(QuicConnectionProtocol):
         # Verify that the origin host is allowed to talk to this server.  This
         # is similar to the CORS (Cross-Origin Resource Sharing) mechanism in
         # HTTP.  See <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS>.
-        if origin.hostname != 'localhost':
+        if origin.hostname not in ALLOWED_ORIGINS:
             raise Exception('Wrong origin specified')
 
         # Dispatch the incoming connection based on the path specified in the
