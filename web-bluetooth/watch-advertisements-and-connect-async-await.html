@@ -1,0 +1,35 @@
+---
+feature_name: Web Bluetooth / Watch Advertisements & Connect (Async Await)
+chrome_version: 87
+check_min_version: true
+feature_id: 5180688812736512
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to check if a
+permitted Bluetooth device is in range of the system before attempting to
+connect to the Bluetooth device. You may want to check out the <a
+href="watch-advertisements-and-connect.html">Watch Advertisements</a> sample.</p>
+
+<button id="connectToBluetoothDevices">Connect to Bluetooth Devices</button>
+<button id="requestBluetoothDevice">Request Bluetooth Device</button>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='watch-advertisements-and-connect-async-await.js' %}
+
+{% include_relative _includes/utils.html %}
+
+<script>
+  if (isWebBluetoothEnabled()) {
+    document.querySelector('#connectToBluetoothDevices').addEventListener('click', function() {
+        onConnectToBluetoothDevicesButtonClick();
+    });
+    document.querySelector('#requestBluetoothDevice').addEventListener('click', function() {
+        onRequestBluetoothDeviceButtonClick();
+    });
+  }
+</script>
