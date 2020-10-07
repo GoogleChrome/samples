@@ -30,14 +30,7 @@ feature_id: 6338383617982464
 {% include output_helper.html %}
 
 <script>
-  var times = 1;
-  var log = function(args) {
-    ChromeSamples.log(args);
-    if (times % 5 == 0) {
-      ChromeSamples.log('');
-    }
-    times++;
-  }
+  var log = ChromeSamples.log;
 </script>
 
 {% include js_snippet.html filename='demo.js' %}

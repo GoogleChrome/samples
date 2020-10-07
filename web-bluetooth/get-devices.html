@@ -1,0 +1,35 @@
+---
+feature_name: Web Bluetooth / Get Devices
+chrome_version: 87
+check_min_version: true
+feature_id: 4797798639730688
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to get a list of
+Bluetooth devices that the website has been granted permission to use by the
+user. You may want to check out the <a href="get-devices-async-await.html">Get
+Devices (Async Await)</a> sample.</p>
+
+<button id="getBluetoothDevices">Get Bluetooth Devices</button>
+<button id="requestBluetoothDevice">Request Bluetooth Device</button>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='get-devices.js' %}
+
+{% include_relative _includes/utils.html %}
+
+<script>
+  if (isWebBluetoothEnabled()) {
+    document.querySelector('#getBluetoothDevices').addEventListener('click', function() {
+        onGetBluetoothDevicesButtonClick();
+    });
+    document.querySelector('#requestBluetoothDevice').addEventListener('click', function() {
+        onRequestBluetoothDeviceButtonClick();
+    });
+  }
+</script>

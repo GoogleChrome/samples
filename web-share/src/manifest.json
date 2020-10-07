@@ -1,0 +1,39 @@
+{
+  "background_color": "#ECEFF1",
+  "description": "An offline-first PWA that acts as a share source and target.",
+  "display": "standalone",
+  "icons": [{
+    "src": "images/splash.jpg",
+    "sizes": "512x512",
+    "type": "image/jpg"
+  }, {
+    "purpose": "maskable",
+    "src": "images/splash.jpg",
+    "sizes": "512x512",
+    "type": "image/jpg"
+  }, {
+    "src": "images/icon.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }],
+  "name": "Scrapbook PWA",
+  "scope": "/",
+  "share_target": {
+    "action": "/_share-target",
+    "enctype": "multipart/form-data",
+    "method": "POST",
+    "params": {
+      "files": [{
+        "name": "media",
+        "accept": [
+          "audio/*",
+          "image/*",
+          "video/*"
+        ]
+      }]
+    }
+  },
+  "short_name": "Scrapbook PWA",
+  "start_url": "/?utm_source=installed",
+  "theme_color": "#37474F"
+}

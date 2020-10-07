@@ -1,0 +1,8 @@
+.DS_Store
+.firebase
+.firebaserc
+.netlify
+dev
+dist
+node_modules
+testfiles
