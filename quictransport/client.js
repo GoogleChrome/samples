@@ -86,7 +86,7 @@ async function sendData() {
         let stream = await transport.createSendStream();
         let writer = stream.writable.getWriter();
         await writer.write(data);
-        writer.close();
+        await writer.close();
         addToEventLog('Sent a unidirectional stream with data: ' + rawData);
         break;
       }
@@ -97,7 +97,7 @@ async function sendData() {
 
         let writer = stream.writable.getWriter();
         await writer.write(data);
-        writer.close();
+        await writer.close();
         addToEventLog(
             'Opened bidirectional stream #' + number +
             ' with data: ' + rawData);
