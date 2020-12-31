@@ -6,8 +6,8 @@ scanButton.addEventListener("click", async () => {
     await ndef.scan();
     log("> Scan started");
 
-    ndef.addEventListener("error", (event) => {
-      log(`Argh! ${event.message}`);
+    ndef.addEventListener("readingerror", () => {
+      log("Argh! Cannot read data from the NFC tag. Try another one?");
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
