@@ -2,15 +2,15 @@ scanButton.addEventListener("click", async () => {
   log("User clicked scan button");
 
   try {
-    const reader = new NDEFReader();
-    await reader.scan();
+    const ndef = new NDEFReader();
+    await ndef.scan();
     log("> Scan started");
 
-    reader.addEventListener("error", (event) => {
-      log(`Argh! ${event.message}`);
+    ndef.addEventListener("readingerror", () => {
+      log("Argh! Cannot read data from the NFC tag. Try another one?");
     });
 
-    reader.addEventListener("reading", ({ message, serialNumber }) => {
+    ndef.addEventListener("reading", ({ message, serialNumber }) => {
       log(`> Serial Number: ${serialNumber}`);
       log(`> Records: (${message.records.length})`);
     });
@@ -23,8 +23,8 @@ writeButton.addEventListener("click", async () => {
   log("User clicked write button");
 
   try {
-    const writer = new NDEFWriter();
-    await writer.write("Hello world!");
+    const ndef = new NDEFReader();
+    await ndef.write("Hello world!");
     log("> Message written");
   } catch (error) {
     log("Argh! " + error);

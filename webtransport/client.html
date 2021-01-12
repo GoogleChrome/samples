@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <title>WebTransport over QUIC client</title>
+  <meta charset="utf-8">
+  <!-- QuicTransport origin trial token. See https://developers.chrome.com/origintrials/#/view_trial/-6744140441987317759 -->
+  <meta http-equiv="origin-trial" content="AmrnrgqP3WKMUy/g9krYpk973oEccOAWMjC5GH8sT1gR2XRthEYSJIWfLGF1t/UhehNI3koobtudUeIIqVI/tg0AAABdeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IlF1aWNUcmFuc3BvcnQiLCJleHBpcnkiOjE2MTA1NTAyMjF9">
+  <script src="client.js"></script>
+  <link rel="stylesheet" href="client.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <body>
+  <div id="top">
+    <div id="explanation">
+      This tool can be used to connect to an arbitrary <code>quic-transport</code> servers.
+      It has several limitations:
+      <ul>
+        <li>It can only send an entirety of a stream at once.  Once the stream
+          is opened, all of the data is immediately sent, and the write side of
+          the steam is closed.</li>
+        <li>This tool does not listen to server-initiated bidirectional
+          streams.</li>
+        <li>Stream IDs are different from the one used by QUIC on the wire, as
+          the on-the-wire IDs are not exposed via the Web API.</li>
+        <li>The QuicTransport object can be accessed using the developer console via <code>currentTransport</code>.</li>
+      </ul>
+    </div>
+    <div id="tool">
+    <h1>WebTransport over QUIC client</h1>
+    <div>
+      <h2>Establish WebTransport connection</h2>
+      <div class="input-line">
+      <label for="url">URL:</label>
+      <input type="text" name="url" id="url"
+             value="quic-transport://localhost:4433/counter">
+      <input type="button" id="connect" value="Connect" onclick="connect()">
+      </div>
+    </div>
+    <div>
+      <h2>Send data over WebTransport</h2>
+      <form name="sending">
+      <textarea name="data" id="data"></textarea>
+      <div>
+        <input type="radio" name="sendtype" value="datagram"
+               id="datagram" checked>
+        <label for="datagram">Send a datagram</label>
+      </div>
+      <div>
+        <input type="radio" name="sendtype" value="unidi" id="unidi-stream">
+        <label for="unidi-stream">Open a unidirectional stream</label>
+      </div>
+      <div>
+        <input type="radio" name="sendtype" value="bidi" id="bidi-stream">
+        <label for="bidi-stream">Open a bidirectional stream</label>
+      </div>
+      <input type="button" id="send" name="send" value="Send data"
+             disabled onclick="sendData()">
+      </form>
+    </div>
+    <div>
+      <h2>Event log</h2>
+      <ul id="event-log">
+      </ul>
+    </div>
+    </div>
+  </div>
+  </body>
+</html>
