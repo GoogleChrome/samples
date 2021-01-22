@@ -64,7 +64,7 @@ async function readPPCPValue(characteristic) {
       (value.getUint8(0) | value.getUint8(1) << 8) * 1.25 + 'ms');
   log('  > Maximum Connection Interval: ' +
       (value.getUint8(2) | value.getUint8(3) << 8) * 1.25 + 'ms');
-  log('  > Slave Latency: ' +
+  log('  > Latency: ' +
       (value.getUint8(4) | value.getUint8(5) << 8) + 'ms');
   log('  > Connection Supervision Timeout Multiplier: ' +
       (value.getUint8(6) | value.getUint8(7) << 8));
