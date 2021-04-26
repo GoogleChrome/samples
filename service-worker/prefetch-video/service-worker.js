@@ -36,8 +36,7 @@ self.addEventListener('install', function(event) {
     '../../styles/main.css',
     'static/poster.jpg',
     // The videos are stored remotely with CORS enabled.
-    'https://prefetch-video-sample.storage.googleapis.com/gbike.webm',
-    'https://prefetch-video-sample.storage.googleapis.com/gbike.mp4'
+    'https://storage.googleapis.com/media-session/sample.webm',
   ];
 
   // All of these logging statements should be visible via the "Inspect" interface
