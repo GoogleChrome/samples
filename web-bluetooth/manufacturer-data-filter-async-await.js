@@ -1,22 +1,22 @@
 async function onButtonClick() {
   let manufacturerData = {};
 
-  let filterCompanyIdentifier = document.querySelector('#companyIdentifier').value;
+  const filterCompanyIdentifier = document.querySelector('#companyIdentifier').value;
   if (filterCompanyIdentifier) {
     manufacturerData.companyIdentifier = parseInt(filterCompanyIdentifier);
   }
   
-  let filterDataPrefix = document.querySelector('#dataPrefix').value;
+  const filterDataPrefix = document.querySelector('#dataPrefix').value;
   if (filterDataPrefix) {
     manufacturerData.dataPrefix = hexStringToUint8Array(filterDataPrefix);
   }
 
-  let filterMask = document.querySelector('#mask').value;
+  const filterMask = document.querySelector('#mask').value;
   if (filterMask) {
     manufacturerData.mask = hexStringToUint8Array(filterMask);
   }
 
-  let options = { filters: [{ manufacturerData: [manufacturerData] }] };
+  const options = { filters: [{ manufacturerData: [manufacturerData] }] };
 
   try {
     log('Requesting Bluetooth Device...');
@@ -38,8 +38,8 @@ function hexStringToUint8Array(hexString) {
     throw "Invalid hexString";
   }
   let arrayBuffer = new Uint8Array(hexString.length / 2);
-  for (let i = 0; i < hexString.length; i += 2) {
-    let byteValue = parseInt(hexString.substr(i, 2), 16);
+  for (const i = 0; i < hexString.length; i += 2) {
+    const byteValue = parseInt(hexString.substr(i, 2), 16);
     if (byteValue == NaN) {
       throw "Invalid hexString";
     }
