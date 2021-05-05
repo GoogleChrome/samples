@@ -1,0 +1,44 @@
+---
+feature_name: Web Bluetooth / Manufacturer Data Filter
+chrome_version: 92
+check_min_version: true
+feature_id: 5684530360877056
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
+device information from a nearby Bluetooth Low Energy Device that matches
+manufacturer specific data. You may want to check out the
+<a href="manufacturer-data-filter-async-await.html">Manufacturer Data Filter
+(Async Await)</a> sample.</p>
+
+<form>
+  Manufacturer Data:
+  <input id="companyIdentifier" type="text" size=18 list="companyIdentifiers" placeholder="Company Identifier">
+  <input id="dataPrefix" type="text" size=17 placeholder="Data Prefix (HEX)">
+  <input id="mask" type="text" size=17 placeholder="Mask (HEX)">
+  <button>Get Bluetooth Device Info</button>
+</form>
+
+{% include_relative _includes/datalist-company-identifiers.html %}
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='manufacturer-data-filter.js' %}
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}
