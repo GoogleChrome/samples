@@ -38,7 +38,7 @@ function hexStringToUint8Array(hexString) {
     throw "Invalid hexString";
   }
   let arrayBuffer = new Uint8Array(hexString.length / 2);
-  for (const i = 0; i < hexString.length; i += 2) {
+  for (let i = 0; i < hexString.length; i += 2) {
     const byteValue = parseInt(hexString.substr(i, 2), 16);
     if (byteValue == NaN) {
       throw "Invalid hexString";
