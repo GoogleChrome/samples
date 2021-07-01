@@ -84,15 +84,21 @@ navigator.mediaSession.setActionHandler('seekforward', function(event) {
 navigator.mediaSession.setActionHandler('play', async function() {
   log('> User clicked "Play" icon.');
   await video.play();
-  navigator.mediaSession.playbackState = "playing";
   // Do something more than just playing video...
 });
 
 navigator.mediaSession.setActionHandler('pause', function() {
   log('> User clicked "Pause" icon.');
   video.pause();
-  navigator.mediaSession.playbackState = "paused";
   // Do something more than just pausing video...
+});
+
+video.addEventListener('play', function() {
+  navigator.mediaSession.playbackState = 'playing';
+});
+
+video.addEventListener('pause', function() {
+  navigator.mediaSession.playbackState = 'paused';
 });
 
 /* Stop (supported since Chrome 77) */
