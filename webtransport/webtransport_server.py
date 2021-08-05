@@ -18,7 +18,7 @@ An example WebTransport over HTTP/3 server based on the aioquic library.
 Processes incoming streams and datagrams, and
 replies with the ASCII-encoded length of the data sent in bytes.
 Example use:
-  python3 web_transport_server.py certificate.pem certificate.key
+  python3 webtransport_server.py certificate.pem certificate.key
 Example use from JavaScript:
   let transport = new WebTransport("https://localhost:4433/counter");
   await transport.ready;
