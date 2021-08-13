@@ -20,7 +20,7 @@ async function requestDevice() {
   bluetoothDevice = await navigator.bluetooth.requestDevice({
    // filters: [...] <- Prefer filters to save energy & show relevant devices.
       acceptAllDevices: true,
-      optionalServices: ['battery_service']});
+      optionalServices: [0x180F /* Battery */]});
   bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
 }
 
@@ -33,10 +33,10 @@ async function connectDeviceAndCacheCharacteristics() {
   const server = await bluetoothDevice.gatt.connect();
 
   log('Getting Battery Service...');
-  const service = await server.getPrimaryService('battery_service');
+  const service = await server.getPrimaryService(0x180F /* Battery */);
 
   log('Getting Battery Level Characteristic...');
-  batteryLevelCharacteristic = await service.getCharacteristic('battery_level');
+  batteryLevelCharacteristic = await service.getCharacteristic(0x2A19 /* Battery Level */);
 
   batteryLevelCharacteristic.addEventListener('characteristicvaluechanged',
       handleBatteryLevelChanged);

@@ -1,17 +1,17 @@
 function onButtonClick() {
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters: [{services: ['heart_rate']}]})
+  navigator.bluetooth.requestDevice({filters: [{services: [0x180D /* Heart Rate */]}]})
   .then(device => {
     log('Connecting to GATT Server...');
     return device.gatt.connect();
   })
   .then(server => {
     log('Getting Heart Rate Service...');
-    return server.getPrimaryService('heart_rate');
+    return server.getPrimaryService(0x180D /* Heart Rate */);
   })
   .then(service => {
     log('Getting Heart Rate Control Point Characteristic...');
-    return service.getCharacteristic('heart_rate_control_point');
+    return service.getCharacteristic(0x2A39 /* Heart Rate Control Point */);
   })
   .then(characteristic => {
     log('Writing Heart Rate Control Point Characteristic...');

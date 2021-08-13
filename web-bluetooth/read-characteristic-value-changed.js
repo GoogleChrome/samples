@@ -18,7 +18,7 @@ function requestDevice() {
   return navigator.bluetooth.requestDevice({
    // filters: [...] <- Prefer filters to save energy & show relevant devices.
       acceptAllDevices: true,
-      optionalServices: ['battery_service']})
+      optionalServices: [0x180F /* Battery */]})
   .then(device => {
     bluetoothDevice = device;
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
@@ -34,11 +34,11 @@ function connectDeviceAndCacheCharacteristics() {
   return bluetoothDevice.gatt.connect()
   .then(server => {
     log('Getting Battery Service...');
-    return server.getPrimaryService('battery_service');
+    return server.getPrimaryService(0x180F /* Battery */);
   })
   .then(service => {
     log('Getting Battery Level Characteristic...');
-    return service.getCharacteristic('battery_level');
+    return service.getCharacteristic(0x2A19 /* Battery Level */);
   })
   .then(characteristic => {
     batteryLevelCharacteristic = characteristic;
