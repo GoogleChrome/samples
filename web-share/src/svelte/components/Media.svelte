@@ -89,8 +89,10 @@ limitations under the License.
 
 <div class="card">
   {#if contentType.startsWith('image/')}
+    <!-- svelte-ignore a11y-img-redundant-alt -->
     <img {src} alt="An image in the scrapbook.">
   {:else if contentType.startsWith('video/')}
+    <!-- svelte-ignore a11y-media-has-caption -->
     <video {src} controls controlsList="nodownload" alt="A video in the scrapbook."></video>
   {:else if contentType.startsWith('audio/')}
     <audio {src} controls controlsList="nodownload" alt="A sound in the scrapbook."></audio>
