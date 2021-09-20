@@ -1,0 +1,52 @@
+---
+feature_name: EME MediaKeySession Closed Reason
+chrome_version: 96
+feature_id: 5632124143009792
+check_min_version: true
+---
+
+<h3>Background</h3>
+<p>
+The current EME spec says "the CDM may close a session at any point, such as
+when the session is no longer needed or when system resources are lost".
+However, there's no way to specify the exact reason for session closure. In
+some cases, this is part of normal user flow, e.g. user close laptop lid to
+put the device into sleep mode, where the player should resume playback. In
+some other cases, this is due to some unrecoverable fatal error.
+</p>
+<p>
+This is why the <code>closed</code> attribute on <code>MediaKeySession</code>
+is updated to provide a <code>MediaKeySessionClosedReason</code> so that you
+can handle session closure differently based on the reason.
+</p>
+
+<button id="createSessionButton">create media key session</button>
+<button id="closeSessionButton">close media key session</button>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='key-session-closed-reason.js' %}
+
+<script>
+  document.querySelector('#createSessionButton').addEventListener('click', function() {
+    try {
+      onCreateSessionButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+
+  document.querySelector('#closeSessionButton').addEventListener('click', function() {
+    try {
+      onCloseSessionButtonClick();
+    } catch(error) {
+      logError(error);
+    }
+  });
+
+  function logError(error) {
+    log(`> Error: ${error.message}\n`);
+  }
+
+  log = ChromeSamples.log;
+</script>
