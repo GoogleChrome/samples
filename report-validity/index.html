@@ -25,13 +25,180 @@ feature_id: 5433505009893376
 
 {% capture initial_output_content %}
 <form id="sample-form">
-  <div>
+  <fieldset>
+  <!-- NOTE my-element must be visible and focusable see comments in script below -->
+    <my-element required name="my-element"></my-element>
     <label for="year">Enter at least four characters (required):</label>
-    <input id="year" type="text" minlength="4" required>
-  </div>
+    <!-- 
+    	Norse were in Newfoundland North America in 1021 
+	https://wikipedia.org/wiki/Norse_colonization_of_North_America
+    -->
+    <input id="year" type="text" minlength="4" required name="sample-year" placeholder="year like '1021'">
+  </fieldset>
+  <button id="report-validity">Report Validity</button>
+  <button type=reset>reset</button>
 </form>
 
-<button id="report-validity">Report Validity</button>
+<script type=module>
+/* a simple demo custom element that incorporates elementinternals to use validity APIs and reporting
+	when implemented as noted here it works in the same way standard HTML elements work
+
+
+2021-October applied to custom element
+see
+https://developer.mozilla.org/docs/Web/API/Constraint_validation
+https://developer.mozilla.org/docs/Web/API/ValidityState
+https://developer.mozilla.org/docs/Web/API/ElementInternals
+ */
+class HTMLMyElement extends HTMLElement{
+	static get formAssociated() {
+		return true;
+	}
+	constructor(){
+		super();
+		this.internals = this.attachInternals();
+		this._initial;
+		this.attachShadow({
+			mode: 'open'
+			/* 	NOTE 
+			,delegatesFocus: true
+				does not work because shadowRoot elements are outside the form's tree
+			*/
+		}).innerHTML = `
+<style>
+:host{
+	cursor: pointer;
+	border: 1px dotted #aaa;
+	display: block;
+	padding: 0.2em 0.5em;
+	margin: 0.1rem 0;
+	font-size: 1rem;
+}
+:host([hidden]){
+	display:none;
+}
+:host([disabled]){
+	cursor: not-allowed;
+}
+:host(:invalid){
+	border-color: red;
+}
+:host(:where(:required)){
+	border-style: solid;
+	border-color: #000;
+}
+:host(:where(:optional)){
+	border-size: 0 0 1px 0;
+}
+:host(:where(:focus-within,:acive,:focus,:hover,[invalid])){
+	border-style: solid;
+}
+</style>
+<slot>empty + invalid</slot>
+		`;
+		this.addEventListener('click', this._click);
+
+		if(!this.hasAttribute('tabindex')){
+		/* NOTE 
+		to use the request validation the element must:
+		* be visible
+		* not use delegatesFocus because shadowRoots do not work currently (2021-10)
+		* have a tabIndex value
+
+		otherwise the error (for native and custom elements both) appears (when invalid):
+		An invalid form control with name='my-element' is not focusable.
+
+		to reproduce the error simply remove/comment the tabindex or hide the element
+			*/
+			this.setAttribute('tabindex', 0);
+		}
+
+	}
+	/*
+		provide a convenient way to toggle values through possibilities
+	 */
+	_click(event){
+		const { value } = this;
+		const { altKey, metaKey, ctrlKey, shiftKey } = event;
+		if(altKey && shiftKey && metaKey){
+			this.setAttribute('hidden', '');
+		}else if(altKey && shiftKey){
+			this.disabled = true;
+		}else if(shiftKey || altKey){
+			this.required = !this.required;
+		}else{
+			this.value = value ? '' : (new Date).toISOString();
+		}
+	}
+
+	get validity(){
+		return this.internals.validity;
+	}
+	get willValidate(){
+		return this.internals.willValidate;
+	}
+	get validationMessage(){
+		return this.internals.validationMessage;
+	}
+	setValidity(){
+		const { value } = this;
+		if(!this.disabled && this.required && value.trim().length < 1){
+			this.internals.setValidity({valueMissing: true}, 'My-element requires a value.');
+		}else{
+			this.internals.setValidity({});
+		}
+		this.internals.setFormValue(value);
+	}
+	checkValidity() {
+		return this.internals.checkValidity();
+	}
+	reportValidity() {
+		return this.internals.reportValidity();
+	}
+	formAssociatedCallback(form){
+		this._initial = this.value;
+		this.setValidity();
+	}
+	formResetCallback(){
+		this.value = this._initial;
+		this.setValidity();
+	}
+	formDisabledCallback(disabled){
+		console.log(`element${ disabled ? '[disabled]' : ':not([disabled])'}`);
+	}
+
+	__attributeBoolean(name, value){
+		if(value){
+			return this.setAttribute(name, '');
+		}else{
+			return this.removeAttribute(name);
+		}
+	}
+	get required(){
+		return this.hasAttribute('required');
+	}
+	set required(state){
+		return this.__attributeBoolean('required', state);
+	}
+	get disabled(){
+		return this.hasAttribute('disabled');
+	}
+	set disabled(state){
+		return this.__attributeBoolean('disabled', state);
+	}
+	get value(){
+		return this.innerText;
+	}
+	set value(text){
+		this.textContent = text ?? '';
+		this.setValidity();
+	}
+
+}
+
+customElements.define('my-element', HTMLMyElement)
+</script>
+
 {% endcapture %}
 {% include output_helper.html initial_output_content=initial_output_content %}
 
