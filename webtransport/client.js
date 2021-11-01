@@ -33,7 +33,7 @@ async function connect() {
   currentTransport = transport;
   streamNumber = 1;
   try {
-    currentTransportDatagramWriter = transport.datagramWritable.getWriter();
+    currentTransportDatagramWriter = transport.datagrams.writable.getWriter();
     addToEventLog('Datagram writer ready.');
   } catch (e) {
     addToEventLog('Sending datagrams not supported: ' + e, 'error');
@@ -60,7 +60,7 @@ async function sendData() {
         break;
       case 'unidi': {
         let stream = await transport.createUnidirectionalStream();
-        let writer = stream.writable.getWriter();
+        let writer = stream.getWriter();
         await writer.write(data);
         await writer.close();
         addToEventLog('Sent a unidirectional stream with data: ' + rawData);
@@ -88,7 +88,7 @@ async function sendData() {
 // Reads datagrams from |transport| into the event log until EOF is reached.
 async function readDatagrams(transport) {
   try {
-    var reader = transport.datagramReadable.getReader();
+    var reader = transport.datagrams.readable.getReader();
     addToEventLog('Datagram reader ready.');
   } catch (e) {
     addToEventLog('Receiving datagrams not supported: ' + e, 'error');
@@ -131,7 +131,7 @@ async function acceptUnidirectionalStreams(transport) {
 
 async function readFromIncomingStream(stream, number) {
   let decoder = new TextDecoderStream('utf-8');
-  let reader = stream.readable.pipeThrough(decoder).getReader();
+  let reader = stream.pipeThrough(decoder).getReader();
   try {
     while (true) {
       const { value, done } = await reader.read();
