@@ -81,7 +81,7 @@ from collections import defaultdict
 from typing import Dict, Optional
 
 from aioquic.asyncio import QuicConnectionProtocol, serve
-from aioquic.h3.connection import H3_ALPN, H3Connection
+from aioquic.h3.connection import H3_ALPN, H3Connection, Setting
 from aioquic.h3.events import H3Event, HeadersReceived, WebTransportStreamDataReceived, DatagramReceived
 from aioquic.quic.configuration import QuicConfiguration
 from aioquic.quic.connection import stream_is_unidirectional
@@ -91,6 +91,24 @@ BIND_ADDRESS = '::1'
 BIND_PORT = 4433
 
 logger = logging.getLogger(__name__)
+
+# https://datatracker.ietf.org/doc/html/draft-ietf-masque-h3-datagram-05#section-9.1
+H3_DATAGRAM_05 = 0xffd277
+
+class H3ConnectionWithDatagram(H3Connection):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+
+    # Overrides H3Connection._validate_settings() to enable HTTP Datagram
+    def _validate_settings(self, settings: Dict[int, int]) -> None:
+        settings[Setting.H3_DATAGRAM] = 1
+        return super()._validate_settings(settings)
+
+    # Overrides H3Connection._get_local_settings() to enable HTTP Datagram
+    def _get_local_settings(self) -> Dict[int, int]:
+        settings = super()._get_local_settings()
+        settings[H3_DATAGRAM_05] = 1
+        return settings
 
 
 # CounterHandler implements a really simple protocol:
@@ -104,7 +122,7 @@ logger = logging.getLogger(__name__)
 #     datagram that was just received.
 class CounterHandler:
 
-    def __init__(self, session_id, http: H3Connection) -> None:
+    def __init__(self, session_id, http: H3ConnectionWithDatagram) -> None:
         self._session_id = session_id
         self._http = http
         self._counters = defaultdict(int)
@@ -141,12 +159,13 @@ class WebTransportProtocol(QuicConnectionProtocol):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self._http: Optional[H3Connection] = None
+        self._http: Optional[H3ConnectionWithDatagram] = None
         self._handler: Optional[CounterHandler] = None
 
     def quic_event_received(self, event: QuicEvent) -> None:
         if isinstance(event, ProtocolNegotiated):
-            self._http = H3Connection(self._quic, enable_webtransport=True)
+            self._http = H3ConnectionWithDatagram(
+                self._quic, enable_webtransport=True)
         elif isinstance(event, StreamReset) and self._handler is not None:
             # Streams in QUIC can be closed in two ways: normal (FIN) and
             # abnormal (resets).  FIN is handled by the handler; the code
