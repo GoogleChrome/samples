@@ -136,7 +136,6 @@ limitations under the License.
           if (navigator.serviceWorker.controller) {
             // If .controller is set, then this page is being actively controlled by the service worker.
             document.querySelector('#status').textContent = 'The service worker is currently handling network operations.';
-
             showRequest();
           } else {
             // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
