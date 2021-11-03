@@ -103,30 +103,32 @@ limitations under the License.
       }
 
       function makeApiRequest() {
-        var xhr = new XMLHttpRequest();
         // See https://developers.google.com/url-shortener/v1/getting_started#shorten
-        xhr.open('POST', 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyCr0XVB-Hz1ohPpjvLatdj4qZ5zcSohHsU');
-        xhr.setRequestHeader('Content-Type', 'application/json');
+        var request = new Request('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyCr0XVB-Hz1ohPpjvLatdj4qZ5zcSohHsU', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            longUrl: document.querySelector('#original-url').value
+          })
+        })
         // Only set the custom 'X-Mock-Response' header if the box is checked. The service worker will
         // use the header's presence to determine whether to return a mock or genuine response.
         if (document.querySelector('#mock-checkbox').checked) {
-          xhr.setRequestHeader('X-Mock-Response', 'yes');
+          request.headers.set('X-Mock-Response', 'yes')
         }
 
-        xhr.addEventListener('load', function() {
-          var response = JSON.parse(xhr.response);
-          console.log('Response is', response);
-
-          var shortUrlElement = document.querySelector('#short-url');
-          shortUrlElement.href = response.id;
-          shortUrlElement.textContent = response.id;
-        });
-
-        var request = {
-          longUrl: document.querySelector('#original-url').value
-        };
-        var requestJson = JSON.stringify(request);
-        xhr.send(requestJson);
+        fetch(request)
+          .then(response => {
+            return response.json()
+          })
+          .then(json => {
+            console.log('Response is', json);
+            var shortUrlElement = document.querySelector('#short-url');
+            shortUrlElement.href = json.id;
+            shortUrlElement.textContent = json.id;
+          })
       }
 
       if ('serviceWorker' in navigator) {
