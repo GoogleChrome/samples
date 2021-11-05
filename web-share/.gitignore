@@ -2,7 +2,6 @@
 .firebase
 .firebaserc
 .netlify
-dev
+*.log
 dist
 node_modules
-testfiles

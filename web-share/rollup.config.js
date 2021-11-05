@@ -1,6 +1,7 @@
 import {terser} from 'rollup-plugin-terser';
 import commonjs from 'rollup-plugin-commonjs';
 import copy from 'rollup-plugin-copy';
+import css from 'rollup-plugin-css-only';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
@@ -11,7 +12,8 @@ export default [{
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'dist/js/app.js'
+		dir: 'dist',
+		entryFileNames: 'js/[name].js'
 	},
 	plugins: [
 		copy({
@@ -19,24 +21,17 @@ export default [{
 				{src: 'src/*.{json,html}', dest: 'dist'},
 				{src: 'src/css/**/*', dest: 'dist/css'},
 				{src: 'src/images/**/*', dest: 'dist/images'},
-				{src: 'testfiles/*', dest: 'dist/testfiles'},
 			],
 		}),
-		svelte({
-			dev: false,
-			css: css => {
-				css.write('dist/css/svelte.css');
-			}
+		svelte(),
+		css({
+			output: 'css/svelte.css',
 		}),
 		resolve({
 			browser: true,
 			dedupe: (importee) => importee === 'svelte' || importee.startsWith('svelte/'),
 		}),
-		commonjs({
-			namedExports: {
-				'pretty-bytes': ['default'],
-			},
-		}),
+		commonjs(),
 		terser(),
 	],
 }, {
@@ -49,14 +44,10 @@ export default [{
 	},
 	plugins: [
 		svelte({
-			dev: false,
+			emitCss: false,
 		}),
 		resolve(),
-		commonjs({
-			namedExports: {
-				'pretty-bytes': ['default'],
-			},
-		}),
+		commonjs(),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
 		}),

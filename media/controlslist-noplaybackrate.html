@@ -1,0 +1,45 @@
+---
+feature_name: noplaybackrate in HTMLMediaElement.controlsList
+chrome_version: 93
+feature_id: 5092414224072704
+---
+
+<h3>Background</h3>
+<p>Using the ControlsList API, developers can customize Chrome's playback
+speed button in native media controls.
+</p>
+
+<p>Credits: Media files are © copyright Blender Foundation | <a href="http://www.blender.org">www.blender.org <a>.</p>
+
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='controlslist-noplaybackrate.js' %}
+
+<style>
+  .container {
+      padding: 36px 12px;
+      text-align: center;
+  }
+  video {
+      max-width: 100%;
+  }
+  .container pre {
+      padding-top: 12px;
+      margin: 0;
+      word-break: break-word;
+      white-space: normal;
+  }
+</style>
+
+<div class="container">
+  <video controls src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=80"></video>
+  <pre>&lt;video controls&gt;</pre>
+</div>
+<div class="container">
+  <video controls controlsList="noplaybackrate" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=82"></video>
+  <pre>&lt;video controls controlsList="noplaybackrate"&gt;</pre>
+</div>
+<div class="container">
+  <video controlsList="noplaybackrate" src="//storage.googleapis.com/media-session/caminandes/short.mp4#t=84"></video>
+  <pre>&lt;video controlsList="noplaybackrate"&gt;</pre>
+</div>
