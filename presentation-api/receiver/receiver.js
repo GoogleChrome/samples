@@ -10,15 +10,9 @@ function addConnection(connection) {
     const data = JSON.parse(event.data);
     const logString = 'Message ' + messageIdx + ' from connection #' +
         connection.connectionId + ': ' + data.message;
-    if (data.message = 'start') {
-       new PresentationRequest(["index.html"]).start().then(c =>
-         connection.send('Started second presentation successfully!!!');
-       )
-    } else {
-      addMessage(logString, data.lang);
-      maybeSetFruit(data.message);
-      connection.send('Received message ' + messageIdx);
-    }
+    addMessage(logString, data.lang);
+    maybeSetFruit(data.message);
+    connection.send('Received message ' + messageIdx);
   });
 
   connection.addEventListener('close', function(event) {
