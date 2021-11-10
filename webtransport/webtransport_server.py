@@ -94,6 +94,8 @@ logger = logging.getLogger(__name__)
 
 # https://datatracker.ietf.org/doc/html/draft-ietf-masque-h3-datagram-05#section-9.1
 H3_DATAGRAM_05 = 0xffd277
+# https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-h3-websockets-00#section-5
+ENABLE_CONNECT_PROTOCOL = 0x08
 
 class H3ConnectionWithDatagram(H3Connection):
     def __init__(self, *args, **kwargs) -> None:
@@ -104,10 +106,12 @@ class H3ConnectionWithDatagram(H3Connection):
         settings[Setting.H3_DATAGRAM] = 1
         return super()._validate_settings(settings)
 
-    # Overrides H3Connection._get_local_settings() to enable HTTP Datagram
+    # Overrides H3Connection._get_local_settings() to enable HTTP Datagram and
+    # extended CONNECT methods.
     def _get_local_settings(self) -> Dict[int, int]:
         settings = super()._get_local_settings()
         settings[H3_DATAGRAM_05] = 1
+        settings[ENABLE_CONNECT_PROTOCOL] = 1
         return settings
 
 
