@@ -131,7 +131,7 @@ async function acceptUnidirectionalStreams(transport) {
 
 async function readFromIncomingStream(readable, number) {
   let decoder = new TextDecoderStream('utf-8');
-  let reader = readable.getReader();
+  let reader = readable.pipeThrough(decoder).getReader();
   try {
     while (true) {
       const { value, done } = await reader.read();
@@ -139,7 +139,7 @@ async function readFromIncomingStream(readable, number) {
         addToEventLog('Stream #' + number + ' closed');
         return;
       }
-      let data = decoder.decode(value);
+      let data = value;
       addToEventLog('Received data on stream #' + number + ': ' + data);
     }
   } catch (e) {
