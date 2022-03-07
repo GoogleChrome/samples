@@ -130,8 +130,6 @@ function sendPaymentToServer(instrumentResponse) {
  */
 function instrumentToJsonString(instrument) {
   let details = instrument.details;
-  details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
-  details.cardSecurityCode = '***';
 
   return JSON.stringify({
     methodName: instrument.methodName,
