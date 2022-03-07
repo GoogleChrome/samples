@@ -17,8 +17,8 @@
  */
 
 /**
- * Asynchronously builds PaymentRequest for both Android Pay and credit card
- * payments, but does not show any UI yet. Succeeds only if can make payments.
+ * Asynchronously builds PaymentRequest for both Android Pay and BobBucks, but
+ * does not show any UI yet. Succeeds only if can make payments.
  * If you encounter issues when running your own copy of this sample, run 'adb
  * logcat | grep Wallet' to see detailed error messages.
  *
@@ -33,9 +33,6 @@ function initPaymentRequest(onSuccess, onFailure) {
     return;
   }
 
-  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-      'visa', 'mir'];
-  let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{
     supportedMethods: 'https://android.com/pay',
     data: {
@@ -58,8 +55,7 @@ function initPaymentRequest(onSuccess, onFailure) {
       },
     },
   }, {
-    supportedMethods: 'basic-card',
-    data: {supportedNetworks: networks, supportedTypes: types},
+    supportedMethods: 'https://bobbucks.dev/pay',
   }];
 
   let details = {
