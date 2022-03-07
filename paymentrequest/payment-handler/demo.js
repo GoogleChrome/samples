@@ -1,15 +1,11 @@
 /**
- * Builds PaymentRequest for credit cards, but does not show any UI yet.
+ * Builds PaymentRequest for the BobBucks payment method, but does not show any UI yet.
  *
  * @return {PaymentRequest} The PaymentRequest oject.
  */
 function initPaymentRequest() {
-  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-      'visa', 'mir'];
-  let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{
-    supportedMethods: 'basic-card',
-    data: {supportedNetworks: networks, supportedTypes: types},
+    supportedMethods: 'https://bobbucks.dev/pay',
   }];
 
   let details = {
@@ -30,7 +26,7 @@ function initPaymentRequest() {
 }
 
 /**
- * Invokes PaymentRequest for credit cards.
+ * Invokes PaymentRequest for the BobBucks payment method.
  *
  * @param {PaymentRequest} request The PaymentRequest object.
  */
@@ -74,8 +70,6 @@ function sendPaymentToServer(instrumentResponse) {
  */
 function instrumentToJsonString(instrument) {
   let details = instrument.details;
-  details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
-  details.cardSecurityCode = '***';
 
   return JSON.stringify({
     methodName: instrument.methodName,
