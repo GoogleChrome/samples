@@ -1,8 +1,7 @@
 # PaymentRequest Recipes
 
-- [Credit cards](https://googlechrome.github.io/samples/paymentrequest/credit-cards/) -
-a sample that accepts credit card payments and does not request shipping
-information.
+- [Payment Handler](https://googlechrome.github.io/samples/paymentrequest/payment-handler/) -
+a sample that accepts the URL-based payment method.
 
 - [Android Pay](https://googlechrome.github.io/samples/paymentrequest/android-pay/) -
 a sample that accepts Android Pay payments and does not request shipping

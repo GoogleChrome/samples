@@ -5,12 +5,8 @@
  * @return {PaymentRequest} The PaymentRequest object.
  */
 function initPaymentRequest() {
-  let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
-      'visa', 'mir'];
-  let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{
-    supportedMethods: 'basic-card',
-    data: {supportedNetworks: networks, supportedTypes: types},
+    supportedMethods: 'https://bobbucks.dev/pay',
   }];
 
   let details = {
