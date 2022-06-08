@@ -1,4 +1,4 @@
-scanButton.addEventListener("click", async () => {
+  scanButton.addEventListener("click", async () => {
   log("User clicked scan button");
 
   try {
@@ -13,8 +13,32 @@ scanButton.addEventListener("click", async () => {
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
       log(`> Serial Number: ${serialNumber}`);
       log(`> Records: (${message.records.length})`);
-    });
-  } catch (error) {
+      
+      if(message.records.length>0){
+      for (const record of message.records) {
+          log("Record type:  " + record.recordType);
+          log("MIME type:    " + record.mediaType);
+          log("Record id:    " + record.id);
+          switch (record.recordType) {
+            case "text":
+              {
+                const textDecoder = new TextDecoder(record.encoding);
+                log(`Text: ${textDecoder.decode(record.data)} (${record.lang})`);
+              }
+              break;
+            case "url":
+              {
+                const textDecoder = new TextDecoder();
+                console.log(`URL: ${textDecoder.decode(record.data)}`);
+              }
+              break;
+            default:
+              // TODO: Handle other records with record data.
+            }
+          }
+         }
+       });
+      } catch (error) {
     log("Argh! " + error);
   }
 });
