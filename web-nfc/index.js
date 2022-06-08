@@ -14,11 +14,10 @@
       log(`> Serial Number: ${serialNumber}`);
       log(`> Records: (${message.records.length})`);
       
-      if(message.records.length>0){
       for (const record of message.records) {
-          log("Record type:  " + record.recordType);
-          log("MIME type:    " + record.mediaType);
-          log("Record id:    " + record.id);
+          log(`\nRecord id: ${record.id}`);
+          log(`Record type: ${record.recordType}`);
+          log(`MIME type: ${record.mediaType}`);          
           switch (record.recordType) {
             case "text":
               {
@@ -29,7 +28,7 @@
             case "url":
               {
                 const textDecoder = new TextDecoder();
-                console.log(`URL: ${textDecoder.decode(record.data)}`);
+                log(`URL: ${textDecoder.decode(record.data)}`);
               }
               break;
             default:
