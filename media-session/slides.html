@@ -1,0 +1,37 @@
+---
+feature_name: Presenting Slides / Media Session
+chrome_version: 110
+feature_id: 5090980649238528
+check_min_version: true
+index: index.html
+---
+
+<h3>Background</h3>
+<p>The <a href="https://web.dev/media-session">Media Session API</a> lets you
+handle presenting slides actions such as previous and next slides
+from a Picture-in-Picture window.</p>
+
+<style>
+  canvas { background: #263238; height: 198px; width: 100%; object-fit: contain;} 
+  button { margin: 4px 0; }
+</style>
+
+<canvas></canvas>
+<button id="togglePipButton">Toggle Slides in Picture-in-Picture</button>
+
+{% include output_helper.html %}
+
+<script>
+  if (!('mediaSession' in navigator)) {
+    ChromeSamples.setStatus('The Media Session API is not yet available.');
+  }
+
+  // This prevents unnecessary errors when Media Session API is not available.
+  navigator.mediaSession = navigator.mediaSession || {};
+  navigator.mediaSession.setActionHandler = navigator.mediaSession.setActionHandler || function() {};
+  window.MediaMetadata = window.MediaMetadata || function() {};
+
+  log = ChromeSamples.log;
+</script>
+
+{% include js_snippet.html filename='slides.js' %}
