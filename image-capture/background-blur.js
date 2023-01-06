@@ -12,9 +12,9 @@ navigator.mediaDevices.getUserMedia({ video: true })
 
   const toggleButton = document.querySelector("button");
   toggleButton.onclick = () => {
-    const backgroundBlur = track.getSettings().backgroundBlur;
+    const settings = track.getSettings();
     track.applyConstraints({
-      advanced: [{ backgroundBlur: !backgroundBlur }],
+      advanced: [{ backgroundBlur: !settings.backgroundBlur }],
     });
   };
   toggleButton.disabled = false;
