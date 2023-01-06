@@ -3,12 +3,12 @@ navigator.mediaDevices.getUserMedia({ video: true })
   document.querySelector("video").srcObject = mediaStream;
 
   const [track] = mediaStream.getVideoTracks();
-  const settings = track.getSettings();
+  const capabilities = track.getCapabilities();
 
-  // Check whether background blur is supported or not.
-  if (!("backgroundBlur" in settings)) {
+  // Check whether toggling background blur is supported or not.
+  if (capabilities.backgroundBlur?.length !== 2) {
     throw new Error(
-      `Background blur is not supported by ${track.label}`
+      `Toggling background blur is not supported by ${track.label}`
     );
   }
 
