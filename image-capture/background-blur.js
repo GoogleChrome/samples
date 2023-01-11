@@ -12,9 +12,7 @@ navigator.mediaDevices.getUserMedia({ video: true })
 
   // Check whether toggling background blur is supported or not.
   if (capabilities.backgroundBlur?.length !== 2) {
-    throw new Error(
-      `Toggling background blur is not supported by ${track.label}`
-    );
+    throw Error(`Background blur toggle is not supported by ${track.label}`);
   }
 
   // Listen to background blur changes.
@@ -22,9 +20,9 @@ navigator.mediaDevices.getUserMedia({ video: true })
 
   const toggleButton = document.querySelector("button");
   toggleButton.onclick = () => {
-    const backgroundBlur = track.getSettings().backgroundBlur;
+    const settings = track.getSettings();
     track.applyConstraints({
-      advanced: [{ backgroundBlur: !backgroundBlur }],
+      advanced: [{ backgroundBlur: !settings.backgroundBlur }],
     });
   };
   toggleButton.disabled = false;
