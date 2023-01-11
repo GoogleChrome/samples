@@ -4,6 +4,11 @@ navigator.mediaDevices.getUserMedia({ video: true })
 
   const [track] = mediaStream.getVideoTracks();
   const capabilities = track.getCapabilities();
+  const settings = track.getSettings();
+
+  if ("backgroundBlur" in settings) {
+    log(`Background blur is ${settings.backgroundBlur ? "ON" : "OFF"}`);
+  }
 
   // Check whether toggling background blur is supported or not.
   if (capabilities.backgroundBlur?.length !== 2) {
@@ -11,6 +16,9 @@ navigator.mediaDevices.getUserMedia({ video: true })
       `Toggling background blur is not supported by ${track.label}`
     );
   }
+
+  // Listen to background blur changes.
+  track.onconfigurationchange = onconfigurationchange;
 
   const toggleButton = document.querySelector("button");
   toggleButton.onclick = () => {
@@ -21,4 +29,11 @@ navigator.mediaDevices.getUserMedia({ video: true })
   };
   toggleButton.disabled = false;
 })
-.catch((error) => ChromeSamples.log("Argh!", `${error}`));
+.catch((error) => log("Argh!", `${error}`));
+
+function onconfigurationchange(event) {
+  const settings = event.target.getSettings();
+  if ("backgroundBlur" in settings) {
+    log(`Background blur is now ${settings.backgroundBlur ? "ON" : "OFF"}`);
+  }
+}
