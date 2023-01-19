@@ -10,13 +10,13 @@ navigator.mediaDevices.getUserMedia({ video: true })
     log(`Background blur is ${settings.backgroundBlur ? "ON" : "OFF"}`);
   }
 
-  // Check whether toggling background blur is supported or not.
+  // Listen to background blur changes.
+  track.onconfigurationchange = onconfigurationchange;
+  
+  // Check whether the user can toggle background blur or not.
   if (capabilities.backgroundBlur?.length !== 2) {
     throw Error(`Background blur toggle is not supported by ${track.label}`);
   }
-
-  // Listen to background blur changes.
-  track.onconfigurationchange = onconfigurationchange;
 
   const toggleButton = document.querySelector("button");
   toggleButton.onclick = () => {
