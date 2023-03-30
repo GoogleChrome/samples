@@ -6,10 +6,12 @@ navigator.mediaDevices.getUserMedia({ video: true })
   const capabilities = track.getCapabilities();
   const settings = track.getSettings();
 
-  if ("backgroundBlur" in settings) {
-    log(`Background blur is ${settings.backgroundBlur ? "ON" : "OFF"}`);
+  if (!("backgroundBlur" in settings)) {
+    throw Error(`Background blur is not supported by ${track.label}`);
   }
 
+  log(`Background blur is ${settings.backgroundBlur ? "ON" : "OFF"}`);
+  
   // Listen to background blur changes.
   track.addEventListener("configurationchange", configurationChange);
   
