@@ -33,8 +33,8 @@ and ask for feedback directly.
 
 Style / Linting / CI
 ===
-The samples ideally should follow the [Google JavaScript Style Guide](http://google.github.io/styleguide/javascriptguide.xml),
-and that's enforced via [ESLint](), using the [`eslint-config-google`](https://github.com/google/eslint-config-google)
+The samples ideally should follow the [Google JavaScript Style Guide](http://google.github.io/styleguide/jsguide.html),
+and that's enforced via __**ESLint**__, using the [`eslint-config-google`](https://github.com/google/eslint-config-google)
 base configuration, with a few overrides as needed.
 
 Linting can be performed via `npm run lint` (make sure to `npm install` first).
