@@ -128,6 +128,18 @@ try {
   log('Warning! The "seekto" media session action is not supported.');
 }
 
+
+/* Enter Picture-in-Picture (supported since Chrome 120) */
+
+try {
+  navigator.mediaSession.setActionHandler('enterpictureinpicture', async function() {
+    log('> User clicked "Enter Picture-in-Picture" icon.');
+    await video.requestPictureInPicture();
+  });
+} catch(error) {
+  log('Warning! The "enterpictureinpicture" media session action is not supported.');
+}
+
 /* Utils */
 
 function getAwesomePlaylist() {
