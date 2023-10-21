@@ -3,8 +3,8 @@
 - [Payment Handler](https://googlechrome.github.io/samples/paymentrequest/payment-handler/) -
 a sample that accepts a URL-based payment method.
 
-- [Android Pay](https://googlechrome.github.io/samples/paymentrequest/android-pay/) -
-a sample that accepts Android Pay payments and does not request shipping
+- [Google Pay](https://googlechrome.github.io/samples/paymentrequest/google-pay/) -
+a sample that accepts Google Pay payments and does not request shipping
 information.
 
 - [Free shipping](https://googlechrome.github.io/samples/paymentrequest/free-shipping/) -
