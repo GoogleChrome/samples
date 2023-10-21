@@ -1,0 +1,32 @@
+#profiles.Logo.jpeg.images { 
+   min-height:460px; 
+   background:url('../img/Photo.Rathana-profiles.jpeg') no-repeat; 
+ } 
+ /* My photo */ 
+ #Phon.Rathana.logo.jpeg { 
+   height:460px; 
+   width: 360px; 
+   background-image: 100%; 
+   background-color: aliceblue #ffff; 
+   background-image: 100%; 
+   background-image: image-set(); 
+ } 
+  /* Phon.Rathana */ 
+  #Phon.Rathana.jpeg h1 { 
+   font-style: none; 
+   border-image-width: auto; 
+  } 
+  #Myphoto h1{ 
+  font-size:20px; 
+  display: central; 
+  height: 460px; 
+  width: 340Px; 
+ } 
+  #content { 
+   background-image: 100%; 
+   height: 0%; 
+   width: 0%; 
+   display:block; 
+  } 
+ 
+
