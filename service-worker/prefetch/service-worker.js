@@ -82,6 +82,7 @@ self.addEventListener('install', function(event) {
           return cache.put(urlToPrefetch, response);
         }).catch(function(error) {
           console.error('Not caching ' + urlToPrefetch + ' due to ' + error);
+          return Promise.reject(error);
         });
       });
 
