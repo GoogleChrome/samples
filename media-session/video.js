@@ -156,7 +156,22 @@ function getAwesomePlaylist() {
         { src: BASE_URL + 'sintel/artwork-256.png', sizes: '256x256', type: 'image/png' },
         { src: BASE_URL + 'sintel/artwork-384.png', sizes: '384x384', type: 'image/png' },
         { src: BASE_URL + 'sintel/artwork-512.png', sizes: '512x512', type: 'image/png' },
-      ]
+      ],
+      chapterInfo: [{
+        title: 'Chapter 1',
+        startTime: 0,
+        artwork: [
+          { src: BASE_URL + 'sintel/chapter1-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'sintel/chapter1-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }, {
+        title: 'Chapter 2',
+        startTime: 37,
+        artwork: [
+          { src: BASE_URL + 'sintel/chapter2-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'sintel/chapter2-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }]
     }, {
       src: BASE_URL + 'big-buck-bunny/trailer.mov',
       title: '"Big Buck Bunny" Trailer, Peach Open Movie Project',
@@ -168,7 +183,22 @@ function getAwesomePlaylist() {
         { src: BASE_URL + 'big-buck-bunny/artwork-256.png', sizes: '256x256', type: 'image/png' },
         { src: BASE_URL + 'big-buck-bunny/artwork-384.png', sizes: '384x384', type: 'image/png' },
         { src: BASE_URL + 'big-buck-bunny/artwork-512.png', sizes: '512x512', type: 'image/png' },
-      ]
+      ],
+      chapterInfo: [{
+        title: 'Chapter 1',
+        startTime: 0,
+        artwork: [
+          { src: BASE_URL + 'big-buck-bunny/chapter1-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'big-buck-bunny/chapter1-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }, {
+        title: 'Chapter 2',
+        startTime: 16,
+        artwork: [
+          { src: BASE_URL + 'big-buck-bunny/chapter2-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'big-buck-bunny/chapter2-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }]
     }, {
       src: BASE_URL + 'elephants-dream/teaser.mp4',
       title: '"Elephants Dream" Teaser, Orange Open Movie Project',
@@ -180,7 +210,22 @@ function getAwesomePlaylist() {
         { src: BASE_URL + 'elephants-dream/artwork-256.png', sizes: '256x256', type: 'image/png' },
         { src: BASE_URL + 'elephants-dream/artwork-384.png', sizes: '384x384', type: 'image/png' },
         { src: BASE_URL + 'elephants-dream/artwork-512.png', sizes: '512x512', type: 'image/png' },
-      ]
+      ],
+      chapterInfo: [{
+        title: 'Chapter 1',
+        startTime: 0,
+        artwork: [
+          { src: BASE_URL + 'elephants-dream/chapter1-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'elephants-dream/chapter1-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }, {
+        title: 'Chapter 2',
+        startTime: 64,
+        artwork: [
+          { src: BASE_URL + 'elephants-dream/chapter2-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'elephants-dream/chapter2-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }]
     }, {
       src: BASE_URL + 'caminandes/short.mp4',
       title: '"Caminandes 2: Gran Dillama" - Blender Animated Short',
@@ -192,6 +237,21 @@ function getAwesomePlaylist() {
         { src: BASE_URL + 'caminandes/artwork-256.png', sizes: '256x256', type: 'image/png' },
         { src: BASE_URL + 'caminandes/artwork-384.png', sizes: '384x384', type: 'image/png' },
         { src: BASE_URL + 'caminandes/artwork-512.png', sizes: '512x512', type: 'image/png' },
-      ]
+      ],
+      chapterInfo: [{
+        title: 'Chapter 1',
+        startTime: 0,
+        artwork: [
+          { src: BASE_URL + 'caminandes/chapter1-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'caminandes/chapter1-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }, {
+        title: 'Chapter 2',
+        startTime: 94,
+        artwork: [
+          { src: BASE_URL + 'caminandes/chapter2-128.png', sizes: '128x128', type: 'image/png'},
+          { src: BASE_URL + 'caminandes/chapter2-512.png', sizes: '512x512', type: 'image/png'},
+        ]
+      }]
     }];
 }
