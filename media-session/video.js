@@ -21,7 +21,8 @@ function updateMetadata() {
   navigator.mediaSession.metadata = new MediaMetadata({
     title: track.title,
     artist: track.artist,
-    artwork: track.artwork
+    artwork: track.artwork,
+    chapterInfo: track.chapterInfo,
   });
 
   // Media is loaded, set the duration.
