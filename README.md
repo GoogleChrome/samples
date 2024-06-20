@@ -40,7 +40,7 @@ base configuration, with a few overrides as needed.
 Linting can be performed via `npm run lint` (make sure to `npm install` first).
 
 Various IDEs offer [real-time ESLint integration](http://eslint.org/docs/user-guide/integrations.html),
-and using those integrations that can help avoid errors before anything gets
+and using those integrations can help avoid errors before anything gets
 checked in.
 
 [Travis CI](https://travis-ci.org/GoogleChrome/samples) is currently being used to verify that the
