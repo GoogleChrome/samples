@@ -1,0 +1,58 @@
+---
+feature_name: Web Bluetooth / Exclusion Filters
+chrome_version: 114
+check_min_version: true
+feature_id: 6208474255458304
+icon_url: icon.png
+index: index.html
+---
+
+{% include_relative _includes/intro.html %}
+
+<p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
+device information from a nearby Bluetooth Low Energy Device featuring
+basic exclusion filters. You may want to check out the
+<a href="exclusion-filters-async-await.html">Exclusion Filters (Async Await)
+</a> sample.</p>
+
+<form>
+  <fieldset id="filters">
+    <legend>Filters:</legend>
+    <input class="service" type="text" size=17 list="services" placeholder="Bluetooth Service">
+    <input class="name" type="text" size=17 placeholder="Device Name">
+    <input class="namePrefix" type="text" size=17 placeholder="Device Name Prefix">
+  </fieldset>
+  <fieldset id="exclusionFilters">
+    <legend>Exclusion filters:</legend>
+    <input class="service" type="text" size=17 list="services" placeholder="Bluetooth Service">
+    <input class="name" type="text" size=17 placeholder="Device Name">
+    <input class="namePrefix" type="text" size=17 placeholder="Device Name Prefix">
+  </fieldset>
+  <p>
+    <button>Get Bluetooth Device Info</button>
+  </p>
+</form>
+
+<style>
+  fieldset { border: 0; padding-inline: 0; }
+</style>
+
+{% include_relative _includes/datalist-services.html %}
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='exclusion-filters.js' %}
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onButtonClick();
+    }
+  });
+</script>
+
+{% include_relative _includes/utils.html %}

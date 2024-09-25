@@ -1,25 +1,23 @@
 ---
-feature_name: Video Conferencing / Media Session
-chrome_version: 91
-feature_id: 5744304695803904
+feature_name: Presenting Slides / Media Session
+chrome_version: 111
+feature_id: 5090980649238528
 check_min_version: true
 index: index.html
 ---
 
 <h3>Background</h3>
 <p>The <a href="https://web.dev/media-session">Media Session API</a> lets you
-handle video conferencing actions such as mute/unmute, turnon/turnoff camera,
-and hang up from a Picture-in-Picture window.</p>
+handle presenting slides actions such as previous and next slides
+from a Picture-in-Picture window.</p>
 
 <style>
-  video { background: #263238; height: 198px; width: 100%;} 
+  canvas { background: #263238; height: 198px; width: 100%; object-fit: contain;} 
   button { margin: 4px 0; }
 </style>
 
-<video playsinline autoplay muted></video>
-<button id="openCameraButton">Open Camera</button>
-<button id="togglePipButton">Toggle Picture-in-Picture</button>
-<input id="autoPipCheckbox" type="checkbox">Automatically enter Picture-in-Picture</button>
+<canvas></canvas>
+<button id="togglePipButton">Toggle Slides in Picture-in-Picture</button>
 
 {% include output_helper.html %}
 
@@ -36,4 +34,4 @@ and hang up from a Picture-in-Picture window.</p>
   log = ChromeSamples.log;
 </script>
 
-{% include js_snippet.html filename='video-conferencing.js' %}
+{% include js_snippet.html filename='slides.js' %}

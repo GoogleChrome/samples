@@ -18,6 +18,13 @@ feature_id: 6676265876586496
 </p>
 
 <p>
+  Note that this demo uses a <code>cast:</code> URL to start the presentation
+  instead of the receiver page's URL.  This will load the receiver page on a
+  Chromecast, but the sender page will be unable to communicate with it as the
+  Chromecast does not implement the Presentation Receiver API.
+</p>
+
+<p>
   <button id="start">presentationRequest.start()</button>
   <button id="close">presentationConnection.close()</button>
   <button id="terminate">presentationConnection.terminate()</button>
@@ -46,7 +53,7 @@ document.querySelector('#start').addEventListener('click', function() {
     log('> Connected to ' + connection.url + ', id: ' + connection.id);
   })
   .catch(error => {
-    log('> ' + error.name + ': ' + error.message);
+    // A timeout error is expected because the presentation is not connected.
   });
 });
 

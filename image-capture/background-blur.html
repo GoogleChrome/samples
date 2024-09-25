@@ -1,0 +1,27 @@
+---
+feature_name: Image Capture / Control Camera Background Blur
+chrome_version: 106
+feature_id: 5077577782263808
+local_css_files: ['background-blur.css']
+check_min_version: true
+index: index.html
+origin_trial: AnfKCMTULZHC0KSWjw9Pv9s7yQQin85gn6RM2b/t9OXz7FMNXQR1yDcxykZZ2yTMEtidMwyOMo29e8cqiC875QMAAABqeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZWNocm9tZS5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6Ik1lZGlhQ2FwdHVyZUJhY2tncm91bmRCbHVyIiwiZXhwaXJ5IjoxNjk4OTY5NTk5fQ==
+---
+
+<h3>Background</h3>
+<p>The ImageCapture Web API allows web developers to control the background blur
+of the camera.</p>
+<p>Note: Background Blur is still under development. You must be using Chrome
+with the <code>chrome://flags/#enable-experimental-web-platform-features</code>
+flag enabled.</p>
+
+<video autoplay></video>
+<button disabled>Toggle Background Blur</button>
+
+{% include output_helper.html %}
+
+{% include js_snippet.html filename='background-blur.js' %}
+
+<script>
+  log = ChromeSamples.log;
+</script>

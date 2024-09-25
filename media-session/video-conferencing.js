@@ -27,6 +27,23 @@ togglePipButton.addEventListener("click", async () => {
   }
 });
 
+autoPipCheckbox.addEventListener('input', () => {
+  try {
+    if (!autoPipCheckbox.checked) {
+      // Disable automatically enter Picture-in-Picture.
+      navigator.mediaSession.setActionHandler('enterpictureinpicture', null);
+      return;
+    }
+    // Request browser to automatically enter Picture-in-Picture when eligible.
+    navigator.mediaSession.setActionHandler('enterpictureinpicture', async () => {
+      log('> Video is eligible for Automatic Picture-in-Picture.');
+      await video.requestPictureInPicture();
+    });
+  } catch (error) {
+    log('Warning! The "enterpictureinpicture" media session action is not supported.');
+  }
+});
+
 try {
   navigator.mediaSession.setActionHandler('togglemicrophone', () => {
     log('> User clicked "Toggle Mic" icon.');

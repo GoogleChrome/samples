@@ -1,6 +1,6 @@
 ---
 feature_name: CSS pseudo-class ":picture-in-picture"
-chrome_version: 76
+chrome_version: 110
 feature_id: 6259534815297536
 check_min_version: true
 ---
@@ -10,7 +10,7 @@ check_min_version: true
 The <a href="https://wicg.github.io/picture-in-picture/">Picture-in-Picture
 API</a> allows websites to create a floating video window that is always on top
 of other windows so that users may continue consuming media while they interact
-with other sites or applications on their device. In Chrome 76, a CSS
+with other sites or applications on their device. In Chrome 110, a CSS
 pseudo-class is added to help web developers customize the media player when
 videos enter and exit Picture-in-Picture.
 </p>
@@ -26,6 +26,7 @@ Credits: Media files are © copyright Blender Foundation | <a href="http://www.b
 #video {
   display: block;
   width: 100%;
+  height: 360px;
   will-change: opacity;
 }
 
@@ -34,11 +35,11 @@ Credits: Media files are © copyright Blender Foundation | <a href="http://www.b
 }
 
 #video-container {
-  background: linear-gradient(to bottom right, #888, #000);
+  background: #000;
   position: relative;
 }
 
-#video-container::before {
+#video-container:has(video:picture-in-picture)::before {
   bottom: 36px;
   color: #ddd;
   content: 'Video is now playing in a Picture-in-Picture window';
