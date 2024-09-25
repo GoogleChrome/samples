@@ -33,12 +33,13 @@ function buttonClick() {
   const constraints = {
     advanced: [{ backgroundBlur: !settings.backgroundBlur }],
   };
-  track.applyConstraints(constraints)
-  .then(() => {
+  try {
+    await track.applyConstraints(constraints);
     const settings = track.getSettings();
     log(`Background blur is now ${settings.backgroundBlur ? "ON" : "OFF"}`);
-  })
-  .catch((error) => log("Argh!", `${error}`));
+  } catch (error) {
+    log("Argh!", `${error}`);
+  }
 }
 
 function configurationChange(event) {
