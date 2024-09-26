@@ -30,13 +30,13 @@ function buttonClick() {
   const stream = document.querySelector("video").srcObject;
   const [track] = stream.getVideoTracks();
   const settings = track.getSettings();
+  const newState = !settings.backgroundBlur;
   const constraints = {
-    advanced: [{ backgroundBlur: !settings.backgroundBlur }],
+    backgroundBlur: newState;
   };
   try {
     await track.applyConstraints(constraints);
-    const settings = track.getSettings();
-    log(`Background blur is now ${settings.backgroundBlur ? "ON" : "OFF"}`);
+    log(`Background blur constraint was set to ${newState ? "ON" : "OFF"}`);
   } catch (error) {
     log("Argh!", `${error}`);
   }
@@ -45,6 +45,6 @@ function buttonClick() {
 function configurationChange(event) {
   const settings = event.target.getSettings();
   if ("backgroundBlur" in settings) {
-    log(`Background blur changed to ${settings.backgroundBlur ? "ON" : "OFF"}`);
+    log(`Background blur setting changed to ${settings.backgroundBlur ? "ON" : "OFF"}`);
   }
 }
