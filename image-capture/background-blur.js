@@ -26,13 +26,13 @@ navigator.mediaDevices.getUserMedia({ video: true })
 })
 .catch((error) => log("Argh!", `${error}`));
 
-function buttonClick() {
+async function buttonClick() {
   const stream = document.querySelector("video").srcObject;
   const [track] = stream.getVideoTracks();
   const settings = track.getSettings();
   const newState = !settings.backgroundBlur;
   const constraints = {
-    backgroundBlur: newState;
+    backgroundBlur: newState
   };
   try {
     await track.applyConstraints(constraints);
