@@ -24,7 +24,7 @@ document.querySelector('#paste').addEventListener('click', () => {
 /** Watch for pastes */
 document.addEventListener('paste', e => {
   e.preventDefault();
-  navigator.clipboard.getText().then(text => {
+  navigator.clipboard.readText().then(text => {
     ChromeSamples.log('Updated clipboard contents: ' + text);
   });
 });
@@ -45,7 +45,7 @@ document.querySelectorAll('[data-permission]').forEach(btn => {
     });
   btn.addEventListener('click', () => {
     Promise.resolve().then(() => {
-      return navigator.permissions.request({name: permission});
+      return navigator.permissions.query({name: permission});
     })
       .then(status => {
         ChromeSamples.log('Permission: ' + status.state);
