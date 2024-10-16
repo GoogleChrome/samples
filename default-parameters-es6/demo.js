@@ -4,7 +4,7 @@
 function greetES5(message, to) {
   // Test parameter values in the function body, specifying a default
   to = to || 'DOM';
-  // OR if (typeof to === undefined) { to = 'DOM'; }
+  // OR if (typeof to === 'undefined') { to = 'DOM'; }
   // OR if (arguments.length === 1) { to = 'DOM'; }
   ChromeSamples.log(message + ', ' + to);
 }
