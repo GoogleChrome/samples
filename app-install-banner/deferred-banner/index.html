@@ -32,23 +32,16 @@ limitations under the License.
     </p>
 
     <ul>
-      <li>The app uses a <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service worker</a></li>
       <li>The site is using HTTPS</li>
       <li>The app has a manifest declared</li>
       <li>The manifest has a <code>short_name</code>, 144 pixel icon and a type of 'image/png'</li>
     </ul>
     
-    <p>Frequently developers want be able to control when the Add to homescreen prompt is shown to users.
-       This API and example shows you how you can defer the prompt until a later time, in this case when the 
-       user clicks the button below.  If the button below is disabled, Chrome has chosen now is not a good time to 
-       show the prompt.</p>
+    <p>Frequently developers want be able to control when the install flow is shown to users.
+       This API and example shows you how you can defer the flow until a later time, in this
+       case when the user clicks the button below.</p>
 
-    <p>If the button is disabled, come back in a few minutes and the button will be enabled.</p>
-
-    <p>For testing, we encourage you to force the button to be enabled by setting the
-    chrome://flags/#bypass-app-banner-engagement-checks flag.</p>
-       
-    <button id="btnSave" disabled>Click this to show the prompt</button>
+    <button id="btnSave" disabled>Click this to install the app</button>
     
     <p>Below you will see the output of the example.</p>
     
