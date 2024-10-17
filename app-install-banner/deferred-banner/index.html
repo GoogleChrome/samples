@@ -25,33 +25,28 @@ limitations under the License.
   <body>
     <h1>Web App Install Banner: Defer prompt of banner sample</h1>
     
-    <p>Available in <a href="https://www.chromestatus.com/features/4540065577435136">Chrome 45+ (for Android)</a></p>
+    <p>Available in <a href="https://www.chromestatus.com/features/6560913322672128">Chrome 45+</a></p>
 
     <p>The <a href="https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/">web app install banner</a> will prompt the user to add your web app to the users home screen.
     It will only prompt when a number of criteria have been met:
     </p>
 
     <ul>
-      <li>The app uses a <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service worker</a></li>
       <li>The site is using HTTPS</li>
       <li>The app has a manifest declared</li>
       <li>The manifest has a <code>short_name</code>, 144 pixel icon and a type of 'image/png'</li>
     </ul>
     
-    <p>Frequently developers want be able to control when the Add to homescreen prompt is shown to users.
-       This API and example shows you how you can defer the prompt until a later time, in this case when the 
-       user clicks the button below.  If the button below is disabled, Chrome has chosen now is not a good time to 
-       show the prompt.</p>
-       
-    <button id="btnSave" disabled>Click this to show the prompt</button>
+    <p>Frequently developers want be able to control when the install flow is shown to users.
+       This API and example shows you how you can defer the flow until a later time, in this
+       case when the user clicks the button below.</p>
+
+    <button id="btnSave" disabled>Click this to install the app</button>
     
     <p>Below you will see the output of the example.</p>
     
     <pre id=output></pre>
 
-    <p>For testing we encourage you to force the banner to appear by setting the chrome://flags/#bypass-app-banner-engagement-checks flag.</p>
-    <p>To see if this example works, come back after a few minutes and you will see the banner.</p>
- 
     <script>
       window.addEventListener('load', function() {
   

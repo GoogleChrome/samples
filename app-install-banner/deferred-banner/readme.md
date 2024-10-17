@@ -1,13 +1,11 @@
-App Install Banner User Response Sample
+Deferred App Install Banner Sample
 ===
 
-See https://googlechrome.github.io/samples/app-install-banner/useraction-banner/index.html for a live demo.
+See https://googlechrome.github.io/samples/app-install-banner/deferred-banner/index.html for a live demo.
 
+#### Directions
 
-#### Directions:
+* Install Chrome, or another browser that supports manifest.
+* Visit the demo page.
 
-* Install Chrome, or another browser that supports Service Workers and manifest
-* Visit the site over two separate days.
-* Or, more usefully, enable chrome://flags/#bypass-app-banner-engagement-checks
-
-On the second vist, you will see a message on the page that says the user either installed the app or dismissed the banner.
+The browser will trigger the install flow when you click the button.
