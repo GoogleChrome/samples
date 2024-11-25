@@ -23,8 +23,7 @@ document.querySelector('#paste').addEventListener('click', () => {
 
 /** Watch for pastes */
 document.addEventListener('paste', e => {
-  e.preventDefault();
-  navigator.clipboard.getText().then(text => {
+  navigator.clipboard.readText().then(text => {
     ChromeSamples.log('Updated clipboard contents: ' + text);
   });
 });
