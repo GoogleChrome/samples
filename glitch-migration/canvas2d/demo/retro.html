@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<style>
+  canvas {
+    border: 1px solid black;
+  }
+</style>
+
+<body></body>
+<script type='text/javascript' src="pattern.js"></script>
+<script type='text/javascript'>
+
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 500;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  draw90sPattern(ctx);
+
+  // Clear the rect to erase, doesn't reset transform
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Doesn't reset the path or style commands
+  // ctx.resetTransform();
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // This works, but its unintuitive
+  // canvas.width = canvas.width;
+
+  // Yaay! A functional reset function
+  // ctx.reset();
+
+  // Draw on the reset canvas
+  ctx.font = "100px sans-serif";
+  ctx.fillText("RESET", 85, 200);
+  ctx.moveTo(30, 210);
+  ctx.lineTo(canvas.width - 30, 210);
+  ctx.stroke();
+
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-754F24EHD8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-754F24EHD8');
+</script>

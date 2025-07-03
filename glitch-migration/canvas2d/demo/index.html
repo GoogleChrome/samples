@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<style type='text/css'>
+  .slider:hover {
+    opacity: 1
+  }
+
+  .slider {
+    opacity: 0.7;
+    width: 500px;
+  }
+</style>
+
+<body>
+  <canvas></canvas>
+  <div class="slidercontainer" id="base">
+    <p>Base: <span></span></p>
+    <input type="range" min="0" max="2" value="1" class="slider" step="0.01">
+  </div>
+  <div class="slidercontainer" id="emboss">
+    <p>Emboss: <span></span></p>
+    <input type="range" min="0" max="10" value="0" class="slider" step="0.01">
+  </div>
+  <div class="slidercontainer" id="blur">
+    <p>Blur: <span></span></p>
+    <input type="range" min="0" max="5" value="0" class="slider" step="0.01">
+  </div>
+  <div class="slidercontainer" id="hue">
+    <p>Hue: <span></span></p>
+    <input type="range" min="0" max="360" value="0" class="slider" step="5">
+  </div>
+</body>
+<script type='text/javascript' src="pattern.js"></script>
+<script type='text/javascript'>
+  const START_VALUES = { emboss: 0.0, base: 1.0, blur: 0.0, hue: 0 };
+  const GOAL_VALUES = { emboss: 10.0, base: 0.4, blur: 3.5, hue: 360 };
+
+  const canvas = document.querySelector('canvas');
+  canvas.width = canvas.height = 500;
+  const ctx = canvas.getContext('2d');
+
+  function draw(options) {
+    ctx.reset(); // Hey! I'm useful!
+
+    // Create the filter using the new interface
+    ctx.filter = new CanvasFilter([
+      { filter: "gaussianBlur", stdDeviation: options.blur.input.value },
+      {
+        filter: "convolveMatrix",
+        kernelMatrix: [
+          [options.emboss.input.value, 0, 0],
+          [0, options.base.input.value, 0],
+          [0, 0, -1 * options.emboss.input.value]]
+      },
+      { filter: "colorMatrix", type: "hueRotate", values: options.hue.input.value },
+    ]);
+    draw90sPattern(ctx, 3);
+  }
+
+  // Connect the sliders to the filter parameters and update in real-time
+  const sliders = document.querySelectorAll(".slidercontainer");
+  const options = {}
+  for (s of sliders) {
+    const sliderControl = {
+      label: s.querySelector("span"),
+      input: s.querySelector("input"),
+      startValue: START_VALUES[s.id],
+    }
+    sliderControl.input.oninput = function () {
+      draw(options);
+      sliderControl.label.innerText = sliderControl.input.value;
+    }
+    options[s.id] = sliderControl;
+  }
+
+  // A little block to animate the intro
+  const lerp = (x, y, a) => x * (1 - a) + y * a;
+  let startTime;
+  function initDraw() {
+    const time = (performance.now() - startTime) / 2000;
+    for (parameter in options) {
+      options[parameter].input.value = lerp(START_VALUES[parameter], GOAL_VALUES[parameter], time);
+      options[parameter].label.innerText = options[parameter].input.value;
+    }
+    draw(options);
+    if (time < 1)
+      requestAnimationFrame(initDraw);
+  }
+
+  window.onload = function () {
+    startTime = performance.now();
+    initDraw(performance.now());
+  }
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-754F24EHD8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-754F24EHD8');
+</script>
+
+</html>

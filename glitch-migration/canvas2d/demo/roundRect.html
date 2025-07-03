@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<style type='text/css'>
+  .slider:hover {
+    opacity: 1
+  }
+
+  .slider {
+    opacity: 0.7;
+    width: 500px;
+  }
+
+  canvas {
+    border: 1px solid magenta;
+  }
+
+  /* Dropdown Button */
+  .dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  #code {
+    font-family: courier new;
+  }
+
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+</style>
+
+<body>
+  <canvas></canvas>
+  <p id="code">ctx.roundRect(10, 10, 100, 100, [x, y, z, w]);</p>
+  <div class="dropdown">
+    <button class="dropbtn">Number of Radii = 4</button>
+    <div class="dropdown-content">
+      <a onclick="changeNumRadii(1)">1</a>
+      <a onclick="changeNumRadii(2)">2</a>
+      <a onclick="changeNumRadii(3)">3</a>
+      <a onclick="changeNumRadii(4)">4</a>
+    </div>
+  </div>
+  <div class="slidercontainer" id="x">
+    <p><span class="name"></span>: <span class="number"></span></p>
+    <input oninput="draw()" type="range" min="0" max="100" value="1" class="slider" step="0.01">
+  </div>
+  <div class="slidercontainer" id="y">
+    <p><span class="name"></span>: <span class="number"></span></p>
+    <input oninput="draw()" type="range" min="0" max="100" value="0" class="slider" step="0.01">
+  </div>
+  <div class="slidercontainer" id="z">
+    <p><span class="name"></span>: <span class="number"></span></p>
+    <input oninput="draw()" type="range" min="0" max="100" value="0" class="slider" step="0.01">
+  </div>
+  <div class="slidercontainer" id="w">
+    <p><span class="name"></span>: <span class="number"></span></p>
+    <input oninput="draw()" type="range" min="0" max="100" value="0" class="slider" step="0.01">
+  </div>
+</body>
+<script type='text/javascript'>
+
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const START_VALUES = { x: 0, y: 0, z: 100, w: 0 };
+  const GOAL_VALUES = { x: 100, y: 20, z: 0, w: 50 };
+
+  // Connect the sliders to the filter parameters and update in real-time
+  const sliders = document.querySelectorAll(".slidercontainer");
+  const code = document.getElementById("code");
+  const corners = Object.assign({}, START_VALUES);
+  let numRadii = 4;
+  function draw() {
+    for (s of sliders) {
+      const label = s.querySelector("span.number");
+      const input = s.querySelector("input");
+      label.innerText = parseInt(input.value);
+      corners[s.id] = parseInt(input.value);
+    }
+    ctx.reset();
+    if (numRadii == 4) {
+      code.innerText = `ctx.roundRect(50, 25, 200, 100, [${corners.x}, ${corners.y}, ${corners.z}, ${corners.w}]);`
+      ctx.roundRect(50, 25, 200, 100, [corners.x, corners.y, corners.z, corners.w]);
+    } else if (numRadii == 3) {
+      code.innerText = `ctx.roundRect(50, 25, 200, 100, [${corners.x}, ${corners.y}, ${corners.z}]);`
+      ctx.roundRect(50, 25, 200, 100, [corners.x, corners.y, corners.z]);
+    } else if (numRadii == 2) {
+      code.innerText = `ctx.roundRect(50, 25, 200, 100, [${corners.x}, ${corners.y}]);`
+      ctx.roundRect(50, 25, 200, 100, [corners.x, corners.y]);
+    } else if (numRadii == 1) {
+      code.innerText = `ctx.roundRect(50, 25, 200, 100, [${corners.x}]);`
+      ctx.roundRect(50, 25, 200, 100, [corners.x]);
+    }
+    ctx.fill();
+  }
+
+  // A little block to animate the intro
+  const lerp = (x, y, a) => x * (1 - a) + y * a;
+  let startTime;
+  function initDraw() {
+    const time = (performance.now() - startTime) / 2000;
+    for (s of sliders) {
+      value = lerp(START_VALUES[s.id], GOAL_VALUES[s.id], time);
+      s.querySelector("input").value = value;
+    }
+    draw();
+    if (time < 1)
+      requestAnimationFrame(initDraw);
+  }
+
+  function changeNumRadii(x) {
+    numRadii = x;
+    for (s of sliders) {
+      if (numRadii == 1) {
+        if (s.id != "x") {
+          s.style.display = "none";
+        } else {
+          s.querySelector("span.name").innerText = "All Corners";
+        }
+      } else if (numRadii == 2) {
+        if (s.id == "z" || s.id == "w") {
+          s.style.display = "none";
+        } else {
+          s.style.display = "";
+          if (s.id == "x")
+            s.querySelector("span.name").innerText = "Upper Left and Lower Right";
+          if (s.id == "y")
+            s.querySelector("span.name").innerText = "Upper Right and Lower Left";
+        }
+      } else if (numRadii == 3) {
+        if (s.id == "w") {
+          s.style.display = "none";
+        } else {
+          s.style.display = "";
+          if (s.id == "x")
+            s.querySelector("span.name").innerText = "Upper Left";
+          if (s.id == "y")
+            s.querySelector("span.name").innerText = "Upper Right and Lower Left";
+          if (s.id == "z")
+            s.querySelector("span.name").innerText = "Lower Right";
+        }
+      } else if (numRadii == 4) {
+        s.style.display = "";
+        if (s.id == "x")
+          s.querySelector("span.name").innerText = "Upper Left";
+        if (s.id == "y")
+          s.querySelector("span.name").innerText = "Upper Right";
+        if (s.id == "z")
+          s.querySelector("span.name").innerText = "Lower Right";
+        if (s.id == "w")
+          s.querySelector("span.name").innerText = "Lower Left";
+      }
+    }
+    const button = document.querySelector("button.dropbtn");
+    button.innerText = `Number of Radii = ${numRadii}`;
+    draw();
+  }
+
+  window.onload = function () {
+    startTime = performance.now();
+    changeNumRadii(numRadii);
+    initDraw(performance.now());
+  }
+
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-754F24EHD8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-754F24EHD8');
+</script>
+
+</html>
