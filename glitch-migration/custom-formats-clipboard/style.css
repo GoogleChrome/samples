@@ -1,0 +1,39 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+  font-family: system-ui, sans-serif;
+}
+
+img {
+  margin-block: 1rem;
+  height: auto;
+  max-width: 320px;
+  display: block;
+}
+
+button {
+  margin-block: 1rem;
+}
+
+button,
+canvas,
+pre {
+  display: none;
+}
+
+pre {
+  color: red;
+}
