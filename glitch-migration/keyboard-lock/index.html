@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <script>
+    if (location.protocol !== "https:") {
+      location.protocol = "https:";
+    }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Keyboard Lock Demo</title>
+
+  <!-- import the webpage's stylesheet -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- import the webpage's javascript file -->
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <main>
+    <h1>Keyboard Lock Demo</h1>
+
+    <p>
+      Press the button to toggle full screen mode.
+      <button id="fullscreen" type="button">Enter full screen</button>
+    </p>
+
+    <div hidden>
+      Press the button to toggle the keyboard lock. When the keyboard lock is
+      active, try pressing <kbd>Command</kbd>&nbsp;+&nbsp;<kbd>T</kbd> (new
+      tab) or <kbd>Command</kbd>&nbsp;+&nbsp;<kbd>N</kbd> (new window). It
+      won't work when the keyboard lock is active.
+      <button id="keyboard" type="button">Activate keyboard lock</button>
+      <div>
+        Hold the <kbd>Esc</kbd> key for two seconds to exit full screen.
+      </div>
+    </div>
+    <div class="info" hidden>
+      The keyboard lock has captured this key or key combination.
+    </div>
+  </main>
+</body>
+
+</html>

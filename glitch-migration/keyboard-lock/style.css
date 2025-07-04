@@ -1,0 +1,46 @@
+/* CSS files add styling rules to your content */
+
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+main {
+  max-width: 500px;
+}
+
+h1 {
+  color: #373fff;
+}
+
+button {
+  display: block;
+  margin-block: 1rem;
+  width: 100%;
+}
+
+p,
+div {
+  margin-block-end: 2.5rem;
+}
+
+kbd {
+  outline: solid 1px gray;
+  background-color: lightgray;
+  color: black;
+  padding-inline: 0.25rem;
+  font-family: monospace;
+}
+
+.info {
+  color: red;
+}
