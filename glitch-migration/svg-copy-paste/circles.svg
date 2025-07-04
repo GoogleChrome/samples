@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" 
+              "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="400">  
+  <style>
+    circle:hover {
+      fill-opacity: 1; /* Change opacity to full when hovered */
+    }
+  </style>
+  <g style="fill-opacity:0.7;">
+    <circle id="circle1" cx="6.5cm" cy="2cm" r="100" style="fill:red; stroke:black; stroke-width:0.1cm" transform="translate(0,50)"
+            onclick="alert('You have clicked circle no. 1');" />
+    <circle id="circle2" cx="6.5cm" cy="2cm" r="100" style="fill:blue; stroke:black; stroke-width:0.1cm" transform="translate(70,150)"
+            onclick="alert('You have clicked circle no. 2');" />
+    <circle id="circle3" cx="6.5cm" cy="2cm" r="100" style="fill:green; stroke:black; stroke-width:0.1cm" transform="translate(-70,150)"
+            onclick="alert('You have clicked circle no. 3');" />
+  </g>
+</svg>
