@@ -1,0 +1,102 @@
+/**
+ * Copyright 2019 Google LLC.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+:root {
+  color-scheme: dark light;
+  supported-color-schemes: dark light;
+   --duration: 0.5s;
+  --timing: ease;  
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 12pt;
+  max-width: 900px;
+  position: relative;
+  margin: 0 auto;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+  transition:
+    color var(--duration) var(--timing),
+    background-color var(--duration) var(--timing);  
+}
+
+h1 {
+  color: var(--main-headline-color);
+  line-height: 1;
+}
+
+:any-link {
+  color: var(--link-color);
+}
+
+p {
+  line-height: 1.5;
+}
+
+figure {
+  margin: 1rem 0;  
+}
+
+figcaption {
+  margin: 0.5rem 0;    
+}
+
+button,
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;  
+  padding: 0.5rem 1rem;
+  margin: 0;  
+  border: none;
+  outline: solid 1px var(--color);
+  outline-offset: -1px;
+}
+
+button {        
+  color: var(--accent-color);  
+  background: var(--accent-background-color);  
+  cursor: pointer;
+  text-align: center;
+}
+
+input:focus,
+button:focus {
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-offset: -2px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+img[src*=".svg"]:hover {
+  filter: var(--icon-filter_hover);
+}
+
+dark-mode-toggle {
+  --dark-mode-toggle-light-icon: url(https://googlechromelabs.github.io/dark-mode-toggle/demo/moon.png);
+  --dark-mode-toggle-dark-icon: url(https://googlechromelabs.github.io/dark-mode-toggle/demo/sun.png);    
+  
+  position: absolute;
+  top: 0.5rem;
+  right: 0;  
+}

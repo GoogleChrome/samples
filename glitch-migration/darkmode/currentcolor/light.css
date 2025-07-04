@@ -1,0 +1,9 @@
+/**
+ * Copyright 2019 Google LLC.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+:root {
+  --color: rgb(5, 5, 5);
+  --background-color: rgb(250, 250, 250);
+}
