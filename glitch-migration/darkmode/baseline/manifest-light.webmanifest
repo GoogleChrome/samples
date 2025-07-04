@@ -6,7 +6,7 @@
   "background_color": "rgb(250, 250, 250)",
   "theme_color": "rgb(5, 5, 5)",
   "icons": [{
-    "src": "https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/791b2241-459b-4a2e-8cca-c0fdc21f0487%2Flight.png",
+    "src": "https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/791b2241-459b-4a2e-8cca-c0fdc21f0487_light.png",
     "sizes": "144x144",
     "type": "image/png"
   }]
