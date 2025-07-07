@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!-- Copyright 2023 Google LLC.
+SPDX-License-Identifier: Apache-2.0 -->
+
+<html lang="en">
+
+<head>
+
+  <title>URL parts</title>
+
+  <link rel="apple-touch-icon" href="./images/icons/icon256.png">
+  <link rel="shortcut icon" href="./images/icons/icon256.png">
+  <link href="favicon.ico" rel="shortcut icon">
+
+  <link rel="canonical" href="https://chrome.dev/url-parts">
+  <link rel="manifest" href="./manifest.json">
+
+  <script type="module" src="./js/main.js"></script>
+
+  <link rel="stylesheet" href="./css/main.css">
+
+
+  <meta charset="utf-8">
+  <meta id="theme-color" name="theme-color" content="#fff">
+  <meta itemprop="image" content="./images/icons/icon256.png">
+  <meta itemprop="name" content="Interactive tool for showing the names of URL components">
+  <meta name="author" content="https://samdutton.com">
+  <meta name="description" content="Interactive tool for showing the names of URL components">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://chrome.dev/url-parts/images/icons/icon256.png">
+  <meta property="og:site_name" content="https://chrome.dev/url-parts/">
+  <meta property="og:title" content="https://chrome.dev/url-parts/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrome.dev/url-parts/">
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Organization",
+      "name": "https://chrome.dev/url-parts/",
+      "logo": "https://chrome.dev/url-parts/images/icons/icon256.png",
+      "url": "https://chrome.dev/url-part/"
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "https://chrome.dev/url-parts/",
+      "url": "https://chrome.dev/url-parts/"
+    }
+  </script>
+
+  <base target="_blank">
+
+</head>
+
+<body>
+
+  <main>
+
+<!--     <h1>URL parts</h1>
+ -->
+    <div id="container">
+<!--       <p>View the site, origin, and other parts of a URL.</p> -->
+      <label for="url">URL:</label>
+      <input id="url" autofocus autocomplete="off" autocapitalize="off" value="https://cats.example.org.au:1234/stripes/fur.html?pattern=tabby#claws">
+      <div id="url-parts"></div>
+    </div>
+
+  </main>
+
+</body>
+
+</html>
+
