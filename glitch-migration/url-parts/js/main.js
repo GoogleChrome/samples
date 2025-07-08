@@ -169,7 +169,7 @@ function handleUrl() {
     return;
   }
 
-  const etld1 = hostname.match(`[^\/\\\.]+\.${etld}`)[0];
+  const etld1 = hostname.match(`[^\/\\\.]+\\\.${etld}`)[0];
   
   if (!etld1) {
     replace(`eTLD ${etld} specified, but no eTLD+1.`)
