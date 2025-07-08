@@ -1,0 +1,13 @@
+{
+  "name": "url-parts",
+  "version": "0.2.0",
+  "description": "",
+  "scripts": {
+    "deploy": "gsutil -m rsync -rd ./ gs://chrome-dev-demos/public/url-parts"
+  },
+  "repository": {
+    "url": "https://github.com/GoogleChrome/samples/glitch-migration/url-parts"
+  },
+  "license": "Apache-2.0"
+}
+
