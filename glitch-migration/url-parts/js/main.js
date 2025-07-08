@@ -144,7 +144,7 @@ function handleUrl() {
     // Check for match at end of hostname only.
     // Need to add \\. to avoid accepting hostnames that end in a valid (e)TLD, such as 'web.xcom', but this is optional so we can check this case later
     // Wildcards replaced with a match for sequences of not-period characters
-    const pslEntryRegExpBody = pslEntry.replaceAll('.', '\.').replaceAll('*', '[^.]+');
+    const pslEntryRegExpBody = pslEntry.replaceAll('.', '\\.').replaceAll('*', '[^.]+');
     const pslEntryRegExp = new RegExp(`(?<dot>\\.)?(?<etld>${pslEntryRegExpBody})$`);
     // Find the longest eTLD in the PSL that matches the hostname (e.g. 'co.uk' rather than just 'co').
     const hostnameMatch = hostname.match(pslEntryRegExp);
@@ -169,7 +169,7 @@ function handleUrl() {
     return;
   }
 
-  const etld1 = hostname.match(`[^\/\.]+\.${etld}`)[0];
+  const etld1 = hostname.match(`[^\/\\\.]+\.${etld}`)[0];
   
   if (!etld1) {
     replace(`eTLD ${etld} specified, but no eTLD+1.`)
