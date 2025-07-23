@@ -1,0 +1,21 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 2em;
+  color: black;
+  background-color: white;
+}
+
+dark-mode-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.dark {
+  color: white;
+  background-color: black;
+}
