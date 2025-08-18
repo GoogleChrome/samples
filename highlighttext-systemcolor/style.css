@@ -1,0 +1,37 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.dark,
+.light {
+  color: CanvasText;
+  background-color: Canvas;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 80ch;
+  border: inset;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;  
+}
+
+span {
+  color: HighlightText;
+  background-color: Highlight;
+}
