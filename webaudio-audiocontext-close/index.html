@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2015 Google Inc. All Rights Reserved.
 
@@ -17,45 +17,39 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of WebAudio AudioContext close.">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>WebAudio AudioContext close Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="WebAudio AudioContext close Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>WebAudio AudioContext close Sample</h1>
-
-    <p>Available in <a href="https://www.chromestatus.com/feature/5411681005993984">Chrome 43+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/feature/5411681005993984">Chrome 43+</a></p>
     <p>
-      The <code>AudioContext.close</code> method closes the audio context, stopping audio operations, and releases any system resources in use.
-      It will not necessarily release objects <em>created</em> by this <code>AudioContext</code>.
-      This method returns a <code>Promise</code> that resolves when any resources blocking further creation of other audio contexts have been released.
+      The
+      <code>AudioContext.close</code>
+      method closes the audio context, stopping audio operations, and releases any system resources in use.
+      It will not necessarily release objects
+      <em>created</em>
+      by this
+      <code>AudioContext</code>.
+      This method returns a
+      <code>Promise</code>
+      that resolves when any resources blocking further creation of other audio contexts have been released.
     </p>
-
     <div class="output">
       <div>
         Manages a pool of AudioContext instances, allowing it to be grown or shrunk (by explicitly closing a random context).
@@ -66,11 +60,9 @@ limitations under the License.
       <button id="btn-close">Close</button>
       <pre id="results" style="color: red"></pre>
     </div>
-
     <!-- // [START code-block] -->
     <script>
-
-    // Create a large pool of initial contexts. On Mac OS X running M44, this
+      // Create a large pool of initial contexts. On Mac OS X running M44, this
     // can create six contexts.
     var pool = (function(max) {
       var pool = [];
@@ -125,10 +117,8 @@ limitations under the License.
 
     document.getElementById('btn-close').addEventListener('click', closeRandomContext);
     document.getElementById('btn-create').addEventListener('click', createContext);
-
     </script>
     <!-- // [END code-block] -->
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

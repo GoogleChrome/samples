@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2014 Google Inc. All Rights Reserved.
 
@@ -17,66 +17,52 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of Generators (ES6).">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Generators (ES6) Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="Generators (ES6) Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>Generators (ES6) Sample</h1>
-    <p>Available in <a href="https://www.chromestatus.com/feature/4959347197083648">Chrome 39+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/feature/4959347197083648">Chrome 39+</a></p>
     <p>
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*">Generators</a>
       are special functions which produce
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/The_Iterator_protocol">iterators</a>
       when constructed.
-      The <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield">yield</a></code>
+      The
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield">yield</a></code>
       statement within a generator suspends execution and returns control back to the calling
       function, and normally also returns a value. Subsequent iterations will reuse the previous
       state and continue execution of the generator code where it last left off.
     </p>
-
     <p>
       This two-part example relies on a generator function which yields the words in the first sentence of
       <a href="http://en.wikipedia.org/wiki/Lorem_ipsum">Lorem ipsum...</a>, one at a time.
     </p>
-
     <p>
       The first part uses an iterator that terminates after yielding five words, and the words
       can optionally be yielded in uppercase.
     </p>
-
     <p>
       The second part uses an iterator that will continue yielding words infinitely, looping around
       to the beginning after the last word in the "Lorem ipsum..." sequence is yielded. Since infinite
       loops are no fun, we explicitly break out of the iteration once enough words have been yielded
       to take up 300px of vertical space on the page.
     </p>
-
     <div class="output">
       <h3>Five Words</h3>
       <p>
@@ -85,7 +71,6 @@ limitations under the License.
         <button id="add-uppercase-word">Add UPPERCASE Word</button>
       </p>
       <p id="five-words"></p>
-
       <h3>300px Worth of Words</h3>
       <p>
         This will add enough words to use up 300px of vertical space:
@@ -93,7 +78,6 @@ limitations under the License.
       </p>
       <p id="many-words"></p>
     </div>
-
     <!-- // [START code-block] -->
     <script>
       var loremIpsumArray = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'.split(' ');
@@ -188,7 +172,6 @@ limitations under the License.
       }
     </script>
     <!-- // [END code-block] -->
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2015 Google Inc. All Rights Reserved.
 
@@ -17,49 +17,38 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of the Permissions API.">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Permissions API Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="Permissions API Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>Permissions API Sample</h1>
-
-    <p>Available in <a href="https://www.chromestatus.com/feature/6376494003650560">Chrome 43+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/feature/6376494003650560">Chrome 43+</a></p>
     <p>The Permissions API allows a web application to be aware of the status of a given permission, to know whether it is granted, denied or if the user will be asked whether the permission should be granted.</p>
-
     <!-- // [START code-block] -->
     <h3>Permissions</h3>
-
-    <div><b>Geolocation:</b> <span id='geolocation'></span></div>
-    <div><b>Notifications:</b> <span id='notifications'></span></div>
-    <div><b>Midi:</b> <span id='midi'></span></div>
-    <div><b>Midi SysEx:</b> <span id='midi-sysex'></span></div>
-
+    <div><b>Geolocation:</b>
+      <span id='geolocation'></span></div>
+    <div><b>Notifications:</b>
+      <span id='notifications'></span></div>
+    <div><b>Midi:</b>
+      <span id='midi'></span></div>
+    <div><b>Midi SysEx:</b>
+      <span id='midi-sysex'></span></div>
     <p>
       <fieldset>
         <legend>Requests</legend>
@@ -68,13 +57,11 @@ limitations under the License.
         <button id="getMidiBtn">Midi SysEx</button>
       </fieldset>
     </p>
-
     <div class="output">
       <pre id="log"></pre>
     </div>
-
     <script>
-    (function () {
+      (function () {
       function log() {
         document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
       }
@@ -152,7 +139,6 @@ limitations under the License.
     })();
     </script>
     <!-- // [END code-block] -->
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

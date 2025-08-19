@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Async Clipboard API: Text</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer=""></script>
+  </head>
+  <body>
+    <h1>Async Clipboard API Demo</h1>
+    <section>
+      <button id="copy">
+        <strong>Copy</strong><br /><em>(write to clipboard)</em>
+      </button>
+      <button id="paste">
+        <strong>Paste</strong><br /><em>(read from clipboard)</em>
+      </button>
+    </section>
+    <textarea id="out" placeholder="Text to copy"></textarea>
+    <h3>Permissions:</h3>
+    <section id="permbuttons">
+      <button title="Click to request permission" data-state="prompt">
+        read</button
+      ><button title="Click to request permission" data-state="granted">
+        write
+      </button>
+    </section>
+    <div id="toast" hidden=""></div>
+  </body>
+</html>

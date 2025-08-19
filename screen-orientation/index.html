@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2014 Google Inc. All Rights Reserved.
 
@@ -17,54 +17,44 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of Screen Orientation.">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Screen Orientation Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="Screen Orientation Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>Screen Orientation Sample</h1>
-    <p>Available in <a href="https://www.chromestatus.com/feature/6191285283061760">Chrome 38+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/feature/6191285283061760">Chrome 38+</a></p>
     <p>Screen Orientation API gives ability to read the screen orientation and lock it. It can be used to adapt the layout of a web app, e.g.
     from vertical to horizontal grid.</p>
-
-    <p>To read the current orientation of the screen, inspect the <code>orientation</code> property of the global <code>screen</code> object.</p>
-
+    <p>To read the current orientation of the screen, inspect the
+      <code>orientation</code>
+      property of the global
+      <code>screen</code>
+      object.</p>
     <script>
-    /* // [START read-orientation] */
+      /* // [START read-orientation] */
       var log = document.createElement('pre');
       log.textContent = 'Current orientation: ' + screen.orientation.type;
       document.body.appendChild(log);
     /* // [END read-orientation] */
     </script>
-
     <p>It is possible to listen to the changes in screen orientation using the
-    <code>onchange</code> listener.</p>
-
+      <code>onchange</code>
+      listener.</p>
     <pre>
       screen.orientation.onchange = function() {
         alert('Orientation changed! the current angle is ' +
@@ -72,15 +62,13 @@ limitations under the License.
       }
     </pre>
     <script>
-
-    /* // [START listen-orientation] */
+      /* // [START listen-orientation] */
       screen.orientation.onchange = function() {
         alert('Orientation changed! the current angle is ' +
             screen.orientation.angle);
       };
     /* // [END listen-orientation] */
     </script>
-
     <p>You can lock the orientation to a supported value
       (landscape,
       landscape-primary,
@@ -89,10 +77,9 @@ limitations under the License.
       portrait-primary,
       portrait-secondary,
       natural).
-    Calling <code>screen.orientation.lock</code> returns a promise. The promise will be rejected if the device does not support the orientation lock.
-    </p>
-
-
+    Calling
+      <code>screen.orientation.lock</code>
+      returns a promise. The promise will be rejected if the device does not support the orientation lock.</p>
     <script>
       var lock = function() {
         /* // [START lock-orientation] */
@@ -112,7 +99,6 @@ limitations under the License.
       };
     </script>
     <button onclick="lock()">lock orientation</button>
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

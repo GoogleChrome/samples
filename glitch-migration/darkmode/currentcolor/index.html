@@ -3,30 +3,26 @@
   <head>
     <title>Dark Mode currentColor</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/currentcolor/style.css">
     <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/currentcolor/light.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
     <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/currentcolor/dark.css" media="(prefers-color-scheme: dark)">
     <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
-  </head>  
-  <body>       
+  </head>
+  <body>
     <p>
       Toggle dark mode and see how the icon below adapts to the
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#currentColor_keyword">currentColor</a></code>:
     </p>
-    
     <svg xmlns="http://www.w3.org/2000/svg" width="25%" height="25%" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <circle cx="12" cy="12" r="4"/>
       <line x1="21.17" y1="8" x2="12" y2="8"/>
       <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
       <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
-    </svg>    
-    
+    </svg>
     <pre><code>
-&lt;svg xmlns="http://www.w3.org/2000/svg"    
+&lt;svg xmlns="http://www.w3.org/2000/svg"
     viewbox="0 0 24 24" fill="none"
     <strong>stroke="currentColor"</strong> stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round"
@@ -36,31 +32,27 @@
   &lt;line x1="21.17" y1="8" x2="12" y2="8"/&gt;
   &lt;line x1="3.95" y1="6.06" x2="8.54" y2="14"/&gt;
   &lt;line x1="10.88" y1="21.94" x2="15.46" y2="14"/&gt;
-&lt;/svg&gt;        
+&lt;/svg&gt;
     </code></pre>
-    
     <p>
-      This also works for <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/use">externally referenced SVGs</a>:
+      This also works for
+      <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/use">externally referenced SVGs</a>:
     </p>
-
     <svg width="25%" height="25%" viewbox="0 0 24 24">
       <use href="chrome.svg#chrome"></use>
     </svg>
-
     <pre><code>
 &lt;svg&gt;
   &lt;use href=&quot;<a href="chrome.svg">chrome.svg#chrome</a>&quot;&gt;&lt;/use&gt;
-&lt;/svg&gt;        
+&lt;/svg&gt;
     </code></pre>
-    
-    <dark-mode-toggle></dark-mode-toggle> 
-    
+    <dark-mode-toggle></dark-mode-toggle>
     <script>
       if (window.matchMedia('(prefers-color-scheme)').media === 'not all') {
         // alert('Your browser does not support the `prefers-color-scheme` media query.');
-      }      
+      }
       const darkModeToggle = document.querySelector('dark-mode-toggle');
-      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');              
+      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       darkModeMediaQuery.addListener((e) => {
         if (e.matches) {
           darkModeToggle.mode = 'dark';
@@ -69,9 +61,9 @@
         }
       });
     </script>
-    <!-- 
+    <!--
       Copyright 2019 Google LLC.
       SPDX-License-Identifier: Apache-2.0
-    -->    
+    -->
   </body>
 </html>

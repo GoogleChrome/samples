@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2015 Google Inc. All Rights Reserved.
 
@@ -17,79 +17,67 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of extended unicode escapes in strings.">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Extended Unicode Escapes in Strings Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="Extended Unicode Escapes in Strings Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>Extended Unicode Escapes in Strings Sample</h1>
-
     <p>Available in Chrome 44+</p>
-
     <p>
       When representing Unicode code points outside of the
       <a href="http://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane">basic multilingual plane</a>
       in JavaScript string literals, it was previously necessary to use a pair of
       <a href="http://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates">surrogate code points</a>.
       Newer browsers support extended Unicode escapes, which allow for a more concise representation
-      of code points in <a href="http://en.wikipedia.org/wiki/Plane_(Unicode)#Supplementary_Multilingual_Plane">other planes</a>.
+      of code points in
+      <a href="http://en.wikipedia.org/wiki/Plane_(Unicode)#Supplementary_Multilingual_Plane">other planes</a>.
     </p>
-
     <p>
-      For example, the <a href="http://unicode.org/cldr/utility/character.jsp?a=1F302">Unicode code point</a>
-      for a "closed umbrella" character is <code>U+1F302</code>. This character can be represented
-      in a JavaScript string literal using the surrogate code point pair <code>\uD83C\uDF02</code>,
+      For example, the
+      <a href="http://unicode.org/cldr/utility/character.jsp?a=1F302">Unicode code point</a>
+      for a "closed umbrella" character is
+      <code>U+1F302</code>. This character can be represented
+      in a JavaScript string literal using the surrogate code point pair
+      <code>\uD83C\uDF02</code>,
       but in supported browsers, this can be simplified to the single extended Unicode escape,
       <code>\u{1F302}</code>.
     </p>
-
     <p>
-      This feature is closely related to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint"><code>String.fromCodePoint()</code></a>,
+      This feature is closely related to
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint"><code>String.fromCodePoint()</code></a>,
       which was added to Chrome 41. That method provides a programmatic way of translating a code
       point value into a string, outside the context of a string literal.
     </p>
-
     <p>
       Note that in browser which don't support extended Unicode escapes, attempting to use them in
       JavaScript string literals will trigger syntax errors that cannot be wrapped in a
-      <code>try</code> / <code>catch</code>. Please ensure that you're running under a supported
+      <code>try</code>
+      /
+      <code>catch</code>. Please ensure that you're running under a supported
       JavaScript environment before using extended Unicode escapes.
     </p>
-
     <!-- // [START code-block] -->
     <div class="output"></div>
-
     <script>
       /* jshint ignore:start */
       document.querySelector('.output').textContent = 'This is an umbrella: \u{1F302}';
       /* jshint ignore:end */
     </script>
     <!-- // [END code-block] -->
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

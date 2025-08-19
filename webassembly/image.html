@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2018 Google Inc. All Rights Reserved.
 
@@ -17,49 +17,37 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of WebAssembly">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>WebAssembly Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="WebAssembly Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>Web Assembly</h1>
-
-    <p>Available in <a href="https://www.chromestatus.com/features/5453022515691520">Chrome 57+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/features/5453022515691520">Chrome 57+</a></p>
     <!-- // [START code-block] -->
     <p>
       WebAssembly allows you to compile code from other languages like C or C++
       to run on the web at native speed.
     </p>
     <div class="output">
-        <pre id="log"></pre>
+      <pre id="log"></pre>
     </div>
     <script>
-        async function loadImage(src) {
+      async function loadImage(src) {
           // Load image
           const imgBlob = await fetch(src).then(resp => resp.blob());
           const img = await createImageBitmap(imgBlob);
@@ -76,7 +64,7 @@ limitations under the License.
     <!-- // [START code-block] -->
     <script src="image.js"></script>
     <script>
-    "use strict";
+      "use strict";
 
     Module.onRuntimeInitialized = async _ => {
       // Create wrapper functions for all the exported C functions
@@ -109,7 +97,6 @@ limitations under the License.
     };
     </script>
     <!-- // [END code-block] -->
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

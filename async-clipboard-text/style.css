@@ -1,0 +1,150 @@
+html,
+body {
+  font: 16px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-weight: 300;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #eee;
+  overflow: hidden;
+  text-align: center;
+}
+h1 {
+  margin: 10px;
+  font: inherit;
+  font-size: 200%;
+  color: #634884;
+  text-shadow: 0 1px 0 #fff;
+}
+h3 {
+  margin: 0;
+  font: inherit;
+  font-size: 140%;
+  color: #666;
+  text-shadow: 0 1px 0 #fff;
+}
+strong {
+  font-weight: 500;
+}
+em {
+  font-size: 80%;
+}
+
+section {
+  margin: 5px auto;
+  max-width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+section > * {
+  flex: 0 1 45%;
+}
+
+button {
+  position: relative;
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 10px 20px;
+  border: 2px solid #230844;
+  background: #634884;
+  border-radius: 5px;
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.1;
+  outline: none;
+  white-space: nowrap;
+}
+button:hover,
+button:focus {
+  background: #8368A4;
+}
+
+textarea {
+  box-sizing: border-box;
+  display: block;
+  max-width: 478px;
+  margin: 10px auto;
+  padding: 10px;
+  font: inherit;
+  color: #555;
+  border: 2px solid #432864;
+  border-radius: 5px;
+  width: calc(100% - 22px);
+  height: 6em;
+  outline: none;
+}
+
+#perms {
+  display: inline-block;
+  text-align: left;
+  color: #444;
+}
+
+#permbuttons button {
+  text-align: left;
+  padding-left: 40px;
+}
+
+#permbuttons button:before {
+  position: absolute;
+  content: "\1f47b";
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 130%;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+#permbuttons button[data-state="granted"] {
+  background: #495;
+  border-color: #051;
+}
+#permbuttons button[data-state="granted"]:before {
+  content: "\2705";
+}
+
+#permbuttons button[data-state="denied"] {
+  background: #945;
+  border-color: #501;
+}
+#permbuttons button[data-state="denied"]:before {
+  content: "\1f6ab";
+}
+
+#toast,
+#toast[hidden] {
+  display: block;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  padding: 6px 20px;
+  min-width: 30%;
+  max-width: 80%;
+  background: #333;
+  transform: translateX(-50%);
+  color: #fff;
+  text-align: center;
+  transition: all 500ms ease;
+  visibility: visible;
+  white-space: pre-wrap;
+  line-height: 2;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  will-change: transform, opacity;
+  overflow: hidden;
+  contain: content;
+}
+#toast[hidden] {
+  transform: translateX(-50%) translateY(120%);
+  opacity: 0;
+}
+#toast.error {
+  color: #FCC;
+  background: #511;
+}

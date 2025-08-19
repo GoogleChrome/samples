@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2015 Google Inc. All Rights Reserved.
 
@@ -15,54 +15,44 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of Computed Property Names (ES6).">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Computed Property Names (ES6) Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="Computed Property Names (ES6) Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
-</head>
-
-<body>
+  </head>
+  <body>
     <h1>Computed Property Names (ES6) Sample</h1>
-
     <!--
     <p>Available in <a href="https://www.chromestatus.com/feature/PLACEHOLDER">Chrome PLACEHOLDER+</a></p>
     -->
-    <p>ES6 Computed property names allow you to dynamically create property names using an expression in brackets (<code>[ ]</code>) similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">property accessors</a>. Below, computed property names are demonstrated using Object Literals, ES6 Classes and ES6 Symbols.
-    </p>
-    <p>This feature is available in Chrome 42 behind the <code>--harmony-computed-property-names</code> flag. For step-by-step instructions on how to use command-line flags with Chrome, read the <a href="http://www.chromium.org/for-testers/command-line-flags">command-line flags</a> guide. In this case, you would launch Chrome with <code>--args --js-flags="--harmony-computed-property-names"</code>.</p>
-
+    <p>ES6 Computed property names allow you to dynamically create property names using an expression in brackets (<code>[ ]</code>) similar to
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">property accessors</a>. Below, computed property names are demonstrated using Object Literals, ES6 Classes and ES6 Symbols.</p>
+    <p>This feature is available in Chrome 42 behind the
+      <code>--harmony-computed-property-names</code>
+      flag. For step-by-step instructions on how to use command-line flags with Chrome, read the
+      <a href="http://www.chromium.org/for-testers/command-line-flags">command-line flags</a>
+      guide. In this case, you would launch Chrome with
+      <code>--args --js-flags="--harmony-computed-property-names"</code>.</p>
     <div class="output">
-        <pre id="log"></pre>
+      <pre id="log"></pre>
     </div>
-
     <!-- // [START code-block] -->
     <script>
-    "use strict";
+      "use strict";
 
     function log() {
         document.querySelector('#log').textContent += Array.prototype.join.call(arguments, '') + '\n';
@@ -118,9 +108,8 @@ limitations under the License.
     log(new Person('Inigo', 'Montoya')[Foo]());
     </script>
     <!-- // [END code-block] -->
-
     <script>
-    /* jshint ignore:start */
+      /* jshint ignore:start */
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function() {
@@ -137,6 +126,5 @@ limitations under the License.
     /* jshint ignore:end */
     </script>
     <!-- Built with love using Web Starter Kit -->
-</body>
-
+  </body>
 </html>

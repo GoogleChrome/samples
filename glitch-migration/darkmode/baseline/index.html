@@ -3,13 +3,10 @@
   <head>
     <title>Dark Mode Baseline</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <meta name="supported-color-schemes" content="dark light">
     <meta name="color-scheme" content="dark light">
     <meta name="theme-color" content="">
-
     <script>
       if (window.location.protocol === 'http:') {
         window.location.protocol = 'https:';
@@ -23,7 +20,7 @@
             '<link rel="stylesheet" href="/light.css" onload="document.documentElement.style.display = ``">'
         );
       }
-    </script>  
+    </script>
     <!--
       Conditionally either load the light or the dark stylesheet. The matching file
       will be downloaded with `highest`, the non-matching file with `lowest`
@@ -34,33 +31,38 @@
     <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/dark.css" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/light.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
     <!-- The main stylesheet -->
-    <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/style.css">    
-       
-    <link rel="manifest" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/manifest-light.webmanifest" data-href-light="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/manifest-light.webmanifest" data-href-dark="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/manifest-dark.webmanifest">      
+    <link rel="stylesheet" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/style.css">
+    <link rel="manifest" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/manifest-light.webmanifest" data-href-light="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/manifest-light.webmanifest" data-href-dark="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/manifest-dark.webmanifest">
     <link rel="icon" href="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_light.png" data-href-light="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_light.png" data-href-dark="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_dark.png" sizes="144x144">
-       
-    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>    
-    <script defer src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/darkmode.js"></script>    
-  </head>  
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+    <script defer src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/darkmode.js"></script>
+  </head>
   <body>
-    <h1>Some Headline</h1>    
+    <h1>Some Headline</h1>
     <p>
-      Some body text with a <a href="#">link</a> pointing to nowhere.
+      Some body text with a
+      <a href="#">link</a>
+      pointing to nowhere.
     </p>
     <form>
       <input type="text" placeholder="Some input">
       <button type="button">Some button</button>
-    </form>  
+    </form>
     <figure>
       <img src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_mockaroon-1333674-unsplash.jpg?1558958450566" alt="Colored candy worms" intrinsicsize="948x733">
-      <figcaption>Photo by <a href="https://unsplash.com/photos/XVYz_QeiEBw" target="_blank" rel="noopener noreferrer">Mockaroon</a> on <a href="https://unsplash.com/">Unsplash</a>.</figcaption>
+      <figcaption>Photo by
+        <a href="https://unsplash.com/photos/XVYz_QeiEBw" target="_blank" rel="noopener noreferrer">Mockaroon</a>
+        on
+        <a href="https://unsplash.com/">Unsplash</a>.</figcaption>
     </figure>
     <p>
-      <img src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_baseline-wb_incandescent-24px.svg?1558957452117" alt=""> Some icon
-      <img src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_baseline-wb_sunny-24px.svg?1558957452243" alt=""> Some icon     
+      <img src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_baseline-wb_incandescent-24px.svg?1558957452117" alt="">
+      Some icon
+      <img src="https://googlechrome.github.io/samples/glitch-migration/darkmode/baseline/assets/791b2241-459b-4a2e-8cca-c0fdc21f0487_baseline-wb_sunny-24px.svg?1558957452243" alt="">
+      Some icon
     </p>
     <dark-mode-toggle appearance="toggle"></dark-mode-toggle>
-    <!-- 
+    <!--
       Copyright 2019 Google LLC.
       SPDX-License-Identifier: Apache-2.0
     -->

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2014 Google Inc. All Rights Reserved.
 
@@ -17,56 +17,46 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of WebAudio suspend/resume">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>WebAudio suspend/resume Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="WebAudio suspend/resume Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>WebAudio suspend/resume Sample</h1>
-    <p>Available in <a href="https://www.chromestatus.com/feature/5664622837235712">Chrome 41+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/feature/5664622837235712">Chrome 41+</a></p>
     <p>
-      These methods support suspending and resuming a whole <code>AudioContext</code> to allow applications to pause the audio device when not needed.
+      These methods support suspending and resuming a whole
+      <code>AudioContext</code>
+      to allow applications to pause the audio device when not needed.
       This reduces CPU usage and power consumption, as the audio device can be closed.
     </p>
-
     <div class="output">
       <div>
         Start and stop a single tone.
-        When this tab is hidden (e.g., open a new tab, hiding this tab), the <code>AudioContext</code> will be suspended; when this tab is reopened, the context will be resumed.
+        When this tab is hidden (e.g., open a new tab, hiding this tab), the
+        <code>AudioContext</code>
+        will be suspended; when this tab is reopened, the context will be resumed.
       </div>
       <button id="start">Start</button>
       <button id="stop">Stop</button>
     </div>
-
     <!-- // [START code-block] -->
     <script>
-
-    var context = new AudioContext();
+      var context = new AudioContext();
     var source;
 
     function stop() {
@@ -93,11 +83,8 @@ limitations under the License.
         context.resume();
       }
     });
-
     </script>
     <!-- // [END code-block] -->
-
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

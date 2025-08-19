@@ -3,10 +3,10 @@
   <head>
     <title>Dark Mode Art Direction</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
-    <style >  
+    <style
+    >
       body {
         background-color: #000;
         color: #eee;
@@ -26,8 +26,8 @@
 
       }
       figcaption {
-        text-align: center;  
-      }  
+        text-align: center;
+      }
       dark-mode-toggle {
         position: absolute;
         top: 1rem;
@@ -37,18 +37,22 @@
       }
     </style>
   </head>
-  <body>   
+  <body>
     <figure>
       <picture>
         <source srcset="https://googlechrome.github.io/samples/glitch-migration/darkmode/picture/assets/695100d4-5f7f-4ac4-b051-5a7cc71f3b3f_480px-Blue_Marble_Western_Hemisphere.jpg?v=1560946212255" media="(prefers-color-scheme: dark)">
         <source srcset="https://googlechrome.github.io/samples/glitch-migration/darkmode/picture/assets/695100d4-5f7f-4ac4-b051-5a7cc71f3b3f_480px-Blue_Marble_Eastern_Hemisphere.jpg?v=1560946212618" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
-        <img width="480" height="480" src="https://googlechrome.github.io/samples/glitch-migration/darkmode/picture/assets/695100d4-5f7f-4ac4-b051-5a7cc71f3b3f_480px-Blue_Marble_Eastern_Hemisphere.jpg?v=1560946212618" >
+        <img
+          width="480"
+          height="480"
+          src="https://googlechrome.github.io/samples/glitch-migration/darkmode/picture/assets/695100d4-5f7f-4ac4-b051-5a7cc71f3b3f_480px-Blue_Marble_Eastern_Hemisphere.jpg?v=1560946212618"
+        >
       </picture>
-      <figcaption>NASA Blue Marble: <a href="https://commons.wikimedia.org/wiki/File:Blue_Marble_Eastern_Hemisphere.jpg">Eastern Hemisphere</a>, <a href="https://commons.wikimedia.org/wiki/File:Blue_Marble_Western_Hemisphere.jpg">Western Hemisphere</a></figcaption>
+      <figcaption>NASA Blue Marble:
+        <a href="https://commons.wikimedia.org/wiki/File:Blue_Marble_Eastern_Hemisphere.jpg">Eastern Hemisphere</a>,
+        <a href="https://commons.wikimedia.org/wiki/File:Blue_Marble_Western_Hemisphere.jpg">Western Hemisphere</a></figcaption>
     </figure>
-
     <dark-mode-toggle></dark-mode-toggle>
-
     <script>
       (() => {
         if (window.matchMedia('(prefers-color-scheme)').media === 'not all') {
@@ -66,23 +70,23 @@
             dark.media = 'none';
             light.media = 'all';
           }
-        }; 
+        };
 
-        document.addEventListener('colorschemechange', (e) => {    
+        document.addEventListener('colorschemechange', (e) => {
           modeChange(e.detail.colorScheme);
         });
 
-        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');              
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         darkModeMediaQuery.addListener((e) => {
           if (e.matches) {
             modeChange('dark');
           } else {
             modeChange('light');
           }
-        });        
+        });
       })();
     </script>
-    <!-- 
+    <!--
       Copyright 2019 Google LLC.
       SPDX-License-Identifier: Apache-2.0
     -->

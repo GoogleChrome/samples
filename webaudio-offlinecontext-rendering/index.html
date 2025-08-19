@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 Copyright 2014 Google Inc. All Rights Reserved.
 
@@ -17,57 +17,50 @@ limitations under the License.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="description" content="Sample illustrating the use of WebAudio Offline context rendering promise.">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>WebAudio Offline context rendering promise Sample</title>
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-title" content="WebAudio Offline context rendering promise Sample">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
-
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
     <link rel="icon" href="../images/favicon.ico">
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
-
   <body>
     <h1>WebAudio Offline context rendering promise Sample</h1>
-
-    <p>Available in <a href="https://www.chromestatus.com/feature/5692188675538944">Chrome 42+</a></p>
-
+    <p>Available in
+      <a href="https://www.chromestatus.com/feature/5692188675538944">Chrome 42+</a></p>
     <p>
-      The <code>OfflineAudioContext.startRendering</code> method renders audio to an <code>AudioBuffer</code> potentially faster than real-time.
-      This method returns a <code>Promise</code> which is fulfilled when the rendering is complete.
-      It is further documented in the <a href="http://webaudio.github.io/web-audio-api/#widl-OfflineAudioContext-startRendering-Promise-AudioBuffer">Web Audio API</a>.
+      The
+      <code>OfflineAudioContext.startRendering</code>
+      method renders audio to an
+      <code>AudioBuffer</code>
+      potentially faster than real-time.
+      This method returns a
+      <code>Promise</code>
+      which is fulfilled when the rendering is complete.
+      It is further documented in the
+      <a href="http://webaudio.github.io/web-audio-api/#widl-OfflineAudioContext-startRendering-Promise-AudioBuffer">Web Audio API</a>.
     </p>
-
     <div class="output">
       <div>
-        Merge two tones, display information about the final <code>AudioBuffer</code>, and plays it.
+        Merge two tones, display information about the final
+        <code>AudioBuffer</code>, and plays it.
       </div>
       <button id="start">Start</button>
       <pre id="results"></pre>
     </div>
-
     <!-- // [START code-block] -->
     <script>
-
-    var seconds = 4;
+      var seconds = 4;
     var offlineAudioContext = new OfflineAudioContext(2, seconds * 44100, 44100);
     var audioContext = new AudioContext();
 
@@ -116,10 +109,8 @@ limitations under the License.
       });
 
     });
-
     </script>
     <!-- // [END code-block] -->
-
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
