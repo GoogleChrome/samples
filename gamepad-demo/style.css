@@ -1,0 +1,34 @@
+:root {
+  color-scheme: dark light;  
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+@media (prefers-color-scheme: dark) {
+  background-color: #000;
+}
+
+h1 {
+  color: #373fff;
+}
+
+h2 {
+  color: red;
+}
+
+svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  visibility: hidden;
+}
+
+.highlight {
+  fill: forestgreen;
+}
