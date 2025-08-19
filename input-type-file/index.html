@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Select files with HTML and JavaScript</title>
+    <link
+      rel="shortcut icon"
+      href="https://web.archive.org/web/20200523100737im_/https://cdn.glitch.com/9b775a52-d700-4208-84e9-18578ee75266%2Ficon.jpeg?v=1585082912878"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Select files with HTML and JavaScript</h1>
+    <input type="file" id="file-selector" multiple="" />
+    <ul id="output"></ul>
+    <script>
+      const output = document.getElementById("output");
+      if (window.FileList && window.File) {
+        document
+          .getElementById("file-selector")
+          .addEventListener("change", (event) => {
+            output.innerHTML = "";
+            for (const file of event.target.files) {
+              const li = document.createElement("li");
+              const name = file.name ? file.name : "NOT SUPPORTED";
+              const type = file.type ? file.type : "NOT SUPPORTED";
+              const size = file.size ? file.size : "NOT SUPPORTED";
+              li.textContent = `name: ${name}, type: ${type}, size: ${size}`;
+              output.appendChild(li);
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
