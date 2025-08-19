@@ -1,0 +1,16 @@
+{
+  "name": "Wikimedia Featured Content",
+  "short_name": "Featured",
+  "start_url": "./",  
+  "display_override": ["window-controls-overlay"],
+  "display": "standalone",
+  "theme_color": "#36c",
+  "background_color": "#131313",
+  "icons": [
+    {
+      "src": "https://cdn.glitch.me/c9bc66cc-4360-4eaa-8c47-ab59a1bad38c%2Flogo.svg?v=1635255211816",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ]
+}

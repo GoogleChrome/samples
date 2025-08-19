@@ -1,0 +1,76 @@
+:root {
+  color-scheme: dark light;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #36c;
+  padding-block: 1rem;
+}
+
+img {
+  height: 100%;
+  width: auto;
+  padding-block: 0.25rem;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 2em;
+}
+
+.highlight {
+  background-color: Highlight;
+}
+
+.search {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+  position: fixed;
+  left: env(titlebar-area-x, 0);
+  top: env(titlebar-area-y, 0);
+  width: env(titlebar-area-width, 100%);
+  height: env(titlebar-area-height, 33px);
+}
+
+/* For Windows: */
+.search-controls-left {
+  background-image: linear-gradient(90deg, #36c, 45%, #131313, 90%, #36c);
+}
+
+/* For macOS: */
+.search-controls-right {
+  background-image: linear-gradient(90deg, #36c, #131313, 33%, #36c);
+}
+
+.search label {
+  color: #eee;
+}
+
+.search {
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+
+input {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+@media (prefers-color-scheme: dark) {
+  img {
+    filter: invert(1);
+  }
+}

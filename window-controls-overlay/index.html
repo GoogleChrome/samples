@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#36c" />
+    <script>
+      if (!isSecureContext) {
+        location.protocol = "https:";
+      }
+    </script>
+    <title>Wikimedia Featured Content</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Wikimedia Featured Content</h1>
+    <div class="search">
+      <img
+        src="https://cdn.glitch.me/c9bc66cc-4360-4eaa-8c47-ab59a1bad38c%2Flogo.svg?v=1635255211816"
+        alt="Wikimedia Logo."
+        width="512"
+        height="512"
+      />
+      <label><input type="search" /> Search words in articles</label>
+      <span hidden>(Search powered by CSS)</span>
+    </div>
+    <ul></ul>
+    <p>
+      Content via the
+      <a
+        href="https://api.wikimedia.org/wiki/API_reference/Feed/Featured_content"
+        >Wikimedia Featured Content API</a
+      >.
+    </p>
+  </body>
+</html>
