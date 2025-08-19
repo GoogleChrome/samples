@@ -1,0 +1,161 @@
+:root {
+  color-scheme: dark light;  
+  --opacity: 0.75;
+}
+
+html {
+  height: 100%;
+}
+
+body {  
+  font-family: "PT Sans", system-ui, sans-serif;  
+  margin: 0;
+  height: 100%;
+}
+
+header {
+  margin-bottom: 0.5em;
+  color: #CCC;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.btn {
+  background: #DDD;
+  color: Canvas;
+  font-size: 110%;
+  font-weight: bold;
+  padding: 0.5em;
+  margin: 0.3em;
+  width: 4em;
+  border: outset 2px rgba(204, 204, 204, 0.75);
+  border-radius: 0.6em;
+  box-shadow: 1px 2px 3px 1px #353535;
+}
+
+.btn:active {
+  background: #CCC;
+  border: inset 2px #CCC;
+  box-shadow: inset 1px 2px 3px 1px #353535;
+}
+
+.btn:focus {
+  outline: none;
+  background: #CCC;
+}
+
+.btn_wide {
+  width: 8.6em;
+}
+
+.spacer {
+  font-size: 50%;
+}
+
+#calc_outside {
+  background: #284965;
+  text-align: center; 
+  min-width: 400px;  
+  height: 100%;
+  border-radius: 0.25em;
+  box-shadow: -1px -2px 3px #252525, 2px 3px 3px 1px #3A3A3A;
+  /*   transform: rotate3d(5, 2, -2, 10deg); */
+}
+
+#calc_inside {
+  background: #385975;
+  height: calc(100% - 2.4rem);
+  margin: 0.3em 0.9em 0.4em 1em;
+  border-radius: 1.2em;
+  box-shadow: 0px 0px 5px 4px #385975, 2px 2px 5px 2px #284965;
+}
+
+#calc_display_surface {
+  background: #182425;
+  padding: 0.6em;
+  margin: 0.5em 1em;
+  border: inset 1px #182425;
+  border-radius: 0.3em;
+  box-shadow: inset 1px 1px 4px #222, inset -1px -1px 2px #222;
+}
+
+#calc_solar_cell {  
+  background-color: #26201C;  
+  background: repeating-linear-gradient(
+    to left,
+    #111,
+    #111 2px,
+    #26201C 2px,
+    #26201C 29px
+  );  
+  border-radius: 0.25rem;  
+  height: 40px;
+  box-shadow: inset 2px 3px 4px #111, inset -1px -1px 2px #111;
+}
+
+#calc_screen {
+  background: #687;
+  color: #100A09;
+  font-family: "VT323", monospace;
+  text-align: right;
+  padding: 1em 1em 0.8em;
+  border-radius: 0.3em;
+  box-shadow: inset 2px 3px 4px #111, inset -1px -1px 2px #111;
+}
+
+#calc_expression {
+  font-size: 175%;
+  height: 2.1em;
+  padding-bottom: 0.4em;
+}
+
+#calc_result {
+  font-size: 200%;
+  height: 1.1em;
+}
+
+#calc_expression,
+#calc_result {
+  opacity: var(--opacity);
+}
+
+#calc_buttons {
+  padding: 0.6em;
+}
+
+footer {
+  font-size: 0.75rem;  
+}
+
+footer a {
+  color: inherit;  
+}
+
+#calc_solar_cell.wco {
+  position: fixed;
+  left: calc(0.25rem + env(titlebar-area-x, 0));  
+  top: calc(0.75rem + env(titlebar-area-y, 0));  
+  width: calc(env(titlebar-area-width, 100%) - 0.5rem);
+  height: calc(env(titlebar-area-height, 33px) - 0.5rem);
+}
+
+#calc_display_surface.wco {
+  margin-top: calc(env(titlebar-area-height, 33px) - 0.5rem);
+}
+
+#calc_outside.wco {
+  background: #385975;
+}
+
+#calc_inside.wco,
+#calc_solar_cell.wco {
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+
+button {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}

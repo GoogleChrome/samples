@@ -1,0 +1,17 @@
+{
+  "name": "Designcember Calculator",
+  "short_name": "Calculator",
+  "start_url": "./",
+  "id": "./",
+  "icons": [
+    {
+      "src": "https://cdn.glitch.me/51b557eb-4530-49ca-83f7-d37630504a75%2Fpocket-calculator_1f5a9.png?v=1638875272456",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ],
+  "theme_color": "#385975",
+  "background-color": "#385975",
+  "display": "fullscreen",  
+  "display_override": ["window-controls-overlay"]
+}

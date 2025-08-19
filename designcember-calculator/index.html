@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name='viewport' content='initial-scale=1, viewport-fit=cover'>
+    <meta name="theme-color" content="" />
+    <script>
+      if (!isSecureContext) {
+        location.protocol = "https:";
+      }
+    </script>
+    <link rel="manifest" href="./manifest.json" />
+    <title>Designcember Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js" type="module"></script>
+    <script src="calculator.js" type="module"></script>
+  </head>
+  <body>
+    <div id="calc_outside">
+      <div class="spacer">&nbsp;</div>
+      <div id="calc_inside">
+        <div class="spacer">&nbsp;</div>
+        <div id="calc_display_surface">
+          <div id="calc_solar_cell">&nbsp;</div>
+          <header><h1>Solar Calculator</h1></header>
+          <main id="calc_screen">
+            <div id="calc_expression">&nbsp;</div>
+            <div id="calc_result">0</div>
+          </main>
+        </div>
+        <menu id="calc_buttons">
+          <div id="calc_row_0">
+            <button id="calc_b_pi" class="btn">&pi;</button>
+            <button id="calc_b_euler" class="btn">E</button>
+            <button id="calc_b_delete" class="btn">DEL</button>
+            <button id="calc_b_clear" class="btn">CLR</button>
+          </div>
+          <div id="calc_row_1">
+            <button id="calc_b_modulus" class="btn">%</button>
+            <button id="calc_b_lparen" class="btn">(</button>
+            <button id="calc_b_rparen" class="btn">)</button>
+            <button id="calc_b_div" class="btn">/</button>
+          </div>
+          <div id="calc_row_2">
+            <button id="calc_b_7" class="btn">7</button>
+            <button id="calc_b_8" class="btn">8</button>
+            <button id="calc_b_9" class="btn">9</button>
+            <button id="calc_b_mult" class="btn">*</button>
+          </div>
+          <div id="calc_row_3">
+            <button id="calc_b_4" class="btn">4</button>
+            <button id="calc_b_5" class="btn">5</button>
+            <button id="calc_b_6" class="btn">6</button>
+            <button id="calc_b_sub" class="btn">-</button>
+          </div>
+          <div id="calc_row_4">
+            <button id="calc_b_1" class="btn">1</button>
+            <button id="calc_b_2" class="btn">2</button>
+            <button id="calc_b_3" class="btn">3</button>
+            <button id="calc_b_add" class="btn">+</button>
+          </div>
+          <div id="calc_row_5">
+            <button id="calc_b_0" class="btn">0</button>
+            <button id="calc_b_decimal" class="btn">.</button>
+            <button id="calc_b_equals" class="btn btn_wide">=</button>
+          </div>
+        </menu>
+        <div class="spacer">&nbsp;</div>
+      </div>
+      <footer>
+        Based on a
+        <a href="https://codepen.io/sassjajc/pen/zNJgKg">CodePen</a> by
+        <a href="https://codepen.io/sassjajc">Sassja Ceballos</a>.
+      </footer>
+      <div class="spacer">&nbsp;</div>
+    </div>
+  </body>
+</html>
