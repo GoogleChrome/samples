@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Read an image file</title>
+    <link
+      rel="shortcut icon"
+      href="https://web.archive.org/web/20200523100735im_/https://cdn.glitch.com/9b775a52-d700-4208-84e9-18578ee75266%2Ficon.jpeg?v=1585082912878"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Read an image file</h1>
+    <input type="file" id="file-selector" />
+    <p id="status"></p>
+    <div>
+      <img id="output" />
+    </div>
+    <script>
+      const status = document.getElementById("status");
+      const output = document.getElementById("output");
+      if (window.FileList && window.File && window.FileReader) {
+        document
+          .getElementById("file-selector")
+          .addEventListener("change", (event) => {
+            output.src = "";
+            status.textContent = "";
+            const file = event.target.files[0];
+            if (!file.type) {
+              status.textContent =
+                "Error: The File.type property does not appear to be supported on this browser.";
+              return;
+            }
+            if (!file.type.match("image.*")) {
+              status.textContent =
+                "Error: The selected file does not appear to be an image.";
+              return;
+            }
+            const reader = new FileReader();
+            reader.addEventListener("load", (event) => {
+              output.src = event.target.result;
+            });
+            reader.readAsDataURL(file);
+          });
+      }
+    </script>
+  </body>
+</html>

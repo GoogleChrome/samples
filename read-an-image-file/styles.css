@@ -1,0 +1,16 @@
+/* Copyright 2018 Google LLC.
+ * SPDX-License-Identifier: Apache-2.0 */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
