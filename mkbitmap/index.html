@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>mkbitmap Wasm</title>
+    <script>
+      if (!isSecureContext) {
+        location.protocol = 'https:';
+      }
+    </script>
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>mkbitmap Wasm</h1>
+    <div>
+      <section>
+        <h2>Settings</h2>
+        <form>
+          <fieldset>
+            <legend>Choose an input image (<code>.bmp</code> files).</legend>
+            <input type="file" accept="image/bmp" />
+          </fieldset>
+          <fieldset>
+            <legend>Apply a highpass filter to the input image.</legend>
+            <label
+                   ><input min="0" max="10" value="4" type="range" name="filter" /><span></span>
+              Filter (<code>-f</code>)</label
+            >
+            <label><input type="checkbox" name="no-filter" /> No filter</label>
+          </fieldset>
+          <fieldset>
+            <legend>Blur the input image.</legend>
+            <label
+              ><input min="0" max="5" value="0" type="range" name="blur" /><span></span> Blur
+              (<code>-b</code>)</label
+            >
+          </fieldset>
+          <fieldset>
+            <legend>Scale the input image.</legend>
+            <label
+              ><input min="1" max="10" value="2" type="range" name="scale" /><span></span>
+              Scale (<code>-s</code>)</label
+            >
+            <label
+              ><input type="radio" name="scaling" value="cubic" checked /> Cubic
+              (<code>-3</code>)</label
+            >
+            <label
+              ><input type="radio" name="scaling" value="linear" /> Linear
+              (<code>-1</code>)</label
+            >
+          </fieldset>
+          <fieldset>
+            <legend>
+              Set the threshold gray value for bilevel conversion.
+            </legend>
+            <label
+              ><input
+                min="0.25"
+                max="0.75"
+                value="0.45"
+                step="0.01"
+                type="range"
+                name="threshold"
+              /><span></span>
+              Threshold (<code>-t</code>)</label
+            >
+            <label
+              ><input type="checkbox" name="no-threshold" /> No threshold</label
+            >
+          </fieldset>
+          <fieldset>
+            <legend>Invert the input image.</legend>
+            <label><input type="checkbox" name="invert" /> Invert (<code>-i</code>)</label>
+          </fieldset>
+        </form>
+        <h2>mkbitmap command</h2>
+        <pre></pre>
+      </section>
+      <section>        
+        <h2>Input</h2>
+        <img
+          src="https://cdn.glitch.global/9521426a-efe6-43e5-9de0-286741712dd6/IxTMIGl9KB2HQCI57VVk.bmp?v=1683814059631"
+          alt="Input image"
+        />
+        <h2>Output</h2>
+        <canvas></canvas>
+      </section>
+    </div>
+    <footer></footer>
+  </body>
+</html>

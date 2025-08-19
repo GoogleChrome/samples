@@ -1,0 +1,64 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+  font-family: system-ui, sans-serif;
+}
+
+label {
+  display: block;
+}
+
+img,
+canvas {
+  display: block;
+  height: auto;
+  max-width: 300px;
+  margin-block-start: 2rem;
+}
+
+fieldset {
+  margin-block-start: 1rem;
+  border: none;
+}
+
+@media (min-width: 600px) {
+  div {
+    display: flex;
+  }
+}
+
+footer {
+  margin-block-start: 2rem;
+}
+
+span {
+  font-variant-numeric: tabular-nums;
+}
+
+span::before {
+  content: "(";
+}
+
+span::after {
+  content: ")";
+}
+
+pre,
+code {
+  font-family: ui-monospace, monospace;
+  font-weight: bold;
+  color: green;
+}
