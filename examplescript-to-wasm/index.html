@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>"
+    />
+    <title>ExampleScript to Wasm with Binaryen</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      if (!isSecureContext) location.protocol = 'https:';
+    </script>
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>ExampleScript to Wasm with Binaryen</h1>
+    <h2>ExampleScript input</h2>
+    <textarea>
+5 + 1
+6 - 2
+7 * 3
+8 / 4</textarea
+    >
+    <button type="button" class="convert-button">Convert to Wasm</button>
+    <button type="button" class="save-button">Save Wasm to disk</button>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <h2>Unoptimized output</h2>
+          </th>
+          <th>
+            <h2>Optimized output</h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <output class="unoptimized"></output>
+          </td>
+          <td>
+            <output class="optimized"></output>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
