@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Streams Demo</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Streams Demo</h1>
+
+    <p>When you press the button, the following happens:</p>
+    <ol>
+      <li>
+        A <a href="./lorem-ipsum.txt">text file</a> is fetched as a
+        <code>ReadableStream</code> and piped through a
+        <code>TextDecodeStream</code>.
+      </li>
+      <li>
+        A file handle is created and exposed as a <code>WritableStream</code>.
+      </li>
+      <li>
+        The resulting decoded <code>ReadableStream</code> from step 1 is
+        <code>tee()</code>ed into two <code>ReadableStream</code>s.
+      </li>
+      <li>
+        The first <code>ReadableStream</code> is streamed into a
+        <code>&lt;pre&gt;</code> displayed on the screen.
+      </li>
+      <li>
+        The second <code>ReadableStream</code> is…
+        <ul>
+          <li>piped through an uppercase <code>TransformStream</code>,</li>
+          <li>then piped through a <code>TextEncoderStream</code>,</li>
+          <li>next piped through a <code>CompressionStream</code>,</li>
+          <li>
+            and finally piped to the <code>WritableStream</code> from step 2.
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <button type="button">Save zipped</button>
+    <pre></pre>
+  </body>
+</html>
