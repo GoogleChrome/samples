@@ -1,0 +1,66 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  max-width: clamp(320px, 90%, 1000px);
+  margin: auto;
+}
+
+img {
+  border-radius: 20%;
+  width: 6rem;
+  height: auto;
+}
+
+output {
+  white-space: pre-wrap;
+}
+
+form {
+  margin-block: 1rem;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+input {
+  width: 20rem;  
+}
+
+.speech-bubble {
+  position: relative;
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  max-width: 300px;
+  font-family: sans-serif;
+  color: black;
+  margin-block-end: 15px;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #f0f0f0;
+  border-bottom: 0;
+  margin-left: -10px;
+}
