@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <script src="coi-serviceworker.min.js"></script>
+    <title>Hello, sqlite3</title>
+    <style>
+      :root {
+        color-scheme: dark light;
+      }
+
+      .warning,
+      .error {
+        color: red;
+      }
+      .error {
+        background-color: yellow;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        font-family: monospace;
+        white-space: break-spaces;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello, sqlite3</h1>
+    <script>
+      const logHtml = function (cssClass, ...args) {
+        const ln = document.createElement('div');
+        if (cssClass) ln.classList.add(cssClass);
+        ln.append(document.createTextNode(args.join(' ')));
+        document.body.append(ln);
+      };
+
+      const w = new Worker('worker.js?sqlite3.dir=jswasm');
+      w.onmessage = function ({ data }) {
+        switch (data.type) {
+          case 'log':
+            logHtml(data.payload.cssClass, ...data.payload.args);
+            break;
+          default:
+            logHtml('error', 'Unhandled message:', data.type);
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      :root {
+        color-scheme: dark light;
+      }
+      
+      body {
+        font-family: system-ui, sans-serif;
+      }     
+    </style>
+    <title>Performance Comparison of SQLite/OPFS versus WebSQL</title>
+  </head>
+  <body>
+    <div>
+      <h1 align="center">
+        Performance Comparison of SQLite/OPFS versus WebSQL
+      </h1>
+
+      <h2>The Performance Benchmark Program: <tt>speedtest1</tt></h2>
+
+      <p>
+        The SQLite project has been using a performance measurement tool called
+        "speedtest1" for many years. Speedtest1 runs a variety of SQL statements
+        in an attempt to simulate a "typical" SQLite workload. Speedtest1 is the
+        standard performance measurement tool for SQLite. It is used to generate
+        graphs such the one near the top of
+        <a
+          href="https://www.google.com/url?q=https://sqlite.org/cpu.html&amp;source=gmail-html&amp;ust=1680103848648000&amp;usg=AOvVaw2vZyTedMQJrVuFB81ZroUx"
+          target="_blank"
+          rel="noreferrer"
+          >https://sqlite.org/cpu.html</a
+        >.
+      </p>
+      <p>
+        The default mode of operation for speedtest1 is for speedtest1 to invoke
+        SQLite API routines directly. However, a run-time option can cause
+        speedtest1 to emit pure SQL statements which can then be piped into a
+        separate SQL execution engine to perform the tests. Speedtest1 also has
+        a run-time option to control the "size" of the test, which changes both
+        the size of the database and the number of queries executed against the
+        database.
+      </p>
+      <h2>Two Ways Of Testing</h2>
+
+      <ol>
+        <li>
+          <p>
+            Direct execution means that the "speedtest1" program is run
+            directly. Speedtest1 makes SQLite API calls to run the SQL
+            statement.
+          </p>
+        </li>
+        <li>
+          <p>
+            Script execution means that "speedtest1" is run with the --script
+            option to generate a file that contains the (thousands) of SQL
+            statements that would be run for a performance test, then that file
+            of SQL statements is piped into the execution engine in order to run
+            the test.
+          </p>
+        </li>
+        <p></p>
+      </ol>
+
+      <p>
+        Due to design limitations, performance tests against WebSQL can only be
+        run in script mode. In other words, to test the performance of WebSQL,
+        we have to feed it a big script with thousands of SQL statements. The
+        other variants of SQLite can all be run using either modality.
+      </p>
+      <h2>Variants Of SQLite Under Test</h2>
+
+      <p>These are the different builds of SQLite that we compare:</p>
+      <ul>
+        <li>
+          <p>
+            <b>C-native speedtest1</b>. This means running the "speedtest1"
+            program on Linux in a shell.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>WebSQL</b>. This is the deprecated SQLite interface that is built
+            into Chrome. It does not use WASM. It is coded directly in C/C++.
+            WebSQL only runs in the main thread.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>WASM in-memory</b>. This is SQLite compiled using Emscripten and
+            using the in-memory file system provided by Emscripten. No
+            persistent I/O occurs.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>WASMFS</b>. This is SQLite compiled using Emscripten's WASMFS
+            filesystem that does support persistence. This variant currently
+            only works in the main thread.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>sqlite3_vfs</b>. This is SQLite compiled to WASM and using OPFS
+            to implement persistence without any help from Emscripten. This
+            variantly currently only functions in worker threads.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>local/session storage</b>. This is SQLite compiled to WASM and
+            using localStorage or sessionStorage for persistence. This variant
+            only functions in the main thread. Only smaller performance tests
+            can be run on this variant due to browser-imposed limitations on the
+            amount of local/session storage.
+          </p>
+        </li>
+      </ul>
+
+      <h2>Script-Mode Performance Comparisons</h2>
+
+      <p>
+        The following table shows approximate run-times (in milliseconds) for
+        speedtest1 runs of various sizes in script mode.
+      </p>
+
+      <table border="1" cellpadding="15" cellspacing="0">
+        <tbody>
+          <tr>
+            <th>SQL Statement Count</th>
+            <th>WASM in-memory</th>
+            <th>WebSQL</th>
+            <th>WASMFS</th>
+          </tr>
+
+          <tr>
+            <td align="right">14200</td>
+            <td align="right">2200</td>
+            <td align="right">2230</td>
+            <td align="right">2240</td>
+          </tr>
+
+          <tr>
+            <td align="right">71000</td>
+            <td align="right">3050</td>
+            <td align="right">4250</td>
+            <td align="right">3400</td>
+          </tr>
+
+          <tr>
+            <td align="right">177500</td>
+            <td align="right">6200</td>
+            <td align="right">6000</td>
+            <td align="right">6900</td>
+          </tr>
+
+          <tr>
+            <td align="right">355000</td>
+            <td align="right">16000</td>
+            <td align="right">10900</td>
+            <td align="right">16350</td>
+          </tr>
+
+          <tr>
+            <td align="right">710000</td>
+            <td align="right">52000</td>
+            <td align="right">40000</td>
+            <td align="right">57200</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Direct-Mode Performance Comparisons</h2>
+
+      <p>
+        The following table shows approximate run-times (in milliseconds) for
+        running speedtest1 directly (compiled to WASM where appropriate).
+      </p>
+      <table border="1" cellpadding="15" cellspacing="0">
+        <tbody>
+          <tr>
+            <th>SQL Statement Count</th>
+            <th>C-native speedtest1</th>
+            <th>WASMFS</th>
+            <th>sqlite3_vfs</th>
+            <th>local/session storage</th>
+          </tr>
+
+          <tr>
+            <td align="right">14200</td>
+            <td align="right">40</td>
+            <td align="right">245</td>
+            <td align="right">270</td>
+            <td align="right">150</td>
+          </tr>
+
+          <tr>
+            <td align="right">71000</td>
+            <td align="right">220</td>
+            <td align="right">700</td>
+            <td align="right">725</td>
+            <td align="right"><i>database too large</i></td>
+          </tr>
+
+          <tr>
+            <td align="right">177500</td>
+            <td align="right">540</td>
+            <td align="right">1715</td>
+            <td align="right">1620</td>
+            <td align="right"><i>database too large</i></td>
+          </tr>
+
+          <tr>
+            <td align="right">355000</td>
+            <td align="right">1230</td>
+            <td align="right">3200</td>
+            <td align="right">3200</td>
+            <td align="right"><i>database too large</i></td>
+          </tr>
+
+          <tr>
+            <td align="right">710000</td>
+            <td align="right">3200</td>
+            <td align="right">6500</td>
+            <td align="right">6700</td>
+            <td align="right"><i>database too large</i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
