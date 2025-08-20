@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>You are offline</title>
@@ -18,31 +17,31 @@
         font-style: italic;
         color: #373fff;
       }
-      
+
       p {
         margin-block: 1rem;
       }
-      
+
       button {
         display: block;
       }
-    </style>    
+    </style>
   </head>
   <body>
     <h1>You are offline</h1>
 
     <p>
       The page will automatically reload once the connection is re-established.
-      Click the button below to try reloading manually.      
+      Click the button below to try reloading manually.
     </p>
     <button type="button">⤾ Reload</button>
-    
+
     <!-- Inline the page's JavaScript file. -->
     <script>
       document.querySelector('button').addEventListener('click', () => {
         window.location.reload();
       });
-    
+
       // Listen to changes in the network state, reload when online.
       // This handles the case when the device is completely offline.
       window.addEventListener('online', () => {

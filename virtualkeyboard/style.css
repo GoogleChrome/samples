@@ -1,0 +1,129 @@
+:root {
+  --canvas: #fff;
+  --canvastext: #000;
+  --compose-height: 50px;
+
+  color-scheme: dark light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #000;
+    --canvastext: #fff;
+  }
+}
+
+html {
+  box-sizing: border-box;
+  height: var(--100vh, 100vh);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.container {
+  height: 100%;
+  display: grid;
+  gap: 10px 10px;
+  grid-template:    
+    "messages" 1fr
+    "compose" var(--compose-height)
+    "keyboard" env(keyboard-inset-height, 0px);
+}
+
+.messages {
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;  
+  justify-content: center;  
+  height: 100%;
+}
+
+.compose {
+  border: solid 1px var(--canvastext);
+  width: 100%;
+  height: var(--compose-height);
+}
+
+
+ul {
+  margin-inline-start: 0;
+  margin-block-start: auto;
+  list-style: none;  
+  padding: 10px;
+}
+
+li {
+  padding: 0.25rem;
+  color: var(--canvas);
+  margin-block-end: 0.25rem;
+  border-radius: 0.25rem;
+  position: relative;
+  word-break: break-word;
+}
+
+input {
+  flex-grow: 1;
+  font-size: inherit;
+  border-radius: 0;
+}
+
+button {
+  appearance: none;
+  background-color: var(--canvastext);
+  color: var(--canvas);
+  border: none;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: none;
+}
+
+form {
+  display: flex;
+  height: 100%;
+}
+
+.me {
+  background-color: deeppink;
+  margin-inline-end: 1rem;
+}
+
+.me::before,
+.them::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.me::before {
+  left: -10px;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent deeppink transparent transparent;
+}
+
+.them {
+  background-color: turquoise;
+  margin-inline-start: 1rem;
+}
+
+.them::before {
+  right: -10px;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent turquoise;
+}
