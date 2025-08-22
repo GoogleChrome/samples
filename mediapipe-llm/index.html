@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❇️</text></svg>"
+    />
+    <title>MediaPipe LLM</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preload" href="script.js" as="script" crossorigin />
+    <link
+      rel="modulepreload"
+      href="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest/genai_bundle.mjs"
+    />
+    <link
+      rel="modulepreload"
+      href="https://cdn.jsdelivr.net/npm/browser-fs-access@latest/dist/index.modern.js"
+    />
+    <link
+      rel="modulepreload"
+      href="https://cdn.jsdelivr.net/npm/idb-keyval@latest/+esm"
+    />
+    <link
+      rel="modulepreload"
+      href="https://cdn.jsdelivr.net/npm/marked@latest/lib/marked.esm.js"
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest/wasm/genai_wasm_internal.js"
+      as="script"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/fetch-in-chunks@latest/index.js"
+      as="script"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest/wasm/genai_wasm_internal.wasm"
+      as="fetch"
+      crossorigin
+    />
+    <script>
+      if (!isSecureContext) location.protocol = 'https:';
+    </script>
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>MediaPipe LLM</h1>
+    <p>
+      For this demo, download the <code>gemma-2b-it-gpu-int4</code> model
+      <a href="https://www.kaggle.com/models/google/gemma/tfLite/"
+        >from Kaggle</a
+      >.
+    </p>
+    <div>
+      <button class="disk">Load model from disk</button>
+      <span class="cached"></span>
+    </div>
+    <div>
+      <button class="download">Download model from Web</button>
+      <progress value="0"></progress>
+      <button hidden class="cancel">Cancel download</button>
+    </div>
+    <form>
+      <label for="input">Prompt:</label>
+      <div>
+        <textarea autocomplete="off">
+Given the three storage technologies IndexedDB, the Origin Private File System, and the Service Worker Cache, plus the option to store a `FileSystemFileHandle` to IndexedDB pointing at a local file on disk, where should I store large language model files?</textarea
+        >
+      </div>
+      <div>
+        <input type="submit" value="OK" />
+        <input type="reset" value="Reset" />
+        <span class="busy"></span>
+      </div>
+    </form>
+    <div class="error"></div>
+    <output></output>
+  </body>
+</html>
