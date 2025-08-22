@@ -1,0 +1,13 @@
+{
+  "name": "Ephemeral Canvas",
+  "short_name": "Canvas",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait",
+  "display": "standalone",
+  "icons": [{
+    "src": "https://cdn.glitch.com/e30e5776-3461-4364-afb2-a941f2cae564%2Ffugu.png?v=1572281278034", 
+    "type": "image/png",
+    "sizes": "160x160"
+  }]
+}

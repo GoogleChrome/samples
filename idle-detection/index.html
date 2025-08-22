@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.mjs"></script>
+    <link rel="modulepreload" href="dark_mode.mjs">
+    <link rel="manifest" href="manifest.webmanifest">
+    <title>Ephemeral Canvas</title>
+  </head>
+  <body>
+    <div class="toolbar">
+      <h1>Ephemeral Canvas</h1>
+      <input id="color" type="color" aria-label="select pen color">
+      <button id="clear" type="button">Clear Canvas</button>
+      <span id="nosupport">Your browser doesn't support the
+        <a href="https://github.com/WICG/idle-detection/blob/main/README.md">Idle Detection API</a>… 😿</span>
+      <input id="ephemeral" type="checkbox">
+      <label for="ephemeral">Ephemeral (Don't move your mouse during 60s after clicking.)</label>
+    </div>
+    <canvas></canvas>
+  </body>
+</html>
