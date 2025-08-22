@@ -1,0 +1,29 @@
+:root {
+  color-scheme: dark light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: white;
+    background-color: black;
+  }
+}
+
+body {
+  font-family: sans-serif;  
+}
+
+a {
+  color: red;  
+}
+
+code {
+  font-weight: bold;
+  font-size: 100%;
+}
+
+em {
+  background-color: yellow;
+  color: black;
+  padding-inline: 0.25rem;
+}

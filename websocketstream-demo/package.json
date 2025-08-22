@@ -1,0 +1,15 @@
+{
+  "name": "modern-node-server",
+  "version": "1.0.0",
+  "description": "A modern Node.js server with Socket.IO and SSE.",
+  "main": "server.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "eventsource": "^2.0.2",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

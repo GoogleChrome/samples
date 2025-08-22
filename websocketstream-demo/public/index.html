@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebSocketStream Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Wikipedia Edits</h1>
+    <p>
+      This demo reads from a WebSocket stream of
+      <a href="https://en.wikipedia.org/wiki/Help:Recent_changes">Wikipedia Recent Changes</a>
+      and, after a
+      <em>fake processing step that takes one second</em>, echos the result back to another WebSocket server.
+    </p>
+    <p>
+      Open the DevTools of your browser to see the in- and outgoing WebSocket traffic.
+      On Chrome, you can filter the Network tab to
+      <a href="https://umaar.com/dev-tips/193-websocket-viewer/">just show WebSocket</a>
+      data.
+    </p>
+    <h2>WebSocketStream</h2>
+    <p>
+      This part of the demo
+      <em>reads</em>
+      from a
+      <code>WebSocketStream</code>
+      of recent Wikipedia changes
+      and
+      <em>writes</em>
+      each message back to a different echo
+      <code>WebSocketStream</code>.
+    </p>
+    <p>
+      ✅ Backpressure is applied to both read and write operations.
+      The next message is only read once the pipeline is ready.
+    </p>
+    <ol class="new" reverse></ol>
+  </body>
+</html>
