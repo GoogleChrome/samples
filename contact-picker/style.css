@@ -1,0 +1,75 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+p { clear: both; }
+
+.hidden {
+  display: none !important;
+}
+
+#notSupported b:first-of-type,
+#requireHTTPS b:first-of-type {
+  color: #b71c1c;
+}
+
+button[disabled] {
+  opacity: 0.5;
+  border: 1px solid rgba(74, 20, 140, 0.5) !important;
+}
+
+button {
+  background-color: #e8eaf6;
+  border: 1px solid #3f51b5;
+  font-size: 1em;
+  padding: 0.75em;
+}
+
+label {
+  display: inline-block;
+  width: 250px;
+}
+
+ol {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+ul {
+  color: #aaa;
+}
+
+ul.success {
+  color: #000;
+}
+
+ul.error {
+  color: red;
+}
+/*
+     FILE ARCHIVED ON 12:12:16 Sep 13, 2019 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 13:43:25 Aug 25, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.878
+  exclusion.robots: 0.128
+  exclusion.robots.policy: 0.019
+  esindex: 0.022
+  cdx.remote: 101.414
+  LoadShardBlock: 372.704 (3)
+  PetaboxLoader3.datanode: 305.675 (4)
+  load_resource: 582.791
+  PetaboxLoader3.resolve: 437.958
+*/
