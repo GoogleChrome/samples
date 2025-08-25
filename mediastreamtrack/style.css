@@ -1,0 +1,40 @@
+:root {
+  color-scheme: dark light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h1,
+h2 {
+  margin-top: 0;
+  padding-top: 0.25rem;
+  color: #373fff;
+}
+
+select,
+button {
+  font-size: inherit;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+div {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
