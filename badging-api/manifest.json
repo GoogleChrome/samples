@@ -1,0 +1,34 @@
+{
+  "name": "Badge API Demo",
+  "short_name": "Badge Demo",
+  "icons": [{
+    "src": "https://cdn.glitch.com/9056b88b-8249-47fe-9d0c-0d9437c84482%2Ffugu-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }, {
+      "src": "https://cdn.glitch.com/9056b88b-8249-47fe-9d0c-0d9437c84482%2Ffugu-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }, {
+      "src": "https://cdn.glitch.com/9056b88b-8249-47fe-9d0c-0d9437c84482%2Ffugu-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }, {
+      "src": "https://cdn.glitch.com/9056b88b-8249-47fe-9d0c-0d9437c84482%2Ffugu-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }, {
+      "src": "https://cdn.glitch.com/9056b88b-8249-47fe-9d0c-0d9437c84482%2Ffugu-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }, {
+      "src": "https://cdn.glitch.com/9056b88b-8249-47fe-9d0c-0d9437c84482%2Ffugu-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }],
+  "scope": "/",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#e8eaf6",
+  "theme_color": "#3f51b5"
+}
