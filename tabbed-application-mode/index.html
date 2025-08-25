@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tabbed Application Mode</title>
+    <link rel="manifest" href="manifest.json" />
+    <link
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗂️</text></svg>"
+      rel="icon"
+    />
+    <meta http-equiv="origin-trial" content="AqBCfWvGIBGnL8huKmfG1ok1T9AmZ6PSUgY3UE12kUvilTaruruHKVxaoyLRMtNgKrQSKBaiRGYWuPgLEf46VgsAAABpeyJvcmlnaW4iOiJodHRwczovL3RhYmJlZC1hcHBsaWNhdGlvbi1tb2RlLmdsaXRjaC5tZTo0NDMiLCJmZWF0dXJlIjoiV2ViQXBwVGFiU3RyaXAiLCJleHBpcnkiOjE3MzMxODQwMDB9">
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      navigator.serviceWorker.register("serviceworker.js");
+    </script>
+  </head>
+  <body>
+    <h1>Tabbed Application Mode</h1>
+    <h2>Home</h2>
+    <img
+      src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>"
+    />
+    <p id="url"></p>
+    <script>
+      document.getElementById("url").textContent =
+        "Current URL: " + window.location.href;
+    </script>
+    <p>On the pinned Home tab, this link reloads the pinned Home tab:</p>
+    <a href="./">Home</a>
+    <p>On the pinned Home tab, these links open in new tabs, and never navigate the pinned Home tab:</p>
+    <a href="./one.html">Page 1</a>
+    <a href="./two.html">Page 2</a>
+    <p>On the pinned Home tab, this link leaves the app and opens in a regular browser tab:</p>
+    <a href="https://www.google.com">Out of scope link</a>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+html {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+  color-scheme: dark light;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 200px;
+  height: 200px;
+}
+
+a {
+  display: block;
+}

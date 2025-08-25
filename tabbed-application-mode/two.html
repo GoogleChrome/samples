@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Page 2</title>
+    <link rel="manifest" href="manifest.json" />
+    <link
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>2️⃣</text></svg>"
+      rel="icon"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      navigator.serviceWorker.register("serviceworker.js");
+    </script>
+  </head>
+  <body>
+    <h1>Tabbed Application Mode</h1>
+    <h2>Page 2</h2>
+    <img
+      src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>2️⃣</text></svg>"
+    />
+    <p>On a Page tab, this link jumps back to the pinned Home tab:</p>
+    <a href="./">Home</a>
+    <p>On a Page tab, these links navigate the tab as usual:</p>
+    <a href="./one.html">Page 1</a>
+    <a href="./two.html">Page 2</a>
+    <p>On a Page tab, this link leaves the app, but opens in an in-app browser tab:</p>
+    <a href="https://www.google.com">Out of scope link</a>
+  </body>
+</html>
