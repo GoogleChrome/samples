@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>"
+    />
+    <title>Web SQL to SQLite Wasm Migration</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      if (!isSecureContext) location.protocol = 'https:';
+    </script>
+    <!-- https://github.com/sdesalas/websqldump/ -->
+    <script src="mywebsqldump.js"></script>
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Web SQL to SQLite Wasm Migration</h1>
+    <p>
+      <strong
+        >This demo shows how you can migrate a Web SQL database over to SQLite
+        Wasm database.</strong
+      >
+    </p>
+    <p>
+      To debug, open Chrome DevTools on the "Application" tab and check the "Web
+      SQL" section. For debugging the OPFS, you can install the
+      <a href="https://goo.gle/opfs-explorer">OPFS Explorer</a> Chrome DevTools
+      extension.
+    </p>
+    <p>
+      There is no way to programmatically delete a Web SQL database. You can
+      only ask the user to
+      <a
+        href="https://developer.chrome.com/docs/devtools/storage/websql/#delete"
+        >clear site data in DevTools</a
+      >, or even to
+      <a href="https://stackoverflow.com/a/21194711/6255000"
+        >delete the database manually with the file explorer</a
+      >.
+    </p>
+    <ol>
+      <li>
+        <p>This step creates a Web SQL database with sample data.</p>
+        <button type="button" class="button-web-sql-create">
+          Create Web SQL database
+        </button>
+      </li>
+
+      <li>
+        <p>
+          This step shows the SQL statements required to dump the data from Web
+          SQL.
+        </p>
+        <button type="button" class="button-web-sql-dump">
+          Dump Web SQL database
+        </button>
+      </li>
+
+      <li>
+        <p>
+          This step runs each SQL statement from above to migrate the data from
+          Web SQL to SQLite, persisted on the OPFS.
+        </p>
+        <button type="button" class="button-sqlite-wasm">
+          Create SQLite Wasm database
+        </button>
+        <p>
+          (⚠️ Warning: this example deletes any other data that may exist on the
+          OPFS.)
+        </p>
+      </li>
+      <li>
+        <p>
+          This steps deletes all tables in the Web SQL database after the
+          migration.
+        </p>
+        <button type="button" class="button-web-sql-delete">
+          Delete all Web SQL tables
+        </button>
+      </li>
+    </ol>
+    <h2>Status</h2>
+    <pre class="messages">Migration not started.</pre>
+  </body>
+</html>
