@@ -1,0 +1,31 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+  font-family: system-ui, sans-serif;
+}
+
+iframe {
+  display: block;
+  height: 300px;
+  width: 600px;
+  max-width: 100%;  
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
