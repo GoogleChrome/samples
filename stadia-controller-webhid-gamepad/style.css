@@ -1,0 +1,45 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+  font-family: system-ui, sans-serif;
+}
+
+svg {
+  width: 800px;
+  height: auto;
+  max-width: 100%;
+}
+
+kbd {
+  background-color: #ddd;
+  color: #000;
+  outline: solid 1px gray;
+  outline-offset: -1px;
+  padding: 2px;
+  font-family: ui-monospace, monospace;
+}
+
+a {
+  color: red;
+}
+
+.green {
+  fill: green;
+}
+
+.highlight {
+  fill: red;
+}
