@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Screen Wake Lock Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Screen Wake Lock Demo</h1>
+    <div>
+      <label><input type="checkbox" id="wakeLockCheckbox">
+        Activate
+        <code>screen</code>
+        Wake Lock</label>
+    </div>
+    <div>
+      <label><input type="checkbox" id="reacquireCheckbox">
+        Re-Acquire
+        <code>screen</code>
+        Wake Lock On Visibility Changes</label>
+    </div>
+    <div>
+      <button id="fullScreenButton" type="button">Go Full Screen</button>
+    </div>
+    <div id="statusDiv"></div>
+  </body>
+</html>

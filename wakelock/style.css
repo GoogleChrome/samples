@@ -1,0 +1,18 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {  
+  color: #373fff;
+}
+
+div {
+  margin: 2em 1em;
+}
+
+#statusDiv {  
+  background-color: #eee;
+}
