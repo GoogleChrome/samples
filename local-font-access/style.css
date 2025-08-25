@@ -1,0 +1,50 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+html {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  font-family: system-ui;
+  margin: 2em;
+  max-width: 60ch;
+}
+
+section {
+  margin-block: 2em;
+}
+
+h1 {
+  color: #373fff;
+}
+
+h2 {
+  color: green;
+}
+
+font-select {
+  display: block;
+  --input-height: 1.3125em;
+  height: var(--input-height);
+}
+
+.preview {
+  padding: 0.25rem;
+  border: solid 1px Field;
+  margin-block: 1em;
+}
+
+code {
+  color: red;
+  font-family: ui-monospace, monospace;
+}
+
+a {
+  color: red;
+}
