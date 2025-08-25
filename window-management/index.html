@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multi-Screen Window Management API Demo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="prefetch" href="iframe.html" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Multi-Screen Window Management API Demo 🐘</h1>
+    <ul>
+      <li>
+        Click <strong>Elmer</strong>, the patchwork elephant, to start the
+        Elmer-inspired trading desk demo.
+      </li>
+      <li>
+        You will see a permission prompt for
+        <strong>window management</strong> and potentially another for
+        <strong>popup</strong> windows. Grant both.
+      </li>
+      <li>Focus any of the windows and click again to toggle fullscreen.</li>
+      <li>Plug or unplug an additional screen and see how the demo adapts.</li>
+      <li>
+        Play with the sliders below (closing one popup closes all other popups,
+        too).
+      </li>
+    </ul>
+    <button type="button">
+      <img
+        src="elmer.jpg"
+        alt="Elmer, the patchwork elephant."
+        width="316"
+        height="316"
+      />
+    </button>
+    <label
+      ><input type="range" min="1" max="5" id="rows" value="2" /> Rows</label
+    >
+    <label
+      ><input type="range" min="1" max="5" id="cols" value="2" /> Columns</label
+    >
+    <footer>
+      Image <a href="https://en.wikipedia.org/wiki/Fair_use">fair use</a> from
+      <a
+        href="https://en.wikipedia.org/wiki/File:Elmer_the_Patchwork_Elephant_(cover_art).jpg"
+        >Wikipedia</a
+      >.
+    </footer>
+  </body>
+</html>

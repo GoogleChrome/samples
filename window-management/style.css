@@ -1,0 +1,41 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #fff;
+    background-color: #000;
+  }
+}
+body {
+  font-family: system-ui, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  color: #373fff;
+}
+
+footer {
+  position: absolute;
+  bottom: 2em;
+  font-size: 0.8reml;
+}
+
+a {
+  color: red;
+}
+
+input {
+  font-size: inherit;
+  display: block;
+  margin-top: 1rem;
+}
+
+input:after {
+  content: attr(data-value);
+  font-size: 1rem;
+  position: relative;
+  right: -1rem;
+}
+
+label {
+  margin-left: 1rem;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="origin-trial"
+      content="AkxMGq+Fu8kzSxUiPom+cz/uqdBbayMaIbpT7gM/tCXQUeJEwHGAT37vTElwjThVOy2nz2N5eekXZnMw1Ys8mw8AAABmeyJvcmlnaW4iOiJodHRwczovL3dpbmRvdy1wbGFjZW1lbnQuZ2xpdGNoLm1lOjQ0MyIsImZlYXR1cmUiOiJXaW5kb3dQbGFjZW1lbnRPVDIiLCJleHBpcnkiOjE2Mzk1MjYzOTl9"
+    />
+    <style>
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #fff;
+          background-color: #000;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        background-color: var(--background);
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        font-family: system-ui, sans-serif;
+        font-size: 100%;
+        margin: 0;
+        padding: 1rem;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }
+      h1 {
+        color: #000;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      div {
+        flex-grow: 1;
+      }
+      .sparkline {
+        stroke: var(--sparkline);
+        fill: var(--sparkline-fill);
+      }
+      .down,
+      .up {
+        color: transparent;
+      }
+      .down {
+        text-shadow: 0 0 0 red;
+      }
+      .up {
+        text-shadow: 0 0 0 lime;
+      }
+    </style>
+  </head>
+  <body>
+    <h1></h1>
+    <div></div>
+    <script>
+      const currency = Math.random()
+        .toString(36)
+        .replace(/[^a-z]+/g, "")
+        .substr(0, 3)
+        .toUpperCase();
+      const price = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+      }).format(Math.random() * 20000);
+      const percent = new Intl.NumberFormat("en-US", {
+        style: "percent"
+      }).format(Math.random() * 1000);
+      document.querySelector("h1").innerHTML = `${currency} (🗓 ${price} ${
+        Math.random() < 0.5
+          ? "<span class=down>▼</span>"
+          : "<span class=up>▲</span>"
+      } ${percent})`;
+      document.title = currency;
+      const hue = Math.floor(Math.random() * 360);
+      const color = `hsl(${hue}deg 100% 50%)`;
+      const colorFill = `hsl(${hue}deg 100% 40%)`;
+      const colorBackground = `hsl(${hue + 180}deg 100% 50%)`;
+      const style = document.documentElement.style;
+      style.setProperty("--background", `${colorBackground}`);
+      style.setProperty("--sparkline", `${color}`);
+      style.setProperty("--sparkline-fill", `${colorFill}`);
+    </script>
+    <script src="https://unpkg.com/@fnando/sparkline@0.3.10/dist/sparkline.js"></script>
+    <script>
+      const div = document.querySelector("div");
+      const values = Array.from({ length: 25 }, () =>
+        Math.floor(Math.random() * 40)
+      );
+      const sizeSVG = () => {
+        div.innerHTML = '<svg class="sparkline" stroke-width="3"></svg>';
+        line = document.querySelector(".sparkline");
+        line.setAttribute("width", div.clientWidth);
+        line.setAttribute("height", div.clientHeight);
+        sparkline.sparkline(line, values);
+      };
+      sizeSVG();
+      window.addEventListener("resize", sizeSVG);
+    </script>
+  </body>
+</html>
