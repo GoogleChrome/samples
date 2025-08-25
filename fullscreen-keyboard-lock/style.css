@@ -1,0 +1,34 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+  font-family: system-ui, sans-serif;
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+li {
+  margin-block-end: 1rem;  
+}
+
+kbd {
+  font-family: ui-monospace, monospace;
+  outline: solid 2px red;
+  border-radius: 4px;
+}

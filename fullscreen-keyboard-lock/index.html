@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌨️</text></svg>"
+    />
+    <title>Better fullscreen mode with the Keyboard Lock API</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/prismjs@1.30.0/themes/prism.css" rel="stylesheet" />
+    <script>
+      if (!isSecureContext) location.protocol = 'https:';
+    </script>
+    <script src="https://unpkg.com/prismjs@1.30.0/prism.js"></script>
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Better fullscreen mode with the Keyboard Lock API</h1>
+    <dialog id="favDialog">
+      <form>
+        <p>
+          <label>
+            Favorite animal:
+            <select>
+              <option value="default">Choose…</option>
+              <option>Brine shrimp</option>
+              <option>Red panda</option>
+              <option>Spider monkey</option>
+            </select>
+          </label>
+        </p>
+        <div>
+          <button value="cancel" formmethod="dialog">Cancel</button>
+          <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+    <h2>The bad experience 👎</h2>
+    <ol>
+      <li>
+        Click the button to go fullscreen:
+        <button class="fullscreen" type="button">Go fullscreen</button>
+      </li>
+      <li>
+        Click the button to show the dialog:
+        <button id="showDialog">Show the dialog</button>
+      </li>
+      <li>Cancel the dialog with the <kbd>Esc</kbd> key.</li>
+      <li>You're kicked out of fullscreen mode.</li>
+    </ol>
+
+    <h2>The good experience 👍</h2>
+    <ol>
+      <li>
+        Click the button to go fullscreen:
+        <button class="fullscreen-keyboard-lock" type="button">
+          Go fullscreen and request a keyboard lock
+        </button>
+      </li>
+
+      <li>
+        Click the button to show the dialog:
+        <button id="showDialog2">Show the dialog</button>
+      </li>
+      <li>Cancel the dialog with the <kbd>Esc</kbd> key.</li>
+      <li>
+        Leave fullscreen mode by pressing and holding the <kbd>Esc</kbd> key.
+      </li>
+    </ol>
+    <h2>Show me how 💡</h2>
+    <h3>Use the Keyboard Lock API as a progressive enhancement</h3>
+    <pre><code class="language-js">// Feature detection.
+const supportsKeyboardLock =
+    ('keyboard' in navigator) && ('lock' in navigator.keyboard);
+
+if (supportsKeyboardLock) {
+  document.addEventListener('fullscreenchange', async () => {
+    if (document.fullscreenElement) {
+      // The magic happens here… 🦄
+      await navigator.keyboard.lock(['Escape']);
+      return console.log('Keyboard locked.');
+    }
+    navigator.keyboard.unlock();
+    console.log('Keyboard unlocked.');
+  });
+}</code></pre>
+    <output></output>
+  </body>
+</html>
