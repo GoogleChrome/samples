@@ -2,7 +2,7 @@
 
 function addKrill() {
   const image = document.createElement('img');
-  image.src = 'http://cdn.glitch.com/c605c71d-22d0-48c7-b85a-7611786324cb%2Ftelling-krills.png';
+  image.src = 'telling-krills.png';
   document.body.appendChild(image);
 }
 

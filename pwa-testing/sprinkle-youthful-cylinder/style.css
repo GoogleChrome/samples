@@ -37,13 +37,13 @@ to this section's matching END comment to see page-specific styles.
 /* Import fonts */
 @font-face {
   font-family: HK Grotesk;
-  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf")
+  src: url("HKGrotesk-Regular.otf")
     format("opentype");
 }
 @font-face {
   font-family: HK Grotesk;
   font-weight: bold;
-  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf")
+  src: url("HKGrotesk-Bold.otf")
     format("opentype");
 }
 

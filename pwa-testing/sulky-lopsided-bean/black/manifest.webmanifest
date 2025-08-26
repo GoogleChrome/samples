@@ -5,7 +5,7 @@
   "scope": "/black/",
   "theme_color": "black",
   "icons": [{
-    "src": "https://cdn.glitch.me/aea6f11b-51e9-49ef-b120-ecbe7f63b884%2Fsulky-lopsided-bean-black.svg",
+    "src": "sulky-lopsided-bean-black.svg",
     "sizes": "144x144",
     "type": "image/svg+xml"
   }],

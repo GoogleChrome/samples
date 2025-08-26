@@ -2,80 +2,80 @@
   "name": "bush-lowly-system",
   "icons": [
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmaroon-16.png",
+      "src": "maroon-16.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Folive-20.png",
+      "src": "olive-20.png",
       "sizes": "20x20",
       "type": "image/png"
     },
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Faqua-32.png",
+      "src": "aqua-32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fteal-48.png",
+      "src": "teal-48.png",
       "sizes": "48x48",
       "type": "image/png"
     },
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fnavy-64.png",
+      "src": "navy-64.png",
       "sizes": "64x64",
       "type": "image/png"
     },
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Ffuchsia-96.png",
+      "src": "fuchsia-96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fpurple-192.png",
+      "src": "purple-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
 
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-16.png",
+      "src": "mandelbrot-16.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-20.png",
+      "src": "mandelbrot-20.png",
       "sizes": "20x20",
       "type": "image/png"
     },
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-32.png",
+      "src": "mandelbrot-32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-48.png",
+      "src": "mandelbrot-48.png",
       "sizes": "48x48",
       "type": "image/png"
     },
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-64.png",
+      "src": "mandelbrot-64.png",
       "sizes": "64x64",
       "type": "image/png"
     },
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-96.png",
+      "src": "mandelbrot-96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
       "purpose": "monochrome",
-      "src": "https://cdn.glitch.me/89c7898c-5848-4400-9d63-f6d127dd2a31%2Fmandelbrot-192.png",
+      "src": "mandelbrot-192.png",
       "sizes": "192x192",
       "type": "image/png"
     }

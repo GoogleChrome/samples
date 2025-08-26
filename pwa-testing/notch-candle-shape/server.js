@@ -9,7 +9,7 @@ Links to pages for testing link capturing with launch_handler:
  - <a href="./app/307_redirect">/app/307_redirect</a>
  - <a href="./app/meta_redirect">/app/meta_redirect</a>
 `;
-const iconUrl = 'https://cdn.glitch.me/5424b80f-25d2-4691-92b0-687db45cc3d6%2Fnotch-candle-shape.svg';
+const iconUrl = 'notch-candle-shape.svg';
 
 require('http').createServer((request, response) => {
   switch (request.url) {

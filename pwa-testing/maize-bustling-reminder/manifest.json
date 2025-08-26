@@ -2,7 +2,7 @@
   "name": "Maize Bustling Reminder",
   "icons": [
     {
-      "src": "https://cdn.glitch.me/efd78312-f86f-450f-a2ff-63fbc45339b3%2Fmaize.png",
+      "src": "maize.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

@@ -5,7 +5,7 @@
   "id": "./",
   "icons": [
     {
-      "src": "https://cdn.glitch.me/d0334cc3-be72-47b5-a25f-d3fbe953f5ff%2Fapple-touch-icon.png",
+      "src": "apple-touch-icon.png",
       "type": "image/png",
       "sizes": "257x257"
     }
