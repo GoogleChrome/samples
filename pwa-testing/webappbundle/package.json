@@ -15,9 +15,6 @@
     "uuid": "8.3.2",
     "escape-html": "^1.0.3"
   },
-  "engines": {
-    "node": "12.x"
-  },
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"
   },

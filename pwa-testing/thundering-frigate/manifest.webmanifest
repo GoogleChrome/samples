@@ -5,7 +5,7 @@
   "theme_color": "#c8e1ff",
   "scope": "./",
   "icons": [{
-    "src": "thunderingfrigate.png?1552881082871",
+    "src": "thunderingfrigate.png",
     "sizes": "144x144",
     "type": "image/png"
   }]

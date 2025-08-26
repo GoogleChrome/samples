@@ -6,8 +6,8 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "astronaut-icon.png",
-      "sizes": "1024x1024",
+      "src": "fugu.png",
+      "sizes": "192x192",
       "type": "image/png"
     }
   ],

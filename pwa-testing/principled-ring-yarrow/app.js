@@ -1,5 +1,5 @@
-import { makeFileEditor } from "/file-editor.js";
-import("/check-state.js");
+import { makeFileEditor } from "./file-editor.js";
+import("./check-state.js");
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
@@ -111,7 +111,7 @@ const findSupportedTypes = async () => {
     }
   }
 
-  const checkState = await import("/check-state.js");
+  const checkState = await import("./check-state.js");
   checkState.show("manifest-types-mime");
   checkState.show("manifest-types-extension");
 };

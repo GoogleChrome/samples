@@ -14,7 +14,7 @@
   "theme_color": "#9aca42",
   "file_handlers": [
     {
-      "action": "/?plaintext",
+      "action": "./?plaintext",
       "name": "Plain Text",
       "icons": [
         {

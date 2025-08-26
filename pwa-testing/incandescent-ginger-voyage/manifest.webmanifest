@@ -3,7 +3,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#ffffff",
-  "id": "https://incandescent-ginger-voyage.glitch.me/",
+  "id": ".",
   "scope": "./",
   "icons": [{
     "src": "incandescent-ginger-voyage.png",

@@ -10,11 +10,11 @@
 
 
 "shortcuts":[
-  {"name":"Fast","url":"/standalone/fast.html",
+  {"name":"Fast","url":"./standalone/fast.html",
 "icons":[{"src":"s1.png","type":"image/png","sizes":"192x192"}]},
-  {"name":"Medium","url":"/standalone/medium.html",
+  {"name":"Medium","url":"./standalone/medium.html",
 "icons":[{"src":"s3.png","type":"image/png","sizes":"192x192"}]},
-  {"name":"Slow","url":"/standalone/slow.html",
+  {"name":"Slow","url":"./standalone/slow.html",
 "icons":[{"src":"s5.png","type":"image/png","sizes":"192x192"}]}
 ],
 

@@ -7,7 +7,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://super-concrete-tarsal.glitch.me/badging/index.html",
+  "start_url": "./",
   "theme_color": "#123456",
   "display": "minimal-ui"
 }

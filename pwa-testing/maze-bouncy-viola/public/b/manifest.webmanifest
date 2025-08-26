@@ -5,7 +5,7 @@
   "theme_color": "#beffff",
   "scope": "./b/",
   "icons": [{
-    "src": "windvetb.png?1552284094394",
+    "src": "windvetb.png",
     "sizes": "144x144",
     "type": "image/png"
   }]

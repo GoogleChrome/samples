@@ -11,7 +11,7 @@
     "type": "image/png"
   }],
   "note_taking": {
-    "new_note_url": "/new-note.html"
+    "new_note_url": "./new-note.html"
   },
   "lock_screen": {
     "start_url": "./lock-screen"

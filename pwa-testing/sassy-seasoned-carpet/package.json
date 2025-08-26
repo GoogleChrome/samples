@@ -12,9 +12,6 @@
   "dependencies": {
     "express": "^4.18.1"
   },
-  "engines": {
-    "node": "14.x"
-  },
   "repository": {
     "url": "https://glitch.com/edit/#!/sassy-seasoned-carpet"
   },
