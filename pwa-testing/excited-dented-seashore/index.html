@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+    <style>
+        html {
+            font-family: sans-serif;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #focusElem {
+            opacity: 0.0001;
+        }
+    </style>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<script src="main.js"></script>
+
+<body>
+    Click anywhere in the page to trigger a picture in picture window.
+    
+    <input id="focusElem">
+    <script>
+        var newWin;
+        var runPoC = async () => {
+            newWin = await documentPictureInPicture.requestWindow();
+            var newWinContent = newWin.document.createElement('div');
+            newWinContent.innerHTML = `<P>PIP!<P>`;
+            newWin.document.body.appendChild(newWinContent);
+
+            var newWinContent1 = document.createElement('div');
+            newWinContent1.innerHTML = `<P>Picture in Picture Loaded<P>`;
+            document.body.appendChild(newWinContent1);
+            
+        }
+        window.addEventListener('click', runPoC);
+        // window.addEventListener('blur', runPoC);
+    </script>
+</body>
+
+</html>

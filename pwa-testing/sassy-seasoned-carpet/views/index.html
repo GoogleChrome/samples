@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<head>
+  <title>Sassy Seasoned Carpet</title>
+  <link
+    rel="icon"
+    href="Gemini_Generated_Image_65lit565lit565li%20copy.png"
+  />
+</head>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  pre {
+    white-space: pre-wrap;
+  }
+  table {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  thead {
+    background-color: rgb(228 240 245);
+  }
+
+  td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+  }
+</style>
+<img
+  src="Gemini_Generated_Image_65lit565lit565li.jpeg"
+  width="256px"
+  height="256px"
+/>
+<h1>Sassy Seasoned Carpet <span class="glitch-remix"></span></h1>
+<p>
+  This site shows the window.opener document.referrer and referer header sent to
+  the server. This is intended to debug window.open and other frame creation
+  calls, specifically around auxiliary browsing contexts, 'noopener',
+  'noreferrer', etc.
+</p>
+<p>
+  Note: old versions of firefox seem to simply crash when the button is hit, so instead copy-paste the js into the console.
+</p>
+
+<h2>Data</h2>
+<pre id="data"></pre>
+
+<h2>Tests</h2>
+<p>
+  These are tests using window.open to verify that older browsers match the
+  behavior of new browsers / the current spec. Note: technically we could also
+  test cross-origin window.open, but the behavior of that should be strictly
+  MORE restrictive than same-origin, so if these pass we should be fine.
+</p>
+<table>
+  <thead>
+    <tr>
+      <td>Populated</td>
+      <td>Not Populated</td>
+      <td>Test</td>
+    </tr>
+  </thead>
+  <tr>
+    <td>opener, document.referrer, headers.referer</td>
+    <td></td>
+    <td>
+      <input
+        type="button"
+        value="window.open('https://sassy-seasoned-carpet.glitch.me/', '')"
+        onclick="window.open('https://sassy-seasoned-carpet.glitch.me/', '')"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>document.referrer, headers.referer</td>
+    <td>opener not populated.</td>
+    <td>
+      <input
+        type="button"
+        value="window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noopener')"
+        onclick="window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noopener')"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>opener, document.referrer, headers.referer</td>
+    <td>
+      <input
+        type="button"
+        value="window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noreferrer')"
+        onclick="window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noreferrer')"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>opener, document.referrer, headers.referer</td>
+    <td>
+      <input
+        type="button"
+        value="window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noreferrer=true,noopener=true')"
+        onclick="window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noreferrer=true,noopener=true')"
+      />
+    </td>
+  </tr>
+</table>
+
+<div>
+  <p>
+    Copy-paste-able:
+  </p>
+  <pre>
+  window.open('https://sassy-seasoned-carpet.glitch.me/', '')
+  window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noopener')
+  window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noreferrer')
+  window.open('https://sassy-seasoned-carpet.glitch.me/', '', 'noreferrer=true,noopener=true')
+  </pre>
+</div>
+
+<h2>Debug Data</h2>
+<pre id="lessImportantData"></pre>
+<script>
+  var headers = "__HEADERS__";
+  document.getElementById("data").innerHTML = JSON.stringify(
+    {
+      "document.referrer": document.referrer,
+      "window.opener": window.opener ? "populated" : null,
+      "headers.referer": "referer" in headers ? headers["referer"] : null,
+    },
+    null,
+    2
+  );
+
+  // debug
+  const windowKeys = ["closed", "length", "opener", "parent", "top", "window"];
+  function windowToJsonable(window) {
+    if (window == null) {
+      return null;
+    }
+    let result = {};
+    result.has_properties = [];
+    Object.keys(window)
+      .concat(windowKeys)
+      .forEach((key) => {
+        if (key in window) {
+          result.has_properties.push(key);
+        }
+        try {
+          result[key] = JSON.parse(JSON.stringify(window[key]));
+        } catch {
+          console.log("coule not parse / stringify " + key);
+        }
+      });
+    return result;
+  }
+
+  document.getElementById("lessImportantData").innerHTML = JSON.stringify(
+    {
+      "window.opener": windowToJsonable(window.opener),
+      headers: headers,
+    },
+    null,
+    2
+  );
+</script>
+<script src="https://remix.glitch.me/remix.min.js"></script>

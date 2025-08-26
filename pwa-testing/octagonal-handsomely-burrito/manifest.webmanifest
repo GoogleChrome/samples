@@ -1,0 +1,12 @@
+{
+  "name": "Octagonal Handsomely Burrito",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#552200",
+  "icons": [{
+    "src": "SmallBurrito.jpeg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }],
+  "capture_links": "new-client"
+}

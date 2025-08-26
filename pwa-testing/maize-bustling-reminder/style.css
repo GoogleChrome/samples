@@ -1,0 +1,10 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: Arial;
+  color: #000000;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<head>
+  <title id="title">AGC Lock Screen App</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="aeolian-grandiose-cayenne.png"
+  />
+</head>
+
+<style>
+  body {
+    background-color: #f86;
+    font-family: monospace;
+    color: black;
+  }
+</style>
+
+<h1>AGC* Lock Screen App</h1>
+<p>
+  Just some arbitrary page in scope of the app.
+</p>
+<p>
+  <a href="./">Here is a link back to the main page</a>
+</p>
+<p>* Aeolian Grandiose Cayenne</p>
+
+<script>
+  navigator.serviceWorker.register("sw.js");
+</script>

@@ -1,0 +1,12 @@
+{
+  "name": "Sunny Cart fullscreen",
+  "icons": [
+    {
+      "src": "blue-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "fullscreen"
+}

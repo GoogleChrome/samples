@@ -1,0 +1,13 @@
+{
+  "name": "Abyssinian Sparkly Entree",
+  "description": "Abysses are sparkly",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "scope": "/",
+  "icons": [{
+    "src": "https://barkbarkbark",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

@@ -1,0 +1,1 @@
+console.log('==> dedicated worker location: ' + self.location.href);

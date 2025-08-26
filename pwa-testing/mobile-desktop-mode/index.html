@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <title>Mobile or Desktop?</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title" id="h1">Unknown</h1>
+        <script>
+          const h1 = document.getElementById("h1");
+          h1.innerHTML = navigator.userAgentData.mobile ? "Mobile" : "Desktop";
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "Large Productive Rattlesnake",
+  "description": "Server-side icon changes",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "scope": "/",
+  "icons": [{
+    "src": "large-productive-rattlesnake.png",
+    "purpose": "any maskable",
+    "sizes": "871x871",
+    "type": "image/png"
+  }]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Classic Tall Individual",
+  "display": "standalone",
+  "start_url": "/start.html",
+  "icons": [{
+    "src": "classic-tall-individual.svg",
+    "type": "image/svg+xml",
+    "sizes": "256x256"
+  }]
+}

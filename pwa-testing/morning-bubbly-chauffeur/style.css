@@ -1,0 +1,13 @@
+/* CSS files add styling rules to your content */
+
+body {
+  margin: 2em;
+}
+
+.hide {
+  display: none;
+}
+
+.error {
+  color: red;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Empty note taking in manifest",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#8FF",
+  "description": "Empty note taking in manifest",
+  "scope": ".",
+  "icons": [{
+    "src": "yielding-large-chef.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "note_taking": {
+  }
+}

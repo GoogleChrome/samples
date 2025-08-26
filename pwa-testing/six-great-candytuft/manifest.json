@@ -1,0 +1,12 @@
+{
+  "name": "Six Great Candytuft",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "icons": [{
+    "src": "six-great-candytuft.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml",
+    "purpose": "maskable any"
+  }]
+}

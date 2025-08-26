@@ -1,0 +1,1399 @@
+---
+  0 debug pnpm:scope: 
+    selected: 1
+    workspacePrefix: null
+  1 info pnpm: 
+    message: "A store server is running. All store manipulations are delegated to it."
+    prefix: "/app"
+  2 debug pnpm:package-json: 
+    initial: 
+      name: "glitch-hello-node"
+      version: "0.0.1"
+      description: "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com."
+      main: "server.js"
+      scripts: 
+        start: "node server.js"
+      dependencies: 
+        fastify: "^3.28.0"
+        fastify-cookie: "^7.0.0"
+        fastify-static: "^4.6.1"
+      engines: 
+        node: "12.x"
+      repository: 
+        url: "https://glitch.com/edit/#!/glitch-hello-node"
+      license: "MIT"
+      keywords: 
+        - "node"
+        - "glitch"
+        - "express"
+      gitHead: "f5b6ef7f54d4885844f3b769d89089c0ec5e5e5b"
+      readme: "ERROR: No README data found!"
+      _id: "glitch-hello-node@0.0.1"
+    prefix: "/app"
+  3 debug pnpm:stage: 
+    prefix: "/app"
+    stage: "resolution_started"
+  4 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/fastify/3.28.0"
+    requester: "/app"
+    status: "resolved"
+  5 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/fastify-static/4.6.1"
+    requester: "/app"
+    status: "resolved"
+  6 error pnpm: 
+    message: "No matching version found for fastify-cookie@>=7.0.0 <8.0.0"
+    code: "ERR_PNPM_NO_MATCHING_VERSION"
+    packageMeta: 
+      name: "fastify-cookie"
+      dist-tags: 
+        latest: "5.7.0"
+        next: "5.6.0"
+      versions: 
+        1.0.0: 
+          name: "fastify-cookie"
+          version: "1.0.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            abstract-logging: "^1.0.0"
+            fastify: "^0.26.2"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-hoMMQjqUvlYjEO9BOoTSYp+wmzI2nXzDstU4TN4BjO9dg4LY74msrw13ZQ6IyDpGK9lCDq9zupwMd8Cy4rBGcA=="
+            shasum: "a5a93016cdbbd3684df12323a4c9c248538a81f5"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.0.0.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQDfidi3nnzfeM/zSXZqvjY5uEa4MiXDUVMz+AfzlhlTGAIhAOrq8iAidptKoupstMwwgGBYj8e2HHEPmmSksWXuuL1H"
+        1.0.1: 
+          name: "fastify-cookie"
+          version: "1.0.1"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            abstract-logging: "^1.0.0"
+            fastify: "^0.26.2"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-xbTFY6oL9+shWTXgedyanLAX1gTPW2VDoxn2/9WPi9jNBbM3adRTWOMB0WdPFkVJMk51sd+US/4hh+BkCJtL6g=="
+            shasum: "08b09a0be467cbad924a932a12e084875d2bed87"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.0.1.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQDKtvTWfXgejI/qygW/SBRHddaMBXjxUue0+xcm3VJCVgIgLInRrfZOefDjVv1jX+T90HcGNQeFzUb6raKlL/0hjQs="
+        1.0.2: 
+          name: "fastify-cookie"
+          version: "1.0.2"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            abstract-logging: "^1.0.0"
+            fastify: "^0.26.2"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-4gGUbIeGw4hmoEZrQn08q9PgYrHUVvNCeTF11h+DGILlj/JczEHtvvUMlcQUWjwbUVtg3YVCqSZvcJSOwhTNOA=="
+            shasum: "bca7bdc29804fdb848b2ef308b65445cf63cae84"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.0.2.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIGxnYX7/1/PVkmlRYyPHMqzDNIRNaUYX1A2n4yU6H6h7AiEAxSUDsbaVeFfHvyD0V5H6J2zLFHjy6FrK6SKtK6P02pQ="
+        1.0.3: 
+          name: "fastify-cookie"
+          version: "1.0.3"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            abstract-logging: "^1.0.0"
+            fastify: "^0.26.2"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-xMRr+ToorC8Z8ce96ywhZt2K7zhz+73Co0ZD5H68DSRyewcGlJYWnvwL8E2BrtOgwyNv5Oph/JaswcXyG7aNdg=="
+            shasum: "974d0c072c4ea254e471ec6f03226629a7bc4620"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.0.3.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQC63hl2DnitPnm2f571ElXWBSvHFeWguYb+HMqFa3o//gIhAJxTq3MV+mx9qpRaSYiKdHRDGFvyK1T6k3HB94WiVDir"
+        1.1.0: 
+          name: "fastify-cookie"
+          version: "1.1.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            fastify: "^0.34.0"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-5bIK92JnDyshwEXvFFwdHa5ZUyR9159m8cyKksYD8WelAU3LnXIxb6DeGJHcu07B4hMnGGp4IfxvoA4+1vBrYg=="
+            shasum: "feb5d0a588502ffaf6f1c5f1ecb97db35d65a8d8"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.1.0.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQDF25do7uK+L1E4Ks76slaXq3UQRE7Ae6MgtWeVlQJfgwIhAIgDlnATWFPv4YPbrcyxrclk+auSyKMRT2p3hc2//iqv"
+        1.1.1: 
+          name: "fastify-cookie"
+          version: "1.1.1"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            fastify: "^0.34.0"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-/fjQikjuJu0XqUar6K3AdBBSct/GcSQLj+8dygdaNTxuw8mRIrS5Bhkrb+rZdoPwtFjJm0faBvPxrVbuHHv03w=="
+            shasum: "2ec8c5aed5348a872beb9aa7c9900eeceff9f8e7"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.1.1.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQCumchlXoKY8VM1JKL6Vxl5ZSyNuAx2iyaIM8vbV7Ep+gIgD6qqqA7skrRdLrwsmhjqEJ27IQIqsmeUZidzohLSn94="
+        1.1.2: 
+          name: "fastify-cookie"
+          version: "1.1.2"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            fastify: "^0.34.0"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-YxMP7B7gaHFnA5URbcKOUXiSYjnVSTohnPoGnLSiU3TwskllqPoQm7IzDzVdEAwPz7TsglFRx+87MrwQhQEX/A=="
+            shasum: "3228aa3cba18d1379f474a8050094ef72d41e7b8"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.1.2.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIBO7IoHv9+JoMZtOdiLqzWlecsrzDAn26oYCpRKas6+ZAiAxtzUczKW4WsS6MOeqtzsU+UEOF9xhnE2wFlWNX64Kgg=="
+        1.1.3: 
+          name: "fastify-cookie"
+          version: "1.1.3"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.1.1"
+          devDependencies: 
+            fastify: "^0.34.0"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^10.7.2"
+          dist: 
+            integrity: "sha512-PMplLuq5lrb0E6OM7lzhzfT43n6j3dBh0Mx28EcAf4bUzKQn7tqQlDPaTExKniMWKMUK3WaC3BpVSNzrNnvBhg=="
+            shasum: "c0172aa575baa310a46c48669e99d96aa2915379"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.1.3.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIHKR24k/4PWDgIA0GnzbKcojquh2JnFa0wIMsmSuZhKyAiAf40AG/O0xFOBwVwD9LCiZD3argWSCgvFYbbLmFNHBBA=="
+        1.2.0: 
+          name: "fastify-cookie"
+          version: "1.2.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.2.1"
+          devDependencies: 
+            fastify: "^0.37.0"
+            pre-commit: "^1.2.2"
+            request: "^2.81.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^11.0.1"
+          dist: 
+            integrity: "sha512-YuMouMqN2Aq7zVpvgjGHJO+JNqE66D/n/blOmiJQ1W1+iGUtzfzpeBiNbZosYGuGdHYCNAC0KMZVFv3K6EbgMA=="
+            shasum: "491de949f2ad7f0a6562f9d401ef315fee1d1316"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.2.0.tgz"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQD4ej4XhYR2Oqll4IMwFhE/cKYodOMkpM8UMY7LNUO8JgIhALczmfkp3vG9cHyO8NOqjDev81wvtwv3uxjVc+5R7k1H"
+        1.2.1: 
+          name: "fastify-cookie"
+          version: "1.2.1"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.2.2"
+          devDependencies: 
+            fastify: "^1.0.0-rc.1"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^7.0.0"
+            standard: "^10.0.3"
+            tap: "^11.1.0"
+          dist: 
+            integrity: "sha512-xNOHFeaNIxLPlqpLoTILse1OnpNrwBV2EGwGKL2im1/jAbFvyNEoHWyl76S3kfhMVQZJqB4073Z/BId1qfjtbg=="
+            shasum: "e363781984bae74ef5ed7e53bf9aac10baff512d"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-1.2.1.tgz"
+            fileCount: 6
+            unpackedSize: 7805
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQD7vQOkvRR8JwEiyWHALKr+hGtEFjNvomdsIoO07m6osAIhAMFdi0wFFFni05f6sBHKF5SUdCTl1RZKFAPadOXsl+Ee"
+        2.0.0: 
+          name: "fastify-cookie"
+          version: "2.0.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.2.2"
+          devDependencies: 
+            fastify: "^1.1.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^7.1.1"
+            standard: "^11.0.0"
+            tap: "^11.1.1"
+          dist: 
+            integrity: "sha512-f4SjMzgmy/cJm28d9zhe//iYmISTTHCWsWvg6ARFb+FqKsBKA47JggoVbyo1reepWnc/abnyr1j5ifgCKOffWQ=="
+            shasum: "2b8f60dce4d53c9ed7c34e265bea284f1651be0d"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.0.0.tgz"
+            fileCount: 6
+            unpackedSize: 7794
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQDfW/AzxeQ+9ZAKF9GFmUndRmUkj+kOVe5ti2c3JjhFwQIhAMKH4wyBWAXYBxCDeQ2R6opy1ULi4o/9fYaQ/Vr91yl2"
+        2.0.1: 
+          name: "fastify-cookie"
+          version: "2.0.1"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^0.2.2"
+          devDependencies: 
+            fastify: "^1.1.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^7.1.1"
+            standard: "^11.0.0"
+            tap: "^11.1.1"
+          dist: 
+            integrity: "sha512-jCn3aY13AlDs7OmjiOOy/ocJvMClaDQtw64frABruBsS49O/YEfzrh2SeFKjTFyrrZMxRbX8II+0yJ6wIZa8OA=="
+            shasum: "b1221f1bd2b489fc58d8d50f30aac65a1ccfb875"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.0.1.tgz"
+            fileCount: 6
+            unpackedSize: 8698
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIHO0p09vkdTpZLkQRcJ/JuDjRDkyGE+1Qh5NuTzjyJSEAiEAtrCRysW81pnbQa/QO79yjPs6xZKjWZiVex5rAc4V9i0="
+        2.0.2: 
+          name: "fastify-cookie"
+          version: "2.0.2"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            fastify: "^1.1.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+          dist: 
+            integrity: "sha512-YdOmgHILIyvQ0Qjp4hxpTUPhzrySAdE8rLRDj90z6aKh5b3dH8+dHQ03NiN96GpTyLuo95YvW4edxwg58sA34A=="
+            shasum: "d158ce951fd0fb426baccb51c49d3e0e43e4934e"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.0.2.tgz"
+            fileCount: 6
+            unpackedSize: 8970
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJboSgOCRA9TVsSAnZWagAAoAAP/12Bv/j3GQ0ecVhv70gR\nuMjBpO1ckH0+z2x1dT/HUjc3VySOjNhbn2ZVaV49Qv0GskaooA5NG/++tGU0\n/hFr6RBTgAPfl33lMaxVx3sXNxbusCGAw4i1VtIsNK7ZJaoxiYLcclF48/RT\nVidfwDd05f0AhqJSX345sVVShi5/KY1Cm9uxmdAe4Bb9mBCjQPMrMvn6vrD/\nAGMDA8PpIV1SOkYL82dotVvU8euY2Lbv+3sAWjLLpMUmD3XNeksWdYgpNy5J\nD73jhhgzEimrBYEeyjkooVh66Wl0yN8TJ3899LtH7Pl/fZo5w7jWpPKUz5H9\nkVsPCsZOIJh83/GYRsszPD1PI8+LVy4kSbgXRuLhtULXbDeqgBNSOBryguJ5\nUy9XWuP8lHb1k5TBO4jma0AtBYiBhuI79H5FJQbv5T+oR2Ct7hGBHpvdkvxt\nI/QtFwd15YhWR6//BiPdXdGRShSLf+vAZxoRNjFE3pYtcbrfmtUAm0Jqoz4r\nAC0KBPORI/G2ZtKfjeXcGQyOS/KC7WncsFrNLZhU+gSNL8vxfxcY8pgm6eGj\nzCwPMUJC+9HFmrUoi8V5DYZ3nBcwiHSIr5HWoNTTfHl5bEz1VtqBGqd5pwEL\ncT35ErUPmvEK7rhrv3IGdR+9QpL1n21hw4md6dsRXftko6vxIb0FDiNTuUpX\nm+rb\r\n=io77\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQD7FkcODsJaVMyesmCQM3a7i7klYaO+X6qBZZ3/MFpVUwIhAMMOLLti37o6q/wsSiqFl/xbaqjNiNi3hBhuW9640Ls0"
+        2.1.0: 
+          name: "fastify-cookie"
+          version: "2.1.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            @types/cookie: "^0.3.1"
+            fastify: "^1.13.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+            typescript: "^3.1.6"
+          dist: 
+            integrity: "sha512-LO4dBgo8HcHcxN72JEfW8gJNr4MxepdBT+3BnZjpgB17S9YlxraMsjTXrhfcBqt19FUw0CNGo7vF9/Ov2MENmQ=="
+            shasum: "fcb049bc1b650eb82dfc1aacc24f10378d1db829"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.0.tgz"
+            fileCount: 9
+            unpackedSize: 10912
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJb4VzmCRA9TVsSAnZWagAAyJQQAJKObrBZDltLuLbE7AT4\nd5BYrpjkBCX46thNAy1/8ZPiBAPninR1QAF3cJDeGaYVK4P+F+8XpH5TfwF4\nSH4cUI/MlyB9SdNSCGueV11PYsBXDxx5G3B/W0eKVMrxfdG0Qif6+Lfw82Uu\nacggwB5fUSv0o/rhUJkz0vHn3Q+o9QFZC8WSvMncxKQGhTQeXigtfO7xao5D\nMZESbJul7RPOyovb35WF+r4gHk2dmIfJl1AQqSNbLdcOJVz72qkllfu8zUrk\n5MpP4k7g0xWCDJ3b7KEG18zlRBNZWEBu3m9kptS89gQ54KnhKk3uKsfmo+J2\nJ/3uyqhGY1xmNc3DYcXV1a87qL7L3wmLSxbOFaE+GHL9oRM3Y/5DbW21seBf\nJgoyfqxUoeVDmIn7wXGXnEto1D2j0Wh2yiVdV0InfdpSJaIoGr8EI09Uecgi\nV5/3RU2dJE4+HCWOImovbnkAjLsMEmphqVttJmVkoLIifgh45jwNnRoqsul8\nRguWs8U06g3zxHd7tvbTsV9CKQjCJZIrs4SIUB9lgZXtehZrEVSbx2+0L80g\nyuuKZAeTWXpO4DHzcX3p2KEdoS5xQHskqABWgTWX8EQgsoavDvYvffpp5Yci\naqVLw2GR72KiM0MNMqGuXBaLDT+2QS9+kUtwuL2sOmsVFx+PmH/sGGoxSpaq\nlhZW\r\n=QofG\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIHIy0fmoryQ9paGK2wXElfU4n396GRwX/T44pViIZtcEAiEA8fTA3fauXSuhBM6+x6aB+Ne1yk1vPHBHIYuw4nUyzYE="
+        2.1.1: 
+          name: "fastify-cookie"
+          version: "2.1.1"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            @types/cookie: "^0.3.1"
+            fastify: "^1.13.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+            typescript: "^3.1.6"
+          dist: 
+            integrity: "sha512-s+7nPyF5ne4Pmp+9XhRbWdTpzkzjq8m3u8LeiTpO9+mIGNiFgJ1CeT4rX6eLibVABQ/YLAp4lOimCZxS2dBHdA=="
+            shasum: "c92798e1850e8abc3ab1916622be8631669d62e7"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.1.tgz"
+            fileCount: 9
+            unpackedSize: 10928
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJb6THLCRA9TVsSAnZWagAA2msQAKO1Vi7VQmZfpuL7fale\nmclvVTZXJT7oqPYdP4RQRCE2YSCFCrKWs1lAGw3HWvPjP7oH3G3xAeVHgUbr\nPkqQscCox3iUR2RluHW/FEjNBav/wB7BDSyOfODJmEsDJI3PYCYwP4SIEeLO\nVTpJzbkM+6Ly3uGW+rkqDRkoJOb91lJD/By+ZUEfvWw3rvjz1maQtxTCqZpn\nicXHzuyUB3yvD+lSKUoSLbL8xzrmPxwJjkOomfQUhPLq/xBSLpaGeR/cLpFy\n73qwfrml9Jz5rK0F0iaSH8o4GDHU5YXRA3TIXPJfSTnw6vMrmQAeNeS7uWAf\nKt2lIOzisnsUMfqnEzIux/BcltBk4Y7OIS+BRRmGJdB3nW709a2KSB74VKWE\nBhNErt0+/H+NimX+bYqb113h2rzJ1FueXZY/JpqJCZNXYKrFCxR5J9cOHZ6b\nUcdV1lNJDwqCM0VOt5mcXg3WT8H3ytfHzjFlO5SEe49agD0PdWuBVJojHZ2F\n7/Aa0EW3jr5L00LQvuBTkbRE/b7UP5OC+bZh/DI5z4/JPYHQcEYUK6YJucf6\nfqG21LWheNYOPhmr1wfxjiNhHO61zb6Bb4Mb1AJ9Cu8BAHlOxEgcQ2m2QM0r\ncCYw3rTwWpj5Sy9c5YgLEh/C8bQF8S9iVePkcpskDfNSqzF/+IJepvKFfHFx\n2gGv\r\n=Y+LJ\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIHhBJ4VAEbwn20CTeOni4BGgqsvI8WZ64ZsQaP/sRgIjAiAnlxDssF89v2k8gldLfqr9wyry3nI5U1cVCNEZo0MbnA=="
+        2.1.2: 
+          name: "fastify-cookie"
+          version: "2.1.2"
+          dependencies: 
+            @types/cookie: "^0.3.1"
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            fastify: "^1.13.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+            typescript: "^3.1.6"
+          dist: 
+            integrity: "sha512-+Jc+XJflBr0IhIfi5473gn7lT3EauBDBK7fKPx/C5CAZZZ9OjOb3MNp65PaSdTQipkmen6GKFemi9ycKfmoAXA=="
+            shasum: "70287d40debfe33ab7fbb3514c96b9eec8191fa4"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.2.tgz"
+            fileCount: 9
+            unpackedSize: 11370
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJb9pOgCRA9TVsSAnZWagAARk0P+wemM5FQaCf0TthwIZiq\n68pz/Hooij9E12RsUbnlVaL7Ed83KQV9K+Ten/6izTGYPYzPDUpO1J3lnFya\nb34xP17WJtu0oh2l9E+T5hxJg0j9Kz+Ecj7v65vGoz68nziZi2DYhDSBNPp5\nnZFdHw8YFlJbskQn3GC4D/oJM1Lno4523atUzOlW0QE0bnnM3ZWdxJznyhPE\nNmQUXM2wtSj6PIrYTL6sdYS6CMm8dOoy5RCPSkAfr+4yN2P7yMR+bfAjqIfI\nwv2qEHX6DagdMM04lk2e5yS2/V5/BhWRzzIqctt+p8bGnqbTbEskrv5KCFGF\n0i2ZZNz0uNrQkR9QByvJVfn+AE29rnspaN85O4csFy6bO9lJKaUuQhZ/La5w\n0BhuTzAhqk3bIHHwT2iy8HwwCGMo+Wfd5zz2egSX4Bb//71WXrv5961qom4b\nQtExsTIOKGBclLd/yG4eUOX+Us+2OXqsbuCarmUd40oxVwApESJ+f5ePX6x5\n92CxsIkHEebQuHp7uostgXqRyPR56swefSWiNwSO0vxmyP5BYGvpkAzpp7Ha\napqF8PznFucoTcMN2j/qUTGQSvQ2PvlGylfciLxoS5lGfBtsLMABtW198yTo\n7NVmKJBcbRfN+zfc3MdQV2ZTSRNPk4W4h5PIZoSFKdAecKPpWkTpGcc86dds\nMvQu\r\n=7j/7\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIEEWBFPLwmRzzWetiVhXzRKd225pJQy9sFpmUvXfVe+DAiEAz96xztborH0Nj+v647Pn0OXZjbBVOQuPq6IK1Sg+Ecc="
+        2.1.3: 
+          name: "fastify-cookie"
+          version: "2.1.3"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            fastify: "^1.13.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+            typescript: "^3.1.6"
+          dist: 
+            integrity: "sha512-+6aKFw4IqB2fYGKQpQHIPRX8qkWRdudYrvEqR+sO0RztU4+tsqSPQR5Yj9sk1hy1lx0B82aCsfEzP38XHeHD1w=="
+            shasum: "32bcd9275cf1bcd1a6554cbec287e22eb5789801"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.3.tgz"
+            fileCount: 9
+            unpackedSize: 11749
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJb9sdSCRA9TVsSAnZWagAA1BcQAKOkh5PNB3gMvLnKAs/y\nxjubIkY8nMwgiOfmxfwo2NOdgf12Tnncp23uaaaiOPMPMA27dxkR9CpLdLjP\nJ3j3aJ0V+YgcsUDuP8Xiy/aGbhpfVg0NqT1Mzphx5cohAcsITb6Yy2NZoaVm\nI5uvdtpHMlpd8y+iX07tirPn2LkO9T1omPQkAwt64iJefYmUJNAohdNnXPkC\n8+B2in7grnNxrFaNXU6HZWXWsfouqgLgln38mzTcBfwh5wgPRB8oGjh2fMDZ\n2KHzxZJohyXNKn4Ur8gb/WpjN+qbXMnbtMt/rnHS5TX/PzPuGNWOUpzqwnqB\nuF//eKev8YHEllrSMdCCUIZOOnsyswqahWkEa6S8YUdfFAAW7gBt6UpsLMWR\n3x5neLhGraciWZVLxrTXAUZikuWNLVMK+aLrFUES1hrtNdEHuqIHAnEa/Gwd\nPLbXk2Vc4MpcDAj77J+xAKVYWzhJUz1cjxCsMxJpXeqoHDkPlxOKN9cJX5cI\nIw2ddSx2uYMuRaThrPZBbemkl2dh8fajCKVh7zsLJjiTsvNAzv7Rd6geBrc5\nQ51jYsuw0U7Q8e9QceCRmLkIDS5PXe+eAUWfOHV2zcv+NWd+y1jQU5IDzIUo\nOOu1bbDxA9iIQfZERO/q2+c0hrwVo4L+JX65ZjB/XbO5D35+ne7pi3WzjybY\nTBXr\r\n=pEFY\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIF9syya+KlqBOIFYaazLtMk1egonKXjmM5bs/7JtYTTzAiEAxeQ5JfieE0n+njUCi7UGApWgEDx0ViVGKw448mYQ3wo="
+        2.1.4: 
+          name: "fastify-cookie"
+          version: "2.1.4"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            fastify: "^1.13.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+            typescript: "^3.1.6"
+          dist: 
+            integrity: "sha512-VPVC/yjfeE7mKpgAJKRpPLzugtbmo5eVK0c1vRQIS1hu3JUnQo2NNe/FNtxri6BZpm9LV8C2LMXbFJglkYEY4A=="
+            shasum: "e9982c6d7c3f7f2794bdbc195e516eb92fe9c4dd"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.4.tgz"
+            fileCount: 9
+            unpackedSize: 11911
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcE2d6CRA9TVsSAnZWagAALskP/0fdTd/adHD9rtpsJq8r\nGIsNGTBe02HLvl4vD78K7UW2LO0XkamXYf+w+RXdJ+BXjKWi8ieC1Kq+O+F/\n18oMraWGowzV/oA0zaCsRoFc/y7cC+9lOjSmj3UdaCD1qRZa5ZDVBqdGQdEy\nIIpJl9M4fhtvkSn0QOhqPSHB/cf1RE1QhTzIXbdPCQIH//+5Ovh5Pqej+XWy\nhHcY3StU/jxC9Tx940JQz2nTDeMh2Uwpdmey19evIQiSy2GiZvL93ue36/50\nliabl9Ui2RNR/apVdAcPIy2h49YsItIGk+hV41cVfcxuMYhFSVtlaI7ejC71\n86rw5L1eqVk7b0ufearZcKy6A/h3X7UjQUVU2RRHlmuEABhfphYyt+KTA/wy\nX9g1Z3FNsMRn5Stt2WX9HzLl5Q8tNl5vL+2pLKsKzMvMFOr0swoZRlZ9lFs3\nt/C2RuU5XhJsCcUohvFbqVdzIObZuVWaRq6aULfuDn71l1iFU40S8QwKV3E2\nSwAo4MyWZUuZFHqw/UetEwz77/vhXJ5cgB/nexTU+Y6Z+EQuRk/AihZeALFa\nOv0EkQAK/Sy9hShyhfPiU+FUNk5Xrlopno0+E7ZqHB/NWdA7fYcXGq7bqkyE\nH4SDNI12R/ESGoABgQAZGarYl0XiCKWD9+2/kQ8aU32blKpdnkVGzyZCuTmZ\n74/+\r\n=Tob7\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIDy7j9imxUD7u0AdaEvKWM1NXgR3bWYfflW437f7t46nAiEAuK0Yt6CsL1mQthlKlBsHnqRUcSPJxVr9pd2TjFRal+s="
+        2.1.5: 
+          name: "fastify-cookie"
+          version: "2.1.5"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.2.1"
+          devDependencies: 
+            fastify: "^1.13.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.0.1"
+            typescript: "^3.1.6"
+          dist: 
+            integrity: "sha512-s1xDYpWiA5cnRgdO3a/VUA4lWWmOyu4gjrjyQJLFMTJ3/PF8soWp8tUvcUAGw/Pnyd+Kig6MY6lAFTB7DsTmaA=="
+            shasum: "6cb03c37f9ac92817f8c7b069e7e88c3622736c9"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.5.tgz"
+            fileCount: 9
+            unpackedSize: 12388
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcKQMACRA9TVsSAnZWagAAk4UP/17EQ+pmEeLvVbPissz6\nhIppJADCm2QTE8pGLAEjTqPzAAFVRbAcl25tc146Tpe6mXpU+SjPrR++zanG\nixCl5yQDeN086rG+4orhhKoDHpdfg45ba3SzG56h2t8BDygZmBucGyyOF8Zt\naqHutY6gdAratPnvvfntqK0e3AEHkl8s0PMYcM9dUSONi9LcjZkjGfyiP5C5\nCjTOd0COLkIRCZOOci79w9GJu5HA2pN8D5QpRWTixpwNu/wBdycNnTMVko4b\n/qCFcBrNmJ4CsIGerXcBaxltbkcMozJJCnwgp1qRtMq+dA91ih+zCkgb+9MH\ngQL76IxWCn51l2p4VyGstBW+tVjRz5MGhr7UcqayzGuxHjv7fKTxIhuAj0Ra\n9B95/yDKZ+/28QxDc7vy/gmhFV7E/xC8jtRBQWyHcCRx7zGYpmUgOhxBRv6c\n9Gw39Q0J9n/a82RTgSmd68zaqn4ccdjgsh6eHFxZSebTiAALjiBXNikkFa8m\n/rbgTco1BLFEqtdaKbbaIhABhGxG/yH44ev9goWNuCEfWxDLGpC8MtR7UF6H\nWMtO1dV820YBQsHf7tWTppr6iGCXWN9a7feMZlpBxauP1lef2+Jtt7F8rqvL\n90BhAozz4eIvHg56mVYjKGWIs8mvnR2bolR/kH2pry5HGYir/pXOU7jX7ugS\njej3\r\n=/dOZ\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIHByMqEsRskplfYlbZ1hXEh6xlT9JJFYLTaRehhJ5MaWAiBmPta+WrLkrHXQFyoWvBmzlx0XogyobElYKXjBjF1fGg=="
+        2.1.6: 
+          name: "fastify-cookie"
+          version: "2.1.6"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            fastify: "^1.13.4"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.5.1"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-HwvakFY/MnVRS1HkALSnvWC6sTOgvwitGPIG2wry7NIC0DccvQhzqeUui3kHVzvqKsV1eA9VAYIIw3ZoYNhvJQ=="
+            shasum: "f5cf7d85d933262024032e4dc8681ec576a91a1d"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.6.tgz"
+            fileCount: 9
+            unpackedSize: 11898
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcVOnrCRA9TVsSAnZWagAAZg4P/RfWVV8qxSqwkISdfwQe\nI+AFr0/ksQoIsMkmHE/taXcgw5ceZql2d80hjwzk89OpspsPPFPbgH4KG+5Z\nVAtf2+5OTf4yncNe/uOE9YTVwR/vXprSKXVgBzUuiiOnxekfmtM8irPeE3UV\n9qtHbLFLirIC7WjmFRJbsHiKprT3QGse4Oktjz1fyNImFjnuwA/5Adc97wij\n43HYd9/KBOSADDfjfyLPuyyj7lVAzkfPgvopr4N7TFskkMa8FPVg2+HEdvS1\n1Ov3feAelwm18eVdvF8TO0RQlSoZnGl1zw4yOeNyvJT2PI1/9sQKN3D+UMJX\ntoBrP1BSPTzpYmNlPxWzd8YgMciI20eqt3tVbvfEcbOZEOvjiJt0tW4iEqMc\ncx/JkM9LWhH3j+f/7Kzv4IaGYThjbBKDklDprdtKPEQsGkoXUGVGDg+TbbnD\nazZ8KsjK5CS81TZEw7sw347h21cfJ3H/3gHCyLLxcEkEuN0vcSrodwsnoGnr\nqyICPlF1OezHqSWsDh3PjY2dn5c0ziV08KuoJB2fglyQWqDrUH6DTaarHjiZ\nFetJ/mPB9GjWGG7j/+QJWrKlEBp50bF+FL3+aSQ4vZjeZ7CI85G1/nHrTEYW\ncYYizknMLyqrsRPi1EPIJE0ywULT9tbb5arQh7od1hBqbmejH8Hy4MiVDfsl\nhsal\r\n=eR10\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIDiD3mKhw9vqKfcM9QWO9JERaOaAeS6UqvJH2oDPOTr2AiAL3vDwjRyDRegp1Eu14WEurRbO1nl1irXOZMTDLgDKWg=="
+        2.1.7: 
+          name: "fastify-cookie"
+          version: "2.1.7"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^11.9.3"
+            fastify: "^1.13.4"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.5.2"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-+dWM5zfGX7sfOqNH6OCFlnQbbvhVrkMbSf1gLGXVle/GFcl1VO6Sl/2hGdDcZ7RoyQk2qWUmLclAk+o8r3wYxg=="
+            shasum: "97f2ac16386e7f671f3c80cac030a1a999293261"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-2.1.7.tgz"
+            fileCount: 9
+            unpackedSize: 11928
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcZDmhCRA9TVsSAnZWagAAVRgP+wdImohcCnY7W5LLcpWs\nH/DjoLTL4iym+Vd2cL4LUPmjytYP80QWBW3RLWn1K62b5kfdTotDbwBe61QV\nwq9x32tVoE4MYTJ/qXKE601t2GOhzeYBlb1NKN0X7qYERfXpF0AB/eRWjEhE\nMy9/dcPdYjrwdIKx9Th80CODbtKtv6cfsuRbS6BJ7Y0SfJbSZg/gJ4HwN0iV\nYBB76UjxKeAtXxtcUumI0NYr/YhBo7aVRC3jeHjgSk+ZjtD8Sh4JsNcwrm/o\n6/XTibK742nUBPjA+UwWBG9a+sbcafaRUMkeN1AyRzGuqxUvO2rFxY3r+fta\n2LKCZGpEaYurE6aUbtwyXl3r8UfmaCgrCbLFjsFwHfczVpMd2h+Z+pWdUC99\nbDTVWN8+XXM7Ym8+bOMeVOHSQR1uMFnpLa82W1D+3OycTtGz8rJfOr3X3IMQ\nRZHoaLiVP/zUwm3KhkEKquEY8la70Cq+iEPmfNY9uSUdRaOHYxHdyRLUdV/8\nwgLh4BZrDYfcEfyiv+lbNNLq6NuEwW/5qnL3Mjw6SSghWUg98QcGROomiXiN\nI/EcMgTeVZD3VT7ENkpQ+8v631Q2r5GBKUksoSLPvJWCM6TOzNK5Dr9o9PUB\nmmJiTdzOhh0O26GJktBmUkPnnWVuwstkaIaXtHyq0+0AlU4mUBwxa1OVWBaI\nq7pu\r\n=b7rv\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIB6Jb9em6yB4pkOQvfV31JUEXStASuRgBNJrDNDXbqXbAiEAslQj24q3++jCrUovDO5PsgH/4WgDgbWzIZqDH//Ug+8="
+        3.0.0: 
+          name: "fastify-cookie"
+          version: "3.0.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^11.9.3"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.5.2"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-1BpEUGMRTWVjRtnuM03oDpvcM86EQudEXf9yF5O2uRjWywjaQMAcz0Nh+LprHBXbpjUvoFrvKLTf4s97LMansg=="
+            shasum: "181e4dc6dec765321153eaa5993b782b98d2e62c"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.0.0.tgz"
+            fileCount: 9
+            unpackedSize: 12387
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJceAslCRA9TVsSAnZWagAAP9QP/1knTPDKUfJD+MghFTmZ\nH9j1aR3zhJxD4sJPlM0cOEbMF7mdEMjzV64YuyxL0stPzYlJop3zZ+yAy+4i\nXYX6739uKdSKFZ6xZcSTb6lYO6XAkclvChXFYuwO0BPTxoD3hxFcJxngxXAx\n1+UgGddQ+rQtm7niPh5Aq4czM5qqMFQxpJ675RqAIodS4dER8I54HywPb6K4\nb+vG6r7e3prbhWrbCFio9aCdBgaDWEqYSewgy7DcsfkGqfsFjz0cKe3Zok02\nyWBFUNwp1V2UJGUg/Bxco3jXLLm8rLp5ZcTQuMfdQnlb6Hj5swrLR3aQKoFw\nq1YK8exask/+0r0eMTTnZ/JiR1ijo30mFhk0DtE655Ph6usNngFXzQLZQxxC\nEyLvOdBcXOEX4u0UMh60Qtm+F1upFCehz4Cz/439YNuYp6B1Nk1KRqk+Y3QE\nd49B9Mfi/M0dyfJKuZjrHxHHos73KEZtoq/2zWb4xLng8uXAIPo2itPT5pTx\nTVmDzLLP5rRj9hoIVyyu/3MT0fzW1NAg/eVMZCVrAkEFJDQtpCldSuL+Fp3t\nsP7nWR5dorQ5NgGon1TLWdOPK8rQdDWqmu+b4IXy0kuXlTzFVNkuVD4bfP9Q\nfTB+lGazqo5hkWcQKoGFQCC1xa9FBPWbTU3oc2rImnPb3xyt2qnESJMXHRtJ\n3hid\r\n=Uqz4\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQDP4L4zL8NNKgJIPeUqUXZZQJFBaRH9mPQY7fJN8hG3pgIhALBalpw5Jj/8kgc/dq0JV6+oeT2RwMvhiiwX/Rbjc4R5"
+        3.0.1: 
+          name: "fastify-cookie"
+          version: "3.0.1"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^11.9.3"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.5.2"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-MNx/i01u2+yOMt/RA4DIIiqjLWAzdv0BFok1849mgK/Z4xYNXynEAht+q4eH85TDPnlV/6SGEF1ZlnxHqfZYtA=="
+            shasum: "629caba62e7efe082b0df0e32fb4157eab88033d"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.0.1.tgz"
+            fileCount: 9
+            unpackedSize: 12878
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcfsXQCRA9TVsSAnZWagAAiw0P/0s9q72Mnw7dh7Goloez\nTWCS0CTUHlmc6CXjE1u1YATPccDDqH6e1J4GcDhF6t+qvt4I104o4gUk5cdR\nnYE86DcoHnvnJidsDQDGRCrQu4MsLxnqb6ym+Yl8NT9G4vWgCUNoWkdtPJ0U\nspdxsU8mDdcsAoD/RnaId0ikyQIkekwV3DxJXkO3eAdc4/ILmaJ91ZeMnNaj\n4ca9gZO/P2g3TNcXKv1McCSBVcFJBZQ5E+1rJvfm9Wom/TRD4W6RiPtqzubE\n/AaRe4w0U77P37tVjoDsx7OFQfELWKc0P3uP1K5Zh+rN/kDsB5JIINZ5lYwB\n1pmlK9xhmt8F5PAEgIX4hGOtQHIS6+uRWPUxuDJYAHd+Y7YK2JhCOOIlQqXp\n348U3pvS5MFJKry+P8HEEu2IwNquc8pGG2AKNRBmd5/noe2yz2Fz6tcONmih\nAY6wbOem7f0yffwQQ1XUV7LAVG8JBn6pxWO9G8tj4XIfU+TIKpzixOG0IMKG\nB8ZIj9b/rtBV6EXGq6IdOhaAUyKAVYmxQn7P0uJlbMrZU4EOKTw68VJKcYOP\nLgY3cKYj/UtLwb/uYU7buuDUaIvS4YaXQpaoEC2ial/sCfG/heYSKxBLg+su\n8FtDjGYAF93zcUhAv/8xDTfPAl/w3oH0ut1wYkcvJkLUKSvAPf1fiuRg23rJ\nRw0o\r\n=Tv0x\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCICtWH47ltmEIIPAygH3xd5qR8S+UPaeOo5Q2DFZI1/3/AiEAmuK7Eu1EzZbZJB8iHhf1W2m6EpSXCse2641dvoSZG8I="
+        3.0.2: 
+          name: "fastify-cookie"
+          version: "3.0.2"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^11.9.3"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^12.0.1"
+            tap: "^12.5.2"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-eFbMRK1Ydy5XRxjTyqUmt+kVblde1kcCPnEtXecqtg4KBFrBxkQ2C0fYIk3ILzLvJdpY4i1YFS578IDS77I3XA=="
+            shasum: "4f36709a5f355af40ad6f42987101c1d5f78a01a"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.0.2.tgz"
+            fileCount: 9
+            unpackedSize: 12352
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJci4eiCRA9TVsSAnZWagAABvMP/16VwSVfYlJxIIrhv27V\nbQqULInj4ZZr+QrCj5NqJ/65YeCwYq8yNogC9nmiZFqyeNlGn6yZolerR07z\n4tpvlu7ZeGwYtqswbdoWlKh23FqbQm9/ZLaDGznYP4OmVkLwz3qmSTWtIAm0\nAc+obQtENjUTLbzp6nsyamWvZHrSyFPmj7zGRfiKPTer/cO5zFvKEfq4Qabc\nHUHx90rdW4rAY//pyO9XVlfI4llkaerJWWkrBUHroKzFncXCrQ+NQBxo2jxT\nuYHq390asteLOw321iKnLh6i+rIltj30lpJNe3Zt069WsE9Nu6DYezllHBMQ\nn4p0lTqDAqDK3JJCv6cfWbedBTBKwUk0mBNoucSNVINu96uwbT+xBWHjR0Xj\nem6YwXA9ivady4nqBsv59o/ZmQ7LNnR27dcqbDZTI0HS6rf3NcYRUx4ruy6D\nVWZYIVYaW5rNq8heibKGdqlAhmdxL9pbiZr0trG5asIckqtnTHir13Yu07Ya\nhXRQGtNPNnXA0RvH9cRC2xJzH0xTDdDWft+zU1Y8CifOepYx3DduUvSMPrmO\nUfRMVyU/a70WP8fgVe8Mn+KWjSDxGy5b5r7XmmIOX+eVNw5wBt+593/X7xLr\niOm5ucS6akCFqjQk3CqzGhwUmpiODfOxWKqwgZ15FUrhYlwcz6ma1XntnH+x\nEs1m\r\n=0eXP\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQDerfh4f8COFHgb5eI1SlYmiprUZpPYE/WiI9MiGXB0CAIgbun8EUpx5TkmQ7kOfilHSTrA2HGg34ANyKItV/3lYsk="
+        3.1.0: 
+          name: "fastify-cookie"
+          version: "3.1.0"
+          dependencies: 
+            cookie: "^0.3.1"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^12.0.6"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^13.0.1"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-xCy7UJcJcwNBbDPKiczyAvFFTGX9iUgz/7l91N/et97SdbweqYrI3IS8zQLGScWXLm638cvgXPLP7P9w6RYmIg=="
+            shasum: "01c3df5e44ef9feed7b7d25574c8348b8ea10b1d"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.1.0.tgz"
+            fileCount: 9
+            unpackedSize: 14226
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJdU9vkCRA9TVsSAnZWagAAKWkP/RulBuHRPR3Tp8L/ATdq\n9dL2Mplf2occvupyIMExMpP0hP7/HY9AvWZkS3LMgSdunFWdcfRk9943rUhc\n4IKS9Wtre0AHcIOlTMwgNqLxqILdJj13wgaEGJP2wex/k+LndrMFKFsDupvO\nVkFx7PET0Jv0SXvb9T9jw/2GNqWWOnPQYXnpkZbR19pc6aQqbp9qB+TxG9Ti\nLtEnxIkKmZdhR6S+40OFaBKXxRmV9EU6Z6BjR6wVHGOtjYYTIAfaBOPDtCH4\n5M9M4H0LOFtf7fDb9FbOKqV4pK59u99pv49Ij+15LCkyyvpcFY3O4/MhQy5n\nOlvxItV1QUWGSw3PGd1F4ucijDZgZxgYoWxKSIDcEiV3Qyppz9D5ZJEItSV4\n/5FhYd79JXHYe3ZDtqcsNVLhMzpd5SDJnXGtqFdU+R3KMKG3Wb70dYmaLIXu\nJJ291iiuuZNu4tvzIZE/4fE62bxPz1Sbubs3WGe7VsJUnfk0vafea+ityoga\n6Gx00WN6GVCnnwXaJ+L9/x0yCn2OhiE8wpvj3jz4H41E8GNDk3rjsGfLEW80\nSbzIk+KJaI8ovaBqrF8HwN0WGPLrJrDH+mde4tiNupem+fCgMbBoTm7FYGOp\nTgBgQ/z5920QMtpv5CxcM2AdhUauG/cNsIcpKCasQCvHFyF2x2mqkT7Hk6Hb\noKdd\r\n=xRSp\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQCY1Fs6fOf6XyS9noZfo4FbbImlUmnBjfKHCbWEdSbH7AIgDecHkCHHGOL3DCVzSvgL3WCxLRtRuM0Hir8Xv6k1nq4="
+        3.2.0: 
+          name: "fastify-cookie"
+          version: "3.2.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^12.0.6"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-R/JCM/ILu1CZ5M50Oh58TiXwd1dRy+ED9neCHGbQl5pmEUwQljtnzCvYHYRY1y2nzAikbKhONdeVyrQDULsHgA=="
+            shasum: "61f28e6eeb642bbaefd88e707be1d34f35acaba7"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.2.0.tgz"
+            fileCount: 9
+            unpackedSize: 14226
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJdrgW+CRA9TVsSAnZWagAAjPIP+wR9q1B8PXcdw+Ux/osr\nItxaSSya1GtvY9/QsdaOQ4jJ/VwyJ1fNjATBZe9GdKhyLueeBMggSrk7prxy\nVBkDzTi2fUG4UI3KolQs0C4hp1c5eHwvbkn3hahzTw8VA2QW0mvgqzkmNU0n\nDDTfZn73KpsMy0rKRmW3l2PA75Ai/luHMDvvfFGV0BlviX22t/y7URfVg6Uf\n45sAo767egOyczmmVqDLYhXGtj6GZz+DHa6FELzO7DMbxd1aYTMTBKJVUAqd\n886QrndXwXB2KBR4xtAhdFZF7eRoQFf4xF5EnKPzVf+BpX1h7trD1v5ulrU6\no9evB1Kxa560lco3cp4mLt2iK+Ho5QN1eId6hCMjRenIi9aJzsvFynOzskI7\nnYU9fpE/W8w4BvZQmtN7FH4D5AVRd/FtFQica6T0l9WfK6dGMo3+G/CvjxMl\nezC5xRSNqw7A+B3osGjjS/W587MdgapBbla5lOOTySNMjQ0TONVR29GH4K75\nfMYyd0TWw+4JwaBBR9puqkEHspfAw8t/CXlhyCAIXsOhfjvatu8vlI0u+ZK/\nUuLXF8n4tvdABPouSInzRxlqaZhKvLmsuSvWg69X2xO20ENmVtL9aCvXB+Qc\n+20aEK6Wfdyxl+1bhIN74Y4/WLUs1VSykVcRvAeIqxMgwheWrBYPVOr9mBM4\nISk5\r\n=ubtc\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIG5F8dEgkAd7BiFvfux6zjprFvulmUv9jxdMQsITrHz7AiA9wUlW8OCqgPaeD2tJcXOIgg/r3n1uL1AHTiF1Fr3eNQ=="
+        3.3.0: 
+          name: "fastify-cookie"
+          version: "3.3.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^12.0.6"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-S/lDizY6KugON6Swr7uoZ1A76Ka2zcVRioPx5jhpGQf9rEEAcLbliU1mG0MUylr9+ECqyQSw0P3FiX3z8tOSlA=="
+            shasum: "8c659c64232e40d5fe47fbe1f1e858397434d718"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.3.0.tgz"
+            fileCount: 9
+            unpackedSize: 16043
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd4M1rCRA9TVsSAnZWagAAPX0P/0xs9vg3CWTmGvOwCDsi\n3RoxdPbUgFNL8SJx4MVKMf1/x54x5LzYvXss6h6DHCEey6ZNUfJN3PNrrWMH\nP3PNow0YtEP0v6Eoh5om9OwjulcR2g4ZdimVyVAfQYKOErnf+o+dX6ZPsqi9\n8620voqnrxiijcugA8VbQC2XnbDfgkYwHo3zlDHh9Hw3DUURLgb3gk5ce13p\nCVgmuyn7qIa4A1LWbeqJKGjKVnvzz76SeME4T3mDm1Vf+czt7NDItRSNB2+x\nRo0gxBw3OLOcU/Z6YEgGMMC7XqS27DAC+HlPLlsr0gRGO5fmMmJndncUGQoS\nU2naBYPZvqGcKNbngyeltKATDpHFLWZ0CS0de0sGqJBqLW8FD7X7jVC3HCsx\nmrP7wb9Z+LWoyeHxM/6RwXqJpNK2b+0ywZW30PWgm1lVDD4p8+v+vb9o7RC2\nSzobDtWZtNjzY15wSbar70TVohjDxQyQHH0RiiSN/3L7C+XHrOkWFiX3hKl1\ne+uwnwsZIKkQPSWSm27yjGptvEyLnWE9qQMLaoS0joOimVbO3304mFFYerOc\npU9AozBhvNE+Meh5S1Ax/KDG0hFpLvzIgDFoZWRdf2akaf8Un1KcDlzlYoGf\niL+hEpZVe6gPdVPvFEp/aJCb7njlPjv7fIIxjbxcl+fUCT4msjJZC1+eFJFW\ndTU3\r\n=Kr9K\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQDEf50j9LQKHCHKaswf53j0ML0qh1oSsp3WP3I6CL1BiwIgNfEE2xgY0IcjZmerocNEBonicYO3t9lbMTMRIdJnRxc="
+        3.4.0: 
+          name: "fastify-cookie"
+          version: "3.4.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^12.0.6"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-phDyL7Yh4UcRI0TY4gyem4LFomJLWHc/U9W0++F1wrxqq1U7MSBkhVEuUgcxg2sPMFub+T73jAj3s/SjxEc9Xg=="
+            shasum: "caadd4d543a864d1c61df16919131ed08a4c4b7d"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.4.0.tgz"
+            fileCount: 9
+            unpackedSize: 17258
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd5U0oCRA9TVsSAnZWagAAeIUQAIyvsvqpjNa4ogCpptSJ\nqaLWzgLpI/smcDzet3M2VcjO1ioTESkG4S4S4ojuK2eqkm5+WIt3rCWYppEe\ndKa3F0bdhQlhmILB9XbC6YV6CeHJUJZlB4SAfSM+fayvLyol7L+0Idh1L71E\nynBl2/2CwMj1BD6AzJ2E28+ZleSdLtQgVOJCYRQZpGhJ6kDV9PzZX20ezPX7\nIFnKgNEJ6dSEs9gzVaRJU+O+Nbm+H8mEORSR4J3lNpq3rRx1BKAp8woR9GCi\ntcZTG2RBsH5PO/qYBdaD3WemI5JD634rRDbTyRsIfD0SRQMxx4w+vZ87lU6p\nV+LIhdHscTtr8dewN4QrtnxVSxjvrNRYHcoPNeZK593XELSTn6q9iFMYuTLx\nxVYycgwPOVMjZMguKrN2kXlG/CGXfY4hiivWJQr4t9fs9qD8z1MH4cNd32b/\nGOHnMxPvL+n+7V/mbOY0/WoSNvQZNWI/XCLb6mxrrLNah9hgyKdaS3LTRNbm\nIDuVcUuH3Q83EOGmEj3BC9M7HVF/oaFjrxcoQPbcBuH58M7v0LNlDQBycBmL\neGIfivw7fyA+0evS5Ga0H0oIS4f1TpusSfiVqFknVWHLft/E4w0wEN64QAmY\nuYUskj5mCfysdh8C0h/NsslsdwLVINraXOHx+FjUBWa+hCaZrZZkuNONgLNF\nkxQ4\r\n=NH3X\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIC1zCGxe0Wl/wZWGojdITXRpwEWSlqQIkTLFMKOfCFbtAiAXlFSsa76L8cSypHWYSySrDw102RCyRc7Ucg8nxCfwgA=="
+        3.3.1: 
+          name: "fastify-cookie"
+          version: "3.3.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^12.0.6"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-avB2U+P97F9/QlNm2u7R5SqCzJlOHmhLrjepACM8u1i3P4ip4IiX64orQMXdRwy46xiLO0ZNwLz9eS3srrTJOQ=="
+            shasum: "9e1da1742c75e7f031f3fc04695fa53978a57dad"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.3.1.tgz"
+            fileCount: 9
+            unpackedSize: 17882
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeEl2RCRA9TVsSAnZWagAANxEP/RHeuajVSXMCKF9SKZFv\nrhnubnMf0Ggps4RnYoOx4FiqVa6ylfPKkyRPOHnZpQGpfKlT4pHHr8tTxYJC\nuAxHbcCaFsDGI6BIL2/Dt6chK4+CZCAi2i8NWiiYpUhA9SkmOc3FVqGq0Xel\nEaVH76tk0XzXyGOiOMzo+Y8j8oXmJbAtGUyXkj4u7EscwlY3yiQQ0cBVrDhI\nXhdL0EeuIWlVNTNJYoUIorxMkMsEBRxmX7He+GwPhFpL8ZWV40gsAePfTmmW\n5UkkyAQU+K96qb6XX8XxZQebtaxnYf/R5NueXAj0ItFnTltPdueUPWDtDSQB\nt2P3opeatP47qaL1bn+oksW2MsKNrIPkXcL1WHVsmLDoQXacZ2weLW0bLAr8\n9fUTTOJiI1H/aH6y4GrJZVEiWb0lRx5Ri6lDQNgnU1RvsfdrEPqRix4zf57z\nV3ytcfZd2EiDyneWGuWpYxxOd61XOTyZyiPniNLkdXDXJ12A5jiQpOu0hUXg\nZFA7bjvNNQBxVXOy/iowdvDD4tKwuYvwvv8pY1lVb4RE8bNZZw9duMOiD+xB\naovtAhaSx+MOW+ss2oUFKrmtv2EpZsEar2xEBfLMsQNlON0FEHfTSaFdTtDg\nYUxG/lj1tO9pdDgyFiG0Fp0D4rWwouJbdJMLSydithkfAHMbw+ixqneDAo0O\nlskW\r\n=lgfS\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIDr96cgLwfJR1OfAhoDpCmuGtOppMTQnKKU8L50MtKPHAiEAgad6MJj2ACjhWohTeM0c9wrUAqfj/GwXm8rTf5VIwqc="
+        3.4.1: 
+          name: "fastify-cookie"
+          version: "3.4.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^12.0.6"
+            fastify: "^2.0.0"
+            pre-commit: "^1.2.2"
+            request: "^2.83.0"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-GWiHwMSDPQnIqppxWLhoHKZsqPOXGAWdIpcaHSUT3OMhYloDCGkTFzpG9wXvcgMvUSEE2K5/mT3YeZhW5DjvRQ=="
+            shasum: "73edab9a4604cb1d67024676e581bd92c585fe85"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.4.1.tgz"
+            fileCount: 9
+            unpackedSize: 17882
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeEl6eCRA9TVsSAnZWagAAfj4P/0ROXTSGsuEI42+E54DB\nOoKD3qFVuznKomfA/9LgeZZSAWvI2Sci6nUnhoMhukasJ0ky+p1jjIu7sIps\ny2cOrZyWKsp6gvTQ2eo0fA8cqbkaoNNP7LEO0fx6RqfmBsVIYsV69J8a4fAJ\nQfLLOeJhLOEFVDtkkGY2AKRap6GBOBTs3RKyfGX1kMeRAv6AEEf4Xhpmn20Q\nxCc2+ao0rk1Ss/q1OeVYas0wkui6XciEhrdi1KwAVATVQB7hHoINks5gdxP7\neseA3QDt7W3AdYiyIEyTjAZmPcNP9t4D12zfF6YCt/P0FWTDxE6Xa3dXIZEN\nJz8xMC2i3xmMDTTDdmPARclmNGsDNziF6S09tdPONrrWHCCXWmFOtiyBfbRW\nHOEe+2a49B64TzdkZq9GUuuWCAMw9e0SzTXdaROmUT5dbuiIPN6DqCPQae5w\nMk90TAgrcsFDZDA4olUc+i3ohikkWGINtUU7vqGs4OFiA6JbkcrcTxut0SvK\nF+r8fLLdHsM3rbrWSVkayu9myOqc0MSmbr7RK4PrCQCyzshGGZu7YBYoWIHY\nh0xXyJN1r/n9gOF3DG33hYEGN4U1OlFgo9k2ZtbZq7iCQpOteJ+t5aldPKru\nnJpjkSI3Hpm8HTUrSumD8eIlWYzeulB/RJ+c++ttB23mWirOsfE01tNNp5OL\nKBCk\r\n=+xOC\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIBdQ5AhBd7zewogKYRHN31K89RHfoF6NLrdCURw8O/eJAiBfX282780g+sz+MdmGOFCyEOCaFCFPlwfecdOZ0rSv+w=="
+        3.5.0: 
+          name: "fastify-cookie"
+          version: "3.5.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^2.11.0"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-IQueMUmJjQtP+sMO5XX0Ekk4us3vfWYNaZ7cA5Zx8YN5yG2fFyYcdTBaLZfXqTsxPDn1UQWPEEfsHDG1DCC06w=="
+            shasum: "22b64842a5bd439a42b054d1c762e98a23ab8222"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.5.0.tgz"
+            fileCount: 9
+            unpackedSize: 16983
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeJOq0CRA9TVsSAnZWagAAQfcP/2hWSSlfynXw6uRwxrTt\nRgfGdr+xPRJ4dhWpTWsmyJmkl9p/i2Rm4XuE7WF1SA6i4XYPEvT4zoLBk3v8\n9ewS4YY+LlXjlp5AHOEM6us1obU4AVNkQcsyoAaiySmtjElF1t/88L6373LH\n7uomiknYZm44NIytJfa/Fb+9g4NbqAFyOsvwwokwu0qAVZ5vRUOQcBJAbciu\n+Y56cKFDpZEIxV737VqbIRBuFFW3b5kLgmPlcAM71aES6buyb8awootw2svc\nO6ArPyVsr4q6C5RewScL6zC0gnJpj3NFxUjH04qa9RxuCMFr88zg842mT9ic\nT8ttRs4QwHLe3Ya4lS4LbImkSsb9kg7HHYL6pCS5szWolgqvM8dT1OefD//J\nKmiGqdUpwSczhQ24dPn71aXYG2czMz2cH1fqRs11nrDDU7GisPtMnVLmnNqk\nfxFyGK3t7F4wEtM4YmroXK2TZp5Xu1CaW2pm9mofFpDIS2ZVYWtsyyJB3+z6\ndQV0l1bRCMTU1DBEsNwY1wJzw+kvhrX3zHm0Fo8YHhUVExKv8+E43OGks51j\nrfS0RPYirRL9qu92c/xhT2Qk5s7g1IES1a9ua1Mx3qEzNe9IkTcQ4GyDNQX4\nz+4BU6ozX/rgURdRzxASkzzLE4R7ZjYdplXhLMF8tag1tyOdnf0TLw71ZpL7\naspK\r\n=kyTf\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIE5NtzsIeA0BqnGa/sKb3Trd3QNl3SRtbym6f+wj64UiAiEA91S4SKVhcaphN/wuouMACCGxkypYldSWEUPSODBtt+8="
+        3.6.0: 
+          name: "fastify-cookie"
+          version: "3.6.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^2.11.0"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-pvGzhtBIHP3NG/EWpf7WGzMjY+ur31uJ7XA2tz7iMpbl+T43pUM8WtDVMVoDAH1AJ3RAvSdVk58vZiqO4jUVfA=="
+            shasum: "0c83fa0452a15a4be40eeae56b87676c7146dbf6"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.6.0.tgz"
+            fileCount: 9
+            unpackedSize: 17493
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJeRq/OCRA9TVsSAnZWagAAnF8P/0CZuXbZRwg/JlFXlwVW\nk9S+3gf7RZL7RGtgIROHJxJj9atxF7FmONmLNc6GBO9/7pUiGPKfgibolAXl\nWPClkj8fQ9d56HBF2Csa2XgVOiETWIeUz2hpQcVIoqoBZCXGrcrYf4YJx6mE\nrrJizCWmmmoJlswgFxGr+WRRWJsxJrzOeJBPFfxDwc+1qtK++rofFEHVYBa8\ntM1eXEmk2W4acsmujRLLjIxx8y6qXe2FDulxLO2Jh9puhuQZznYY6jw+wvqU\nfIxFlDQXoHUKb4sTrhuw44ulYzssf6GNGHKuR8VEK+MDLhM9GLJrneb/NJkL\nqCyLYP8VLS1F3gNxubSpp2c3tMcsMf6PRCVQv+xAbDzCAujXIRLrDD+unznu\novr5FBC5o3gHbEZ3GiVfGiTQsudjJ/RpasuwzTs/YaFBwFtIJFs+1LVqh+53\nOcRj/HsgHtnUpabkI5oESd3DPfhuoVXqaVG9SalsHzSjglleSmj7y9rvOIY8\nAzc59ZwLIwbplofZ8Ak9HHuTudibFITkGV7SBvXr+WY2JCfS4JOm5WelY/O6\nFlazlIqXKcZPJk4EuRArT4dVlvhpNBv1DvVobp/yfQIOO2Lnp7Xl1Y9cz+IR\nvYzUTXV1QF6GSMoqsnVoceTdl7cJ82uT/WgVJPrWLaqtJI2QKeUCdGOBEEUY\nfl64\r\n=6t7n\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQCk5ZMp+jkoQVR0Cdysyrf5ebAAX67ebfx3ToCO89KtpgIhAPzrPQ5q19hSdrHlyXgGHGTnDchSZ9fGzslWGP799cYH"
+        3.6.1: 
+          name: "fastify-cookie"
+          version: "3.6.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^1.4.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^2.11.0"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-kADZepeHYlq9IsiqaVrhVJ5qsESaotOEzfRcauChhkCWnSnA20WRHzkeofu7ByqNOeodEDWwz7N5sDJ55DOIGw=="
+            shasum: "560495c28e381f71f7ac86fbb9f43fd637a182fe"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-3.6.1.tgz"
+            fileCount: 10
+            unpackedSize: 18554
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJesIScCRA9TVsSAnZWagAA43AQAIbjK5HISXBw+jDh/+tp\nT5DkITaLf74xcaVHmeYK3ZYFciaNNqf26ykk1dIs6cPp2utYebsygim4YHeL\nQ3bPHWlhYtdlb6oKC6ltfYxk+TTMMPaVinKgQPArf26APSsBkBj7ycoymN3f\nMZvz+z2wZQHfCFsfWDOac0ZLVFcHYYgpDrqSdkSUzIDd9JFS6rxZY3+7ZVSd\nCI+Qjd5SjLJU+NkONL/ISlw7zvhjwnqSxyECK4gmNHr1Ijwblx5Kfvaa00as\naFBNxQD8CDpo/DmaiKRRIk9Gc21Tl2D1W6e1x6dPKfcCZlcNGuT1RQznTeph\nSPQg7/s4UK6QUOBGVoHuBL1oBP9NgpNrUKsWyvQ2JF8z5MzOXu+2TQ+Btizb\njakV1Z4MI4B+1GEHX9yxBihXOHlrLB3RVYyBKFHiXVAM27aXrUBfVJqc2FH5\nk62RFhyIgmqQ6Q087P3w5tIHJr2yPr9R2Lv2qxk/3AWTvOSTAy5P5twYts1b\ngJTOg69RAA5F3WeMdNVQe6zggoxjE9AkLAa2DOesX0Y09agAdV2jqPoWBsgN\nIoVqkpDre3oGjWGHWEphkhLzMYdVOmqQ4o4bu93Ogf4Jr39L8kS87EF6FFu0\nG26J2myNISljZRDM8ixcSZa5NTGkkM9UFw2Ek7U9ARQIao9K1JKrKVQKHrNz\nlEWl\r\n=whqt\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIE49m/s5ZgquZLqEb04eiu9pKmOJsnXDRIOU+0EjYStwAiARVBifeXM3MDjoGhqamSMjKAo4Jkp+KRyjj2jQH/TflQ=="
+        4.0.0: 
+          name: "fastify-cookie"
+          version: "4.0.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^2.0.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^3.0.0-rc.1"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            tsd: "^0.11.0"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-joo4rpbbxif3YveoaGl/QHxLH+I7TPOwmCiQIQJ9BJSA257LWBPajSvI79RMT1VyR4cTHJ7F/gVnBegVq/nXag=="
+            shasum: "b10648c726e6e9bbc81094e2e9f194da9b62e8f8"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-4.0.0.tgz"
+            fileCount: 9
+            unpackedSize: 17435
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJesIXNCRA9TVsSAnZWagAAUtUQAJBGhVU/MyYvqZzzu2dz\nh+TQ+CS1HKgc1NxzTF81Zb29VVoi8Jys+Rh3oD3YEDaq8PWlZmoYfPhQnRyD\nt6N5m7yI3lrjnhNofOwseMhHPRNnPIke98lj1LkybyEvUTT7Tn5L7t48M3fv\nanxz3dK2d5TnMuXuQX/8PKXVRkPPc2s5IUey1/aP06G14EUROYqOhU5Y/tns\nORDx7kqjH3zSZ2LYA6x1piC/BZYQaqvVtFAzMT3qGNfAIU6QjFYNzUYaIe86\nkC/bnp5fxaEACrBHCtWrRPbrOBSbxT54wkK2DMyTrZ90HNI1JZmznmvAbhzc\nV0Jd8+AruL1LtZimxwOv2cBra8hnMS3TzsZQ1kQwld+AgA7ITMUEmej786Kz\n5mkDaSaOOcNlDeIdcTR5AIb/jugvzYuMcDuAT7C6eH2uGCB+J75R/u4wmPBL\nY0ZIg0LQYMZdbPJeClTZ4mYBdjpL2YwJ1VcmQZdHU2m7BC1sX6d2PDTWp6dz\ngSqdLiMzz8Lu4L85KYlfkXcfANGIXv3KcrqjF+KxEQTWuarrkxW13osoNbY3\n481INr/CwDk8RZ1U7byqWMFSU5LHHHUlk3/kBaxZIXMw6Y+AxLT31Od8Eaka\n+fzLCN5U+wiGR4qtry0He79o1poJevc/Hj8+RjjQutA7di8/I8jxMFsGJB93\n+q3a\r\n=A2wR\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIDeVaPCYtJMzQjGHXiVOyOTdSbNsGXVwuzjhO3LDnBp3AiB+VPzrQztckF8M5v/8FlJK5HtpPhTcvNqXgfzrIXJsRw=="
+        4.0.1: 
+          name: "fastify-cookie"
+          version: "4.0.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^2.0.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^3.0.0-rc.1"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            tsd: "^0.11.0"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-ZK3WpFH0+q0I8bCOCJ1VmfzxcChnt4VpoXFrYy0AbG+D4bSPEE+2JGn2WBbnXJFo++Hdrrc2B4lTrzkVXVLTDQ=="
+            shasum: "68695e7c5502a11bf0e236874d915feee5790093"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-4.0.1.tgz"
+            fileCount: 9
+            unpackedSize: 17435
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJesrKdCRA9TVsSAnZWagAAZBIP/2kUCuQgr2fNmocAE/k5\np/TiCPf98drMmIzVfQunVNCdTzHxlwM/w539vrJlR5Xkl9K3Dwho6g76f60F\nJcGsGmOOp4gR6W8vXd4+rx9dZWZJmDMcnZuJ3SF4KFg4jlEURNUVVDqioFi1\nDcVnbg7byVN/rHrI2PBuXPTl7pZRSWstLrDkqCT4ZVomooaI/UyOHE8lAkWC\nCfCphoeoFPZNTssUrazCbPzKJtqK7EzPwAhNwvcx16ufWYfd9WgYZYU1PokM\nJSVdVU1BS5KGSuY6NqixMhNJpciWOi0x17PIvFXCzebSYMBhLax0aLYyj/8R\nMnL1evv4sdcwzCQ9eOmPyarDQ9eg/Q35cEy0QnZj8r1PfrN6fzYlL5lqC7jM\nLaB12caU0qZkutnule8h2iwhENzLqmOQ4Lppd56dC6ItkvHGwTNxfoL9uXdG\nJ8rgwHBbP7UGL4ZGlyNy5kHJtpWKRN1d6ILv7idfQF4klSXtmxaBILqu4Qu8\nosrN7sSl2hC8Z7iU9YYiXQh9EAJ8OqEovQn/ZCKae+mYNQwaTx6nUj7FuiOt\nUMPZ5K1grLcnztTu3UZdpqh7oYnfgPY+3v9q48mqgPaDF+2ynQ27naSSHtKU\nHEg8bMFBcWQ54w8oS5WUuOBWFPY43P9lLIFOpcegILPLw7JBC/B/hj/Vo6e3\niOW4\r\n=bvOb\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQCvYxpBkLnhUR4MZ6Yb7n25OxIOQg/jYtwcUvlXH8RywQIgQJfvPyr2pSUwmuU1wlvE6/LOXHabJxOMwE1CRdyMeTk="
+        4.0.2: 
+          name: "fastify-cookie"
+          version: "4.0.2"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^2.0.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^3.0.0-rc.4"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            tsd: "^0.11.0"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-XvC5mYsYsBG4616EEt49TnuL5AYZBEDCBoRsraCAneLzEOoN2/WH5v5Xrk3vQ5H0FRM/SfnZrifo3j04gQ8WEQ=="
+            shasum: "2bd93ea9b4712235563d0400eb1d6a196cd0b3e3"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-4.0.2.tgz"
+            fileCount: 9
+            unpackedSize: 17548
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJe4feOCRA9TVsSAnZWagAAxX4P/3bsdyJffTVAB7TyZ2c9\nch6oe+cKRQjMETTnZZZb5GtUXVrPUDwn071yO+IoLLCfPi6vk5Y0pLgY6fbh\nCcPEf807OeS6SNYsSSYIzaIr0MD7RER4WiGJJ72AnXqRf07ayAnDp4jnA3tK\nyoAFJmDKPX+1qF0wu2veaMp7aMY5M0oucE7VxCxSp0eq2YtQrAcWTV4rcCuL\nRyWQ74xUm+yJcDe0gfXeDi/VekaeLQLd3NjFRdeK0XfSFrNOcF+FAP2WKFIi\ns73BX39RV2kv1GW3Lu9Z314UHiFL7BcumZnmZP+bxqTWsUETiMVBROjwvO/A\n4l6j6+zVqkx3pbe7ZyZUxVmA4c2g3ZqBEDFyPO/3ROxQOTQERQcBaL/321eG\n0OtwFjrVvAzVywr+JZ41uZwhpxq4opx7u5/K4wA8qZ0jcdQWB68KnlU6+eNB\nP82cQ992nmkaBBFcaMs7DkJ//3bsdjXFXxsvy7IitytneM/6kDn+K8Z8uy0t\nfnRgGydBOGcLr7pB/Qhx+WEdDiDQQeKVzNWkP8xaijqAXN8kFVnmQDo29WrT\n6c/O9jpZTU1MWejy+epNCmsmFKUZrUUv/qVI144OYRnmmpFsQcXo2mgMSyc7\nS5XgbttFHoXCq6i4YTWvggmE7M4yuqLnqo9OE41HdGCuIm3ukQfLlCVq+Dv7\n2mcG\r\n=otmR\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEYCIQCfdpFJVMwDPjvzQ2kppuQVlglAlWF8d1vxKHvxtboIeQIhAL9KuSmlEVUvR+VhlwfXKTyRT8YUIgpg89eGWf/+dnPk"
+        4.1.0: 
+          name: "fastify-cookie"
+          version: "4.1.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^2.0.0"
+          devDependencies: 
+            @types/node: "^13.1.0"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            snazzy: "^8.0.0"
+            standard: "^14.0.2"
+            tap: "^12.6.6"
+            tsd: "^0.11.0"
+            typescript: "^3.3.1"
+          dist: 
+            integrity: "sha512-+se+kNPFDE49JCiBYQrfPfchcW9s8BXjCqP5ijuYpbydTcMlo9pnyd8tyxLi43SIXBmeTBkB1CjklmD7nlHsXg=="
+            shasum: "b063f2b97cf9de7a33eb799a951b604ede48a915"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-4.1.0.tgz"
+            fileCount: 9
+            unpackedSize: 18208
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJfV4HLCRA9TVsSAnZWagAAO9EQAJvIXkHwlDkE5jB0OZEw\nFYT2l56AMgkdzbO3ln0/9ikT8wdY1nWZrddQonHRYPif98yjIp2SCfKdhoik\nb6EGB6xNIPX7fLtH4+XtfsxF/9hW6N4XaYIiRr2lIY/cbPve5aBB1BWJSNjz\nPP3HG38ncBFm3/5mpcCZI997py8teXP5kPoIve56wjn7UlYdLxKhuysa15ml\nbd60ChLsTM+/UHTQdaZ+Ekrvp+dHG0jBSG2y2tD65V265lNJIXVL/n/sRjbd\n62LfA2g73r4+IIhBZb0bQUzpWJkvy2p35VXUGcDDzsCdexVsLWXcoh3evzpL\ncvoglQRRkpVMEF4gw5pzyj7U1CXMJZobk+48QwBtzeaXzxH0b/1592ATpc2q\nJFG8KK52RFui67mbYpihrRrg0RLGXbkK0/1b+LDgC/o2s5M6C/h+yu6yJ7GU\nFh33mN5rhj3lMuqfCaZkOo9+leWRgsX3AbTufT0bBYKcURUz3uHv3D9qkPEF\nUWKVD9wtdTA6tth4DG3bJt5ClKlGqZs3HVwTD77+MbOiT10ax/JUeA7sscDh\nK7FkpPAo3SXqfQrEFheKgB4ba57bqtxvhEBK3FwmiivANrgZN4D1Kg9ej3Dw\nqs9d1r2dTCv1ZjvlBqkrB0GIMDqbRaihZB3TqujoCBVkUToPvI2/BlO4jSHu\n13+i\r\n=qzNQ\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIGZ+78foqUUa75eyBArluCcPgflZ4nFaTq6xi0q3SLARAiBksyUc/RKXmJBkydlV2ThOEpKa7k8ykwsJy6/HtvPR0g=="
+        4.1.1: 
+          name: "fastify-cookie"
+          version: "4.1.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.8"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.13.1"
+            typescript: "^4.0.5"
+          dist: 
+            integrity: "sha512-rMrY5LWOHXxishMls5Urk2AqrJ3Xvln6jKmj5GyI+3OV9MlyxnXej/ZqDsPlfRS+58J1CzJRutGtoWRe19i5aA=="
+            shasum: "c2f71055651d0b1bb38f90ef839200592f348d43"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-4.1.1.tgz"
+            fileCount: 11
+            unpackedSize: 19401
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJfyKjACRA9TVsSAnZWagAAjYwP/ir8TgWsXkz+IFIRhB89\n+Ro2D+DAK85AwP3pWGLUeoHeoS1lyQnIKO3sFZsfrJv07SJaBJcvLTKbi9Qu\n3qYMdO1uQcwqW7HIPRunu9AYVvM7KAxgVAnlevB0gmHBteLaPcSlfW1S3xGg\ndY6pQV1WJYUsaCTup/cmMsD/4eHVbE65yBDSG+0Gu2WMWlGX3iZ4WEk4L5dW\nDjgJSkHYqM94ONn8xpyxqdKULUCeZmICLAeCE6gQjNF8hHhe8ZWMCWPlwDcl\nhqdIgq49kIIBC3tGz9GqrfTOSnNhMP6SGx3MY3AA/sRM5Hris+ALrUU0NQ8S\nMskZbJlKPIymBLh3NYrYZJvASPcmCJ4Wjnaun1eKagq214qaQxGmpJxDrbWt\nHm5pP+VGvEom+f+dKd3ACCHg7+GlZZPVPdNqs0Gms87s7CeOJ7dA+PPoYx/F\nYx0zN6VNHtA5by2PuOxo8GkYdiCDnV8nVZyc+55WrIGsLTSVDljvTYRM9uSc\nQFPysZor318Q4NcbVoXSIkQJlpaxgMaITKIvUgORqmISdo+io1Lyf9oV06zq\ndzYpL5l5tH8Tnlpg1lF5v8CBsPh80CrAdcbcOt2Q6Q1IkHg2UJPjHnVdLf+R\n9SecJ1VYDbTrxshMDo/LAWYCffXhx0xPcVmiHyzEs9GmJjk2EOar0Ddwi2Ok\nvtGY\r\n=hTdo\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIAxDNTFNw8YdSg4S+eokD/wSqkIsLlGasONWK+Pa4h9QAiAauDEPs2nKGauauSB2eEC3w/v2nuTEYS9LhLRwv4Da+g=="
+        4.2.0: 
+          name: "fastify-cookie"
+          version: "4.2.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.8"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.0.5"
+          dist: 
+            integrity: "sha512-BZjgIA143YevEjAwJmqfnJJ5hIonkl49nLBjRLbErFKor/Rd8DZ0xnHnmxSk8xUhnr5g5vxKHnH3/dQt+11cpg=="
+            shasum: "c9d7f9c16a25f23ef1451f38e53ae7650e210b2e"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-4.2.0.tgz"
+            fileCount: 14
+            unpackedSize: 23544
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJf0k52CRA9TVsSAnZWagAAIsgP/2DmHkCJdc3cchhFejru\nE+RWW56k1CSjFIg1ouyUCOEJSiRv3CTGlk9/b3yBZrPuswIPAnmFWwvger4s\nY0uJiNNVErtkYSl06GmNgDqTDttw7HuNw7xFA/5wXEHfBZzBHf0RvTzMfryf\nb3ox5eoQZdjQCXWMN3iVEezPxMWNdq8RC8wTWgKNvxTetGMhJZbB50xYDgcF\nMe9tzGlhWk0WamrJ0piV7xx7d47wmQ9QQkZzB2+vSe/coNYw5sOtixCqHMiM\nFgib0xMH9eFC4si2L1Vt8EpJZGh5tPo4xOGAz8ztP/OwxielEkKeDF1Q2tIv\nkEFzygP0/QJYA6fgnxFcM3jZrl78P92ObDUcfRz56Jn8pcYokf/CN5VJZkVG\ngW03Ch0vhqgxmwN94WmpCoVQEaz51DHR/YAv88TnYmnhLBkppYzceT68GDix\n4tuhPZ+RmaluAgPMaYChUe8xFDhWQWXr+jtv2dKLcIrEIndygnGM2PSO8MWq\nUMY0yZ5O6RMoB0HgcP52KbPolyeEEn3KobYmf9zcacWoAn8Qw95lF+IkMByj\n3P+KNPKHTg8i7Q6FnOf+r9kdUynxgyUOEECH7JCie1MOLilTuLmSSZEB2RRR\nR0ewjsAh/QXmQxuquY9q7pvXF+sup17kboccVHMV/ITKEMEhr6bIAYz9jw+6\nohml\r\n=u/f+\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIDSsKpZtf/WRzaHKvFByK5cZEGFLN3ufFVCszpJzGp3VAiBpGcnAxDic/yULiFdX5hVS8Clb17U1T2CvWfJfX05Alg=="
+        5.0.0: 
+          name: "fastify-cookie"
+          version: "5.0.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.8"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.0.5"
+          dist: 
+            integrity: "sha512-/UOXwIoLVyxQ+vJOADPM5/a5luKLuKl2Ou8LmbL+opm4dJIMExakLi/J84PYiNDxLKuGwcV7p2QdQe1wgUqPJg=="
+            shasum: "6ca0e8464f1b073d4b27438b31efc69d72ca45fb"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.0.0.tgz"
+            fileCount: 14
+            unpackedSize: 29446
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJf2fdMCRA9TVsSAnZWagAA9DgP/11G//jUN+NYPy2jVQhL\nTGLPm/2Lbg01f7ydhwz1OdlpPHj55xo3IjLYZK6urIhvlaOHOX4vHppPjCt/\nmrjmQu0U7cysQummYoEbJ6otk4peAeTP+vQSz8WJXo7dhogzb1pWvGqwLiLf\nkMvDpILCtO8O46DzN08HOynMzlMyp5gS+ctuej4uE0kDcblQsHjxc5TsYIA6\n0wdkLhB9evrLjUbCxaLs5o+5vb4kLlCEIPTr5zi/IidQDTbvfWEDOREebflD\nxrhuRTJp45GD4djO1D38OXc2DAeNqFDNbv4+Abvf1GMXzR59nVoDlIxUsKNM\n9YuG2fGS8vww6yh8LmOUk1R4D4BjMOPJrFEXUU1klM0QmradNnRMQLOJCuX5\nPPgBFomtQaMEGUatsmfcfWLP5WcwiPIviYrsj+eGijCiQQggr/k8UVR4L+mK\n9pHPqTqnjS9oEHHPFiaUBIobK/+YziGywyGGUnWF8sdh/zZXvtWITmZlkED5\nWX+hrKe1m8Bz5XQTHHGhoZn0/RpjemJPWcDafsQBrnd5kaNfXRnwtt8CHjtc\nvC5YOhup12+eZLLKHQyCP/WwhJVjJmwz7dwv8NFXl39fjWYOlVlLv82EZX/6\nvh/kiMm2GeunKrEGqwCSnTfW29whvR6gwPyz+AL6/nLPik0+cJN91ohbM7cq\nI58q\r\n=Ihjq\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQC1SJW3fPvGHdbb1FjRSmq7e+67z/4udsqx48ZN4XjZaQIgVmLXvesNbahpSNVequklNN2Ff50AZN7tiC4n/C86LvU="
+        5.0.1: 
+          name: "fastify-cookie"
+          version: "5.0.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.8"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.0.5"
+          dist: 
+            integrity: "sha512-HmAqVwX3Jro9Q+C63L/Sf8q1OFlqnxcHtUoMHwS3w62ILBlEHwNDV0alrJzo413RmXRMYhgq0QaQn9+j/8kKBw=="
+            shasum: "9a41da570710023aa96f4efaa0d69c6a6b467513"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.0.1.tgz"
+            fileCount: 14
+            unpackedSize: 30010
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJf27/9CRA9TVsSAnZWagAAWk0P/2aRvzq6om06X+WysIre\n8RJUB2B+VSsR9j6EZ8p4XQBwXadhGYqkkKJL2aFVAbXaWhcfuAeiDNSOUCP3\njVAYHyeEsvkc9wUEcY4pM+YJ6Ru2mLa6JJtSfQJfznCOU9ty2A4JTIgOrog0\n7VPdftWc9RGm3RBKgulKJF5MFjlh94gubWZuzd100PoXXeW+B6POrNvLfi/+\ngI1YkMlzZzHXATqOwGgvVC71vn1cDbc5LaY14fsLL6Ifc7rqLRQ+AsGiD356\nhUeHBkvUy/gDcSDY/gUM0debNXot7JrxRSLmMwc/K/S3fOCj6JBdHAkbvB+7\nPfFu7eYheQmlxvhZ42nx9MXQIvr+5duONpBez5uZJR3Nq++XaHgA29EbyA8D\nbvvm5hZZ8RujtI4CW1/bwIYyXkhlUOsGOjlacnZYudqxQboSHBr25dy0cujg\nNNVsVmxncCWihHVsy2MrYD2UYoTABfPYappz1nQzIAF1Pp4gkI8XGh2RE+8l\nYO2Sax2x9WeTGCAol0Ks6pFlfP9NhwTo1skjqTEEA+RdPNmhrdTHkqP/IYU0\nlO2sPoupXtGaFX4bXj77IS8pWan15nh68fHjn1Zs9i3ZuaGZXE/RJTGCRyDq\nV98NDipvsL0LAoJE7MEWO9lGj9sgxDY0uasrUcbEinZdAVnZbsA9Snaa/++G\nUbBz\r\n=GA7G\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQCHiL521cxNwP8kPMHMpOr8f52770EJ5hNas+cPPC4CdgIgdr7kBNLRJz/Q9ZgH8D3BHjwG7xhYUuNKtlr7+1iFL7U="
+        5.0.2: 
+          name: "fastify-cookie"
+          version: "5.0.2"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.8"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.0.5"
+          dist: 
+            integrity: "sha512-sYdHT2PmQvzwuD/HUhHoQdEUixw7rxJcGiPEt/zvi0j/QNJwr5C8JzO2uMGUEOGLDlpSw2TtfEDeOhxJi25O5A=="
+            shasum: "04e32e7862cc0a2b5dedf812e0617c08826a38f9"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.0.2.tgz"
+            fileCount: 14
+            unpackedSize: 32048
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJf3HawCRA9TVsSAnZWagAAiU4P/R3yyNRA4fTR2gqRO7sx\noW3v/syfzx0fuAw8aQNWNQMC+yh15ZGlP+qpSQfF3v/TqlAx/gYyngD8CHnK\nF0VHf4r+pvi2TutJ3jDBQwluLhznPeVSEczcpoRzPmB/Nqu2fVCyRamo3CuL\nnBAoQCJRhGmcGS3PlkdITurmYpM+rZNRJC9XBDo10MwI+mvUgtDCpcCxlQnu\nDln+yH0HQ3FU9hqOSgAkzeb9YFif10jBV3N+RZlsTXKHnipNXXarHpGXKOKH\nSnJT+uR1s//ylzT3TI9VK2jAjb0TuvEuvOrZnzYQ/ayVhNABGZtLHKE75hyB\npgYOS9nY5wesyngGRc1Aj8l+ZXa3mBL9wzIlKH8qJ7wd3ngVkT1UlKWyRjiU\nbNfjAiv6dXe4HLdguB+ld7nypCWYBgdKU49A8f5hJGZEMTrggc9avq49tAcR\nepRdC0rGUxZCuTA2+tzjBX7CHPQnQ7Mpltl19XeXmxW+Z1K1M+Atc14OPr9I\nTj9xy9IKdVaagF1HVjM+sgCAa7g//kdluiwXnIwT2VCvgUAfKC77qOW2o24p\nsrvYtKaCXeCUeuBSiRAAjKPJzrLrZs2ZO7oYVH9hvOTMSMfcKU6vFrVP/MtA\nENgenL36yCxh4yjeURzqIBnznRoTiRwIfow5aDHxRfwWhlnXsohwhtocJ+Tr\npPLo\r\n=19Oo\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQCJFdWSGwg2NhP7uGz35B+DcYVpyOXcoQLAaU5eSlBH1wIgIYqPtOLjCZnxB/M26M/TwGQZyETWXQEwnSyPdQCgOLw="
+        5.1.0: 
+          name: "fastify-cookie"
+          version: "5.1.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.14"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.1.3"
+          dist: 
+            integrity: "sha512-AN5C/p7YVSgnW1D9fcUL10yRIN+9lcOtyps3h4/5ZsxwrHVgdNH5T77CbnIrzfAx6qz7K/8NYQCTE8cxZIJcJg=="
+            shasum: "d09099d1516f407cfc73d9e8318f9778035a6251"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.1.0.tgz"
+            fileCount: 14
+            unpackedSize: 37229
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJf6fSoCRA9TVsSAnZWagAA480QAIsBUGO0VFaoyjnyRv3O\nUY/OprlWHIfZiUtTjITAMnp/QQlujOUEvIXWCC6Vj0v1b7W4Vl1XN8Znfv5i\nbXXmBj6pNMUsdgtitKXtavQhAFciumh1pi0HbDoKaP1ULx4AoEOLeB7ZrB9P\nSTra6EW3FPUeNuivnhGOG5RUFynvPqubcYGR8tQ1YepSDXss6DDHfUo8HzBD\no/xpZf3YYXcfRII5qIA+nlJbVin69bXWjBqtlfNh9enHJHBGQ1TavQb5hY7C\nmAEBuGXkONAzua/j/hYxqA7oF/hKg00CAb/aIO1+T5tbFXTrmEVHl3nIW+vD\n79Cq7tBdDydh7JX8ISa17gLNFQ3vgBq7zIynYrxuUgT6i49FapPecb0ZMKv3\n30b00PDpcqoIBXoEdGzbtqhfA1RK4mHjG19rTtwwm7iRYt0MUzD1eDxi4s7O\nbbq00mQ5sWusSJo0H26wANht2rMdvGFDnGfkDGEfxA3gDudrgYo+Hu9eYeWQ\nw8xj/YMBZvLYDq6ycRHSWUvHmLL3JkxmPa/hzEXxtFYWNJUmJmk3xGuS/19K\n35c4b/6AnP8AKAHCZO1oMXsbIdqF135kMLNiOOMd6/rMMGagYaejygzdAsIQ\nkc0OQRjRyQ9qEfOkua+28U8MWgQVqO0sT8O26LVRXa6a7YpWOQq+xCKIvDE0\n0qaa\r\n=eqxr\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIChcbplTH78pI+GSEh2k4YfvdkYnTBOIHOCdboF1quRwAiEAtwJryyGbenClzAIzxL1lCSrQYCynrDB1jp4UYAfr1e4="
+        5.2.0: 
+          name: "fastify-cookie"
+          version: "5.2.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.14"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.1.3"
+          dist: 
+            integrity: "sha512-L3niFwJWv8ghmRCDpQH9Fy4b1PD1dDzRuFHDOpB2pFlyHcvxZI5foo+4K05TYVYt2TnNTk/eoM8IVJcbqkK65Q=="
+            shasum: "24f236873028627ddc5d48ff618cc9acea13f8e0"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.2.0.tgz"
+            fileCount: 14
+            unpackedSize: 38376
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJgTf0QCRA9TVsSAnZWagAAHuQP/2sibfbOpK7eUVmlvt1e\nEfrne3OIeHddzRfHHNT+We9ju64vh9ofqkiuau/2XZy0wgKqKlhFlAonD/kz\n2UtEegcTi4Nr+j72o58r4XuIZ6DdQUtYwexx1shFJ8rvy6LGHbxVGBtVSrdO\nBigxbHysHLvj8p9AhcuHE/jews5Oj829IrXbOUOuznKsiCh8eig1Q0uvgWsM\n5u1O4BxpNhozY/gmV4EOf5zXSg93QPFeIDzpLbJkeYArSVVTa9WUhn7LWwrX\n6YYcNutyaLuPVGByrgNqdBNdLWTNayog9bJpwIjhU/WT+wAV+C0HjMUJmuDO\nH5DUf+XKIJQF9pJAzoN4kN2/QGjaQqiDlwrBG0GA3nVl5e3vwpT+4y3Zlc+/\nkFqmX5lAngGqyiHN2jsCrzvWVXMBILo7ypJ3ystfrmnqv2eMtCz3rAUM3eZx\nwuiVBbMajNuS9cBlxNoplGblOZ6AZ1lJyFdGc/jzcZXfmxqzM25omboeR45L\nm2tY4KfKKFhpJjQBhS/R10/mbldShz709A/DoMzeGMq/EbEJnyjQvcg5n7uS\n98F1CO8OXe0GsllbFsJh0C5uxuXa0qrfUPnFNQQpFgLLfvNvmLjpujyTE/jZ\n3QQkzOfvwwNpVNXyPAj9XxTEVoE7w4in4uhy0d4AxeL79HhzeDIVNoOiFD55\nw5Lu\r\n=LzGf\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIAGozHHeb/uIptxpOSplMsjC+bSs2oRBGQFn8kf+VZA6AiEA6XkfIKGEUx0n1IYvwkVfOfegAVRzNnbk7oSVeDQE2pc="
+        5.3.0: 
+          name: "fastify-cookie"
+          version: "5.3.0"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^14.14.14"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^9.2.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^14.11.0"
+            tsd: "^0.14.0"
+            typescript: "^4.1.3"
+          dist: 
+            integrity: "sha512-aQpeddzkFlfsWZfSzjsgkU2S8wOUNiKehMaOcKNm48Sy14R57G5rd6adlZtPd1/zNdNcEaZAFsz3d4NrmJVBpA=="
+            shasum: "412846d755a5a22a981cbd924a13ae489a5df610"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.3.0.tgz"
+            fileCount: 14
+            unpackedSize: 39640
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJgVI19CRA9TVsSAnZWagAA1sMP/0+zqVSJed1QBJxrmHo/\nJEpIJOEazK09f8m8P3X2Il24ZBFCeAH1CH/D/SI1+seOc/5DuOTUPf2fSp3H\nboZQF0sPsI66d5GYmDlX+TIzhtclC/AnI0NSRfCJ2PW3C4mcsexqU9NKIQAC\n59ObranFrV600+r4JVbsW8bDRSs84rYj6mcySXRnKkaJ/0XUuNhGMjWDOi6W\nFw6+9jpAyxfTDUF4+pFi8g9yuSOC1AKZm17nCJoyFLTri6C9Ys5ZzdZKOlmN\nNslIRhh+XtJSwFUsLx6ndauAxeYjZOAU6AnaJwWzKZbXZKKfWkfGYN2wEs6f\nF3t8z83g+QS6nDVSvRwmNybVvu1HsNVwxuRitZCGOng26AEGkXE2nGhhgckw\n/GzlMnlVqvXo2X9aoWY/HxdcsIxeMzOidl6jjxlcVWvP5YgeOKvTa7X49jrd\nks8lwM//9OGIAwSBkpaYF7VCcI684p9CYIYw6xxGlt2xGmhPD6GOC9BGemyd\nAt61yl/8cpYkjGRQrvf2GNDKMemy2pIer54E2YNifkvwzUGz2Egjo7qrPuSa\nEfgTBvO078R4VLD8pm5VSP7hRQqvPnC08xZCiW3jJmmTMTfmtUmgtT58anIn\nQM/glpVRXzyhF410RK+v2QCadzxqBhudvTkFDQKw8tgIZBDP6vihEkcQ3BqY\nYQmC\r\n=udLk\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIF0Vw6uO5DwJomAyv11pW0kQJH3IH8TPH9b6H/c7/YnLAiAIuaZe/QUkBJLDGSMrfoybgvMfmeEJD3G1HLymGQ7kTA=="
+        5.3.1: 
+          name: "fastify-cookie"
+          version: "5.3.1"
+          dependencies: 
+            cookie: "^0.4.0"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^15.0.0"
+            fastify: "^3.0.0"
+            pre-commit: "^1.2.2"
+            sinon: "^10.0.0"
+            snazzy: "^9.0.0"
+            standard: "^16.0.3"
+            tap: "^15.0.2"
+            tsd: "^0.15.0"
+            typescript: "^4.1.3"
+          dist: 
+            integrity: "sha512-ubiC5ydvgqaXOydeg3G+SFEiTJtsyNPde6ForXi+UG66aDbsHlWNLJTQZg4BopXv+MJ0SzlShGVCWv26mgAwpw=="
+            shasum: "97b17f3f297b06ffc8e27fe7a0398aefa9df74f0"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.3.1.tgz"
+            fileCount: 14
+            unpackedSize: 40694
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJgnM3jCRA9TVsSAnZWagAA6AAQAJhtrqQqWVd76BBNinFm\nVN5q13uXvT6FgVKfC6IO2eQgfV/5SCiiwOrBn8dZ9QNHnWsiNCccAoMQczOJ\nN3SO784L5Vd+faFE9aBc7/cYib7ifKB7MZgk7itG4NE/9X7QvJk5XPeRxiWg\nBQPryZRitb9iqsKNa3a89C/CEZGK/jh0L2yoANip1mepUViSgE5Xi3rxx1BY\n66iPf+e/sjvSR+Mf8LNKFIRQUlGeyK+9quoOM2kcKMBNT89CWzRSoDVJNPCT\nvwtJO66d/3yjqdQ/8p9hlwdMDo5VBi1VpVGK+/o34pt+dXd6mjmHXEqD5K9K\nGWWVlJnKSZNk1nPWeDHOXIbibUINbkJzpbA7hssSqO/HLFaHsK+IA5UW5xAT\nUFIK6mLiMiAC+P+65FaohFDJ9e52cYfX1ISoO1t5u+xKkIdw83SbmwrClwiG\nfvHNSYUiMp1HbYCcZ8twVFkpwu/1O0KNZMxW6mNfNefsnh0zwTOSeVGQhb6v\nVsh5sj6G6PqrdQq1c69gQVv90F3hnFBP5QlF/W3D035dgADwQjR+kc60MF/m\n7WiqVi6JH/ILRR5duEmWjY2EszYtYqABseqxVQiRD8zIdNhe1c67O9/dNkwC\nJxf+57OYLdIoQ8HMuCggWarZuLIxaDJjoqTdvQ+WqB5JHiwJcU8P7pejzsxf\nKV1O\r\n=ewV6\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQCr+/i/Xhe3ZYuDa9FN1BpBdIBLQhgErIXiZ+8OAUy9pQIgIFNmWUKu+AfStmmscUz5JBzJh82CgH9FjMj0kdyeCRI="
+        5.3.2: 
+          name: "fastify-cookie"
+          version: "5.3.2"
+          dependencies: 
+            cookie: "^0.4.1"
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^16.11.6"
+            fastify: "^3.23.0"
+            pre-commit: "^1.2.2"
+            sinon: "^12.0.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.4"
+            tap: "^15.0.10"
+            tsd: "^0.18.0"
+            typescript: "^4.4.4"
+          dist: 
+            integrity: "sha512-7ZrRDOxlzO8dxgQSYd3yOd1AWRghpXTP/GxiBel44GVyRyPiYgHeLfqjcoyPNJYPYAEUpxi+6NHkc96Zl8yh9w=="
+            shasum: "915d708d1391096febe1aa2a27559e72ce57b14f"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.3.2.tgz"
+            fileCount: 14
+            unpackedSize: 41132
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIE0n4bcc9neLZwW6F0Jj6oljNE/qJv2qPQkF/jy6mpHpAiAFkrMOQP4iLhsNxC0swYomh6UEdBFe2gLqsn9nub3xTw=="
+        5.4.0: 
+          name: "fastify-cookie"
+          version: "5.4.0"
+          dependencies: 
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^16.11.6"
+            fastify: "^3.23.0"
+            pre-commit: "^1.2.2"
+            sinon: "^12.0.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.4"
+            tap: "^15.0.10"
+            tsd: "^0.19.0"
+            typescript: "^4.4.4"
+          dist: 
+            integrity: "sha512-uKTbOLx6pSyKqA9oD2G9hpMuRTVtKRm98bRwJVg4ga7GCm+RR6771stmfhbblXxHHcQQHuHvwdOdPeHJjr2sgg=="
+            shasum: "2648b64a9f4090c783369b86f5862b1cc501fec3"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.4.0.tgz"
+            fileCount: 16
+            unpackedSize: 53014
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJhnTVCCRA9TVsSAnZWagAA66cP/i1Qq3Y3LBVZ/rBA7YI0\n3C+xdU1X7okTunmXckuPE03VtzHK+xxYPyDTYxhDTrzFVM8CxOgB0fP2+8Gy\ngcfNlVSrpDCRpcMmqPekwAV0HDE1ZV9491rm68plTLOsiacI5wQFbEqRY7PO\ny0GJPdKAd2Hsvc5dImEBsQpb+Fmo/OHwUa2/dHQ1nZK3aXg6P7F3wSTJcpgR\nUd5jSah6lLBidxOToTIbE1nmsGjE/Ugmu+bHlKTjLFEaveKIecHElp2Ijx91\nVVo/8w2pgCqEowHIiHYOiHDiPodAmd8VHo3M6y9IlNS4uD3XcxYmGgwBHGoT\ncFEPOS198m16DhtAwPvZ7AX70YfT5AxERlfp9INxAiixPQg6yvJPtow2APAP\nljwMRiegBoFfOQUX8U/j7OlbvhpeB/Lwgb99vYgqDomovuGZ0KmmZi3P9HTn\n3eeV6QFLwmQ+BrFAH8fTGVDm5AOYO0G4IXbt2EtH9VkQsv/pZcDAtnZdcKyn\n6b7M1qoSj0TXX+hy0Eivtx39hHfyPjjeJOcgrcfGrQilY1P5G1/3jZhvn7Ck\nlsAHcFvCbGs6HuHFCbP2viyZ2Qyde7096hLgmk2pEjKAhb014wBP2Q9YJMbS\nV5MvAH7NND57Rf0gdpCfG9/waXLzP6ZhRFDxZvj5iPRl1W1gVCMzd46vE7Vh\nV1ha\r\n=Up4h\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIDboU65Cqg2V4zcZqB/l4PryL0k0CVvLNrkPbS4AYLvAAiEA4pyp6BLVMNXbDz5gT8eeFTWG2N7hhnwUU0cg7pBn3lw="
+        5.5.0: 
+          name: "fastify-cookie"
+          version: "5.5.0"
+          dependencies: 
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.0"
+          devDependencies: 
+            @types/node: "^17.0.0"
+            fastify: "^3.23.0"
+            pre-commit: "^1.2.2"
+            sinon: "^12.0.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.4"
+            tap: "^15.0.10"
+            tsd: "^0.19.0"
+            typescript: "^4.4.4"
+          dist: 
+            integrity: "sha512-XhexnjmAR4CUh3Cz6Ko0is+pa8k1bS6+nkf/i3viv4p7R1fwGtGhAXuz+b4nEM0x7pvdi5ApKY73Bp5CELZP7g=="
+            shasum: "5898ef8197a3976874c30c04c21f103856ab251f"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.5.0.tgz"
+            fileCount: 16
+            unpackedSize: 54693
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJh0Z49CRA9TVsSAnZWagAAYm4P/jHw8Wxc4WButD+aT4R+\nBHpE5xV/Pbw+JLzoY0syIEnbIxpucGrx99t13WryOV/CzjEQ9c6qcf4eCWY/\n3DfLkodh2gM8dTZN+oEzc8joBjytctH0evRIjwozwLR20GzAzGX8t1tTSXQc\nYFzrgh8pAe9QiC5bWzCz+vU7/dM9CkY+RYghbXX1OKkoc3O08retHf+mE4QL\n9AhXtZI499RPmLYtd6knnact6mPqOCvt09E/WFr7hKL3Id6NbxfUq9NFo0Qz\n/mJ40tMHcKkF+NdXqGiViuelQhPaLpDDT3oiuT2nRrTpTK/Uko6njjNPsjRU\ngOWZJ0UQ+UehkZ47nPScZRYdC9Yv3UessyGFdMjddB3ZxxaAGx1lHUx5Ifoa\nyYsLqzQBOmNDWtIVQ5IX6num4XeqXa0U8mIQ3XBtnzO0quJ4+OpwjtGfpof7\nkaMoNnoc4Q63JcSTj5OYUa6yJB0vDUHNnZa1FvA0QpQi2S0yhAf1mwl823sj\ntWn+ZWHcWEE9W/AnU1Ha3MKyHTrmzhoL1+vIrBQTrPJtj8I7ubKUwSsVVUux\nDQUpTeDQ3WuRxqXYECDEieG79GxFiLxN0sa5XMZHH3l9SS6qZuyP8Pslv2gL\n695+SucGq7pMLAxq6hW2jg+mpSzrwU+IY9odCfj3wb/laBWiyOpWKZ2PwV6a\nQz5t\r\n=U8p8\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIGx7K00XIOsevktGccjHkdsTb0Mzzk9BbkbFIxdwtlUrAiB62dd/octjIfvd1TnNgale1mSjXgNPUz6OE7zWak76Sg=="
+        5.6.0: 
+          name: "fastify-cookie"
+          version: "5.6.0"
+          dependencies: 
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.1"
+          devDependencies: 
+            @types/node: "^17.0.16"
+            fastify: "^3.27.1"
+            pre-commit: "^1.2.2"
+            sinon: "^13.0.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.4"
+            tap: "^15.1.6"
+            tsd: "^0.19.1"
+            typescript: "^4.5.5"
+          dist: 
+            integrity: "sha512-zmZhw1CugavEZjFToMDz6FTawXw9QQ6bJ1vhhalMLYTbhog8C42+1jIWENKjV6PkiERdDRhXahj9MiYSVNynDw=="
+            shasum: "90f098779438524e7ac6624c00ff5787b865d313"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.6.0.tgz"
+            fileCount: 16
+            unpackedSize: 55041
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJiE2LsACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmqQuA/+PCMZUjQcwmpzzU8mFFeLaIBYOh7mFVaMoRGlcfQstfqPTT5c\r\nZHp+RbrPtKCUBQkONkt5AMQnMny9JuIsUy5GfgVgV3MdJMM06WaPjuMZBGj0\r\nmRMHRfXVVtk5GRyNySGqFeyD91Ib7EOSChS0lrArOV/e36qlGFs1PGK47LQX\r\nEW+QzNPLSy0Fdj0tZJATS6vrxmB3ADzpfkDP4dxfFC/5haBOPBTwcKjwWnhE\r\nU2tzhUY7kjmXurAY00gsENZuiTDD1LReZq8vgrQ7I0ayaWMIBH+wOFQED7HK\r\nOlpnp05BCoQbZYDijqku/3M/vYkcpbOq4PBfEU9zMMM3lQmAShKx+E6U9Wqv\r\nf0mzRaArtuLLCTAEqBtO7DYATth1mDyZZWCn+6qOe3hEShFz4Smu/JK98/jy\r\nuq3SUMR724ymDhqNHyZz3aqFtclxT8K6fv91zPRzMUQ4BpJs0ckMo0LogTJ8\r\noIV1YjhDcfN1++RMgHtGS3t4HDcBmENYLce1+S9amApRm4LIxkvBIqaV2onV\r\nPyi1K9bb4fcn4zU2Tb8JwFoP4dd5voKgFpsIqguo5yOzdVvSieME3b1f6b33\r\nCYQsAA4jVU/vcH13Z2dUZKP3JPYHk0h6lj8DldUfZge0f/TtPlCHXGG+JItJ\r\nwgVBVCy2YWBmjN4PDmysFk0oPIlngn7S8uk=\r\n=JqmR\r\n-----END PGP SIGNATURE-----\r\n"
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEUCIQC3wwgkmMy7cl3jbOilqgOTh+zC4AcA04jjtpa56vq8YAIgIlIRSgvLT9Gq4czS0S66AaaGDQz/HH2T6NxhWwXGa/g="
+        5.6.1: 
+          name: "fastify-cookie"
+          version: "5.6.1"
+          dependencies: 
+            cookie-signature: "^1.1.0"
+            fastify-plugin: "^3.0.1"
+          devDependencies: 
+            @types/node: "^17.0.16"
+            fastify: "^3.27.1"
+            pre-commit: "^1.2.2"
+            sinon: "^13.0.1"
+            snazzy: "^9.0.0"
+            standard: "^16.0.4"
+            tap: "^16.0.0"
+            tsd: "^0.20.0"
+            typescript: "^4.5.5"
+          dist: 
+            integrity: "sha512-qKFxDOLkrXn2TkxlO/+cK0tWYCTSrJDmuwty6Zl7kD5FtALwcjUHPFzOdR1Gxupb5oWhvbpSHBMx2XS+t9fbQQ=="
+            shasum: "885a15bd7cf459158a6df12a898075cf5e2a3733"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.6.1.tgz"
+            fileCount: 16
+            unpackedSize: 55846
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIHFvhgcjGTS3j7fVxllDWiqIvPBvwKSNpVNqtUSmLpGwAiBL83hkgdLSasPktomJcjOPzkkRxsGcM9gkzb/kntju9w=="
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJiXC9rACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmoWqA//cxg08HnIy+qmrpEBZd/Kbf787pnbZz+GHKpQzDCuIJaQCeW3\r\nVGlDps2JdkRF5+wSa8FZO+FLkBoDUvKNh3lQ8kKbHROI68KXZZBdL1f1j9YX\r\nNPAorpeOwrpMC+ae1gqblm5S0Bb4YGJCtCCsIATTrEuMo0M94GYSfKdxcfpN\r\n36H5JH0F+we8JSsQEqCkXQOLE7nE21SDsKqwHCKok5vj8H2SDdEnm9Mync9J\r\nHyGArxo6mGfR1A2cV7++WTsvXPexZPvw/70oWhRDLMGcSPFUEl5H1k0I4QsZ\r\n7RfnkYBufLcXlRL9tgXKi9w1cXf6gWyxKeQdQE8pG3t0gLEkRhGekPdPRcT8\r\n/wNj1A1o0l72ki0BHAFyQU7cgHAoMRvHk8QsymT/uBj4NLbnky0qulDndBsx\r\nNkM55RRDJ9yU3rPgmxkvXoTeku1l7RK8JAy2GbjTNCe2OSG+G4WkmUeCnqeu\r\nDieYA3XPjwl7xuOzWb0+LEkD59mvrwyRgY+1CFJWxztKKQA5xGD67yZvNK5U\r\n8wxHm/ThqG+jTFmYk0lDTaRtQvYROG0DtB6YeF/CK/pvd4xMQD/qoOWTBVii\r\nTAidte6344J+Xzmh85ciF3wRV6CQgw5veNCL3N638XaVdpT8akzFI1Fbjsee\r\nh0Gup2WtkZ8LjAVXqNpL3rjZAtvOENhuAjg=\r\n=TCwq\r\n-----END PGP SIGNATURE-----\r\n"
+        5.7.0: 
+          name: "fastify-cookie"
+          version: "5.7.0"
+          dependencies: 
+            process-warning: "^1.0.0"
+            fastify-cookie-deprecated: "npm:fastify-cookie@5.6.1"
+          dist: 
+            integrity: "sha512-l9UDkHysfOBdyA2rNkr1DQqe6xFdT3NuT60W+o7ramvuyyIc9kv6VmrhpLeEx29EftVJR9lRpW4Pg8T+RDNBLw=="
+            shasum: "b4c1ce61b5250f2f1915505ae53ec54cd21d6fe2"
+            tarball: "https://registry.npmjs.org/fastify-cookie/-/fastify-cookie-5.7.0.tgz"
+            fileCount: 3
+            unpackedSize: 801
+            signatures: 
+              - 
+                keyid: "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+                sig: "MEQCIDKEWNM7j7NwmAfaROketxEz6mZUep8xBNGBdHaiGL+HAiB6K8JfyJNjefEDFo3mqOgRJdlhxiOB3li3wAuN8DLFvg=="
+            npm-signature: "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJiaULeACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2VmrsqQ/+MeVB4c+hfg4jzk8FsNCvRHHYwplXVa8C/wVUATexOKCpT36X\r\nASmjo+5Z2Zt930Sx89F6DbyiH9lKKcDSVW1MT1FxwVmryje93L+GTEv5WEos\r\nJiVS4WPZNmEuL27DDK86kckRVQMJ1hjgvKnZy8e6Ct0E4VoJvNW0lT0t4dI+\r\nHye/Hbwtg9GxSYNLtu6hiTQQM9rM9Byj5tnPR3I98anubkFMHAolcBo0kntX\r\noGJwYLCZ1ol+mb6aNXCgiyO1bQoHj/lkP4eV9ccUmeKKjhbe3j2evBq3HZjf\r\nsNLx3IvOWcHTMUB2vtHujPU4ogb37uvyz12D6P4bSF0iuMCg8qhKpRQC4d5L\r\nqCIW2/KcTphZn0WRdsTkknOW4fY9wLGE9iS/abdDsOISaj28gqvJx9ekJRPu\r\nsVzoJS0AV5YJnV+oAVj2o39O3j/59xMniwM3Xrv2Hu5IdOwo9kp1MVAHIPvE\r\nZPaFHJCCej9N2k4859+nvcux4jWhGGR7MoHBu3xXxi1QwgJ+ItnNx//aXV2u\r\nZqPGIuiE/Dzjt8xCBD6P+EljMn9e01TVsyspIvbBzwWsNEUqzQQ7vLmCKDry\r\nx/Z/RhLEorS7/txxlXqSnwkahTYiLxy3XjHiU0Xf3AN06Q5e39FHSxu+ntqD\r\nToKvymtWgxFKZCKjLNsaR0fSwMkgTZeVicw=\r\n=85vL\r\n-----END PGP SIGNATURE-----\r\n"
+      modified: "2022-05-02T04:50:25.185Z"
+      cachedAt: 1653977456776
+  7 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/fastify/3.28.0"
+    requester: "/app"
+    status: "found_in_store"
+  8 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/@fastify/ajv-compiler/1.1.0"
+    requester: "/app"
+    status: "resolved"
+  9 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/abstract-logging/2.0.1"
+    requester: "/app"
+    status: "resolved"
+  10 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/avvio/7.2.5"
+    requester: "/app"
+    status: "resolved"
+  11 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/fast-json-stringify/2.7.13"
+    requester: "/app"
+    status: "resolved"
+  12 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/fastify-error/0.3.1"
+    requester: "/app"
+    status: "resolved"
+  13 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/find-my-way/4.5.1"
+    requester: "/app"
+    status: "resolved"

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title id="title">Moma fixed</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style>
+body {
+  background-color: #e0a35e;
+  font-family: monospace;
+}
+</style>
+This page has a brown square app icon *with* a width and height set in the SVG itself.
+<pre id="output"></pre>
+<script src="main.js"></script>

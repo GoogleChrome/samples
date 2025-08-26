@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="blue-192.png">
+    <title>Sunny Cart fullscreen</title>
+    <script>
+      'use strict';
+
+      if (location.protocol === 'https:')
+        navigator.serviceWorker.register("service_worker.js");
+      else
+        location.protocol = 'https:';
+    </script>
+    <style>
+      @media (display-mode: browser) {
+        #browser {
+          background-color: fuchsia;
+        }
+        #browser::after {
+          content: 'browser';
+        }
+      }
+      @media (display-mode: minimal-ui) {
+        #minimal-ui {
+          background-color: yellow;
+        }
+        #minimal-ui::after {
+          content: 'minimal-ui';
+        }
+      }
+      @media (display-mode: standalone) {
+        #standalone {
+          background-color: lime;
+        }
+        #standalone::after {
+          content: 'standalone';
+        }
+      }
+      @media (display-mode: fullscreen) {
+        #fullscreen {
+          background-color: aqua;
+        }
+        #fullscreen::after {
+          content: 'fullscreen';
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h3><a href="index.html">Sunny Cart</a></h3>
+    <span id="browser"></span>
+    <span id="minimal-ui"></span>
+    <span id="standalone"></span>
+    <span id="fullscreen"></span>
+  </body>
+</html>

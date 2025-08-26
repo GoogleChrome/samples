@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+  <title id="title">Invalid note taking in manifest</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image+xml/svg" href="yielding-large-chef.png">
+</head>
+<style>
+  body {
+  background-color: #8FF;
+  font-family: monospace;
+  color: black;
+}
+</style>
+<h1>Invalid note taking in manifest</h1>
+<img src="yielding-large-chef.png"><br>
+This page should be installable,
+<b>but should show warnings in dev tools</b>.<br>
+This page's manifest declares a "new note URL" to indicate it's a note-taking app.<br>
+On supporting systems, you should be able to use system integration to take a new note.<br><br>
+If you want a hard-coded note-taking app,
+<a href="..">try this one</a>.
+<script>
+  navigator.serviceWorker.register('sw.js');
+</script>

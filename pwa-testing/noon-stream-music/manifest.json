@@ -1,0 +1,18 @@
+{
+  "name": "Noon Stream Music",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "icons": [{
+    "src": "noon-stream-music.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml",
+    "purpose": "maskable any"
+  }],
+  "scope_extensions": [{
+    "origin": "https://alancutter.github.io/"
+  }],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
+}

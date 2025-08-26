@@ -1,0 +1,31 @@
+{
+  "short_name": "PRY FH Demo",
+  "name": "PRY FH Demo",
+  "icons": [
+    {
+      "src": "favicon-144x144.png",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#8888FF",
+  "display": "standalone",
+  "scope": "/",
+  "file_handlers": [
+    {
+      "action": "/index.html?plaintext",
+      "name": "Plain Text",
+      "accept": {
+        "text/plain": [".txt", ".md", ".csv", ".text"]
+      }
+    },
+    {
+      "action": "/index.html?image",
+      "accept": {
+        "image/jpeg": [".jpeg", ".jpg"]
+      },
+      "launch_type": "multiple-clients"
+    }
+  ],
+  "theme_color": "#9aca42"
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Badging API Demo</title>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="theme-color" content="#3f51b5">
+    <link rel="manifest" href="./manifest.json">
+    <script>
+      // Redirect to HTTPS if HTTP is requested.
+      if (window.location.protocol === 'http:') {
+        window.location.href = 'https:' + window.location.href.substring(5);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>
+      App Badging API Demo
+    </h1>
+
+    <p>
+      The <a href="https://web.dev/badging-api/">App Badging API</a> is a new web
+      platform API that allows installed web apps to set an application-wide
+      badge, shown in an operating-system-specific place associated with the
+      application (such as the shelf or home screen).
+    </p>
+
+    <p>
+      Unless manually set (See <em>Set app badge in page</em>), the badge
+      shows the number of requests that have been made and intercepted
+      by the service worker since it started.
+    </p>
+
+    <p id="notSupported">
+      <b>Sorry!</b> This browser doesn't appear to support the badging API.
+    </p>
+
+    <p id="requiresStandalone">
+      <b>Note:</b> In order for this demo to work, it must be an installed
+      Progressive Web App.
+      <br><br>
+      <button id="butInstall" type="button" disabled>
+        Install
+      </button>
+    </p>
+
+    <h3>
+      Set app badge in page
+    </h3>
+    <div id="demoControls">
+      <label for="badgeVal">Badge value</label>
+      <input type="number" id="badgeVal" placeholder="<number>" min="0" value="42" disabled />
+      <br>
+      <button id="butSet" type="button" disabled>
+        Set
+      </button>
+      <button id="butClear" type="button" disabled>
+        Clear
+      </button>
+    </div>
+
+    <h3>
+      Set app badge in background (via service worker)
+    </h3>
+    <div>
+      <p>
+        Increment the badge value by opening another window to this page, or
+        clicking the  <b>Make XHR</b> button.
+      </p>
+      <button id="butMakeXHR" type="button" disabled>
+        Make XHR
+      </button>
+    </div>
+
+    <h3>
+      Show notification
+    </h3>
+    <div id="demoControls2">
+      <button id="notSet" type="button">
+        Show
+      </button>
+      <button id="notClear" type="button">
+        Clear
+      </button>
+    </div>
+
+
+
+
+
+    <p>
+      Check out the
+      <a href="https://glitch.com/edit/#!/badging-api?path=demo.js:46:0" target="_blank">source</a>
+      for this sample, or
+      <a href="https://glitch.com/edit/#!/remix/badging-api" target="_blank">remix it</a> on Glitch.
+    </p>
+
+    <script src="common.js"></script>
+    <script src="demo.js"></script>
+
+  </body>
+</html>

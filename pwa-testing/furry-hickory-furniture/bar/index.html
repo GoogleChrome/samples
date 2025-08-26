@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+  if (window.location.protocol != "https:") {
+    window.location.protocol = "https:";
+  }
+</script>
+<head>
+  <link rel="manifest" href="bar_manifest.webmanifest">
+</head>
+<div>
+  <h1>Manifest Unique ID Tester - BAR PAGE</h1>
+</div>
+<div>
+  This page is bar/index.html. It also hosts a manifest to test the scope configuration of the parent webapp.
+</div>
+<ul>
+  <li><a href="./index.html">/index.html</a></li>
+  <li><a href="./foo/index.html">/foo/index.html</a></li>
+  <li>
+    <a href="./bar/index.html">/bar/index.html</a>
+  </li>
+</ul>

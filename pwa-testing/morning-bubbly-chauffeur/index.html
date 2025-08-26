@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="Description" content="A super basic file handling demo" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#9aca42" />
+    <!-- Should match with theme_color in manifest.json -->
+    <!-- File Handling token from ./generate_token.py -->
+    <meta
+      http-equiv="origin-trial"
+      name="file-handling"
+      content="Aw+on2fMN4Tws+WVZKUGbOQYKsSz4rCqrKi7CVklSDaLUyuShfeBmWHJ8Yobsk+WHlX60v/uHiCKmhhZCSz5RA0AAABteyJvcmlnaW4iOiAiaHR0cHM6Ly9tb3JuaW5nLWJ1YmJseS1jaGF1ZmZldXIuZ2xpdGNoLm1lOjQ0MyIsICJmZWF0dXJlIjogIkZpbGVIYW5kbGluZyIsICJleHBpcnkiOiAxNjIzOTY4MjY2fQ=="
+    />
+    <link rel="manifest" href="./manifest.json" />
+    <title>File Handling Demo (morning-bubbly-chauffeur)</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" type="module" async></script>
+  </head>
+  <body>
+    <h1>
+      File Handling Demo (morning-bubbly-chauffeur)
+    </h1>
+    <div class="section">
+      <h2>
+        Instructions
+      </h2>
+      <ol>
+        <li>
+          Be running a Chromium browser on a desktop OS (ex. Chrome/Edge on ChromeOS/Windows).
+        </li>
+        <li>Install the site as a PWA</li>
+        <li>
+          Ensure Chrome is launched with the command line flag
+          `--enable-features=FileHandlingAPI`, or that
+          chrome://flags/#file-handling-api is enabled
+        </li>
+        <li>
+          You should see an option in the right click menu to open files with
+          `File Handling Demo`
+        </li>
+      </ol>
+    </div>
+    <div class="section hide" id="problems">
+      <h2>
+        Problems
+      </h2>
+      <ul>
+        <li class="error" id="file-handling-problem">
+          FileHandling is not available (ensure Chrome was started with
+          --enable-features=FileHandlingAPI)
+        </li>
+        <li class="error" id="file-system-problem">
+          NativeFileSystem is not available (ensure Chrome was started with
+          --enable-features=NativeFileSystemAPI)
+        </li>
+      </ul>
+    </div>
+    <div class="section hide" id="manifest-types-mime">
+      <h2>
+        Manifest File Types (MIME):
+      </h2>
+      <ul id="manifest-types-mime-list"></ul>
+    </div>
+    <div class="section hide" id="manifest-types-extension">
+      <h2>
+        Manifest File Types (Extension):
+      </h2>
+      <ul id="manifest-types-extension-list"></ul>
+    </div>
+    <div class="section hide" id="launch-files">
+      <h2>
+        Launched Files
+      </h2>
+      <div id="editors-container"></div>
+    </div>
+    <div class="section hide" id="opened-files">
+      <h2>
+        Opened Files
+      </h2>
+      <p>
+        Files which can be edited and saved back to the file system.
+      </p>
+      <div id="opened-editors-container"></div>
+      <button id="open-files-button">
+        Open File
+      </button>
+      <button id="open-folder-button">
+        Open Folder
+      </button>
+    </div>
+    <div class="section">
+      <p>
+        View Source (or fork) on
+        <a
+          href="https://glitch.com/edit/#!/morning-bubbly-chauffeur"
+          target="_blank"
+          >Glitch</a
+        >
+      </p>
+    </div>
+  </body>
+  <template id="file-editor-template">
+    <div>
+      <h3>File: <span name="file-name"></span></h3>
+      <textarea
+        name="file-contents"
+        cols="80"
+        rows="10"
+        style="white-space: pre-wrap"
+      >
+      </textarea>
+      <br />
+      <button name="save-button">Save</button>
+      <button name="delete-button">Delete</button>
+      <br />
+    </div>
+  </template>
+</html>

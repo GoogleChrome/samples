@@ -1,0 +1,13 @@
+{
+  "name": "Soft Puppy",
+  "description": "Puppies are soft.",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "scope": "/",
+  "icons": [{
+    "src": "spicon.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

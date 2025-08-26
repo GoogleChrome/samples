@@ -1,0 +1,20 @@
+{
+  "name": "Relative Start URL",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#789ABC",
+  "description": "Testing site for relative start URLs in web manifests",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "emphasised-shell-feeling.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "emphasised-shell-feeling%20(1).png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}

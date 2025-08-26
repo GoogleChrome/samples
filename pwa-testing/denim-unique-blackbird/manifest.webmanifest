@@ -1,0 +1,42 @@
+{
+  "name": "Slick Blackbirb",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#a0532e",
+  "description": "Sick Blackbirb rocking some unique denims",
+  "scope": "/",
+  "icons": [{
+    "src": "BlackbirdJeans_144.svg",
+    "sizes": "any",
+    "type": "image/svg+xml"
+  }],
+  "shortcuts": [
+    {
+      "name": "Smol Birb",
+      "url": "/",
+      "icons": [
+        {
+          "src": "BlackbirdJeans_144.jpeg",
+          "sizes": "0x0",
+          "type": "image/svg+xml",
+          "purpose": "any monochrome"
+        }
+      ]
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/?plaintext",
+      "name": "Plain Text",
+      "icons": [
+        {
+          "src": "BlackbirdJeans_144.svg",
+          "sizes": "any"
+        }
+      ],
+      "accept": {
+        "image/txt": [".txt", ".md", ".csv"]
+      }
+    }
+  ]
+}

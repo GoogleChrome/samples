@@ -1,0 +1,12 @@
+{
+  "name": "Glossy Cuboid Attention",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#c837ab",
+  "scope": "/",
+  "icons": [{
+    "src": "https://cdn.glitch.me/e581f14b-5939-4b7a-9e55-4684865a1a48%2Fglossy-cuboid-attention.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

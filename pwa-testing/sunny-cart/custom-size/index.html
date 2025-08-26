@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="s2.png">
+    <title>Custom Size</title>
+    <script>
+      'use strict';
+    function create_file(prefix, extension, content_type, content) {
+      const name = prefix + extension;
+      const options = {type: content_type};
+      return new File([content], name, options);
+    }
+
+    async function createShareData() {
+      const flags = 2;
+      let files = [];
+      let shareData = { files: files };
+      if (flags & 1) {
+        shareData.text = 'Message';
+      }
+      if (flags & 2) {
+        const count = parseInt(document.getElementById('bytes').value);
+        files.push(create_file('readme', '.txt', 'text/plain', '.'.repeat(count)));
+      }
+      if (flags & 4) {
+        const content = '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96"><rect width="96" height="96" fill="indigo"/></svg>';
+        files.push(create_file('square', '.svg', 'image/svg+xml', content));
+      }
+      return shareData;
+    }
+
+    window.onload = () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      } else {
+        location.protocol = 'https:';
+      }
+
+      const share = document.getElementById('share');
+      if (!('share' in navigator)) {
+        share.style.display = 'none';
+        return;
+      }
+
+      share.onclick = async () =>
+          navigator.share(await createShareData()).catch(() => {});
+    }
+    </script>
+  </head>
+  <body>
+    <input id="bytes" type="text" value="52428800">
+    <button id="share">share</button>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Soft Puppy</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta id="themeColor" name="theme-color" content="#000000" />
+  <link rel="icon" type="image/png" href="spicon.png">
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+<img src="spicon.png">
+<pre id="output"></pre>
+<script src="main.js"></script>

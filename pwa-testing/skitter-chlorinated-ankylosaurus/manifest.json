@@ -1,0 +1,11 @@
+{
+  "name": "Skitter Chlorinated Ankylosaurus",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#d45500",
+  "icons": [{
+    "src": "skitter-chlorinated-ankylosaurus.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

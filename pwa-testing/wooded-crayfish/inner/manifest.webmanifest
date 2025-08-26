@@ -1,0 +1,12 @@
+{
+  "name": "Inner Wooded Crayfish",
+  "start_url": "/inner/index.html",
+  "display": "standalone",
+  "theme_color": "#d59712",
+  "scope": "/inner",
+  "icons": [{
+    "src": "inner-wooded-crayfish.png",
+    "sizes": "155x155",
+    "type": "image/png"
+  }]
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Updating Web Share</title>
+
+    {{#if mimeType}}
+      <link rel="manifest" href="./manifest.json?mime={{mimeType}}" />
+    {{/if}}
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Hello Web Share!</h1>
+
+        <div class="mime-form">
+
+          <p>
+            What file type should we allow in shares?
+          </p>
+          <p>
+            <button><a href="./?mime=image/*">Images</a></button>
+            <button><a href="./?mime=video/*">Videos</a></button>
+            <button><a href="./?mime=*/*">Everything</a></button>
+          </p>
+
+            <form class="mime-entry" method="GET">
+              <label for="mime">
+                Custom:
+                <input id="mime" name="mime" required="required" type="text" placeholder="image/*"><button type="submit">Submit</button>
+              </label>
+            </form>
+
+            <p>
+              Current MIME type in manifest: <b>{{mimeType}}</b>
+            </p>
+        </div>
+
+        <div>
+          <p>
+            How to make a manifest update work on Chrome OS:
+          </p>
+          <ol>
+            <li>Install the app</li>
+            <li>Select a new file type from the options above</li>
+            <li>
+              With the app still open, log out and log back in. Allow session restore to bring
+              back the PWA window. This is necessary to work around manifest update throttling.
+            </li>
+            <li>
+              Close the PWA window. The manifest update should have been applied, you can check
+              this in chrome://internals/web-app.
+            </li>
+          </ol>
+          <p>
+            On a dev mode device, you can use the switch --disable-manifest-update-throttle
+            to remove the need for step 3.
+          </p>
+        </div>
+      </div>
+      <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('sw.js');
+        });
+      }
+    </script>
+
+    <footer>
+      Contact tsergeant@chromium for questions about the site.
+    </footer>
+  </body>
+</html>

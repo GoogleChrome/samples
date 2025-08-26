@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <div id="output">
+  </div>
+  <script>
+    let output_div;
+    let cache;
+    
+    const fast_url = new URL("/empty.txt", location).href;
+    const slow_url = new URL("/dynamic/slow.html", location).href;
+    const large_url = "/resource/large.txt";
+    const large2_url = "/resource/large2.txt";
+    
+    labels = {};
+    labels[fast_url] = "fast_url";
+    labels[slow_url] = "slow_url";
+    
+    function out(line, opts = {}) {
+      console.log(line);
+      let el = document.createElement("span");
+      el.textContent = line;
+      output_div.appendChild(el);
+      if (!opts.continue_line) {
+        el = document.createElement("br");
+        output_div.appendChild(el);
+      }
+    }
+    
+    async function step(func) {
+      out(`Execute:  ${func.toString()}`);
+      return func();
+    }
+    
+    async function on_load() {
+      output_div = document.getElementById("output");
+      await caches.delete("foo");
+      cache = await caches.open("foo");
+      
+      let response_list;
+      await step(async _ => response_list = await Promise.all([fetch(slow_url), fetch(fast_url)]));
+      await step(_ => Promise.all(response_list.map(r => cache.put(r.url, r))));
+      let keys = await step(_ => cache.keys());
+      out(`resulting keys: ${keys.map(k => labels[k.url])}`);
+    }
+    self.addEventListener("load", on_load, { once: true });
+  </script>
+</html>

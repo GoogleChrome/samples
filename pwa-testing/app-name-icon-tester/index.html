@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+  <title id="title"></title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link id="favicon" rel="icon" type="image/png" href="efficient-newt-1.png">
+</head>
+<style>
+  * {
+  font-family: monospace;
+}
+#icon {
+  border-style: solid;
+  border-width: 10px;
+}
+</style>
+<h1>
+  Manifest Name & Icon Update Tester
+</h1>
+<h3>
+  App Name:
+</h3>
+<div id="appName"></div>
+<h3>
+  App Icon:
+</h3>
+<img id="icon">
+<br>
+<h2>
+  Change the manifest!
+</h2>
+Name:
+<select id="appNameSelect">
+  <option>Name From Manifest</option>
+  <option>Second Name From Manifest</option>
+</select><br>
+Icon:
+<select id="iconSelect">
+  <option>efficient-newt-1.png</option>
+  <option>efficient-newt-2.png</option>
+</select><br>
+<script src="main.js"></script>

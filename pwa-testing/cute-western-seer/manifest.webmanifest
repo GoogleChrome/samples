@@ -1,0 +1,50 @@
+{
+  "name": "Cute Western Seer",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#a0532e",
+  "description": "Really Cute Seer",
+  "scope": "/",
+  "icons": [{
+    "src": "Seer144.jpg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }],
+  "screenshots": [
+    {
+      "src": "random.jpeg",
+      "sizes": "1912x1336",
+      "type": "image/jpg",
+      "form_factor": "wide"
+    },
+    {
+      "src": "random_narrow.jpeg",
+      "sizes": "956x668",
+      "type": "image/jpg",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "random2_doesnt_exist.jpeg",
+      "sizes": "1912x1336",
+      "type": "image/jpg",
+      "form_factor": "wide"
+    },
+    {
+      "src": "random2_narrow.jpeg",
+      "sizes": "956x668",
+      "type": "image/jpg",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "random3.jpeg",
+      "sizes": "1912x1336",
+      "type": "image/jpg",
+      "form_factor": "wide"
+    },
+    {
+      "src": "random3_narrow.jpeg",
+      "sizes": "956x668",
+      "type": "image/jpg",
+      "form_factor": "narrow"
+    }]
+}

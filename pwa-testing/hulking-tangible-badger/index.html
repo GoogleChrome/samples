@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title></title>
+  <link rel="manifest">
+  <link rel="icon">
+</head>
+<style>
+  body {
+  font-family: monospace;
+}
+</style>
+<h1></h1>
+<img><br>
+<button>Change</button>
+<script>
+  navigator.serviceWorker.register('sw.js');
+
+function $(selector) {
+  return document.querySelector(selector);
+}
+
+const hulking = JSON.parse(localStorage.getItem('hulking') ?? 'false');
+
+$('button').addEventListener('click', () => {
+  localStorage.setItem('hulking', !hulking);
+  location.reload();
+});
+
+$('title').textContent = hulking ? 'Hulking Tangible Badger' : 'Tangible Badger';
+$('link[rel="manifest"]').href = hulking ? './hulking-manifest.json' : './normal-manifest.json';
+$('link[rel="icon"]').href = hulking ? 'hulking-tangible-badger.svg' : 'normal-tangible-badger.svg';
+$('body').bgColor = hulking ? '#9d7' : '#999';
+$('h1').textContent = $('title').textContent;
+$('img').src = $('link[rel="icon"]').href;
+</script>

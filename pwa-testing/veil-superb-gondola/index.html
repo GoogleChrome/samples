@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title id="title">Veil Superb Gondola</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="veil-superb-gondola.svg">
+</head>
+<style>
+  * {
+  font-family: monospace;
+}
+</style>
+<img src="veil-superb-gondola.svg">
+Veil Superb Gondola<br>
+This site's service worker replaces the main page with plain text.
+<script>
+  navigator.serviceWorker.register('serviceworker.js');
+</script>

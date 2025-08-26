@@ -1,0 +1,43 @@
+{
+  "short_name": "PRY FH Demo with Foo and Bar",
+  "name": "PRY FH Demo with Foo and Bar",
+  "icons": [
+    {
+      "src": "favicon-144x144.png",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#88FFFF",
+  "display": "standalone",
+  "scope": "/",
+  "file_handlers": [
+    {
+      "action": "/index.html?plaintext&first_launch",
+      "name": "Plain Text",
+      "accept": {
+        "text/plain": [".txt", ".md", ".csv", ".text", ".foo", ".bar", ".foobar"]
+      },
+      "icons": [
+        {
+          "src": "plain_text_icon.png",
+          "sizes": "144x144"
+        }
+      ]
+    },
+    {
+      "action": "/index.html?image&first_launch",
+      "accept": {
+        "image/jpeg": [".jpeg", ".jpg"]
+      },
+      "launch_type": "multiple-clients",
+      "icons": [
+        {
+          "src": "jpg-flat.png",
+          "sizes": "144x144"
+        }
+      ]
+    }
+  ],
+  "theme_color": "#9aca42"
+}

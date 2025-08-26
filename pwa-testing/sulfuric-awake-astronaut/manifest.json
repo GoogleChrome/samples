@@ -1,0 +1,15 @@
+{
+  "name": "Web App URL Handlers Sample App",
+  "start_url": "/",
+  "description": "Web App URL sample app.",
+  "theme_color": "#8FF",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "astronaut-icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ],
+  "short_name": "Web App URL"
+}

@@ -1,0 +1,30 @@
+html {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+  color-scheme: dark light;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 1rem;
+}
+
+li {
+  margin-block-end: 1rem;
+}
+
+h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code {
+  font-family: ui-monospace, monospace;
+  font-size: inherit;
+  color: green;
+}

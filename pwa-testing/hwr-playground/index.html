@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Update OT Token if necessary -->
+    <meta http-equiv="origin-trial" content="AnYfDZuLh/E8Y8Zi2gEsIliGHlqY1zifV95+jgyCXyu2VSve5SQ71k+3llNTbMFMtanLBPxEgrBidCAYPUIRxQ4AAABoeyJvcmlnaW4iOiJodHRwczovL2h3ci1wbGF5Z3JvdW5kLmdsaXRjaC5tZTo0NDMiLCJmZWF0dXJlIjoiSGFuZHdyaXRpbmdSZWNvZ25pdGlvbiIsImV4cGlyeSI6MTY1MDA2NzE5OX0=">
+    <title>HWR Playground</title>
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- import the webpage's javascript file -->
+    <!-- <script src="mock-recognizer.js" defer></script> -->
+    <script src="origin-trial-helper.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Handwriting Recognition API Playground</h1>
+    <p>
+      Only
+      <u>mouse inputs</u>
+      are supported now.
+      <br>
+      Touch events may give strange results :)
+    </p>
+    <ul>
+      <li>
+        Draw in the canvas
+      </li>
+      <li>
+        Press "C" key to
+        <a href="#" id="clear-btn">clear the drawing</a>
+      </li>
+      <li>
+        Press "X" key to
+        <a href="#" id="switch-btn">switch language</a>
+        (will also clear the drawing)
+      </li>
+    </ul>
+    <div id="feature-detection-error" style="color: forestgreen">
+      <h4>Steps:</h4>
+      <ol>
+        <li>Have a compatible Chrome OS device, chrome://version command line includes
+          <code>ondevice_handwriting=use_rootfs</code></li>
+        <li>Chrome version &gt;= 91.0.4472.53 / (wait for M92 version)</li>
+        <li id="ot-status"></li>
+        <li>Use
+          <a href="https://hwr-playground.glitch.me/">HTTPS</a></li>
+      </ol>
+    </div>
+    <pre id="status" style="color: crimson"></pre>
+    <canvas id="canvas" style="border: 2px solid black; background-color: #eeeeee;" width="1280" height="400"></canvas>
+    <p>
+      Predictions: (See console for result object, or
+      <code>window.lastResult</code>)
+    </p>
+    <pre id="output"></pre>
+  </body>
+</html>

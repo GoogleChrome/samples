@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Web Share Test
+    </title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+    .error {
+      color: #d22;
+    }
+    input[type="button"] {
+        height: 30px
+    }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Web Share Test
+    </h1>
+    <table>
+      <tr>
+        <td>
+          Title:
+        </td>
+        <td>
+          <input type="checkbox" id="title_checkbox" checked>
+        </td>
+        <td>
+          <input id="title" value="0" size="40">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Text:
+        </td>
+        <td>
+          <input type="checkbox" id="text_checkbox" checked>
+        </td>
+        <td>
+          <input id="text" value="0" size="40">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          URL:
+        </td>
+        <td>
+          <input type="checkbox" id="url_checkbox" checked>
+        </td>
+        <td>
+          <input id="url" value="0" size="40">
+        </td>
+      </tr>
+    </table>
+    <p>
+      <input id="share" type="button" value="Share"> <input id=
+      "share-no-gesture" type="button" value="Share without user gesture">
+    </p>
+    <div id="output"></div>
+    <p>
+      This is a test page for the <a href=
+      "https://w3c.github.io/web-share/">Web Share API</a>. It will only work
+      in browsers that have implemented the API.
+    </p>
+    <script>
+    'use strict';
+
+    function sleep(delay) {
+      return new Promise(resolve => {
+        setTimeout(resolve, delay);
+      });
+    }
+
+    function logText(message, isError) {
+      if (isError)
+        console.error(message);
+      else
+        console.log(message);
+
+      const p = document.createElement('p');
+      if (isError)
+        p.setAttribute('class', 'error');
+      document.querySelector('#output').appendChild(p);
+      p.appendChild(document.createTextNode(message));
+    }
+
+    function logError(message) {
+      logText(message, true);
+    }
+
+    function setShareButtonsEnabled(enabled) {
+      document.querySelector('#share').disabled = !enabled;
+      document.querySelector('#share-no-gesture').disabled = true;
+    }
+
+    function checkboxChanged(e) {
+      const checkbox = e.target;
+      const textfield = document.querySelector('#' + checkbox.id.split('_')[0]);
+
+      textfield.disabled = !checkbox.checked;
+      if (!checkbox.checked)
+        textfield.value = '';
+    }
+
+function extractValue(input) {
+	// return input.disabled ? undefined : input.value;
+  const len = input.disabled ? 0 : parseInt(input.value);
+  if (len > 0) {
+ 		let str =  'x'.repeat(len * 1024);
+    if (input.id == 'url')
+    	str = 'https://jsfiddle.net/?q=' + str;
+    return str;
+  } else {
+  	return undefined;
+  }
+}
+function generateFiles() {
+
+      const content = ['x'.repeat(5 * 1024 * 1024)];
+    const name = 'hello.pjpeg';
+    const options = {type: 'image/x-xbitmap'};
+    return  Array(10).fill(new File(content, name, options));
+  
+}
+      
+    async function testWebShare() {
+      const title_input = document.querySelector('#title');
+      const text_input = document.querySelector('#text');
+      const url_input = document.querySelector('#url');
+
+      const title = extractValue(title_input);
+      const text = extractValue(text_input);
+      const url = extractValue(url_input);
+      let files = generateFiles();
+      setShareButtonsEnabled(false);
+      try {
+        await navigator.share({title, text, url, files});
+        logText('Successfully sent share');
+      } catch (error) {
+        logError('Error sharing: ' + error);
+      }
+      setShareButtonsEnabled(true);
+    }
+
+    async function testWebShareDelay() {
+      setShareButtonsEnabled(false);
+      await sleep(6000);
+      testWebShare();
+    }
+
+    function onLoad() {
+      // Checkboxes disable and delete textfields.
+      document.querySelector('#title_checkbox').addEventListener('click',
+          checkboxChanged);
+      document.querySelector('#text_checkbox').addEventListener('click',
+          checkboxChanged);
+      document.querySelector('#url_checkbox').addEventListener('click',
+          checkboxChanged);
+
+      document.querySelector('#share').addEventListener('click', testWebShare);
+      document.querySelector('#share-no-gesture').addEventListener('click',
+          testWebShareDelay);
+
+      if (navigator.share === undefined) {
+        setShareButtonsEnabled(false);
+        if (window.location.protocol === 'http:') {
+          // navigator.share() is only available in secure contexts.
+          window.location.replace(window.location.href.replace(/^http:/, 'https:'));
+        } else {
+          logError('Error: You need to use a browser that supports this draft ' +
+                   'proposal.');
+        }
+      }
+    }
+
+    window.addEventListener('load', onLoad);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "Outer Tabby",
+  "start_url": "/index.html",
+  "display": "minimal-ui",
+  "theme_color": "#2FF924",
+  "scope": "/",
+  "icons": [{
+    "src": "thumbnails%2FTabbySkywalker.jpg?1697034478604",
+    "sizes": "155x155",
+    "type": "image/png"
+  }]
+}

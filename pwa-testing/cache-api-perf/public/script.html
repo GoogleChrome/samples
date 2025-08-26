@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <body>
+    <div id="output"></div>
+    <script>
+      const url = "/";
+      const reportSeconds = 2.0;
+      
+      const locURL = new URL(window.location);
+      const maxJobs = locURL.searchParams.get("jobs") || 10;
+      const maxEntries = locURL.searchParams.get("entries") || maxJobs;
+      const entryType = locURL.searchParams.get("type") || "search";
+      
+      const expectedSearch = `?jobs=${maxJobs}&entries=${maxEntries}&type=${entryType}`;
+      if (window.location.search != expectedSearch) {
+        window.location.search = expectedSearch;
+      }
+      
+      let outputDiv;
+      function log(text) {
+        if (!outputDiv) {
+          outputDiv = document.getElementById("output");
+        }
+        let line = document.createElement("div");
+        line.textContent = text;
+        outputDiv.appendChild(line);
+      }
+      
+      function makeEntryURL(entry) {
+        if (entryType === "path") {
+          return "/resource/" + entry;
+        } else if (entryType === "both") {
+            return "/resource/" + entry + "?q=" + entry;
+        }
+        return "/?q=" + entry;
+      }
+      
+      async function doMatch(opts) {
+        let entry = ~~(Math.random() * (maxEntries - 1));
+        await opts.cache.match(makeEntryURL(entry));
+        opts.count += 1;
+        let now = performance.now();
+        if (opts.lastReportTime === undefined) {
+          opts.lastReportTime = now;
+        }
+        let elapsedSeconds = (now - opts.lastReportTime) / 1000;
+        if (elapsedSeconds >= reportSeconds) {
+          log(Math.round(opts.count / elapsedSeconds) + " cache.match() calls per second");
+          opts.count = 0;
+          opts.lastReportTime = now;
+        }
+        doMatch(opts);
+      }
+      
+      async function onLoad() {
+        log(`config - jobs:${maxJobs} entries:${maxEntries} type:${entryType}`);
+        log("preparing...");
+        await navigator.serviceWorker.register("script_sw.js");
+        await caches.delete("foo");
+        let cache = await caches.open("foo");
+        let addList = [];
+        for (let i = 0; i < maxEntries; ++i) {
+          addList.push(cache.add(makeEntryURL(i)));
+        }
+        await Promise.all(addList);
+        log("starting...");
+        
+        let opts = { cache, count: 0 };
+        for (let i = 0; i < maxJobs; ++i) {
+          doMatch(opts);
+        }
+      }
+      
+      addEventListener("load", onLoad, { once: true });
+    </script>
+  </body>
+</html>

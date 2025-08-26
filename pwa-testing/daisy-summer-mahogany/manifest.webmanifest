@@ -1,0 +1,12 @@
+{
+  "name": "Daisy Summer Mahogany",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#a13100",
+  "icons": [{
+    "src": "daisy-summer-mahogany.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

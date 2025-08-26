@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="origin-trial" content="AmTD8WPIPsLJCl7hq82u2mWk28V/uh1cAnCs6rACdTPqzfWNwRkFuLq9NweLBQznre4YT8GK7gYFRdDXYDJVqgMAAABmeyJvcmlnaW4iOiJodHRwczovL3BhaW50LXJpZ2h0ZnVsLXBhdGNoLmdsaXRjaC5tZTo0NDMiLCJmZWF0dXJlIjoiV2ViQXBwVGFiU3RyaXAiLCJleHBpcnkiOjE3MTQ1MjE1OTl9">
+    <meta http-equiv="origin-trial" content="Ah5ujupI1563HkuBKxQDykDTZxEc6b/p+v5qEnxUk/4sLBPeTcTnJ8pBLF94lRNWIh5PvatSAEbSxFWA+pGXAQgAAABmeyJvcmlnaW4iOiJodHRwczovL3BhaW50LXJpZ2h0ZnVsLXBhdGNoLmdsaXRjaC5tZTo0NDMiLCJmZWF0dXJlIjoiV2ViQXBwVGFiU3RyaXAiLCJleHBpcnkiOjE3MjI5ODg3OTl9">
+    <title>Paint Rightful Patch</title>
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="paint-rightful-patch.svg"
+      media="(display-mode: tabbed)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="favicon.png"
+    />
+
+    <script>
+      navigator.serviceWorker.register("serviceworker.js");
+    </script>
+    <style>
+      body {
+        background-color: #dcfce7;
+        font-family: monospace;
+      }
+      h1 {
+        color: #000;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Paint Rightful Patch</h1>
+    <h2>Page3</h2>
+    <img
+      src="paint-rightful-patch.svg" style="width:128px;height:128px"
+    /><br/>
+    <p id="url"></p>
+    <script>
+      document.getElementById("url").innerHTML = "Current URL: " + window.location.href;
+    </script>
+
+    <a href="./">Home</a> (<a href="./" target="_blank">target blank</a>)<br/>
+    <a href="./one.html">Page1</a> (<a href="page_1.html" target="_blank">target blank</a>)<br/>
+    <a href="./two.html">Page2</a><br/>
+    <a href="three.html">Page3</a><br/>
+    <br/>
+    <a href="?hello">Home with query params</a><br/>
+    <a href="#">Home with empty hash</a><br/>
+    <a href="#somehash">Home with hash</a><br/>
+    <a href="?query#somehash">Home with query and hash</a><br/>
+    <br/>
+    <a href="https://www.google.com">Out of scope link</a><br/>
+    <a href="https://maize-bustling-reminder.glitch.me">Another out of scope link</a><br/>
+    <br/>
+    <p>
+      .<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>.<br/>
+    </p>
+  </body>
+</html>

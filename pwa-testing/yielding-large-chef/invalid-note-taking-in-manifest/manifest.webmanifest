@@ -1,0 +1,16 @@
+{
+  "name": "Invalid note taking in manifest",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#8FF",
+  "description": "Invalid note taking in manifest",
+  "scope": ".",
+  "icons": [{
+    "src": "yielding-large-chef.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "note_taking": {
+    "new_note_url": "https://yielding-large-chef.glitch.me/new"
+  }
+}

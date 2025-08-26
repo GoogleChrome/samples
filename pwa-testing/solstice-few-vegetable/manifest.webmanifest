@@ -1,0 +1,13 @@
+{
+  "name": "Solstice Few Vegetable",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "theme_color": "#b3b3b3",
+  "description": "Site that demos a manifest being a data url.",
+  "scope": "/",
+  "icons": [{
+    "src": "Solstice%20Few%20Vegetables%20(1).png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

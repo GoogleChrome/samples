@@ -1,0 +1,13 @@
+{
+  "name": "Veil Superb Gondola",
+  "description": "Veil Superb Gondola",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "scope": "/",
+  "icons": [{
+    "src": "veil-superb-gondola.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

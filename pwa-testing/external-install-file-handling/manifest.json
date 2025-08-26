@@ -1,0 +1,10 @@
+{
+  "name": "External Install File Handling Tester",
+  "display": "standalone",
+  "start_url": "/index.html",
+  "icons": [{
+    "src": "ai-icon.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }]
+}

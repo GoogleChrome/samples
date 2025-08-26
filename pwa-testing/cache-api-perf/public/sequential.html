@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <body>
+    <div id="output"></div>
+    <script>
+      const url = "/";
+      const reportSeconds = 2.0;
+      
+      let outputDiv;
+      function log(text) {
+        if (!outputDiv) {
+          outputDiv = document.getElementById("output");
+        }
+        let line = document.createElement("div");
+        line.textContent = text;
+        outputDiv.appendChild(line);
+      }
+      
+      async function doMatch(cache, count, lastReportTime) {
+        await cache.match(url);
+        count += 1;
+        let now = performance.now();
+        if (lastReportTime === undefined) {
+          lastReportTime = now;
+        }
+        let elapsedSeconds = (now - lastReportTime) / 1000;
+        if (elapsedSeconds >= reportSeconds) {
+          log(elapsedSeconds / count + " seconds per Cache.match()");
+          count = 0;
+          lastReportTime = now;
+        }
+        doMatch(cache, count, lastReportTime);
+      }
+      
+      async function onLoad() {
+        log("preparing...");
+        let cache = await caches.open("foo");
+        await cache.add(url);
+        log("starting...");
+        doMatch(cache, 0);
+      }
+      
+      addEventListener("load", onLoad, { once: true });
+    </script>
+  </body>
+</html>

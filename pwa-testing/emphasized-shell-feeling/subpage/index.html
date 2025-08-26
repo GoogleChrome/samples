@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title id="title">Emphasised Shell Feeling</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="emphasised-shell-feeling.png">
+</head>
+<style>
+  body {
+  background-color: #789ABC;
+  font-family: monospace;
+}
+</style>
+This page is for testing relative manifest URLs<br>
+<b>== You are on the subpage now ==</b><br>
+Try installing from the
+<a href="./">root page</a>, the
+<a href="./subpage">subpage without slash</a>, and the
+<a href="./subpage/">subpage with trailing slash</a>,<br>
+and finally, for comparison,
+<a href="./subpage/absolute/">subpage with trailing slash and absolute start_url</a>.<br>
+Take note of where you land when you launch the installed web app.<br>
+<pre id="output"></pre>
+<script src="main.js"></script>

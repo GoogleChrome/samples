@@ -1,0 +1,11 @@
+<link rel="manifest" href="manifest.json">
+<title>Classic Tall Individual</title>
+Classic Tall Individual<br>
+<img src="classic-tall-individual.svg"><br>
+Install this as a PWA and sync it to another device.
+<script>
+  navigator.serviceWorker.register('sw.js');
+if (!document.cookie) {
+  document.cookie = 'normal';
+}
+</script>

@@ -1,0 +1,34 @@
+{
+  "short_name": "File Handling Demo (morning-bubbly-chauffeur)",
+  "name": "File Handling Demo (morning-bubbly-chauffeur)",
+  "icons": [
+    {
+      "src": "favicon-144x144.png",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#8888FF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#9aca42",
+  "file_handlers": [
+    {
+      "action": "/?plaintext",
+      "name": "Plain Text",
+      "icons": [
+        {
+          "src": "Chromium_Material_Icon.png",
+          "sizes": "144x144"
+        },
+        {
+          "src": "favicon-144x144.png",
+          "sizes": "144x144"
+        }
+      ],
+      "accept": {
+        "image/png": [".txt", ".md", ".csv"]
+      }
+    }
+  ]
+}

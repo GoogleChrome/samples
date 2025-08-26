@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Thundering Frigate</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="thunderingfrigate.png">
+  <meta id="themeColor" name="theme-color" content="#c8e1ff" />
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+<img src="thunderingfrigate.png?1552881082871">
+<button id="button">Day mode</button>
+<script src="main.js"></script>

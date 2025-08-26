@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    input {
+      width: 40em;
+    }
+  </style>
+</head>
+<body>
+  <!-- <h2>Response generated {{generation_location}}</h2> -->
+  <form>
+    <table>
+      <tr>
+        <td><label for="target_title">Title:</label></td>
+        <td><input id="target_title" name="target_title" readonly value="{{received_title}}"></input></td>
+      </tr>
+      <tr>
+        <td><label for="target_text">Text:</label></td>
+        <td><input id="target_text" name="target_text" readonly value="{{received_text}}"></input></td>
+      </tr>
+      <tr>
+        <td><label for="target_url">URL:</label></td>
+        <td><input id="target_url" name="target_url" readonly value="{{received_url}}"></input></td>
+      </tr>
+
+      <tr>
+        <td>Images:</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{{received_image_files}}</td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

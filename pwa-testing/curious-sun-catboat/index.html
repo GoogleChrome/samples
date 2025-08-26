@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Curious Sun Catboat</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/png" href="curious-sun-catboat-3.jpeg">
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+<img src="curious-sun-catboat-3.jpeg">
+<pre>Curious Sun Catboat</pre>
+<p>
+  Testing page for PWA with URL params in start_url and scope.
+</p>
+<script>
+navigator.serviceWorker.register('serviceworker.js');
+</script>

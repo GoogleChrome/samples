@@ -1,0 +1,10 @@
+{
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "icons": [{
+    "src": "halved-cubic-postage.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Delirious Twilight Scene",
+  "short_name": "Twilight",
+  "description": "Has a distinct name and short_name",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "delirious-twilight-scene-48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "delirious-twilight-scene-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "delirious-twilight-scene-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+     <meta name="theme-color" content="#111199"> 
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="icon-48.png">
+    <title>Partial Wild - Image Target</title>
+    <script>
+      'use strict';
+
+      function create_file(prefix, extension, content_type, content) {
+        const name = prefix + extension;
+        const options = {type: content_type};
+        return new File([content], name, options);
+      }
+
+      async function share(extension, content_type) {
+        try 
+        {
+          let files = [];
+          if (content_type === '*/*') {
+            const first_file = create_file('sample1', '.mp3', 'audio/mp3', '1,2\n3,4\n');
+            const second_file = create_file('sample2', '.svg', 'image/svg+xml', '3,4\n5,6\n');
+            const third_file = create_file('sample3', '.webm', 'video/webm', '5,6\n7,8\n');
+            files = [first_file, second_file, third_file];
+          } else if (content_type === 'image/svg+xml') {
+            const content =
+            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" >\n<rect x="0" y="0" width="200" height="200" rx="20" fill="red" />\n</svg>';
+            const first_file = create_file('sample1', extension, content_type, content);
+
+            const content2 =
+            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" >\n<rect x="0" y="0" width="200" height="200" rx="20" fill="green" />\n</svg>';
+            const second_file = create_file('sample1', extension, content_type, content2);
+
+            files = [first_file, second_file];
+          } else {
+            const first_file = create_file('sample1', extension, content_type, '1,2\n3,4\n');
+            const second_file = create_file('sample2', extension, content_type, '3,4\n5,6\n');
+            const third_file = create_file('sample3', extension, content_type, '5,6\n7,8\n');
+            files = [first_file, second_file, third_file];
+          }
+          await navigator.share({files: files});
+          return 'share succeeded';
+        } catch(error) {
+          return ('share failed: ' + error);
+        }
+      }
+
+      function addButton(extension, content_type) {
+        const buttons = document.getElementById('buttons');
+        const button = document.createElement('button');
+        button.textContent = 'Share ' + extension;
+        buttons.appendChild(button);
+        button.onclick = () => {
+          share(extension, content_type).then(result => {
+            const div = document.createElement('div');
+            div.textContent = result;
+            document.getElementById('report').appendChild(div);
+          });
+        };
+      }
+
+      function addButtons() {
+        // addButton('.csv', 'text/csv');
+        // addButton('.mp3', 'audio/mp3');
+        addButton('.svg', 'image/svg+xml');
+        // addButton('.webm', 'video/webm');
+        // addButton('multimedia', '*/*');
+      }
+
+      window.onload = () => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register("sw.js");
+
+navigator.serviceWorker.onmessage = (event) => {
+  console.log(event);
+  let imageShare = document.getElementById('image_share');
+  let imageBlob = event.data.file;
+  // Update the UI with the data that has been shared to it.
+  imageShare.src = URL.createObjectURL(imageBlob);
+};
+
+
+        } else {
+          location.protocol = 'https:';
+        }
+
+        if ('share' in navigator)
+          addButtons();
+      }
+    </script>
+  </head>
+  <body>
+    <h3><a href="index.html">Partial Wild Image Target</a></h3>
+    <section id="buttons"></section>
+    <!-- <img id="image_share" alt="shared image" src="" width="200" height="200"> -->
+    <section id="report"></section>
+  </body>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Silk Curse Honey</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta id="themeColor" name="theme-color" content="#ff9d00" />
+  <link rel="icon" type="image/png" href="silk-curse-honey.svg">
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffbde0;
+}
+</style>
+<pre>Silk Curse Honey</pre>
+<img src="silk-curse-honey.svg">
+
+<script>
+window.addEventListener('load', () => {
+  const kReloadKey = 'reloaded';
+  if (!window.localStorage.getItem(kReloadKey)) {
+    window.localStorage.setItem(kReloadKey, true);
+    console.log('Reloading.');
+    window.location.reload();
+  } else {
+    console.log('Already reloaded.');
+  }
+});
+</script>

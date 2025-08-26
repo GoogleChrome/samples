@@ -1,0 +1,13 @@
+{
+  "name": "Excited Dented Seashore",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#a0532e",
+  "description": "Testing Picture in picture vulnerability for dialog occlusions",
+  "scope": "/",
+  "icons": [{
+    "src": "Seashore144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

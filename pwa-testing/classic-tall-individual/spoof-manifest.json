@@ -1,0 +1,10 @@
+{
+  "name": "Classic Spoof Individual",
+  "display": "standalone",
+  "start_url": "/start.html",
+  "icons": [{
+    "src": "classic-tall-individual-spoof.svg",
+    "type": "image/svg+xml",
+    "sizes": "256x256"
+  }]
+}

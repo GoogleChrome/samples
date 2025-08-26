@@ -1,0 +1,13 @@
+{
+  "capture_links": "existing-client-navigate",
+  "display": "minimal-ui",
+  "icons": [
+    {
+      "src": "red-192.png?1616459346014",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Shortcuts",
+  "start_url": "shortcuts.html"
+}

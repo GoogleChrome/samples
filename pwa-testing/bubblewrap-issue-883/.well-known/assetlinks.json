@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "me.glitch.bubblewrap_issue_883.twa",
+    "sha256_cert_fingerprints":
+    ["30:94:4C:9F:25:72:A8:B5:94:7D:AD:A8:A0:31:30:91:AB:0B:8D:88:B6:C5:58:37:BD:82:CB:2B:36:91:38:44"]
+  }
+}]

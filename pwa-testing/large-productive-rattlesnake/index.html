@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Large Productive Rattlesnake</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta id="themeColor" name="theme-color" content="#000000" />
+  <link rel="icon" type="image/png" href="large-productive-rattlesnake.png">
+</head>
+<style>
+* {
+  font-family: monospace;
+}
+:root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+<img src="large-productive-rattlesnake.png">
+<pre id="output"></pre>
+<script src="main.js"></script>

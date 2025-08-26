@@ -1,0 +1,20 @@
+{
+  "name": "Main PWA",
+  "short_name": "Main PWA",
+  "start_url": "./",
+  "id": "./",
+  "icons": [
+    {
+      "src": "https://cdn.glitch.me/d0334cc3-be72-47b5-a25f-d3fbe953f5ff%2Fapple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "257x257"
+    }
+  ],
+  "display": "standalone",
+  "scope_extensions": [
+    {
+      "type": "origin",
+      "origin": "https://associated-pwa-origin-2.glitch.me/"
+    }
+  ]
+}

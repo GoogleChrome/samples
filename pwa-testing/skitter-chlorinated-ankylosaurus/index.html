@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+navigator.serviceWorker.register('sw.js');
+</script>
+<head>
+  <title>Skitter Chlorinated Ankylosaurus</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="skitter-chlorinated-ankylosaurus.svg">
+</head>
+<style>
+  body {
+  font-family: monospace;
+  background-color: #ffd42a;
+}
+</style>
+<h1>Skitter Chlorinated Ankylosaurus</h1>
+<img src="skitter-chlorinated-ankylosaurus.svg"><br>
+This manifest has no start_url.

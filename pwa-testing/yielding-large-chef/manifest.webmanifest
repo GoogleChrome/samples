@@ -1,0 +1,13 @@
+{
+  "name": "YLC Hard-Coded Note-Taking App",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#8FF",
+  "description": "App that is hard-coded in Chrome 91-93 as a note-taking app",
+  "scope": "/",
+  "icons": [{
+    "src": "yielding-large-chef.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Daisy Summer Mahogany</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta id="themeColor" name="theme-color" content="#a13100" />
+  <link rel="icon" type="image/png" href="daisy-summer-mahogany.png">
+</head>
+<style>
+body {
+  background-color: orange;
+}
+* {
+  font-family: monospace;
+}
+</style>
+
+<img src="daisy-summer-mahogany.png"><br>
+window.matchMedia('(display-mode: standalone)').matches == <span id="output"></span><br>
+<a href="https://soft-puppy.glitch.me">External link</a>
+
+<script>
+navigator.serviceWorker.register('sw.js');
+const mediaQueryList = window.matchMedia('(display-mode: standalone)');
+function update() {
+  output.textContent = mediaQueryList.matches;
+}
+update();
+mediaQueryList.addEventListener('change', update);
+</script>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="s4.png">
+    <title>Badging</title>
+    <style>
+      #gallery {
+      visibility: hidden;
+    }
+    div {
+      margin: 20px;
+    }
+    button {
+      width: 70px;
+    }
+    #notify {
+      font-style: italic;
+      font-size: larger;
+    }
+    </style>
+    <script>
+      'use strict';
+    function create_file(prefix, extension, content_type, content) {
+      const name = prefix + extension;
+      const options = {type: content_type};
+      return new File([content], name, options);
+    }
+
+    async function createShareData() {
+      const flags = 4;
+      let files = [];
+      let shareData = { files: files };
+      if (flags & 1) {
+        shareData.text = 'Message';
+      }
+      if (flags & 2) {
+        files.push(create_file('readme', '.txt', 'text/plain', 'Attachment'));
+      }
+      if (flags & 4) {
+        const content = '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96"><rect width="96" height="96" fill="indigo"/></svg>';
+        files.push(create_file('square', '.svg', 'image/svg+xml', content));
+      }
+      return shareData;
+    }
+
+
+    function init(id, handler) {
+      const button = document.getElementById(id);
+      if (button)
+        button.onclick = handler;
+    }
+
+function getDate() {
+  return new Date().toISOString();
+}
+
+function showApiDate() {
+  const apiDate = document.getElementById('api_date');
+  const notificationDate = document.getElementById('notification_date');
+  notificationDate.textContent = '.';
+  apiDate.textContent = 'Badging API called at: ' + getDate();
+}
+
+function showNotificationDate() {
+  const notificationDate = document.getElementById('notification_date');
+  notificationDate.textContent = 'Notification at: ' + getDate();
+}
+
+function setAppBadge(value) {
+  navigator.setAppBadge(value);
+  showApiDate();
+}
+
+function clearAppBadge() {
+  navigator.clearAppBadge();
+  showApiDate();
+  //showApiDate();
+  //navigator.clearAppBadge();
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/notification
+function notifyMe() {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    showNotificationDate();
+    var notification = new Notification("Hi there!");
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        showNotificationDate();
+        var notification = new Notification("Hi there!");
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you
+  // want to be respectful there is no need to bother them any more.
+}
+
+    window.onload = () => {
+      if (window.location.toString() === 'https://super-concrete-tarsal.glitch.me/badging/index.html') {
+        window.location = "https://super-concrete-tarsal.glitch.me/badging/";
+        return;
+      }
+
+      document.getElementById('address').textContent =  window.location.href;
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      } else {
+        location.protocol = 'https:';
+      }
+
+      /*
+      const share = document.getElementById('share');
+      if (!('share' in navigator)) {
+        share.style.display = 'none';
+        return;
+      }
+
+      share.onclick = async () =>
+          navigator.share(await createShareData()).catch(() => {});
+      */
+
+    /*
+      init('set', () => navigator.setAppBadge() );
+      init('clear', () => navigator.clearAppBadge() );
+      init('one', () => navigator.setAppBadge(1) );
+      init('two', () => navigator.setAppBadge(2) );
+      init('three', () => navigator.setAppBadge(3) );
+      init('notify', () => notifyMe() );
+    */
+
+//      init('set', () => setAppBadge() );
+     //  init('clear', () => clearAppBadge() );
+      init('set', () => navigator.setAppBadge() );
+       init('clear', () => navigator.clearAppBadge() );
+      init('one', () => setAppBadge(1) );
+      init('two', () => setAppBadge(2) );
+      init('three', () => setAppBadge(3) );
+      init('notify', () => notifyMe() );
+
+    }
+    </script>
+    <style>
+      canvas {
+      visibility: hidden;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="address">
+    </div>
+    <div id="api_date">
+    </div>
+    <div id="notification_date">
+      .
+    </div>
+    <div>
+      <button id="set">
+        Set
+      </button>
+    </div>
+    <div>
+      <button id="clear">
+        Clear
+      </button>
+    </div>
+    <!--
+  <div>
+    <button id="one">
+      One
+    </button>
+  </div>
+  <div>
+    <button id="two">
+      Two
+    </button>
+  </div>
+  <div>
+    <button id="three">
+      Three
+    </button>
+  </div>
+  -->
+    <div>
+      <button id="notify">
+        Notify
+      </button>
+    </div>
+  </body>
+</html>

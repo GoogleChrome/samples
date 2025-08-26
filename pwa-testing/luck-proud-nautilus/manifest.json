@@ -1,0 +1,15 @@
+{
+  "name": "Luck Proud Nautilus",
+  "icons": [
+    {
+      "src": "proud%20nautilus.png",
+      "type": "image/png",
+      "sizes": "425x425",
+      "purpose": "maskable"
+    }
+  ],
+  "background_color": "#3367D6",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3367D6"
+}

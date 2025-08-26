@@ -1,0 +1,21 @@
+{
+  "name": "Absorbing Immediate Middle",
+  "icons": [
+    {
+      "src": "absorbing-immediate-middle-1.png",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "index.html",
+  "theme_color": "#9AD1F8",
+  "display": "standalone",
+  "translations": {
+    "fr": {
+      "name": "milieu immediat absorbant"
+    },
+    "es": {
+      "name": "absorbente medio inmediato"
+    }
+  }
+}

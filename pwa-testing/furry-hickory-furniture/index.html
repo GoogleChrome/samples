@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<script>
+  // HTTPS Redirect.
+  if (window.location.protocol != "https:") {
+    window.location.protocol = "https:";
+  }
+</script>
+
+<head id="headElement">
+  <title id="title"></title>
+  <link
+    rel="icon"
+    type="image/icon"
+    href="favicon.ico"
+  />
+</head>
+
+<style>
+  * {
+    font-family: monospace;
+  }
+  #icon {
+    border-style: solid;
+    border-width: 10px;
+  }
+</style>
+
+<div>
+  <h1>Manifest Unique ID Tester</h1>
+</div>
+
+<div>
+  <ul>
+    <li><a href="foo/index.html">/foo/index.html</a></li>
+    <li>
+      <a href="bar/index.html">/bar/index.html</a>
+    </li>
+  </ul>
+</div>
+
+<img id="icon" /><br />
+
+<div>
+  <h2>
+    Manifest
+  </h2>
+  <div>Hosted at <span id="manifestUrlOutput"></span></div>
+  <pre id="manifestOutput"></pre>
+</div>
+
+ID:
+<select id="idSelect">
+  <option>None</option>
+  <option>UniqueId1</option>
+  <option>UniqueId2</option>
+</select>
+
+Start URL:
+<select id="startUrlSelect">
+  <option>.</option>
+  <option>/foo/index.html</option>
+  <option>/bar/index.html</option>
+</select>
+
+Scope:
+<select id="scopeSelect">
+  <option>.</option>
+  <option>/foo/</option>
+  <option>/bar/</option>
+</select>
+
+Manifest URL:
+<select id="manifestUrlSelect">
+  <option>manifest.webmanifest</option>
+  <option>manifest2.webmanifest</option>
+  <option>foo/manifest.webmanifest</option>
+  <option>bar/manifest.webmanifest</option>
+</select>
+
+<pre id="output"></pre>
+
+<script src="main.js"></script>
+<script>
+  main();
+</script>
+
+<!-- include the Glitch button to show what the webpage is about and
+      to make it easier for folks to view source and remix -->
+
+<script src="https://button.glitch.me/button.js" defer></script>

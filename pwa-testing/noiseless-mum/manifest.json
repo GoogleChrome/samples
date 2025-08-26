@@ -1,0 +1,16 @@
+{
+  "short_name": "Noiseless Mum",
+  "name": "Noiseless Mum!",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/scope/scoped.html",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/scope/",
+  "theme_color": "#3367D6"
+}

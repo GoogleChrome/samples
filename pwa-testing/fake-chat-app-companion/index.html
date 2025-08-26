@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="fake-chat-companion-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="fake-chat-companion-icon.png"
+    />
+    <title>Fake Chat App Companion</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>
+      <a href="./">Fake Chat App Companion</a> <span class="glitch-remix"></span>
+    </h1>
+    <h2></h2>
+    <div hidden class="not-supported">
+      Your browser does not support the Launch Handler API.
+    </div>
+    <div>
+      <p>
+        This site provides deep links for the
+        <a href="https://chat-app-deep-linking.glitch.me/">Fake Chat App</a> to
+        demonstrate deep linking. These all require that app be installed.
+      </p>
+      <div>
+        <h3>Anchor Links</h3>
+        <ul>
+          <li>
+            <a href="https://chat-app-deep-linking.glitch.me/" target="_blank"
+              >Home page <code>target="_blank"</code></a
+            >
+          </li>
+          <li>
+            <a href="https://chat-app-deep-linking.glitch.me/" target="_self"
+              >Home page <code>target="_self"</code></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chat-app-deep-linking.glitch.me/?chat=alice"
+              target="_blank"
+              >Alice Chat <code>target="_blank"</code></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chat-app-deep-linking.glitch.me/?chat=alice"
+              target="_self"
+              >Alice Chat <code>target="_self"</code></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chat-app-deep-linking.glitch.me/?chat=bob"
+              target="_blank"
+              >Bob Chat <code>target="_blank"</code></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chat-app-deep-linking.glitch.me/?chat=bob"
+              target="_self"
+              >Bob Chat <code>target="_self"</code></a
+            >c
+          </li>
+          <li>
+            <a
+              href="https://chat-app-deep-linking.glitch.me/second-page.html"
+              target="_blank"
+              >Second Page <code>target="_blank"</code></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chat-app-deep-linking.glitch.me/second-page.html"
+              target="_self"
+              >Second Page <code>target="_self"</code></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>Protocol Hanlder Links</h3>
+        <ul>
+          <li>
+            <a href="web+fakechat:?chat=alice" target="_blank"
+              >web+fakechat:alice</a
+            >
+          </li>
+          <li>
+            <a href="web+fakechat:?chat=bob" target="_blank"
+              >web+fakechat:bob</a
+            >
+          </li>
+          <li>
+            <a href="web+fakechat:second-page.html" target="_blank"
+              >web+fakechat:second-page.html</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>Files</h3>
+        <ul>
+          <li>
+            <a
+              href="testmessage.fakechat"
+              download
+              >testmessage.fakechat</a
+            >, which should send a fake chat to 'Alice'.
+          </li>
+          <li>You can make your own files too, it's just simple json.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script src="https://remix.glitch.me/remix.min.js" async></script>
+</html>

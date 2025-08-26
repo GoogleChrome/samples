@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title id="title"></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link id="favicon" rel="icon" type="image/png" href="efficient-newt-1.png">
+</head>
+<style>
+  * {
+  font-family: monospace;
+}
+
+.icon {
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 3px;
+}
+</style>
+<h1>
+  Icon size Tester
+</h1>
+<h3>
+  Current App Name:
+</h3>
+<div id="appName"></div>
+<h3>
+  Current Icons:
+</h3>
+<div id="appIcons"></div>
+<br>
+<h2>
+  Change the manifest!
+</h2>
+<h3>Name:</h3>
+<select id="appNameSelect">
+  <option>App Foo</option>
+  <option>App Bar</option>
+</select><br>
+<h3>Icons</h3>
+<div id="selectBoxes"></div>
+<script src="main.js"></script>
+<!-- include the Glitch button to show what the webpage is about and
+      to make it easier for folks to view source and remix -->
+<!--div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+<script src="https://button.glitch.me/button.js" defer></script-->

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Incandescent Ginger Voyage</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/png" href="craiyon_124501_drawing_of_a_brightly_glowing_ginger_root_on_a_criuse_ship.png">
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+<img src="craiyon_124501_drawing_of_a_brightly_glowing_ginger_root_on_a_criuse_ship.png" width="500" height="500">
+<pre>Incandescent Ginger Voyage</pre>
+<script>
+navigator.serviceWorker.register('serviceworker.js');
+</script>

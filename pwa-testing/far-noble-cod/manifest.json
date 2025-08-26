@@ -1,0 +1,14 @@
+{
+  "name": "Far Noble Cod",
+  "scope": "/",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#d45500",
+  "icons": [
+    {
+      "src": "far-noble-cod.png",
+      "sizes": "144x144",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Hulking Tangible Badger",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "theme_color": "#080",
+  "icons": [{
+    "src": "hulking-tangible-badger.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

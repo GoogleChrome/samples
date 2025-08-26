@@ -1,0 +1,12 @@
+{
+  "name": "Wind Veterinarian A",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#beffff",
+  "scope": "/a/",
+  "icons": [{
+    "src": "windvet.png?1552284022748",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

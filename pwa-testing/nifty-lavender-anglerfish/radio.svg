@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        input {   
+          display: block;
+          width: 30px;
+          height: 30px;
+          margin: 0px;
+        }
+        a:visited {
+          color: red;
+        }
+        a {
+          color: green;
+        }
+      </style>
+      <input type="radio" checked="true"></input>
+    </body>
+  </foreignObject>
+</svg>

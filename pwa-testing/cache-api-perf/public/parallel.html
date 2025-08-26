@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+  <body>
+    <div id="output"></div>
+    <script>
+      const url = "/";
+      const reportSeconds = 2.0;
+      
+      const locURL = new URL(window.location);
+      const maxJobs = locURL.searchParams.get("jobs") || 10;
+      const maxEntries = locURL.searchParams.get("entries") || 100;
+      const entryType = locURL.searchParams.get("type") || "path";
+      const maxBodyReaders = locURL.searchParams.get("bodies") || 0;
+      const reports = locURL.searchParams.get("reports") || 20;
+      
+      const expectedSearch = `?jobs=${maxJobs}&entries=${maxEntries}&type=${entryType}&bodies=${maxBodyReaders}&reports=${reports}`;
+      if (window.location.search != expectedSearch) {
+        window.location.search = expectedSearch;
+      }
+      
+      let outputDiv;
+      function log(text) {
+        if (!outputDiv) {
+          outputDiv = document.getElementById("output");
+        }
+        let line = document.createElement("div");
+        line.textContent = text;
+        outputDiv.appendChild(line);
+      }
+      
+      function makeEntryURL(entry) {
+        if (entryType === "path") {
+          return "/resource/" + entry;
+        } else if (entryType === "both") {
+            return "/resource/" + entry + "?q=" + entry;
+        }
+        return "/?q=" + entry;
+      }
+      
+      function maybeReadBody(opts, response) {
+        opts.pendingBodies.push(response);
+        if (opts.numReaders < maxBodyReaders) {
+          setTimeout(readNextBody, 0, opts);
+        }
+      }
+      
+      async function readNextBody(opts) {
+        if (opts.numReaders >= maxBodyReaders) {
+          return;
+        }
+        opts.numReaders += 1;
+        let response = opts.pendingBodies.pop();
+        while (response && opts.reports > 0) {
+          let text = await response.text();
+          opts.bytesRead += text.length;
+          response = opts.pendingBodies.pop();
+        }
+        opts.numReaders -= 1;
+      }
+      
+      function makeEmptySummary() {
+        return {
+          min: Number.MAX_SAFE_INTEGER,
+          max: 0,
+          total: 0,
+          count: 0,
+        };
+      }
+      
+      function reportSummary(opts) {
+        let summary = {};
+        for(let i = 0; i < opts.stats.length; ++i) {
+          let stats = opts.stats[i];
+          for (let key in stats) {
+            if (!(key in summary)) {
+              summary[key] = makeEmptySummary();
+            }
+            summary[key].count += 1;
+            summary[key].total += stats[key];
+            summary[key].min = Math.min(summary[key].min, stats[key]);
+            summary[key].max = Math.max(summary[key].max, stats[key]);
+          }
+        }
+        for (let key in summary) {
+          let s = summary[key];
+          log(`${key} - min: ${Math.round(s.min)} mean: ${Math.round(s.total / s.count)} max: ${Math.round(s.max)}`);
+        }
+        log("done");
+      }
+      
+      async function doMatch(opts) {
+        if (opts.reports < 1) {
+          return;
+        }
+        let entry = ~~(Math.random() * (maxEntries - 1));
+        let response = await opts.cache.match(makeEntryURL(entry));
+        opts.count += 1;
+        let now = performance.now();
+        if (opts.lastReportTime === undefined) {
+          opts.lastReportTime = now;
+        }
+        let elapsedSeconds = (now - opts.lastReportTime) / 1000;
+        if (elapsedSeconds >= reportSeconds) {
+          let stats = {
+            matchesPerSec: Math.round(opts.count / elapsedSeconds),
+            bodyMegaBytesPerSec: opts.bytesRead / (elapsedSeconds * 1000 * 1000)
+          };
+          opts.stats.push(stats);
+          log(stats.matchesPerSec + " cache.match() calls and " +
+              Math.round(stats.bodyMegaBytesPerSec) + " body MB read per second");
+          opts.count = 0;
+          opts.bytesRead = 0;
+          opts.lastReportTime = now;
+          opts.reports -= 1;
+          if (opts.reports === 0) {
+            reportSummary(opts);
+          }
+        }
+        maybeReadBody(opts, response);
+        doMatch(opts);
+      }
+      
+      async function onLoad() {
+        log("config:");
+        log(` - number of cache.match() jobs: ${maxJobs}`);
+        log(` - number of cache entries: ${maxEntries}`);
+        log(` - resource uniqueness type: ${entryType}`);
+        log(` - number of body readers: ${maxBodyReaders}`);
+        log(` - report count limit: ${reports}`);
+        log("preparing...");
+        await caches.delete("foo");
+        let cache = await caches.open("foo");
+        let addList = [];
+        for (let i = 0; i < maxEntries; ++i) {
+          addList.push(cache.add(makeEntryURL(i)));
+        }
+        await Promise.all(addList);
+        log("starting...");
+        
+        let opts = {
+          cache,
+          count: 0,
+          numReaders: 0,
+          pendingBodies: [],
+          bytesRead: 0,
+          reports,
+          stats: []
+        };
+        
+        for (let i = 0; i < maxJobs; ++i) {
+          doMatch(opts);
+        }
+      }
+      
+      addEventListener("load", onLoad, { once: true });
+    </script>
+  </body>
+</html>

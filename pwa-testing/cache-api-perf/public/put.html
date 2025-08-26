@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <div id="output">
+  </div>
+  <script>
+    let output_div;
+    let cache;
+    
+    const fast_url = "/empty.txt";
+    const slow_url = "/dynamic/slow.html";
+    const large_url = "/resource/large.txt";
+    const large2_url = "/resource/large2.txt";
+    
+    const fast_url_list_20 = [];
+    for (let i = 0; i < 20; ++i) {
+      fast_url_list_20.push(fast_url + "?q=" + i);
+    }
+    
+    const fast_url_list_100 = [];
+    for (let i = 0; i < 100; ++i) {
+      fast_url_list_100.push(fast_url + "?q=" + i);
+    }
+    
+    const large_url_list_20 = [];
+    for (let i = 0; i < 20; ++i) {
+      large_url_list_20.push(large_url + "?q=" + i);
+    }
+    
+    const large_url_list_100 = [];
+    for (let i = 0; i < 100; ++i) {
+      large_url_list_100.push(large_url + "?q=" + i);
+    }
+    
+    function out(line, opts = {}) {
+      console.log(line);
+      let el = document.createElement("span");
+      el.textContent = line;
+      output_div.appendChild(el);
+      if (!opts.continue_line) {
+        el = document.createElement("br");
+        output_div.appendChild(el);
+      }
+    }
+        
+    let pending_promise_list = [];
+    async function race(list) {
+      pending_promise_list = pending_promise_list.concat(list);
+      return Promise.race(list);
+    }
+    
+    async function drain_pending_promise_list() {
+      let pending = pending_promise_list;
+      pending_promise_list = [];
+      return Promise.all(pending);
+    }
+    
+    async function time(func) {
+      out(`${func.toString()}: `, { continue_line: true });
+      let start = performance.now();
+      await func();
+      let elapsed = performance.now() - start;
+      out(`${Math.round(elapsed)}ms`, "span");
+      
+      await drain_pending_promise_list();
+    }
+    
+    async function on_load() {
+      output_div = document.getElementById("output");
+      cache = await caches.open("foo");
+
+      await time(_ => cache.add(fast_url));
+      await time(_ => cache.add(large_url));
+      await time(_ => fetch(slow_url));
+      await time(_ => cache.add(slow_url));
+      
+      await time(_ => race([cache.match(large_url), cache.add(fast_url)]));
+      await time(_ => race([cache.match(fast_url), cache.add(large_url)]));
+      
+      await time(_ => race([cache.add(fast_url), cache.match(large_url)]));
+      await time(_ => race([cache.add(large_url), cache.match(fast_url)]));
+      
+      await time(_ => fetch(large_url).then(r => race([cache.put(large_url, r), cache.match(fast_url)])));
+      await time(_ => fetch(large_url).then(r => race([cache.match(fast_url), cache.put(large_url, r)])));
+
+      
+      await time(_ => Promise.all([fetch(large_url), fetch(large2_url)]).then(r => race([cache.put(large_url, r[0]), cache.put(large2_url, r[1]), cache.match(fast_url)])));
+      await time(_ => Promise.all([fetch(large_url), fetch(large2_url)]).then(r => race([cache.match(fast_url), cache.put(large_url, r[0]), cache.put(large2_url, r[1])])));
+      await time(_ => Promise.all([fetch(large_url), fetch(large2_url)]).then(r => { cache.put(large_url, r[0]); cache.put(large2_url, r[1]); return cache.match(fast_url); }));
+            
+      out("populating response lists");
+      let fast_response_list_20 = await Promise.all(fast_url_list_20.map(url => fetch(url)));
+      let fast_response_list_100 = await Promise.all(fast_url_list_100.map(url => fetch(url)));
+      let large_response_list_20 = await Promise.all(large_url_list_20.map(url => fetch(url)));
+      let large_response_list_100 = await Promise.all(large_url_list_100.map(url => fetch(url)));
+      
+      await Promise.all(fast_response_list_20.map(response => response.clone().text()));
+      await Promise.all(fast_response_list_100.map(response => response.clone().text()));
+      await Promise.all(large_response_list_20.map(response => response.clone().text()));
+      await Promise.all(large_response_list_100.map(response => response.clone().text()));
+      
+      await time(_ => Promise.all(fast_response_list_20.map(response => cache.put(response.url, response.clone()))));
+      await time(_ => Promise.all(fast_response_list_100.map(response => cache.put(response.url, response.clone()))));
+      await time(_ => Promise.all(large_response_list_20.map(response => cache.put(response.url, response.clone()))));
+      await time(_ => Promise.all(large_response_list_100.map(response => cache.put(response.url, response.clone()))));
+   
+      await time(_ => race([cache.match(fast_url)].concat(fast_response_list_20.map(response => cache.put(response.url, response.clone())))));
+      await time(_ => race([cache.match(fast_url)].concat(fast_response_list_100.map(response => cache.put(response.url, response.clone())))));
+      await time(_ => race([cache.match(fast_url)].concat(large_response_list_20.map(response => cache.put(response.url, response.clone())))));
+      await time(_ => race([cache.match(fast_url)].concat(large_response_list_100.map(response => cache.put(response.url, response.clone())))));
+      
+      await time(_ => race(fast_response_list_20.map(response => cache.put(response.url, response)).concat(cache.match(fast_url))));
+      await time(_ => race(fast_response_list_100.map(response => cache.put(response.url, response)).concat(cache.match(fast_url))));
+      await time(_ => race(large_response_list_20.map(response => cache.put(response.url, response)).concat(cache.match(fast_url))));
+      await time(_ => race(large_response_list_100.map(response => cache.put(response.url, response)).concat(cache.match(fast_url))));
+      
+      out("populating response lists");
+      fast_response_list_20 = await Promise.all(fast_url_list_20.map(url => fetch(url)));
+      fast_response_list_100 = await Promise.all(fast_url_list_100.map(url => fetch(url)));
+      large_response_list_20 = await Promise.all(large_url_list_20.map(url => fetch(url)));
+      large_response_list_100 = await Promise.all(large_url_list_100.map(url => fetch(url)));
+      
+      await Promise.all(fast_response_list_20.map(response => response.clone().text()));
+      await Promise.all(fast_response_list_100.map(response => response.clone().text()));
+      await Promise.all(large_response_list_20.map(response => response.clone().text()));
+      await Promise.all(large_response_list_100.map(response => response.clone().text()));
+      
+      await time(_ => race([cache.match(fast_url)].concat(fast_response_list_20.map(response => cache.put(response.url, response)))));
+      await time(_ => race([cache.match(fast_url)].concat(fast_response_list_100.map(response => cache.put(response.url, response)))));
+      await time(_ => race([cache.match(fast_url)].concat(large_response_list_20.map(response => cache.put(response.url, response)))));
+      await time(_ => race([cache.match(fast_url)].concat(large_response_list_100.map(response => cache.put(response.url, response)))));
+    }
+    self.addEventListener("load", on_load, { once: true });
+  </script>
+</html>

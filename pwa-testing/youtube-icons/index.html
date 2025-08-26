@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Notifications API Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="theme-color" content="#3f51b5">
+    <link rel="manifest" href="./manifest.json">
+    <script>
+      // Redirect to HTTPS if HTTP is requested.
+      if (window.location.protocol === 'http:') {
+        window.location.href = 'https:' + window.location.href.substring(5);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>
+      Youtube Icons and Notifications API Demo
+    </h1>
+    <p>
+      The
+      <a href="https://notifications.spec.whatwg.org/">Notifications API</a>
+      allows installed web apps to show
+      persistent and
+      <a href="https://github.com/whatwg/notifications/issues/26" target="_blank">non-persistent</a>
+      notification bubbles.
+    </p>
+    <p id="notSupported">
+      <b>Sorry!</b>
+      This browser doesn't appear to support the notifications API.
+    </p>
+    <p id="requiresStandalone">
+      <b>Note:</b>
+      Install this demo as Progressive Web App to see icons and title from web app manifest in all notification bubbles.
+      <br><br>
+      <button id="butInstall" type="button" disabled>
+        Install
+      </button>
+    </p>
+    <h3>
+      Show non-persistent notification
+    </h3>
+    <div id="demoControls2">
+      <button id="notificationShow" type="button">
+        Show
+      </button>
+      <button id="notificationClear" type="button">
+        Clear
+      </button>
+    </div>
+    <h3>
+      Show persistent notification (via service worker)
+    </h3>
+    <div id="demoControls3">
+      <button id="swNotificationShow" type="button">
+        SW Show
+      </button>
+      <button id="swNotificationClear" type="button">
+        SW Clear
+      </button>
+    </div>
+    <p>
+      Check out the
+      <a href="https://glitch.com/edit/#!/notificationsapi?path=demo.js:46:0" target="_blank">source</a>
+      for this sample, or
+      <a href="https://glitch.com/edit/#!/remix/notificationsapiapi" target="_blank">remix it</a>
+      on Glitch.
+    </p>
+    <script src="common.js"></script>
+    <script src="demo.js"></script>
+  </body>
+</html>

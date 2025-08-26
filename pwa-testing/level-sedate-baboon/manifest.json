@@ -1,0 +1,93 @@
+{
+  "name": "Level Sedate Baboon",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "b-16.png",
+      "sizes": "16x16",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "b-24.png",
+      "sizes": "24x24",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "b-32.png",
+      "sizes": "32x32",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "b-48.png",
+      "sizes": "48x48",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "b-64.png",
+      "sizes": "64x64",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "b-128.png",
+      "sizes": "128x128",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "b-256.png",
+      "sizes": "256x256",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "g-16.png",
+      "sizes": "16x16",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "g-24.png",
+      "sizes": "24x24",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "g-32.png",
+      "sizes": "32x32",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "g-48.png",
+      "sizes": "48x48",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "g-64.png",
+      "sizes": "64x64",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "g-128.png",
+      "sizes": "128x128",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "g-256.png",
+      "sizes": "256x256",
+      "purpose": "maskable",
+      "type": "image/png"
+    }
+  ]
+}

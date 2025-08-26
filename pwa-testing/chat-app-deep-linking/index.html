@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="fake-chat-app-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="fake-chat-app-icon.png"
+    />
+    <link rel="manifest" href="./manifest.json" />
+    <title>Fake Chat App</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1><a href="./">Fake Chat App</a> <span class="glitch-remix"></span></h1>
+    <h2></h2>
+    <div hidden class="not-supported">Your browser does not support the Launch Handler API.</div>
+    <div class="container">
+      <div class="left-column">
+        <ul>
+          <li><a href="./" data-target="home" class="dynamic-link">Home</a></li>
+          <li>
+            <a href="./?instructions" data-target="instructions" class="dynamic-link"
+              >Instructions</a
+            >
+          </li>
+          <hr />
+          <li>
+            <a href="./?chat=alice" data-target="alice" class="dynamic-link">Alice</a>
+          </li>
+          <li>
+            <a href="./?chat=bob" data-target="bob" class="dynamic-link">Bob</a>
+          </li>
+          <hr />
+          <li><a href="./second-page.html">Second Page (Normal Link)</a></li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div id="home" class="content-item">
+          <h3>What is this?</h3>
+          <p>
+            This is a fake chat app that can be used to test the various ways of deep-linking into
+            installed PWAs, through
+            <a href="https://developer.chrome.com/docs/capabilities/web-apis/file-handling">files</a
+            >,
+            <a href="https://web.dev/learn/pwa/os-integration#url_protocol_handling"
+              >protocol handling</a
+            >, or navigation capturing (article coming soon).
+          </p>
+          <a href="https://fake-chat-app-companion.glitch.me/" target="_blank">
+            Link to companion site which has test links and files.</a
+          >
+          <br />
+          <button onclick="clearChats()">Reset chats</button>
+        </div>
+        <div id="instructions" class="content-item content-item-hidden">
+          <div>
+            <h3>Setup Instructions</h3>
+            <ol>
+              <li>
+                If the link capturing feature isn't launched yet, enable
+                <code>chrome://flags/#enable-user-navigation-capturing-pwa</code>, with option
+                <code>"Enabled V2, On by default"</code> (remember to revert this later to
+                "Default").
+              </li>
+              <li class="install-instruction">
+                Click <button onclick="install()">install</button> to install this site as a PWA.
+                Note that this re-appears if you have the PWA installed but configured to open in a
+                browser tab.
+              </li>
+              <li>Follow testing instructions below, look at the source code, and poke around!</li>
+            </ol>
+          </div>
+          <div>
+            <h3>Testing Instructions</h3>
+            <ul>
+              <li>
+                Use the cross-origin
+                <a href="https://fake-chat-app-companion.glitch.me/">companion site</a>, which has
+                links with <code>target="_blank"</code> that will be capturable, as well as protocol
+                handling links and files.
+              </li>
+              <li>
+                Use the links on the right side of the page to see how
+                <code>target="_blank"</code> is respected if the link comes from the app.
+              </li>
+              <li>See the log below for how things are working, launchParams are sent, etc.</li>
+            </ul>
+            Check out:
+            <ul>
+              <li>
+                What happens with _blank links from within the app and from the companion site?
+              </li>
+              <li>
+                What happens if you ctrl/shift/middle-click links? From the browser or from the app?
+              </li>
+              <li>What happens if the app is installed, but only open in a browser tab?</li>
+              <li>
+                What happens if the app is installed, but if you turn off the "Open in Window"
+                settings?
+              </li>
+              <li>The source code on glitch.me</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Other Notes</h3>
+            <p>
+              You can change the 'desired window' state of the installed app by going to the app
+              settings (via the toggles menu after installing, or chrome://apps via right-click on
+              the app), and checking / unchecking the 'Open in window' option. All of these APIs
+              will still work, but for a browser tab!
+            </p>
+            <img
+              src="uyVZtLtx52ErPcT.png"
+              alt="How to change the 'open in window' setting for an installed app."
+            />
+            <h3>Caveats</h3>
+            <ul>
+              <li>
+                Currently, files and protocol handling always create a new PWA window (if pwa is
+                configured to open in a new window), but link capturing will use a browser tab if
+                there is one open.
+              </li>
+              <li>
+                Please file bugs
+                <a href="https://issues.chromium.org/issues/new?component=1457043">here</a>, or ask
+                questions on pwa-dev@chromium.org.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="alice" class="content-item content-item-hidden">
+          <h2>Chat with Alice-Bot</h2>
+          <input type="text" id="alice-chat-input" placeholder="Enter message" />
+          <button onclick="sendChatMessage('alice-chat', 'alice-chat-input')">Send</button>
+          <input type="checkbox" id="alice-chat-auto-reply" checked />
+          <label for="alice-chat-auto-reply">Auto reply</label>
+          <div class="chat-container" id="alice-chat"></div>
+        </div>
+        <div id="bob" class="content-item  content-item-hidden">
+          <h2>Chat with Bob-Bot</h2>
+          <input type="text" id="bob-chat-input" placeholder="Enter message" />
+          <button onclick="sendChatMessage('bob-chat', 'bob-chat-input')">Send</button>
+          <input type="checkbox" id="bob-chat-auto-reply" checked />
+          <label for="bob-chat-auto-reply">Auto reply</label>
+          <div class="chat-container" id="bob-chat"></div>
+        </div>
+      </div>
+      <div class="right-column">
+        <h3>Test Links</h3>
+        <ul>
+          <li>
+            <a href="https://fake-chat-app-companion.glitch.me/" target="_blank">Companion Site</a>
+            with links for capturing, protocol handling links, and files.
+          </li>
+          <li>
+            Anchor links, <code>target="_blank"</code>
+            <ul>
+              <li>
+                <a href="./" target="_blank">Home page</a>
+              </li>
+
+              <li>
+                <a href="./?chat=alice" target="_blank">Alice Chat</a>
+              </li>
+              <li>
+                <a href="./?chat=bob" target="_blank">Bob Chat</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Anchor links, <code>target="_self"</code>
+            <ul>
+              <li>
+                <a href="./" target="_self">Home page</a>
+              </li>
+              <li>
+                <a href="./?chat=alice" target="_self">Alice Chat</a>
+              </li>
+              <li>
+                <a href="./?chat=bob" target="_self">Bob Chat</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h3>Logs (this is <span id="client-name"></span>)</h3>
+      <div id="log-container"></div>
+    </div>
+    <button onclick="clearLogs()">Clear logs</button>
+  </body>
+  <script src="https://remix.glitch.me/remix.min.js" async></script>
+</html>

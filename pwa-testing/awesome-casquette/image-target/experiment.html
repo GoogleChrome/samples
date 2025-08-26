@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="icon-48.png">
+    <title>Awesome Casquette Image Target</title>
+    <script>
+      'use strict';
+
+      function create_file(prefix, extension, content_type, content) {
+        const name = prefix + extension;
+        const options = {type: content_type};
+        return new File([content], name, options);
+      }
+
+      async function share(extension, content_type) {
+        try 
+        {
+          let files = [];
+          if (content_type === '*/*') {
+            const first_file = create_file('sample1', '.mp3', 'audio/mp3', '1,2\n3,4\n');
+            const second_file = create_file('sample2', '.svg', 'image/svg+xml', '3,4\n5,6\n');
+            const third_file = create_file('sample3', '.webm', 'video/webm', '5,6\n7,8\n');
+            files = [first_file, second_file, third_file];
+          } else if (content_type === 'image/svg+xml') {
+            const content =
+            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" >\n<rect x="0" y="0" width="200" height="200" rx="20" fill="red" />\n</svg>';
+            const first_file = create_file('sample1', extension, content_type, content);
+
+            const content2 =
+            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" >\n<rect x="0" y="0" width="200" height="200" rx="20" fill="green" />\n</svg>';
+            const second_file = create_file('sample2', extension, content_type, content2);
+
+            files = [first_file, second_file];
+          } else {
+            const first_file = create_file('sample1', extension, content_type, '1,2\n3,4\n');
+            const second_file = create_file('sample2', extension, content_type, '3,4\n5,6\n');
+            const third_file = create_file('sample3', extension, content_type, '5,6\n7,8\n');
+            files = [first_file, second_file, third_file];
+          }
+          await navigator.share({/*files: files, */ title: "Subject",  url: "https://example.com/abc"});
+          return 'share succeeded';
+        } catch(error) {
+          return ('share failed: ' + error);
+        }
+      }
+
+      async function share_blobs(extension, content_type, first_blob, second_blob) {
+        try 
+        {
+          const first_file = create_file('sample1', extension, content_type, first_blob);
+          const second_file = create_file('sample2', extension, content_type, second_blob);
+          const files = [first_file]; // , second_file];
+          await navigator.share({files: files, title: "Subject",  url: "https://example.com/abc"});
+          return 'share succeeded';
+        } catch(error) {
+          return ('share failed: ' + error);
+        }
+      }
+
+      function addButton(extension, content_type) {
+        const buttons = document.getElementById('buttons');
+        const button = document.createElement('button');
+        button.textContent = 'Share ' + extension;
+        buttons.appendChild(button);
+        button.onclick = () => {
+          share(extension, content_type).then(result => {
+            const div = document.createElement('div');
+            div.textContent = result;
+            document.getElementById('report').appendChild(div);
+          });
+        };
+      }
+
+      function addCanvasButton(extension, content_type) {
+        const buttons = document.getElementById('buttons');
+        const button = document.createElement('button');
+        button.textContent = 'Share ' + extension;
+        buttons.appendChild(button);
+        button.onclick = () => {
+          const first_canvas = document.getElementById('first_canvas');
+          const second_canvas = document.getElementById('second_canvas');
+          let ctx = first_canvas.getContext('2d');
+          ctx.fillStyle = 'red';
+          ctx.fillRect(0, 0, 200, 200);
+          ctx = second_canvas.getContext('2d');
+          ctx.fillStyle = 'green';
+          ctx.fillRect(0, 0, 200, 200);
+
+          first_canvas.toBlob(async (first_blob) => {
+            second_canvas.toBlob(async (second_blob) => {
+              share_blobs(extension, content_type, first_blob, second_blob).then(result => {
+                const div = document.createElement('div');
+                div.textContent = result;
+                document.getElementById('report').appendChild(div);
+              });
+            }, content_type);
+          }, content_type);
+        };
+      }
+
+      function addButtons() {
+        addCanvasButton('.jpeg', 'image/jpeg');
+        addCanvasButton('.png', 'image/png');
+        addButton('.svg', 'image/svg+xml');
+        addCanvasButton('.webp', 'image/webp');
+      }
+
+      window.onload = () => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register("sw.js");
+        } else {
+          location.protocol = 'https:';
+        }
+
+        if ('share' in navigator)
+          addButtons();
+      }
+    </script>
+    <style>
+      canvas {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <h3><a href="index.html">Awesome Casquette Image Target</a></h3>
+    <section id="buttons"></section>
+    <section id="report"></section>
+    <canvas id="first_canvas" width="100" height="100"></canvas>
+    <canvas id="second_canvas" width="100" height="100"></canvas>
+  </body>
+</html>

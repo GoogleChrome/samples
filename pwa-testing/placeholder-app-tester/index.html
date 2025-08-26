@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<script>
+  // HTTPS Redirect.
+  if (window.location.protocol != "https:") {
+    window.location.protocol = "https:";
+  }
+</script>
+
+<head id="headElement">
+  <title id="title">Placeholder App Tester - Instructions</title>
+  <link
+    rel="icon"
+    type="image/icon"
+    href="favicon.ico"
+  />
+</head>
+
+<style>
+  p,
+  div,
+  h1,
+  h2,
+  h3 {
+    font-family: Roboto, sans-serif;
+  }
+  #icon {
+    border-style: solid;
+    border-width: 10px;
+  }
+</style>
+
+<div>
+  <h1>Placeholder App Tester - Instructions</h1>
+</div>
+
+<div>
+  <button onclick="startRedirection()">Start App Redirection</button>
+  <button onclick="stopRedirection()">Stop App Redirection</button>
+</div>
+
+<div>
+  <h2>
+    <a href="./app/index.html">Navigate to the app.</a>
+  </h2>
+</div>
+
+<div>
+  <h2>Setup</h2>
+  <ul>
+    <li>Have a managed user account.</li>
+    <li>Delete any existing chrome profile for this account.</li>
+    <li>
+      Ensure that the app url here is not in the force install list for this
+      user
+      <ol>
+        <li>Navigate to https://admin.google.com/ac/chrome/apps/</li>
+        <li>Click on "Users and Browsers"</li>
+        <li>
+          Click "Search or add filter" and add a filter for "Installation
+          Policy" = "Force install"
+        </li>
+        <li>
+          <img
+            src="Screen%20Shot%202022-03-31%20at%203.42.52%20PM.png"
+            style="width: 400px"
+          />
+        </li>
+        <li>
+          Verify that https://placeholder-app-tester.glitch.me/app/index.html is
+          not in this list.
+          <ul>
+            <li>It would look like this:</li>
+            <li>
+              <img
+                src="Screen%20Shot%202022-03-31%20at%203.54.31%20PM.png"
+                style="width: 500px"
+              />
+            </li>
+          </ul>
+        </li>
+        <li>
+          If it is, <b>delete that entry</b> by clicking on it, and selecting
+          the trash can in the top right.
+        </li>
+      </ol>
+    </li>
+    <li>Create a new chrome profile and log in to this user</li>
+  </ul>
+</div>
+<div>
+  <h2>Repro steps</h2>
+  <ol>
+    <li>Begin in the new chrome profile created above for the managed user.</li>
+
+    <li>
+      <h3>
+        Make the app redirect all requests to trigger a 'placeholder'
+        installation later.
+      </h3>
+      <ol>
+        <li>
+          Navigate to this site with these instructions.
+          <ul>
+            <li>
+              (<a href="https://placeholder-app-tester.glitch.me/index.html"
+                >https://placeholder-app-tester.glitch.me/index.html</a
+              >)
+            </li>
+          </ul>
+        </li>
+        <li>Click on "Start App Redirection" button at the top of the page</li>
+        <li>
+          Verify that navigating to the app goes to the "REDIRECTION HAS
+          OCCURRED" page by clicking "Navigate to this app" above (or
+          <a href="https://placeholder-app-tester.glitch.me/app/index.html"
+            >here</a
+          >)
+          <ul>
+            <li>
+              If this does not work, try reloading this page, clicking on "Start
+              App Redirection" again, and trying to navigate to the app again.
+            </li>
+            <li>
+              Repeat this until navigating to the app always goes to the
+              "REDIRECTION HAS OCCURRED" page.
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+
+    <li>
+      <h3>Force-install the app from the admin console.</h3>
+      <ol>
+        <li>
+          Navigate to the admin console for the user, at
+          <a href="https://admin.google.com/ac/chrome/apps/"
+            >https://admin.google.com/ac/chrome/apps/</a
+          >.
+        </li>
+        <li>Click on "Users and Browsers"</li>
+        <ol>
+          <li>Click on the "+" icon in the bottom right</li>
+          <li>
+            Paste the URL and select "separate window" from the drop-down box
+            <ul>
+              <li>
+                <b>
+                  <code
+                    >https://placeholder-app-tester.glitch.me/app/index.html</code
+                  ></b
+                >
+              </li>
+              <li>
+                <img
+                  src="Screen%20Shot%202022-03-31%20at%203.01.46%20PM.png"
+                  style="width: 400px"
+                />
+              </li>
+              <li>Click "Save"</li>
+            </ul>
+          </li>
+        </ol>
+      </ol>
+    </li>
+    <li>
+      <h3>
+        Verify a 'placeholder' app is installed with a blank icon and the 'url'
+        name
+      </h3>
+      <ol>
+        <li>Possibly wait 5-10 seconds</li>
+        <li>
+          Verify they have the
+          https://placeholder-app-tester.glitch.me/app/index.html app installed
+          but without the icon or name
+          <ul>
+            <li>
+              App in Finder window (/Users/__username__/Applications/Chrome
+              Apps/)
+            </li>
+            <li>
+              <img
+                src="Screen%20Shot%202022-03-31%20at%204.36.21%20PM.png"
+                style="width: 150px"
+              />
+            </li>
+            <li>App in chrome://apps (no icon, just the text):</li>
+            <li>
+              <img
+                src="Screen%20Shot%202022-03-31%20at%204.37.08%20PM.png"
+                style="width: 200px"
+              />
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <h3>
+        Stop app redirections to allow the placeholder app to be replaced by the
+        'real' app
+      </h3>
+      <ol>
+        <li>
+          Navigate back to this site with these instructions.
+          <ul>
+            <li>
+              (<a href="https://placeholder-app-tester.glitch.me/index.html"
+                >https://placeholder-app-tester.glitch.me/index.html</a
+              >)
+            </li>
+          </ul>
+        </li>
+        <li>Click on "Stop App Redirection" at the top of the page.</li>
+        <li>
+          Click "Navigate to this app" above (or
+          <a href="https://placeholder-app-tester.glitch.me/app/index.html"
+            >here</a
+          >) and verify that the page does NOT go to "REDIRECTION HAS OCCURRED"
+          <ul>
+            <li>
+              If this does not work, try reloading this page, clicking on "Stop
+              App Redirection" again, and trying to navigate to the app again.
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+
+    <li>
+      <h3>
+        Verify the <a href="https://crbug.com/1312061">bug</a> has been
+        reproduced or not.
+      </h3>
+      <ol>
+        <li>
+          The CORRECT behavior should be:
+          <ul>
+            <li>Finder window should show application that looks like this:</li>
+            <li>
+              <img
+                src="Screen%20Shot%202022-03-31%20at%204.49.19%20PM.png"
+                style="width: 100px"
+              />
+            </li>
+            <li>
+              chrome://apps should show an application now that looks like this:
+            </li>
+            <li>
+              <img
+                src="Screen%20Shot%202022-03-31%20at%204.49.19%20PM.png"
+                style="width: 100px"
+              />
+            </li>
+          </ul>
+        </li>
+        <li>
+          If the app icon and name are still the old ones, then the issue has
+          been reproduced!
+        </li>
+      </ol>
+    </li>
+
+    <li>
+      Note: To save time, you can reproduce this again without clearing the
+      whole chrome profile. Instead, you can delete the force-install entry on
+      the admin console, and change the 'redirection' to on again, and re-add
+      the force-install.
+    </li>
+  </ol>
+</div>
+
+<script src="main.js"></script>
+
+<!-- include the Glitch button to show what the webpage is about and
+      to make it easier for folks to view source and remix -->
+<div class="glitchButton" style="position: fixed; top: 20px; right: 20px"></div>
+<script src="https://button.glitch.me/button.js" defer></script>

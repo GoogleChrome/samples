@@ -1,0 +1,36 @@
+{
+  "name": "External Install File Handling Tester",
+  "display": "standalone",
+  "start_url": "/index.html",
+  "icons": [
+    {
+      "src": "ai-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/index.html?plaintext",
+      "name": "Plain Text",
+      "accept": {
+        "text/plain": [
+          ".txt",
+          ".md",
+          ".csv",
+          ".text",
+          ".foo",
+          ".bar",
+          ".foobar",
+          ".turbotax"
+        ]
+      },
+      "icons": [
+        {
+          "src": "ai-icon.png",
+          "sizes": "512x512"
+        }
+      ]
+    }
+  ]
+}

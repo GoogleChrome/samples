@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<script>
+  // HTTPS Redirect.
+  if (window.location.protocol != "https:") {
+    window.location.protocol = "https:";
+  }
+</script>
+<head>
+  <title id="title">Placeholder App Tester - App!</title>
+  <link
+    rel="icon"
+    type="image/icon"
+    href="favicon.ico"
+  />
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<style>
+  p,
+  div,
+  h1,
+  h2,
+  h3 {
+    font-family: Roboto, sans-serif;
+  }
+  #icon {
+    border-style: solid;
+    border-width: 10px;
+  }
+</style>
+
+<div>
+  <h1>App Page!</h1>
+</div>
+<div>
+  This page is the app! If this loads, then the redirection is NOT happening and the app can be installed.
+</div>
+<script src="main.js"></script>
+<ul>
+  <li><a href="./index.html">Back to main page</a></li>
+</ul>

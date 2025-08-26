@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Background Services Demo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <link
+      rel="icon"
+      href="repeated-inexpensive-elephant.png"
+    />
+    <script>
+      // Redirect to HTTPS if HTTP is requested.
+      if (window.location.protocol === "http:") {
+        window.location.protocol = "https:";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Background Services Demo</h1>
+
+    <p id="requiresStandalone">
+      <b>Note:</b> Install this demo as Progressive Web App to ensure background
+      services work.
+    </p>
+
+    <p id="notSupported" class="hidden">
+      <b>Sorry!</b> This browser doesn't appear to support the notifications
+      API.
+    </p>
+
+    <button id="btnBgSync" type="button">Register BG Sync</button>
+    <p>
+      Registering BG Sync will cause the BG process to be started next time the
+      device has network connectivity (may be immediate).
+    </p>
+
+    <h3>Background Tasks Controls:</h3>
+    <button id="btnBgTaskStart" type="button">Start</button>
+    <button id="btnBgTaskStop" type="button">Stop</button>
+    <button id="btnBgTaskEnable" type="button">
+      Enable (without starting)
+    </button>
+
+    <p>
+      Background tasks will print messages to the console, including the service
+      worker console accessible via <i>chrome://serviceworker-internals</i>.
+      This background process will continue until the stop button is pressed, or
+      the browser kills the background work.
+    </p>
+
+    <h3>Show non-persistent notification</h3>
+    <div id="demoControls2">
+      <button id="notificationShow" type="button">Show</button>
+      <button id="notificationClear" type="button">Clear</button>
+    </div>
+
+    <h3>Show persistent notification (via service worker)</h3>
+    <div id="demoControls3">
+      <button id="swNotificationShow" type="button">SW Show</button>
+      <button id="swNotificationClear" type="button">SW Clear</button>
+      <input type="checkbox" id="swUseBadge" />
+      <label for="swUseBadge">Use badge</label>
+    </div>
+
+    <p>
+      Check out the
+      <a
+        href="https://glitch.com/edit/#!/repeated-inexpensive-elephant?path=demo.js"
+        target="_blank"
+        >source</a
+      >
+      for this sample, or
+      <a
+        href="https://glitch.com/edit/#!/remix/repeated-inexpensive-elephant"
+        target="_blank"
+        >remix it</a
+      >
+      on Glitch.
+    </p>
+
+    <img
+      src="repeated-inexpensive-elephant.png"
+      width="256"
+      height="256"
+      title="Repeated Inexpensive Elephant"
+    />
+
+    <script src="common.js"></script>
+    <script src="demo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "Background Services Demo",
+  "short_name": "Background Demo",
+  "description": "Show background capabilities of web apps.",
+  "icons": [
+    {
+      "src": "repeated-inexpensive-elephant.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "repeated-inexpensive-elephant.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "monochrome"
+    }
+  ],
+  "scope": "/",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#e8eaf6",
+  "theme_color": "#3f51b5"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Continuous Harvest Tomato",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#552200",
+  "icons": [{
+    "src": "continuous-harvest-tomato.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }],
+  "capture_links": "new-client"
+}

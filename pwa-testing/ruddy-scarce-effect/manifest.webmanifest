@@ -1,0 +1,13 @@
+{
+  "name": "Ruddy Scarce Effect With a Very Long Name That Definitely Longer than 45 Characters",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#a0532e",
+  "description": "Tree clothes",
+  "scope": "/",
+  "icons": [{
+    "src": "untitled.png",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

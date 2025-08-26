@@ -1,0 +1,34 @@
+{
+  "name": "Fake Chat App",
+  "short_name": "Fake Chat",
+  "start_url": "/",
+  "id": "/",
+  "theme_color": "#000",
+  "background_color": "#000",
+  "icons": [
+    {
+      "src": "fake-chat-app-icon.png",
+      "type": "image/png",
+      "sizes": "257x257"
+    }
+  ],
+  "display": "minimal-ui",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "file_handlers": [
+    {
+      "action": "/",
+      "name": "Send Chat Message",
+      "accept": {
+        "text/plain": [".fakechat"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+fakechat",
+      "url": "/?open-from-protocol=%s"
+    }
+  ]
+}

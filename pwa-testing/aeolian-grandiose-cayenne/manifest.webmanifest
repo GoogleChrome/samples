@@ -1,0 +1,19 @@
+{
+  "name": "AGC Lock Screen App",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#F86",
+  "description": "Test Lock Screen App",
+  "scope": "/",
+  "icons": [{
+    "src": "aeolian-grandiose-cayenne.png",
+    "sizes": "500x500",
+    "type": "image/png"
+  }],
+  "note_taking": {
+    "new_note_url": "./new-note.html"
+  },
+  "lock_screen": {
+    "start_url": "./lock-screen"
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<script>
+// HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+
+<head>
+  <title>Level Sedate Baboon</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/webp" href="level-sedate-baboon-2.webp">
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+<img src="level-sedate-baboon-2.webp" width="200" height="200">
+<pre>Level Sedate Baboon</pre>
+<p>This site declares both maskable and non-maskable icons (maskable preferred), with sizes and a 1px red border drawn on the icons.</p>
+<p>
+  <span style="background-color: #0F7">Maskable</span> icons have a light green background and
+  <span style="background-color: #0FF">non-maskable</span> (any-purpose) icons have a light blue background.
+</p>
+<script>
+navigator.serviceWorker.register('serviceworker.js');
+</script>

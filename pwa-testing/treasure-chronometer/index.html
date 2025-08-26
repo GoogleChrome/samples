@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <script>
+    // HTTPS Redirect.
+  if (window.location.protocol != 'https:') {
+    window.location.protocol = 'https:';
+  }
+  </script>
+  <title>Treasure Chronometer</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="treasure-chronometer.png">
+</head>
+<style>
+  * {
+  font-family: monospace;
+}
+</style>
+<img src="treasure-chronometer.png"><br>
+Type here to see input events captured.
+<pre id="output"></pre>
+<script>
+  'use strict';
+
+navigator.serviceWorker.register('serviceworker.js')
+
+window.addEventListener('keydown', event => {
+  event.preventDefault();
+  let modifiers = ['alt', 'ctrl', 'shift'].filter(m => event[m + 'Key']);
+  let text = event.code + (modifiers.length ? ' : ' + modifiers.join(' ') : '');
+  output.textContent = text + '\n' + output.textContent;
+  console.log(text, event);
+});
+</script>

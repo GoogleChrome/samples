@@ -1,0 +1,14 @@
+{
+  "name": "Moma Broken",
+  "start_url": "/moma-broken/",
+  "display": "standalone",
+  "theme_color": "#a0532e",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "min_icon_broken.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

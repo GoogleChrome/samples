@@ -1,0 +1,22 @@
+{
+  "name": "awesome-casquette",
+  "icons": [
+    {
+      "src": "blue-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+
+"shortcuts":[
+  {"name":"Fast","url":".fast.html",
+"icons":[{"src":"s1.png","type":"image/png","sizes":"192x192"}]},
+  {"name":"Medium","url":"./medium.html",
+"icons":[{"src":"s3.png","type":"image/png","sizes":"192x192"}]},
+  {"name":"Slow","url":"./slow.html",
+"icons":[{"src":"s5.png","type":"image/png","sizes":"192x192"}]}
+],
+
+  "start_url": "index.html",
+  "display": "browser"
+}

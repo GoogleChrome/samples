@@ -1,0 +1,12 @@
+{
+  "name": "Cheerful Plausible Bite",
+  "start_url": ".",
+  "display": "browser",
+  "theme_color": "#ffffff",
+  "scope": "/",
+  "icons": [{
+    "src": "cheerful-plausible-bite.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

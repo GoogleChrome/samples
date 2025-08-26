@@ -1,0 +1,12 @@
+{
+  "name": "Silk Curse Honey",
+  "description": "Silk Curse Honey",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ff9d00",
+  "icons": [{
+    "src": "silk-curse-honey.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }]
+}

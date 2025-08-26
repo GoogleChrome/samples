@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <title>WebUSB API</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <button id="WebUSB">requestDevice() &amp; open()</button>
+        <h2>requestDevice</h2>
+        <div id="requestDevice"></div>
+        <h2>open</h2>
+        <div id="open"></div>
+        <table>
+          <tr>
+            <td>
+              <button id="claimInterfaceBtn0">claimInterface(0)</button>
+              <div id="claimInterface0"></div>
+            </td>
+            <td>
+              <button id="releaseInterfaceBtn0">releaseInterface(0)</button>
+              <div id="releaseInterface0"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="claimInterfaceBtn1">claimInterface(1)</button>
+              <div id="claimInterface1"></div>
+            </td>
+            <td>
+              <button id="releaseInterfaceBtn1">releaseInterface(1)</button>
+              <div id="releaseInterface1"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="claimInterfaceBtn2">claimInterface(2)</button>
+              <div id="claimInterface2"></div>
+            </td>
+            <td>
+              <button id="releaseInterfaceBtn2">releaseInterface(2)</button>
+              <div id="releaseInterface2"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="claimInterfaceBtn3">claimInterface(3)</button>
+              <div id="claimInterface3"></div>
+            </td>
+            <td>
+              <button id="releaseInterfaceBtn3">releaseInterface(3)</button>
+              <div id="releaseInterface3"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="claimInterfaceBtn4">claimInterface(4)</button>
+              <div id="claimInterface4"></div>
+            </td>
+            <td>
+              <button id="releaseInterfaceBtn4">releaseInterface(4)</button>
+              <div id="releaseInterface4"></div>
+            </td>
+          </tr>
+        </table>
+        <script>
+          const button = document.getElementById("WebUSB");
+          const requestDevice = document.getElementById("requestDevice");
+          const open = document.getElementById("open");
+          var usb_device;
+          button.addEventListener('click', async function() {
+            try {
+              usb_device = await navigator.usb.requestDevice({filters:[{vendorId:0x0d28, productId:0x0204}]});
+              requestDevice.innerHTML = 'OK';
+            } catch (error) {
+              requestDevice.innerHTML = 'Error: ' + error;
+            }
+            try {
+              await usb_device.open();
+              open.innerHTML = 'OK';
+            } catch (error) {
+              open.innerHTML = 'Error: ' + error;
+            }
+          });
+          for (let i = 0; i < 5; i++) {
+            const claimInterface = document.getElementById("claimInterface" + i);
+            const claimInterfaceBtn = document.getElementById("claimInterfaceBtn" + i);
+            const releaseInterface = document.getElementById("releaseInterface" + i);
+            const releaseInterfaceBtn = document.getElementById("releaseInterfaceBtn" + i);
+            claimInterfaceBtn.addEventListener('click', async function() {
+              try {
+                await usb_device.claimInterface(i);
+                claimInterface.innerHTML = 'OK';
+              } catch (error) {
+                claimInterface.innerHTML = 'Error: ' + error;
+              }
+            });
+            releaseInterfaceBtn.addEventListener('click', async function() {
+              try {
+                await usb_device.releaseInterface(i);
+                releaseInterface.innerHTML = 'OK';
+              } catch (error) {
+                releaseInterface.innerHTML = 'Error: ' + error;
+              }
+            });
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

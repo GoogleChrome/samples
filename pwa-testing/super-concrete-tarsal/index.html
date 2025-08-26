@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <style>
+      h3 {
+      font-size: 32px;
+    }
+    img {
+      padding-right: 32px;
+    }
+    #gallery {
+      visibility: hidden;
+    }
+    </style>
+    <script>
+      'use strict';
+
+    async function generateIconFile(id, color) {
+      const gallery = document.getElementById('gallery');
+      const canvas = document.createElement('canvas');
+      canvas.setAttribute('width', 192);
+      canvas.setAttribute('height', 192);
+      gallery.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, 192, 192);
+      ctx.fillStyle = 'white';
+      ctx.font = '48px serif';
+      ctx.fillText(id, 48, 48);
+      const content_type = 'image/png';
+      return new Promise(resolve => canvas.toBlob(content => {
+        const name = id + '.png';
+        const options = {type: content_type};
+        resolve(new File([content], name, options));
+      }, content_type));
+    }
+
+    window.onload = () => {
+      if (!('serviceWorker' in navigator)) {
+        location.protocol = 'https:';
+        return;
+      }
+
+      const share = document.getElementById('share');
+      if (!('share' in navigator)) {
+        share.style.display = 'none';
+        return;
+      }
+
+      share.onclick = async () => {
+        const files = await Promise.all([
+            generateIconFile('s1', '#fbb'),
+            generateIconFile('s2', '#fdb'),
+            generateIconFile('s3', '#ffb'),
+            generateIconFile('s4', '#bfc'),
+            generateIconFile('s5', '#bef')]);
+        navigator.share({files: files}).catch(() => {});
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <h3>
+      <a href="one/index.html">
+        <img
+          alt=""
+          width="32"
+          height="32"
+          src="s1.png"
+        >One - text
+      </a>
+    </h3>
+    <h3>
+      <a href="two/index.html">
+        <img
+          alt=""
+          width="32"
+          height="32"
+          src="s2.png"
+        >Two - text file
+      </a>
+    </h3>
+    <h3>
+      <a href="three/index.html">
+        <!-- was s3.png -->
+        <img
+          alt=""
+          width="32"
+          height="32"
+          src="forestgreen.webp"
+        >Three - text file and text
+      </a>
+    </h3>
+    <h3>
+      <a href="four/index.html">
+        <img
+          alt=""
+          width="32"
+          height="32"
+          src="s4.png"
+        >Four - image file
+      </a>
+    </h3>
+    <h3>
+      <a href="five/index.html">
+        <img
+          alt=""
+          width="32"
+          height="32"
+          src="s5.png"
+        >Five - image file and text
+      </a>
+    </h3>
+    <button id="share">Share icons</button>
+    <div id="gallery"></div>
+  </body>
+</html>

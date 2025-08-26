@@ -1,0 +1,25 @@
+{
+  "name": "Sulky Lopsided White Bean",
+  "display": "standalone",
+  "start_url": "/white/",
+  "scope": "/white/",
+  "theme_color": "white",
+  "icons": [{
+    "src": "https://cdn.glitch.me/aea6f11b-51e9-49ef-b120-ecbe7f63b884%2Fsulky-lopsided-bean-white.svg",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }],
+  "share_target": {
+    "action": "/white/",
+    "method": "GET",
+    "params": {
+      "text": "text",
+      "title": "title",
+      "url": "url"
+    }
+  },
+  "launch_handler": {
+    "client_mode": "navigate-new",
+    "route_to": "new-client"
+  }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>External Install File Handling Tester</title>
+    <script src="main.js"></script>
+    <script>
+      // If a "manifest=/path/to/manifest.json" query argument is provided to
+      // the URL accessing this page, that path is injected as the manifest tag.
+      // Otherwise, "basic.json" is used as the manifest tag.
+      addManifestLinkTag();
+    </script>
+    <link
+      rel="icon"
+      type="image/png"
+      href="ai-icon.png"
+    />
+  </head>
+  <body onload="startWorker('sw.js', { scope: '/' })">
+    <!-- include the Glitch button to show what the webpage is about and
+      to make it easier for folks to view source and remix -->
+    <div
+      class="glitchButton"
+      style="position: fixed; top: 20px; right: 20px"
+    ></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+    <h1>External Install File Handling Tester</h1>
+    <div>
+      <p>
+        This site is designed to test if adding file handlers for, say, a policy
+        install, correctly updates the app.
+      </p>
+      <ul>
+        <li>
+          Site with no file handlers: <a href="./index.html">/index.html</a>
+        </li>
+        <li>
+          Site with file handlers:
+          <a href="./index.html?manifest=manifest-with-file-handlers.json"
+            >/index.html?manifest=manifest-with-file-handlers.json</a
+          >
+        </li>
+      </ul>
+      <p>
+        Note: While this site technically handles file on the OS, the UX doesn't
+        change if there is a file handled here.
+      </p>
+    </div>
+  </body>
+</html>

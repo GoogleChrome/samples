@@ -1,0 +1,144 @@
+<head>
+  <title>Sulky Lopsided Bean landing page</title>
+  <!-- https://developer.chrome.com/origintrials/#/registration/900579187985743873 -->
+  <meta
+    http-equiv="origin-trial"
+    content="AmFF6QRTA3m6LsFOmir6NwuG46leZzRvBSQGystim/9YREl9PNfVWl/tboiB+edQb1/HHtc3dLNh9H0LA8QLgwMAAABqeyJvcmlnaW4iOiJodHRwczovL3N1bGt5LWxvcHNpZGVkLWJlYW4uZ2xpdGNoLm1lOjQ0MyIsImZlYXR1cmUiOiJXZWJBcHBMaW5rQ2FwdHVyaW5nIiwiZXhwaXJ5IjoxNjQzMTU1MTk5fQ=="
+  />
+  <!-- https://developer.chrome.com/origintrials/#/registration/1585126331346059265 -->
+  <meta
+    http-equiv="origin-trial"
+    content="AhSs/T7r1eZIxICfetyLpxGnEN6i2TG6J0Zx2uSZylTozcfNTgFgp8xJewFFdTJYd4JmYI0Hfbr/UhCjvYxTJQkAAABleyJvcmlnaW4iOiJodHRwczovL3N1bGt5LWxvcHNpZGVkLWJlYW4uZ2xpdGNoLm1lOjQ0MyIsImZlYXR1cmUiOiJMYXVuY2ggSGFuZGxlciIsImV4cGlyeSI6MTY2Njc0MjM5OX0="
+  />
+  <script>
+    // HTTPS Redirect.
+    if (window.location.protocol != "https:") {
+      window.location.protocol = "https:";
+    }
+    navigator.serviceWorker.register("sw.js");
+  </script>
+  <style>
+    body {
+      font-family: monospace;
+    }
+    .icon {
+      width: 50px;
+    }
+    a {
+      text-decoration: none;
+    }
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+    }
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+    }
+    .link-text {
+      margin: 0;
+      margin-top: 5px;
+    }
+    .bean-box {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<h1>Sulky Lopsided Bean landing page</h1>
+
+<pre>
+This site contains three web apps (linked below) testing three different flavours of the <a href="https://github.com/WICG/sw-launch/blob/main/launch_handler.md">launch_handler</a> web app API.
+This uses the launch_handler <a href="https://developer.chrome.com/origintrials/#/view_trial/2978005253598740481">origin trial</a> available in Chrome 98.0.4738.0 to 110.
+</pre>
+
+<a href="black/" class="app-link" target="_blank">
+  <div class="bean-box flex-row">
+    <img
+      class="icon"
+      src="https://cdn.glitch.me/aea6f11b-51e9-49ef-b120-ecbe7f63b884%2Fsulky-lopsided-bean-black.svg"
+    />
+    <div class="flex-column">
+      <pre class="link-text">Sulky Lopsided Black Bean</pre>
+      <pre class="link-text">
+launch_handler: { client_mode: navgate-existing }</pre
+      >
+    </div>
+  </div>
+</a>
+<a href="brown/" class="app-link" target="_blank">
+  <div class="bean-box flex-row">
+    <img
+      class="icon"
+      src="https://cdn.glitch.me/aea6f11b-51e9-49ef-b120-ecbe7f63b884%2Fsulky-lopsided-bean-brown.svg"
+    />
+    <div class="flex-column">
+      <pre class="link-text">Sulky Lopsided Brown Bean</pre>
+      <pre class="link-text">
+launch_handler: { client_mode: focus-existing }</pre
+      >
+    </div>
+  </div>
+</a>
+<a href="white/" class="app-link" target="_blank">
+  <div class="bean-box flex-row">
+    <img
+      class="icon"
+      src="https://cdn.glitch.me/aea6f11b-51e9-49ef-b120-ecbe7f63b884%2Fsulky-lopsided-bean-white.svg"
+    />
+    <div class="flex-column">
+      <pre class="link-text">Sulky Lopsided White Bean</pre>
+      <pre class="link-text">launch_handler: { client_mode: navigate-new }</pre>
+    </div>
+  </div>
+</a>
+
+<pre>
+The above links go to web apps that test out specific launch_handler configurations.
+Screencast: <a href="https://www.youtube.com/watch?v=EZFnGuIUfrc">https://www.youtube.com/watch?v=EZFnGuIUfrc</a>
+
+Site source: <a href="https://glitch.com/edit/#!/sulky-lopsided-bean">https://glitch.com/edit/#!/sulky-lopsided-bean</a>
+
+Share button: <button id="shareButton">Share</button>
+</pre>
+
+<p>Self-navigation links:</p>
+<ul>
+  <li><a href="black/" target="_self">Black Bean</a></li>
+  <li><a href="brown/" target="_self">Brown Bean</a></li>
+  <li><a href="white/" target="_self">White Bean</a></li>
+</ul>
+
+<script>
+  for (const a of document.querySelectorAll("a.app-link")) {
+    const href = a.href;
+    a.addEventListener("click", () => {
+      a.href = `${href}?${Math.round(Math.random() * 1000)}`;
+    });
+  }
+
+  document.querySelector("#shareButton").addEventListener("click", () => {
+    navigator.share({
+      title: "Sulky Lopsided Bean",
+      text: "Test share action.",
+      url: "https://sulky-lopsided-bean.glitch.me",
+    });
+  });
+</script>
+
+<!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
+<footer class="footer">
+  <div class="links"></div>
+  <a
+    class="btn--remix"
+    target="_top"
+    href="https://glitch.com/edit/#!/remix/sulky-lopsided-bean"
+  >
+    <img
+      src="Logo_Color.svg"
+      alt=""
+    />
+    Remix on Glitch
+  </a>
+</footer>
+

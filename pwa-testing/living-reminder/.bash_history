@@ -1,0 +1,4 @@
+ls
+ys
+ps
+vim

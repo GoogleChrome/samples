@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title id="title">Icon Jail</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="blackwhitebars-min.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+  body {
+  background-color: #e0a35e;
+  font-family: monospace;
+}
+</style>
+<img src="blackwhitebars-min.svg"><br>
+^ This is an SVG. It is 16x16 exact vertical bars. Size is set as 256x256 in manifest. There should be no blur.<br>
+Install it (if possible) and look at chrome://apps (it shows a spurious error/warning in M91, due to icon interpreted as 60x60 not declared 256x256, but is still installable).<br>
+See also
+<a href="./">manifest with "any" size attribute</a>
+<pre id="output"></pre>
+<script src="main.js"></script>

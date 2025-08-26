@@ -1,0 +1,12 @@
+{
+  "name": "Mulberry Phase Leopon",
+  "start_url": "https://mulberry-phase-leopon.glitch.me/app/app.html",
+  "display": "standalone",
+  "theme_color": "#9071ef",
+  "scope": "https://mulberry-phase-leopon.glitch.me/app/",
+  "icons": [{
+    "src": "d4a74359-1e23-40e9-94f8-924329a4507b.image.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Correct app name",
+  "icons": [{
+    "src": "tick.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

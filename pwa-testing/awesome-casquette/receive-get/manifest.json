@@ -1,0 +1,22 @@
+{
+  "name": "Receive Get",
+  "icons": [
+    {
+      "src": "blue-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "minimal-ui",
+  "share_target": {
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "action": "share-target-destination.html",
+    "params": {
+      "title": "received_title",
+      "text": "received_text",
+      "url": "received_url"
+    }
+  }
+}

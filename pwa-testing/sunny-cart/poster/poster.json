@@ -1,0 +1,27 @@
+{
+  "name": "Sunny Cart Poster Target",
+  "icons": [
+    {
+      "src": "text-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "text-192.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "poster.html",
+  "display": "minimal-ui",
+  "share_target": {
+    "action": "share-target-destination.html",
+    "method": "POST",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "received_title",
+      "text": "received_text",
+      "url": "received_url"
+    }
+  }
+}

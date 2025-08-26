@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Page1</title>
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="paint-rightful-patch.svg"
+    />
+
+    <script>
+      navigator.serviceWorker.register("serviceworker.js");
+    </script>
+    <style>
+      body {
+        background-color: #fcf4dd;
+        font-family: monospace;
+      }
+      h1 {
+        color: #000;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Aluminium Cooked Kidney</h1>
+    <h2>Page1</h2>
+    <img
+      src="paint-rightful-patch.svg" style="width:128px;height:128px"
+    /><br/>
+    <a href="./">Home</a><br/>
+    <a href="./one.html">Page1</a><br/>
+    <a href="./two.html">Page2</a><br/>
+    <a href="folder/three.html">Page3</a><br/>
+    <br/>
+    <a href="./?hello">Home with query params</a><br/>
+    <a href="./#">Home with empty hash</a><br/>
+    <a href="./#somehash">Home with hash</a><br/>
+    <a href="./?query#somehash">Home with query and hash</a><br/>
+    <br/>
+    <a href="https://www.google.com">Out of scope link</a><br/>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "Telling Krills",
+  "description": "Talk to the krills.",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#f20",
+  "scope": "/",
+  "icons": [{
+    "src": "telling-krills-logo.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

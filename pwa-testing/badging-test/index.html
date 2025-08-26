@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Badging API Demo</title>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="theme-color" content="#3f51b5">
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Badging Origin Trial Token for https://glitch.me -->
+    <meta http-equiv="origin-trial" content="AgmWuP1ymg4vLxbcbINqQEFl+tBaAP33VF1Q3r6Y9KaSvCEugZjaJWNw08fj/iapxGqmShdMrYTDgNUGtMGCowwAAABKeyJvcmlnaW4iOiJodHRwczovL2dsaXRjaC5tZTo0NDMiLCJmZWF0dXJlIjoiQmFkZ2luZyIsImV4cGlyeSI6MTU3MTA5NzYwMH0=">
+
+    <!-- Badging Origin Trial Token for https://badgin-test.glitch.me -->
+    <meta http-equiv="origin-trial" content="AlikMOTG/iA0aC+mEtJZIPNKsOFIBCYWVZ+lnAdWduqQDuRGRyQbyy/+h1Yez5fdN1b/zrXFjTVSLOHsglqSTAUAAABXeyJvcmlnaW4iOiJodHRwczovL2JhZGdpbmctdGVzdC5nbGl0Y2gubWU6NDQzIiwiZmVhdHVyZSI6IkJhZGdpbmciLCJleHBpcnkiOjE1NzEwOTc2MDB9">
+  </head>
+  <body>
+    <h1>
+      Badging API Demo
+    </h1>
+
+    <p>
+      The <a href="https://developers.google.com/web/updates/2018/12/badging-api">Badging API</a>
+      is a new web platform API that allows
+      installed web apps to set an application-wide badge,
+      shown in an operating-system-specific place associated
+      with the application (such as the shelf or home screen).
+      Check out the
+      <a href="https://glitch.com/edit/#!/badging-api?path=demo.js:23:0">source</a>
+      for this sample, or
+      <a href="https://glitch.com/edit/#!/remix/badging-api">remix it</a> on Glitch.
+    </p>
+
+    <p id="requireHTTPS" class="hidden">
+      <b>STOP!</b> This page <b>must</b> be served over HTTPS.
+      Please <a>reload this page via HTTPS</a>.
+    </p>
+
+    <p id="notSupported">
+      <b>Sorry!</b> This browser doesn't appear to support
+      the badging API. The API is currently available as an origin
+      trial in Chrome 73+ on Windows and macOS only.
+    </p>
+
+    <p id="demoControls" class="hidden">
+      <label for="badgeVal">Badge value</label>
+      <input type="number" id="badgeVal" placeholder="<number>" />
+      <br>
+      <button id="butSet" type="button">
+        Set
+      </button>
+      <button id="butClear" type="button">
+        Clear
+      </button>
+    </p>
+
+    <div>
+      <h3>
+        Manual Tests to Run
+      </h3>
+      <ol>
+        <li>
+          Set a Badge (click the 'Set' button, or press 'f' for flag)
+          <div class="test-result">
+            <span class="test-result-expect">Expect: </span>
+            <span class="test-result-standalone">The app icon in the dock/taskbar to be badged with a dot.</span>
+            <span class="test-result-browser">Nothing to happen.</span>
+          </div>
+        </li>
+        <li>
+          Set a numeric Badge (enter a positive, non-zero number in the 'Badge value' input and click 'Set', or press 'n' for number)
+          <div class="test-result">
+            <span class="test-result-expect">Expect: </span>
+            <span class="test-result-standalone">The app icon in the dock/taskbar to be badged with the number <span id="expectBadgeNumber"></span>.</span>
+            <span class="test-result-browser">Nothing to happen.</span>
+          </div>
+        </li>
+        <li>
+          Clear the Badge (click the 'Clear' button, or press 'c' for clear)
+          <div class="test-result">
+            <span class="test-result-expect">Expect: </span>
+            <span class="test-result-standalone">The app icon badge to be cleared.</span>
+            <span class="test-result-browser">Nothing to happen.</span>
+          </div>
+        </li>
+      </ol>
+      <h4>
+        Repeat the tests for:
+      </h4>
+      <ol>
+        <li>Normal browsing windows</li>
+        <li>Incognito browsing windows</li>
+        <li>
+          Installed windows (click the OmniBox install button or follow the instructions <a href="https://medium.com/@dhormale/install-pwa-on-windows-desktop-via-google-chrome-browser-6907c01eebe4">here</a>) <br>
+          <img src="Screenshot_20191002_150105.png">
+        </li>
+      </ol>
+      <h4>
+        On platforms:
+      </h4>
+      <ol>
+        <li>Windows</li>
+        <li>Mac</li>
+      </ol>
+    </div>
+    <div id="log">
+      <h3>
+        Logs (most recent at top)
+      </h3>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="demo.js" type="module"></script>
+
+  </body>
+</html>

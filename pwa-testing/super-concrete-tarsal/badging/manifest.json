@@ -1,0 +1,13 @@
+{
+  "name": "Badging",
+  "icons": [
+    {
+      "src": "s4.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://super-concrete-tarsal.glitch.me/badging/index.html",
+  "theme_color": "#123456",
+  "display": "minimal-ui"
+}

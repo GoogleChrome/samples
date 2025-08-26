@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Share received</title>
+
+    {{#if mimeType}}
+      <link rel="manifest" href="./manifest.json?mime={{mimeType}}" />
+    {{/if}}
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Share received</h1>
+      </div>
+
+      <div>
+        <p>
+          Shared files:
+        </p>
+        <ul>
+          {{#each files}}
+            <li><b>Name: </b> {{this.filename}}, <b>Type: </b> {{this.type}}</li>
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+      <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('sw.js');
+        });
+      }
+    </script>
+  </body>
+</html>

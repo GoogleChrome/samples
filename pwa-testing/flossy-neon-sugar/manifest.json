@@ -1,0 +1,50 @@
+{
+  "name": "Aluminium Cooked Kidney",
+  "icons": [
+    {
+      "src": "canvas.png",
+      "sizes": "793x793",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "theme_color": "#bad4f5",
+  "background_color": "pink",
+  "display": "standalone",
+  "display_override": ["tabbed"],
+  "shortcuts": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "One",
+      "url": "one.html"
+    },
+    {
+      "name": "Two",
+      "url": "two.html"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "tab_strip": {
+    "home_tab": {
+      "url": "/",
+      "icons": [
+        {
+          "src": "image.png",
+          "sizes": "16x16",
+          "type": "image/png"
+        }
+      ],
+      "scope_patterns": [
+        {"pathname": "/[^/]*/.*"}
+      ]
+    },
+    "new_tab_button": {
+      "url": "one.html"
+    }
+  }
+}

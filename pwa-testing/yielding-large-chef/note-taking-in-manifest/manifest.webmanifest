@@ -1,0 +1,16 @@
+{
+  "name": "YLC Note-taking App",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#8FF",
+  "description": "YLC Note-taking App - this web app declares a new_note_url in its manifest",
+  "scope": ".",
+  "icons": [{
+    "src": "yielding-large-chef.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "note_taking": {
+    "new_note_url": "create-note.html"
+  }
+}

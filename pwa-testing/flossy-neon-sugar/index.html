@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Aluminium Cooked Kidney - FOCUS EXISTING</title>
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="thumbnails%2Fcanvas.png?1672356919136"
+      media="(display-mode: tabbed)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="thumbnails%2Fcanvas.png?1672356919136"
+    />
+
+    <script src="launch-queue.js"></script>
+    <style>
+      body {
+        font-family: arial;
+      }
+      h1 {
+        color: #000;
+      }
+      a {
+        text-decoration: none;
+      }
+      div {
+        display: flex;
+      }
+
+      /* Log container with a coding log style */
+      #log-container {
+        height: 200px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #222;
+        color: #ccc;
+        font-family: monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 5px;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+        display: flex;
+        flex-direction: column;
+                width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Aluminium Cooked Kidney - FOCUS EXISTING</h1>
+    <h2>Home</h2>
+    <img
+      src="thumbnails%2Fcanvas.png?1672356919136"
+    /><br/>
+    <p id="url"></p>
+    <script>
+      document.getElementById("url").innerHTML = "Current URL: " + window.location.href;
+    </script>
+
+    <p>
+      Aluminum Cooked Kidney FOCUS EXISTING tests the use of tabbed mode and pinned home tabs in PWA apps. If pinned home tabs function correctly, the icon on the pinned home tab should display a house rather than a kidney.
+    </p>
+    <p>
+      The following images show what we are looking for:
+    </p>
+    <div>
+    <img width="400" src="one.png" alt="wrong" />
+    <p>
+      <-- This is <strong>wrong.</strong>
+    </p>
+    </div>
+        <div>
+    <img width="1000" src="right.png" alt="right" />
+    <p>
+      <-- This is <strong>correct.</strong>
+    </p>
+    </div>
+
+    <a href="./">Home</a><br/>
+    <a href="./one.html">Page1</a><br/>
+    <a href="./two.html">Page2</a><br/>
+    <a href="folder/three.html">Page3</a><br/>
+    <br/>
+    <div>
+      <h3>Logs</h3>
+      <div id="log-container"></div>
+    </div>
+  </body>
+</html>

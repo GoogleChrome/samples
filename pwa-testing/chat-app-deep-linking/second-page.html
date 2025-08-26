@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="fake-chat-app-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="fake-chat-app-icon.png"
+    />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Fake Chat App - Second Page</title>
+  </head>
+  <body>
+    <h1>
+      <a href="./second-page.html">Fake Chat App - Second Page</a>
+      <span class="glitch-remix"></span>
+    </h1>
+    <div>
+      <p>
+        This is an example page that is not handled by launch handling consumer, so it should always
+        simply be navigated.
+      </p>
+      <h4>Links (that should navigate this frame).</h4>
+      <ol>
+        <li><a href="./">Home</a></li>
+        <li><a href="./?chat=alice">Alice</a></li>
+        <li><a href="./?chat=bob">Bob</a></li>
+        <li><a href="./second-page.html">Second Page (here)</a></li>
+      </ol>
+      <h3>Note: with this page open, file handling will no longer 'work' to send a chat.</h3>
+      <p>
+        Why? Because this app is configured to <code>'focus-existing'</code>, and I was too lazy to
+        figure out how to implement file handling where I loaded the 'home' page and sent files
+        there. So when you implement your own app, know that if you are
+        <code>'focus-existing'</code> you'll need to make sure ALL of your in-scope pages have a
+        launch consumer.
+      </p>
+    </div>
+  </body>
+  <script>
+    // Implement simple launch handler that sets window.location, as there is no internal navigation stuff for this page.
+    window.launchQueue.setConsumer(async (launchParams) => {
+      if (launchParams.targetURL) {
+        window.location = launchParams.targetURL;
+      }
+      if (launchParams.files) {
+        console.log('got files, but we are at the "second" page. Not implemented.');
+      }
+    });
+  </script>
+  <script src="https://remix.glitch.me/remix.min.js" async></script>
+</html>

@@ -1,0 +1,22 @@
+{
+  "//1": "Tester for referrer html header",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "sassy-seasoned-carpet",
+  "version": "0.0.1",
+  "description": "Test site for printing the referrer header sent to the server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/sassy-seasoned-carpet"
+  },
+  "license": "MIT"
+}

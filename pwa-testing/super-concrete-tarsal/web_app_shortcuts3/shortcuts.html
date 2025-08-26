@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="manifest" href="shortcuts.json">
+    <link rel="icon" href="red-192.png">
+    <script>
+      window.onload = () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("web_app_shortcuts3/service_worker.js");
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <h1>Shortcuts</h1>
+    <a id="one"><h2>One</h2></a>
+    <a id="two"><h2>Two</h2></a>
+    <a id="three"><h2>Three</h2></a>
+    <a id="four"><h2>Four</h2></a>
+    <a id="five"><h2>Five</h2></a>
+  </body>
+</html>

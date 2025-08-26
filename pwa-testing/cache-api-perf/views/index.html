@@ -1,0 +1,59 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <ul>
+      <li>
+        Sequential match performance differentiated by main URL path or search
+      </li>
+      <ul>
+        <li><a href="parallel.html?jobs=1&type=path">1 match() job, unique by URL path</a></li>
+        <li><a href="parallel.html?jobs=1&type=search">1 match() job, unique by URL search</a></li>
+        <li><a href="parallel.html?jobs=1&type=both">1 match() job, unique by both URL path and search</a></li>
+      </ul>
+      <li>
+        Parallel match performance differentiated by main URL path or search
+      </li>
+      <ul>
+        <li><a href="parallel.html?jobs=3&type=path">3 match() job, unique by URL path</a></li>
+        <li><a href="parallel.html?jobs=3&type=search">3 match() job, unique by URL search</a></li>
+        <li><a href="parallel.html?jobs=3&type=both">3 match() job, unique by both URL path and search</a></li>
+      </ul>
+      <li>
+        Shortcuts to compare body read performance.  These mostly test hot disk cache, unfortunately.
+      </li>
+      <ul>
+        <li><a href="parallel.html?jobs=1&bodies=0">1 match() job, 0 body readers</a></li>
+        <li><a href="parallel.html?jobs=2&bodies=0">2 match() jobs, 0 body readers</a></li>
+        <li><a href="parallel.html?jobs=3&bodies=0">3 match() jobs, 0 body readers</a></li>
+        <li><a href="parallel.html?jobs=1&bodies=1">1 match() job, 1 body reader</a></li>
+        <li><a href="parallel.html?jobs=2&bodies=1">2 match() jobs, 1 body reader</a></li>
+        <li><a href="parallel.html?jobs=3&bodies=1">3 match() jobs, 1 body reader</a></li>
+        <li><a href="parallel.html?jobs=1&bodies=2">1 match() job, 2 body readers</a></li>
+        <li><a href="parallel.html?jobs=2&bodies=2">2 match() jobs, 2 body readers</a></li>
+        <li><a href="parallel.html?jobs=3&bodies=2">3 match() jobs, 2 body readers</a></li>
+      </ul>
+      <li>
+        Some random cache.put() testing
+      </li>
+      <ul>
+        <li><a href="put.html">Put Tests</a></li>
+      </ul>
+    </ul>
+  </body>
+</html>

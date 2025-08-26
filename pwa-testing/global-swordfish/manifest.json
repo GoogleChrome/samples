@@ -1,0 +1,15 @@
+{
+  "short_name": "Play Billing",
+  "name": "Play Billing Demo",
+  "icons": [
+    {
+      "src": "Play%20Billing%20Demo%20Logo.png",
+      "sizes": "256X256"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#216F20",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#689f38"
+}

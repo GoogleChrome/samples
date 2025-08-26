@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+  <title id="title">YLC Hard-Coded Note-Taking App</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="yielding-large-chef.png">
+</head>
+<style>
+  body {
+  background-color: #8FF;
+  font-family: monospace;
+  color: black;
+}
+</style>
+<h1>YLC Hard-Coded Note-Taking App</h1>
+<img src="yielding-large-chef.png"><br>
+This page should be installable.<br>
+This web app is hard-coded in Chrome as a note-taking app (works in Chrome 91-93 (inclusive)).<br>
+If you want a non-hard-coded note-taking app, using manifest fields:
+<a href="note-taking-in-manifest/">note-taking-in-manifest</a>
+(works in Chrome 93+).<br>
+Also for testing:
+<a href="empty-note-taking-in-manifest/">empty-note-taking-in-manifest</a>
+and
+<a href="invalid-note-taking-in-manifest/">invalid-note-taking-in-manifest</a>.<br>
+<script>
+  navigator.serviceWorker.register('sw.js');
+</script>

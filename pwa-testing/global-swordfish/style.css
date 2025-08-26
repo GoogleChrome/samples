@@ -1,0 +1,34 @@
+/* CSS files add styling rules to your content */
+
+body {
+  margin: 2em;
+}
+
+.hide {
+ display: none; 
+}
+
+.error {
+  color: red;
+}
+
+.section:not(last-child) {
+  border-bottom: 1px solid black;
+}
+
+.standalone-only {
+  display: none;
+}
+
+.not-standalone {
+  display: list-item;
+}
+
+@media (display-mode: standalone) {
+  .standalone-only {
+    display: list-item;
+  }
+  .not-standalone {
+    display: hidden;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Sunny Cart minimal-ui",
+  "icons": [
+    {
+      "src": "blue-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "minimal-ui",
+
+
+  "share_target": {
+    "action": "/minimal-ui/share.html",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "text": "received_text",
+      "url": "received_url",
+      "files": [
+        {
+          "name": "records",
+          "accept": ["text/csv", ".csv"]
+        },
+        {
+          "name": "graphs",
+          "accept": "image/svg+xml"
+        }
+      ]
+    }
+  }
+}

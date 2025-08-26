@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title id="title"></title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link id="favicon" rel="icon" type="image/png" href="efficient-newt-1.png">
+</head>
+<style>
+  * {
+  font-family: monospace;
+}
+#icon {
+  border-style: solid;
+  border-width: 10px;
+}
+</style>
+<div id="appName"></div>
+<div id="display"></div>
+<img id="icon"><br>
+<pre id="manifestOutput"></pre>
+Title:
+<select id="appNameSelect">
+  <option>Efficient Newt 1</option>
+  <option>AAAAAAAAAAAAAAAAAAA</option>
+</select><br>
+Start URL:
+<select id="startUrlSelect">
+  <option>.</option>
+  <option>index.html</option>
+</select><br>
+Display:
+<select id="displaySelect">
+  <option>standalone</option>
+  <option>minimal-ui</option>
+  <option>browser</option>
+</select><br>
+Theme colour:
+<select id="themeColourSelect">
+  <option>green</option>
+  <option>purple</option>
+  <option>yellow</option>
+  <option>blue</option>
+  <option>lime</option>
+  <option>white</option>
+  <option>black</option>
+  <option>red</option>
+  <option>lightgoldenrodyellow</option>
+</select><br>
+Icon:
+<select id="iconSelect">
+  <option>efficient-newt-1.png</option>
+  <option>efficient-newt-2.png</option>
+  <option>https://does.not.exist.com/does-not-exist.png</option>
+</select><br>
+Brand version:
+<select id="brandVersionSelect">
+  <option>1</option>
+  <option>2</option>
+</select><br>
+<a href="https://soft-puppy.glitch.me">External link</a><br>
+<pre id="output"></pre>
+<script src="main.js"></script>
+<!-- include the Glitch button to show what the webpage is about and
+      to make it easier for folks to view source and remix -->
+<script src="https://button.glitch.me/button.js" defer></script>

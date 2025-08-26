@@ -1,0 +1,49 @@
+{
+  "name": "Paint Rightful Patch",
+  "icons": [
+    {
+      "src": "paint-rightful-patch.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+      ],
+  "start_url": "/",
+  "theme_color": "black",
+  "background_color": "pink",
+  "display": "standalone",
+  "display_override": ["tabbed"],
+  "description": "A test tabbed web app",
+  "shortcuts": [
+    {
+      "name": "Home",
+      "url": "/",
+      "icons": [
+        {
+          "src": "paint-rightful-patch.svg",
+          "sizes": "512x512",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Page1",
+      "url": "one.html"
+    },
+    {
+      "name": "Page2",
+      "url": "two.html"
+    }
+  ],
+  "tab_strip": {
+    "home_tab": {
+      "scope_patterns": [
+        {"pathname": "/:foo/*"},
+        {"pathname": "/index.html"},
+        {"pathname": "/"}
+      ]
+    },
+    "new_tab_button": {
+      "url": "one.html"
+    }
+  }
+}

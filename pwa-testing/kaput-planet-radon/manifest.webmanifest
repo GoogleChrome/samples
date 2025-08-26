@@ -1,0 +1,19 @@
+{
+  "name": "Alternative Lock Screen App",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#663",
+  "description": "Test Alternative Lock Screen App",
+  "scope": "/",
+  "icons": [{
+    "src": "kaput-planet-radon.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }],
+  "note_taking": {
+    "new_note_url": "/new-note.html"
+  },
+  "lock_screen": {
+    "start_url": "/lock-screen"
+  }
+}

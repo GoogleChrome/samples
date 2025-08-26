@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<head>
+  <title id="title">Alternative Lock Screen App</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="kaput-planet-radon.png"
+  />
+</head>
+
+<style>
+  body {
+    background-color: #663;
+    font-family: monospace;
+    color: black;
+  }
+</style>
+
+<h1>Alternative Lock Screen App</h1>
+<img
+  width="256"
+  height="256"
+  src="kaput-planet-radon.png"
+/><br />
+<p>This page should be installable.</p>
+<p>
+  This web app should be recognised in Chrome as a lock-screen-capable web app (works
+  in Chrome 105+?).
+</p>
+<p>
+  <a href="./in-scope.html">Link to another page in scope</a>
+</p>
+<p>
+  <a href="https://www.example.com/">Link to a different origin</a>
+</p>
+<p>
+  <a href="https://www.example.com/" target="_blank">Link with target=blank</a>
+</p>
+
+<button onclick="document.body.innerHTML += '<p>button clicked</p>'">
+  JS modify document
+</button>
+<button onclick="alert('hi')">
+  JS alert
+</button>
+<button onclick="window.open('example.com')">
+  JS new window/tab
+</button>
+<label for="prevent-default">
+   <input type="checkbox" id="prevent-default" name="prevent-default" value="no"> Test beforeUnload preventDefault
+</label>
+
+<div>
+  <h2>
+    Stored data
+  </h2>
+  <label for="local-storage-text">Local storage text:</label>
+  <input type="text" id="local-storage-text" name="local-storage-text" value="Not yet loaded">
+  <button onclick="loadLocalStorageText()">load</button>
+  <button onclick="saveLocalStorageText()">save</button>
+  <br>
+
+  <label for="lock-screen-data-text">Lock screen data text:</label>
+  <input type="text" id="lock-screen-data-text" name="lock-screen-data-text" value="Not yet loaded">
+  <button onclick="loadLockScreenDataText()">load</button>
+  <button onclick="saveLockScreenDataText()">save</button>
+  <br>
+</div>
+
+
+<script>
+  navigator.serviceWorker.register("sw.js");
+
+  window.addEventListener('beforeunload', (event) => {
+      const prevent_default = document.querySelector('#prevent-default');
+      if (prevent_default.checked) {
+        event.preventDefault();
+        // Chrome requires returnValue to be set.
+        event.returnValue = '';
+      }
+  });
+
+  function loadLocalStorageText() {
+    const elem = document.getElementById('local-storage-text');
+    const text = localStorage.getItem('stored-text');
+    elem.value = text;
+  };
+
+  function saveLocalStorageText() {
+    const elem = document.getElementById('local-storage-text');
+    localStorage.setItem('stored-text', elem.value);
+  };
+
+  async function loadLockScreenDataText() {
+    const elem = document.getElementById('lock-screen-data-text');
+    if (!!window.getLockScreenData) {
+      const data = await window.getLockScreenData();
+      const text = await data.getData('stored-text');
+      elem.value = text;
+    } else {
+      elem.value = 'LockScreenData API unavailable';
+    }
+  };
+
+  async function saveLockScreenDataText() {
+    const elem = document.getElementById('lock-screen-data-text');
+    if (!!window.getLockScreenData) {
+      const data = await window.getLockScreenData();
+      await data.setData('stored-text', elem.value);
+    } else {
+      elem.value = 'LockScreenData API unavailable';
+    }
+  };
+</script>

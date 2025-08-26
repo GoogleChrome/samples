@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title>Telling Krills</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="telling-krills-logo.png">
+</head>
+<style>
+  button {
+  font-family: monospace;
+  color: #f20;
+}
+</style>
+<button id="button">Load HTTP content</button>
+<img src="telling-krills-logo.png">
+<script src="main.js"></script>

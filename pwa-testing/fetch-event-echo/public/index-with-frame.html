@@ -1,0 +1,28 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    Please open the web console.
+    <iframe id="frame">
+    </iframe>
+    <script>
+      addEventListener('load', evt => {
+        navigator.serviceWorker.register('sw.js');
+      }, { once: true });
+    </script>
+  </body>
+</html>

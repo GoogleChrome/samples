@@ -1,0 +1,28 @@
+{
+  "name": "Private Brick Universe",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2395d7",
+  "description": "Private universe in the galaxy. Used to test shortcuts",
+  "scope": "/",
+  "icons": [{
+    "src": "squash_unvierse.png",
+    "sizes": "144x144",
+    "type": "image/svg+xml"
+  }],
+  "shortcuts": [
+    {
+      "name": "Brick Universe 1",
+      "short_name": "universe_1",
+      "description": "View the 1st universe",
+      "url": "/",
+      "icons": [{ "src": "squash_unvierse.png", "sizes": "144x144" }]
+    },
+    {
+      "name": "Brick Universe 2",
+      "short_name": "universe_2",
+      "description": "View the 2nd universe",
+      "url": "/",
+      "icons": [{ "src": "universe2.png", "sizes": "144x144" }]
+    }]
+}

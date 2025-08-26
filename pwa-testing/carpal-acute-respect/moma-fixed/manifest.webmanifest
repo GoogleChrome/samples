@@ -1,0 +1,14 @@
+{
+  "name": "Moma Fixed",
+  "start_url": "/moma-fixed/",
+  "display": "standalone",
+  "theme_color": "#a0532e",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "min_icon_fixed.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

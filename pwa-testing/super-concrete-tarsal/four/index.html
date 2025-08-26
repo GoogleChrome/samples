@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="s4.png">
+    <title>share Four</title>
+    <style>
+      #gallery {
+      visibility: hidden;
+    }
+    </style>
+    <script>
+      'use strict';
+    function create_file(prefix, extension, content_type, content) {
+      const name = prefix + extension;
+      const options = {type: content_type};
+      return new File([content], name, options);
+    }
+
+    async function createShareData() {
+      const flags = 4;
+      let files = [];
+      let shareData = { files: files };
+      if (flags & 1) {
+        shareData.text = 'Message';
+      }
+      if (flags & 2) {
+        files.push(create_file('readme', '.txt', 'text/plain', 'Attachment'));
+      }
+      if (flags & 4) {
+        const content = '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96"><rect width="96" height="96" fill="indigo"/></svg>';
+        // files.push(create_file('square', '.svg', 'image/svg+xml', content));
+        files.push(create_file('square', '.xbm', 'image/x-xbitmap', content));
+      }
+      return shareData;
+    }
+
+    window.onload = () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      } else {
+        location.protocol = 'https:';
+      }
+
+      const share = document.getElementById('share');
+      if (!('share' in navigator)) {
+        share.disabled = true; // share.style.display = 'none';
+        return;
+      }
+
+      share.onclick = async () =>
+          navigator.share(await createShareData()).catch(() => {});
+    }
+    </script>
+    <style>
+      canvas {
+      visibility: hidden;
+    }
+    </style>
+  </head>
+  <body>
+    <button id="share">share Four</button>
+    <div id="gallery"></div>
+  </body>
+</html>
