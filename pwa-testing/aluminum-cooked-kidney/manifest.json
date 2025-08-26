@@ -7,7 +7,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "./",
   "theme_color": "#bad4f5",
   "background_color": "pink",
   "display": "standalone",
@@ -15,7 +15,7 @@
   "shortcuts": [
     {
       "name": "Home",
-      "url": "/"
+      "url": "./"
     },
     {
       "name": "One",
@@ -28,7 +28,7 @@
   ],
   "tab_strip": {
     "home_tab": {
-      "url": "/",
+      "url": "./",
       "icons": [
         {
           "src": "image.png",

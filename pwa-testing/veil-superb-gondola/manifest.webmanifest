@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "veil-superb-gondola.svg",
     "sizes": "144x144",

@@ -1,10 +1,10 @@
 {
   "name": "Fire Star Agate",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#d03700",
   "description": "Fire star agate",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "star-fire-agate.svg",
     "sizes": "144x144",

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-     <meta name="theme-color" content="#111199"> 
+    <meta name="theme-color" content="#111199">
     <link rel="manifest" href="manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="icon-48.png">
@@ -17,7 +17,7 @@
       }
 
       async function share(extension, content_type) {
-        try 
+        try
         {
           let files = [];
           if (content_type === '*/*') {
@@ -84,7 +84,7 @@ navigator.serviceWorker.onmessage = (event) => {
 
 
         } else {
-          location.protocol = 'https:';
+          // location.protocol = 'https:';
         }
 
         if ('share' in navigator)
@@ -99,4 +99,3 @@ navigator.serviceWorker.onmessage = (event) => {
     <section id="report"></section>
   </body>
 </html>
-

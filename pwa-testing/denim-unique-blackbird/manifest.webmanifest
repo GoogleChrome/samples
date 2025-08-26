@@ -1,10 +1,10 @@
 {
   "name": "Slick Blackbirb",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#a0532e",
   "description": "Sick Blackbirb rocking some unique denims",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "BlackbirdJeans_144.svg",
     "sizes": "any",

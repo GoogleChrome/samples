@@ -1,10 +1,10 @@
 {
   "name": "Dull Axiomatic Saver 2",
-  "start_url": "/",
+  "start_url": "./",
   "display": "minimal-ui",
   "theme_color": "rgba(0,122,204,1)",
   "description": "Site that demos a theme color with rgba.",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "dull-axiomatic-saver.png",
     "sizes": "144x144",

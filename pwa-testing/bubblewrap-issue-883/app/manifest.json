@@ -1,8 +1,8 @@
 {
 "name": "Bubblewrap Issue 883 App",
 "short_name": "Bubblewrap-883",
-"start_url": "/app/",
-"scope": "/app/",
+"start_url": "./app/",
+"scope": "./app/",
 "display": "standalone",
 "description": "A description for your application",
 "lang": " The default language of your application",

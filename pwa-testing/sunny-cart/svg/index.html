@@ -6,12 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
       'use strict';
-      
-      if (location.protocol === 'https:')
+
         navigator.serviceWorker.register("service_worker.js");
-      else
-        location.protocol = 'https:';
-      
     </script>
   </head>
   <body>

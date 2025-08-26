@@ -3,7 +3,7 @@
   "start_url": ".",
   "display": "browser",
   "theme_color": "#ffffff",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "cheerful-plausible-bite.svg",
     "sizes": "144x144",

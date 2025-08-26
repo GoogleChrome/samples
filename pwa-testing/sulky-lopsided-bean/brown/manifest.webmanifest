@@ -1,8 +1,8 @@
 {
   "name": "Sulky Lopsided Brown Bean",
   "display": "standalone",
-  "start_url": "/brown/",
-  "scope": "/brown/",
+  "start_url": "./brown/",
+  "scope": "./brown/",
   "theme_color": "#591313",
   "icons": [{
     "src": "sulky-lopsided-bean-brown.svg",

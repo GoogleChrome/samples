@@ -1,10 +1,10 @@
 {
   "name": "Invincible Syringa",
-  "start_url": "/",
+  "start_url": "./",
   "display": "minimal-ui",
   "theme_color": "#c735d8",
   "description": "Always Syringa",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "invincible-syringa.png",
     "sizes": "144x144",

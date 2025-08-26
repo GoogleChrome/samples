@@ -7,10 +7,10 @@
       "sizes": "144x144"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "background_color": "#88FFFF",
   "display": "standalone",
-  "scope": "/",
+  "scope": "./",
   "file_handlers": [
     {
       "action": "/index.html?plaintext&first_launch",

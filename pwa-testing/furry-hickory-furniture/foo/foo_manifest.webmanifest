@@ -1,9 +1,9 @@
 {
   "name": "Furry Hickory Furniture - Foo Inner App",
-  "start_url": "/foo/index.html",
+  "start_url": "./foo/index.html",
   "display": "standalone",
   "theme_color": "#d59712",
-  "scope": "/foo/",
+  "scope": "./foo/",
   "icons": [{
     "src": "inner-wooded-crayfish.png",
     "sizes": "155x155",

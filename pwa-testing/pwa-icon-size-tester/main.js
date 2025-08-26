@@ -86,8 +86,8 @@ function readControlsManifest() {
     background_color: "green",
     theme_color: "blue",
     display: "minimal-ui",
-    scope: "/",
-    start_url: "/",
+    scope: "./",
+    start_url: "./",
     icons: []
   };
   let i = 0;

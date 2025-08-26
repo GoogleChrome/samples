@@ -8,7 +8,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#FBFF00",
   "background_color": "#FBFF00",

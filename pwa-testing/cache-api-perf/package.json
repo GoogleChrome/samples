@@ -12,9 +12,6 @@
   "dependencies": {
     "express": "^4.16.3"
   },
-  "engines": {
-    "node": "16.x"
-  },
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"
   },

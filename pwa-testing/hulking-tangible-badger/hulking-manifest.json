@@ -1,7 +1,7 @@
 {
   "name": "Hulking Tangible Badger",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "minimal-ui",
   "theme_color": "#080",
   "icons": [{

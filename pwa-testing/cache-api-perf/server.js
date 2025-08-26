@@ -5,7 +5,7 @@
 var express = require('express');
 var app = express();
 
-// we've started you off with Express, 
+// we've started you off with Express,
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
@@ -54,7 +54,7 @@ app.get("/dynamic/slow.html", function (request, response) {
     'transfer-encoding': 'chunked',
     'cache-control': 'no-store',
   });
-  
+
   let count = 0;
   let intervalId;
   response.write('<!doctype html><html><head><meta charset="utf-8"/></head><body>\n');
@@ -70,6 +70,6 @@ app.get("/dynamic/slow.html", function (request, response) {
 })
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+var listener = app.listen(process.env.PORT || 3000, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });

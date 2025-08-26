@@ -1,7 +1,7 @@
 {
   "name": "Tangible Badger",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "theme_color": "#333",
   "icons": [{

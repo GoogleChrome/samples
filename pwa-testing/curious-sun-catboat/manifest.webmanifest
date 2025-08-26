@@ -1,9 +1,9 @@
 {
   "name": "Curious Sun Catboat",
-  "start_url": "/?paramfoo=bar",
+  "start_url": "./?paramfoo=bar",
   "display": "standalone",
   "theme_color": "#ffffff",
-  "scope": "/?paramfoo=bar",
+  "scope": "./?paramfoo=bar",
   "icons": [{
     "src": "curious-sun-catboat-3.jpeg",
     "sizes": "512x512",

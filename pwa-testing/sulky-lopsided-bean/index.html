@@ -13,7 +13,7 @@
   <script>
     // HTTPS Redirect.
     if (window.location.protocol != "https:") {
-      window.location.protocol = "https:";
+      // window.location.protocol = "https:";
     }
     navigator.serviceWorker.register("sw.js");
   </script>
@@ -126,19 +126,4 @@ Share button: <button id="shareButton">Share</button>
   });
 </script>
 
-<!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
-<footer class="footer">
-  <div class="links"></div>
-  <a
-    class="btn--remix"
-    target="_top"
-    href="https://glitch.com/edit/#!/remix/sulky-lopsided-bean"
-  >
-    <img
-      src="Logo_Color.svg"
-      alt=""
-    />
-    Remix on Glitch
-  </a>
-</footer>
 

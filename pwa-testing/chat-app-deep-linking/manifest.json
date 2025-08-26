@@ -1,8 +1,8 @@
 {
   "name": "Fake Chat App",
   "short_name": "Fake Chat",
-  "start_url": "/",
-  "id": "/",
+  "start_url": "./",
+  "id": "./",
   "theme_color": "#000",
   "background_color": "#000",
   "icons": [
@@ -18,7 +18,7 @@
   },
   "file_handlers": [
     {
-      "action": "/",
+      "action": "./",
       "name": "Send Chat Message",
       "accept": {
         "text/plain": [".fakechat"]

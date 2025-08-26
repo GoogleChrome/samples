@@ -1,10 +1,10 @@
 {
   "name": "App With URL containing large characters",
-  "start_url": "/abcdefghij/klmnopqrst/uvwxyzabcd/efghijklmn/opqrstuvwxyz/abcdefghij/klmnopqrst/",
+  "start_url": "./abcdefghij/klmnopqrst/uvwxyzabcd/efghijklmn/opqrstuvwxyz/abcdefghij/klmnopqrst/",
   "display": "standalone",
   "theme_color": "#a0532e",
   "description": "Tree clothes",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "untitled.png",
     "sizes": "144x144",

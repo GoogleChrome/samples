@@ -1,10 +1,10 @@
 {
   "name": "Placeholder App Tester",
   "description": "App intending to be redirected.",
-  "start_url": "/app/index.html",
+  "start_url": "./app/index.html",
   "display": "standalone",
   "theme_color": "#ec9740",
-  "scope": "/app/",
+  "scope": "./app/",
   "icons": [{
     "src": "heart.png",
     "sizes": "256x256",

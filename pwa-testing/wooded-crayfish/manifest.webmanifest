@@ -1,9 +1,9 @@
 {
   "name": "Outer Wooded Crayfish",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "minimal-ui",
   "theme_color": "#8c640b",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "outer-wooded-crayfish.png",
     "sizes": "155x155",

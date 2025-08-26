@@ -192,7 +192,7 @@ function showContentDivForUrl(
     log(`Recieved protocol handling launch, to open '${dataAfterProtocol}'`);
     pushHistoryState = true;
     forceNavigationIfNotFound = true;
-    url = new URL("/" + dataAfterProtocol, window.location);
+    url = new URL("./" + dataAfterProtocol, window.location);
   }
   const getNavElementFromUrl = (url) => {
     for (let link of links) {

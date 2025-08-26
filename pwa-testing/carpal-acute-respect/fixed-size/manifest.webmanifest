@@ -1,10 +1,10 @@
 {
   "name": "Icon Jail 256x256",
-  "start_url": "/fixed-size/",
+  "start_url": "./fixed-size/",
   "display": "standalone",
   "theme_color": "#a0532e",
   "description": "Jail for bad icons",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "blackwhitebars-min.svg",

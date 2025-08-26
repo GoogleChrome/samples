@@ -3,16 +3,16 @@ const CACHE_NAME = `cache-v${cacheVersion}`;
 
 // The resources cached by this service worker.
 const resources = [
-  '/',
-  '/app.js',
-  '/index.html',
-  '/manifest.json',
-  '/style.css',
-  '/sku-details.js',
-  '/sku-manager.js',
-  '/sku-purchase-history.js',
-  '/https-redirect.js',
-  'Play%20Billing%20Demo%20Logo.png'
+  './',
+  './app.js',
+  './index.html',
+  './manifest.json',
+  './style.css',
+  './sku-details.js',
+  './sku-manager.js',
+  './sku-purchase-history.js',
+  './https-redirect.js',
+  './Play%20Billing%20Demo%20Logo.png'
 ];
 
 // Load all resources for this service worker.

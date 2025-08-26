@@ -3,7 +3,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#c8e1ff",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "thunderingfrigate.png?1552881082871",
     "sizes": "144x144",

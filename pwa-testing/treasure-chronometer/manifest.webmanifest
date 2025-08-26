@@ -1,9 +1,9 @@
 {
   "name": "Treasure Chronometer",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#d8cb0a",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "treasure-chronometer.png",
     "sizes": "144x144",

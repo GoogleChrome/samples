@@ -3,7 +3,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#ffffff",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "b-16.png",

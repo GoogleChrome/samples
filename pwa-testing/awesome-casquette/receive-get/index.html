@@ -16,7 +16,7 @@
       }
 
       async function share(extension, content_type) {
-        try 
+        try
         {
           let files = [];
           if (content_type === '*/*') {
@@ -48,7 +48,7 @@
       }
 
       async function shareSpecificData(share_data) {
-        try 
+        try
         {
           await navigator.share(share_data);
           return 'share succeeded';
@@ -133,7 +133,7 @@
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register("sw.js");
         } else {
-          location.protocol = 'https:';
+          // location.protocol = 'https:';
         }
 
         if ('share' in navigator)

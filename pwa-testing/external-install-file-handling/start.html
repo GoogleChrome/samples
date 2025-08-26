@@ -3,7 +3,7 @@
 <script>
   const spoof = document.cookie != 'normal';
 if (!spoof) {
-  location.href = '/';
+  location.href = './';
 } else {
   navigator.serviceWorker.register('sw.js');
   document.cookie = 'spoof';

@@ -1,9 +1,9 @@
 {
   "name": "Moma Fixed",
-  "start_url": "/moma-fixed/",
+  "start_url": "./moma-fixed/",
   "display": "standalone",
   "theme_color": "#a0532e",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "min_icon_fixed.svg",

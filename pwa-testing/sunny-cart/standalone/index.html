@@ -9,10 +9,8 @@
     <script>
       'use strict';
 
-      if (location.protocol === 'https:')
+
         navigator.serviceWorker.register("service_worker.js");
-      else
-        location.protocol = 'https:';
 
       function create_file(name, content_type, content) {
         const options = {type: content_type};
@@ -159,10 +157,8 @@
     <script>
       'use strict';
 
-      if (location.protocol === 'https:')
+
         navigator.serviceWorker.register("service_worker.js");
-      else
-        location.protocol = 'https:';
 
     </script>
     <style>

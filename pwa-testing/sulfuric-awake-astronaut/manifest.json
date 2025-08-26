@@ -1,6 +1,6 @@
 {
   "name": "Web App URL Handlers Sample App",
-  "start_url": "/",
+  "start_url": "./",
   "description": "Web App URL sample app.",
   "theme_color": "#8FF",
   "display": "standalone",

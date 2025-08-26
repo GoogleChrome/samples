@@ -1,7 +1,7 @@
 {
   "name": "Intriguing Veiled Butternut",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "./",
   "theme_color": "#ba6734",
   "icons": [{
     "src": "VeiledButternut144.jpeg",

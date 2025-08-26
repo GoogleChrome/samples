@@ -3,7 +3,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#c837ab",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "glossy-cuboid-attention.svg",
     "sizes": "144x144",

@@ -1,6 +1,6 @@
 {
   "name": "Scope Extensions Sample App",
-  "start_url": "/",
+  "start_url": "./",
   "description": "A sample app for testing scope extensions feature.",
   "theme_color": "#8FF",
   "display": "standalone",

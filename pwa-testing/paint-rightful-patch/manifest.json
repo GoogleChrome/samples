@@ -7,7 +7,7 @@
       "type": "image/svg+xml"
     }
       ],
-  "start_url": "/",
+  "start_url": "./",
   "theme_color": "black",
   "background_color": "pink",
   "display": "standalone",
@@ -16,7 +16,7 @@
   "shortcuts": [
     {
       "name": "Home",
-      "url": "/",
+      "url": "./",
       "icons": [
         {
           "src": "paint-rightful-patch.svg",
@@ -39,7 +39,7 @@
       "scope_patterns": [
         {"pathname": "/:foo/*"},
         {"pathname": "/index.html"},
-        {"pathname": "/"}
+        {"pathname": "./"}
       ]
     },
     "new_tab_button": {

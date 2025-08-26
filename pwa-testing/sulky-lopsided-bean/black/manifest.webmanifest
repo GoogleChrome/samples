@@ -1,8 +1,8 @@
 {
   "name": "Sulky Lopsided Black Bean",
   "display": "standalone",
-  "start_url": "/black/",
-  "scope": "/black/",
+  "start_url": "./black/",
+  "scope": "./black/",
   "theme_color": "black",
   "icons": [{
     "src": "sulky-lopsided-bean-black.svg",

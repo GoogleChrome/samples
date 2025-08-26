@@ -4,7 +4,7 @@
   "display": "standalone",
   "theme_color": "red",
   "description": "1234567891123456789212345678931234567894123456789512345678961234567897123456789812345678991234567890",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "upbeat-hydrant.png?1558335188004",
     "sizes": "144x144",

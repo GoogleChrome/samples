@@ -3,7 +3,7 @@
   "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#beffff",
-  "scope": "/b/",
+  "scope": "./b/",
   "icons": [{
     "src": "windvetb.png?1552284094394",
     "sizes": "144x144",

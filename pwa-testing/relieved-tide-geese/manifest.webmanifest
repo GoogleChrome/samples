@@ -1,10 +1,10 @@
 {
   "name": "Relieved Tide Geese",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#a0532e",
   "description": "Site that lets you demo the beforeinstallprompt functionality.",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "icon144.png",
     "sizes": "144x144",

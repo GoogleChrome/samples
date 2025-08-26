@@ -26,8 +26,8 @@ self.addEventListener('fetch', event => {
         background_color: "green",
         theme_color: "blue",
         display: "minimal-ui",
-        scope: "/",
-        start_url: "/",
+        scope: "./",
+        start_url: "./",
         icons: []
       };
       console.log('*** Service Worker *** Using manifest: ', manifest);

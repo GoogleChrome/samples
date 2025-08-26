@@ -1,10 +1,10 @@
 {
   "name": "Private Brick Universe",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#2395d7",
   "description": "Private universe in the galaxy. Used to test shortcuts",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "squash_unvierse.png",
     "sizes": "144x144",

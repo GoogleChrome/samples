@@ -1,7 +1,7 @@
 {
   "name": "Far Noble Cod",
-  "scope": "/",
-  "start_url": "/index.html",
+  "scope": "./",
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#d45500",
   "icons": [

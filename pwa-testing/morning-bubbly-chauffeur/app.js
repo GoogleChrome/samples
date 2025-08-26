@@ -1,13 +1,7 @@
 import { makeFileEditor } from "/file-editor.js";
 import("/check-state.js");
-
-// Redirect to https if using http, because File System Access API (previously Native FileSystem API) isn't supported in http.
-if (location.protocol !== 'https:') {
-    location.replace(`https:${location.href.substring(location.protocol.length)}`);
-}
-
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js");
+  navigator.serviceWorker.register("service-worker.js");
 }
 
 const openedFilesContainer = document.getElementById(
@@ -78,7 +72,7 @@ const findSupportedTypes = async () => {
       const item = document.createElement("li");
       item.innerHTML = `${mime}`;
       mimelist.appendChild(item);
-    
+
       console.log(fileexts);
       if(typeof fileexts == 'string') {
         const extitem = document.createElement("li");

@@ -1,8 +1,8 @@
 {
   "name": "Sulky Lopsided White Bean",
   "display": "standalone",
-  "start_url": "/white/",
-  "scope": "/white/",
+  "start_url": "./white/",
+  "scope": "./white/",
   "theme_color": "white",
   "icons": [{
     "src": "sulky-lopsided-bean-white.svg",

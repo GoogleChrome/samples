@@ -1,6 +1,6 @@
 {
   "name": "Butternut Shocking Deerstalker",
-  "start_url": "/inner/index.html",
+  "start_url": "./inner/index.html",
   "display": "standalone",
   "theme_color": "#d59712",
   "scope": "..",

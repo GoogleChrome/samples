@@ -16,7 +16,7 @@
       }
 
       async function share(extension, content_type) {
-        try 
+        try
         {
           let files = [];
           if (content_type === '*/*') {
@@ -48,7 +48,7 @@
       }
 
       async function share_blobs(extension, content_type, first_blob, second_blob) {
-        try 
+        try
         {
           const first_file = create_file('sample1', extension, content_type, first_blob);
           const second_file = create_file('sample2', extension, content_type, second_blob);
@@ -112,7 +112,7 @@
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register("sw.js");
         } else {
-          location.protocol = 'https:';
+          // location.protocol = 'https:';
         }
 
         if ('share' in navigator)

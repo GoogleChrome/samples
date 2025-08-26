@@ -7,9 +7,9 @@
       "sizes": "256X256"
     }
   ],
-  "start_url": "/",
+  "start_url": "./",
   "background_color": "#216F20",
   "display": "standalone",
-  "scope": "/",
+  "scope": "./",
   "theme_color": "#689f38"
 }

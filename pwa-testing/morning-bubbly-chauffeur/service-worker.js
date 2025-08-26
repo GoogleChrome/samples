@@ -3,14 +3,14 @@ const CACHE_NAME = `cache-v${cacheVersion}`;
 
 // The resources cached by this service worker.
 const resources = [
-  "/",
-  "/app.js",
-  "/check-state.js",
-  "/file-editor.js",
-  "/index.html",
-  "/manifest.json",
-  "/style.css",
-  "favicon-144x144.png"
+  "./",
+  "./app.js",
+  "./check-state.js",
+  "./file-editor.js",
+  "./index.html",
+  "./manifest.json",
+  "./style.css",
+  "./favicon-144x144.png"
 ];
 
 // Load all resources for this service worker.

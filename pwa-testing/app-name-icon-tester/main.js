@@ -46,8 +46,8 @@ function readControlsManifest() {
     description: "6 star efficiency rated newt (1)",
     theme_color: "green",
     display: "minimal-ui",
-    scope: "/",
-    start_url: "/",
+    scope: "./",
+    start_url: "./",
     icons: [
       {
         src: iconSelect.value,

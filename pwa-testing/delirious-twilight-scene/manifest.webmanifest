@@ -5,7 +5,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "delirious-twilight-scene-48.png",

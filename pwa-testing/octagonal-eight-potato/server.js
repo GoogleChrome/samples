@@ -46,17 +46,17 @@ fastify.get("/manifest.json", function(request, reply) {
 fastify.post("/share", async function(request, reply) {
   let params = getMimeTypeParams(request);
   const files = await request.saveRequestFiles()
-  
+
   params["files"] = [];
   for (const file of files) {
     params["files"].push({filename: file.filename, type: file.mimetype});
   }
-  
+
   return reply.view("/src/pages/share.hbs", params);
 });
 
 // Run the server and report out to the logs
-fastify.listen(process.env.PORT, function(err, address) {
+fastify.listen(process.env.PORT || 3000, function(err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);

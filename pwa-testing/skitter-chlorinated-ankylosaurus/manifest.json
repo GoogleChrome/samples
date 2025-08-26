@@ -1,6 +1,6 @@
 {
   "name": "Skitter Chlorinated Ankylosaurus",
-  "scope": "/",
+  "scope": "./",
   "display": "standalone",
   "theme_color": "#d45500",
   "icons": [{

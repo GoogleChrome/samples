@@ -4,7 +4,7 @@
   "id": "https://unexpected-five-scowl.glitch.me/web/index.html?query=sdf#!/home.html",
   "display": "standalone",
   "theme_color": "#ffffff",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "unexpected-five-scowl3.jpg",
     "sizes": "512x512",

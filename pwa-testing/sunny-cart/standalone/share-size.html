@@ -6,7 +6,7 @@
     </title>
     <meta name="viewport" content="width=device-width">
     <style>
-    .error {
+      .error {
       color: #d22;
     }
     input[type="button"] {
@@ -54,17 +54,17 @@
       </tr>
     </table>
     <p>
-      <input id="share" type="button" value="Share"> <input id=
-      "share-no-gesture" type="button" value="Share without user gesture">
+      <input id="share" type="button" value="Share">
+      <input id="share-no-gesture" type="button" value="Share without user gesture">
     </p>
     <div id="output"></div>
     <p>
-      This is a test page for the <a href=
-      "https://w3c.github.io/web-share/">Web Share API</a>. It will only work
+      This is a test page for the
+      <a href="https://w3c.github.io/web-share/">Web Share API</a>. It will only work
       in browsers that have implemented the API.
     </p>
     <script>
-    'use strict';
+      'use strict';
 
     function sleep(delay) {
       return new Promise(resolve => {
@@ -121,9 +121,9 @@ function generateFiles() {
     const name = 'hello.pjpeg';
     const options = {type: 'image/x-xbitmap'};
     return  Array(10).fill(new File(content, name, options));
-  
+
 }
-      
+
     async function testWebShare() {
       const title_input = document.querySelector('#title');
       const text_input = document.querySelector('#text');
@@ -164,13 +164,6 @@ function generateFiles() {
 
       if (navigator.share === undefined) {
         setShareButtonsEnabled(false);
-        if (window.location.protocol === 'http:') {
-          // navigator.share() is only available in secure contexts.
-          window.location.replace(window.location.href.replace(/^http:/, 'https:'));
-        } else {
-          logError('Error: You need to use a browser that supports this draft ' +
-                   'proposal.');
-        }
       }
     }
 

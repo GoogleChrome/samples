@@ -1,9 +1,9 @@
 {
   "name": "Moma Broken",
-  "start_url": "/moma-broken/",
+  "start_url": "./moma-broken/",
   "display": "standalone",
   "theme_color": "#a0532e",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "min_icon_broken.svg",

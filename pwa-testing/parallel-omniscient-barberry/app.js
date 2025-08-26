@@ -1,15 +1,8 @@
 import { makeFileEditor } from "/file-editor.js";
 import("/check-state.js");
 
-// Redirect to https if using http, because File System Access API (previously Native FileSystem API) isn't supported in http.
-if (location.protocol !== "https:") {
-  location.replace(
-    `https:${location.href.substring(location.protocol.length)}`
-  );
-}
-
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js");
+  navigator.serviceWorker.register("service-worker.js");
 }
 
 const openedFilesContainer = document.getElementById(
@@ -77,7 +70,7 @@ if ("launchQueue" in window) {
     // Allow reloading support (not implemented yet, currently supported
     // by Chromium's re-adding lauchParams to queue on reload).
     removeParamFromUrl("first_launch");
-    
+
     if (window.location.search.startsWith("?plaintext")) {
       for (const launchFile of launchParams.files) {
         const editor = await makeFileEditor(launchFile);

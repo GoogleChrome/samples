@@ -33,8 +33,8 @@
       "purpose": "monochrome"
     }
   ],
-  "scope": "/",
-  "start_url": "/index.html",
+  "scope": "./",
+  "start_url": "./index.html",
   "display": "minimal-ui",
   "theme_color": "#FF0000",
   "background_color": "#FFFFFF"

@@ -7,10 +7,10 @@
       "sizes": "144x144"
     }
   ],
-  "start_url": "/",
+  "start_url": "./",
   "background_color": "#8888FF",
   "display": "standalone",
-  "scope": "/",
+  "scope": "./",
   "theme_color": "#9aca42",
   "file_handlers": [
     {

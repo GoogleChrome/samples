@@ -1,7 +1,7 @@
 {
   "name": "Daisy Summer Mahogany",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "theme_color": "#a13100",
   "icons": [{

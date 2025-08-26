@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#f20",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "telling-krills-logo.png",
     "sizes": "144x144",

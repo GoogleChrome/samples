@@ -1,10 +1,10 @@
 {
   "name": "Cute Western Seer",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#a0532e",
   "description": "Really Cute Seer",
-  "scope": "/",
+  "scope": "./",
   "icons": [{
     "src": "Seer144.jpg",
     "sizes": "144x144",

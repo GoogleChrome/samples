@@ -8,6 +8,6 @@ app.all('*', (req, res, next) => {
     res.redirect('https://' + req.hostname + req.url);
 });
 app.use(express.static('public'));
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('Listening');
 });
