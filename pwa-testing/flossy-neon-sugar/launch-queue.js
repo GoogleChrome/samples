@@ -14,6 +14,6 @@ function log(message) {
   logContainer.appendChild(logElement);
 }
 
-window.launchConsumer((params) => {
+window.launchQueue.setConsumer((params) => {
   log(`Got launch for ${params.targetUrl}`);
 })

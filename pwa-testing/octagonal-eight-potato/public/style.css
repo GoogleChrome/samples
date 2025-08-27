@@ -26,20 +26,6 @@ to this section's matching END comment to see page-specific styles.
   display: none !important;
 }
 
-/* Import fonts */
-@font-face {
-  font-family: HK Grotesk;
-  src: url("HKGrotesk-Regular.otf")
-    format("opentype");
-}
-@font-face {
-  font-family: HK Grotesk;
-  font-weight: bold;
-  src: url("HKGrotesk-Bold.otf")
-    format("opentype");
-}
-
-
 /* Navigation grid */
 .footer {
   display: flex;

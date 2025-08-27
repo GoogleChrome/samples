@@ -13,11 +13,11 @@
   "shortcuts": [
     {
       "name": "Smol Birb",
-      "url": "/",
+      "url": "./",
       "icons": [
         {
           "src": "BlackbirdJeans_144.jpeg",
-          "sizes": "0x0",
+          "sizes": "144x144",
           "type": "image/svg+xml",
           "purpose": "any monochrome"
         }
@@ -26,7 +26,7 @@
   ],
   "file_handlers": [
     {
-      "action": "/?plaintext",
+      "action": "./?plaintext",
       "name": "Plain Text",
       "icons": [
         {

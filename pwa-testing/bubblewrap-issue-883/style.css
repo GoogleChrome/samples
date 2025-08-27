@@ -18,17 +18,8 @@
   display: none !important;
 }
 
-/* Import fonts */
 @font-face {
-  font-family: HK Grotesk;
-  src: url("HKGrotesk-Regular.otf")
-    format("opentype");
-}
-@font-face {
-  font-family: HK Grotesk;
   font-weight: bold;
-  src: url("HKGrotesk-Bold.otf")
-    format("opentype");
 }
 
 /* Our remix on glitch button */

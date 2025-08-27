@@ -10,7 +10,8 @@
     "purpose": "maskable any"
   }],
   "scope_extensions": [{
-    "origin": "https://alancutter.github.io/"
+    "origin": "https://alancutter.github.io/",
+    "type": "origin"
   }],
   "launch_handler": {
     "client_mode": "focus-existing"

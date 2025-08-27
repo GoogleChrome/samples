@@ -13,7 +13,7 @@
   "scope": "./",
   "file_handlers": [
     {
-      "action": "/index.html?plaintext&first_launch",
+      "action": "./index.html?plaintext&first_launch",
       "name": "Plain Text",
       "accept": {
         "text/plain": [".txt", ".md", ".csv", ".text", ".foo", ".bar", ".foobar"]
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "action": "/index.html?image&first_launch",
+      "action": "./index.html?image&first_launch",
       "accept": {
         "image/jpeg": [".jpeg", ".jpg"]
       },

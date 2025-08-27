@@ -28,7 +28,7 @@
   "protocol_handlers": [
     {
       "protocol": "web+fakechat",
-      "url": "/?open-from-protocol=%s"
+      "url": "./?open-from-protocol=%s"
     }
   ]
 }

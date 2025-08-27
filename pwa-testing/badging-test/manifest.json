@@ -2,27 +2,27 @@
   "name": "Badge API Demo",
   "short_name": "Badge Demo",
   "icons": [{
-    "src": "https://via.placeholder.com/128",
+    "src": "https://placehold.co/128",
       "sizes": "128x128",
       "type": "image/png"
     }, {
-      "src": "https://via.placeholder.com/144",
+      "src": "https://placehold.co/144",
       "sizes": "144x144",
       "type": "image/png"
     }, {
-      "src": "https://via.placeholder.com/152",
+      "src": "https://placehold.co/152",
       "sizes": "152x152",
       "type": "image/png"
     }, {
-      "src": "https://via.placeholder.com/192",
+      "src": "https://placehold.co/192",
       "sizes": "192x192",
       "type": "image/png"
     }, {
-      "src": "https://via.placeholder.com/256",
+      "src": "https://placehold.co/256",
       "sizes": "256x256",
       "type": "image/png"
     }, {
-      "src": "https://via.placeholder.com/512",
+      "src": "https://placehold.co/512",
       "sizes": "512x512",
       "type": "image/png"
     }],

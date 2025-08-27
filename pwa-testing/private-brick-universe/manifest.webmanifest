@@ -15,14 +15,14 @@
       "name": "Brick Universe 1",
       "short_name": "universe_1",
       "description": "View the 1st universe",
-      "url": "/",
+      "url": "./",
       "icons": [{ "src": "squash_unvierse.png", "sizes": "144x144" }]
     },
     {
       "name": "Brick Universe 2",
       "short_name": "universe_2",
       "description": "View the 2nd universe",
-      "url": "/",
+      "url": "./",
       "icons": [{ "src": "universe2.png", "sizes": "144x144" }]
     }]
 }

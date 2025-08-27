@@ -202,7 +202,7 @@ function updateControls(manifest) {
 function updateDisplay(manifest) {
   document.getElementById('title').textContent = manifest.name;
   document.getElementById('appName').textContent = manifest.name;
-  document.getElementById('favicon').href = manifest.icons[0].src;
+  document.getElementById('favicon').href = manifest.icons[0]?.src || '';
   let imgContainer = document.getElementById('appIcons');
   imgContainer.innerText = '';
 

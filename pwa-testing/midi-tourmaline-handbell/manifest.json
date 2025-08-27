@@ -16,7 +16,7 @@
   "scope_extensions": [
     {
       "type": "origin",
-      "value": "https://sulfuric-awake-astronaut.glitch.me"
+      "origin": "https://example.com"
     }
   ]
 }
