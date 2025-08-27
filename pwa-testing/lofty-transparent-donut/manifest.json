@@ -1,0 +1,48 @@
+{
+  "name": "Notifications API Demo 2",
+  "short_name": "Notifications Demo 2",
+  "description": "The Notifications API allows installed web apps to show persistent and non-persistent notification bubbles.",
+  "icons": [
+    {
+      "src": "fugu-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "fugu-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "fugu-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "fugu-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "fugu-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "fugu-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "fugu-monochrome-weird.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "monochrome"
+    }
+  ],
+  "scope": "/",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#e8eaf6",
+  "theme_color": "#3f51b5"
+}
