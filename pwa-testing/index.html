@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Testing Demos</title>
+    <style>
+      body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 2em;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #111;
+        }
+        #demo-list {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1em;
+            border: 1px solid #e1e4e8;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 0.75em 1em;
+            border-bottom: 1px solid #e1e4e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .source-link {
+            font-size: 0.9em;
+            font-weight: 400;
+            color: #586069;
+            white-space: nowrap;
+        }
+        .loading, .error {
+            color: #586069;
+            font-style: italic;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>PWA Testing Demos 🧪</h1>
+    <p>This page dynamically lists all demos from the
+      <code>pwa-testing</code>
+      directory in the
+      <a href="https://github.com/GoogleChrome/samples">GoogleChrome/samples</a>
+      repository.</p>
+    <div id="demo-list">
+      <p class="loading">Loading demos from GitHub API...</p>
+    </div>
+    <script>
+      // --- Configuration ---
+        const GITHUB_API_URL = 'https://api.github.com/repos/GoogleChrome/samples/contents/pwa-testing?ref=gh-pages';
+        const DEMO_BASE_URL = 'https://googlechrome.github.io/samples/pwa-testing/';
+        const SOURCE_BASE_URL = 'https://github.com/GoogleChrome/samples/tree/gh-pages/pwa-testing/';
+
+        // --- DOM Element ---
+        const listContainer = document.getElementById('demo-list');
+
+        // --- Main Function ---
+        async function fetchAndDisplayDemos() {
+            try {
+                const response = await fetch(GITHUB_API_URL);
+
+                if (!response.ok) {
+                    throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+                }
+
+                const items = await response.json();
+
+                // We are only interested in directories, as each one is a demo.
+                const demos = items.filter(item => item.type === 'dir');
+
+                if (demos.length === 0) {
+                    listContainer.innerHTML = `<p class="error">No demos found in the specified directory.</p>`;
+                    return;
+                }
+
+                // Build the HTML list
+                const listHtml = demos.map(demo => {
+                    const demoUrl = `${DEMO_BASE_URL}${demo.name}`;
+                    const sourceUrl = `${SOURCE_BASE_URL}${demo.name}`;
+                    return `
+                        <li>
+                            <a href="${demoUrl}" target="_blank" rel="noopener noreferrer">${demo.name}</a>
+                            <a href="${sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link">[View Source]</a>
+                        </li>
+                    `;
+                }).join('');
+
+                listContainer.innerHTML = `<ul>${listHtml}</ul>`;
+
+            } catch (error) {
+                console.error('Failed to fetch demos:', error);
+                listContainer.innerHTML = `<p class="error">Sorry, could not fetch the demo list. Please check the browser console for more details.</p>`;
+            }
+        }
+
+        fetchAndDisplayDemos();
+    </script>
+  </body>
+</html>
