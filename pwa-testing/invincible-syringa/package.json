@@ -12,9 +12,6 @@
   "dependencies": {
     "express": "^4.16.2"
   },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/welcome-project"
-  },
   "license": "MIT",
   "keywords": [
     "node",
