@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Notifications API Demo</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <meta name="theme-color" content="#3f51b5" />
+    <link rel="manifest" href="./manifest.json" />
+  </head>
+  <body>
+    <h1>
+      Notifications API Demo
+    </h1>
+
+    <p>
+      The
+      <a href="https://notifications.spec.whatwg.org/">Notifications API</a>
+      allows installed web apps to show persistent and
+      <a
+        href="https://github.com/whatwg/notifications/issues/26"
+        target="_blank"
+        >non-persistent</a
+      >
+      notification bubbles.
+    </p>
+
+    <p id="notSupported">
+      <b>Sorry!</b> This browser doesn't appear to support the notifications
+      API.
+    </p>
+
+    <p id="requiresStandalone">
+      <b>Note:</b> Install this demo as Progressive Web App to see icons and
+      title from web app manifest in all notification bubbles. <br /><br />
+      <button id="butInstall" type="button" disabled>
+        Install
+      </button>
+    </p>
+    
+    <p>
+      Permission state: <span id="permissionState">TODO</span>
+      <button id="permissionRequest" type="button">
+        Request permission
+      </button>
+    </p>
+
+    <h3>
+      Show non-persistent notification
+    </h3>
+    <div id="demoControls2">
+      <button id="notificationShow" type="button">
+        Show
+      </button>
+      <button id="notificationClear" type="button">
+        Close most recent
+      </button>
+    </div>
+
+    <h3>
+      Show persistent notification (via service worker)
+    </h3>
+    <div id="demoControls3">
+      <button id="swNotificationShow" type="button">
+        SW Show
+      </button>
+      <button id="swNotificationClear" type="button">
+        SW Clear
+      </button>
+      <input type="checkbox" id="swUseBadge" />
+      <label for="swUseBadge">Use badge</label>
+      <input type="checkbox" id="swWithActions" />
+      <label for="swWithActions">With actions</label>
+      <input type="checkbox" id="swViaPage" />
+      <label for="swViaPage">Via page</label>
+    </div>
+    
+    <div>
+      <h3>
+        Received Actions
+      </h3>
+      <pre id="receivedActions"></pre>
+    </div>
+    
+    <div>
+      <h3>
+        Displayed notifications
+      </h3>
+      <pre id="displayedNotifications"></pre>
+      <button id="refreshNotifications" type="button">
+      Refresh
+      </button>
+    </div>
+    <div>
+      <h3>
+        Custom notification
+      </h3>
+      <dl>
+        <dt>Title</dt>
+        <dd><input type="text" id="notTitle" value="Title"></dd>
+        <dt>Body</dt>
+        <dd><input type="text" id="notBody" value="Notification body"></dd>
+        <dt>Tag</dt>
+        <dd><input type="text" id="notTag" value=""></dd>
+        <dt>Flags</dt>
+        <dd>
+          <input type="checkbox" id="notRenotify"> <label for="notRenotify">Renotify</label><br>
+          <input type="checkbox" id="notSilent"> <label for="notSilent">Silent</label><br>
+          <input type="checkbox" id="notRequireInteraction"> <label for="notRequireInteraction">Require Interaction</label><br>
+        </dd>
+      </dl>
+      <button id="notDisplay" type="button">
+        Display
+      </button>
+    </div>
+    <p>
+      Check out the
+      <a
+        href="https://glitch.com/edit/#!/lofty-transparent-donut?path=demo.js:46:0"
+        target="_blank"
+        >source</a
+      >
+      for this sample, or
+      <a
+        href="https://glitch.com/edit/#!/remix/lofty-transparent-donut"
+        target="_blank"
+        >remix it</a
+      >
+      on Glitch.
+    </p>
+
+    <script src="common.js"></script>
+    <script src="demo.js"></script>
+  </body>
+</html>
