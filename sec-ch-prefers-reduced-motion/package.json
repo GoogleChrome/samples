@@ -1,0 +1,10 @@
+{
+  "name": "sec-ch-prefers-reduced-motion",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
