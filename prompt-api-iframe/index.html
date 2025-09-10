@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+      }
+      div {
+        white-space: pre-wrap;
+      }
+    </style>
+    <title>Prompt API iframe on Glitch</title>
+    <script type="module">
+      const params = new URLSearchParams(location.search);
+
+      if (
+        'LanguageModel' in self &&
+        (await self.LanguageModel.availability()) === 'available' &&
+        params.has('prompt')
+      ) {
+        const div = document.querySelector('div');
+        const prompt = params.get('prompt');
+        const session = await self.LanguageModel.create();
+        console.log({
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              value: prompt,
+            },
+          ],
+        });
+        const stream = session.promptStreaming(prompt);
+        for await (const chunk of stream) {
+          div.append(chunk);
+        }
+
+        window.addEventListener('message', (event) => {
+          console.log('Request from ' + new URL(event.origin));
+          console.log('Received message:', event.data);
+
+          if (event.data === 'gemini') {
+            console.log('Responding', div.innerText);
+            event.source.postMessage(
+              {
+                prompt,
+                response: div.innerHTML,
+              },
+              event.origin
+            );
+          }
+        });
+
+        const img = document.querySelector('img');
+        img.src = '';
+        img.remove();
+      }
+    </script>
+  </head>
+  <body>
+    <div></div>
+    <img
+      src="https://httpbin.org/delay/10"
+      alt=""
+      width="0"
+      height="0"
+    />
+  </body>
+</html>
