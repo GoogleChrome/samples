@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<script>
+  // HTTPS Redirect.
+if (window.location.protocol != 'https:') {
+  // window.location.protocol = 'https:';
+}
+</script>
+<head>
+  <title id="title"></title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link id="favicon" rel="icon" type="image/png" href="32x32-alt.png">
+</head>
+<style>
+  * {
+  font-family: monospace;
+}
+img {
+  border: 5px solid #555;
+}
+</style>
+<h1>
+Test site to verify predictable app updating
+</h1>
+<img id="pageIcon" src="256x256.png"><br>
+<h3>
+Select name:
+<select id="appName">
+  <option>FOOOOOOOO</option>
+  <option>BARRRRRRR</option>
+</select><br>
+</h3>
+<h3>
+Select icon (Use alt icons to verify the 10% diff):
+<select id="appIcon">
+  <option>white_icons</option>
+  <option>red_icons</option>
+  <option>alt_icons</option>
+</select><br>
+</h3>
+<h3>
+Select theme color (verify non-security sensitive update):
+<select id="themeColorSelect">
+  <option>lightgreen</option>
+  <option>lightsalmon</option>
+  <option>gold</option>
+  <option>lightskyblue</option>
+  <option>white</option>
+  <option>black</option>
+</select><br>
+</h3>
+<h2>
+  Output manifest:
+</h2>
+<pre id="output"></pre>
+<script src="main.js"></script>
