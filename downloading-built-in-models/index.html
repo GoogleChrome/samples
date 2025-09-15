@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      http-equiv="origin-trial"
+      content="AtL2Ny6PLM+TQJkLBmlm8aHGsh7m+ETl75E73jdYbHAVEfBmD3BLb0BmQW0LG1c01A/ke871KHq+nJcuiNV7Ig8AAAB8eyJvcmlnaW4iOiJodHRwczovL2Nsb3Vkd29ya3N0YXRpb25zLmRldjo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlfQ=="
+    />
+    <title>LanguageModel downloadprogress</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>"
+    />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>LanguageModel</h1>
+    <div>
+      <button class="create" type="button">Create LLM session</button>
+      <button class="prompt" type="button" disabled>Prompt LLM</button>
+    </div>
+    <div>
+      <progress hidden id="progress" value="0"></progress>
+      <label for="progress">Model download progress</label>
+    </div>
+    <output></output>
+    <script defer src="main.js"></script>
+  </body>
+</html>
