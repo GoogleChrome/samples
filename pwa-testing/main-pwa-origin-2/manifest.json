@@ -14,7 +14,7 @@
   "scope_extensions": [
     {
       "type": "origin",
-      "origin": "https://associated-pwa-origin-2.glitch.me/"
+      "origin": "https://googlechrome.github.io/samples/associated-pwa-origin-2/"
     }
   ]
 }

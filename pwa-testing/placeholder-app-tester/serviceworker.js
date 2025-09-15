@@ -74,7 +74,7 @@ self.addEventListener("fetch", (event) => {
       new Promise(async (resolve) => {
         let redirect = await idbKeyval.get("redirect");
         if (redirect) {
-          resolve(Response.redirect("https://redirection-target.glitch.me/"));
+          resolve(Response.redirect("https://googlechrome.github.io/samples/redirection-target/"));
         } else {
           return resolve(
             fetch(event.request).then((response) => {

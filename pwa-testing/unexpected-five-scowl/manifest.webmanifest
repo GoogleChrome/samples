@@ -1,7 +1,7 @@
 {
   "name": "Unexpected Five Scowl",
   "start_url": ".",
-  "id": "https://unexpected-five-scowl.glitch.me/web/index.html?query=sdf#!/home.html",
+  "id": "https://googlechrome.github.io/samples/pwa-testing/unexpected-five-scowl/web/index.html?query=sdf#!/home.html",
   "display": "standalone",
   "theme_color": "#ffffff",
   "scope": "./",

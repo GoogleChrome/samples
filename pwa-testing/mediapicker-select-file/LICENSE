@@ -1,14 +1,14 @@
-The LICENSE file for any project gives credit to the creator/author of the 
-project, copyright information for the project, and the legal terms under 
+The LICENSE file for any project gives credit to the creator/author of the
+project, copyright information for the project, and the legal terms under
 which it's being shared. In other words, this is us using an MIT license to
 say "we wrote this and you can do whatever you want with it."
 
 ******************************************************************************
-~glitch-hello-website
+
 ******************************************************************************
 MIT License
 
-Copyright (c) 2021, Glitch, Inc.
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,9 +36,9 @@ SOFTWARE.
 THIRD-PARTY SOFTWARE
 This is all the software we used to build this starter project. All of these
 licenses are compatible with the license above. We've included links so you
-can learn more if you want. 
+can learn more if you want.
 
-1. HK Grotesk: The font we're using. 
+1. HK Grotesk: The font we're using.
 
 
 ******************************************************************************

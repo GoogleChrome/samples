@@ -6,7 +6,7 @@
 // Use your menus or right-click / control-click and choose "Inspect" > "Console"
 console.log("Hello 🌎");
 
-/* 
+/*
 Make the "Click me!" button move when the visitor clicks it:
 - First add the button to the page by following the steps in the TODO 🚧
 */
@@ -19,12 +19,12 @@ if (btn) { // Detect clicks on the button
 }
 
 
-// ----- GLITCH STARTER PROJECT HELPER CODE -----
+
 
 // Open file when the link in the preview is clicked
 let goto = (file, line) => {
   window.parent.postMessage(
-    { type: "glitch/go-to-line", payload: { filePath: file, line: line } }, "*"
+    { type: "github/go-to-line", payload: { filePath: file, line: line } }, "*"
   );
 };
 // Get the file opening button from its class name

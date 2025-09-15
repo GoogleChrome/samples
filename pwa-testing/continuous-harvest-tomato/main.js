@@ -1,8 +1,7 @@
 navigator.serviceWorker.register('serviceworker.js');
 
 const urls = [
-  'https://hill-glitter-tree.glitch.me/',
-  'https://continuous-harvest-tomato.glitch.me/',
+  'https://googlechrome.github.io/samples/pwa-testing/continuous-harvest-tomato/',
 ];
 
 for (const url of urls) {

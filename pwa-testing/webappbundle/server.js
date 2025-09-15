@@ -2,7 +2,7 @@ const express = require("express");
 const wbn = require('wbn');
 const app = express();
 
-const origin = 'https://webappbundle2.glitch.me/';
+const origin = 'https://googlechrome.github.io/samples/pwa-testing/webappbundle/';
 
 const SW_SCRIPT = `
 const CACHE_NAME = 'my-cache';

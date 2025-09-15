@@ -1,18 +1,18 @@
 navigator.serviceWorker.register('serviceworker.js');
 
 const urls = [
-  'https://intriguing-veiled-butternut.glitch.me/',
-  'https://octagonal-handsomely-burrito.glitch.me/',
-  'http://intriguing-veiled-butternut.glitch.me/',
-  'http://octagonal-handsomely-burrito.glitch.me/',
+  'https://googlechrome.github.io/samples/pwa-testing/intriguing-veiled-butternut/',
+  'https://googlechrome.github.io/samples/pwa-testing/octagonal-handsomely-burrito//',
+  'https://googlechrome.github.io/samples/pwa-testing/intriguing-veiled-butternut/',
+  'https://googlechrome.github.io/samples/pwa-testing/octagonal-handsomely-burrito/',
   'https://bit.ly/3YfC0xv',
   'https://bit.ly/46o4G9J',
-  'https://intriguing-veiled-butternut.glitch.me/burrito',
-  'https://octagonal-handsomely-burrito.glitch.me/burrito',
-  'https://intriguing-veiled-butternut.glitch.me/butternut',
-  'https://octagonal-handsomely-burrito.glitch.me/butternut',
-  'https://intriguing-veiled-butternut.glitch.me/?burrito',
-  'https://octagonal-handsomely-burrito.glitch.me/?butternut',
+  'https://googlechrome.github.io/samples/pwa-testing/intriguing-veiled-butternut/burrito',
+  'https://googlechrome.github.io/samples/pwa-testing/octagonal-handsomely-burrito//burrito',
+  'https://googlechrome.github.io/samples/pwa-testing/intriguing-veiled-butternut/butternut',
+  'https://googlechrome.github.io/samples/pwa-testing/octagonal-handsomely-burrito//butternut',
+  'https://googlechrome.github.io/samples/pwa-testing/intriguing-veiled-butternut/?burrito',
+  'https://googlechrome.github.io/samples/pwa-testing/octagonal-handsomely-burrito//?butternut',
   'https://www.google.com',
 ];
 
@@ -32,9 +32,9 @@ for (const url of urls) {
 
   const list = document.createElement('ul');
   document.body.appendChild(list);
-  
+
   let currentList = list;
-  
+
   function subList(name) {
     const sub = document.createElement('ul');
     const li = document.createElement('li');
@@ -43,37 +43,37 @@ for (const url of urls) {
     list.appendChild(li);
     currentList = sub;
   }
-  
+
   function addItem(item) {
     const li = document.createElement('li');
     li.appendChild(item);
     currentList.appendChild(li);
   }
 
-  
+
   for (const target of ['_self', 'embeddedFrame', '_blank', 'otherFrameName']) {
     subList("Frame: " + target);
-    
+
     const linkNoArgs = document.createElement('a');
     linkNoArgs.textContent = `target="${target}"`;
     linkNoArgs.href = url;
     linkNoArgs.target = target;
     addItem(linkNoArgs);
-    
+
     const link = document.createElement('a');
     link.textContent = `target="${target}" rel=opener`;
     link.href = url;
     link.target = target;
     link.rel = "opener";
     addItem(link);
-    
+
     const link2 = document.createElement('a');
     link2.textContent = `target="${target}" rel=noopener`;
     link2.href = url;
     link2.target = target;
     link2.rel = "noopener";
     addItem(link2);
-    
+
     const buttonNoArgs = document.createElement('button');
     buttonNoArgs.textContent = 'window.open(url)';
     buttonNoArgs.onclick = () => {
@@ -84,7 +84,7 @@ for (const url of urls) {
       window.open(url);
     }
     addItem(buttonNoArgs);
-    
+
     const buttonTargetOnly = document.createElement('button');
     buttonTargetOnly.textContent = 'window.open(url, "'+target+')';
     buttonTargetOnly.onclick = () => {
@@ -95,8 +95,8 @@ for (const url of urls) {
       window.open(url, target);
     }
     addItem(buttonTargetOnly);
-    
-    
+
+
     const button = document.createElement('button');
     button.textContent = 'window.open(url, "'+target+'", "opener")';
     button.onclick = () => {
@@ -107,7 +107,7 @@ for (const url of urls) {
       window.open(url, target);
     }
     addItem(button);
-  
+
     const button2 = document.createElement('button');
     button2.textContent = 'window.open(url, "'+target+'", "noopener")';
     button2.onclick = () => {
@@ -118,7 +118,7 @@ for (const url of urls) {
       window.open(url, target, 'noopener');
     }
     addItem(button2);
-    
+
     const button3 = document.createElement('button');
     button3.textContent = "window.open('about:blank', '"+target+"', opener).window.location.href = " + url;
     button3.onclick = () => {
@@ -129,7 +129,7 @@ for (const url of urls) {
       window.open("about:blank", target).window.location.href = url;
     }
     addItem(button3);
-    
+
     const button4 = document.createElement('button');
     button4.textContent = "window.open('about:blank', '"+target+"', noopener).window.location.href = " + url;
     button4.onclick = () => {
@@ -140,7 +140,7 @@ for (const url of urls) {
       window.open("about:blank", target, 'noopener').window.location.href = url;
     }
     addItem(button4);
-    
+
     if(i <= count) {
      const form_link = document.createElement('a');
      form_link.textContent = `FORM target="${target}" rel=opener`;
@@ -160,7 +160,7 @@ for (const url of urls) {
       f.submit();
      };
      addItem(form_link);
-      
+
     const form_link_2 = document.createElement('a');
      form_link_2.textContent = `FORM target="${target}" rel=noopener`;
      form_link_2.href = url;

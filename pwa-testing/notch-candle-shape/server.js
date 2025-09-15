@@ -116,7 +116,7 @@ self.addEventListener('fetch', event => {
 
     case '/app/meta_redirect':
       response.writeHead(200, { 'Content-Type': 'text/html' });
-      response.write('<meta http-equiv="refresh" content="0;url=https://notch-candle-shape.glitch.me/app/b">');
+      response.write('<meta http-equiv="refresh" content="0;url=https://googlechrome.github.io/samples/pwa-testing/notch-candle-shape/app/b">');
       response.end();
       break;
 

@@ -1,14 +1,14 @@
-The LICENSE file for any project gives credit to the creator/author of the 
-project, copyright information for the project, and the legal terms under 
+The LICENSE file for any project gives credit to the creator/author of the
+project, copyright information for the project, and the legal terms under
 which it's being shared. In other words, this is us using an MIT license to
 say "we wrote this and you can do whatever you want with it."
 
 ******************************************************************************
-~glitch-hello-node
+
 ******************************************************************************
 MIT License
 
-Copyright (c) 2021, Glitch, Inc.
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ THIRD-PARTY SOFTWARE
 2. fastify-static: Plugin for serving static files as fast as possible.
 3. handlebars.js: Minimal templating on steroids
 4. point-of-view: Templates rendering plugin support for Fastify.
-5. HK Grotesk: The font we're using. 
+5. HK Grotesk: The font we're using.
 
 
 ******************************************************************************
