@@ -98,6 +98,7 @@ createButton.addEventListener('click', async () => {
     if (availability !== 'available') {
       console.log(`Language model is ${availability}`);
       if (availability !== 'unavailable') {
+        // Don't `await`, just trigger in the background.
         prepareLocalSession();
       }
       await createCloudSession();
