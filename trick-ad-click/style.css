@@ -1,0 +1,94 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 12pt;
+  margin: 2em;
+  max-width: 250px;
+}
+
+h1, h2 {
+  font-size: 1em;
+}
+
+h1 {
+  color: red;  
+}
+
+h2 {
+  color: blue;
+}
+
+.note {
+  background-color: yellow;
+  border: solid black 2px;
+  margin-bottom: .5em;
+  padding: .5em;
+}
+
+iframe, img {  
+  width: 250px;
+  height: 167px;
+  border: none;
+}
+
+figure {
+  margin: 0;
+  width: 250px;
+  position: relative;
+}
+
+img {
+  display: block;
+}
+
+figcaption {
+  opacity: .8;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-2 * 0.5em + 1em);
+  padding: 0.5em;
+  text-align: center;
+  font-size: 1em;  
+  background-color: black;
+  color: white;
+}
+
+div {
+  position: relative;
+}
+
+iframe {  
+  opacity: 1;
+  position: absolute;
+  top: 0;
+}
+
+iframe.animate {
+  animation: pulse 4s infinite, move 4s 1;    
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }  
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0px) scale(1);
+  }
+  50% {
+    transform: translateX(250px) scale(1.25);
+  }
+  100% {
+    transform: translateX(0px) scale(1);
+  }  
+}
