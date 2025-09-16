@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>IntersectionObserver v2</title>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="note">Read the accompanying 👉&nbsp;<a href="https://developers.google.com/web/updates/2019/02/intersectionobserver-v2">article</a> &nbsp;👈 for details!</div>
+    <div class="note">
+      <label>Trick mode
+        <input type="checkbox"></label>
+    </div>
+    <h1>10 Ways to Trick People into Clicking Ads</h1>
+    <h2>You won't believe the 7th!</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <div>
+      <figure>
+        <img src="cat.jpg">
+        <figcaption>▶️ Click for cute cat video!</figcaption>
+      </figure>
+      <iframe
+        srcdoc="
+          <style>
+            body {
+              font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+              background-color: orange;
+              font-size: 12pt;
+              overflow: hidden;
+              margin: 0;
+              height: 100vh;
+              width: 100vw;
+            }
+            marquee {
+              color: darkgreen;
+            }
+            p {
+              padding: 0.5em;
+            }
+          </style>
+          <marquee behavior=alternate><a target='_blank' href='https://www.youtube.com/watch?v=DLzxrzFCyOs'>Buy Now</a></marquee>
+          <p>Ad in iframe styled transparent and layered over lure content.</p>
+          <script>
+            document.body.addEventListener('click', () => {
+              alert('✅ This was a legit ad click');
+            });
+          </script>"
+      ></iframe>
+    </div>
+    <p>
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <h2><code>IntersectionObserver&nbsp;v2</code>
+      to the rescue!</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <div>
+      <figure>
+        <img src="dog.jpg">
+        <figcaption>▶️ Click for cute puppy video!</figcaption>
+      </figure>
+      <iframe
+        srcdoc="
+          <style>
+            body {
+              font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+              background-color: orange;
+              font-size: 12pt;
+              overflow: hidden;
+              margin: 0;
+              height: 100vh;
+              width: 100vw;
+            }
+            marquee {
+              color: darkgreen;
+            }
+            p {
+              padding: 0.5em;
+            }
+            body {
+              outline-offset: -2px
+            }
+            .legit {
+              outline: inset 2px green;
+            }
+            .clickjacking {
+              outline: inset 2px red;
+            }
+          </style>
+          <marquee behavior=alternate><a target='_blank' href='https://www.youtube.com/watch?v=DLzxrzFCyOs'>Buy Now</a></marquee>
+          <p>Ad in iframe styled transparent and layered over lure content.</p>
+          <script>
+            const minimumVisibleDuration = 0;
+            const body = document.body;
+            let visibleSince = 0;
+            let alertShown = false;
+
+            body.addEventListener('click', () => {
+              if (visibleSince && performance.now() - visibleSince >= minimumVisibleDuration) {
+                alert('✅ This was a legit ad click');
+              } else {
+                alert('🚫 Prevented a non-legit ad click!');
+              }
+            });
+
+            let observer = new IntersectionObserver(changes => {
+              changes.forEach(change => {
+                console.log(change);
+                if (typeof change.isVisible === 'undefined') {
+                  if (!alertShown) {
+                    alert('🤷 Sorry, your browser doesn\'t support Intersection Observer v2, falling back to v1 behavior.');
+                    alertShown = true;
+                  }
+                  change.isVisible = true;
+                }
+                if (change.isIntersecting && change.isVisible) {
+                  body.classList.add('legit');
+                  body.classList.remove('clickjacking');
+                  visibleSince = change.time;
+                } else {
+                  body.classList.remove('legit');
+                  body.classList.add('clickjacking');
+                  visibleSince = 0;
+                }
+              });
+            },
+            { threshold: [1.0],
+              trackVisibility: true,
+              delay: 100
+            });
+            observer.observe(document.body);
+          </script>"
+      ></iframe>
+    </div>
+    <p>
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+  </body>
+</html>
