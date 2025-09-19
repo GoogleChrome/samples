@@ -8,11 +8,11 @@
     <title>Share received</title>
 
     {{#if mimeType}}
-      <link rel="manifest" href="./manifest.json?mime={{mimeType}}" />
+      <link rel="manifest" href="/octagonal_eight_potato/manifest.json?mime={{mimeType}}" />
     {{/if}}
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/octagonal_eight_potato/style.css" />
 
   </head>
   <body>
@@ -36,7 +36,7 @@
       <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('sw.js');
+          navigator.serviceWorker.register('/octagonal_eight_potato/sw.js');
         });
       }
     </script>

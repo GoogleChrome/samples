@@ -2,9 +2,9 @@
   "name": "hello-node",
   "version": "0.0.1",
   "description": "A simple Node app built on fastify, instantly up and running.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "fastify": "^3.14.1",

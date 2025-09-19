@@ -1,11 +1,11 @@
 {
   "name": "Outer Tabby",
-  "start_url": "./index.html",
+  "start_url": "/saber_tabby_shield/index.html",
   "display": "minimal-ui",
   "theme_color": "#2FF924",
-  "scope": "./",
+  "scope": "/saber_tabby_shield/",
   "icons": [{
-    "src": "TabbySkywalker.jpg",
+    "src": "/saber_tabby_shield/TabbySkywalker.jpg",
     "sizes": "155x155",
     "type": "image/png"
   }]

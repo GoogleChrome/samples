@@ -8,11 +8,11 @@
     <title>Updating Web Share</title>
 
     {{#if mimeType}}
-      <link rel="manifest" href="./manifest.json?mime={{mimeType}}" />
+      <link rel="manifest" href="/octagonal_eight_potato/manifest.json?mime={{mimeType}}" />
     {{/if}}
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/octagonal_eight_potato/style.css" />
 
   </head>
   <body>
@@ -26,9 +26,9 @@
             What file type should we allow in shares?
           </p>
           <p>
-            <button><a href="./?mime=image/*">Images</a></button>
-            <button><a href="./?mime=video/*">Videos</a></button>
-            <button><a href="./?mime=*/*">Everything</a></button>
+            <button><a href="/octagonal_eight_potato/?mime=image/*">Images</a></button>
+            <button><a href="/octagonal_eight_potato/?mime=video/*">Videos</a></button>
+            <button><a href="/octagonal_eight_potato/?mime=*/*">Everything</a></button>
           </p>
 
             <form class="mime-entry" method="GET">
@@ -68,7 +68,7 @@
       <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('sw.js');
+          navigator.serviceWorker.register('/octagonal_eight_potato/sw.js');
         });
       }
     </script>

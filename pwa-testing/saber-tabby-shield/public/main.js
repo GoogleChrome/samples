@@ -1,1 +1,1 @@
-navigator.serviceWorker.register('serviceworker.js');
+navigator.serviceWorker.register('/saber_tabby_shield/serviceworker.js');

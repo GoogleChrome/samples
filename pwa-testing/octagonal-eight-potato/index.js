@@ -55,12 +55,17 @@ fastify.post("/share", async function(request, reply) {
   return reply.view("/src/pages/share.hbs", params);
 });
 
-// Run the server and report out to the logs
-fastify.listen(process.env.PORT || 3000, function(err, address) {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-  console.log(`Your app is listening on ${address}`);
-  fastify.log.info(`server listening on ${address}`);
-});
+// This is the exported function that Google Cloud will call.
+exports.octagonal_eight_potato = (req, res) => {
+  // We need to make sure fastify is "ready" before handling requests.
+  fastify.ready(err => {
+    if (err) {
+      console.error(err);
+      res.statusCode = 500;
+      res.end('Internal Server Error');
+      return;
+    }
+    // Pass the request to the fastify server instance.
+    fastify.server.emit('request', req, res);
+  });
+};

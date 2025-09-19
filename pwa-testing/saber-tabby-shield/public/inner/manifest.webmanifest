@@ -1,11 +1,11 @@
 {
   "name": "Inner Tabby",
-  "start_url": "./inner/index.html",
+  "start_url": "/saber_tabby_shield/inner/index.html",
   "display": "standalone",
   "theme_color": "#d59712",
-  "scope": "./",
+  "scope": "/saber_tabby_shield/inner/",
   "icons": [{
-    "src": "DarthTabby.jpg",
+    "src": "/saber_tabby_shield/DarthTabby.jpg",
     "sizes": "155x155",
     "type": "image/png"
   }]
