@@ -2,14 +2,14 @@ const express = require("express");
 const wbn = require('wbn');
 const app = express();
 
-const origin = 'https://googlechrome.github.io/samples/pwa-testing/webappbundle/';
+const origin = 'https://us-central1-web-devrel-apps.cloudfunctions.net/webappbundle/';
 
 const SW_SCRIPT = `
 const CACHE_NAME = 'my-cache';
 const URLS_TO_CACHE = [
-  '/index.html',
-  '/style.css',
-  '/app.js'
+  '/webappbundle/index.html',
+  '/webappbundle/style.css',
+  '/webappbundle/app.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -45,7 +45,7 @@ const TOP_HTML = `
 <body><h1>Page in wbn</h1>
 <div><a href="index.html">index.html</a></div>
 <div><a href="sw_generated">sw_generated</a></div>
-<script src="script.js"></script></body>
+<script src="/webappbundle/script.js"></script></body>
 `;
 
 const SCRIPT_JS = `
@@ -61,7 +61,7 @@ const SCRIPT_JS = `
   button.appendChild(document.createTextNode('register SW'));
   button.addEventListener('click', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('sw.js');
+      const registration = await navigator.serviceWorker.register('/webappbundle/sw.js');
       log('success');
     } catch (e) {
       log('fail');
@@ -76,9 +76,9 @@ const SCRIPT_JS = `
 
 const INDEX_HTML = `
 <head>
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="/webappbundle/style.css" type="text/css" />
 </head>
-<h1>index.html</h1><script src="app.js"></script>
+<h1>index.html</h1><script src="/webappbundle/app.js"></script>
 `;
 
 const APP_JS = `
@@ -147,7 +147,4 @@ app.get("/test.wbn", (request, response) => {
   response.send(builder.createBundle());
 });
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log("Your app is listening on port " + listener.address().port);
-});
+exports.webappbundle = app;
