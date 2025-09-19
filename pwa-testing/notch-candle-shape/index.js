@@ -1,17 +1,17 @@
 const links = `
 Links to pages for testing link capturing with launch_handler:
- - <a href="./">/</a> (not in scope of web app)
- - <a href="./app/">/app/</a>
- - <a href="./app/a">/app/a</a>
- - <a href="./app/b">/app/b</a>
- - <a href="./app/301_redirect">/app/301_redirect</a>
- - <a href="./app/302_redirect">/app/302_redirect</a>
- - <a href="./app/307_redirect">/app/307_redirect</a>
- - <a href="./app/meta_redirect">/app/meta_redirect</a>
+ - <a href="/notch_candle_shape/">/</a> (not in scope of web app)
+ - <a href="/notch_candle_shape/app/">/app/</a>
+ - <a href="/notch_candle_shape/app/a">/app/a</a>
+ - <a href="/notch_candle_shape/app/b">/app/b</a>
+ - <a href="/notch_candle_shape/app/301_redirect">/app/301_redirect</a>
+ - <a href="/notch_candle_shape/app/302_redirect">/app/302_redirect</a>
+ - <a href="/notch_candle_shape/app/307_redirect">/app/307_redirect</a>
+ - <a href="/notch_candle_shape/app/meta_redirect">/app/meta_redirect</a>
 `;
-const iconUrl = 'notch-candle-shape.svg';
+const iconUrl = '/notch_candle_shape/notch-candle-shape.svg';
 
-require('http').createServer((request, response) => {
+exports.notch_candle_shape = (request, response) => {
   switch (request.url) {
     case '/':
       response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -19,7 +19,7 @@ require('http').createServer((request, response) => {
 <pre>
 Notch Candle Shape
 
-This page is out of scope of the <a href="./app/">app</a>.
+This page is out of scope of the <a href="/notch_candle_shape/app/">app</a>.
 
 ${links}
 </pre>
@@ -34,7 +34,7 @@ ${links}
       response.write(`
 <!DOCTYPE html>
 <head>
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/notch_candle/shape/manifest.json">
   <link rel="icon" href="${iconUrl}">
   <title>Notch Candle Shape</title>
 </head>
@@ -51,7 +51,7 @@ ${links}
 </pre>
 <pre id="output"></pre>
 <script>
-navigator.serviceWorker.register('sw.js');
+navigator.serviceWorker.register('/notch_candle_shape/sw.js');
 
 output.textContent += 'Current page: ' + location.href + '\\n';
 output.textContent += 'window.launchQueue: ' + (window.launchQueue ? 'exists' : 'missing') + '\\n';
@@ -70,8 +70,8 @@ if (window.launchQueue) {
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.write(JSON.stringify({
         name: 'Notch Candle Shape',
-        start_url: '/app/',
-        scope: '/app/',
+        start_url: '/notch_candle_shape/app/',
+        scope: '/notch_candle_shape/app/',
         display: 'standalone',
         theme_color: '#e82ac3',
         icons: [{
@@ -100,25 +100,24 @@ self.addEventListener('fetch', event => {
       break;
 
     case '/app/301_redirect':
-      response.writeHead(301, { 'Location': '/app/a' });
+      response.writeHead(301, { 'Location': '/notch_candle_shape/app/a' });
       response.end();
       break;
 
     case '/app/302_redirect':
-      response.writeHead(302, { 'Location': '/app/b' });
+      response.writeHead(302, { 'Location': '/notch_candle_shape/app/b' });
       response.end();
       break;
 
     case '/app/307_redirect':
-      response.writeHead(307, { 'Location': '/app/a' });
+      response.writeHead(307, { 'Location': '/notch_candle_shape/app/a' });
       response.end();
       break;
 
     case '/app/meta_redirect':
       response.writeHead(200, { 'Content-Type': 'text/html' });
-      response.write('<meta http-equiv="refresh" content="0;url=https://googlechrome.github.io/samples/pwa-testing/notch-candle-shape/app/b">');
+      response.write('<meta http-equiv="refresh" content="0;url=https://us-central1-web-devrel-apps.cloudfunctions.net/notch_candle_shape/app/b">');
       response.end();
       break;
-
 }
-}).listen(process.env.PORT || 3000);
+};
