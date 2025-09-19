@@ -5,9 +5,9 @@
   "name": "sassy-seasoned-carpet",
   "version": "0.0.1",
   "description": "Test site for printing the referrer header sent to the server",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.1"
