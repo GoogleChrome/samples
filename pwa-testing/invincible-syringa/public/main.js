@@ -18,7 +18,7 @@ async function main() {
 async function registerServiceWorker() {
   try {
     print('Registering service worker...');
-    await navigator.serviceWorker.register('serviceworker.js')
+    await navigator.serviceWorker.register('/invincible_syringa/serviceworker.js')
     printLn('success.');
 
   } catch (e) {
