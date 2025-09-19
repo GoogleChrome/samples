@@ -11,14 +11,14 @@
     <title>Welcome!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/fetch_event_echo/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60= sha384-fJU6sGmyn07b+uD1nMk7/iSb4yvaowcueiQhfVgQuD98rfva8mcr1eSvjchfpMrH sha512-5SUkiwmm+0AiJEaCiS5nu/ZKPodeuInbQ7CiSrSnUHe11dJpQ8o4J1DU/rw4gxk/O+WBpGYAZbb8e17CDEoESw==" crossorigin="anonymous" defer></script>
   </head>
   <body>
     Please open the web console.
     <script>
       addEventListener('load', async evt => {
-        let reg = await navigator.serviceWorker.register('sw.js');
+        let reg = await navigator.serviceWorker.register('/fetch_event_echo/sw.js');
         if ('navigationPreload' in ServiceWorkerRegistration)
           await reg.navigationPreload.enable();
       }, { once: true });

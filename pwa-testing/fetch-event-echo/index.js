@@ -21,7 +21,4 @@ app.get("/upgrader.html", function (request, response) {
   response.sendFile(__dirname + "/views/upgrader.html");
 });
 
-// listen for requests :)
-var listener = app.listen(process.env.PORT || 3000, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+exports.fetch_event_echo = app;

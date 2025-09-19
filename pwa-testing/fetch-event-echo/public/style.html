@@ -11,13 +11,13 @@
     <title>Welcome!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/fetch_event_echo/style.css">
   </head>
   <body>
     Please open the web console.
     <script>
       addEventListener('load', evt => {
-        navigator.serviceWorker.register('sw.js');
+        navigator.serviceWorker.register('/fetch_event_echo/sw.js');
       }, { once: true });
     </script>
   </body>
