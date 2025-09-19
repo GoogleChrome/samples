@@ -1,23 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <body>
     <div id="output"></div>
     <script>
-      const url = "/";
+      const url = "/cache_api_perf/";
       const reportSeconds = 2.0;
-      
+
       const locURL = new URL(window.location);
       const maxJobs = locURL.searchParams.get("jobs") || 10;
       const maxEntries = locURL.searchParams.get("entries") || 100;
       const entryType = locURL.searchParams.get("type") || "path";
       const maxBodyReaders = locURL.searchParams.get("bodies") || 0;
       const reports = locURL.searchParams.get("reports") || 20;
-      
+
       const expectedSearch = `?jobs=${maxJobs}&entries=${maxEntries}&type=${entryType}&bodies=${maxBodyReaders}&reports=${reports}`;
       if (window.location.search != expectedSearch) {
         window.location.search = expectedSearch;
       }
-      
+
       let outputDiv;
       function log(text) {
         if (!outputDiv) {
@@ -27,23 +27,23 @@
         line.textContent = text;
         outputDiv.appendChild(line);
       }
-      
+
       function makeEntryURL(entry) {
         if (entryType === "path") {
-          return "/resource/" + entry;
+          return "/cache_api_perf/resource/" + entry;
         } else if (entryType === "both") {
-            return "/resource/" + entry + "?q=" + entry;
+            return "/cache_api_perf/resource/" + entry + "?q=" + entry;
         }
-        return "/?q=" + entry;
+        return "/cache_api_perf/?q=" + entry;
       }
-      
+
       function maybeReadBody(opts, response) {
         opts.pendingBodies.push(response);
         if (opts.numReaders < maxBodyReaders) {
           setTimeout(readNextBody, 0, opts);
         }
       }
-      
+
       async function readNextBody(opts) {
         if (opts.numReaders >= maxBodyReaders) {
           return;
@@ -57,7 +57,7 @@
         }
         opts.numReaders -= 1;
       }
-      
+
       function makeEmptySummary() {
         return {
           min: Number.MAX_SAFE_INTEGER,
@@ -66,7 +66,7 @@
           count: 0,
         };
       }
-      
+
       function reportSummary(opts) {
         let summary = {};
         for(let i = 0; i < opts.stats.length; ++i) {
@@ -87,7 +87,7 @@
         }
         log("done");
       }
-      
+
       async function doMatch(opts) {
         if (opts.reports < 1) {
           return;
@@ -119,7 +119,7 @@
         maybeReadBody(opts, response);
         doMatch(opts);
       }
-      
+
       async function onLoad() {
         log("config:");
         log(` - number of cache.match() jobs: ${maxJobs}`);
@@ -136,7 +136,7 @@
         }
         await Promise.all(addList);
         log("starting...");
-        
+
         let opts = {
           cache,
           count: 0,
@@ -146,12 +146,12 @@
           reports,
           stats: []
         };
-        
+
         for (let i = 0; i < maxJobs; ++i) {
           doMatch(opts);
         }
       }
-      
+
       addEventListener("load", onLoad, { once: true });
     </script>
   </body>

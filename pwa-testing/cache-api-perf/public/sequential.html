@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <body>
     <div id="output"></div>
     <script>
-      const url = "/";
+      const url = "/cache_api_perf/";
       const reportSeconds = 2.0;
-      
+
       let outputDiv;
       function log(text) {
         if (!outputDiv) {
@@ -15,7 +15,7 @@
         line.textContent = text;
         outputDiv.appendChild(line);
       }
-      
+
       async function doMatch(cache, count, lastReportTime) {
         await cache.match(url);
         count += 1;
@@ -31,7 +31,7 @@
         }
         doMatch(cache, count, lastReportTime);
       }
-      
+
       async function onLoad() {
         log("preparing...");
         let cache = await caches.open("foo");
@@ -39,7 +39,7 @@
         log("starting...");
         doMatch(cache, 0);
       }
-      
+
       addEventListener("load", onLoad, { once: true });
     </script>
   </body>

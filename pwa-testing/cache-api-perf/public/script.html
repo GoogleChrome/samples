@@ -1,21 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <body>
     <div id="output"></div>
     <script>
-      const url = "/";
+      const url = "/cache_api_perf/";
       const reportSeconds = 2.0;
-      
+
       const locURL = new URL(window.location);
       const maxJobs = locURL.searchParams.get("jobs") || 10;
       const maxEntries = locURL.searchParams.get("entries") || maxJobs;
       const entryType = locURL.searchParams.get("type") || "search";
-      
+
       const expectedSearch = `?jobs=${maxJobs}&entries=${maxEntries}&type=${entryType}`;
       if (window.location.search != expectedSearch) {
         window.location.search = expectedSearch;
       }
-      
+
       let outputDiv;
       function log(text) {
         if (!outputDiv) {
@@ -25,16 +25,16 @@
         line.textContent = text;
         outputDiv.appendChild(line);
       }
-      
+
       function makeEntryURL(entry) {
         if (entryType === "path") {
-          return "/resource/" + entry;
+          return "//cache_api_perf/resource/" + entry;
         } else if (entryType === "both") {
-            return "/resource/" + entry + "?q=" + entry;
+            return "/cache_api_perf/resource/" + entry + "?q=" + entry;
         }
-        return "/?q=" + entry;
+        return "/cache_api_perf/?q=" + entry;
       }
-      
+
       async function doMatch(opts) {
         let entry = ~~(Math.random() * (maxEntries - 1));
         await opts.cache.match(makeEntryURL(entry));
@@ -51,7 +51,7 @@
         }
         doMatch(opts);
       }
-      
+
       async function onLoad() {
         log(`config - jobs:${maxJobs} entries:${maxEntries} type:${entryType}`);
         log("preparing...");
@@ -64,13 +64,13 @@
         }
         await Promise.all(addList);
         log("starting...");
-        
+
         let opts = { cache, count: 0 };
         for (let i = 0; i < maxJobs; ++i) {
           doMatch(opts);
         }
       }
-      
+
       addEventListener("load", onLoad, { once: true });
     </script>
   </body>
