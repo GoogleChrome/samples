@@ -1,11 +1,11 @@
 {
   "name": "Wind Veterinarian A",
-  "start_url": "index.html",
+  "start_url": "/maze_bouncy_viola/index.html",
   "display": "standalone",
   "theme_color": "#beffff",
-  "scope": "./a/",
+  "scope": "/maze_bouncy_viola/a/",
   "icons": [{
-    "src": "windvet.png",
+    "src": "/maze_bouncy_viola/windvet.png",
     "sizes": "144x144",
     "type": "image/png"
   }]
