@@ -68,15 +68,16 @@
       <p class="loading">Loading demos from GitHub API...</p>
     </div>
     <script>
-      // --- Configuration ---
-        const GITHUB_API_URL = 'https://api.github.com/repos/GoogleChrome/samples/contents/pwa-testing?ref=gh-pages';
+      const GITHUB_API_URL = 'https://api.github.com/repos/GoogleChrome/samples/contents/pwa-testing?ref=gh-pages';
         const DEMO_BASE_URL = 'https://googlechrome.github.io/samples/pwa-testing/';
         const SOURCE_BASE_URL = 'https://github.com/GoogleChrome/samples/tree/gh-pages/pwa-testing/';
 
-        // --- DOM Element ---
+        const specialDemoFolders = ['broken-synonymous-air'];
+
+        const NEW_DEMO_BASE_URL = 'https://us-central1-web-devrel-apps.cloudfunctions.net/';
+
         const listContainer = document.getElementById('demo-list');
 
-        // --- Main Function ---
         async function fetchAndDisplayDemos() {
             try {
                 const response = await fetch(GITHUB_API_URL);
@@ -97,12 +98,24 @@
 
                 // Build the HTML list
                 const listHtml = demos.map(demo => {
-                    const demoUrl = `${DEMO_BASE_URL}${demo.name}`;
+
+                    let demoUrl;
+
+                    if (specialDemoFolders.includes(demo.name)) {
+                        // If it's a special folder, transform the name and use the new URL
+                        const transformedName = demo.name.replace(/-/g, '_');
+                        demoUrl = `${NEW_DEMO_BASE_URL}${transformedName}/`;
+                    } else {
+                        // Otherwise, use the default demo URL
+                        demoUrl = `${DEMO_BASE_URL}${demo.name}`;
+                    }
+
                     const sourceUrl = `${SOURCE_BASE_URL}${demo.name}`;
+
                     return `
                         <li>
-                            <a href="${demoUrl}" target="_blank" rel="noopener noreferrer">${demo.name}</a>
-                            <a href="${sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link">[View Source]</a>
+                            <a href="${demoUrl}" rel="noopener noreferrer">${demo.name}</a>
+                            <a href="${sourceUrl}" rel="noopener noreferrer" class="source-link">[View Source]</a>
                         </li>
                     `;
                 }).join('');
