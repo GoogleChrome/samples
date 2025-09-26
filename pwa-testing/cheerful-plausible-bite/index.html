@@ -1,27 +1,19 @@
 <!DOCTYPE html>
-
-<script>
-// HTTPS Redirect.
-if (window.location.protocol != 'https:') {
-  // window.location.protocol = 'https:';
-}
-</script>
-
 <head>
-  <title>Cheerful Plausible Bite</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="icon" type="image/png" href="cheerful-plausible-bite.svg">
+	<title>Cheerful Plausible Bite</title>
+	<link rel="manifest" href="manifest.webmanifest">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="icon" type="image/png" href="cheerful-plausible-bite.svg">
 </head>
 <style>
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 </style>
 <img src="cheerful-plausible-bite.svg">
 <pre>Cheerful Plausible Bite</pre>
 <script>
-navigator.serviceWorker.register('serviceworker.js');
+	navigator.serviceWorker.register('serviceworker.js');
 </script>

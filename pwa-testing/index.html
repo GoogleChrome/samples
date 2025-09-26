@@ -1,157 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWA Testing Demos</title>
-    <style>
-      body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-            line-height: 1.6;
-            margin: 0 auto;
-            max-width: 800px;
-            padding: 2em;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            color: #111;
-        }
-        #demo-list {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 1em;
-            border: 1px solid #e1e4e8;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            padding: 0.75em 1em;
-            border-bottom: 1px solid #e1e4e8;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        li:last-child {
-            border-bottom: none;
-        }
-        a {
-            text-decoration: none;
-            color: #0366d6;
-            font-weight: 600;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .source-link {
-            font-size: 0.9em;
-            font-weight: 400;
-            color: #586069;
-            white-space: nowrap;
-        }
-        .loading, .error {
-            color: #586069;
-            font-style: italic;
-        }
-        a[href*="cloudfunctions.net"]::after {
-            content: '';
-            display: inline-block;
-            width: 1.5em;
-            height: 1.5em;
-            margin-left: 0.3em;
-            vertical-align: middle;
-            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='m0 0H512V512H0' fill='%23fff'/><path fill='%23539E43' d='M247 281q3 0 4 2c2 3-2 27 34 30s57-2 60-18-4-21-60-27-56-33-56-42 0-49 68-49 70 40 71 47 0 9-4 9H346q-4 0-5-5c-3-12-9-25-44-25s-39 11-39 22 11 13 47 18 65 9 69 39-16 58-71 58q-79 0-79-54 0-5 5-5M417 145q16 9 16 29V340q0 18-14 27L273 452q-16 8-32 0l-49-29q-8-4-2-6 13-4 22-10 2-1 4 0l37 22q3 2 6 0l145-84q2-1 2-5V172q0-3-2-4L259 84q-3-2-6 0L107 168q-2 1-2 4V341q0 3 2 4l40 23c16 9 35 3 35-15V188q0-6 6-6h16q6 0 6 6V353c0 49-45 55-77 37L94 368q-15-9-15-27V172q0-18 16-27L237 63q19-12 38 0'/></svg>");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    </style>
-  </head>
-  <body>
-    <h1>PWA Testing Demos 🧪</h1>
-    <p>This page dynamically lists all demos from the
-      <code>pwa-testing</code>
-      directory in the
-      <a href="https://github.com/GoogleChrome/samples">GoogleChrome/samples</a>
-      repository.</p>
-    <div id="demo-list">
-      <p class="loading">Loading demos from GitHub API...</p>
-    </div>
-    <script>
-      const GITHUB_API_URL = 'https://api.github.com/repos/GoogleChrome/samples/contents/pwa-testing?ref=gh-pages';
-        const DEMO_BASE_URL = 'https://googlechrome.github.io/samples/pwa-testing/';
-        const SOURCE_BASE_URL = 'https://github.com/GoogleChrome/samples/tree/gh-pages/pwa-testing/';
-
-        const specialDemoFolders = [
-            'broken-synonymous-air',
-            'cache-api-perf',
-            'fetch-event-echo',
-            'invincible-syringa',
-            'maze-bouncy-viola',
-            'notch-candle-shape',
-            'octagonal-eight-potato',
-            'saber-tabby-shield',
-            'sassy-seasoned-carpet',
-            'webappbundle',
-        ];
-
-        const NEW_DEMO_BASE_URL = 'https://us-central1-web-devrel-apps.cloudfunctions.net/';
-
-        const listContainer = document.getElementById('demo-list');
-
-        async function fetchAndDisplayDemos() {
-            try {
-                const response = await fetch(GITHUB_API_URL);
-
-                if (!response.ok) {
-                    throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
-                }
-
-                const items = await response.json();
-
-                // We are only interested in directories, as each one is a demo.
-                const demos = items.filter(item => item.type === 'dir');
-
-                if (demos.length === 0) {
-                    listContainer.innerHTML = `<p class="error">No demos found in the specified directory.</p>`;
-                    return;
-                }
-
-                // Build the HTML list
-                const listHtml = demos.map(demo => {
-
-                    let demoUrl;
-
-                    if (specialDemoFolders.includes(demo.name)) {
-                        // If it's a special folder, transform the name and use the new URL
-                        const transformedName = demo.name.replace(/-/g, '_');
-                        demoUrl = `${NEW_DEMO_BASE_URL}${transformedName}/`;
-                    } else {
-                        // Otherwise, use the default demo URL
-                        demoUrl = `${DEMO_BASE_URL}${demo.name}`;
-                    }
-
-                    const sourceUrl = `${SOURCE_BASE_URL}${demo.name}`;
-
-                    return `
-                        <li>
-                            <a href="${demoUrl}" rel="noopener noreferrer">${demo.name}</a>
-                            <a href="${sourceUrl}" rel="noopener noreferrer" class="source-link">[View Source]</a>
-                        </li>
-                    `;
-                }).join('');
-
-                listContainer.innerHTML = `<ul>${listHtml}</ul>`;
-
-            } catch (error) {
-                console.error('Failed to fetch demos:', error);
-                listContainer.innerHTML = `<p class="error">Sorry, could not fetch the demo list. Please check the browser console for more details.</p>`;
-            }
-        }
-
-        fetchAndDisplayDemos();
-    </script>
-  </body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>PWA Testing Demos</title>
+		<style>
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+				line-height: 1.6;
+				margin: 0 auto;
+				max-width: 800px;
+				padding: 2em;
+				background-color: #f9f9f9;
+				color: #333;
+			}
+			h1 {
+				color: #111;
+			}
+			#demo-list {
+				background-color: #fff;
+				border-radius: 8px;
+				padding: 1em;
+				border: 1px solid #e1e4e8;
+			}
+			ul {
+				list-style: none;
+				padding: 0;
+			}
+			li {
+				padding: 0.75em 1em;
+				border-bottom: 1px solid #e1e4e8;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			li:last-child {
+				border-bottom: none;
+			}
+			a {
+				text-decoration: none;
+				color: #0366d6;
+				font-weight: 600;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			.description {
+				font-size: 0.9em;
+				color: #586069;
+				margin: 0.2em 0 0;
+				font-weight: 400;
+			}
+			.source-link {
+				font-size: 0.9em;
+				font-weight: 400;
+				color: #586069;
+				white-space: nowrap;
+				margin-left: 1em;
+			}
+			.loading, .error {
+				color: #586069;
+				font-style: italic;
+			}
+			a[href*="cloudfunctions.net"]::after {
+				content: '';
+				display: inline-block;
+				width: 1.5em;
+				height: 1.5em;
+				margin-left: 0.3em;
+				vertical-align: middle;
+				background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='m0 0H512V512H0' fill='%23fff'/><path fill='%23539E43' d='M247 281q3 0 4 2c2 3-2 27 34 30s57-2 60-18-4-21-60-27-56-33-56-42 0-49 68-49 70 40 71 47 0 9-4 9H346q-4 0-5-5c-3-12-9-25-44-25s-39 11-39 22 11 13 47 18 65 9 69 39-16 58-71 58q-79 0-79-54 0-5 5-5M417 145q16 9 16 29V340q0 18-14 27L273 452q-16 8-32 0l-49-29q-8-4-2-6 13-4 22-10 2-1 4 0l37 22q3 2 6 0l145-84q2-1 2-5V172q0-3-2-4L259 84q-3-2-6 0L107 168q-2 1-2 4V341q0 3 2 4l40 23c16 9 35 3 35-15V188q0-6 6-6h16q6 0 6 6V353c0 49-45 55-77 37L94 368q-15-9-15-27V172q0-18 16-27L237 63q19-12 38 0'/></svg>");
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>PWA Testing Demos 🧪</h1>
+		<p>This page dynamically lists all demos from the
+			<code>pwa-testing</code>
+			directory in the
+			<a href="https://github.com/GoogleChrome/samples">GoogleChrome/samples</a>
+			repository.</p>
+		<div id="demo-list">
+			<p class="loading">Loading demos from GitHub API...</p>
+		</div>
+		<script>
+			const GITHUB_API_URL = 'https://api.github.com/repos/GoogleChrome/samples/contents/pwa-testing?ref=gh-pages';
+			const DEMO_BASE_URL = 'https://googlechrome.github.io/samples/pwa-testing/';
+			const SOURCE_BASE_URL = 'https://github.com/GoogleChrome/samples/tree/gh-pages/pwa-testing/';
+			
+			const metadata = {
+				"absorbing-immediate-middle": "Translations",
+				"abyssinian-sparkly-entree": "App icon randomly generated by service worker",
+				"aeolian-grandiose-cayenne": "Lock screen capable web app",
+				"aluminum-cooked-kidney": "Pinned home tab icon in tabbed mode",
+				"app-name-icon-tester": "Test site for updating name & icon",
+				"awesome-casquette": "Trivial app using minimal-ui",
+				"badging-test": "Test site for the Badging APIs",
+				"believed-triceratops": "JPG icons in manifest",
+				"broken-synonymous-air": "2 PWAs (/a and /app/a, different scopes, useful for testing redirects)",
+				"bubblewrap-issue-883": "2 PWAs with and without scope for testing Bubblewrap-generated AndroidManifest",
+				"bubbly-checkered-airport": "Notifications API testing - site without monochrome icons",
+				"bush-lowly-system": "Service worker requests refresh",
+				"butternut-shocking-deerstalker": "Relative scope member to capture root page.",
+				"cache-api-perf": "Some CacheStorage performance tests.",
+				"carnelian-sneeze": "Custom tab bar testing (let's you navigate to any url)",
+				"carpal-acute-respect": "SVG icon treatment in resizing",
+				"chat-app-deep-linking": "Deep link testing for pwas - capturing, files, protocol handlers",
+				"cheerful-plausible-bite": "Offline fallback text",
+				"classic-tall-individual": "Sync install spoof",
+				"continuous-harvest-tomato": "old link capturing",
+				"curious-sun-catboat": "URL params in scope and start_url (allowed by code @ 2024-05 but not allowed by spec)",
+				"cute-western-seer": "Testing dynamic loading of screenshots with invalid urls (random 2)",
+				"daisy-summer-mahogany": "window.matchMedia('(display-mode: standalone)').matches",
+				"delirious-twilight-scene": "Has a distinct name and short_name",
+				"denim-unique-blackbird": "Site only having SVG icons with size set to any as manifest, shortcut menu and file handling icons.",
+				"dull-axiomatic-saver": "Manifest only has theme_color, nothing else.",
+				"dull-axiomatic-saver2": "Installable theme_color tester",
+				"efficient-newt-1": "Test manifest updating",
+				"emphasized-shell-feeling": "Relative start URL resolved relative to manifest URL",
+				"excited-dented-seashore": "Test for crbug.com/350256139, interaction of PiP window and install dialogs (or create shortcut dialog too)",
+				"exciting-scarlet-scabiosa": "PWA app badging interactions with Notifications badging",
+				"exclusive-brassy-dollar": "Shows document.referrer, referer header, etc, companion to above - doesn't work as there is a cross-origin policy",
+				"external-install-file-handling": "allows switching to a manifest with file handling for an external install",
+				"fake-chat-app-companion": "companion app to above",
+				"far-noble-cod": "No service workers",
+				"fetch-event-echo": "Echo FetchEvent properties to the web console",
+				"fir-skirt": "SVG icon",
+				"flossy-neon-sugar": "tabbed mode with focus-existing",
+				"flower-confused-dinosaur": "Test site with different images embedded for testing go/shortcuts-not-apps",
+				"foggy-noiseless-cylinder": "Name is made entirely of emojis and longer than 45 characters",
+				"furry-hickory-furniture": "Change manifest url, start_url, and scope dynamically",
+				"global-swordfish": "Play billing APIs test site.",
+				"glossy-cuboid-attention": "Links to badssl.com to test insecure pages in web app windows.",
+				"halved-cubic-postage": "Empty name and empty page title.",
+				"huge-name-that-is-definitely-more-than-the-app": "Site with big URL with screenshots to investigate detailed install dialog subtitle line wrapping",
+				"hulking-tangible-badger": "Switch between manifests",
+				"hwr-playground": "Handwriting Recognition API testing",
+				"incandescent-ginger-voyage": "Manifest ID set to absolute version of start_url",
+				"intriguing-veiled-butternut": "Mock of hill-glitter-tree with middle clicks and window.open target link fix, along with iframe for testing in frame navigations",
+				"invincible-syringa": "Uses minimal-ui display mode",
+				"joyous-horse-quilt": "Blank page.",
+				"kaput-planet-radon": "Lock screen capable web app (alternative)",
+				"large-productive-rattlesnake": "Icon can be changed server-side upon request (test WebAPK)",
+				"level-sedate-baboon": "Has maskable and any-purpose icons of different sizes (visibly different for seeing which icon is used)",
+				"living-reminder": "Uses mixed security content",
+				"luck-proud-nautilus": "Maskable icon only",
+				"main-pwa-origin-2": "Updated Scope Extensions, post Origin Trial",
+				"maize-bustling-reminder": "Dark mode theme color and background color",
+				"maze-bouncy-viola": "Sub page within app (A2) doesn't declare manifest. Multiple apps on origin. Can navigate out of scope.",
+				"mediapicker-select-file": "Exercises file uploads via Chrome's Media Picker",
+				"midi-tourmaline-handbell": "Test PWA for scope extensions",
+				"mobile-desktop-mode": "Checks whether the browser is in Mobile mode via navigator.userAgentData.mobile",
+				"morning-bubbly-chauffeur": "Test site for file handling which should work in the latest Chrome",
+				"motley-petite-friday": "calls 'prompt()' immediately in beforeinstallprompt event.",
+				"mulberry-phase-leopon": "Out of scope install page.",
+				"nice-spiny-responsibility": "Icon with purpose: \"maskable any\" (discouraged)",
+				"nifty-lavender-anglerfish": "Retrieve system accent color from canvas",
+				"noiseless-mum": "Has pages inside/outside scope referencing manifest. Maskable icon only.",
+				"noon-stream-music": "scope_extensions primary site",
+				"notch-candle-shape": "Has launch_handler with a 307 redirect page.",
+				"notificationsapi": "Notifications API testing",
+				"octagonal-eight-potato": "Updates share target file types",
+				"octagonal-handsomely-burrito": "Mock of continous-harvest-tomato with middle clicks and window.open target link fix, along with iframe for testing in frame navigations",
+				"paint-rightful-patch": "display_override: [\"tabbed\"]",
+				"parallel-omniscient-barberry": "file handling with .foo extension too",
+				"placeholder-app-tester": "Site to help test placeholder apps and if they re-install themselves correctly.",
+				"principled-ring-yarrow": "file handling test site",
+				"private-brick-universe": "Test shortcut menu icons on Windows",
+				"pwa-icon-size-tester": "For updating the name and specific sizes of icons (fork of app-name-icon-tester)",
+				"relieved-tide-geese": "Site that uses beforeinstallprompt",
+				"repeated-inexpensive-elephant": "Background services testing/demo",
+				"ruby-clover": "Has a video element for video fullscreen testing",
+				"ruddy-scarce-effect": "Have a name that is longer than 45 characters.",
+				"rumbling-factual-schooner": "App manifest not considered promotable, has different icon to page.",
+				"saber-tabby-shield": "2 sites having the same scope for link capturing on desktop (W/M/L)",
+				"sassy-seasoned-carpet": "Shows document.referrer, referer header, etc",
+				"silk-curse-honey": "Reloads on first load.",
+				"silly-sepia-kingfisher": "No icon; non-BMP Unicode character in title (emoji)",
+				"six-great-candytuft": "scope_extensions secondary site",
+				"skitter-chlorinated-ankylosaurus": "No start_url",
+				"snowy-submarine": "Uses a cross origin manifest",
+				"soft-puppy": "Updates the HTML theme color continuously",
+				"solstice-few-vegetable": "Has a manifest that is a data url",
+				"sprinkle-youthful-cylinder": "AccentColor test",
+				"star-fire-agate": "Service worker fetch event does nothing",
+				"sulfuric-awake-astronaut": "Companion to app above. Associate site allowing the app above to have an extended scope",
+				"sulky-lopsided-bean": "launch_handler: { \"route_to\": \"existing-client\", \"navigate_existing_client\": \"never\" }",
+				"sunny-cart": "For testing web share and web share target",
+				"super-concrete-tarsal": "Sharing testing",
+				"telling-krills": "Dynamically load HTTP content",
+				"thundering-frigate": "Can switch between light and dark HTML theme colours",
+				"treasure-chronometer": "Prevent defaults all input events and displays what it sees (keyboard lock)",
+				"uncovered-hound": "Sets a before unload event to prevent tab closure",
+				"unexpected-five-scowl": "Hash fragment in manifest ID, should be ignored in comparisons",
+				"upbeat-hydrant": "Prefers a related Android app",
+				"veil-superb-gondola": "Service worker replaces main page with plain text",
+				"waiting-zigzag-windscreen": "No icon; non-BMP Unicode character in title (Chinese)",
+				"watery-shingle": "Uses geolocation permission",
+				"web-usb-api-test": "WebUSB API basic operations",
+				"webappbundle": "See also https://us-central1-web-devrel-apps.cloudfunctions.net/webappbundle/test.wbn",
+				"wind-veterinarian": "Multiple disjoint scopes on same origin",
+				"wooded-crayfish": "Nested scopes",
+				"yielding-large-chef": "Note-taking web app",
+				"youtube-icons": "YouTube Icons and Notifications API testing"
+				};
+				
+				const specialDemoFolders = [
+				'broken-synonymous-air',
+				'cache-api-perf',
+				'fetch-event-echo',
+				'invincible-syringa',
+				'maze-bouncy-viola',
+				'notch-candle-shape',
+				'octagonal-eight-potato',
+				'saber-tabby-shield',
+				'sassy-seasoned-carpet',
+				'webappbundle',
+				];
+				
+				const NEW_DEMO_BASE_URL = 'https://us-central1-web-devrel-apps.cloudfunctions.net/';
+				
+				const listContainer = document.getElementById('demo-list');
+				
+				async function fetchAndDisplayDemos() {
+					try {
+						const response = await fetch(GITHUB_API_URL);
+						
+						if (!response.ok) {
+							throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+						}
+						
+						const items = await response.json();
+						
+						// We are only interested in directories, as each one is a demo.
+						const demos = items.filter(item => item.type === 'dir');
+						
+						if (demos.length === 0) {
+							listContainer.innerHTML = `<p class="error">No demos found in the specified directory.</p>`;
+							return;
+						}
+						
+						// Build the HTML list
+						const listHtml = demos.map(demo => {
+							
+							let demoUrl;
+							
+							if (specialDemoFolders.includes(demo.name)) {
+								// If it's a special folder, transform the name and use the new URL
+								const transformedName = demo.name.replace(/-/g, '_');
+								demoUrl = `${NEW_DEMO_BASE_URL}${transformedName}/`;
+								} else {
+									// Otherwise, use the default demo URL
+									demoUrl = `${DEMO_BASE_URL}${demo.name}`;
+								}
+								
+								const description = metadata[demo.name] || 'No description available.';
+								const sourceUrl = `${SOURCE_BASE_URL}${demo.name}`;
+								
+								return `
+								<li>
+								<div>
+								<a href="${demoUrl}" rel="noopener noreferrer">${demo.name}</a>
+								<p class="description">${description}</p>
+								</div>
+								<a href="${sourceUrl}" rel="noopener noreferrer" class="source-link">View Source</a>
+								</li>
+								`;
+								}).join('');
+								
+								listContainer.innerHTML = `<ul>${listHtml}</ul>`;
+								
+								} catch (error) {
+									console.error('Failed to fetch demos:', error);
+									listContainer.innerHTML = `<p class="error">Sorry, could not fetch the demo list. Please check the browser console for more details.</p>`;
+								}
+							}
+							
+							fetchAndDisplayDemos();
+		</script>
+	</body>
 </html>
