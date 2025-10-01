@@ -35,8 +35,12 @@ autoPipCheckbox.addEventListener('input', () => {
       return;
     }
     // Request browser to automatically enter Picture-in-Picture when eligible.
-    navigator.mediaSession.setActionHandler('enterpictureinpicture', async () => {
-      log('> Video is eligible for Automatic Picture-in-Picture.');
+    navigator.mediaSession.setActionHandler('enterpictureinpicture', async function({ enterPictureInPictureReason }) {
+      if (enterPictureInPictureReason === "useraction") {
+        log('> User clicked "Enter Picture-in-Picture" icon.');
+      } else if (enterPictureInPictureReason === "contentoccluded") {
+        log('> Automatically enter picture-in-picture.');
+      }
       await video.requestPictureInPicture();
     });
   } catch (error) {

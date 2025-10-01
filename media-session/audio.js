@@ -152,8 +152,12 @@ async function showPictureInPictureWindow() {
 /* Enter Picture-in-Picture (supported since Chrome 120) */
 
 try {
-  navigator.mediaSession.setActionHandler('enterpictureinpicture', function() {
-    log('> User clicked "Enter Picture-in-Picture" icon or we are eligible to automatically enter picture-in-picture.');
+  navigator.mediaSession.setActionHandler('enterpictureinpicture', async function({ enterPictureInPictureReason }) {
+    if (enterPictureInPictureReason === "useraction") {
+      log('> User clicked "Enter Picture-in-Picture" icon.');
+    } else if (enterPictureInPictureReason === "contentoccluded") {
+      log('> Automatically enter picture-in-picture.');
+    }
     showPictureInPictureWindow();
   });
 } catch(error) {
