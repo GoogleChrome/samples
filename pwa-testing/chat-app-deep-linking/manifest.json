@@ -2,7 +2,6 @@
   "name": "Fake Chat App",
   "short_name": "Fake Chat",
   "start_url": "./",
-  "id": "./",
   "theme_color": "#000",
   "background_color": "#000",
   "icons": [

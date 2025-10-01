@@ -3,7 +3,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#ffffff",
-  "id": ".",
   "scope": "./",
   "icons": [{
     "src": "incandescent-ginger-voyage.png",

@@ -2,7 +2,6 @@
   "name": "Main PWA",
   "short_name": "Main PWA",
   "start_url": "./",
-  "id": "./",
   "icons": [
     {
       "src": "apple-touch-icon.png",
