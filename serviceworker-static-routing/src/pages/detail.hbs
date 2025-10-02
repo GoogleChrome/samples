@@ -1,0 +1,35 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{seo.title}}</title>
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}" />
+    <meta name="description" content="{{seo.description}}" />
+    <meta property="og:title" content="{{seo.title}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{seo.url}}" />
+    <meta property="og:description" content="{{seo.description}}" />
+    <meta property="og:image" content="{{seo.image}}" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/serviceworker_static_routing/style.css" />
+    <script src="/serviceworker_static_routing/script.js" defer></script>
+  </head>
+  <body class="network">
+    <div class="wrapper">
+      <div class="content" role="main">
+        <!-- This is the start of content for our page -->
+        <h1>ServiceWorker static routing API demo</h1>
+
+        <!-- Add text indicating that we've changed color OR had an error -->
+        <p>The response from network</p>
+      </div>
+      <div>
+        <a href="/serviceworker_static_routing/">back to the top page</a>
+      </div>
+    </div>
+  </body>
+</html>
