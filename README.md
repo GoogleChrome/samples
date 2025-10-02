@@ -1,13 +1,11 @@
-[![Build Status](https://travis-ci.org/GoogleChrome/samples.svg?branch=gh-pages)](https://travis-ci.org/GoogleChrome/samples)
-
 Google Chrome Samples
 ===
-Samples tied to new functionality in Google Chrome.
+Samples tied to new functionality in Google Chrome and general samples.
 
-Each sample corresponds to an entry in https://www.chromestatus.com/features, and using that
+Some samples correspond to an entry in https://www.chromestatus.com/features, and using that
 interface is currently the best way to browse.
 
-Contributing Samples
+Contributing a sample for a ChromeStatus feature
 ===
 Please use [`SAMPLE_STARTING_POINT`](SAMPLE_STARTING_POINT) as a starting point.
 
@@ -31,10 +29,16 @@ the corresponding https://www.chromestatus.com/features entry. If you're unsure 
 username corresponding to the engineer, an alternative is to email them a link to the pull request
 and ask for feedback directly.
 
+Contributing a general sample
+===
+Just add all the resources for your sample in a dedicated folder. One example is
+[mkbitmap](https://github.com/GoogleChrome/samples/tree/gh-pages/mkbitmap), which is referenced and embedded
+in the article [Compiling mkbitmap to WebAssembly](https://web.dev/articles/compiling-mkbitmap-to-webassembly#add_an_interactive_ui).
+
 Style / Linting / CI
 ===
 The samples ideally should follow the [Google JavaScript Style Guide](http://google.github.io/styleguide/javascriptguide.xml),
-and that's enforced via [ESLint](), using the [`eslint-config-google`](https://github.com/google/eslint-config-google)
+and for samples for a ChromeStatus feature that's enforced via [ESLint](), using the [`eslint-config-google`](https://github.com/google/eslint-config-google)
 base configuration, with a few overrides as needed.
 
 Linting can be performed via `npm run lint` (make sure to `npm install` first).
@@ -42,6 +46,3 @@ Linting can be performed via `npm run lint` (make sure to `npm install` first).
 Various IDEs offer [real-time ESLint integration](http://eslint.org/docs/user-guide/integrations.html),
 and using those integrations that can help avoid errors before anything gets
 checked in.
-
-[Travis CI](https://travis-ci.org/GoogleChrome/samples) is currently being used to verify that the
-Jekyll build completes successfully and that linting passes without errors.
