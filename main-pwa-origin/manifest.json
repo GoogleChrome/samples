@@ -13,6 +13,7 @@
   "display": "standalone",
   "scope_extensions": [
     {
+      "type": "origin",
       "origin": "https://googlechrome.github.io/samples/associated-pwa-origin"
     }
   ]
