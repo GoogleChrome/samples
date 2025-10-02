@@ -1,0 +1,281 @@
+<!--
+  Copyright 2025 Google LLC.
+  SPDX-License-Identifier: Apache-2.0
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗄️</text></svg>"
+    />
+    <title>Cross-Origin Storage API Extension</title>
+    <style>
+      :root {
+        color-scheme: dark light;
+      }
+
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: clamp(320px, 90%, 1000px);
+        margin: auto;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-block-end: 1rem;
+      }
+
+      button {
+        width: fit-content;
+        background-color: green;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        outline: white solid 1px;
+        outline-offset: -1px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      small {
+        display: block;
+        margin-block: 1rem;
+      }
+
+      pre {
+        font-family: ui-monospace, monospace;
+        text-wrap-mode: wrap;
+      }
+
+      pre > span {
+        color: red;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <h1>Cross-Origin Storage API Extension</h1>
+    <h2>AI Sentiment Analysis</h2>
+    <form>
+      <label for="input">Enter text to analyze:</label>
+      <input
+        id="input"
+        type="text"
+        value="I'm really excited for the day and full of joy!"
+      />
+      <button type="submit">Analyze sentiment</button>
+    </form>
+    <label for="output">Detected sentiment:</label>
+    <output id="output">⏳ Pending AI model download</output>
+    <small
+      >💡 This demo will try to retrieve a "large" AI model from Cross-Origin
+      Storage. If the model isn't found, it will download the file from the
+      network and then store it in Cross-Origin Storage if the user has granted
+      access.</small
+    >
+    <small
+      >⚠️ The extension simulates the behavior of the Cross-Origin Storage API.
+      It can't actually store or retrieve files across different origins or show
+      real permission prompts.</small
+    >
+    <hr />
+    <h2>Event log</h2>
+    <pre></pre>
+    <hr />
+    <h2>Source code</h2>
+    <pre><code class="language-js"></code></pre>
+    <script type="module">
+      import { getBlobHash } from './util.js';
+
+      /* HIGHLIGHT START */
+      // The hash of the AI sentiment analysis model.
+      const hash = {
+        algorithm: 'SHA-256',
+        value:
+          '0fb85c8c503d43711cf821d5629ac17fecaf1a3e98517c73038e72105aaf56d9',
+      };
+
+      const obtainModel = async () => {
+        console.log('Trying to access file in cross-origin storage...', hash);
+        try {
+          /* BEGIN MARK */
+          // Retrieving a file from cross-origin storage.
+          const [handle] =
+            await navigator.crossOriginStorage.requestFileHandles([
+              hash,
+            ]); /* END MARK */
+          const fileBlob = await handle.getFile();
+          console.log('File found in cross-origin storage:', fileBlob);
+          return fileBlob;
+        } catch (error) {
+          console.error(error.name, error.message);
+          const storeFile = error.name === 'NotFoundError';
+          return obtainModelFromNetwork(storeFile);
+        }
+      };
+
+      const obtainModelFromNetwork = async (storeFile) => {
+        console.log('Fetching file from network...');
+        try {
+          const fileResponse = await fetch('sentiment-analysis-model.bin');
+          const fileBlob = await fileResponse.blob();
+          console.log('File obtained from network:', fileBlob);
+          const { algorithm, value } = await getBlobHash(fileBlob);
+          if (algorithm !== hash.algorithm || value !== hash.value) {
+            throw new Error('Hash mismatch.');
+          }
+          console.log('File hash and control hash match.');
+          if (storeFile) {
+            saveFileInCrossOriginStorage(fileBlob);
+          }
+          return fileBlob;
+        } catch (error) {
+          console.error(error.name, error.message);
+        }
+      };
+
+      const saveFileInCrossOriginStorage = async (fileBlob) => {
+        try {
+          /* BEGIN MARK */
+          // Storing a file in cross-origin storage.
+          const options = { create: true };
+          const [handle] =
+            await navigator.crossOriginStorage.requestFileHandles(
+              [hash],
+              options,
+            ); /* END MARK */
+          const writable = await handle.createWritable();
+          await writable.write(fileBlob);
+          await writable.close();
+          console.log('File stored in cross-origin storage:', fileBlob);
+        } catch (error) {
+          console.error(error.name, error.message);
+        }
+      };
+      /* HIGHLIGHT END */
+
+      const form = document.querySelector('form');
+      const input = document.querySelector('input');
+      const output = document.querySelector('output');
+      const pre = document.querySelector('pre');
+
+      let model = null;
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const text = input.value.trim();
+        if (!text) {
+          return;
+        }
+        model = model || (await (await obtainModel()).text());
+        const sentimentRegExp = new RegExp(model, 'i');
+        const match = text.match(sentimentRegExp);
+
+        if (match?.groups?.happy) {
+          output.textContent =
+            '😃 Positive sentiment detected: ' + match.groups.happy;
+        } else if (match?.groups?.sad) {
+          output.textContent =
+            '☹️ Negative sentiment detected: ' + match.groups.sad;
+        } else {
+          output.textContent = '🤷 No clear sentiment detected.';
+        }
+      });
+
+      /**
+       * Event logging.
+       */
+      Blob.prototype.toString = function () {
+        return `Blob {
+  size: ${this.size} bytes,
+  type: "${this.type || 'application/octet-stream'}",
+}`;
+      };
+
+      const originalConsoleLog = console.log;
+      const originalConsoleError = console.error;
+
+      console.log = (...args) => {
+        originalConsoleLog.apply(console, args);
+        const message = args
+          .map((arg) =>
+            arg instanceof Blob
+              ? arg.toString()
+              : typeof arg === 'string'
+                ? arg
+                : JSON.stringify(arg, null, 2),
+          )
+          .join(' ');
+        pre.append(document.createTextNode(message + '\n\n'));
+      };
+
+      console.error = (...args) => {
+        originalConsoleError.apply(console, args);
+        const message = args
+          .map((arg) =>
+            arg instanceof Blob
+              ? arg.toString()
+              : typeof arg === 'string'
+                ? arg
+                : JSON.stringify(arg, null, 2),
+          )
+          .join(' ');
+        const span = document.createElement('span');
+        span.append(message + '\n\n');
+        pre.append(span);
+      };
+
+      /**
+       * Show relevant source code.
+       */
+      const code = document.querySelector('code');
+      const regExp =
+        /.*?\/\* HIGHLIGHT START \*\/(.*?)\/\* HIGHLIGHT END \*\/.*?/gms;
+      const sourceCode = regExp.exec(
+        await fetch('.').then((response) => response.text()),
+      )[1];
+      code.append(sourceCode.trim());
+      hljs.highlightAll();
+      code.innerHTML = code.innerHTML
+        .replaceAll(
+          '<span class="hljs-comment">/* BEGIN MARK */</span>',
+          '<mark>',
+        )
+        .replaceAll(
+          '<span class="hljs-comment">/* END MARK */</span>',
+          '</mark>',
+        )
+        .split(/\n/)
+        .map((line) => line.replace(/^      /, ''))
+        .join('\n')
+        .replace(/\n(\s*)<mark>\s*/g, '\n$1<mark>')
+        .replace(/<mark>\n(\s*)/g, '\n$1<mark>');
+    </script>
+  </body>
+</html>

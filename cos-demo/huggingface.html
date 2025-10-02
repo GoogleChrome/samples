@@ -1,0 +1,85 @@
+<!--
+  Copyright 2025 Google LLC.
+  SPDX-License-Identifier: Apache-2.0
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤗</text></svg>"
+    />
+    <title>Hugging Face Transcription Demo</title>
+    <style>
+      :root {
+        color-scheme: dark light;
+      }
+
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: clamp(320px, 90%, 1000px);
+        margin: auto;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-block-end: 1rem;
+      }
+
+      button {
+        width: fit-content;
+        background-color: green;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        outline: white solid 1px;
+        outline-offset: -1px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      small {
+        display: block;
+        margin-block: 1rem;
+      }
+
+      pre {
+        font-family: ui-monospace, monospace;
+        text-wrap-mode: wrap;
+      }
+
+      pre > span {
+        color: red;
+      }
+    </style>
+    <script type="module" src="huggingface.js"></script>
+  </head>
+  <body>
+    <h1>Cross-Origin Storage API Extension</h1>
+    <h2>Hugging Face Transcription Demo</h2>
+    <output>Getting the model ready…</output>
+    <h2>Event log</h2>
+    <pre></pre>
+  </body>
+</html>
