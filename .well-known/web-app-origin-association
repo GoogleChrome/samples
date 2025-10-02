@@ -1,0 +1,5 @@
+{
+  "web_apps" : [
+    {"web_app_identity": "https://googlechrome.github.io/samples/main-pwa-origin"}
+  ]
+}

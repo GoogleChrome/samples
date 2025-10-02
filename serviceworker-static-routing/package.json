@@ -1,7 +1,7 @@
 {
-  "name": "glitch-hello-node",
+  "name": "hello-node",
   "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
+  "description": "A simple Node app built on fastify, instantly up and running.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -15,7 +15,6 @@
   },
   "license": "MIT",
   "keywords": [
-    "node",
-    "glitch"
+    "node"
   ]
 }
