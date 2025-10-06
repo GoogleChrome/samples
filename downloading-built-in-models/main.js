@@ -5,7 +5,7 @@ const output = document.querySelector('output');
 
 let sessionCreationTriggered = false;
 
-let session = null;
+let localSession = null;
 
 const createSession = async (options = {}) => {
   if (sessionCreationTriggered) {
