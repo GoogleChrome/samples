@@ -1,0 +1,14 @@
+{
+  "name": "Seamless Titlebar",
+  "short_name": "Seamless",
+  "start_url": "./",
+  "id": "./",
+  "icons": [
+    {
+      "src": "fugu.png",
+      "type": "image/png",
+      "sizes": "160x160"
+    }
+  ],
+  "display": "standalone"
+}

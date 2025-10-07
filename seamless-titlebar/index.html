@@ -1,0 +1,96 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Seamless titlebar example</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<script src="script.js" defer=""></script></head>
+
+<body>
+
+	<header id="titlebar">
+		<div id="drag-region">
+			<div id="window-title">
+				<span>Seamless titlebar example</span>
+			</div>
+			<div id="window-controls">
+				<div class="awc-button" role="button" tabindex="0" id="min-button" alt="Button to minimize">
+					<img class="icon" src="min-w-15.png" draggable="false">
+				</div>
+
+				<div class="awc-button" role="button" tabindex="0" id="max-button" alt="Button to maximize">
+					<img class="icon" src="max-w-15.png" draggable="false">
+				</div>
+
+				<div class="awc-button" role="button" tabindex="0" id="restore-button" alt="Button to restore">
+					<img class="icon" src="restore-w-15.png" draggable="false">
+				</div>
+
+				<div class="awc-button" role="button" tabindex="0" id="close-button" alt="Button to close">
+					<img class="icon" src="close-w-15.png" draggable="false">
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="main">
+		<!-- display-state CSS color elements -->
+		<h3>display-state CSS</h3>
+		<div class="state-boxes-wrapper">
+			<div id="normal-state">normal</div>
+			<div id="minimized-state">minimized</div>
+			<div id="maximized-state">maximized</div>
+			<div id="fullscreen-state">fullscreen</div>
+		</div>
+
+		<!-- display-state matchMedia CSS buttons -->
+		<div>
+			<button type="button" id="normal-match-media-btn" class="match-media-btn">
+				matchMedia normal?
+			</button>
+			<button type="button" id="minimized-match-media-btn" class="match-media-btn">
+				matchMedia minimized?
+			</button>
+			<button type="button" id="maximized-match-media-btn" class="match-media-btn">
+				matchMedia maximized?
+			</button>
+			<button type="button" id="fullscreen-match-media-btn" class="match-media-btn">
+				matchMedia fullscreen?
+			</button>
+		</div>
+
+		<!-- resizable related elements -->
+		<h3>resizable CSS testing</h3>
+		<button type="button" id="toggle-resizable-btn" class="match-media-btn">
+			Toggle resizable
+		</button>
+		<div class="state-boxes-wrapper">
+			<div id="resizable">resizable</div>
+		</div>
+		<button type="button" id="resizable-match-media-btn" class="match-media-btn">
+			matchMedia is resizable?
+		</button>
+		<button type="button" id="resizeby-btn" class="match-media-btn">
+			Run window.resizeBy(X,Y)
+		</button>
+
+		<!-- onmove related elements -->
+		<h3>onmove event testing</h3>
+		<div style="color: white">
+			<p>window.screenX: <span id="screenx">438</span></p>
+			<p>window.screenY: <span id="screeny">53</span></p>
+		</div>
+
+		<!-- fullscreen related elements -->
+		<h3>fullscreen testing</h3>
+		<button type="button" id="enter-fullscreen-btn" class="match-media-btn">
+			Enter fullscreen
+		</button>
+		<button type="button" id="exit-fullscreen-btn" class="match-media-btn">
+			Exit fullscreen
+		</button>
+
+		<h3>different origin testing</h3>
+		<a href="https://google.com/">
+			Navigate to google.com
+		</a>
+	</div>
+</body></html>

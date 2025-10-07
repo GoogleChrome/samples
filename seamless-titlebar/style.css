@@ -1,0 +1,208 @@
+
+/* Basic styles. */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #305773;
+  color: #fff;
+  border: 1px solid #48545c;
+  overflow-y: hidden;
+}
+h1 {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  line-height: 1.2;
+}
+h3 {
+  padding: 1.5rem 0px 1rem 0px;
+}
+
+#titlebar {
+  display: block;
+  position: fixed;
+  height: 32px;
+  width: calc(100% - 2px); /* Compensate for body 1px border. */
+  background: #254053;
+  padding: 4px;
+  color: #fff;
+}
+
+#titlebar #drag-region {
+  width: 100%;
+  height: 100%;
+  -webkit-app-region: drag;
+  display: grid;
+  grid-template-columns: auto 138px;
+}
+
+#window-title {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+}
+
+#window-title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+#window-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 46px);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  -webkit-app-region: no-drag;
+}
+
+#window-controls .awc-button {
+  grid-row: 1 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+#window-controls .awc-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+#window-controls .awc-button:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+#min-button {
+  grid-column: 1;
+}
+
+#close-button {
+  grid-column: 3;
+}
+#close-button:active .icon {
+  filter: invert(1);
+}
+
+#main {
+  height: calc(100% - 32px);
+  margin-top: 32px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* display-state CSS tests */
+#normal-state,
+#minimized-state,
+#fullscreen-state,
+#maximized-state, #resizable {
+  /*display: block;*/
+  color: black;
+  width: 100px;
+  text-align: center;
+  padding: 15px 0;
+  height: 50px;
+  float: left;
+  background-color: red;
+  margin: 10px;
+}
+
+.state-boxes-wrapper {
+  overflow: hidden;
+}
+
+#enter-fullscreen-btn {
+  display: block;
+}
+#exit-fullscreen-btn {
+  display: none;
+}
+
+@media (display-state: normal) {
+  #normal-state {
+    background-color: green;
+  }
+  #restore-button {
+    display: none !important;
+  }
+  #max-button {
+    display: flex;
+    grid-column: 2;
+  }
+}
+
+@media (display-state: minimized) {
+  #minimized-state {
+    background: gray;
+  }
+}
+
+@media (display-state: maximized) {
+  #maximized-state {
+    background-color: green;
+  }
+  #restore-button {
+    display: flex;
+    grid-column: 2;
+  }
+  #max-button {
+    display: none !important;
+  }
+}
+
+@media (display-state: fullscreen) {
+  #fullscreen-state {
+    background-color: green;
+  }
+  #max-button {
+    display: none !important;
+  }
+  #enter-fullscreen-btn {
+    display:none;
+  }
+  #exit-fullscreen-btn {
+    display: block;
+  }
+}
+
+.match-media-btn {
+  border: 1px solid;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+/* resizable CSS tests */
+@media (resizable: true) {
+  #resizable {
+    display: block;
+    background: green;
+  }
+}
+@media (resizable: false) {
+  #resizable {
+    display: block;
+    background: red;
+  }
+}
