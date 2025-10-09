@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Audio splitter (30s chunks, Web APIs only)</title>
+<style>
+	body { font: 14px/1.4 system-ui, sans-serif; margin: 2rem; }
+	.row { margin: 1rem 0; }
+	progress { width: 100%; height: 1rem; }
+	.grid { display:grid; gap:.5rem; grid-template-columns: auto auto; align-items:center; }
+	a[download]{ word-break: break-all; }
+</style>
+
+<h1>Split audio into 30s chunks (all in your browser)</h1>
+
+<div class="row">
+	<input id="file" type="file" accept="audio/*">
+	<label style="margin-left:.5rem;">
+		<input id="startOffset" type="number" min="0" value="0" step="1">
+		start offset (seconds)
+	</label>
+</div>
+
+<div class="row">
+	<button id="go" disabled>Split into 30s WAV files</button>
+</div>
+
+<div class="row">
+	<progress id="prog" max="1" value="0" hidden></progress>
+	<div id="status"></div>
+</div>
+
+<ol id="out"></ol>
+
+<script>
+	const $ = (sel) => document.querySelector(sel);
+	const fileEl = $('#file');
+	const goEl = $('#go');
+	const outEl = $('#out');
+	const progEl = $('#prog');
+	const statusEl = $('#status');
+	const startOffsetEl = $('#startOffset');
+	
+	fileEl.addEventListener('change', () => {
+		outEl.innerHTML = '';
+		statusEl.textContent = '';
+		progEl.hidden = true;
+		goEl.disabled = !fileEl.files?.[0];
+		});
+		
+		goEl.addEventListener('click', async () => {
+			const file = fileEl.files?.[0];
+			if (!file) return;
+			
+			goEl.disabled = true;
+			outEl.innerHTML = '';
+			statusEl.textContent = 'Decoding…';
+			progEl.hidden = false;
+			progEl.value = 0;
+			
+			const arrayBuffer = await file.arrayBuffer();
+			
+			// 1) Decode to PCM using Web Audio API
+			const ac = new (window.AudioContext || window.webkitAudioContext)();
+			const audioBuffer = await ac.decodeAudioData(arrayBuffer);
+			
+			const sampleRate = audioBuffer.sampleRate;
+			const channels = audioBuffer.numberOfChannels;
+			const totalFrames = audioBuffer.length;
+			const durationSec = audioBuffer.duration;
+			
+			// Optional: start offset (seconds)
+			const startOffsetSec = Math.max(0, Number(startOffsetEl.value) || 0);
+			const startFrame = Math.min(Math.floor(startOffsetSec * sampleRate), totalFrames);
+			
+			const CHUNK_SECONDS = 30;
+			const chunkFrames = Math.floor(CHUNK_SECONDS * sampleRate);
+			
+			const framesRemaining = totalFrames - startFrame;
+			const numChunks = Math.ceil(framesRemaining / chunkFrames);
+			
+			statusEl.textContent = `Decoded ${file.name} – ${durationSec.toFixed(2)}s @ ${sampleRate}Hz, ${channels}ch. Creating ${numChunks} chunk(s)…`;
+			
+			// 2) Slice into 30s chunks and encode to WAV
+			for (let i = 0; i < numChunks; i++) {
+				const chunkStart = startFrame + i * chunkFrames;
+				const thisFrames = Math.min(chunkFrames, totalFrames - chunkStart);
+				
+				// Create a new AudioBuffer for the chunk
+				const chunkAB = new AudioBuffer({
+					numberOfChannels: channels,
+					length: thisFrames,
+					sampleRate
+					});
+					
+					for (let ch = 0; ch < channels; ch++) {
+						const src = audioBuffer.getChannelData(ch).subarray(chunkStart, chunkStart + thisFrames);
+						chunkAB.copyToChannel(src, ch, 0);
+					}
+					
+					// Encode to WAV (16-bit PCM)
+					const wavBuffer = encodeWavPCM16(chunkAB);
+					const blob = new Blob([wavBuffer], { type: 'audio/wav' });
+					
+					// 3) Offer each chunk as a downloadable file
+					const url = URL.createObjectURL(blob);
+					const startSec = (i * CHUNK_SECONDS) + startOffsetSec;
+					const endSec = Math.min(startSec + CHUNK_SECONDS, durationSec);
+					
+					const li = document.createElement('li');
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = safeFileStem(file.name) + `__${padSec(startSec)}s_to_${padSec(endSec)}s.wav`;
+					a.textContent = a.download;
+					li.appendChild(a);
+					
+					const size = document.createElement('span');
+					size.textContent = `  (${(blob.size / (1024 * 1024)).toFixed(2)} MB)`;
+					li.appendChild(size);
+					
+					outEl.appendChild(li);
+					
+					progEl.value = (i + 1) / numChunks;
+					await microtask(); // keep UI responsive
+				}
+				
+				statusEl.textContent = `Done. Generated ${numChunks} chunk(s).`;
+				goEl.disabled = false;
+				await ac.close();
+				});
+				
+				function microtask() {
+					return new Promise(requestAnimationFrame);
+				}
+				
+				function padSec(s) {
+					return Math.round(s).toString().padStart(4, '0');
+				}
+				
+				function safeFileStem(name) {
+					const dot = name.lastIndexOf('.');
+					const stem = dot > 0 ? name.slice(0, dot) : name;
+					return stem.replace(/[^\w.-]/g, '_');
+				}
+				
+				// --- WAV encoding (16-bit PCM), multi-channel-aware ---
+				function encodeWavPCM16(audioBuffer) {
+					const numChannels = audioBuffer.numberOfChannels;
+					const sampleRate = audioBuffer.sampleRate;
+					const frames = audioBuffer.length;
+					
+					// Interleave channels
+					const interleaved = new Int16Array(frames * numChannels);
+					const channelData = Array.from({ length: numChannels }, (_, ch) => audioBuffer.getChannelData(ch));
+					
+					let w = 0;
+					for (let i = 0; i < frames; i++) {
+						for (let ch = 0; ch < numChannels; ch++) {
+							// clamp float32 -> int16
+							let s = Math.max(-1, Math.min(1, channelData[ch][i]));
+							interleaved[w++] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+						}
+					}
+					
+					// WAV header + data
+					const bytesPerSample = 2; // 16-bit
+					const blockAlign = numChannels * bytesPerSample;
+					const byteRate = sampleRate * blockAlign;
+					const dataSize = interleaved.byteLength;
+					const headerSize = 44;
+					const buf = new ArrayBuffer(headerSize + dataSize);
+					const view = new DataView(buf);
+					
+					// RIFF header
+					writeString(view, 0, 'RIFF');
+					view.setUint32(4, 36 + dataSize, true); // file size minus 8
+					writeString(view, 8, 'WAVE');
+					
+					// fmt  chunk
+					writeString(view, 12, 'fmt ');
+					view.setUint32(16, 16, true);            // PCM header size
+					view.setUint16(20, 1, true);             // audio format = PCM
+					view.setUint16(22, numChannels, true);
+					view.setUint32(24, sampleRate, true);
+					view.setUint32(28, byteRate, true);
+					view.setUint16(32, blockAlign, true);
+					view.setUint16(34, 16, true);            // bits per sample
+					
+					// data chunk
+					writeString(view, 36, 'data');
+					view.setUint32(40, dataSize, true);
+					
+					// PCM samples
+					new Int16Array(buf, headerSize).set(interleaved);
+					
+					return buf;
+				}
+				
+				function writeString(view, offset, str) {
+					for (let i = 0; i < str.length; i++) {
+						view.setUint8(offset + i, str.charCodeAt(i));
+					}
+				}
+</script>
