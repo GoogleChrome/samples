@@ -167,7 +167,7 @@ try {
 /* Utils */
 
 function getAwesomePlaylist() {
-  const BASE_URL = 'https://storage.googleapis.com/media-session/';
+  const BASE_URL = 'https://chrome.dev/media-session/';
 
   return [{
       src: BASE_URL + 'sintel/snow-fight.mp3',

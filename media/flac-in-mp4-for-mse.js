@@ -10,7 +10,7 @@ if (MediaSource.isTypeSupported('audio/mp4; codecs="flac"')) {
     const sourceBuffer = mediaSource.addSourceBuffer('audio/mp4; codecs="flac"');
 
     log('Fetching audio file...');
-    fetch('https://storage.googleapis.com/media-session/flac.mp4')
+    fetch('https://chrome.dev/media-session/flac.mp4')
     .then(response => response.arrayBuffer())
     .then(data => {
       sourceBuffer.appendBuffer(data);

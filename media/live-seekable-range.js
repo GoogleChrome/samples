@@ -66,7 +66,7 @@ function onEndOfStreamButtonClick() {
 /* Utils */
 
 function fetchAndAppendSegment(range) {
-  const videoUrl = 'https://storage.googleapis.com/media-session/sample.webm';
+  const videoUrl = 'https://chrome.dev/media-session/sample.webm';
   const sourceBuffer = mediaSource.sourceBuffers[0];
 
   fetch(videoUrl, { headers: { range } })

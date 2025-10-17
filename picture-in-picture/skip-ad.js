@@ -15,7 +15,7 @@ function onSkipAdButtonClick() {
   log('> User clicked "Skip Ad" button.');
   navigator.mediaSession.setActionHandler('skipad', null);
 
-  video.src = "https://storage.googleapis.com/media-session/caminandes/short.mp4";
+  video.src = "https://chrome.dev/media-session/caminandes/short.mp4";
   video.play();
 }
 
