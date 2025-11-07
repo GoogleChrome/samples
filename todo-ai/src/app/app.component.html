@@ -1,0 +1,35 @@
+<app-nav>
+  <mat-list>
+    @for (todo of todos(); track todo) {
+      <mat-list-item>
+        <div class="content">
+          <mat-checkbox [checked]="todo.done" (change)="toggleTodo(todo)"></mat-checkbox>
+
+          <span>{{ todo.text }}</span>
+
+          <button mat-icon-button (click)="deleteTodo(todo)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    }
+  </mat-list>
+
+  <pre>{{ reply() }}</pre>
+
+  <div class="chat-container">
+    <mat-form-field>
+      <mat-label>Prompt</mat-label>
+      <input matInput placeholder="Prompt" #prompt>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="runPrompt(prompt.value)">
+      <mat-icon>send</mat-icon>
+      Ask
+    </button>
+  </div>
+
+  <button mat-fab (click)="addTodo()">
+    <mat-icon>add</mat-icon>
+  </button>
+</app-nav>
