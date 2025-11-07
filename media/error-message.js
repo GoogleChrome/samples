@@ -19,7 +19,7 @@ invalidFileButton.addEventListener('click', function() {
 });
 
 crossOriginInvalidFileButton.addEventListener('click', function() {
-  video.src = 'https://storage.googleapis.com/media-error/no_streams.webm';
+  video.src = 'https://chrome.dev/media-error/no_streams.webm';
   // Error message will be cleared out because file is cross-origin.
 });
 

@@ -4,10 +4,10 @@ audio.src = URL.createObjectURL(mediaSource);
 
 const resources = [
   {
-    url: 'https://storage.googleapis.com/media-session/bear-opus.webm',
+    url: 'https://chrome.dev/media-session/bear-opus.webm',
     type: 'audio/webm; codecs="opus"'
   }, {
-    url: 'https://storage.googleapis.com/media-session/bear-flac_frag.mp4',
+    url: 'https://chrome.dev/media-session/bear-flac_frag.mp4',
     type: 'audio/mp4; codecs="flac"'
   }
 ];

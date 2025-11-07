@@ -36,7 +36,7 @@ self.addEventListener('install', function(event) {
     '../../styles/main.css',
     'static/poster.jpg',
     // The videos are stored remotely with CORS enabled.
-    'https://storage.googleapis.com/media-session/sample.webm',
+    'https://chrome.dev/media-session/sample.webm',
   ];
 
   // All of these logging statements should be visible via the "Inspect" interface
