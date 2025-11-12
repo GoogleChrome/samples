@@ -76,28 +76,24 @@ async function main() {
 
 function readLSManifest() {
   try {
-    return JSON.parse(localStorage.getItem("manifest"));
+    return JSON.parse(localStorage.getItem("furry-hickory-furniture.manifest"));
   } catch {
     return undefined;
   }
 }
 
 function readLSManifestUrl() {
-  return localStorage.getItem("manifestUrl");
+  return localStorage.getItem("furry-hickory-furniture.manifestUrl");
 }
 
 function readControlsManifest() {
-  let name =
-    "murl: " +
-    manifestUrlSelect.value +
-    ", surl: " +
-    startUrlSelect.value +
-    ", scope: " +
-    scopeSelect.value +
-    "}";
   let hasId = idSelect.value != "None";
-  if (hasId) name = "id: " + idSelect.value + ", " + name;
-  name = "Manifest: {" + name;
+  let name;
+  if (hasId) {
+    name = "Furry Hickory Furnature: " + idSelect.value;
+  } else {
+    name = "Furry Hickory Furniture: " + startUrlSelect.value;
+  }
   let manifest = createManifest(name, scopeSelect.value, startUrlSelect.value);
   if (hasId) manifest.id = idSelect.value;
   return manifest;
@@ -122,8 +118,8 @@ function updateControls(manifest, manifestUrl) {
 }
 
 function updateLS(manifest, manifestUrl) {
-  localStorage.setItem("manifest", JSON.stringify(manifest));
-  localStorage.setItem("manifestUrl", manifestUrl);
+  localStorage.setItem("furry-hickory-furniture.manifest", JSON.stringify(manifest));
+  localStorage.setItem("furry-hickory-furniture.manifestUrl", manifestUrl);
   printLn("LS updated.");
 }
 
