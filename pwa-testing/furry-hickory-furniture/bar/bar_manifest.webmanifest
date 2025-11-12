@@ -1,11 +1,11 @@
 {
   "name": "Furry Hickory Furniture - Bar Inner App",
-  "start_url": "./bar/index.html",
+  "start_url": "./index.html",
   "display": "minimal-ui",
   "theme_color": "#8c640b",
-  "scope": "./bar/",
+  "scope": ".",
   "icons": [{
-    "src": "outer-wooded-crayfish.png",
+    "src": "./hickory_bar.png",
     "sizes": "155x155",
     "type": "image/png"
   }]
