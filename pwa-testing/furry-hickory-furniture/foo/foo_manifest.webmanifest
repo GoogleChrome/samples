@@ -5,7 +5,7 @@
   "theme_color": "#d59712",
   "scope": ".",
   "icons": [{
-    "src": "hickory_foo.png",
+    "src": "./hickory_foo.png",
     "sizes": "155x155",
     "type": "image/png"
   }]
