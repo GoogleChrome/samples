@@ -10,7 +10,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^5.1.0"
   },
   "license": "MIT",
   "keywords": [
