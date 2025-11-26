@@ -11,7 +11,7 @@ const mediaConfig = {
     width: 1920,
     height: 1080,
     bitrate: 2646242, // number of bits used to encode a second of video
-    framerate: '25' // number of frames used in one second
+    framerate: 25 // number of frames used in one second
   }
 };
 
