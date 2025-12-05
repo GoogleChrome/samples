@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic controls</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    video, audio {
+      margin-top: 200px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <video src="https://chrome.dev/media-session/big-buck-bunny/trailer.mov" controls width=400 loop>
+    <track kind=subtitles src=test-sub-en.vtt srclang=en label=English>
+    <track kind=subtitles src=test-sub-fr.vtt srclang=fr label=French>
+  </video>
+  <audio src="https://chrome.dev/media-session/big-buck-bunny/trailer.mov" controls width=400 style='display: none;' loop</audio>
+  <fieldset>
+    <legend>Options</legend>
+    <div><label>Video <input type=radio name=mediatype value=video checked></label> <label>Audio <input type=radio name=mediatype value=audio></label></div>
+    <div><label>Width: <input type=number id=width value=400></label></div>
+    <div><label>Controls: <input type=checkbox checked id=controls></label></div>
+    <div><label>Disable cast: <input type=checkbox id=disableCast></label></div>
+    <div><label>Captions: <input type=checkbox checked id=captions></label></div>
+    <div><label>Label Captions: <input type=checkbox checked id=labelcaptions></label></div>
+    <div><label>Picture-in-Picture: <input type=checkbox checked id=pip></label></div>
+  </fieldset>
+</body>
+<script>
+  var audio = document.querySelector('audio');
+  var video = document.querySelector('video');
+  var currentMedia = video;
+  
+  var captions = document.querySelectorAll('track');
+  function addCaptions() {
+    captions.forEach(c => video.appendChild(c));
+  }
+  function removeCaptions() {
+    while (video.firstChild) { video.removeChild(video.firstChild); }
+  }
+  function addLabelCaptions() {
+    captions[0].srclang = 'en';
+    captions[0].label = 'English';
+    captions[1].srclang = 'fr';
+    captions[1].label = 'French';
+  }
+  function removeLabelCaptions() {
+    captions[0].srclang = captions[0].label = '';
+    captions[1].srclang = captions[1].label = '';
+  }
+
+  var radios = document.querySelectorAll('input[type=radio]');
+  for (var i = 0; i < radios.length; ++i) {
+    radios[i].onchange = function() {
+      currentMedia.style.display = 'none';
+      currentMedia = document.querySelector(this.value);
+      currentMedia.style.display = 'block';
+      
+      document.getElementById('captions').disabled = (this.value == 'audio');
+    }
+  };
+
+  document.getElementById('width').onchange = function() { audio.style.width = video.style.width = this.value + 'px'; };
+  document.getElementById('controls').onchange = function() { audio.controls = video.controls = this.checked; };
+  document.getElementById('captions').onchange = function() { this.checked ? addCaptions() : removeCaptions(); };
+  document.getElementById('disableCast').onchange = function() { audio.disableRemotePlayback = video.disableRemotePlayback = this.checked; };
+  document.getElementById('labelcaptions').onchange = function() { this.checked ? addLabelCaptions() : removeLabelCaptions(); };
+  document.getElementById('pip').onchange = function() { video.disablePictureInPicture = !this.checked; };
+
+  // Initialize width.
+  if (window.location.search.startsWith('?width=')) {
+    document.getElementById('width').value = window.location.search.substring('?width='.length, window.location.search.length);
+    document.getElementById('width').onchange();
+  }
+</script>
+</html>
