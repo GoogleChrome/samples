@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:02.000 --> 00:00:10.000
+This is the <b>first</b> line of text, <u>displaying from 2-10 seconds</u>
+
+2
+00:00:15.000 --> 00:00:20.000
+And the second line of text
