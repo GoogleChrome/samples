@@ -1,5 +1,7 @@
-{
-  "web_apps" : [
-    {"web_app_identity": "https://googlechrome.github.io/samples/main-pwa-origin"}
-  ]
-}
+---
+layout: none
+---
+{% comment %}
+  To allow the file to both have templating funtions available and to allow it to be included by render_json.html, it lives in its own file in _includes, and is simply included here.
+{% endcomment %}
+{% include web-app-origin-association %}

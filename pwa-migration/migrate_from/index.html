@@ -1,0 +1,32 @@
+---
+title: Web App Migration - 'Old App'
+feature_name: Web App Migration
+chrome_version: 147
+icon_url: icon.png
+feature_id: 5123349239955456
+additional_head_content: <link rel="manifest" href="manifest.webmanifest" />
+---
+
+<p> This is the "Old App" (e.g. the 'migrating from' app) that is set up to migrate to the "New App", located <a
+        href="../migrate_to/index.html">here</a>.</p>
+
+<h3>Background</h3>
+<p>
+    This feature allows a PWA to migrate to a new origin or identity. Said another way, this feature allows a PWA to change it's <a href="https://w3c.github.io/manifest/#id-member"><code>id</code>
+        member</a>
+    (<a
+        href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/id#understanding_id_resolution">MDN</a>)
+    to a different value, as long as the origin of the new id is same-site as the current one.
+</p>
+
+
+{% include render_json.html filename='manifest.webmanifest' %}
+
+<h2>Web App Origin Association file</h2>
+<p>To confirm that the migration is OK with the 'old' app origin, a key must be added to the
+    <code>/.well-known/web-app-origin-association</code> file of the id of the 'new' app, with
+    <code>allow_migration: true</code></p>
+<p>(Ignore the the web_apps key, that is for the scope extensions demo, a different feature)</p>
+
+{% include render_json.html absolute_filename='web-app-origin-association'
+href='/.well-known/web-app-origin-association' %}

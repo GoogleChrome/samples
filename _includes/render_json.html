@@ -1,0 +1,18 @@
+{% assign filename = include.filename | default: include.absolute_filename %}
+{% assign href = include.href | default: include.filename %}
+{% if filename %}
+  {% if include.title == null %}
+    <h3><a href="{{href}}" target="_blank">{{href}}</a></h3>
+  {% elsif include.title != "" %}
+    <h3><a href="{{href}}" target="_blank">{{include.title}}</a></h3>
+  {% endif %}
+
+  {% capture content %}
+    {% if include.absolute_filename %}
+      {% include {{include.absolute_filename}} %}
+    {% else %}
+      {% include_relative {{include.filename}} %}
+    {% endif %}
+  {% endcapture %}
+  {% highlight json %}{{ content | split: "---" | last | strip }}{% endhighlight %}
+{% endif %}

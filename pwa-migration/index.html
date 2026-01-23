@@ -1,0 +1,42 @@
+---
+feature_name: Web App Origin Migration
+chrome_version: 147
+feature_id: 5123349239955456
+---
+
+<h3>Background</h3>
+<p>Installed web apps have an unchangable unique identifier, the manifest <a
+    href="https://w3c.github.io/manifest/#id-member"><code>id</code>
+    member</a>
+  (<a
+    href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/id#understanding_id_resolution">MDN</a>).
+  This allows the browser to identify the app uniquely, for operations like updating, discovery, and when APIs need to
+  refer to a specific installed web app.
+</p>
+<p>
+  Sometimes an app needs to change this, for a number of possible reasons, such as:
+</p>
+<ul>
+  <li>Architecture changes - moving from:
+    <ul>
+      <li><code>www.mysite.com/app</code></li>
+      <li><code>app.mysite.com</code></li>
+    </ul>
+  </li>
+  <li>Fixing when 'id' wasn't set and now two apps are installed in the world - merging:
+    <ul>
+      <li><code>www.mysite.com/index.html?first_start_url&usp=etc</code> into</li>
+      <li><code>www.mysite.com/index.html</code></li>
+    </ul>
+  </li>
+  <li>
+    etc.
+  </li>
+</ul>
+<p>
+  The following sites are set up to help demo and test this:
+</p>
+<ul>
+  <li><a href="migrate_from/index.html">migrate_from/index.html</a></li>
+  <li><a href="migrate_to/index.html">migrate_to/index.html</a></li>
+</ul>

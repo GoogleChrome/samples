@@ -1,0 +1,22 @@
+---
+title: Web App Migration - 'New App'
+feature_name: Web App Migration
+chrome_version: 147
+feature_id: 5123349239955456
+icon_url: icon.png
+additional_head_content: <link rel="manifest" href="manifest.webmanifest"/>
+---
+
+<p> This is the "New App" (e.g. the 'migrating to' app) that is set up to be migrated from the "Old App", located <a
+        href="../migrate_from/index.html">here</a>.</p>
+
+<h3>Background</h3>
+<p>
+    This feature allows a PWA to migrate to a new origin or identity. Said another way, this feature allows a PWA to change it's <a href="https://w3c.github.io/manifest/#id-member"><code>id</code>
+        member</a>
+    (<a
+        href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/id#understanding_id_resolution">MDN</a>)
+    to a different value, as long as the origin of the new id is same-site as the current one.
+</p>
+
+{% include render_json.html filename='manifest.webmanifest' %}

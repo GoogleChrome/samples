@@ -1,0 +1,8 @@
+{
+  "web_apps" : [
+    {"web_app_identity": "{{site.url}}/samples/main-pwa-origin"}
+  ]
+  "{{site.url}}/pwa-migration/migrate_to/": {
+    "allow_migration": true
+  }
+}

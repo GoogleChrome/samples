@@ -1,0 +1,24 @@
+---
+layout: none
+---
+{
+  "name": "PWA Demo New App",
+  "short_name": "New App",
+  "description":
+    "This is a 'new' app that the developer wants to migrate to, from an old app.",
+  "id": "{{site.url}}/pwa-migration/migrate_to/",
+  "start_url": "index.html",
+  "display": "standalone",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "migrate_from": {
+    "id": "{{site.url}}/pwa-migration/migrate_from/",
+    "install_url": "{{site.url}}/pwa-migration/migrate_from/index.html"
+  }
+}
