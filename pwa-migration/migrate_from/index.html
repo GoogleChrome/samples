@@ -26,7 +26,6 @@ additional_head_content: <link rel="manifest" href="manifest.webmanifest" />
 <p>To confirm that the migration is OK with the 'old' app origin, a key must be added to the
     <code>/.well-known/web-app-origin-association</code> file of the id of the 'new' app, with
     <code>allow_migration: true</code></p>
-<p>(Ignore the the web_apps key, that is for the scope extensions demo, a different feature)</p>
 
 {% include render_json.html absolute_filename='web-app-origin-association'
 href='/.well-known/web-app-origin-association' %}
