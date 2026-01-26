@@ -30,8 +30,9 @@ const logTimingInfo = () => {
 
   appendEntry('workerRouterEvaluationStart', getValueOrWarning(navTiming.workerRouterEvaluationStart))
   appendEntry('workerCacheLookupStart', getValueOrWarning(navTiming.workerCacheLookupStart))
-  appendEntry('workerMatchedSourceType', getValueOrWarning(navTiming.workerMatchedSourceType))
-  appendEntry('workerFinalSourceType', getValueOrWarning(navTiming.workerFinalSourceType))
+  // TODO: Remove the navTiming.workerMatchedSourceType / workerFinalSourceType once merge is complete.
+  appendEntry('workerMatchedRouterSource', getValueOrWarning(navTiming.workerMatchedRouterSource || navTiming.workerMatchedSourceType))
+  appendEntry('workerFinalRouterSource', getValueOrWarning(navTiming.workerFinalRouterSource || navTiming.workerFinalSourceType))
   appendEntry('deliveryType', navTiming.deliveryType || "Empty deliveryType")
   appendEntry('encodedBodySize', navTiming.encodedBodySize);
 
