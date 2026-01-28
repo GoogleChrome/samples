@@ -17,8 +17,10 @@ layout: none
       "type": "image/png"
     }
   ],
-  "migrate_from": {
-    "id": "{{site.url}}/pwa-migration/migrate_from/",
-    "install_url": "{{site.url}}/pwa-migration/migrate_from/index.html"
-  }
+  "migrate_from": [
+    {
+      "id": "{{site.url}}/pwa-migration/migrate_from/",
+      "install_url": "{{site.url}}/pwa-migration/migrate_from/index.html"
+    }
+  ]
 }
