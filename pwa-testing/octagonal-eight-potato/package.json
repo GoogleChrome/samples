@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "fastify": "^3.14.1",
+    "fastify": "^5.7.3",
     "fastify-multipart": "^4.0.0",
     "fastify-static": "^4.0.0",
     "handlebars": "^4.7.7",
