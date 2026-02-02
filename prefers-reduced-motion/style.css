@@ -1,0 +1,111 @@
+:root {  
+  line-sizing: normal;    
+  --heading-color: red;
+  --duration: 0s;
+  --timing: ease-in-out;
+  --background-color: rgb(15, 15, 15);
+  --text-color: rgb(240, 240, 240);
+  --shadow-color: rgba(240, 240, 240, 0.5);
+  --accent-color: rgba(240, 0, 0, 0.5);    
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;  
+  max-width: 100%;
+  overflow-x: hidden;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 12pt;
+  display: flex;
+  justify-content: center;
+}
+
+a:link,
+a:active,
+a:hover,
+a:focus,
+a:visited {
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 0.1rem solid var(--accent-color);
+}
+
+a:active,
+a:hover,
+a:focus {
+  text-shadow: 0.1rem 0.1rem 0.1rem var(--shadow-color);  
+}
+
+main {
+  overflow-x: hidden;
+  margin: 1rem;
+  width: 100%;
+  max-width: 30rem;
+  position: relative;
+  
+}
+
+ul {
+  margin: 0;
+  padding: 0;  
+  list-style: none;  
+}
+
+li { 
+  margin: 1rem;
+}
+
+h1 {
+  color: var(--heading-color);
+  text-shadow: 0.1rem 0.1rem 0.1rem var(--shadow-color);
+}
+
+img {
+  background-image: url('placeholder.svg');  
+  background-repeat: no-repeat;
+  background-position: center;    
+  background-size: 75%;    
+  max-width: 100%;
+  height: auto;
+  display: block; 
+  filter: grayscale(50%);
+  opacity: 0.5;
+  background-color: var(--background-color);
+  transition: transform var(--duration) var(--timing),
+      opacity var(--duration) var(--timing);
+}
+
+img.outofsight {    
+  background-size: 75%;          
+}
+
+img.insight {
+  opacity: 1;
+  background-size: contain;  
+}
+
+img:hover {
+  transform: scale(1.1);  
+}
+
+li:nth-child(even) img.outofsight {
+  transform: translateX(100vw);     
+}
+
+li:nth-child(odd) img.outofsight {
+  transform: translateX(-100vw);     
+}
+  
