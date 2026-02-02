@@ -2,7 +2,7 @@
   "name": "Tabbed Application Mode",
   "icons": [
     {
-      "src": "https://cdn.glitch.global/563b0136-ef02-47aa-9600-7da28abe691c/card-index-dividers_1f5c2-fe0f.png?v=1670196760807",
+      "src": "tabbed.png",
       "sizes": "160x160",
       "type": "image/png"
     }
@@ -18,7 +18,7 @@
       "url": "./",
       "icons": [
         {
-          "src": "https://cdn.glitch.global/563b0136-ef02-47aa-9600-7da28abe691c/house_1f3e0.png?v=1670201802646",
+          "src": "home.png",
           "sizes": "160x160",
           "type": "image/png"
         }
@@ -29,7 +29,7 @@
       "url": "one.html",
       "icons": [
         {
-          "src": "https://cdn.glitch.global/563b0136-ef02-47aa-9600-7da28abe691c/keycap-digit-one_31-fe0f-20e3.png?v=1670201800580",
+          "src": "one.png",
           "sizes": "160x160",
           "type": "image/png"
         }
@@ -40,7 +40,7 @@
       "url": "two.html",
       "icons": [
         {
-          "src": "https://cdn.glitch.global/563b0136-ef02-47aa-9600-7da28abe691c/keycap-digit-two_32-fe0f-20e3.png?v=1670201798261",
+          "src": "two.png",
           "sizes": "160x160",
           "type": "image/png"
         }
