@@ -1,0 +1,23 @@
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {  
+  font-family: system-ui, sans-serif;    
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
