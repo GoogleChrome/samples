@@ -1,0 +1,116 @@
+{
+  "name": "Manifest Localization Test App",
+  "short_name": "Localization Test",
+  "description": "A Progressive Web App for testing manifest localization capabilities",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196f3",
+  "icons": [
+    {
+      "src": "./icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Open Home",
+      "short_name": "Home",
+      "description": "Navigate to home page",
+      "url": "./",
+      "icons": [
+        {
+          "src": "./icons/icon-128.png",
+          "sizes": "128x128",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "name_localized": {
+    "de": "Manifest-Lokalisierungstest-App",
+    "ar": "تطبيق اختبار توطين البيان"
+  },
+  "short_name_localized": {
+    "de": "Lokalisierungstest",
+    "ar": "اختبار التوطين"
+  },
+  "description_localized": {
+    "de": "Eine Progressive Web App zum Testen der Manifest-Lokalisierungsfunktionen",
+    "ar": "تطبيق ويب تقدمي لاختبار قدرات توطين البيان"
+  },
+  "icons_localized": {
+    "de": [
+      {
+        "src": "./icons/localized_icons/de/icon-128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "./icons/localized_icons/de/icon-256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+      }
+    ],
+    "ar": [
+      {
+        "src": "./icons/localized_icons/ar/icon-128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "./icons/localized_icons/ar/icon-256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+      }
+    ]
+  },
+  "shortcuts_localized": {
+    "de": [
+      {
+        "name": "Startseite öffnen",
+        "short_name": "Startseite",
+        "description": "Zur Startseite navigieren",
+        "url": "./",
+        "icons": [
+          {
+            "src": "./icons/localized_icons/de/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+          }
+        ]
+      }
+    ],
+    "ar": [
+      {
+        "name": "فتح الصفحة الرئيسية",
+        "short_name": "الرئيسية",
+        "description": "الانتقال إلى الصفحة الرئيسية",
+        "url": "./",
+        "icons": [
+          {
+            "src": "./icons/localized_icons/ar/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Progressive Web App for testing manifest localization capabilities">
+  <meta name="theme-color" content="#2196f3">
+  <title>Manifest Localization Test App</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon-128.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Manifest Localization Test App</h1>
+      <p class="subtitle">Testing PWA manifest localization capabilities</p>
+    </header>
+
+    <div class="content">
+      <div class="section">
+        <div class="info-box">
+          <p>
+            This PWA demonstrates manifest localization using the <code>name_localized</code>, 
+            <code>short_name_localized</code>, <code>icons_localized</code>, 
+            <code>description_localized</code>, and <code>shortcuts_localized</code> fields.
+            The service worker caches the manifest for offline access.
+          </p>
+        </div>
+        <div id="sw-status" class="status">Checking Service Worker...</div>
+      </div>
+
+      <div class="section">
+        <h2>Localized App Names and Icons</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Language</th>
+              <th>App Name</th>
+              <th>Short Name</th>
+              <th>Icon</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="language-code">Default (en)</span></td>
+              <td>Manifest Localization Test App</td>
+              <td>Localization Test</td>
+              <td>
+                <img src="./icons/icon-128.png" alt="Default icon" width="48" height="48">
+              </td>
+            </tr>
+            <tr>
+              <td><span class="language-code">German (de)</span></td>
+              <td>Manifest-Lokalisierungstest-App</td>
+              <td>Lokalisierungstest</td>
+              <td>
+                <img src="./icons/localized_icons/de/icon-128.png" alt="German icon" width="48" height="48">
+              </td>
+            </tr>
+            <tr>
+              <td><span class="language-code">Arabic (ar)</span></td>
+              <td>تطبيق اختبار توطين البيان</td>
+              <td>اختبار التوطين</td>
+              <td>
+                <img src="./icons/localized_icons/ar/icon-128.png" alt="Arabic icon" width="48" height="48">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
