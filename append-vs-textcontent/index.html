@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance Test: append() vs textContent</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .log {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Performance Test: append() vs textContent</h1>
+  <div id="log"></div> <!-- This will display the test results -->
+
+  <script>
+    // Generate a long "lorem ipsum" text
+    const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '.repeat(1000);
+
+    // Split the text into chunks
+    const chunkSize = 200; // Customize chunk size
+    const chunks = [];
+    for (let i = 0; i < loremIpsum.length; i += chunkSize) {
+      chunks.push(loremIpsum.slice(i, i + chunkSize));
+    }
+
+    // Function to append test results to the page
+    function logToPage(message) {
+      const logDiv = document.getElementById('log');
+      const p = document.createElement('p');
+      p.textContent = message;
+      logDiv.appendChild(p);
+    }
+
+    // Function to perform the append test
+    function appendTest() {      
+      const div = document.createElement('div');
+      document.body.append(div);
+      const startTime = performance.now();
+      chunks.forEach(chunk => {        
+        div.append(chunk); // Use append() method to add the chunk      
+      });
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      logToPage(`append() method took ${duration.toFixed(2)}ms`);
+    }
+
+    // Function to perform the textContent test
+    function textContentTest() {
+      const div = document.createElement('div');
+      document.body.append(div);
+      const startTime = performance.now();
+      chunks.forEach(chunk => {
+        div.textContent += chunk; // Use textContent property to add the chunk
+      });     
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      logToPage(`textContent property took ${duration.toFixed(2)}ms`);
+    }
+
+    // Run both tests
+    logToPage('Running append() test...');
+    appendTest();
+
+    logToPage('Running textContent test...');
+    textContentTest();
+  </script>
+</body>
+</html>
