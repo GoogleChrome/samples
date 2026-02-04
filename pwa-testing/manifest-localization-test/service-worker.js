@@ -1,11 +1,13 @@
 const CACHE_NAME = 'manifest-localization-test-v1';
-const MANIFEST_URL = '/manifest.json';
+const MANIFEST_URL = './manifest.json';
 
 // Files to cache
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  './',
+  './index.html',
+  './manifest.json',
+  './style.css',
+  './main.js'
 ];
 
 // Install event - cache files
@@ -43,7 +45,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   
   // Special handling for manifest.json
-  if (url.pathname === MANIFEST_URL) {
+  if (url.pathname.endsWith('/manifest.json')) {
     event.respondWith(
       caches.match(event.request)
         .then((cachedResponse) => {

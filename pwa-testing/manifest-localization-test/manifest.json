@@ -2,7 +2,7 @@
   "name": "Manifest Localization Test App",
   "short_name": "Localization Test",
   "description": "A Progressive Web App for testing manifest localization capabilities",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196f3",
@@ -33,7 +33,7 @@
       "name": "Open Home",
       "short_name": "Home",
       "description": "Navigate to home page",
-      "url": "/",
+      "url": "./",
       "icons": [
         {
           "src": "./icons/icon-128.png",
@@ -87,7 +87,7 @@
         "name": "Startseite öffnen",
         "short_name": "Startseite",
         "description": "Zur Startseite navigieren",
-        "url": "/",
+        "url": "./",
         "icons": [
           {
             "src": "./icons/localized_icons/de/icon-128.png",
@@ -102,7 +102,7 @@
         "name": "فتح الصفحة الرئيسية",
         "short_name": "الرئيسية",
         "description": "الانتقال إلى الصفحة الرئيسية",
-        "url": "/",
+        "url": "./",
         "icons": [
           {
             "src": "./icons/localized_icons/ar/icon-128.png",
