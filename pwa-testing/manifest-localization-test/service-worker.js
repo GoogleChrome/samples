@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manifest-localization-test-v1';
+const CACHE_NAME = 'manifest-localization-test-v2';
 const MANIFEST_URL = './manifest.json';
 
 // Files to cache
