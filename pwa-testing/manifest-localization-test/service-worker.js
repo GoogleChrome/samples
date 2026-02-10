@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manifest-localization-test-v1';
+const CACHE_NAME = 'manifest-localization-test-v2';
 const MANIFEST_URL = './manifest.json';
 
 // Files to cache
@@ -7,7 +7,15 @@ const urlsToCache = [
   './index.html',
   './manifest.json',
   './style.css',
-  './main.js'
+  './main.js',
+  './icons/icon-128.png',
+  './icons/icon-192.png',
+  './icons/icon-256.png',
+  './icons/icon-512.png',
+  './icons/localized_icons/ar/icon-128.png',
+  './icons/localized_icons/ar/icon-256.png',
+  './icons/localized_icons/de/icon-128.png',
+  './icons/localized_icons/de/icon-256.png'
 ];
 
 // Install event - cache files
