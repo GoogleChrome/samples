@@ -2,12 +2,11 @@
 layout: none
 ---
 {
-  "name": "PWA Demo New App",
-  "short_name": "New App",
+  "name": "PWA Demo Old Forced App",
+  "short_name": "Old Forced App",
   "description":
     "This is an 'old' app that the developer wants to migrate to a new same-site origin or same-origin id.",
-  "id": "{{site.url}}/pwa-migration/migrate_from/",
-  "behavior: "forced",
+  "id": "{{site.url}}/pwa-migration/migrate_from_forced/",
   "start_url": "index.html",
   "display": "standalone",
   "scope": "./",
