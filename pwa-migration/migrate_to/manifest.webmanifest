@@ -24,7 +24,7 @@ layout: none
     },
     {
       "id": "{{site.url}}/pwa-migration/migrate_from_forced/",
-      "install_url": "{{site.url}}/pwa-migration/migrate_from_forced/index.html"
+      "install_url": "{{site.url}}/pwa-migration/migrate_from_forced/index.html",
       "behavior": "forced"
     }
   ]
