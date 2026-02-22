@@ -10,7 +10,7 @@
     "fastify": "^4.21.0",
     "handlebars": "^4.7.8",
     "@fastify/formbody": "^7.4.0",
-    "@fastify/static": "^6.10.2",
+    "@fastify/static": "^9.0.0",
     "@fastify/view": "^8.0.0"
   },
   "license": "MIT",
