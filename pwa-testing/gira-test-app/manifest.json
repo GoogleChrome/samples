@@ -1,0 +1,37 @@
+{
+  "name": "getInstalledRelatedApps() API Test",
+  "short_name": "gIRA Test App",
+  "description": "Detect if your app is already installed on the user's device using the getInstalledRelatedApps API.",
+  "start_url": "./",
+  "id": "/samples/pwa-testing/gira-test-app/",
+  "display": "standalone",
+  "background_color": "#c4b5fd",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "./icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "./icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "id": "/samples/pwa-testing/gira-test-app/",
+      "url": "https://googlechrome.github.io/samples/pwa-testing/gira-test-app/"
+    },
+    {
+      "platform": "play",
+      "id": "com.example.gira"
+    },
+    {
+      "platform": "windows",
+      "id": "GiraApp_1a2b3c4d5e6f7!App"
+    }
+  ]
+}
