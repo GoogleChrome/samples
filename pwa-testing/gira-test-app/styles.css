@@ -1,0 +1,367 @@
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #e0c3fc 0%, #c4b5fd 25%, #a78bfa 50%, #c4b5fd 75%, #e0c3fc 100%);
+  color: #1e293b;
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+/* === In-card hero title === */
+.section-hero-title {
+  font-family: "Cascadia Code", "Fira Code", "SF Mono", Consolas, monospace;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: .25rem;
+  text-align: center;
+}
+
+.section-hero-subtitle {
+  color: #475569;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 1rem 0;
+}
+
+/* === Main container === */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 2rem 1rem;
+}
+
+/* === Section cards === */
+.section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.06);
+  transition: box-shadow .2s, transform .2s;
+}
+
+.section:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-1px);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .1rem;
+}
+
+.section-title .emoji {
+  font-size: 1.1rem;
+  margin-right: .35rem;
+}
+
+.section p {
+  font-size: .95rem;
+  color: #334155;
+  margin-bottom: .5rem;
+}
+
+/* === Sub-sections within a card === */
+.sub-section {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sub-section:first-child {
+  padding-top: 0;
+}
+
+.sub-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* === Code blocks === */
+pre {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  color: #e2e8f0;
+  padding: 1.15rem 1.35rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: .85rem;
+  line-height: 1.6;
+  margin-top: .65rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+code {
+  font-family: "Cascadia Code", "Fira Code", "SF Mono", Consolas, monospace;
+}
+
+.code-inline {
+  background: #f1f5f9;
+  padding: .15rem .5rem;
+  border-radius: 5px;
+  font-family: "Cascadia Code", "Fira Code", "SF Mono", Consolas, monospace;
+  font-size: .84rem;
+  color: #6366f1;
+  border: 1px solid #e2e8f0;
+}
+
+/* === Collapsible details === */
+details {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: .75rem;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+
+details:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: #4f46e5;
+  padding: 1rem 1.35rem;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  transition: background .15s;
+}
+
+details summary::before {
+  content: "▸";
+  font-size: .9rem;
+  font-weight: 700;
+  transition: transform .25s ease;
+  color: #6366f1;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary:hover {
+  background: #faf5ff;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* === Supported-on banner === */
+.supported-banner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  background: linear-gradient(135deg, #faf5ff, #eff6ff, #f0fdf4);
+  padding: .65rem 1.35rem;
+  font-size: .82rem;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.supported-banner .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .2rem .65rem;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+.supported-banner .badge {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.supported-banner .badge.green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.supported-banner .badge.amber {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* === Info sections inside details === */
+.info-section {
+  padding: 1rem 1.35rem 1.5rem;
+}
+
+.info-section h4 {
+  color: #1e293b;
+  font-size: .95rem;
+  margin: 1.25rem 0 .4rem;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.info-section h4:first-child {
+  margin-top: .25rem;
+}
+
+.info-section p,
+.info-section li {
+  font-size: .875rem;
+  color: #334155;
+  margin-bottom: .4rem;
+}
+
+.info-section ul {
+  list-style: disc;
+  margin-left: 1.25rem;
+  margin-bottom: .75rem;
+}
+
+.info-section ol {
+  margin-left: 1.25rem;
+  margin-bottom: .75rem;
+}
+
+.info-section ol li {
+  margin-bottom: .25rem;
+}
+
+.info-section a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.info-section a:hover {
+  text-decoration: underline;
+  color: #4f46e5;
+}
+
+/* === Tables === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: .75rem 0;
+  font-size: .85rem;
+}
+
+th, td {
+  text-align: left;
+  padding: .55rem .75rem;
+  border: 1px solid #e2e8f0;
+}
+
+th {
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+td {
+  color: #334155;
+}
+
+/* === Live demo section === */
+.demo-section {
+  background: linear-gradient(135deg, #fff 0%, #faf5ff 100%);
+  border: 1px solid #e9d5ff;
+}
+
+.demo-section .section-title {
+  text-align: left;
+}
+
+.demo-section p {
+  text-align: left;
+}
+
+/* === Install button === */
+#install.hidden { display: none; }
+
+#install {
+  text-align: center;
+}
+
+#butInstall {
+  background: linear-gradient(135deg, #3b82f6, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  padding: .75rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: .95rem;
+  font-weight: 600;
+  transition: all .25s;
+  margin: 1.25rem auto;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(99,102,241,.3);
+}
+
+#butInstall:hover {
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #7c3aed);
+  box-shadow: 0 4px 16px rgba(99,102,241,.4);
+  transform: translateY(-1px);
+}
+
+/* === GIRA result area === */
+.result-box {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.15rem 1.35rem;
+  margin-top: 1.25rem;
+  text-align: left;
+}
+
+.result-box .status-label {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: .9rem;
+}
+
+#giraStatus {
+  display: inline-block;
+  padding: .1rem .55rem;
+  border-radius: 4px;
+  background: transparent;
+  color: #16a34a;
+  font-family: "Cascadia Code", "Fira Code", "SF Mono", Consolas, monospace;
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.result-box pre {
+  margin-top: .65rem;
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #64748b;
+  font-size: .8rem;
+  letter-spacing: .01em;
+}

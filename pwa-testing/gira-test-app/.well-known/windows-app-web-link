@@ -1,0 +1,7 @@
+[
+  {
+    "_comment": "Example Entry: Maps a Windows UWP app to this website for getInstalledRelatedApps() verification. 'packageFamilyName' is the UWP app's package family name, 'paths' defines which URL paths the app can handle ('*' means all).",
+    "packageFamilyName": "GiraApp_1a2b3c4d5e6f7",
+    "paths": ["*"]
+  }
+]
