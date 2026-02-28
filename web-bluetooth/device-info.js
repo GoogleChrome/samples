@@ -1,4 +1,4 @@
-function onButtonClick() {
+function onFormSubmit() {
   let filters = [];
 
   let filterService = document.querySelector('#service').value;

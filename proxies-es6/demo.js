@@ -3,7 +3,7 @@
 // Proxying a normal object
 var target = {};
 var handler = {
-  get(target, property, receiver) { // eslint-disable-line no-unused-vars
+  get(target, property, receiver) {
     return `Hello, ${property}!`;
   }
 };
