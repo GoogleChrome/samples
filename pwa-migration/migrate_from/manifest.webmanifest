@@ -19,6 +19,6 @@ layout: none
   ],
   "migrate_to": {
     "id": "{{site.url}}/pwa-migration/migrate_to/",
-    "install_url": "{{site.url}}/pwa-migration/migrate_to/index.html"
+    "install_url": "{{site.url}}/samples/pwa-migration/migrate_to/index.html"
   }
 }
