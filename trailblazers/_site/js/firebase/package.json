@@ -453,7 +453,7 @@
     "@firebase/util": "1.14.0"
   },
   "devDependencies": {
-    "rollup": "2.79.2",
+    "rollup": "2.80.0",
     "@rollup/plugin-commonjs": "21.1.0",
     "@rollup/plugin-node-resolve": "16.0.0",
     "rollup-plugin-sourcemaps": "0.6.3",
