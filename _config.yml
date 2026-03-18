@@ -1,5 +1,4 @@
 encoding: utf-8
-exclude: [vendor]
 gh_pages_url_prefix: https://googlechrome.github.io/samples
 gh_url_prefix: https://github.com/googlechrome/samples/blob/gh-pages
 plugins:
@@ -11,14 +10,16 @@ defaults:
     values:
       layout: "default"
 exclude:
+  - vendor
   - package.json
+  - package-lock.json
   - README.md
   - node_modules
   - Gemfile
-  - vendor
-  - trailblazers/content/
-  - trailblazers/public/
-  - trailblazers/eleventy.config.js
-  - trailblazers/package.json
-  - trailblazers/package-lock.json
+  - Gemfile.lock
+  - .jekyll-metadata
+  - .travis.yml
+  - .eslintignore
+  - .eslintrc
+  - trailblazers/
 include: ['.well-known']
