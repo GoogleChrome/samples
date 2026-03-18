@@ -17,4 +17,6 @@ exclude:
   - Gemfile
   - vendor
   - trailblazers/
-include: ['.well-known']
+include:
+  - .well-known
+  - trailblazers/_site/
