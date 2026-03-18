@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0e7ff"/>
+      <stop offset="100%" style="stop-color:#c7d2fe"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="192" height="192" rx="40" fill="url(#bg)"/>
+  
+  <!-- Phone body -->
+  <rect x="58" y="32" width="76" height="120" rx="12" fill="url(#phone)" opacity="0.95"/>
+  <rect x="64" y="44" width="64" height="88" rx="4" fill="#6366f1" opacity="0.15"/>
+  
+  <!-- Screen notch -->
+  <rect x="82" y="36" width="28" height="4" rx="2" fill="#6366f1" opacity="0.3"/>
+  
+  <!-- App grid on screen -->
+  <rect x="70" y="52" width="16" height="16" rx="4" fill="#34d399" opacity="0.9"/>
+  <rect x="70" y="52" width="16" height="16" rx="4" fill="#34d399"/>
+  <rect x="92" y="52" width="16" height="16" rx="4" fill="#fb923c"/>
+  <rect x="114" y="52" width="16" height="16" rx="4" fill="#f472b6"/>
+  
+  <rect x="70" y="74" width="16" height="16" rx="4" fill="#60a5fa"/>
+  <rect x="92" y="74" width="16" height="16" rx="4" fill="#a78bfa"/>
+  <rect x="114" y="74" width="16" height="16" rx="4" fill="#fbbf24"/>
+  
+  <rect x="70" y="96" width="16" height="16" rx="4" fill="#f87171"/>
+  <rect x="92" y="96" width="16" height="16" rx="4" fill="#2dd4bf"/>
+  <rect x="114" y="96" width="16" height="16" rx="4" fill="#818cf8"/>
+  
+  <!-- Home button -->
+  <circle cx="96" cy="142" r="5" fill="#6366f1" opacity="0.3"/>
+  
+  <!-- Checkmark badge -->
+  <circle cx="138" cy="46" r="22" fill="#10b981"/>
+  <circle cx="138" cy="46" r="19" fill="#34d399"/>
+  <path d="M128 46 L135 53 L149 39" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Sparkles -->
+  <circle cx="42" cy="56" r="3" fill="white" opacity="0.6"/>
+  <circle cx="150" cy="130" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="36" cy="140" r="2" fill="white" opacity="0.4"/>
+  <circle cx="160" cy="80" r="2" fill="white" opacity="0.3"/>
+</svg>

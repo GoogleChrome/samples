@@ -1,0 +1,384 @@
+/* === Reset === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, rgb(224, 195, 252) 0%, rgb(196, 181, 253) 25%, rgb(167, 139, 250) 50%, rgb(196, 181, 253) 75%, rgb(224, 195, 252) 100%);
+  color: rgb(30, 41, 59);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* === In-card hero title === */
+.hero-title-wrapper {
+  text-align: center;
+}
+
+.section-hero-title {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, rgb(59, 130, 246), rgb(99, 102, 241), rgb(139, 92, 246));
+  background-clip: text;
+  display: inline-block;
+  font-family: 'Cascadia Code', 'Fira Code', 'SF Mono', Consolas, monospace;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: .25rem;
+  text-align: center;
+}
+
+.section-hero-subtitle {
+  color: rgb(71, 85, 105);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid rgb(226, 232, 240);
+  margin: 1rem 0;
+}
+
+/* === Main container === */
+main {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 2rem 2rem 1rem;
+}
+
+/* === Section cards === */
+.section {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .06);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .04), 0 4px 16px rgba(0, 0, 0, .06);
+  margin-bottom: 1.5rem;
+  padding: 1.75rem 2rem;
+  transition: box-shadow 200ms, transform 200ms;
+}
+
+.section:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .06), 0 8px 24px rgba(0, 0, 0, .08);
+  transform: translateY(-1px);
+}
+
+.section-title {
+  align-items: center;
+  color: rgb(30, 41, 59);
+  display: flex;
+  font-size: 1.25rem;
+  font-weight: 700;
+  gap: .1rem;
+  margin-bottom: .75rem;
+}
+
+.section-title .emoji {
+  font-size: 1.1rem;
+  margin-right: .35rem;
+}
+
+.section p {
+  color: rgb(51, 65, 85);
+  font-size: .95rem;
+  margin-bottom: .5rem;
+}
+
+/* === Sub-sections within a card === */
+.sub-section {
+  border-bottom: 1px solid rgb(226, 232, 240);
+  padding: 1.5rem 0;
+}
+
+.sub-section:first-child {
+  padding-top: 0;
+}
+
+.sub-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* === Code blocks === */
+pre {
+  background: linear-gradient(145deg, rgb(30, 41, 59), rgb(15, 23, 42));
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-radius: 12px;
+  color: rgb(226, 232, 240);
+  font-size: .85rem;
+  line-height: 1.6;
+  margin-top: .65rem;
+  overflow-x: auto;
+  padding: 1.15rem 1.35rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  font-family: 'Cascadia Code', 'Fira Code', 'SF Mono', Consolas, monospace;
+}
+
+.code-inline {
+  background: rgb(241, 245, 249);
+  border: 1px solid rgb(226, 232, 240);
+  border-radius: 5px;
+  color: rgb(99, 102, 241);
+  font-family: 'Cascadia Code', 'Fira Code', 'SF Mono', Consolas, monospace;
+  font-size: .84rem;
+  padding: .15rem .5rem;
+}
+
+/* === Collapsible details === */
+details {
+  background: white;
+  border: 1px solid rgb(226, 232, 240);
+  border-radius: 12px;
+  margin-bottom: .75rem;
+  overflow: hidden;
+  transition: box-shadow 200ms;
+}
+
+details:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+details summary {
+  align-items: center;
+  color: rgb(79, 70, 229);
+  cursor: pointer;
+  display: flex;
+  font-size: .95rem;
+  font-weight: 600;
+  gap: .5rem;
+  list-style: none;
+  padding: 1rem 1.35rem;
+  transition: background 150ms;
+  user-select: none;
+}
+
+details summary::before {
+  color: rgb(99, 102, 241);
+  content: '\25B8';
+  font-size: .9rem;
+  font-weight: 700;
+  transition: transform 250ms ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary:hover {
+  background: rgb(250, 245, 255);
+}
+
+details[open] summary {
+  border-bottom: 1px solid rgb(241, 245, 249);
+}
+
+/* === Supported-on banner === */
+.supported-banner {
+  align-items: center;
+  background: linear-gradient(135deg, rgb(250, 245, 255), rgb(239, 246, 255), rgb(240, 253, 244));
+  border-bottom: 1px solid rgb(241, 245, 249);
+  color: rgb(55, 65, 81);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .82rem;
+  font-weight: 600;
+  gap: .5rem;
+  padding: .65rem 1.35rem;
+}
+
+.supported-banner .badge {
+  align-items: center;
+  background: rgb(237, 233, 254);
+  border-radius: 20px;
+  color: rgb(91, 33, 182);
+  display: inline-flex;
+  font-size: .75rem;
+  font-weight: 600;
+  gap: .25rem;
+  letter-spacing: .01em;
+  padding: .2rem .65rem;
+}
+
+.supported-banner .badge.green {
+  background: rgb(220, 252, 231);
+  color: rgb(22, 101, 52);
+}
+
+.supported-banner .badge.amber {
+  background: rgb(254, 243, 199);
+  color: rgb(146, 64, 14);
+}
+
+/* === Info sections inside details === */
+.info-section {
+  padding: 1rem 1.35rem 1.5rem;
+}
+
+.info-section h4 {
+  border-bottom: 1px solid rgb(241, 245, 249);
+  color: rgb(30, 41, 59);
+  font-size: .95rem;
+  margin: 1.25rem 0 .4rem;
+  padding-bottom: .25rem;
+}
+
+.info-section h4:first-child {
+  margin-top: .25rem;
+}
+
+.info-section p,
+.info-section li {
+  color: rgb(51, 65, 85);
+  font-size: .875rem;
+  margin-bottom: .4rem;
+}
+
+.info-section ul {
+  list-style: disc;
+  margin-bottom: .75rem;
+  margin-left: 1.25rem;
+}
+
+.info-section ol {
+  margin-bottom: .75rem;
+  margin-left: 1.25rem;
+}
+
+.info-section ol li {
+  margin-bottom: .25rem;
+}
+
+.info-section a {
+  color: rgb(99, 102, 241);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.info-section a:hover {
+  color: rgb(79, 70, 229);
+  text-decoration: underline;
+}
+
+/* === Tables === */
+table {
+  border-collapse: collapse;
+  font-size: .85rem;
+  margin: .75rem 0;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid rgb(226, 232, 240);
+  padding: .55rem .75rem;
+  text-align: left;
+}
+
+th {
+  background: rgb(241, 245, 249);
+  color: rgb(30, 41, 59);
+  font-weight: 600;
+}
+
+td {
+  color: rgb(51, 65, 85);
+}
+
+/* === Live demo section === */
+.demo-section {
+  background: linear-gradient(135deg, white 0%, rgb(250, 245, 255) 100%);
+  border: 1px solid rgb(233, 213, 255);
+}
+
+.demo-section .section-title {
+  text-align: left;
+}
+
+.demo-section p {
+  text-align: left;
+}
+
+/* === Install button === */
+#install.hidden {
+  display: none;
+}
+
+#install {
+  text-align: center;
+}
+
+#but-install {
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(99, 102, 241), rgb(139, 92, 246));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, .3);
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .95rem;
+  font-weight: 600;
+  margin: 1.25rem auto;
+  padding: .75rem 2rem;
+  transition: all 250ms;
+}
+
+#but-install:hover {
+  background: linear-gradient(135deg, rgb(37, 99, 235), rgb(79, 70, 229), rgb(124, 58, 237));
+  box-shadow: 0 4px 16px rgba(99, 102, 241, .4);
+  transform: translateY(-1px);
+}
+
+/* === GIRA result area === */
+.result-box {
+  background: white;
+  border: 1px solid rgb(226, 232, 240);
+  border-radius: 12px;
+  margin-top: 1.25rem;
+  padding: 1.15rem 1.35rem;
+  text-align: left;
+}
+
+.result-box .status-label {
+  color: rgb(30, 41, 59);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+#gira-status {
+  background: transparent;
+  border-radius: 4px;
+  color: rgb(22, 163, 74);
+  display: inline-block;
+  font-family: 'Cascadia Code', 'Fira Code', 'SF Mono', Consolas, monospace;
+  font-size: .875rem;
+  font-weight: 600;
+  padding: .1rem .55rem;
+}
+
+.result-box pre {
+  margin-top: .65rem;
+}
+
+/* === Footer === */
+footer {
+  color: rgb(100, 116, 139);
+  font-size: .8rem;
+  letter-spacing: .01em;
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
