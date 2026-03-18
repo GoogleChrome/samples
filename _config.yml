@@ -21,6 +21,4 @@ exclude:
   - trailblazers/eleventy.config.js
   - trailblazers/package.json
   - trailblazers/package-lock.json
-include:
-  - .well-known
-  - trailblazers/_site/
+include: ['.well-known']
