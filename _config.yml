@@ -16,4 +16,5 @@ exclude:
   - node_modules
   - Gemfile
   - vendor
+  - trailblazers/
 include: ['.well-known']
