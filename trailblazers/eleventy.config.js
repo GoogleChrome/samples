@@ -110,7 +110,7 @@ export default async function (eleventyConfig) {
     eleventyConfig.addPlugin(feedPlugin, {
       type: 'atom',
       outputPath: `/${lang}/feed/feed.xml`,
-      stylesheet: '/feed/pretty-atom-feed.xsl',
+      stylesheet: '/samples/trailblazers/dist/feed/pretty-atom-feed.xsl',
       templateData: {
         locale: lang,
         eleventyNavigation: {

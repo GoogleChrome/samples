@@ -6,8 +6,8 @@
 		<title>{% if translations[title][locale] %}{{ title | i18n({ tag: tag }, locale) }}{% else %}{{ title or metadata.title }}{% endif %}</title>
 		<meta name="description" content="{{ description or metadata.description }}">
 		<meta name="color-scheme" content="light dark">
-		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-		<link rel="icon" type="image/svg+xml" href="/blog/create/icon.svg">
+		<link rel="alternate" href="{{ ('/' + locale + '/feed/feed.xml') | url }}" type="application/atom+xml" title="{{ metadata.title }}">
+		<link rel="icon" type="image/svg+xml" href="{{ '/blog/create/icon.svg' | url }}">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -50,8 +50,8 @@
 
 		<header class="site-header hero-header">
 			<div class="header-content">
-				<a href="/{{ locale }}/" class="logo">
-					<img src="/img/logo.png" alt="trAIlblazers Travel Blog" class="logo-image">
+				<a href="{{ ('/' + locale + '/') | url }}" class="logo">
+					<img src="{{ '/img/logo.png' | url }}" alt="trAIlblazers Travel Blog" class="logo-image">
 				</a>
 
 				<nav>
@@ -78,9 +78,9 @@
 				<p>&copy; 2026 trAIlblazers Travel Blog. All rights reserved.</p>
 				<p>Travel tales by <strong>Maya, Ashok, and Julia</strong>.</p>
 				<nav class="footer-nav">
-					<a href="/{{ locale }}/about/">{{ 'about' | i18n({}, locale) }}</a> | 
-					<a href="/{{ locale }}/imprint/">{{ 'imprint' | i18n({}, locale) }}</a> | 
-					<a href="/{{ locale }}/privacy/">{{ 'privacy' | i18n({}, locale) }}</a>
+					<a href="{{ ('/' + locale + '/about/') | url }}">{{ 'about' | i18n({}, locale) }}</a> | 
+					<a href="{{ ('/' + locale + '/imprint/') | url }}">{{ 'imprint' | i18n({}, locale) }}</a> | 
+					<a href="{{ ('/' + locale + '/privacy/') | url }}">{{ 'privacy' | i18n({}, locale) }}</a>
 				</nav>
 			</div>
 			<hr>
@@ -88,7 +88,7 @@
 				<label for="lang-switcher">{{ 'language' | i18n({}, locale) }}:</label>
 				<select id="lang-switcher" onchange="location = this.value;">
 					{% for l in [ "en", "es", "ja" ] %}
-					<option value="{{ page.url | translateUrl(l) }}" {% if locale == l %}selected{% endif %}>
+					<option value="{{ page.url | translateUrl(l) | url }}" {% if locale == l %}selected{% endif %}>
 						{% if l == 'en' %}English{% elif l == 'es' %}Español{% elif l == 'ja' %}日本語{% else %}{{ l | upper }}{% endif %}
 					</option>
 					{% endfor %}

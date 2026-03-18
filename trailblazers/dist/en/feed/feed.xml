@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="/feed/pretty-atom-feed.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/samples/trailblazers/dist/feed/pretty-atom-feed.xsl" type="text/xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <title>Posts - trAIlblazers</title>
   <subtitle>Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.</subtitle>
