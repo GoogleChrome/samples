@@ -234,7 +234,7 @@ a[href]:hover {
 
 /* Integrated Header Hero */
 .hero-header {
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url('/img/hero.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url('/samples/trailblazers/dist/img/hero.jpg');
   background-size: cover;
   background-position: center;
   min-height: 220px;
