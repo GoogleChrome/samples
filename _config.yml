@@ -21,7 +21,17 @@ exclude:
   - .travis.yml
   - .eslintignore
   - .eslintrc
-  - trailblazers/
+  - trailblazers/README.md
+  - trailblazers/AGENTS.md
+  - trailblazers/SKILL.md
+  - trailblazers/content/
+  - trailblazers/public/
+  - trailblazers/_data/
+  - trailblazers/_includes/
+  - trailblazers/_config/
+  - trailblazers/eleventy.config.js
+  - trailblazers/package.json
+  - trailblazers/package-lock.json
 include:
   - .well-known
   - trailblazers/dist/
