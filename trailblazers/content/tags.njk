@@ -1,0 +1,22 @@
+---js
+const pagination = {
+	data: "locales",
+	size: 1,
+	alias: "locale",
+	addAllPagesToCollections: true
+};
+
+const eleventyComputed = {
+	title: "tags",
+	permalink: data => `/${data.locale}/tags/index.html`
+};
+---
+<h1>{{ 'tags' | i18n({}, locale) }}</h1>
+
+<div class="tags tags-landing">
+{% for tag in collections | filterTagsByLocale(locale) | sortByPostCount(collections, locale) %}
+	{% set tagUrl %}/{{ locale }}/tags/{{ tag | slugifyTag }}/{% endset %}
+	{% set count = tag | getTagCount(collections, locale) %}
+	<a href="{{ tagUrl }}" class="post-tag">{{ tag }} <span class="tag-count">({{ count }})</span></a>
+{% endfor %}
+</div>

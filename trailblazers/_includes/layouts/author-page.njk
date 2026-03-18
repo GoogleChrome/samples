@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+---
+<div class="author-page-header">
+	<img src="{{ authors[item.author].avatar }}" alt="{{ authors[item.author].name }}" class="author-page-avatar">
+	<div class="author-page-info">
+		<h1>{{ authors[item.author].name }}</h1>
+		<p class="author-page-bio">{{ authors[item.author].bio[locale] }}</p>
+	</div>
+</div>
+
+<hr>
+
+<h2>{{ 'posts_by' | i18n({}, locale) }} {{ authors[item.author].name }}</h2>
+
+{% set authorPosts = collections['posts_' + locale] | filterAuthor(item.author) %}
+{% set postslist = authorPosts %}
+{% include "postslist.njk" %}

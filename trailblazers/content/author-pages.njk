@@ -1,0 +1,23 @@
+---js
+const pagination = {
+	data: "collections.authorLocaleCombos",
+	size: 1,
+	alias: "item",
+};
+
+const eleventyExcludeFromCollections = true;
+
+const eleventyComputed = {
+	author_id: data => data.item.author,
+	locale: data => data.item.locale,
+	title: data => data.authors[data.item.author].name,
+	permalink: function(data) {
+		if (!data.item || !data.item.author || !data.item.locale) {
+			return false;
+		}
+		return `/${data.item.locale}/authors/${data.item.author}/`;
+	}
+};
+
+const layout = "layouts/author-page.njk";
+---

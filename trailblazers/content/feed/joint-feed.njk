@@ -1,0 +1,31 @@
+---
+permalink: /feed/feed.xml
+eleventyExcludeFromCollections: true
+layout: false
+locale: en
+---
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/feed/pretty-atom-feed.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Joint Feed - {{ metadata.title }}</title>
+  <subtitle>{{ metadata.description }}</subtitle>
+  <link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self" />
+  <link href="{{ metadata.base }}" />
+  <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ metadata.base }}</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    {% if metadata.author.email %}<email>{{ metadata.author.email }}</email>{% endif %}
+  </author>
+  {%- for post in collections.posts | reverse | head(10) %}
+  {%- set absolutePostUrl %}{{ post.url | htmlBaseUrl(metadata.base) }}{% endset %}
+  {%- set postLocale = post.data.locale or post.url.split('/')[1] or 'en' %}
+  <entry xml:lang="{{ postLocale }}">
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absolutePostUrl }}" />
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <content type="html">{{ post.content | renderTransforms(post.data.page, metadata.base) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

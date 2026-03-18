@@ -1,0 +1,22 @@
+---
+locale: es
+title: home
+eleventyNavigation:
+  key: Home-es
+  title: home
+  order: 1
+permalink: /es/index.html
+numberOfLatestPostsToShow: 4
+---
+{% set postsCount = collections.posts | filterByLocale(locale) | length %}
+{% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
+<h1>{{ 'latest_posts' | plural(latestPostsCount, locale) }}</h1>
+
+{% set postslist = collections.posts | filterByLocale(locale) | head(-1 * numberOfLatestPostsToShow) %}
+{% set postslistCounter = postsCount %}
+{% include "postslist.njk" %}
+
+{% set morePosts = postsCount - numberOfLatestPostsToShow %}
+{% if morePosts > 0 %}
+<p>{{ 'more_posts' | plural(morePosts, locale) | safe }}</p>
+{% endif %}

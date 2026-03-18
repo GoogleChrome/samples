@@ -1,0 +1,137 @@
+---
+locale: en
+title: about
+eleventyNavigation:
+  key: About-en
+  title: about
+  order: 3
+permalink: /en/about/index.html
+---
+<h1>Meet the team</h1>
+
+<p class="about-hero-text">We are a passionate team of explorers, historians, and storytellers dedicated to uncovering the world's most breathtaking wonders.</p>
+
+<div class="centered-logo-wrapper">
+	<img src="/img/logo.png" alt="trAIlblazers Logo" class="large-centered-logo">
+</div>
+
+<section class="authors-grid">
+	{% for key, author in authors %}
+	<div class="author-card">
+		<div class="author-card-avatar-wrapper">
+			<img src="{{ author.avatar }}" alt="{{ author.name }}" class="author-card-avatar">
+		</div>
+		<div class="author-card-content">
+			<h2>{{ author.name }}</h2>
+			<p>{{ author.bio[locale] }}</p>
+			<a href="/{{ locale }}/authors/{{ key }}/" class="author-archive-link">{{ 'posts_by' | i18n({}, locale) }} {{ author.name }} &rarr;</a>
+		</div>
+	</div>
+	{% endfor %}
+</section>
+
+<style>
+.about-hero-text {
+	text-align: center;
+	font-size: 1.25rem;
+	max-width: 800px;
+	margin: 0 auto 2rem; /* Reduced margin to bring logo closer */
+	color: var(--color-text);
+	opacity: 0.8;
+}
+
+.centered-logo-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 5rem;
+}
+
+.large-centered-logo {
+	width: 220px;
+	height: 220px;
+	object-fit: contain;
+	border-radius: 50%;
+	box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+	border: 5px solid var(--color-secondary);
+	transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.large-centered-logo:hover {
+	transform: scale(1.05) rotate(3deg);
+}
+
+.authors-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	margin-bottom: 4rem;
+}
+
+.author-card {
+	display: flex;
+	align-items: center;
+	gap: 3rem;
+	background: var(--card-bg);
+	padding: 3rem;
+	border-radius: 32px;
+	box-shadow: var(--shadow);
+	border: 1px solid var(--border-color);
+}
+
+.author-card-avatar-wrapper {
+	flex-shrink: 0;
+}
+
+.author-card-avatar {
+	width: 200px;
+	height: 200px;
+	max-width: none;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 6px solid var(--color-secondary);
+	box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.author-card-content h2 {
+	margin-top: 0;
+	border: none;
+	font-size: 2rem;
+	color: var(--color-primary);
+}
+
+.author-card-content p {
+	font-size: 1.1rem;
+	line-height: 1.6;
+}
+
+.author-archive-link {
+	display: inline-block;
+	margin-top: 1.5rem;
+	font-weight: 700;
+	color: var(--color-secondary) !important;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	font-family: var(--font-family-headings);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-size: 0.9rem;
+}
+
+.author-archive-link:hover {
+	color: var(--color-primary) !important;
+	text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+	.author-card {
+		flex-direction: column;
+		text-align: center;
+		padding: 2rem;
+	}
+	
+	.author-card-avatar {
+		width: 150px;
+		height: 150px;
+	}
+}
+</style>

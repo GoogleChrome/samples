@@ -1,0 +1,8 @@
+_site/
+node_modules/
+.cache
+
+# Built-in AI Agent instructions
+AGENTS.md
+SKILL.md
+

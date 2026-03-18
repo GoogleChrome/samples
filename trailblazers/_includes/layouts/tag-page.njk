@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+---
+<h1>{{ 'tagged' | i18n({}, locale) }} “{{ tag }}”</h1>
+
+{% set postslist = collections[ tag ] | filterByLocale(locale) %}
+{% include "postslist.njk" %}
+
+<p>{{ 'see' | i18n({}, locale) }}<a href="/{{ locale }}/tags/">{{ 'all tags' | i18n({}, locale) }}</a>.</p>

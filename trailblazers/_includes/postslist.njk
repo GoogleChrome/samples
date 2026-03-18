@@ -1,0 +1,39 @@
+<ul class="postlist">
+{%- for post in postslist | reverse %}
+	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+		<a href="{{ post.url }}" class="postlist-thumbnail-link">
+			<div class="postlist-thumbnail-container">
+				<img src="{{ post.url }}cover.jpg" alt="{{ post.data.title }}" class="postlist-thumbnail" loading="lazy">
+			</div>
+		</a>
+		<div class="postlist-content">
+			<div class="tags">
+				{%- for tag in post.data.tags | filterTagList %}
+					{%- set tagUrl %}/{{ locale }}/tags/{{ tag | slugify }}/{% endset %}
+					<a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>
+				{%- endfor %}
+			</div>
+			<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+			<a href="{{ post.url }}" class="postlist-description-link">
+				<p class="postlist-description">{{ post.data.description }}</p>
+			</a>
+			
+			<div class="postlist-footer">
+				<a href="/{{ locale }}/authors/{{ post.data.author }}/" class="postlist-author-link">
+					<div class="postlist-item-author">
+						{% if authors[post.data.author] %}
+							<img src="{{ authors[post.data.author].avatar }}" alt="{{ authors[post.data.author].name }}" class="postlist-author-avatar">
+							<span class="postlist-author-name">{{ authors[post.data.author].name }}</span>
+						{% endif %}
+					</div>
+				</a>
+				<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate(locale, { day: undefined, month: "short", year: "numeric" }) }}</time>
+			</div>
+			
+			{%- if not post.data.draft %}
+			<a href="/blog/create/?edit={{ post.inputPath | urlencode }}" class="admin-only edit-post-link btn" style="display: none;">✏️</a>
+			{%- endif %}
+		</div>
+	</li>
+{%- endfor %}
+</ul>

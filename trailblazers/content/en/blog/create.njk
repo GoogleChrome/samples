@@ -1,0 +1,302 @@
+---
+layout: layouts/create.njk
+eleventyExcludeFromCollections: true
+---
+<h1>Create Blog Post</h1>
+
+<div class="admin-only" style="display: none;">
+	<div class="editor-container">
+		<div class="editor-sidebar">
+			<div class="sidebar-header">
+				<h2>Drafts</h2>
+				<button id="new-draft-btn" class="btn" title="New Draft">+</button>
+			</div>
+			<ul id="drafts-list"></ul>
+			<div class="sidebar-actions">
+				<button id="load-draft-btn" class="btn" title="Load Draft from file system">📂 Load Draft</button>
+			</div>
+			<div class="sidebar-footer">
+				<details class="settings-details">
+					<summary>⚙️ Settings</summary>
+					<div class="settings-content">
+						<section class="settings-section">
+							<h3>GitHub Settings</h3>
+							<div class="form-group">
+								<label for="gh-token">
+									GitHub Token
+									<a href="https://github.com/settings/personal-access-tokens/new?name=Core-loop+token&description=Write%20code%20and%20push%20it%20to%20main%21&contents=write&pull_requests=write" target="_blank" rel="noopener" class="help-icon" title="How to get a GitHub Token">ⓘ</a>
+								</label>
+								<input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx">
+							</div>
+							<div class="form-group">
+								<label for="gh-owner">GitHub Username</label>
+								<input type="text" id="gh-owner" placeholder="username">
+							</div>
+							<div class="form-group">
+								<label for="gh-repo">Your Blog's Repository</label>
+								<input type="text" id="gh-repo" placeholder="my-blog">
+							</div>
+						</section>
+
+						<hr>
+
+						<section class="settings-section">
+							<h3>AI Features</h3>
+							<label class="ai-toggle-label">
+								✨ Use AI Features
+								<input type="checkbox" switch id="ai-features-toggle">
+							</label>
+
+							<div id="ai-keys-section" style="display: none;">
+								<div class="form-group ai-backend-group">
+									<label for="ai-backend">AI Backend</label>
+									<select id="ai-backend">
+										<option value="gemini-api">Gemini API</option>
+										<option value="openai">OpenAI</option>
+										<option value="firebase">Firebase AI Logic</option>
+										<option value="transformers-js">Transformers.js</option>
+									</select>
+								</div>
+
+								<!-- Shared: API Key & Model Name -->
+								<div class="ai-backend-fields" data-backend="gemini-api openai firebase" style="display: none;">
+									<div class="form-group">
+										<label for="ai-api-key">API Key</label>
+										<input type="password" id="ai-api-key" placeholder="AIzaSy... / sk-...">
+									</div>
+								</div>
+								<div class="ai-backend-fields" data-backend="gemini-api openai firebase transformers-js" style="display: none;">
+									<div class="form-group">
+										<label for="ai-model-name">Model Name</label>
+										<input type="text" id="ai-model-name" placeholder="Default or custom">
+									</div>
+								</div>
+
+								<!-- Firebase Specific Fields -->
+								<div class="ai-backend-fields" data-backend="firebase" style="display: none;">
+									<div class="form-group">
+										<label for="ai-project-id">Project ID</label>
+										<input type="text" id="ai-project-id" placeholder="your-project-id">
+									</div>
+									<div class="form-group">
+										<label for="ai-app-id">App ID</label>
+										<input type="text" id="ai-app-id" placeholder="1:234567890:web:abcdef">
+									</div>
+									<div class="form-group">
+										<label for="ai-gemini-api-provider">API Provider</label>
+										<select id="ai-gemini-api-provider">
+											<option value="developer">Developer</option>
+											<option value="vertex">Vertex</option>
+										</select>
+									</div>
+									<label class="ai-toggle-label">
+										Use App Check
+										<input type="checkbox" switch id="ai-use-app-check">
+									</label>
+									<div id="ai-app-check-fields" style="display: none;">
+										<div class="form-group">
+											<label for="ai-recaptcha-site-key">reCaptcha Site Key</label>
+											<input type="text" id="ai-recaptcha-site-key" placeholder="6Lc...">
+										</div>
+										<label class="ai-toggle-label">
+											Limited Use Tokens
+											<input type="checkbox" switch id="ai-use-limited-use-tokens">
+										</label>
+									</div>
+								</div>
+
+								<!-- Transformers.js Specific Fields -->
+								<div class="ai-backend-fields" data-backend="transformers-js" style="display: none;">
+									<div class="form-group">
+										<label for="ai-device">Device</label>
+										<select id="ai-device">
+											<option value="webgpu">WebGPU</option>
+											<option value="cpu">CPU</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="ai-dtype">Data Type</label>
+										<select id="ai-dtype">
+											<option value="q4f16">q4f16</option>
+											<option value="q8">q8</option>
+											<option value="f32">f32</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<hr>
+
+						<section class="settings-section">
+							<h3>Translations</h3>
+							<label class="ai-toggle-label">
+								🌐 Translate blog posts
+								<input type="checkbox" switch id="ai-translate-toggle">
+							</label>
+							<div id="ai-translation-locales-container" style="display: none; padding-left: 1.5rem;">
+								<!-- Populated dynamically -->
+							</div>
+						</section>
+
+						<hr>
+
+						<section class="settings-section">							
+							<div class="settings-file-actions">
+								<button type="button" id="save-settings-btn" class="btn" title="Save settings to a file">💾 Save Settings</button>
+								<button type="button" id="load-settings-btn" class="btn" title="Load settings from a file">📂 Load Settings</button>
+							</div>
+						</section>
+					</div>
+				</details>
+			</div>
+		</div>
+
+		<div class="editor-main">
+			<form id="post-form">
+				<div class="form-group">
+					<label for="post-title">Title</label>
+					<div class="input-with-action">
+						<input type="text" id="post-title" required placeholder="My Awesome Post">
+						<button type="button" id="ai-suggest-title-btn" class="btn ai-button" style="display: none;" title="Suggest title using AI">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="post-description">Description</label>
+					<div class="input-with-action">
+						<input type="text" id="post-description" placeholder="A brief summary of the post">
+						<button type="button" id="ai-suggest-description-btn" class="btn ai-button" style="display: none;" title="Suggest description using AI">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="post-date">Date</label>
+					<input type="date" id="post-date" required>
+				</div>
+
+				<div class="form-group">
+					<label for="tag-input">Tags</label>
+					<div class="tag-container">
+						<div id="tag-pills" class="tag-pills"></div>
+						<div class="tag-input-wrapper">
+							<input type="text" id="tag-input" placeholder="Add tag and press Enter...">
+							<button type="button" id="ai-suggest-tags-btn" class="btn ai-button" style="display: none;" title="Suggest tags using AI">✨</button>
+						</div>
+						<label class="ai-toggle-label only-existing-tags-label">
+							🏷️ Only Allow Existing Tags
+							<input type="checkbox" switch id="ai-only-existing-tags-toggle">
+						</label>
+					</div>
+					<input type="hidden" id="post-tags">
+				</div>
+
+				<div class="form-group">
+					<label for="post-content">Content (Markdown)</label>
+					<p class="field-hint">💡 You can drag and drop images directly into the editor or use the button below to place them at the current cursor position.</p>
+					<div class="editor-header-actions">
+						<button type="button" id="upload-btn" class="btn">📂 Add Images</button>
+					</div>
+					<div id="drop-zone">
+						<textarea id="post-content" rows="20" placeholder="Write your post here... Use Markdown for **bold**, *italics*, [links](url), - bullets, or ```code blocks```."></textarea>
+					</div>
+					<input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+				</div>
+
+				<div class="form-group ai-writer-section" style="display: none;">
+					<label for="ai-writer-input">Help me write</label>
+					<p class="field-hint">💡 Enter a few bullet points or a teaser, and AI will expand it into a full post.</p>
+					<div class="input-with-action">
+						<textarea id="ai-writer-input" rows="3" placeholder="- My trip to Tokyo&#10;- Visited Tsukiji market&#10;- Amazing sushi at 5am"></textarea>
+						<button type="button" id="ai-writer-btn" class="btn ai-button" style="display: none;" title="Expand into a full post">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group ai-rewriter-section" style="display: none;">
+					<label for="post-content">Rewrite content</label>
+					<p class="field-hint">💡 Refine your post content with specific tone and length. (Markdown layout is preserved)</p>
+					<p class="field-hint">💡 If you select text in the editor, only the selection will be rewritten.</p>
+					<div class="rewriter-options">
+						<div class="rewriter-option-group">
+							<label for="ai-rewriter-tone">Tone</label>
+							<select id="ai-rewriter-tone">
+								<option value="as-is">As-is</option>
+								<option value="more-formal">More Formal</option>
+								<option value="more-casual">More Casual</option>
+							</select>
+						</div>
+						<div class="rewriter-option-group">
+							<label for="ai-rewriter-length">Length</label>
+							<select id="ai-rewriter-length">
+								<option value="as-is">As-is</option>
+								<option value="shorter">Shorter</option>
+								<option value="longer">Longer</option>
+							</select>
+						</div>
+						<button type="button" id="ai-rewriter-btn" class="btn ai-button" style="display: none;" title="Rewrite content">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group ai-classifier-section" style="display: none;">
+					<label>Advertising categories</label>
+					<div class="classifier-actions">
+						<p class="field-hint">💡 This uses <a href="https://github.com/InteractiveAdvertisingBureau/Taxonomies/blob/develop/Content%20Taxonomies/Content%20Taxonomy%203.1.tsv" target="_blank" rel="noopener">IAB Content Taxonomy 3.1</a> ads categories.</p>
+						<button type="button" id="ai-classifier-btn" class="btn ai-button" style="display: none;" title="Classify content">✨</button>
+					</div>
+					<div id="ai-classifier-results" style="margin-top: 1rem;"></div>
+				</div>
+
+				<div class="form-group ai-translation-section" style="display: none;">
+					<div class="classifier-actions">
+						<label style="flex-grow: 1;">Translations</label>
+						<button type="button" id="ai-translate-all-btn" class="btn ai-button" style="display: none;" title="Translate all enabled locales">✨</button>
+					</div>
+					<p class="field-hint">💡 AI will translate your post paragraph by paragraph. Markdown structure is preserved.</p>
+					<div id="ai-translations-container"></div>
+				</div>
+
+				<div class="editor-footer-actions">
+					<div id="ai-status" style="font-size: 0.7rem; color: #666; display: none;">
+						<progress id="ai-download-progress" value="0" max="100" style="width: 100px;"></progress>
+						<span id="ai-status-text">Ready</span>
+					</div>
+				</div>
+			</form>
+
+			<div class="editor-actions">
+				<button id="copy-btn" class="btn">📋 Copy Markdown</button>
+				<button id="download-btn" class="btn">💾 Save (.zip)</button>
+				<button id="github-pr-btn" class="btn">🚀 Create PR</button>
+			</div>
+		</div>
+
+		<div class="editor-preview">			
+			<div id="preview-content" class="markdown-body"></div>
+		</div>
+	</div>
+</div>
+
+<dialog id="alert-dialog">
+	<form method="dialog">
+		<p id="alert-message"></p>
+		<div class="dialog-actions">
+			<button class="btn">OK</button>
+		</div>
+	</form>
+</dialog>
+
+<dialog id="confirm-dialog">
+	<form method="dialog">
+		<p id="confirm-message"></p>
+		<div class="dialog-actions">
+			<button value="cancel" class="btn btn-secondary">Cancel</button>
+			<button value="confirm" class="btn">Delete</button>
+		</div>
+	</form>
+</dialog>
+
+<script>
+	window.APP_LOCALES = {{ locales | dump | safe }};
+	window.DEFAULT_LOCALE = {{ metadata.language | dump | safe }};
+	window.CURRENT_LOCALE = 'en';
+</script>

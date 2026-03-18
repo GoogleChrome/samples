@@ -1,0 +1,28 @@
+---js
+const pagination = {
+	data: "collections.tagLocaleCombos",
+	size: 1,
+	alias: "item",
+};
+
+const eleventyExcludeFromCollections = true;
+
+const eleventyComputed = {
+	tag: data => data.item.tag,
+	locale: data => data.item.locale,
+	title: "tagged_tag",
+	permalink: function(data) {
+		if (!data.item || !data.item.tag || !data.item.locale) {
+			return false;
+		}
+		let slugified = this.slugify(data.item.tag);
+		if (!slugified) {
+			// Fallback for non-latin tags or empty slugs: use raw characters
+			slugified = data.item.tag.toLowerCase();
+		}
+		return `/${data.item.locale}/tags/${slugified}/`;
+	}
+};
+
+const layout = "layouts/tag-page.njk";
+---

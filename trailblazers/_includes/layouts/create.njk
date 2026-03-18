@@ -1,0 +1,133 @@
+{% extends "layouts/base.njk" %}
+
+{% block extra_nav %}
+<li class="nav-item admin-only" id="install-item" style="display: none;"><button id="install-button" class="btn">Install</button></li>
+{% endblock %}
+
+{% block head %}
+<script type="importmap" eleventy:ignore>
+{
+  "imports": {
+    "prompt-api-polyfill": "/js/prompt-api-polyfill.js",
+    "firebase/app": "/js/firebase/firebase-app.js",
+    "firebase/ai": "/js/firebase/firebase-ai.js",
+    "browser-fs-access": "/js/browser-fs-access.js",
+    "@google/genai": "/js/google-genai.js",
+    "openai": "/js/openai/index.mjs",
+    "@huggingface/transformers": "/js/huggingface-transformers/transformers.web.min.js",
+    "p-retry": "/js/helpers/p-retry-esm.js",
+    "onnxruntime-common": "/js/onnxruntime-web/ort.all.min.mjs",
+    "onnxruntime-web/webgpu": "/js/onnxruntime-web/webgpu.js",
+    "onnxruntime-web": "/js/onnxruntime-web/ort.all.min.mjs",
+    "onnxruntime-web/": "/js/onnxruntime-web/",
+    "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js": "/js/firebase/firebase-app.js"
+  }
+}
+</script>
+
+<style eleventy:ignore>
+  @keyframes hideBriefly {
+    0%,
+    100% {
+      visibility: hidden;
+    }
+  }
+
+  label:has(input[switch]),
+  input[switch] {
+    animation: hideBriefly 2s;
+  }
+</style>
+
+<noscript>
+  <style eleventy:ignore>
+    label:has(input[switch]),
+    input[switch] {
+      animation: none;
+    }
+  </style>
+</noscript>
+
+<script type="module" eleventy:ignore>
+  if (!('switch' in HTMLInputElement.prototype)) {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/js/input-switch-polyfill.css';
+    document.head.appendChild(css);
+
+    await import('/js/input-switch-polyfill.js');
+  } else {
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      `<style>label:has(input[switch]),input[switch]{animation:none;}</style>`
+    );
+  }
+</script>
+
+<link rel="stylesheet" href="/css/create-post.css">
+<link rel="stylesheet" href="/css/prism-okaidia.css">
+<link rel="manifest" href="/blog/create/manifest.json">
+
+<script src="/js/marked.js"></script>
+<script src="/js/prism.js"></script>
+<script src="/js/turndown.js"></script>
+<script src="/js/jszip.js"></script>
+
+<script type="module" src="/js/editor/create-post.js" eleventy:ignore></script>
+
+<script eleventy:ignore>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/blog/create/sw.js', { scope: '/blog/create/' });
+    });
+  }
+
+  (async () => {
+    if (
+      ('storage' in navigator && 'persist' in navigator.storage) &&
+      (matchMedia('(display-mode: standalone)').matches || navigator.standalone)
+    ) {
+      const persisted = await navigator.storage.persist();
+      console.log(`Storage persisted: ${persisted}`);
+    }
+  })();
+
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {    
+    e.preventDefault();
+    deferredPrompt = e;
+    const item = document.getElementById('install-item');
+    if (item) {
+      item.style.display = 'initial';
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const installBtn = document.getElementById('install-button');
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          deferredPrompt = null;
+          const item = document.getElementById('install-item');
+          if (item) item.style.display = 'none';
+        }
+      });
+    }
+
+    window.addEventListener('appinstalled', async () => {
+      const item = document.getElementById('install-item');
+      if (item) {
+        item.style.display = 'none';
+      }
+      if ('storage' in navigator && 'persist' in navigator.storage) {
+        const persisted = await navigator.storage.persist();
+        console.log(`Storage persisted: ${persisted}`);
+      }
+    });
+  });
+</script>
+{% endblock %}

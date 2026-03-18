@@ -1,0 +1,30 @@
+---js
+const pagination = {
+	data: "locales",
+	size: 1,
+	alias: "locale",
+	addAllPagesToCollections: true
+};
+
+const eleventyComputed = {
+	permalink: data => `/${data.locale}/tags-schema.json`
+};
+
+const eleventyExcludeFromCollections = true;
+
+const layout = false;
+---
+{
+  "type": "object",
+  "properties": {
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": {{ collections | filterTagsByLocale(locale) | sortAlphabetically | dump | safe }}
+      }
+    }
+  },
+  "required": ["tags"],
+  "additionalProperties": false
+}
