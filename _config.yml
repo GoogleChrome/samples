@@ -22,4 +22,6 @@ exclude:
   - .eslintignore
   - .eslintrc
   - trailblazers/
-include: ['.well-known']
+include:
+  - .well-known
+  - trailblazers/dist/
