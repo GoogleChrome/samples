@@ -16,7 +16,11 @@ exclude:
   - node_modules
   - Gemfile
   - vendor
-  - trailblazers/
+  - trailblazers/content/
+  - trailblazers/public/
+  - trailblazers/eleventy.config.js
+  - trailblazers/package.json
+  - trailblazers/package-lock.json
 include:
   - .well-known
   - trailblazers/_site/
