@@ -1,0 +1,1273 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>trAIlblazers</title>
+		<meta name="description" content="Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.">
+		<meta name="color-scheme" content="light dark">
+		<link rel="alternate" href="/samples/trailblazers/_site/feed/feed.xml" type="application/atom+xml" title="trAIlblazers">
+		<link rel="icon" type="image/svg+xml" href="/samples/trailblazers/_site/blog/create/icon.svg">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+/* Defaults */
+:root {
+  --font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+    --font-family-headings: 'Outfit', sans-serif;
+  --font-family-monospace:
+    Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+    Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+    Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors - Premium Travel Palette */
+:root {
+  --color-primary: #004b23;
+    /* Deep Jungle Green */
+    --color-secondary: #ff9100;
+    /* Sunset Orange */
+    --color-accent: #f4f1de;
+    /* Soft Sand */
+    --color-text: #1d3557;
+    /* Deep Navy */
+    --color-link: #0077b6;
+    /* Ocean Blue */
+    --color-link-hover: #023e8a;
+    --background-color: #fdfdfd;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --tag-bg: #e9ecef;
+    --tag-color: #495057;
+
+  --syntax-tab-size: 2;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --bg-dot-color: #e9ecef;
+    /* Light gray on near white */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #48cae4;
+      --color-secondary: #ffb703;
+      --color-accent: #023e8a;
+      --color-text: #e9ecef;
+      --color-link: #90e0ef;
+      --color-link-hover: #caf0f8;
+
+    --background-color: #0d1b2a;
+      --card-bg: #1b263b;
+      --border-color: #415a77;
+      --tag-bg: #415a77;
+      --tag-color: #e9ecef;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --bg-dot-color: rgba(255, 255, 255, 0.15);
+      /* Brighter white/gray on near-black */
+  }
+}
+
+
+/* Global stylesheet */
+* {
+  box-sizing: border-box;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--background-color);
+  background-image:
+      radial-gradient(circle at 2px 2px, var(--bg-dot-color) 1px, transparent 0);
+    background-size: 40px 40px;
+    line-height: 1.6;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  max-width: 64rem;
+    /* Slightly wider for cards */
+    padding: 0 1rem;
+}
+
+/* Screen Reader / A11y */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+    margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-secondary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+#skip-link:focus {
+  top: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-primary);
+  text-wrap: pretty;
+  /* Premium typographic orphans control */
+}
+
+/* Fluid images and standard visuals */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+a[href] {
+  color: var(--color-link);
+  transition: color 0.2s ease;
+}
+
+a[href]:hover {
+  color: var(--color-link-hover);
+}
+/* Post metadata */
+.post-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 1.5rem 0 3rem 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--color-gray-dark);
+}
+
+.post-metadata time {
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon-calendar {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+.post-metadata .post-tag {
+  background: var(--vivid-pink-p3, deeppink);
+  color: white;
+  padding: 0 1rem;
+  height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 20, 147, 0.2);
+}
+.post-metadata .post-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.3);
+  filter: brightness(1.1);
+}
+
+.post-metadata-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-link);
+  color: light-dark(white, #0d1b2a);
+  border: none;
+  padding: 0 1.2rem;
+  height: 2.2rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
+}
+.post-metadata-share:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 119, 182, 0.3);
+}
+
+.icon-share {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Integrated Header Hero */
+.hero-header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url('/img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 220px;
+  /* Slimmer, space-efficient header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 3rem;
+  border-bottom: none !important;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.header-content {
+  max-width: 64rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: rotate(-3deg);
+}
+
+header .logo:hover {
+  transform: rotate(0deg) scale(1.08);
+}
+
+.logo-image {
+  height: clamp(80px, 15vw, 120px);
+  width: clamp(80px, 15vw, 120px);
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Glassmorphism Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0.6rem 2rem;
+  margin: 0;
+  gap: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  /* Translucent white */
+  backdrop-filter: blur(12px);
+  /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 40px;
+  /* Pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+header .nav-item a {
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header .nav-item a:hover,
+header .nav-item a[aria-current="page"] {
+  color: var(--color-secondary) !important;
+}
+
+/* Post list cards */
+.postlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem;
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0;
+}
+
+.postlist-item {
+  background: var(--card-bg);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+.postlist-item:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+.postlist-thumbnail-container {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.postlist-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.6s ease;
+}
+.postlist-item:hover .postlist-thumbnail {
+  transform: scale(1.1);
+}
+
+.postlist-content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.postlist-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-primary) !important;
+  text-decoration: none !important;
+  margin-bottom: 1rem;
+  display: block;
+  transition: all 0.2s ease;
+}
+.postlist-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline !important;
+}
+
+.postlist-description {
+  font-size: 1rem;
+  color: var(--color-text);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.postlist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .postlist-item-author {
+    display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.postlist-author-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  max-width: none;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: none;
+  border: 2px solid var(--border-color);
+}
+
+.postlist-author-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.postlist-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+    margin: 1.5rem 0;
+    /* More space at bottom */
+}
+.post-tag {
+  display: inline-block;
+  background-color: rgb(255, 20, 147);
+    /* DeepPink fallback */
+    background-color: color(display-p3 0.99 0.08 0.58);
+    /* Vivid P3 DeepPink */
+    color: white !important;
+    padding: 0.35rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 20, 147, 0.2);
+  }
+  
+  .tags-landing {
+    gap: 1.25rem;
+    margin: 3rem 0;
+    justify-content: center;
+    /* Center them for a more "hero" landing page feel */
+  }
+  
+  .tags-landing .post-tag {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.15);
+  }
+  
+  .tag-count {
+    font-weight: 500;
+    opacity: 0.85;
+    margin-left: 0.5rem;
+    font-size: 0.85em;
+    font-family: var(--font-family-monospace);
+  }
+  
+  .post-tag:hover {
+    background-color: rgb(255, 20, 147);
+    background-color: color(display-p3 1 0 0.6);
+    /* Even more vivid on hover */
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 20, 147, 0.4);
+  }
+  
+  /* Post Content */
+  article {
+    max-width: 45rem;
+    margin: 0 auto;
+  }
+  
+  article h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .post-metadata {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 4rem;
+    font-size: 1.1rem;
+  }
+  
+  .post-share-footer {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    padding: 3rem 0;
+    border-top: 1px dashed var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
+  }
+  
+  .post-share-footer p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-family-headings);
+    letter-spacing: -0.01em;
+  }
+  
+  .author-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 24px;
+    margin-top: 5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+  }
+  
+  .author-avatar {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-secondary);
+  }
+  
+  .author-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+  
+  .author-info p {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 5rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 6rem;
+    color: #6c757d;
+  }
+  
+  .footer-classic {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-classic p {
+    margin: 0.5rem 0;
+  }
+  
+  .footer-nav {
+    margin-top: 1rem;
+}
+.footer-nav a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+footer hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+/* Language Switcher */
+#lang-switcher {
+  background: var(--card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  }
+  
+  #lang-switcher:hover {
+    border-color: var(--color-secondary);
+  }
+  
+  /* Author Page */
+  .author-page-header {
+    display: flex;
+  align-items: center;
+  gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+  }
+  
+  .author-page-avatar {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-secondary);
+    box-shadow: var(--shadow);
+  }
+  
+  .author-page-info h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: var(--color-primary);
+  }
+  
+  .author-page-bio {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-top: 1rem;
+    max-width: 600px;
+  }
+  
+  /* Card Link Interactivity */
+  .postlist-thumbnail-link,
+  .postlist-description-link,
+  .postlist-author-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
+.postlist-thumbnail-link:hover .postlist-thumbnail {
+  transform: scale(1.05);
+}
+
+.postlist-description-link:hover .postlist-description {
+  color: var(--color-secondary) !important;
+}
+
+.postlist-author-link:hover .postlist-author-name {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.postlist-author-link:hover .postlist-author-avatar {
+  border-color: var(--color-secondary);
+  transform: scale(1.1);
+}
+
+.postlist-author-avatar {
+  transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .postlist {
+    gap: 2rem;
+    }
+}
+@media (max-width: 800px) {
+  .author-page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+                                padding: 1.5rem;
+}
+.author-section {
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem;
+}
+.post-share-footer {
+  padding: 2rem 1rem;
+  margin: 2.5rem 0 1rem;
+}
+}
+
+@media (max-width: 768px) {
+  .hero-header {
+    min-height: 380px;
+    padding: 2rem 0;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header .logo {
+    transform: rotate(0deg);
+  }
+
+                                                                                                                                .nav {
+                                                                                                                                  padding: 0.5rem 1.5rem;
+                                                                                                                                  gap: 1.25rem;
+                                                                                                                                  flex-wrap: wrap;
+                                                                                                                                  justify-content: center;
+    border-radius: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+  .article-hero-bleed {
+    height: 300px;
+  }
+
+  article h1 {
+    font-size: 2.2rem;
+  }
+
+  .post-metadata {
+    gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    }
+    
+    @media (max-width: 500px) {
+      body {
+        padding: 0 0.75rem;
+      }
+    
+      .hero-header {
+        min-height: 320px;
+      }
+    
+      .nav {
+        gap: 0.75rem;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+    
+      header .nav-item a {
+        font-size: 0.85rem;
+      }
+    
+      .postlist {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    
+      .postlist-content {
+        padding: 1.25rem;
+      }
+}</style>
+		
+		
+<script type="importmap">
+{
+  "imports": {
+    "prompt-api-polyfill": "/js/prompt-api-polyfill.js",
+    "firebase/app": "/js/firebase/firebase-app.js",
+    "firebase/ai": "/js/firebase/firebase-ai.js",
+    "browser-fs-access": "/js/browser-fs-access.js",
+    "@google/genai": "/js/google-genai.js",
+    "openai": "/js/openai/index.mjs",
+    "@huggingface/transformers": "/js/huggingface-transformers/transformers.web.min.js",
+    "p-retry": "/js/helpers/p-retry-esm.js",
+    "onnxruntime-common": "/js/onnxruntime-web/ort.all.min.mjs",
+    "onnxruntime-web/webgpu": "/js/onnxruntime-web/webgpu.js",
+    "onnxruntime-web": "/js/onnxruntime-web/ort.all.min.mjs",
+    "onnxruntime-web/": "/js/onnxruntime-web/",
+    "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js": "/js/firebase/firebase-app.js"
+  }
+}
+</script>
+
+<style>
+  @keyframes hideBriefly {
+    0%,
+    100% {
+      visibility: hidden;
+    }
+  }
+
+  label:has(input[switch]),
+  input[switch] {
+    animation: hideBriefly 2s;
+  }
+</style>
+
+<noscript>
+  <style>
+    label:has(input[switch]),
+    input[switch] {
+      animation: none;
+    }
+  </style>
+</noscript>
+
+<script type="module">
+  if (!('switch' in HTMLInputElement.prototype)) {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/js/input-switch-polyfill.css';
+    document.head.appendChild(css);
+
+    await import('/js/input-switch-polyfill.js');
+  } else {
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      `<style>label:has(input[switch]),input[switch]{animation:none;}</style>`
+    );
+  }
+</script>
+
+<link rel="stylesheet" href="/samples/trailblazers/_site/css/create-post.css">
+<link rel="stylesheet" href="/samples/trailblazers/_site/css/prism-okaidia.css">
+<link rel="manifest" href="/samples/trailblazers/_site/blog/create/manifest.json">
+
+<script src="/samples/trailblazers/_site/js/marked.js"></script>
+<script src="/samples/trailblazers/_site/js/prism.js"></script>
+<script src="/samples/trailblazers/_site/js/turndown.js"></script>
+<script src="/samples/trailblazers/_site/js/jszip.js"></script>
+
+<script type="module" src="/samples/trailblazers/_site/js/editor/create-post.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/blog/create/sw.js', { scope: '/blog/create/' });
+    });
+  }
+
+  (async () => {
+    if (
+      ('storage' in navigator && 'persist' in navigator.storage) &&
+      (matchMedia('(display-mode: standalone)').matches || navigator.standalone)
+    ) {
+      const persisted = await navigator.storage.persist();
+      console.log(`Storage persisted: ${persisted}`);
+    }
+  })();
+
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {    
+    e.preventDefault();
+    deferredPrompt = e;
+    const item = document.getElementById('install-item');
+    if (item) {
+      item.style.display = 'initial';
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const installBtn = document.getElementById('install-button');
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          deferredPrompt = null;
+          const item = document.getElementById('install-item');
+          if (item) item.style.display = 'none';
+        }
+      });
+    }
+
+    window.addEventListener('appinstalled', async () => {
+      const item = document.getElementById('install-item');
+      if (item) {
+        item.style.display = 'none';
+      }
+      if ('storage' in navigator && 'persist' in navigator.storage) {
+        const persisted = await navigator.storage.persist();
+        console.log(`Storage persisted: ${persisted}`);
+      }
+    });
+  });
+</script>
+
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header class="site-header hero-header">
+			<div class="header-content">
+				<a href="/samples/trailblazers/_site/en/" class="logo">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/_site/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/_site/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
+				</a>
+
+				<nav>
+					<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+					<ul class="nav">
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/">Home</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/blog/">Archive</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/about/">About</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/feed/feed.xml">Feed</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/_site/en/blog/create/" aria-current="page">Create</a></li>
+						
+<li class="nav-item admin-only" id="install-item" style="display: none;"><button id="install-button" class="btn">Install</button></li>
+
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				<h1 id="create-blog-post">Create Blog Post</h1>
+
+<div class="admin-only" style="display: none;">
+	<div class="editor-container">
+		<div class="editor-sidebar">
+			<div class="sidebar-header">
+				<h2 id="drafts">Drafts</h2>
+				<button id="new-draft-btn" class="btn" title="New Draft">+</button>
+			</div>
+			<ul id="drafts-list"></ul>
+			<div class="sidebar-actions">
+				<button id="load-draft-btn" class="btn" title="Load Draft from file system">📂 Load Draft</button>
+			</div>
+			<div class="sidebar-footer">
+				<details class="settings-details">
+					<summary>⚙️ Settings</summary>
+					<div class="settings-content">
+						<section class="settings-section">
+							<h3 id="github-settings">GitHub Settings</h3>
+							<div class="form-group">
+								<label for="gh-token">
+									GitHub Token
+									<a href="https://github.com/settings/personal-access-tokens/new?name=Core-loop+token&description=Write%20code%20and%20push%20it%20to%20main%21&contents=write&pull_requests=write" target="_blank" rel="noopener" class="help-icon" title="How to get a GitHub Token">ⓘ</a>
+								</label>
+								<input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx">
+							</div>
+							<div class="form-group">
+								<label for="gh-owner">GitHub Username</label>
+								<input type="text" id="gh-owner" placeholder="username">
+							</div>
+							<div class="form-group">
+								<label for="gh-repo">Your Blog's Repository</label>
+								<input type="text" id="gh-repo" placeholder="my-blog">
+							</div>
+						</section>
+
+						<hr>
+
+						<section class="settings-section">
+							<h3 id="ai-features">AI Features</h3>
+							<label class="ai-toggle-label">
+								✨ Use AI Features
+								<input type="checkbox" switch="" id="ai-features-toggle">
+							</label>
+
+							<div id="ai-keys-section" style="display: none;">
+								<div class="form-group ai-backend-group">
+									<label for="ai-backend">AI Backend</label>
+									<select id="ai-backend">
+										<option value="gemini-api">Gemini API</option>
+										<option value="openai">OpenAI</option>
+										<option value="firebase">Firebase AI Logic</option>
+										<option value="transformers-js">Transformers.js</option>
+									</select>
+								</div>
+
+								<!-- Shared: API Key & Model Name -->
+								<div class="ai-backend-fields" data-backend="gemini-api openai firebase" style="display: none;">
+									<div class="form-group">
+										<label for="ai-api-key">API Key</label>
+										<input type="password" id="ai-api-key" placeholder="AIzaSy... / sk-...">
+									</div>
+								</div>
+								<div class="ai-backend-fields" data-backend="gemini-api openai firebase transformers-js" style="display: none;">
+									<div class="form-group">
+										<label for="ai-model-name">Model Name</label>
+										<input type="text" id="ai-model-name" placeholder="Default or custom">
+									</div>
+								</div>
+
+								<!-- Firebase Specific Fields -->
+								<div class="ai-backend-fields" data-backend="firebase" style="display: none;">
+									<div class="form-group">
+										<label for="ai-project-id">Project ID</label>
+										<input type="text" id="ai-project-id" placeholder="your-project-id">
+									</div>
+									<div class="form-group">
+										<label for="ai-app-id">App ID</label>
+										<input type="text" id="ai-app-id" placeholder="1:234567890:web:abcdef">
+									</div>
+									<div class="form-group">
+										<label for="ai-gemini-api-provider">API Provider</label>
+										<select id="ai-gemini-api-provider">
+											<option value="developer">Developer</option>
+											<option value="vertex">Vertex</option>
+										</select>
+									</div>
+									<label class="ai-toggle-label">
+										Use App Check
+										<input type="checkbox" switch="" id="ai-use-app-check">
+									</label>
+									<div id="ai-app-check-fields" style="display: none;">
+										<div class="form-group">
+											<label for="ai-recaptcha-site-key">reCaptcha Site Key</label>
+											<input type="text" id="ai-recaptcha-site-key" placeholder="6Lc...">
+										</div>
+										<label class="ai-toggle-label">
+											Limited Use Tokens
+											<input type="checkbox" switch="" id="ai-use-limited-use-tokens">
+										</label>
+									</div>
+								</div>
+
+								<!-- Transformers.js Specific Fields -->
+								<div class="ai-backend-fields" data-backend="transformers-js" style="display: none;">
+									<div class="form-group">
+										<label for="ai-device">Device</label>
+										<select id="ai-device">
+											<option value="webgpu">WebGPU</option>
+											<option value="cpu">CPU</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="ai-dtype">Data Type</label>
+										<select id="ai-dtype">
+											<option value="q4f16">q4f16</option>
+											<option value="q8">q8</option>
+											<option value="f32">f32</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<hr>
+
+						<section class="settings-section">
+							<h3 id="translations">Translations</h3>
+							<label class="ai-toggle-label">
+								🌐 Translate blog posts
+								<input type="checkbox" switch="" id="ai-translate-toggle">
+							</label>
+							<div id="ai-translation-locales-container" style="display: none; padding-left: 1.5rem;">
+								<!-- Populated dynamically -->
+							</div>
+						</section>
+
+						<hr>
+
+						<section class="settings-section">							
+							<div class="settings-file-actions">
+								<button type="button" id="save-settings-btn" class="btn" title="Save settings to a file">💾 Save Settings</button>
+								<button type="button" id="load-settings-btn" class="btn" title="Load settings from a file">📂 Load Settings</button>
+							</div>
+						</section>
+					</div>
+				</details>
+			</div>
+		</div>
+
+		<div class="editor-main">
+			<form id="post-form">
+				<div class="form-group">
+					<label for="post-title">Title</label>
+					<div class="input-with-action">
+						<input type="text" id="post-title" required="" placeholder="My Awesome Post">
+						<button type="button" id="ai-suggest-title-btn" class="btn ai-button" style="display: none;" title="Suggest title using AI">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="post-description">Description</label>
+					<div class="input-with-action">
+						<input type="text" id="post-description" placeholder="A brief summary of the post">
+						<button type="button" id="ai-suggest-description-btn" class="btn ai-button" style="display: none;" title="Suggest description using AI">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="post-date">Date</label>
+					<input type="date" id="post-date" required="">
+				</div>
+
+				<div class="form-group">
+					<label for="tag-input">Tags</label>
+					<div class="tag-container">
+						<div id="tag-pills" class="tag-pills"></div>
+						<div class="tag-input-wrapper">
+							<input type="text" id="tag-input" placeholder="Add tag and press Enter...">
+							<button type="button" id="ai-suggest-tags-btn" class="btn ai-button" style="display: none;" title="Suggest tags using AI">✨</button>
+						</div>
+						<label class="ai-toggle-label only-existing-tags-label">
+							🏷️ Only Allow Existing Tags
+							<input type="checkbox" switch="" id="ai-only-existing-tags-toggle">
+						</label>
+					</div>
+					<input type="hidden" id="post-tags">
+				</div>
+
+				<div class="form-group">
+					<label for="post-content">Content (Markdown)</label>
+					<p class="field-hint">💡 You can drag and drop images directly into the editor or use the button below to place them at the current cursor position.</p>
+					<div class="editor-header-actions">
+						<button type="button" id="upload-btn" class="btn">📂 Add Images</button>
+					</div>
+					<div id="drop-zone">
+						<textarea id="post-content" rows="20" placeholder="Write your post here... Use Markdown for **bold**, *italics*, [links](url), - bullets, or ```code blocks```."></textarea>
+					</div>
+					<input type="file" id="file-input" multiple="" accept="image/*" style="display: none;">
+				</div>
+
+				<div class="form-group ai-writer-section" style="display: none;">
+					<label for="ai-writer-input">Help me write</label>
+					<p class="field-hint">💡 Enter a few bullet points or a teaser, and AI will expand it into a full post.</p>
+					<div class="input-with-action">
+						<textarea id="ai-writer-input" rows="3" placeholder="- My trip to Tokyo&#10;- Visited Tsukiji market&#10;- Amazing sushi at 5am"></textarea>
+						<button type="button" id="ai-writer-btn" class="btn ai-button" style="display: none;" title="Expand into a full post">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group ai-rewriter-section" style="display: none;">
+					<label for="post-content">Rewrite content</label>
+					<p class="field-hint">💡 Refine your post content with specific tone and length. (Markdown layout is preserved)</p>
+					<p class="field-hint">💡 If you select text in the editor, only the selection will be rewritten.</p>
+					<div class="rewriter-options">
+						<div class="rewriter-option-group">
+							<label for="ai-rewriter-tone">Tone</label>
+							<select id="ai-rewriter-tone">
+								<option value="as-is">As-is</option>
+								<option value="more-formal">More Formal</option>
+								<option value="more-casual">More Casual</option>
+							</select>
+						</div>
+						<div class="rewriter-option-group">
+							<label for="ai-rewriter-length">Length</label>
+							<select id="ai-rewriter-length">
+								<option value="as-is">As-is</option>
+								<option value="shorter">Shorter</option>
+								<option value="longer">Longer</option>
+							</select>
+						</div>
+						<button type="button" id="ai-rewriter-btn" class="btn ai-button" style="display: none;" title="Rewrite content">✨</button>
+					</div>
+				</div>
+
+				<div class="form-group ai-classifier-section" style="display: none;">
+					<label>Advertising categories</label>
+					<div class="classifier-actions">
+						<p class="field-hint">💡 This uses <a href="https://github.com/InteractiveAdvertisingBureau/Taxonomies/blob/develop/Content%20Taxonomies/Content%20Taxonomy%203.1.tsv" target="_blank" rel="noopener">IAB Content Taxonomy 3.1</a> ads categories.</p>
+						<button type="button" id="ai-classifier-btn" class="btn ai-button" style="display: none;" title="Classify content">✨</button>
+					</div>
+					<div id="ai-classifier-results" style="margin-top: 1rem;"></div>
+				</div>
+
+				<div class="form-group ai-translation-section" style="display: none;">
+					<div class="classifier-actions">
+						<label style="flex-grow: 1;">Translations</label>
+						<button type="button" id="ai-translate-all-btn" class="btn ai-button" style="display: none;" title="Translate all enabled locales">✨</button>
+					</div>
+					<p class="field-hint">💡 AI will translate your post paragraph by paragraph. Markdown structure is preserved.</p>
+					<div id="ai-translations-container"></div>
+				</div>
+
+				<div class="editor-footer-actions">
+					<div id="ai-status" style="font-size: 0.7rem; color: #666; display: none;">
+						<progress id="ai-download-progress" value="0" max="100" style="width: 100px;"></progress>
+						<span id="ai-status-text">Ready</span>
+					</div>
+				</div>
+			</form>
+
+			<div class="editor-actions">
+				<button id="copy-btn" class="btn">📋 Copy Markdown</button>
+				<button id="download-btn" class="btn">💾 Save (.zip)</button>
+				<button id="github-pr-btn" class="btn">🚀 Create PR</button>
+			</div>
+		</div>
+
+		<div class="editor-preview">			
+			<div id="preview-content" class="markdown-body"></div>
+		</div>
+	</div>
+</div>
+
+<dialog id="alert-dialog">
+	<form method="dialog">
+		<p id="alert-message"></p>
+		<div class="dialog-actions">
+			<button class="btn">OK</button>
+		</div>
+	</form>
+</dialog>
+
+<dialog id="confirm-dialog">
+	<form method="dialog">
+		<p id="confirm-message"></p>
+		<div class="dialog-actions">
+			<button value="cancel" class="btn btn-secondary">Cancel</button>
+			<button value="confirm" class="btn">Delete</button>
+		</div>
+	</form>
+</dialog>
+
+
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<div class="footer-classic">
+				<p>&copy; 2026 trAIlblazers Travel Blog. All rights reserved.</p>
+				<p>Travel tales by <strong>Maya, Ashok, and Julia</strong>.</p>
+				<nav class="footer-nav">
+					<a href="/samples/trailblazers/_site/en/about/">About</a> | 
+					<a href="/samples/trailblazers/_site/en/imprint/">Imprint</a> | 
+					<a href="/samples/trailblazers/_site/en/privacy/">Privacy Policy</a>
+				</nav>
+			</div>
+			<hr>
+			<form>
+				<label for="lang-switcher">Language:</label>
+				<select id="lang-switcher" onchange="location = this.value;">
+					
+					<option value="/en/blog/create/" selected="">
+						English
+					</option>
+					
+					<option value="/es/blog/create/">
+						Español
+					</option>
+					
+					<option value="/ja/blog/create/">
+						日本語
+					</option>
+					
+				</select>
+			</form>
+		</footer>
+
+		<!-- This page `/en/blog/create/` was built on 2026-03-18T19:07:18.248Z -->
+		<script type="module" src="/samples/trailblazers/_site/dist/k-3SUL8az9.js"></script>
+		
+	</body>
+</html>

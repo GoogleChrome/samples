@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Adventure","Canada","City","Coast","Culture","Energy","France","Greece","Hidden Gem","History","Iceland","Indonesia","Islands","Italy","Japan","Jordan","Lakes","Magic","Mountains","Nature","Peru","Relaxation","Romance","South Africa","Spirituality","Summer","Tanzania","UNESCO","USA","Wildlife","Winter"]
+      }
+    }
+  },
+  "required": ["tags"],
+  "additionalProperties": false
+}

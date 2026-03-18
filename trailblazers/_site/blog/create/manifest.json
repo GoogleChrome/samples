@@ -1,0 +1,17 @@
+{
+  "name": "Eleventy Base Blog - Create Post",
+  "short_name": "Create Post",
+  "start_url": "/blog/create/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "400x400",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "scope": "/blog/create/"
+}

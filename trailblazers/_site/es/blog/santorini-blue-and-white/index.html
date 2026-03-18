@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Santorini: El Sueño Azul y Blanco</title>
+		<meta name="description" content="Descubre las maravillas de Santorini, Grecia, a través de nuestra última aventura.">
+		<meta name="color-scheme" content="light dark">
+		<link rel="alternate" href="/samples/trailblazers/_site/feed/feed.xml" type="application/atom+xml" title="trAIlblazers">
+		<link rel="icon" type="image/svg+xml" href="/samples/trailblazers/_site/blog/create/icon.svg">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+/* Defaults */
+:root {
+  --font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+    --font-family-headings: 'Outfit', sans-serif;
+  --font-family-monospace:
+    Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+    Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+    Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors - Premium Travel Palette */
+:root {
+  --color-primary: #004b23;
+    /* Deep Jungle Green */
+    --color-secondary: #ff9100;
+    /* Sunset Orange */
+    --color-accent: #f4f1de;
+    /* Soft Sand */
+    --color-text: #1d3557;
+    /* Deep Navy */
+    --color-link: #0077b6;
+    /* Ocean Blue */
+    --color-link-hover: #023e8a;
+    --background-color: #fdfdfd;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --tag-bg: #e9ecef;
+    --tag-color: #495057;
+
+  --syntax-tab-size: 2;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --bg-dot-color: #e9ecef;
+    /* Light gray on near white */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #48cae4;
+      --color-secondary: #ffb703;
+      --color-accent: #023e8a;
+      --color-text: #e9ecef;
+      --color-link: #90e0ef;
+      --color-link-hover: #caf0f8;
+
+    --background-color: #0d1b2a;
+      --card-bg: #1b263b;
+      --border-color: #415a77;
+      --tag-bg: #415a77;
+      --tag-color: #e9ecef;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --bg-dot-color: rgba(255, 255, 255, 0.15);
+      /* Brighter white/gray on near-black */
+  }
+}
+
+
+/* Global stylesheet */
+* {
+  box-sizing: border-box;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--background-color);
+  background-image:
+      radial-gradient(circle at 2px 2px, var(--bg-dot-color) 1px, transparent 0);
+    background-size: 40px 40px;
+    line-height: 1.6;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  max-width: 64rem;
+    /* Slightly wider for cards */
+    padding: 0 1rem;
+}
+
+/* Screen Reader / A11y */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+    margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-secondary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+#skip-link:focus {
+  top: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-primary);
+  text-wrap: pretty;
+  /* Premium typographic orphans control */
+}
+
+/* Fluid images and standard visuals */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+a[href] {
+  color: var(--color-link);
+  transition: color 0.2s ease;
+}
+
+a[href]:hover {
+  color: var(--color-link-hover);
+}
+/* Post metadata */
+.post-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 1.5rem 0 3rem 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--color-gray-dark);
+}
+
+.post-metadata time {
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon-calendar {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+.post-metadata .post-tag {
+  background: var(--vivid-pink-p3, deeppink);
+  color: white;
+  padding: 0 1rem;
+  height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 20, 147, 0.2);
+}
+.post-metadata .post-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.3);
+  filter: brightness(1.1);
+}
+
+.post-metadata-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-link);
+  color: light-dark(white, #0d1b2a);
+  border: none;
+  padding: 0 1.2rem;
+  height: 2.2rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
+}
+.post-metadata-share:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 119, 182, 0.3);
+}
+
+.icon-share {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Integrated Header Hero */
+.hero-header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url('/img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 220px;
+  /* Slimmer, space-efficient header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 3rem;
+  border-bottom: none !important;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.header-content {
+  max-width: 64rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: rotate(-3deg);
+}
+
+header .logo:hover {
+  transform: rotate(0deg) scale(1.08);
+}
+
+.logo-image {
+  height: clamp(80px, 15vw, 120px);
+  width: clamp(80px, 15vw, 120px);
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Glassmorphism Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0.6rem 2rem;
+  margin: 0;
+  gap: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  /* Translucent white */
+  backdrop-filter: blur(12px);
+  /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 40px;
+  /* Pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+header .nav-item a {
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header .nav-item a:hover,
+header .nav-item a[aria-current="page"] {
+  color: var(--color-secondary) !important;
+}
+
+/* Post list cards */
+.postlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem;
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0;
+}
+
+.postlist-item {
+  background: var(--card-bg);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+.postlist-item:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+.postlist-thumbnail-container {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.postlist-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.6s ease;
+}
+.postlist-item:hover .postlist-thumbnail {
+  transform: scale(1.1);
+}
+
+.postlist-content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.postlist-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-primary) !important;
+  text-decoration: none !important;
+  margin-bottom: 1rem;
+  display: block;
+  transition: all 0.2s ease;
+}
+.postlist-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline !important;
+}
+
+.postlist-description {
+  font-size: 1rem;
+  color: var(--color-text);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.postlist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .postlist-item-author {
+    display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.postlist-author-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  max-width: none;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: none;
+  border: 2px solid var(--border-color);
+}
+
+.postlist-author-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.postlist-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+    margin: 1.5rem 0;
+    /* More space at bottom */
+}
+.post-tag {
+  display: inline-block;
+  background-color: rgb(255, 20, 147);
+    /* DeepPink fallback */
+    background-color: color(display-p3 0.99 0.08 0.58);
+    /* Vivid P3 DeepPink */
+    color: white !important;
+    padding: 0.35rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 20, 147, 0.2);
+  }
+  
+  .tags-landing {
+    gap: 1.25rem;
+    margin: 3rem 0;
+    justify-content: center;
+    /* Center them for a more "hero" landing page feel */
+  }
+  
+  .tags-landing .post-tag {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.15);
+  }
+  
+  .tag-count {
+    font-weight: 500;
+    opacity: 0.85;
+    margin-left: 0.5rem;
+    font-size: 0.85em;
+    font-family: var(--font-family-monospace);
+  }
+  
+  .post-tag:hover {
+    background-color: rgb(255, 20, 147);
+    background-color: color(display-p3 1 0 0.6);
+    /* Even more vivid on hover */
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 20, 147, 0.4);
+  }
+  
+  /* Post Content */
+  article {
+    max-width: 45rem;
+    margin: 0 auto;
+  }
+  
+  article h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .post-metadata {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 4rem;
+    font-size: 1.1rem;
+  }
+  
+  .post-share-footer {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    padding: 3rem 0;
+    border-top: 1px dashed var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
+  }
+  
+  .post-share-footer p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-family-headings);
+    letter-spacing: -0.01em;
+  }
+  
+  .author-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 24px;
+    margin-top: 5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+  }
+  
+  .author-avatar {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-secondary);
+  }
+  
+  .author-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+  
+  .author-info p {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 5rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 6rem;
+    color: #6c757d;
+  }
+  
+  .footer-classic {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-classic p {
+    margin: 0.5rem 0;
+  }
+  
+  .footer-nav {
+    margin-top: 1rem;
+}
+.footer-nav a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+footer hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+/* Language Switcher */
+#lang-switcher {
+  background: var(--card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  }
+  
+  #lang-switcher:hover {
+    border-color: var(--color-secondary);
+  }
+  
+  /* Author Page */
+  .author-page-header {
+    display: flex;
+  align-items: center;
+  gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+  }
+  
+  .author-page-avatar {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-secondary);
+    box-shadow: var(--shadow);
+  }
+  
+  .author-page-info h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: var(--color-primary);
+  }
+  
+  .author-page-bio {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-top: 1rem;
+    max-width: 600px;
+  }
+  
+  /* Card Link Interactivity */
+  .postlist-thumbnail-link,
+  .postlist-description-link,
+  .postlist-author-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
+.postlist-thumbnail-link:hover .postlist-thumbnail {
+  transform: scale(1.05);
+}
+
+.postlist-description-link:hover .postlist-description {
+  color: var(--color-secondary) !important;
+}
+
+.postlist-author-link:hover .postlist-author-name {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.postlist-author-link:hover .postlist-author-avatar {
+  border-color: var(--color-secondary);
+  transform: scale(1.1);
+}
+
+.postlist-author-avatar {
+  transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .postlist {
+    gap: 2rem;
+    }
+}
+@media (max-width: 800px) {
+  .author-page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+                                padding: 1.5rem;
+}
+.author-section {
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem;
+}
+.post-share-footer {
+  padding: 2rem 1rem;
+  margin: 2.5rem 0 1rem;
+}
+}
+
+@media (max-width: 768px) {
+  .hero-header {
+    min-height: 380px;
+    padding: 2rem 0;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header .logo {
+    transform: rotate(0deg);
+  }
+
+                                                                                                                                .nav {
+                                                                                                                                  padding: 0.5rem 1.5rem;
+                                                                                                                                  gap: 1.25rem;
+                                                                                                                                  flex-wrap: wrap;
+                                                                                                                                  justify-content: center;
+    border-radius: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+  .article-hero-bleed {
+    height: 300px;
+  }
+
+  article h1 {
+    font-size: 2.2rem;
+  }
+
+  .post-metadata {
+    gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    }
+    
+    @media (max-width: 500px) {
+      body {
+        padding: 0 0.75rem;
+      }
+    
+      .hero-header {
+        min-height: 320px;
+      }
+    
+      .nav {
+        gap: 0.75rem;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+    
+      header .nav-item a {
+        font-size: 0.85rem;
+      }
+    
+      .postlist {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    
+      .postlist-content {
+        padding: 1.25rem;
+      }
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*='language-diff-'] {
+  --eleventy-code-padding: 1.25em;
+  padding-left: var(--eleventy-code-padding);
+  padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+  background-color: hsl(0, 51%, 37%);
+  color: inherit;
+}
+.token.inserted {
+  background-color: hsl(126, 31%, 39%);
+  color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+  -webkit-user-select: none;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+  width: var(--eleventy-code-padding);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+  display: block;
+  margin-left: calc(-1 * var(--eleventy-code-padding));
+  margin-right: calc(-1 * var(--eleventy-code-padding));
+  text-decoration: none; /* override del, ins, mark defaults */
+  color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Saltar al contenido principal</a>
+
+		<header class="site-header hero-header">
+			<div class="header-content">
+				<a href="/samples/trailblazers/_site/es/" class="logo">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/_site/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/_site/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
+				</a>
+
+				<nav>
+					<h2 class="visually-hidden" id="menu-de-navegacion-de-nivel-superior">Menú de navegación de nivel superior</h2>
+					<ul class="nav">
+						<li class="nav-item"><a href="/samples/trailblazers/_site/es/">Inicio</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/es/blog/">Archivo</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/es/about/">Sobre mí</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/es/feed/feed.xml">Feed</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/_site/es/blog/create/">Crear</a></li>
+						
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="santorini-el-sueno-azul-y-blanco">Santorini: El Sueño Azul y Blanco</h1>
+
+<ul class="post-metadata">
+	<li>
+		<time datetime="2026-03-14">
+			<svg class="icon-calendar" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+				<path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.89,4,3.01,4.9,3.01,6L3,20c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20H5V9h14V20z M7,11h2v2H7V11z M11,11h2v2h-2V11z M15,11h2v2h-2V11z"></path>
+			</svg>
+			14 de marzo de 2026
+		</time>
+	</li>
+	<li><a href="/samples/trailblazers/_site/es/tags/islas/" class="post-tag">Islas</a></li>
+	<li><a href="/samples/trailblazers/_site/es/tags/grecia/" class="post-tag">Grecia</a></li>
+	<li><a href="/samples/trailblazers/_site/es/tags/relajacion/" class="post-tag">Relajación</a></li>
+	<li class="post-metadata-share-container">
+		<button type="button" class="post-metadata-share share-button" aria-label="Compartir" style="display: none;">
+			<svg class="icon-share" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+				<path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"></path>
+			</svg>
+			<span>Compartir</span>
+		</button>
+	</li>
+</ul>
+
+<p><picture><source type="image/avif" srcset="/samples/trailblazers/_site/es/blog/santorini-blue-and-white/mHBp0glhnT-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/_site/es/blog/santorini-blue-and-white/mHBp0glhnT-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/es/blog/santorini-blue-and-white/mHBp0glhnT-3000.jpeg" alt="Santorini, Grecia" width="3000" height="4000"></picture></p>
+<p>Como fotógrafo, Santorini es tanto mi mayor sueño como mi desafío más difícil. ¿Cómo capturar el contraste de esas cúpulas azules imposibles contra un mar que parece ser aún más azul? Es un lugar donde la luz es tan nítida que sientes que podrías estirar la mano y arrancar un trozo de ella.</p>
+<h3 id="la-caminata-por-la-caldera">La Caminata por la Caldera</h3>
+<p>Evitamos los burros turísticos e hicimos la <strong>legendaria caminata de 10 km desde Fira hasta Oia</strong>. Es escarpada, polvorienta y ofrece las vistas de la caldera más impresionantes de la isla. Calculamos el tiempo para llegar a Oia justo cuando comenzaba la &quot;hora dorada&quot;. Mientras las calles principales estaban llenas, encontramos un lugar tranquilo cerca de las <strong>ruinas del Castillo Bizantino</strong> para ver el sol hundirse en el Egeo. Es un cliché por una razón: el cielo adquiere colores que ni siquiera sabía que existían.</p>
+<p>También tomamos un <strong>tour en barco al volcán Nea Kameni</strong>. Caminar sobre la roca volcánica oscura y luego nadar en las cálidas aguas termales de color naranja de Palea Kameni es el contrapunto perfecto a los prístinos pueblos blancos que se encuentran arriba.</p>
+<h3 id="un-sabor-de-la-tierra-volcanica">Un Sabor de la Tierra Volcánica</h3>
+<p>El suelo volcánico de Santorini produce algunas de las verduras más sabrosas que he probado jamás. Pasamos una tarde en una taberna local en Pyrgos donde me enamoré de la <strong>Fava</strong>: un puré cremoso de guisantes amarillos cubierto con alcaparras y cebolla roja. Pero la verdadera estrella fueron los <strong>Tomatokeftedes</strong> (buñuelos de tomate). Crujientes por fuera, estallando con el jugo de los tomates cherry madurados al sol por dentro.</p>
+<h3 id="consejos-y-trucos">Consejos y Trucos</h3>
+<ul>
+<li><strong>La Ola de Cruceros</strong>: Si te quedas en la isla, averigua cuándo atracan los cruceros. Usa esas horas para explorar los pueblos del interior como Emporio o Pyrgos en lugar de Fira u Oia.</li>
+<li><strong>El Sol es Real</strong>: Hay muy poca sombra en la caminata Fira-Oia. Usa un sombrero y comienza antes de las 8 AM.</li>
+<li><strong>Akrotiri es una Joya</strong>: No te quedes solo en la superficie. Las ruinas prehistóricas de Akrotiri (la &quot;Pompeya griega&quot;) están preservadas con tal detalle que es alucinante.</li>
+</ul>
+<h3 id="puntos-destacados">Puntos Destacados</h3>
+<ul>
+<li><strong>Caminata de Fira a Oia</strong>: 10 km de puro drama costero.</li>
+<li><strong>Atardecer en el Castillo Bizantino</strong>: El atardecer más famoso del mundo por una razón.</li>
+<li><strong>Akrotiri</strong>: Una mirada fascinante a una ciudad de la Edad del Bronce.</li>
+<li><strong>Buñuelos de Tomate</strong>: El mejor refrigerio que encontrarás en las Cícladas.</li>
+</ul>
+<p>Santorini es un lugar de fuego y luz. Es una isla que exige que dejes el teléfono y simplemente te quedes mirando el horizonte por un rato.</p>
+<p><small><em>Foto de <a href="https://unsplash.com/photos/1pS6mK3n7oU">Heidi Kaden</a> en Unsplash</em></small></p>
+
+
+<div class="post-share-footer" style="display: none;">
+	<p>¿Te ha gustado lo que has leído? ¡Compártelo!</p>
+	<button type="button" class="post-metadata-share share-button" aria-label="Compartir">
+		<svg class="icon-share" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+			<path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"></path>
+		</svg>
+		<span>Compartir</span>
+	</button>
+</div>
+
+
+<aside class="author-section">
+	<picture><source type="image/avif" srcset="/samples/trailblazers/_site/img/PZ3GfjbWSC-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/_site/img/PZ3GfjbWSC-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/img/PZ3GfjbWSC-1024.png" alt="Ashok" class="author-avatar" width="1024" height="1024"></picture>
+	<div class="author-info">
+		<h3 id="about-ashok">About Ashok</h3>
+		<p>Historiador y explorador de ciudades. A Ashok le encanta descubrir las historias ocultas detrás de la arquitectura antigua y las bulliciosas calles metropolitanas.</p>
+	</div>
+</aside>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Anterior<br> <a href="/samples/trailblazers/_site/es/blog/petra-rose-red-city/">Petra: Secretos de la Ciudad Rosa</a></li><li class="links-nextprev-next">Siguiente →<br><a href="/samples/trailblazers/_site/es/blog/amalfi-coast-winding-roads/">Costa Amalfitana: Caminos Sinuosos y Aire Salado</a></li>
+</ul>
+
+
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<div class="footer-classic">
+				<p>&copy; 2026 trAIlblazers Travel Blog. All rights reserved.</p>
+				<p>Travel tales by <strong>Maya, Ashok, and Julia</strong>.</p>
+				<nav class="footer-nav">
+					<a href="/samples/trailblazers/_site/es/about/">Sobre mí</a> | 
+					<a href="/samples/trailblazers/_site/es/imprint/">Aviso Legal</a> | 
+					<a href="/samples/trailblazers/_site/es/privacy/">Política de Privacidad</a>
+				</nav>
+			</div>
+			<hr>
+			<form>
+				<label for="lang-switcher">Idioma:</label>
+				<select id="lang-switcher" onchange="location = this.value;">
+					
+					<option value="/en/blog/santorini-blue-and-white/">
+						English
+					</option>
+					
+					<option value="/es/blog/santorini-blue-and-white/" selected="">
+						Español
+					</option>
+					
+					<option value="/ja/blog/santorini-blue-and-white/">
+						日本語
+					</option>
+					
+				</select>
+			</form>
+		</footer>
+
+		<!-- This page `/es/blog/santorini-blue-and-white/` was built on 2026-03-18T19:07:18.259Z -->
+		<script type="module" src="/samples/trailblazers/_site/dist/kGNM0sHTDL.js"></script>
+		
+	</body>
+</html>

@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en" dir="">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Posts tagged ‘Jordan’</title>
+		<meta name="description" content="Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.">
+		<meta name="color-scheme" content="light dark">
+		<link rel="alternate" href="/samples/trailblazers/_site/feed/feed.xml" type="application/atom+xml" title="trAIlblazers">
+		<link rel="icon" type="image/svg+xml" href="/samples/trailblazers/_site/blog/create/icon.svg">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+/* Defaults */
+:root {
+  --font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+    --font-family-headings: 'Outfit', sans-serif;
+  --font-family-monospace:
+    Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+    Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+    Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors - Premium Travel Palette */
+:root {
+  --color-primary: #004b23;
+    /* Deep Jungle Green */
+    --color-secondary: #ff9100;
+    /* Sunset Orange */
+    --color-accent: #f4f1de;
+    /* Soft Sand */
+    --color-text: #1d3557;
+    /* Deep Navy */
+    --color-link: #0077b6;
+    /* Ocean Blue */
+    --color-link-hover: #023e8a;
+    --background-color: #fdfdfd;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --tag-bg: #e9ecef;
+    --tag-color: #495057;
+
+  --syntax-tab-size: 2;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --bg-dot-color: #e9ecef;
+    /* Light gray on near white */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #48cae4;
+      --color-secondary: #ffb703;
+      --color-accent: #023e8a;
+      --color-text: #e9ecef;
+      --color-link: #90e0ef;
+      --color-link-hover: #caf0f8;
+
+    --background-color: #0d1b2a;
+      --card-bg: #1b263b;
+      --border-color: #415a77;
+      --tag-bg: #415a77;
+      --tag-color: #e9ecef;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --bg-dot-color: rgba(255, 255, 255, 0.15);
+      /* Brighter white/gray on near-black */
+  }
+}
+
+
+/* Global stylesheet */
+* {
+  box-sizing: border-box;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--background-color);
+  background-image:
+      radial-gradient(circle at 2px 2px, var(--bg-dot-color) 1px, transparent 0);
+    background-size: 40px 40px;
+    line-height: 1.6;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  max-width: 64rem;
+    /* Slightly wider for cards */
+    padding: 0 1rem;
+}
+
+/* Screen Reader / A11y */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+    margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-secondary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+#skip-link:focus {
+  top: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-primary);
+  text-wrap: pretty;
+  /* Premium typographic orphans control */
+}
+
+/* Fluid images and standard visuals */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+a[href] {
+  color: var(--color-link);
+  transition: color 0.2s ease;
+}
+
+a[href]:hover {
+  color: var(--color-link-hover);
+}
+/* Post metadata */
+.post-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 1.5rem 0 3rem 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--color-gray-dark);
+}
+
+.post-metadata time {
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon-calendar {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+.post-metadata .post-tag {
+  background: var(--vivid-pink-p3, deeppink);
+  color: white;
+  padding: 0 1rem;
+  height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 20, 147, 0.2);
+}
+.post-metadata .post-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.3);
+  filter: brightness(1.1);
+}
+
+.post-metadata-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-link);
+  color: light-dark(white, #0d1b2a);
+  border: none;
+  padding: 0 1.2rem;
+  height: 2.2rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
+}
+.post-metadata-share:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 119, 182, 0.3);
+}
+
+.icon-share {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Integrated Header Hero */
+.hero-header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url('/img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 220px;
+  /* Slimmer, space-efficient header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 3rem;
+  border-bottom: none !important;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.header-content {
+  max-width: 64rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: rotate(-3deg);
+}
+
+header .logo:hover {
+  transform: rotate(0deg) scale(1.08);
+}
+
+.logo-image {
+  height: clamp(80px, 15vw, 120px);
+  width: clamp(80px, 15vw, 120px);
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Glassmorphism Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0.6rem 2rem;
+  margin: 0;
+  gap: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  /* Translucent white */
+  backdrop-filter: blur(12px);
+  /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 40px;
+  /* Pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+header .nav-item a {
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header .nav-item a:hover,
+header .nav-item a[aria-current="page"] {
+  color: var(--color-secondary) !important;
+}
+
+/* Post list cards */
+.postlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem;
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0;
+}
+
+.postlist-item {
+  background: var(--card-bg);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+.postlist-item:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+.postlist-thumbnail-container {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.postlist-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.6s ease;
+}
+.postlist-item:hover .postlist-thumbnail {
+  transform: scale(1.1);
+}
+
+.postlist-content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.postlist-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-primary) !important;
+  text-decoration: none !important;
+  margin-bottom: 1rem;
+  display: block;
+  transition: all 0.2s ease;
+}
+.postlist-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline !important;
+}
+
+.postlist-description {
+  font-size: 1rem;
+  color: var(--color-text);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.postlist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .postlist-item-author {
+    display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.postlist-author-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  max-width: none;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: none;
+  border: 2px solid var(--border-color);
+}
+
+.postlist-author-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.postlist-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+    margin: 1.5rem 0;
+    /* More space at bottom */
+}
+.post-tag {
+  display: inline-block;
+  background-color: rgb(255, 20, 147);
+    /* DeepPink fallback */
+    background-color: color(display-p3 0.99 0.08 0.58);
+    /* Vivid P3 DeepPink */
+    color: white !important;
+    padding: 0.35rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 20, 147, 0.2);
+  }
+  
+  .tags-landing {
+    gap: 1.25rem;
+    margin: 3rem 0;
+    justify-content: center;
+    /* Center them for a more "hero" landing page feel */
+  }
+  
+  .tags-landing .post-tag {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.15);
+  }
+  
+  .tag-count {
+    font-weight: 500;
+    opacity: 0.85;
+    margin-left: 0.5rem;
+    font-size: 0.85em;
+    font-family: var(--font-family-monospace);
+  }
+  
+  .post-tag:hover {
+    background-color: rgb(255, 20, 147);
+    background-color: color(display-p3 1 0 0.6);
+    /* Even more vivid on hover */
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 20, 147, 0.4);
+  }
+  
+  /* Post Content */
+  article {
+    max-width: 45rem;
+    margin: 0 auto;
+  }
+  
+  article h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .post-metadata {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 4rem;
+    font-size: 1.1rem;
+  }
+  
+  .post-share-footer {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    padding: 3rem 0;
+    border-top: 1px dashed var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
+  }
+  
+  .post-share-footer p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-family-headings);
+    letter-spacing: -0.01em;
+  }
+  
+  .author-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 24px;
+    margin-top: 5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+  }
+  
+  .author-avatar {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-secondary);
+  }
+  
+  .author-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+  
+  .author-info p {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 5rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 6rem;
+    color: #6c757d;
+  }
+  
+  .footer-classic {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-classic p {
+    margin: 0.5rem 0;
+  }
+  
+  .footer-nav {
+    margin-top: 1rem;
+}
+.footer-nav a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+footer hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+/* Language Switcher */
+#lang-switcher {
+  background: var(--card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  }
+  
+  #lang-switcher:hover {
+    border-color: var(--color-secondary);
+  }
+  
+  /* Author Page */
+  .author-page-header {
+    display: flex;
+  align-items: center;
+  gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+  }
+  
+  .author-page-avatar {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-secondary);
+    box-shadow: var(--shadow);
+  }
+  
+  .author-page-info h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: var(--color-primary);
+  }
+  
+  .author-page-bio {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-top: 1rem;
+    max-width: 600px;
+  }
+  
+  /* Card Link Interactivity */
+  .postlist-thumbnail-link,
+  .postlist-description-link,
+  .postlist-author-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
+.postlist-thumbnail-link:hover .postlist-thumbnail {
+  transform: scale(1.05);
+}
+
+.postlist-description-link:hover .postlist-description {
+  color: var(--color-secondary) !important;
+}
+
+.postlist-author-link:hover .postlist-author-name {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.postlist-author-link:hover .postlist-author-avatar {
+  border-color: var(--color-secondary);
+  transform: scale(1.1);
+}
+
+.postlist-author-avatar {
+  transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .postlist {
+    gap: 2rem;
+    }
+}
+@media (max-width: 800px) {
+  .author-page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+                                padding: 1.5rem;
+}
+.author-section {
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem;
+}
+.post-share-footer {
+  padding: 2rem 1rem;
+  margin: 2.5rem 0 1rem;
+}
+}
+
+@media (max-width: 768px) {
+  .hero-header {
+    min-height: 380px;
+    padding: 2rem 0;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header .logo {
+    transform: rotate(0deg);
+  }
+
+                                                                                                                                .nav {
+                                                                                                                                  padding: 0.5rem 1.5rem;
+                                                                                                                                  gap: 1.25rem;
+                                                                                                                                  flex-wrap: wrap;
+                                                                                                                                  justify-content: center;
+    border-radius: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+  .article-hero-bleed {
+    height: 300px;
+  }
+
+  article h1 {
+    font-size: 2.2rem;
+  }
+
+  .post-metadata {
+    gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    }
+    
+    @media (max-width: 500px) {
+      body {
+        padding: 0 0.75rem;
+      }
+    
+      .hero-header {
+        min-height: 320px;
+      }
+    
+      .nav {
+        gap: 0.75rem;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+    
+      header .nav-item a {
+        font-size: 0.85rem;
+      }
+    
+      .postlist {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    
+      .postlist-content {
+        padding: 1.25rem;
+      }
+}</style>
+		
+		
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header class="site-header hero-header">
+			<div class="header-content">
+				<a href="/samples/trailblazers/_site/en/" class="logo">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/_site/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/_site/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
+				</a>
+
+				<nav>
+					<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+					<ul class="nav">
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/">Home</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/blog/">Archive</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/about/">About</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/_site/en/feed/feed.xml">Feed</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/_site/en/blog/create/">Create</a></li>
+						
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				<h1 id="tagged-jordan">Tagged “Jordan”</h1>
+
+
+<ul class="postlist">
+	<li class="postlist-item">
+		<a href="/samples/trailblazers/_site/en/blog/petra-rose-red-city/" class="postlist-thumbnail-link">
+			<div class="postlist-thumbnail-container">
+				<picture><source type="image/avif" srcset="/samples/trailblazers/_site/img/fiCl4aJmQy-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/_site/img/fiCl4aJmQy-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/img/fiCl4aJmQy-3000.jpeg" alt="Petra: Secrets of the Rose Red City" class="postlist-thumbnail" width="3000" height="2250"></picture>
+			</div>
+		</a>
+		<div class="postlist-content">
+			<div class="tags">
+					<a href="/samples/trailblazers/_site/en/tags/history/" class="post-tag">History</a>
+					<a href="/samples/trailblazers/_site/en/tags/jordan/" class="post-tag">Jordan</a>
+					<a href="/samples/trailblazers/_site/en/tags/hidden-gem/" class="post-tag">Hidden Gem</a>
+			</div>
+			<a href="/samples/trailblazers/_site/en/blog/petra-rose-red-city/" class="postlist-link">Petra: Secrets of the Rose Red City</a>
+			<a href="/samples/trailblazers/_site/en/blog/petra-rose-red-city/" class="postlist-description-link">
+				<p class="postlist-description">Discover the wonders of Petra, Jordan through our latest adventure.</p>
+			</a>
+			
+			<div class="postlist-footer">
+				<a href="/samples/trailblazers/_site/en/authors/ashok/" class="postlist-author-link">
+					<div class="postlist-item-author">
+						
+							<picture><source type="image/avif" srcset="/samples/trailblazers/_site/img/PZ3GfjbWSC-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/_site/img/PZ3GfjbWSC-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/_site/img/PZ3GfjbWSC-1024.png" alt="Ashok" class="postlist-author-avatar" width="1024" height="1024"></picture>
+							<span class="postlist-author-name">Ashok</span>
+						
+					</div>
+				</a>
+				<time class="postlist-date" datetime="2026-03-13">Mar 2026</time>
+			</div>
+			<a href="/samples/trailblazers/_site/blog/create/?edit=.%2Fcontent%2Fen%2Fblog%2Fpetra-rose-red-city%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️</a>
+		</div>
+	</li>
+</ul>
+
+
+<p>See <a href="/samples/trailblazers/_site/en/tags/">all tags</a>.</p>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<div class="footer-classic">
+				<p>&copy; 2026 trAIlblazers Travel Blog. All rights reserved.</p>
+				<p>Travel tales by <strong>Maya, Ashok, and Julia</strong>.</p>
+				<nav class="footer-nav">
+					<a href="/samples/trailblazers/_site/en/about/">About</a> | 
+					<a href="/samples/trailblazers/_site/en/imprint/">Imprint</a> | 
+					<a href="/samples/trailblazers/_site/en/privacy/">Privacy Policy</a>
+				</nav>
+			</div>
+			<hr>
+			<form>
+				<label for="lang-switcher">Language:</label>
+				<select id="lang-switcher" onchange="location = this.value;">
+					
+					<option value="/en/tags/jordan/" selected="">
+						English
+					</option>
+					
+					<option value="/es/tags/jordan/">
+						Español
+					</option>
+					
+					<option value="/ja/tags/jordan/">
+						日本語
+					</option>
+					
+				</select>
+			</form>
+		</footer>
+
+		<!-- This page `/en/tags/jordan/` was built on 2026-03-18T19:07:18.822Z -->
+		<script type="module" src="/samples/trailblazers/_site/dist/tZ-SLEJvvt.js"></script>
+		
+	</body>
+</html>
