@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>getInstalledRelatedApps()</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#8b5cf6">
+  <meta name="description" content="Detect if your app is already installed on the user's device">
+  <link rel="icon" href="./icons/icon-192.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.svg">
+  <link rel="stylesheet" href="./styles.css?v=2">
+</head>
+<body>
+
+  <main>
+
+    <!-- What is it? -->
+    <div class="section">
+      <div class="hero-title-wrapper">
+        <h1 class="section-hero-title">
+          getInstalledRelatedApps()
+        </h1>
+      </div>
+      <p class="section-hero-subtitle">Detect if your app is already installed on the user's device</p>
+      <hr class="section-divider">
+      <h2 class="section-title"><span class="emoji">💡</span> What is it?</h2>
+      <p>
+        The <span class="code-inline">navigator.getInstalledRelatedApps()</span> API can be used to check for the
+        installation of Progressive Web Apps (PWAs), Universal Windows Platform (UWP) apps,
+        and Android apps that are related to the web app calling this method.
+      </p>
+    </div>
+
+    <!-- Basic Usage -->
+    <div class="section">
+      <h2 class="section-title"><span class="emoji">⚡</span> Basic Usage</h2>
+<pre>const installedApps = await navigator.getInstalledRelatedApps?.();
+console.log(installedApps);</pre>
+    </div>
+
+    <!-- Manifest Requirement -->
+    <div class="section">
+      <h2 class="section-title"><span class="emoji">📋</span> Manifest Requirement: related_applications</h2>
+<pre id="manifest-display">Loading manifest&hellip;</pre>
+    </div>
+
+    <!-- More on How to Set It Up -->
+    <div class="section">
+      <h2 class="section-title"><span class="emoji">🔧</span> More on How to Set It Up</h2>
+
+      <!-- PWA in scope -->
+      <details>
+        <summary>Check if your own Desktop PWA is installed (same scope)</summary>
+        <div class="supported-banner">
+          Supported on:
+          <span class="badge green">Android — Chrome 84+</span>
+          <span class="badge">Desktop — Chrome / Edge 140+</span>
+        </div>
+        <div class="info-section">
+          <h4>1. Tell your PWA about itself</h4>
+          <p>Add a <span class="code-inline">related_applications</span> entry in your web app manifest:</p>
+<pre>"related_applications": [{
+  "platform": "webapp",
+  "url": "/manifest.json",
+  "id": "https://example.com/?utm_source=home_screen"
+}]</pre>
+
+          <h4>2. Check if the PWA is installed</h4>
+          <p>
+            Call <span class="code-inline">navigator.getInstalledRelatedApps()</span> from within the scope of your PWA.
+            If called outside the scope, it returns <span class="code-inline">[]</span>.
+          </p>
+<pre>const relatedApps = await navigator.getInstalledRelatedApps();
+console.log(relatedApps);</pre>
+        </div>
+      </details>
+
+      <!-- PWA out of scope -->
+      <details>
+        <summary>Check if a PWA is installed (different scope/origin)</summary>
+        <div class="supported-banner">
+          Supported on:
+          <span class="badge amber">Android only — Chrome 84+</span>
+        </div>
+        <div class="info-section">
+          <h4>1. Tell your PWA about your website</h4>
+          <p>
+            Add an <span class="code-inline">assetlinks.json</span> file to
+            <span class="code-inline">/.well-known/</span> on the PWA's domain:
+          </p>
+<pre>// Served from https://app.example.com/.well-known/assetlinks.json
+[{
+  "relation": ["delegate_permission/common.query_webapk"],
+  "target": {
+    "namespace": "web",
+    "site": "https://www.example.com/manifest.json"
+  }
+}]</pre>
+
+          <h4>2. Tell your website about your PWA</h4>
+<pre>{
+  "related_applications": [{
+    "platform": "webapp",
+    "url": "https://app.example.com/manifest.json"
+  }]
+}</pre>
+        </div>
+      </details>
+
+      <!-- Android -->
+      <details>
+        <summary>Check if an Android app is installed</summary>
+        <div class="supported-banner">
+          Supported on:
+          <span class="badge amber">Android only — Chrome 80+</span>
+        </div>
+        <div class="info-section">
+          <h4>1. Tell your Android app about your website</h4>
+          <p>
+            Update your Android app to define the relationship using
+            <a href="https://developers.google.com/digital-asset-links/v1/getting-started" target="_blank" rel="noopener">Digital Asset Links</a>.
+          </p>
+          <p>In <span class="code-inline">AndroidManifest.xml</span>, add an <span class="code-inline">asset_statements</span> entry:</p>
+<pre>&lt;manifest&gt;
+  &lt;application&gt;
+    &lt;meta-data
+      android:name="asset_statements"
+      android:resource="@string/asset_statements" /&gt;
+  &lt;/application&gt;
+&lt;/manifest&gt;</pre>
+
+          <p>In <span class="code-inline">strings.xml</span>:</p>
+<pre>&lt;string name="asset_statements"&gt;
+  [{
+    \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+    \"target\": {
+      \"namespace\": \"web\",
+      \"site\": \"https://example.com\"
+    }
+  }]
+&lt;/string&gt;</pre>
+
+          <h4>2. Tell your website about your Android app in the app manifest</h4>
+<pre>{
+  "related_applications": [{
+    "platform": "play",
+    "id": "com.android.chrome"
+  }]
+}</pre>
+        </div>
+      </details>
+
+      <!-- Windows UWP -->
+      <details>
+        <summary>Check if a Windows (UWP) app is installed</summary>
+        <div class="supported-banner">
+          Supported on:
+          <span class="badge">Windows — Chrome 85+ / Edge 85+</span>
+        </div>
+        <div class="info-section">
+          <h4>1. Tell your Windows app about your website</h4>
+          <p>
+            Use <a href="https://docs.microsoft.com/en-us/windows/uwp/launch-resume/web-to-app-linking" target="_blank" rel="noopener">URI Handlers</a>.
+            Add to <span class="code-inline">Package.appxmanifest</span>:
+          </p>
+<pre>&lt;Extensions&gt;
+  &lt;uap3:Extension Category="windows.appUriHandler"&gt;
+    &lt;uap3:AppUriHandler&gt;
+      &lt;uap3:Host Name="example.com" /&gt;
+    &lt;/uap3:AppUriHandler&gt;
+  &lt;/uap3:Extension&gt;
+&lt;/Extensions&gt;</pre>
+
+          <h4>2. Tell your website about your Windows app</h4>
+          <p>
+            Create a <span class="code-inline">windows-app-web-link</span> file (no <span class="code-inline">.json</span> extension)
+            in your web server root or <span class="code-inline">/.well-known/</span>:
+          </p>
+<pre>[{
+  "packageFamilyName": "MyApp_9jmtgj1pbbz6e",
+  "paths": ["*"]
+}]</pre>
+
+          <p>Add the UWP reference to the app manifest:</p>
+<pre>{
+  "related_applications": [{
+    "platform": "windows",
+    "id": "MyApp_9jmtgj1pbbz6e!App"
+  }]
+}</pre>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- Live Desktop PWA Demo -->
+    <div class="section demo-section">
+      <h2 class="section-title"><span class="emoji">🚀</span> Live Desktop PWA Demo</h2>
+      <p>
+        This site has a self-defining <span class="code-inline">related_applications</span> entry in its
+        <span class="code-inline">manifest.json</span>.
+        The demo below checks if this PWA has been installed on your device.
+        Try installing this PWA and then reload the app to see how <span class="code-inline">getInstalledRelatedApps</span> works.
+      </p>
+
+      <div id="install" class="hidden">
+        <button id="but-install">Install PWA</button>
+      </div>
+
+      <div class="result-box">
+        <span class="status-label">Installed App:</span>
+        <span id="gira-status">checking&hellip;</span>
+        <pre id="gira-results">[]</pre>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    getInstalledRelatedApps() &middot; PWA Detection Demo
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./demo.js"></script>
+  <script src="./install.js"></script>
+  <script src="./main.js"></script>
+
+</body>
+</html>

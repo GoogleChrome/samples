@@ -1,0 +1,11 @@
+[
+  {
+    "_comment": "Example Entry: Cross-origin PWA (WebAPK) verification.",
+    "relation": ["delegate_permission/common.query_webapk"],
+    "target": {
+      "namespace": "web",
+      "_comment_site": "The origin of the PWA you want to detect",
+      "site": "https://example.com"
+    }
+  }
+]

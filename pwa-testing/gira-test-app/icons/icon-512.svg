@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0e7ff"/>
+      <stop offset="100%" style="stop-color:#c7d2fe"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
+  
+  <!-- Phone body -->
+  <rect x="152" y="80" width="208" height="330" rx="28" fill="url(#phone)" opacity="0.95"/>
+  <rect x="168" y="112" width="176" height="244" rx="8" fill="#6366f1" opacity="0.15"/>
+  
+  <!-- Screen notch -->
+  <rect x="218" y="90" width="76" height="10" rx="5" fill="#6366f1" opacity="0.3"/>
+  
+  <!-- App grid on screen -->
+  <rect x="182" y="130" width="44" height="44" rx="10" fill="#34d399"/>
+  <rect x="234" y="130" width="44" height="44" rx="10" fill="#fb923c"/>
+  <rect x="286" y="130" width="44" height="44" rx="10" fill="#f472b6"/>
+  
+  <rect x="182" y="186" width="44" height="44" rx="10" fill="#60a5fa"/>
+  <rect x="234" y="186" width="44" height="44" rx="10" fill="#a78bfa"/>
+  <rect x="286" y="186" width="44" height="44" rx="10" fill="#fbbf24"/>
+  
+  <rect x="182" y="242" width="44" height="44" rx="10" fill="#f87171"/>
+  <rect x="234" y="242" width="44" height="44" rx="10" fill="#2dd4bf"/>
+  <rect x="286" y="242" width="44" height="44" rx="10" fill="#818cf8"/>
+  
+  <!-- Mini app labels -->
+  <rect x="186" y="168" width="36" height="3" rx="1.5" fill="white" opacity="0.3"/>
+  <rect x="238" y="168" width="36" height="3" rx="1.5" fill="white" opacity="0.3"/>
+  <rect x="290" y="168" width="36" height="3" rx="1.5" fill="white" opacity="0.3"/>
+  
+  <!-- Search bar on screen -->
+  <rect x="182" y="300" width="148" height="28" rx="14" fill="white" opacity="0.15"/>
+  <circle cx="198" cy="314" r="6" fill="white" opacity="0.3"/>
+  
+  <!-- Home button -->
+  <circle cx="256" cy="386" r="12" fill="#6366f1" opacity="0.3"/>
+  
+  <!-- Checkmark badge -->
+  <circle cx="368" cy="118" r="60" fill="#059669"/>
+  <circle cx="368" cy="118" r="52" fill="#10b981"/>
+  <path d="M340 118 L358 136 L398 96" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Magnifying glass (search/detect) -->
+  <circle cx="130" cy="400" r="32" stroke="white" stroke-width="6" fill="none" opacity="0.5"/>
+  <line x1="152" y1="422" x2="172" y2="442" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+  
+  <!-- Sparkles -->
+  <circle cx="100" cy="120" r="8" fill="white" opacity="0.5"/>
+  <circle cx="80" cy="160" r="4" fill="white" opacity="0.3"/>
+  <circle cx="420" cy="340" r="6" fill="white" opacity="0.4"/>
+  <circle cx="440" cy="380" r="3" fill="white" opacity="0.3"/>
+  <circle cx="108" cy="300" r="5" fill="white" opacity="0.35"/>
+  <circle cx="420" cy="240" r="4" fill="white" opacity="0.25"/>
+  
+  <!-- Connection dots (related apps concept) -->
+  <circle cx="430" cy="440" r="14" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="460" cy="410" r="10" fill="#f472b6" opacity="0.6"/>
+  <circle cx="448" cy="460" r="8" fill="#34d399" opacity="0.5"/>
+  <line x1="430" y1="440" x2="460" y2="410" stroke="white" stroke-width="2" opacity="0.3"/>
+  <line x1="430" y1="440" x2="448" y2="460" stroke="white" stroke-width="2" opacity="0.3"/>
+</svg>
