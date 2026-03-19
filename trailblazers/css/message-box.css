@@ -1,18 +1,24 @@
 /* Message Box */
 .message-box {
-  --color-message-box: #ffc;
+  --color-message-box-bg: #fff9c4;
 
   display: block;
-  background-color: var(--color-message-box);
+  background-color: var(--color-message-box-bg);
   color: var(--color-gray-90);
-  padding: 1em 0.625em; /* 16px 10px /16 */
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
 }
+
 .message-box ol {
-  margin-top: 0;
+  margin: 0;
+  padding-left: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   .message-box {
-    --color-message-box: #082840;
+    --color-message-box-bg: #0d1b2a;
+    border-color: var(--border-color);
   }
 }

@@ -19,56 +19,54 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
 /* Defaults */
 :root {
+  color-scheme: light dark;
+
+  /* Fonts */
   --font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
-    --font-family-headings: 'Outfit', sans-serif;
+  --font-family-headings: 'Outfit', sans-serif;
   --font-family-monospace:
     Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
     Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
     Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
-}
 
-/* Theme colors - Premium Travel Palette */
-:root {
-  --color-primary: #004b23;
-    /* Deep Jungle Green */
-    --color-secondary: #ff9100;
-    /* Sunset Orange */
-    --color-accent: #f4f1de;
-    /* Soft Sand */
-    --color-text: #1d3557;
-    /* Deep Navy */
-    --color-link: #0077b6;
-    /* Ocean Blue */
-    --color-link-hover: #023e8a;
-    --background-color: #fdfdfd;
-    --card-bg: #ffffff;
-    --border-color: #e9ecef;
-    --tag-bg: #e9ecef;
-    --tag-color: #495057;
+  /* Theme colors - Premium Travel Palette */
+  --color-primary: #004b23; /* Deep Jungle Green */
+  --color-secondary: #ff9100; /* Sunset Orange */
+  --color-accent: #f4f1de; /* Soft Sand */
+  --color-text: #1d3557; /* Deep Navy */
+  --color-link: #0077b6; /* Ocean Blue */
+  --color-link-hover: #023e8a;
+  --color-gray-dark: #495057;
+  --color-gray-90: #1a1a1b;
+  --background-color: #fdfdfd;
+  --card-bg: #ffffff;
+  --border-color: #e9ecef;
+  --tag-bg: #e9ecef;
+  --tag-color: #495057;
 
   --syntax-tab-size: 2;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --bg-dot-color: #e9ecef;
-    /* Light gray on near white */
+  --bg-dot-color: #e9ecef; /* Light gray on near white */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --color-primary: #48cae4;
-      --color-secondary: #ffb703;
-      --color-accent: #023e8a;
-      --color-text: #e9ecef;
-      --color-link: #90e0ef;
-      --color-link-hover: #caf0f8;
+    --color-secondary: #ffb703;
+    --color-accent: #023e8a;
+    --color-text: #e9ecef;
+    --color-link: #90e0ef;
+    --color-link-hover: #caf0f8;
+    --color-gray-dark: #ced4da;
+    --color-gray-90: #e9ecef;
 
     --background-color: #0d1b2a;
-      --card-bg: #1b263b;
-      --border-color: #415a77;
-      --tag-bg: #415a77;
-      --tag-color: #e9ecef;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      --bg-dot-color: rgba(255, 255, 255, 0.15);
-      /* Brighter white/gray on near-black */
+    --card-bg: #1b263b;
+    --border-color: #415a77;
+    --tag-bg: #415a77;
+    --tag-color: #e9ecef;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --bg-dot-color: rgba(255, 255, 255, 0.15); /* Brighter white/gray on near-black */
   }
 }
 
@@ -154,7 +152,7 @@ img {
   max-width: 100%;
   height: auto;
   border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 h1 {
   font-size: clamp(2.5rem, 8vw, 4rem);
@@ -353,8 +351,8 @@ header .nav-item a[aria-current="page"] {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
-    border: 1px solid var(--border-color);
-    position: relative;
+  border: 1px solid var(--border-color);
+  position: relative;
 }
 .postlist-item:hover {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -415,9 +413,9 @@ header .nav-item a[aria-current="page"] {
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-  }
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
   
   .postlist-item-author {
     display: flex;
@@ -450,8 +448,8 @@ header .nav-item a[aria-current="page"] {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-    margin: 1.5rem 0;
-    /* More space at bottom */
+  margin: 1.5rem 0;
+  /* More space at bottom */
 }
 .post-tag {
   display: inline-block;
@@ -699,8 +697,7 @@ footer hr {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
-  }
-                                padding: 1.5rem;
+  
 }
 .author-section {
   flex-direction: column;
@@ -712,7 +709,6 @@ footer hr {
   margin: 2.5rem 0 1rem;
 }
 }
-
 @media (max-width: 768px) {
   .hero-header {
     min-height: 380px;
@@ -729,13 +725,13 @@ footer hr {
     transform: rotate(0deg);
   }
 
-                                                                                                                                .nav {
-                                                                                                                                  padding: 0.5rem 1.5rem;
-                                                                                                                                  gap: 1.25rem;
-                                                                                                                                  flex-wrap: wrap;
-                                                                                                                                  justify-content: center;
+  .nav {
+    padding: 0.5rem 1.5rem;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
     border-radius: 25px;
-    }
+  }
 }
 
 @media (max-width: 600px) {
@@ -883,7 +879,7 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/tags/ペルー/` was built on 2026-03-19T09:40:04.354Z -->
+		<!-- This page `/ja/tags/ペルー/` was built on 2026-03-19T11:36:46.158Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
 		
 	</body>
