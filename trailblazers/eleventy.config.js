@@ -31,6 +31,8 @@ export default async function (eleventyConfig) {
   eleventyConfig
     .addPassthroughCopy({
       './public/': '/',
+      './content/img/hero.jpg': '/img/hero.jpg',
+      './content/img/logo.png': '/img/logo.png',
       './node_modules/@google/genai/dist/web/index.mjs': '/js/google-genai.js',
       './node_modules/@huggingface/transformers/dist/':
         '/js/huggingface-transformers/',
