@@ -258,7 +258,7 @@ a[href]:hover {
 .hero-header {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
-    url('/samples/trailblazers/dist/img/hero.jpg');
+    var(--hero-image-url, url('/img/hero.jpg'));
   background-size: cover;
   background-position: center;
   min-height: 220px;
@@ -793,7 +793,7 @@ footer hr {
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
-		<header class="site-header hero-header">
+		<header class="site-header hero-header" style="--hero-image-url: url('/samples/trailblazers/dist/img/hero.jpg');">
 			<div class="header-content">
 				<a href="/samples/trailblazers/dist/en/" class="logo">
 					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
@@ -889,7 +889,7 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/en/tags/wildlife/` was built on 2026-03-19T14:57:49.572Z -->
+		<!-- This page `/en/tags/wildlife/` was built on 2026-03-19T17:06:37.990Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
 		
 	</body>

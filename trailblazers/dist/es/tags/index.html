@@ -258,7 +258,7 @@ a[href]:hover {
 .hero-header {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
-    url('/samples/trailblazers/dist/img/hero.jpg');
+    var(--hero-image-url, url('/img/hero.jpg'));
   background-size: cover;
   background-position: center;
   min-height: 220px;
@@ -793,7 +793,7 @@ footer hr {
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">Saltar al contenido principal</a>
 
-		<header class="site-header hero-header">
+		<header class="site-header hero-header" style="--hero-image-url: url('/samples/trailblazers/dist/img/hero.jpg');">
 			<div class="header-content">
 				<a href="/samples/trailblazers/dist/es/" class="logo">
 					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
@@ -873,6 +873,14 @@ footer hr {
 
 	
 	
+	<a href="/samples/trailblazers/dist/es/tags/ee-uu/" class="post-tag">EE. UU. <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/energia/" class="post-tag">Energía <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/es/tags/montanas/" class="post-tag">Montañas <span class="tag-count">(1)</span></a>
 
 	
@@ -893,11 +901,11 @@ footer hr {
 
 	
 	
-	<a href="/samples/trailblazers/dist/es/tags/ee-uu/" class="post-tag">EE. UU. <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/es/tags/jordania/" class="post-tag">Jordania <span class="tag-count">(1)</span></a>
 
 	
 	
-	<a href="/samples/trailblazers/dist/es/tags/energia/" class="post-tag">Energía <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/es/tags/joyas-ocultas/" class="post-tag">Joyas Ocultas <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -913,14 +921,6 @@ footer hr {
 
 	
 	
-	<a href="/samples/trailblazers/dist/es/tags/jordania/" class="post-tag">Jordania <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/joyas-ocultas/" class="post-tag">Joyas Ocultas <span class="tag-count">(1)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/es/tags/islas/" class="post-tag">Islas <span class="tag-count">(1)</span></a>
 
 	
@@ -933,15 +933,15 @@ footer hr {
 
 	
 	
+	<a href="/samples/trailblazers/dist/es/tags/vida-silvestre/" class="post-tag">Vida Silvestre <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/es/tags/japon/" class="post-tag">Japón <span class="tag-count">(1)</span></a>
 
 	
 	
 	<a href="/samples/trailblazers/dist/es/tags/cultura/" class="post-tag">Cultura <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/vida-silvestre/" class="post-tag">Vida Silvestre <span class="tag-count">(1)</span></a>
 
 </div>
 
@@ -980,7 +980,7 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/es/tags/` was built on 2026-03-19T14:57:49.122Z -->
+		<!-- This page `/es/tags/` was built on 2026-03-19T17:06:37.515Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
 		
 	</body>

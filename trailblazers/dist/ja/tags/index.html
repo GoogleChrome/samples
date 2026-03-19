@@ -258,7 +258,7 @@ a[href]:hover {
 .hero-header {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
-    url('/samples/trailblazers/dist/img/hero.jpg');
+    var(--hero-image-url, url('/img/hero.jpg'));
   background-size: cover;
   background-position: center;
   min-height: 220px;
@@ -793,7 +793,7 @@ footer hr {
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">メインコンテンツへスキップ</a>
 
-		<header class="site-header hero-header">
+		<header class="site-header hero-header" style="--hero-image-url: url('/samples/trailblazers/dist/img/hero.jpg');">
 			<div class="header-content">
 				<a href="/samples/trailblazers/dist/ja/" class="logo">
 					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
@@ -849,11 +849,39 @@ footer hr {
 
 	
 	
+	<a href="/samples/trailblazers/dist/ja/tags/湖/" class="post-tag">湖 <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/カナダ/" class="post-tag">カナダ <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/ja/tags/スピリチュアル/" class="post-tag">スピリチュアル <span class="tag-count">(1)</span></a>
 
 	
 	
 	<a href="/samples/trailblazers/dist/ja/tags/インドネシア/" class="post-tag">インドネシア <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/アメリカ/" class="post-tag">アメリカ <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/エネルギー/" class="post-tag">エネルギー <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/フランス/" class="post-tag">フランス <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/ロマンス/" class="post-tag">ロマンス <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/ペルー/" class="post-tag">ペルー <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -869,26 +897,6 @@ footer hr {
 
 	
 	
-	<a href="/samples/trailblazers/dist/ja/tags/ペルー/" class="post-tag">ペルー <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/湖/" class="post-tag">湖 <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/カナダ/" class="post-tag">カナダ <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/アメリカ/" class="post-tag">アメリカ <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/エネルギー/" class="post-tag">エネルギー <span class="tag-count">(1)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/ja/tags/冬/" class="post-tag">冬 <span class="tag-count">(1)</span></a>
 
 	
@@ -901,22 +909,6 @@ footer hr {
 
 	
 	
-	<a href="/samples/trailblazers/dist/ja/tags/フランス/" class="post-tag">フランス <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/ロマンス/" class="post-tag">ロマンス <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/ヨルダン/" class="post-tag">ヨルダン <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/ja/tags/秘境/" class="post-tag">秘境 <span class="tag-count">(1)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/ja/tags/島/" class="post-tag">島 <span class="tag-count">(1)</span></a>
 
 	
@@ -926,6 +918,14 @@ footer hr {
 	
 	
 	<a href="/samples/trailblazers/dist/ja/tags/リラクゼーション/" class="post-tag">リラクゼーション <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/ヨルダン/" class="post-tag">ヨルダン <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/ja/tags/秘境/" class="post-tag">秘境 <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -980,7 +980,7 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/tags/` was built on 2026-03-19T14:57:49.248Z -->
+		<!-- This page `/ja/tags/` was built on 2026-03-19T17:06:37.642Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
 		
 	</body>
