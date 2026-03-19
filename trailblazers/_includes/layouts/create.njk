@@ -8,19 +8,19 @@
 <script type="importmap" eleventy:ignore>
 {
   "imports": {
-    "prompt-api-polyfill": "/js/prompt-api-polyfill.js",
-    "firebase/app": "/js/firebase/firebase-app.js",
-    "firebase/ai": "/js/firebase/firebase-ai.js",
-    "browser-fs-access": "/js/browser-fs-access.js",
-    "@google/genai": "/js/google-genai.js",
-    "openai": "/js/openai/index.mjs",
-    "@huggingface/transformers": "/js/huggingface-transformers/transformers.web.min.js",
-    "p-retry": "/js/helpers/p-retry-esm.js",
-    "onnxruntime-common": "/js/onnxruntime-web/ort.all.min.mjs",
-    "onnxruntime-web/webgpu": "/js/onnxruntime-web/webgpu.js",
-    "onnxruntime-web": "/js/onnxruntime-web/ort.all.min.mjs",
-    "onnxruntime-web/": "/js/onnxruntime-web/",
-    "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js": "/js/firebase/firebase-app.js"
+    "prompt-api-polyfill": "{{ '/js/prompt-api-polyfill.js' | url }}",
+    "firebase/app": "{{ '/js/firebase/firebase-app.js' | url }}",
+    "firebase/ai": "{{ '/js/firebase/firebase-ai.js' | url }}",
+    "browser-fs-access": "{{ '/js/browser-fs-access.js' | url }}",
+    "@google/genai": "{{ '/js/google-genai.js' | url }}",
+    "openai": "{{ '/js/openai/index.mjs' | url }}",
+    "@huggingface/transformers": "{{ '/js/huggingface-transformers/transformers.web.min.js' | url }}",
+    "p-retry": "{{ '/js/helpers/p-retry-esm.js' | url }}",
+    "onnxruntime-common": "{{ '/js/onnxruntime-web/ort.all.min.mjs' | url }}",
+    "onnxruntime-web/webgpu": "{{ '/js/onnxruntime-web/webgpu.js' | url }}",
+    "onnxruntime-web": "{{ '/js/onnxruntime-web/ort.all.min.mjs' | url }}",
+    "onnxruntime-web/": "{{ '/js/onnxruntime-web/' | url }}",
+    "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js": "{{ '/js/firebase/firebase-app.js' | url }}"
   }
 }
 </script>
@@ -52,10 +52,10 @@
   if (!('switch' in HTMLInputElement.prototype)) {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = '/js/input-switch-polyfill.css';
+    css.href = '{{ "/js/input-switch-polyfill.css" | url }}';
     document.head.appendChild(css);
 
-    await import('/js/input-switch-polyfill.js');
+    await import('{{ "/js/input-switch-polyfill.js" | url }}');
   } else {
     document.head.insertAdjacentHTML(
       'beforeend',
@@ -64,21 +64,21 @@
   }
 </script>
 
-<link rel="stylesheet" href="/css/create-post.css">
-<link rel="stylesheet" href="/css/prism-okaidia.css">
-<link rel="manifest" href="/blog/create/manifest.json">
+<link rel="stylesheet" href="{{ '/css/create-post.css' | url }}">
+<link rel="stylesheet" href="{{ '/css/prism-okaidia.css' | url }}">
+<link rel="manifest" href="{{ '/blog/create/manifest.json' | url }}">
 
-<script src="/js/marked.js"></script>
-<script src="/js/prism.js"></script>
-<script src="/js/turndown.js"></script>
-<script src="/js/jszip.js"></script>
+<script src="{{ '/js/marked.js' | url }}"></script>
+<script src="{{ '/js/prism.js' | url }}"></script>
+<script src="{{ '/js/turndown.js' | url }}"></script>
+<script src="{{ '/js/jszip.js' | url }}"></script>
 
-<script type="module" src="/js/editor/create-post.js" eleventy:ignore></script>
+<script type="module" src="{{ '/js/editor/create-post.js' | url }}" eleventy:ignore></script>
 
 <script eleventy:ignore>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/blog/create/sw.js', { scope: '/blog/create/' });
+      navigator.serviceWorker.register('{{ "/blog/create/sw.js" | url }}', { scope: '{{ "/blog/create/" | url }}' });
     });
   }
 
