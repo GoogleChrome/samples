@@ -1,17 +1,18 @@
 ---
 permalink: /index.html
+layout: false
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/en/">
+    <meta http-equiv="refresh" content="0; url={{ '/en/' | url }}">
     <title>Redirecting...</title>
     <script>
-        window.location.href = "/en/";
+        window.location.href = "{{ '/en/' | url }}";
     </script>
 </head>
 <body>
-    <p>Redirecting to <a href="/en/">English version</a>...</p>
+    <p>Redirecting to <a href="{{ '/en/' | url }}">English version</a>...</p>
 </body>
 </html>
