@@ -61,7 +61,7 @@ export default async function (eleventyConfig) {
       './node_modules/prompt-api-polyfill/dot_env.json': '/dot_env.json',
       './node_modules/turndown/dist/turndown.js': '/js/turndown.js',
     })
-    .addPassthroughCopy('./content/feed/pretty-atom-feed.xsl');
+
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
