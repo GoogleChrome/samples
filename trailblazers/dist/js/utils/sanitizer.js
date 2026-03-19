@@ -33,23 +33,13 @@ export async function sanitizeHTML(container, html) {
   }
 
   if (!window.DOMPurify && !domPurifyPromise) {
-    const link = document.createElement('link');
-    link.rel = 'modulepreload';
-    link.href = '/js/purify.min.js';
-    document.head.appendChild(link);
-
     domPurifyPromise = (async () => {
       try {
         await import('/js/purify.min.js');
         return window.DOMPurify;
       } catch (e) {
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = '/js/purify.min.js';
-          script.onload = () => resolve(window.DOMPurify);
-          script.onerror = reject;
-          document.head.appendChild(script);
-        });
+        console.error('Failed to load DOMPurify', e);
+        return null;
       }
     })();
   }

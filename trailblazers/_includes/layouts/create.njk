@@ -5,10 +5,20 @@
 {% endblock %}
 
 {% block head %}
+<script eleventy:ignore>
+	window.APP_LOCALES = {{ locales | dump | safe }};
+	window.DEFAULT_LOCALE = {{ metadata.language | dump | safe }};
+	window.CURRENT_LOCALE = 'en';
+	window.BASE_URL = "{{ '/' | url }}";
+</script>
 <script type="importmap" eleventy:ignore>
 {
   "imports": {
     "prompt-api-polyfill": "{{ '/js/prompt-api-polyfill.js' | url }}",
+    "/js/prompt-api-polyfill.js": "{{ '/js/prompt-api-polyfill.js' | url }}",
+    "/js/purify.min.js": "{{ '/js/purify.min.js' | url }}",
+    "/js/ai/ai-multimodal.js": "{{ '/js/ai/ai-multimodal.js' | url }}",
+    "/js/task-apis/": "{{ '/js/task-apis/' | url }}",
     "firebase/app": "{{ '/js/firebase/firebase-app.js' | url }}",
     "firebase/ai": "{{ '/js/firebase/firebase-ai.js' | url }}",
     "browser-fs-access": "{{ '/js/browser-fs-access.js' | url }}",
@@ -64,16 +74,16 @@
   }
 </script>
 
-<link rel="stylesheet" href="{{ '/css/create-post.css' | url }}">
-<link rel="stylesheet" href="{{ '/css/prism-okaidia.css' | url }}">
-<link rel="manifest" href="{{ '/blog/create/manifest.json' | url }}">
+<link rel="stylesheet" href="/css/create-post.css">
+<link rel="stylesheet" href="/css/prism-okaidia.css">
+<link rel="manifest" href="/blog/create/manifest.json">
 
-<script src="{{ '/js/marked.js' | url }}"></script>
-<script src="{{ '/js/prism.js' | url }}"></script>
-<script src="{{ '/js/turndown.js' | url }}"></script>
-<script src="{{ '/js/jszip.js' | url }}"></script>
+<script src="/js/marked.js"></script>
+<script src="/js/prism.js"></script>
+<script src="/js/turndown.js"></script>
+<script src="/js/jszip.js"></script>
 
-<script type="module" src="{{ '/js/editor/create-post.js' | url }}" eleventy:ignore></script>
+<script type="module" src="/js/editor/create-post.js"></script>
 
 <script eleventy:ignore>
   if ('serviceWorker' in navigator) {

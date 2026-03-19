@@ -28,7 +28,9 @@ export async function initTagSuggestions(ui, updateCallback) {
   const fetchSchema = async () =>
     !tagsSchema &&
     (tagsSchema = await (
-      await fetch(`/${window.CURRENT_LOCALE || 'en'}/tags-schema.json`)
+      await fetch(
+        `${window.BASE_URL || '/'}${window.CURRENT_LOCALE || 'en'}/tags-schema.json`,
+      )
     ).json());
 
   try {

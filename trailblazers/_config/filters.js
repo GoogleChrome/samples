@@ -113,7 +113,7 @@ export default function (eleventyConfig) {
       .getFilter('i18n')
       .call(this, pluralKey, { count, locale }, locale);
   });
-eleventyConfig.addFilter('filterAuthor', (collection, author) => {
+  eleventyConfig.addFilter('filterAuthor', (collection, author) => {
     return (collection || []).filter((item) => item.data.author === author);
   });
 

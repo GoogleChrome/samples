@@ -28,42 +28,39 @@ export default async function (eleventyConfig) {
 
   // Copy the contents of the `public` folder to the output folder
   // For example, `./public/css/` ends up in `_site/css/`
-  eleventyConfig
-    .addPassthroughCopy({
-      './public/': '/',
-      './content/img/hero.jpg': '/img/hero.jpg',
-      './content/img/logo.png': '/img/logo.png',
-      './node_modules/@google/genai/dist/web/index.mjs': '/js/google-genai.js',
-      './node_modules/@huggingface/transformers/dist/':
-        '/js/huggingface-transformers/',
-      './node_modules/browser-fs-access/dist/index.modern.js':
-        '/js/browser-fs-access.js',
-      './node_modules/built-in-ai-task-apis-polyfills/dist/': '/js/task-apis/',
-      './node_modules/dompurify/dist/purify.min.js': '/js/purify.min.js',
-      './node_modules/firebase/': '/js/firebase/',
-      './node_modules/firebase/firebase-ai.js': '/js/firebase-ai.js',
-      './node_modules/firebase/firebase-app.js': '/js/firebase-app.js',
-      './node_modules/input-switch-polyfill/input-switch-polyfill.css':
-        '/js/input-switch-polyfill.css',
-      './node_modules/input-switch-polyfill/input-switch-polyfill.js':
-        '/js/input-switch-polyfill.js',
-      './node_modules/jszip/dist/jszip.js': '/js/jszip.js',
-      './node_modules/marked/lib/marked.umd.js': '/js/marked.js',
-      './node_modules/onnxruntime-web/dist/': '/js/onnxruntime-web/',
-      './node_modules/onnxruntime-web/dist/ort.webgpu.min.mjs':
-        '/js/onnxruntime-web/webgpu.js',
-      './node_modules/openai/': '/js/openai/',
-      './node_modules/prismjs/prism.js': '/js/prism.js',
-      './node_modules/prismjs/themes/prism-okaidia.css':
-        '/css/prism-okaidia.css',
-      './node_modules/prompt-api-polyfill/dist/backends/': '/js/backends/',
-      './node_modules/prompt-api-polyfill/dist/chunks/': '/js/chunks/',
-      './node_modules/prompt-api-polyfill/dist/prompt-api-polyfill.js':
-        '/js/prompt-api-polyfill.js',
-      './node_modules/prompt-api-polyfill/dot_env.json': '/dot_env.json',
-      './node_modules/turndown/dist/turndown.js': '/js/turndown.js',
-    })
-
+  eleventyConfig.addPassthroughCopy({
+    './public/': '/',
+    './content/img/hero.jpg': '/img/hero.jpg',
+    './content/img/logo.png': '/img/logo.png',
+    './node_modules/@google/genai/dist/web/index.mjs': '/js/google-genai.js',
+    './node_modules/@huggingface/transformers/dist/':
+      '/js/huggingface-transformers/',
+    './node_modules/browser-fs-access/dist/index.modern.js':
+      '/js/browser-fs-access.js',
+    './node_modules/built-in-ai-task-apis-polyfills/dist/': '/js/task-apis/',
+    './node_modules/dompurify/dist/purify.min.js': '/js/purify.min.js',
+    './node_modules/firebase/': '/js/firebase/',
+    './node_modules/firebase/firebase-ai.js': '/js/firebase-ai.js',
+    './node_modules/firebase/firebase-app.js': '/js/firebase-app.js',
+    './node_modules/input-switch-polyfill/input-switch-polyfill.css':
+      '/js/input-switch-polyfill.css',
+    './node_modules/input-switch-polyfill/input-switch-polyfill.js':
+      '/js/input-switch-polyfill.js',
+    './node_modules/jszip/dist/jszip.js': '/js/jszip.js',
+    './node_modules/marked/lib/marked.umd.js': '/js/marked.js',
+    './node_modules/onnxruntime-web/dist/': '/js/onnxruntime-web/',
+    './node_modules/onnxruntime-web/dist/ort.webgpu.min.mjs':
+      '/js/onnxruntime-web/webgpu.js',
+    './node_modules/openai/': '/js/openai/',
+    './node_modules/prismjs/prism.js': '/js/prism.js',
+    './node_modules/prismjs/themes/prism-okaidia.css': '/css/prism-okaidia.css',
+    './node_modules/prompt-api-polyfill/dist/backends/': '/js/backends/',
+    './node_modules/prompt-api-polyfill/dist/chunks/': '/js/chunks/',
+    './node_modules/prompt-api-polyfill/dist/prompt-api-polyfill.js':
+      '/js/prompt-api-polyfill.js',
+    './node_modules/prompt-api-polyfill/dot_env.json': '/dot_env.json',
+    './node_modules/turndown/dist/turndown.js': '/js/turndown.js',
+  });
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets

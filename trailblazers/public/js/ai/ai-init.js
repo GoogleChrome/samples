@@ -10,10 +10,7 @@ export async function initAIFeatures(ui, sync, tagEditor) {
     return;
   }
   window.aiFeaturesInitialized = true;
-  const link = document.createElement('link');
-  link.rel = 'modulepreload';
-  link.href = '/js/ai/ai-multimodal.js';
-  document.head.appendChild(link);
+  import('/js/ai/ai-multimodal.js');
   const [
     { initAI },
     { initTagSuggestions },

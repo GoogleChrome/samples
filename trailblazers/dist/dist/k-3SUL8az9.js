@@ -4,27 +4,30 @@
 let globalInstanceIndex = 0;
 
 class HeadingAnchors extends HTMLElement {
-	static register(tagName = "heading-anchors", registry = window.customElements) {
-		if(registry && !registry.get(tagName)) {
-			registry.define(tagName, this);
-		}
-	}
+  static register(
+    tagName = 'heading-anchors',
+    registry = window.customElements,
+  ) {
+    if (registry && !registry.get(tagName)) {
+      registry.define(tagName, this);
+    }
+  }
 
-	static attributes = {
-		exclude: "data-ha-exclude",
-		prefix: "prefix",
-		content: "content",
-	}
+  static attributes = {
+    exclude: 'data-ha-exclude',
+    prefix: 'prefix',
+    content: 'content',
+  };
 
-	static classes = {
-		anchor: "ha",
-		placeholder: "ha-placeholder",
-		srOnly: "ha-visualhide",
-	}
+  static classes = {
+    anchor: 'ha',
+    placeholder: 'ha-placeholder',
+    srOnly: 'ha-visualhide',
+  };
 
-	static defaultSelector = "h2,h3,h4,h5,h6";
+  static defaultSelector = 'h2,h3,h4,h5,h6';
 
-	static css = `
+  static css = `
 .${HeadingAnchors.classes.srOnly} {
 	clip: rect(0 0 0 0);
 	height: 1px;
@@ -63,195 +66,210 @@ class HeadingAnchors extends HTMLElement {
 	}
 }`;
 
-	get supports() {
-		return "replaceSync" in CSSStyleSheet.prototype;
-	}
+  get supports() {
+    return 'replaceSync' in CSSStyleSheet.prototype;
+  }
 
-	get supportsAnchorPosition() {
-		return CSS.supports("anchor-name: none");
-	}
+  get supportsAnchorPosition() {
+    return CSS.supports('anchor-name: none');
+  }
 
-	constructor() {
-		super();
+  constructor() {
+    super();
 
-		if(!this.supports) {
-			return;
-		}
+    if (!this.supports) {
+      return;
+    }
 
-		let sheet = new CSSStyleSheet();
-		sheet.replaceSync(HeadingAnchors.css);
-		document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+    let sheet = new CSSStyleSheet();
+    sheet.replaceSync(HeadingAnchors.css);
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
 
-		this.headingStyles = {};
-		this.instanceIndex = globalInstanceIndex++;
-	}
+    this.headingStyles = {};
+    this.instanceIndex = globalInstanceIndex++;
+  }
 
-	connectedCallback() {
-		if (!this.supports) {
-			return;
-		}
+  connectedCallback() {
+    if (!this.supports) {
+      return;
+    }
 
-		this.headings.forEach((heading, index) => {
-			if(!heading.hasAttribute(HeadingAnchors.attributes.exclude)) {
-				let anchor = this.getAnchorElement(heading);
-				let placeholder = this.getPlaceholderElement();
+    this.headings.forEach((heading, index) => {
+      if (!heading.hasAttribute(HeadingAnchors.attributes.exclude)) {
+        let anchor = this.getAnchorElement(heading);
+        let placeholder = this.getPlaceholderElement();
 
-				// Prefers anchor position approach for better accessibility
-				// https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
-				if(this.supportsAnchorPosition) {
-					let anchorName = `--ha_${this.instanceIndex}_${index}`;
-					placeholder.style.setProperty("anchor-name", anchorName);
-					anchor.style.positionAnchor = anchorName;
-				}
+        // Prefers anchor position approach for better accessibility
+        // https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+        if (this.supportsAnchorPosition) {
+          let anchorName = `--ha_${this.instanceIndex}_${index}`;
+          placeholder.style.setProperty('anchor-name', anchorName);
+          anchor.style.positionAnchor = anchorName;
+        }
 
-				heading.appendChild(placeholder);
-				heading.after(anchor);
-			}
-		});
-	}
+        heading.appendChild(placeholder);
+        heading.after(anchor);
+      }
+    });
+  }
 
-	// Polyfill-only
-	positionAnchorFromPlaceholder(placeholder) {
-		if(!placeholder) {
-			return;
-		}
+  // Polyfill-only
+  positionAnchorFromPlaceholder(placeholder) {
+    if (!placeholder) {
+      return;
+    }
 
-		let heading = placeholder.closest("h1,h2,h3,h4,h5,h6");
-		if(!heading.nextElementSibling) {
-			return;
-		}
+    let heading = placeholder.closest('h1,h2,h3,h4,h5,h6');
+    if (!heading.nextElementSibling) {
+      return;
+    }
 
-		// TODO next element could be more defensive
-		this.positionAnchor(heading.nextElementSibling);
-	}
+    // TODO next element could be more defensive
+    this.positionAnchor(heading.nextElementSibling);
+  }
 
-	// Polyfill-only
-	positionAnchor(anchor) {
-		if(!anchor || !anchor.previousElementSibling) {
-			return;
-		}
+  // Polyfill-only
+  positionAnchor(anchor) {
+    if (!anchor || !anchor.previousElementSibling) {
+      return;
+    }
 
-		// TODO previous element could be more defensive
-		let heading = anchor.previousElementSibling;
-		this.setFontProp(heading, anchor);
+    // TODO previous element could be more defensive
+    let heading = anchor.previousElementSibling;
+    this.setFontProp(heading, anchor);
 
-		if(this.supportsAnchorPosition) {
-			// quit early
-			return;
-		}
+    if (this.supportsAnchorPosition) {
+      // quit early
+      return;
+    }
 
-		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
-		if(placeholder) {
-			anchor.style.setProperty("--ha_offsetx", `${placeholder.offsetLeft}px`);
-			anchor.style.setProperty("--ha_offsety", `${placeholder.offsetTop}px`);
-		}
-	}
+    let placeholder = heading.querySelector(
+      `.${HeadingAnchors.classes.placeholder}`,
+    );
+    if (placeholder) {
+      anchor.style.setProperty('--ha_offsetx', `${placeholder.offsetLeft}px`);
+      anchor.style.setProperty('--ha_offsety', `${placeholder.offsetTop}px`);
+    }
+  }
 
-	setFontProp(heading, anchor) {
-		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
-		if(placeholder) {
-			let style = getComputedStyle(placeholder);
-			let props = ["font-weight", "font-size", "line-height", "font-family"];
-			let [weight, size, lh, family] = props.map(name => style.getPropertyValue(name));
-			anchor.style.setProperty("font", `${weight} ${size}/${lh} ${family}`);
-			let vars = style.getPropertyValue("font-variation-settings");
-			if(vars) {
-				anchor.style.setProperty("font-variation-settings", vars);
-			}
-		}
-	}
+  setFontProp(heading, anchor) {
+    let placeholder = heading.querySelector(
+      `.${HeadingAnchors.classes.placeholder}`,
+    );
+    if (placeholder) {
+      let style = getComputedStyle(placeholder);
+      let props = ['font-weight', 'font-size', 'line-height', 'font-family'];
+      let [weight, size, lh, family] = props.map((name) =>
+        style.getPropertyValue(name),
+      );
+      anchor.style.setProperty('font', `${weight} ${size}/${lh} ${family}`);
+      let vars = style.getPropertyValue('font-variation-settings');
+      if (vars) {
+        anchor.style.setProperty('font-variation-settings', vars);
+      }
+    }
+  }
 
-	getAccessibleTextPrefix() {
-		// Useful for i18n
-		return this.getAttribute(HeadingAnchors.attributes.prefix) || "Jump to section titled";
-	}
+  getAccessibleTextPrefix() {
+    // Useful for i18n
+    return (
+      this.getAttribute(HeadingAnchors.attributes.prefix) ||
+      'Jump to section titled'
+    );
+  }
 
-	getContent() {
-		if(this.hasAttribute(HeadingAnchors.attributes.content)) {
-			return this.getAttribute(HeadingAnchors.attributes.content);
-		}
-		return "#";
-	}
+  getContent() {
+    if (this.hasAttribute(HeadingAnchors.attributes.content)) {
+      return this.getAttribute(HeadingAnchors.attributes.content);
+    }
+    return '#';
+  }
 
-	// Placeholder nests inside of heading
-	getPlaceholderElement() {
-		let ph = document.createElement("span");
-		ph.setAttribute("aria-hidden", true);
-		ph.classList.add(HeadingAnchors.classes.placeholder);
-		let content = this.getContent();
-		if(content) {
-			ph.textContent = content;
-		}
+  // Placeholder nests inside of heading
+  getPlaceholderElement() {
+    let ph = document.createElement('span');
+    ph.setAttribute('aria-hidden', true);
+    ph.classList.add(HeadingAnchors.classes.placeholder);
+    let content = this.getContent();
+    if (content) {
+      ph.textContent = content;
+    }
 
-		ph.addEventListener("mouseover", (e) => {
-			let placeholder = e.target.closest(`.${HeadingAnchors.classes.placeholder}`);
-			if(placeholder) {
-				this.positionAnchorFromPlaceholder(placeholder);
-			}
-		});
+    ph.addEventListener('mouseover', (e) => {
+      let placeholder = e.target.closest(
+        `.${HeadingAnchors.classes.placeholder}`,
+      );
+      if (placeholder) {
+        this.positionAnchorFromPlaceholder(placeholder);
+      }
+    });
 
-		return ph;
-	}
+    return ph;
+  }
 
-	getAnchorElement(heading) {
-		let anchor = document.createElement("a");
-		anchor.href = `#${heading.id}`;
-		anchor.classList.add(HeadingAnchors.classes.anchor);
+  getAnchorElement(heading) {
+    let anchor = document.createElement('a');
+    anchor.href = `#${heading.id}`;
+    anchor.classList.add(HeadingAnchors.classes.anchor);
 
-		let content = this.getContent();
-		anchor.innerHTML = `<span class="${HeadingAnchors.classes.srOnly}">${this.getAccessibleTextPrefix()}: ${heading.textContent}</span>${content ? `<span aria-hidden="true">${content}</span>` : ""}`;
+    let content = this.getContent();
+    anchor.innerHTML = `<span class="${HeadingAnchors.classes.srOnly}">${this.getAccessibleTextPrefix()}: ${heading.textContent}</span>${content ? `<span aria-hidden="true">${content}</span>` : ''}`;
 
-		anchor.addEventListener("focus", e => {
-			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
-			if(anchor) {
-				this.positionAnchor(anchor);
-			}
-		});
+    anchor.addEventListener('focus', (e) => {
+      let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+      if (anchor) {
+        this.positionAnchor(anchor);
+      }
+    });
 
-		anchor.addEventListener("mouseover", (e) => {
-			// when CSS anchor positioning is supported, this is only used to set the font
-			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
-			this.positionAnchor(anchor);
-		});
+    anchor.addEventListener('mouseover', (e) => {
+      // when CSS anchor positioning is supported, this is only used to set the font
+      let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+      this.positionAnchor(anchor);
+    });
 
-		return anchor;
-	}
+    return anchor;
+  }
 
-	get headings() {
-		return this.querySelectorAll(this.selector.split(",").map(entry => `${entry.trim()}[id]`));
-	}
+  get headings() {
+    return this.querySelectorAll(
+      this.selector.split(',').map((entry) => `${entry.trim()}[id]`),
+    );
+  }
 
-	get selector() {
-		return this.getAttribute("selector") || HeadingAnchors.defaultSelector;
-	}
+  get selector() {
+    return this.getAttribute('selector') || HeadingAnchors.defaultSelector;
+  }
 }
 
 HeadingAnchors.register();
 
-export { HeadingAnchors }
-window.APP_LOCALES = ["en","es","ja","en-US","en-GB","es-ES","es-US"];
-	window.DEFAULT_LOCALE = "en";
-	window.CURRENT_LOCALE = 'en';
+export { HeadingAnchors };
+window.APP_LOCALES = ['en', 'es', 'ja', 'en-US', 'en-GB', 'es-ES', 'es-US'];
+window.DEFAULT_LOCALE = 'en';
+window.CURRENT_LOCALE = 'en';
 const urlParams = new URLSearchParams(window.location.search);
-			const adminFromUrl = urlParams.get('admin') === 'true';
-			const adminFromStorage = localStorage.getItem('admin') === 'true';
+const adminFromUrl = urlParams.get('admin') === 'true';
+const adminFromStorage = localStorage.getItem('admin') === 'true';
 
-			if (adminFromUrl) {
-				localStorage.setItem('admin', 'true');
-			} else if (adminFromStorage) {
-				urlParams.set('admin', 'true');
-				window.location.search = urlParams.toString();
-			}
+if (adminFromUrl) {
+  localStorage.setItem('admin', 'true');
+} else if (adminFromStorage) {
+  urlParams.set('admin', 'true');
+  window.location.search = urlParams.toString();
+}
 
-			const isAdmin = adminFromUrl || adminFromStorage;
-			if(isAdmin) {
-				document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'initial');
-				// Append ?admin=true to all internal links to maintain state
-				document.querySelectorAll('a[href^="/"]').forEach(a => {
-					const url = new URL(a.href, window.location.origin);
-					if (!url.searchParams.has('admin')) {
-						url.searchParams.set('admin', 'true');
-						a.href = url.pathname + url.search + url.hash;
-					}
-				});
-			}
+const isAdmin = adminFromUrl || adminFromStorage;
+if (isAdmin) {
+  document
+    .querySelectorAll('.admin-only')
+    .forEach((el) => (el.style.display = 'initial'));
+  // Append ?admin=true to all internal links to maintain state
+  document.querySelectorAll('a[href^="/"]').forEach((a) => {
+    const url = new URL(a.href, window.location.origin);
+    if (!url.searchParams.has('admin')) {
+      url.searchParams.set('admin', 'true');
+      a.href = url.pathname + url.search + url.hash;
+    }
+  });
+}
