@@ -1,6 +1,6 @@
-_site/
 node_modules/
 .cache
+!dist/
 
 # Built-in AI Agent instructions
 AGENTS.md
