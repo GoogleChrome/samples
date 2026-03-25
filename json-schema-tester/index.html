@@ -1,367 +1,397 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JSON Schema Tester</title>
-  <style>
-    body {
-      font-family:
-        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-        Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #f9f9f9;
-    }
-
-    h1 {
-      color: #111;
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      color: #666;
-      margin-top: 0;
-      margin-bottom: 30px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Schema Tester</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f9f9f9;
       }
-    }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-    }
+      h1 {
+        color: #111;
+        margin-bottom: 5px;
+      }
 
-    textarea {
-      width: 100%;
-      height: 450px;
-      font-family:
-        'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-      font-size: 13px;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-      background: #fff;
-      resize: vertical;
-    }
+      .subtitle {
+        color: #666;
+        margin-top: 0;
+        margin-bottom: 30px;
+      }
 
-    textarea:focus {
-      outline: none;
-      border-color: #0066cc;
-      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
 
-    #result-box {
-      height: 450px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background: #fff;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
-    button {
-      margin-top: 15px;
-      padding: 12px 24px;
-      background: #0066cc;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+      }
 
-    button:hover {
-      background: #0052a3;
-    }
+      textarea {
+        width: 100%;
+        height: 450px;
+        font-family:
+          'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 13px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        background: #fff;
+        resize: vertical;
+      }
 
-    .success {
-      color: #1e7e34;
-      background: #d4edda;
-      padding: 15px;
-      border-radius: 6px;
-      border: 1px solid #c3e6cb;
-      font-weight: bold;
-    }
+      textarea:focus {
+        outline: none;
+        border-color: #0066cc;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+      }
 
-    .error-title {
-      color: #bd2130;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+      #result-box {
+        height: 450px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fff;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
 
-    .error-list {
-      list-style-type: none;
-      padding-left: 0;
-      margin: 0;
-    }
+      button {
+        margin-top: 15px;
+        padding: 12px 24px;
+        background: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
 
-    .error-list li {
-      background: #f8d7da;
-      color: #721c24;
-      padding: 10px;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      border: 1px solid #f5c6cb;
-      font-size: 14px;
-      font-family: monospace;
-    }
+      button:hover {
+        background: #0052a3;
+      }
 
-    .examples {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+      .success {
+        color: #1e7e34;
+        background: #d4edda;
+        padding: 15px;
+        border-radius: 6px;
+        border: 1px solid #c3e6cb;
+        font-weight: bold;
+      }
 
-    .example-btn {
-      margin-top: 0;
-      padding: 6px 12px;
-      background: #e0e0e0;
-      color: #333;
-      font-size: 14px;
-      font-weight: normal;
-    }
+      .error-title {
+        color: #bd2130;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
-    .example-btn:hover {
-      background: #d0d0d0;
-    }
-  </style>
-</head>
+      .error-list {
+        list-style-type: none;
+        padding-left: 0;
+        margin: 0;
+      }
 
-<body>
-  <h1>JSON Schema Tester</h1>
-  <p class="subtitle">
-    Paste a schema on the left to check compatibility with
-    <a href="https://github.com/guidance-ai/llguidance/blob/main/docs/json_schema.md">llguidance</a>.
-  </p>
+      .error-list li {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        border: 1px solid #f5c6cb;
+        font-size: 14px;
+        font-family: monospace;
+      }
 
-  <div class="grid">
-    <div>
-      <div style="
+      .examples {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .example-btn {
+        margin-top: 0;
+        padding: 6px 12px;
+        background: #e0e0e0;
+        color: #333;
+        font-size: 14px;
+        font-weight: normal;
+      }
+
+      .example-btn:hover {
+        background: #d0d0d0;
+      }
+    </style>
+    <script type="module">
+      import Ajv from 'https://cdn.jsdelivr.net/npm/ajv@8.18.0/+esm';
+      window.Ajv8 = Ajv;
+    </script>
+  </head>
+
+  <body>
+    <h1>JSON Schema Tester</h1>
+    <p class="subtitle">
+      Paste a schema on the left to check compatibility with
+      <a
+        href="https://github.com/guidance-ai/llguidance/blob/main/docs/json_schema.md"
+        >llguidance</a
+      >.
+    </p>
+
+    <div class="grid">
+      <div>
+        <div
+          style="
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-          ">
-        <label for="schemaInput">JSON Schema</label>
-        <div class="examples">
-          <button onclick="loadExample('working')" class="example-btn">
-            Load Working Example
-          </button>
-          <button onclick="loadExample('not-working')" class="example-btn">
-            Load Not Working Example
-          </button>
+          "
+        >
+          <label for="schemaInput">JSON Schema</label>
+          <div class="examples">
+            <button onclick="loadExample('working')" class="example-btn">
+              Load Working Example
+            </button>
+            <button onclick="loadExample('not-working')" class="example-btn">
+              Load Not Working Example
+            </button>
+          </div>
+        </div>
+        <textarea
+          id="schemaInput"
+          placeholder="Paste your JSON schema here..."
+        ></textarea>
+        <button onclick="runValidation()">Validate Schema</button>
+      </div>
+
+      <div>
+        <label>Validation Report</label>
+        <div id="result-box">
+          <div id="output">
+            Paste a schema and click validate to see the results.
+          </div>
         </div>
       </div>
-      <textarea id="schemaInput" placeholder="Paste your JSON schema here..."></textarea>
-      <button onclick="runValidation()">Validate Schema</button>
     </div>
 
-    <div>
-      <label>Validation Report</label>
-      <div id="result-box">
-        <div id="output">
-          Paste a schema and click validate to see the results.
-        </div>
-      </div>
-    </div>
-  </div>
+    <script>
+      // Core validator engine from previous code
+      function validateSchemaForLLGuidance(schema) {
+        const errors = [];
 
-  <script>
-    // Core validator engine from previous code
-    function validateSchemaForLLGuidance(schema) {
-      const errors = [];
-
-      function containsLookaround(regexStr) {
-        if (!regexStr) return false;
-        return /\(\?[\!\=\<\>\s]/.test(regexStr);
-      }
-
-      function validateNode(node, path = 'root') {
-        if (!node || typeof node !== 'object') return;
-
-        if (node.$ref) {
-          if (
-            node.$ref.startsWith('http://') ||
-            node.$ref.startsWith('https://')
-          ) {
-            errors.push(
-              `[${path}] Remote/external references ($ref: "${node.$ref}") are unsupported.`
-            );
-          }
+        function containsLookaround(regexStr) {
+          if (!regexStr) return false;
+          return /\(\?[\!\=\<\>\s]/.test(regexStr);
         }
 
-        if (node.type === 'object' || node.properties) {
-          const definedProps = Object.keys(node.properties || {});
-          const requiredProps = node.required || [];
-          const allDefinedAreRequired = definedProps.every((p) =>
-            requiredProps.includes(p)
-          );
-          const hasMinMaxProps =
-            node.hasOwnProperty('minProperties') ||
-            node.hasOwnProperty('maxProperties');
+        function validateNode(node, path = 'root') {
+          if (!node || typeof node !== 'object') return;
 
-          if (hasMinMaxProps && !allDefinedAreRequired) {
-            errors.push(
-              `[${path}] minProperties/maxProperties are only supported when ALL defined properties in 'properties' are in the 'required' array.`
-            );
+          if (node.$ref) {
+            if (
+              node.$ref.startsWith('http://') ||
+              node.$ref.startsWith('https://')
+            ) {
+              errors.push(
+                `[${path}] Remote/external references ($ref: "${node.$ref}") are unsupported.`
+              );
+            }
           }
 
-          if (
-            node.patternProperties &&
-            Object.keys(node.patternProperties).length > 1
-          ) {
+          if (node.type === 'object' || node.properties) {
+            const definedProps = Object.keys(node.properties || {});
+            const requiredProps = node.required || [];
+            const allDefinedAreRequired = definedProps.every((p) =>
+              requiredProps.includes(p)
+            );
+            const hasMinMaxProps =
+              node.hasOwnProperty('minProperties') ||
+              node.hasOwnProperty('maxProperties');
+
+            if (hasMinMaxProps && !allDefinedAreRequired) {
+              errors.push(
+                `[${path}] minProperties/maxProperties are only supported when ALL defined properties in 'properties' are in the 'required' array.`
+              );
+            }
+
+            if (
+              node.patternProperties &&
+              Object.keys(node.patternProperties).length > 1
+            ) {
+              errors.push(
+                `[${path}] patternProperties must be disjoint (only 1 definition recommended).`
+              );
+            }
+          }
+
+          if (node.pattern && containsLookaround(node.pattern)) {
             errors.push(
-              `[${path}] patternProperties must be disjoint (only 1 definition recommended).`
+              `[${path}] regex patterns with lookarounds are not supported.`
             );
           }
-        }
 
-        if (node.pattern && containsLookaround(node.pattern)) {
-          errors.push(
-            `[${path}] regex patterns with lookarounds are not supported.`
-          );
-        }
+          const supportedFormats = [
+            'date-time',
+            'time',
+            'date',
+            'duration',
+            'email',
+            'hostname',
+            'ipv4',
+            'ipv6',
+            'uuid',
+            'uri',
+          ];
+          if (node.format && !supportedFormats.includes(node.format)) {
+            errors.push(`[${path}] format "${node.format}" is unsupported.`);
+          }
 
-        const supportedFormats = [
-          'date-time',
-          'time',
-          'date',
-          'duration',
-          'email',
-          'hostname',
-          'ipv4',
-          'ipv6',
-          'uuid',
-          'uri',
-        ];
-        if (node.format && !supportedFormats.includes(node.format)) {
-          errors.push(`[${path}] format "${node.format}" is unsupported.`);
-        }
+          if (path !== 'root' && node['x-guidance']) {
+            errors.push(
+              `[${path}] "x-guidance" is only recognized at the top-level of the schema.`
+            );
+          }
 
-        if (path !== 'root' && node['x-guidance']) {
-          errors.push(
-            `[${path}] "x-guidance" is only recognized at the top-level of the schema.`
-          );
-        }
+          const keywordsToRecurse = [
+            'properties',
+            'patternProperties',
+            'items',
+            'prefixItems',
+          ];
+          for (const kw of keywordsToRecurse) {
+            if (node[kw] && typeof node[kw] === 'object') {
+              for (const [key, value] of Object.entries(node[kw])) {
+                validateNode(value, `${path}.${kw}.${key}`);
+              }
+            }
+          }
 
-        const keywordsToRecurse = [
-          'properties',
-          'patternProperties',
-          'items',
-          'prefixItems',
-        ];
-        for (const kw of keywordsToRecurse) {
-          if (node[kw] && typeof node[kw] === 'object') {
-            for (const [key, value] of Object.entries(node[kw])) {
-              validateNode(value, `${path}.${kw}.${key}`);
+          const combinators = ['anyOf', 'allOf', 'oneOf'];
+          for (const comb of combinators) {
+            if (Array.isArray(node[comb])) {
+              node[comb].forEach((subSchema, idx) => {
+                validateNode(subSchema, `${path}.${comb}[${idx}]`);
+              });
             }
           }
         }
 
-        const combinators = ['anyOf', 'allOf', 'oneOf'];
-        for (const comb of combinators) {
-          if (Array.isArray(node[comb])) {
-            node[comb].forEach((subSchema, idx) => {
-              validateNode(subSchema, `${path}.${comb}[${idx}]`);
-            });
-          }
+        validateNode(schema);
+        return { valid: errors.length === 0, errors };
+      }
+
+      // Logic to interact with HTML UI
+      function runValidation() {
+        const outputDiv = document.getElementById('output');
+        const rawText = document.getElementById('schemaInput').value.trim();
+
+        if (!rawText) {
+          outputDiv.innerHTML = `<div class="error-title">Schema is empty.</div>`;
+          return;
+        }
+
+        let parsedSchema;
+        try {
+          parsedSchema = JSON.parse(rawText);
+        } catch (e) {
+          outputDiv.innerHTML = `<div class="error-title">Invalid JSON syntax:</div><ul class="error-list"><li>${e.message}</li></ul>`;
+          return;
+        }
+
+        // Overall JSON Schema validity check first
+        if (!window.Ajv8) {
+          outputDiv.innerHTML = `<div class="error-title">Validation engine is still loading. Please try again in a moment.</div>`;
+          return;
+        }
+        const ajv = new window.Ajv8({ allErrors: true });
+        const isJsonSchema = ajv.validateSchema(parsedSchema);
+
+        if (!isJsonSchema) {
+          let html = `<div class="error-title">⚠️ Invalid JSON Schema:</div><ul class="error-list">`;
+          ajv.errors.forEach((err) => {
+            html += `<li>${err.instancePath || 'root'} ${err.message}${
+              err.params ? ' (' + JSON.stringify(err.params) + ')' : ''
+            }</li>`;
+          });
+          html += `</ul>`;
+          outputDiv.innerHTML = html;
+          return;
+        }
+
+        const result = validateSchemaForLLGuidance(parsedSchema);
+
+        if (result.valid) {
+          outputDiv.innerHTML = `<div class="success">✅ Your JSON Schema is fully compliant with llguidance limitations!</div>`;
+        } else {
+          let html = `<div class="error-title">⚠️ Limitations Detected (${result.errors.length}):</div><ul class="error-list">`;
+          result.errors.forEach((err) => {
+            html += `<li>${err}</li>`;
+          });
+          html += `</ul>`;
+          outputDiv.innerHTML = html;
         }
       }
 
-      validateNode(schema);
-      return { valid: errors.length === 0, errors };
-    }
-
-    // Logic to interact with HTML UI
-    function runValidation() {
-      const outputDiv = document.getElementById('output');
-      const rawText = document.getElementById('schemaInput').value.trim();
-
-      if (!rawText) {
-        outputDiv.innerHTML = `<div class="error-title">Schema is empty.</div>`;
-        return;
-      }
-
-      let parsedSchema;
-      try {
-        parsedSchema = JSON.parse(rawText);
-      } catch (e) {
-        outputDiv.innerHTML = `<div class="error-title">Invalid JSON syntax:</div><ul class="error-list"><li>${e.message}</li></ul>`;
-        return;
-      }
-
-      const result = validateSchemaForLLGuidance(parsedSchema);
-
-      if (result.valid) {
-        outputDiv.innerHTML = `<div class="success">✅ Your JSON Schema is fully compliant with llguidance limitations!</div>`;
-      } else {
-        let html = `<div class="error-title">⚠️ Limitations Detected (${result.errors.length}):</div><ul class="error-list">`;
-        result.errors.forEach((err) => {
-          html += `<li>${err}</li>`;
-        });
-        html += `</ul>`;
-        outputDiv.innerHTML = html;
-      }
-    }
-
-    const examples = {
-      working: {
-        type: 'object',
-        properties: {
-          hashtags: {
-            type: 'array',
-            maxItems: 3,
-            items: {
-              type: 'string',
-              pattern: '^#[^\\s#]+$',
+      const examples = {
+        working: {
+          type: 'object',
+          properties: {
+            hashtags: {
+              type: 'array',
+              maxItems: 3,
+              items: {
+                type: 'string',
+                pattern: '^#[^\\s#]+$',
+              },
             },
           },
+          required: ['hashtags'],
+          additionalProperties: false,
         },
-        required: ['hashtags'],
-        additionalProperties: false,
-      },
-      'not-working': {
-        type: 'object',
-        properties: {
-          name: { type: 'string' },
-          id: { type: 'string', pattern: '^(?=.*[A-Z])[a-zA-Z0-9]+$' },
+        'not-working': {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            id: { type: 'string', pattern: '^(?=.*[A-Z])[a-zA-Z0-9]+$' },
+          },
+          required: ['name'],
+          minProperties: 2,
+          additionalProperties: {
+            $ref: 'https://external-schema.com/item.json',
+          },
         },
-        required: ['name'],
-        minProperties: 2,
-        additionalProperties: {
-          $ref: 'https://external-schema.com/item.json',
-        },
-      },
-    };
+      };
 
-    function loadExample(type) {
-      const textarea = document.getElementById('schemaInput');
-      textarea.value = JSON.stringify(examples[type], null, 2);
-      runValidation();
-    }
+      function loadExample(type) {
+        const textarea = document.getElementById('schemaInput');
+        textarea.value = JSON.stringify(examples[type], null, 2);
+        runValidation();
+      }
 
-    // Run validation once on initial page load
-    window.onload = runValidation;
-  </script>
-</body>
-
+      // Run validation once on initial page load
+      window.onload = runValidation;
+    </script>
+  </body>
 </html>
