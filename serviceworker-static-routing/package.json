@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "fastify": "^4.21.0",
+    "fastify": "^5.8.3",
     "handlebars": "^4.7.8",
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.10.2",
