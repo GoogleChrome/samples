@@ -1,6 +1,6 @@
 ---
 title: 'New York: Navigating the Concrete Jungle'
-description: 'Discover the wonders of New York, USA through our latest adventure.'
+description: 'Navigate the concrete jungle of Manhattan. Experience the electric energy of Times Square, find tranquility in Central Park, and explore world-class art and culture at every corner of this vibrant city.'
 date: 2026-03-16
 tags: ['City', 'USA', 'Energy']
 author: ashok

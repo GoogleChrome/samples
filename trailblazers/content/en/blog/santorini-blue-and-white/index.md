@@ -1,6 +1,6 @@
 ---
 title: 'Santorini: The Blue and White Dream'
-description: 'Discover the wonders of Santorini, Greece through our latest adventure.'
+description: 'The iconic whitewashed buildings and blue-domed churches of Santorini offer one of the most stunning spectacles in the world. Perched on cliffs overlooking the Aegean Sea, this volcanic island is a dream of sunsets, luxury, and romance. Explore ancient Minoan cities, dine on fresh local seafood at sunset, and take a dip in the famous black sand beaches of Kamari.'
 date: 2026-03-14
 tags: ['Islands', 'Greece', 'Relaxation']
 author: ashok

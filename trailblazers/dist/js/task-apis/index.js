@@ -1,14 +1,7 @@
-import { Summarizer as o } from "./summarizer.js";
-import { Writer as m } from "./writer.js";
-import { Rewriter as a } from "./rewriter.js";
-import { LanguageDetector as x } from "./language-detector.js";
-import { Translator as s } from "./translator.js";
-import { Classifier as l } from "./classifier.js";
-export {
-  l as Classifier,
-  x as LanguageDetector,
-  a as Rewriter,
-  o as Summarizer,
-  s as Translator,
-  m as Writer
-};
+import { t as e } from "./summarizer-api-polyfill-DMZeuo0Y.js";
+import { t } from "./writer-api-polyfill-B0rRftXu.js";
+import { t as n } from "./rewriter-api-polyfill-CmPnCnH2.js";
+import { LanguageDetector as r } from "./language-detector.js";
+import { t as i } from "./translator-api-polyfill-DbwF0EO1.js";
+import { t as a } from "./classifier-api-polyfill-DBIQOtlb.js";
+export { a as Classifier, r as LanguageDetector, n as Rewriter, e as Summarizer, i as Translator, t as Writer };

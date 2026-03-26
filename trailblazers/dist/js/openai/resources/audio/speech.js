@@ -18,7 +18,7 @@ class Speech extends resource_1.APIResource {
      * const speech = await client.audio.speech.create({
      *   input: 'input',
      *   model: 'string',
-     *   voice: 'ash',
+     *   voice: 'string',
      * });
      *
      * const content = await speech.blob();

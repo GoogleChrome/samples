@@ -12,7 +12,7 @@ class Videos extends resource_1.APIResource {
      * Create a new video generation job from a prompt and optional reference assets.
      */
     create(body, options) {
-        return this._client.post('/videos', (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/videos', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
     }
     /**
      * Fetch the latest metadata for a generated video.
@@ -33,6 +33,12 @@ class Videos extends resource_1.APIResource {
         return this._client.delete((0, path_1.path) `/videos/${videoID}`, options);
     }
     /**
+     * Create a character from an uploaded video.
+     */
+    createCharacter(body, options) {
+        return this._client.post('/videos/characters', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+    }
+    /**
      * Download the generated video bytes or a derived preview asset.
      *
      * Streams the rendered video content for the specified video job.
@@ -44,6 +50,25 @@ class Videos extends resource_1.APIResource {
             headers: (0, headers_1.buildHeaders)([{ Accept: 'application/binary' }, options?.headers]),
             __binaryResponse: true,
         });
+    }
+    /**
+     * Create a new video generation job by editing a source video or existing
+     * generated video.
+     */
+    edit(body, options) {
+        return this._client.post('/videos/edits', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+    }
+    /**
+     * Create an extension of a completed video.
+     */
+    extend(body, options) {
+        return this._client.post('/videos/extensions', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+    }
+    /**
+     * Fetch a character.
+     */
+    getCharacter(characterID, options) {
+        return this._client.get((0, path_1.path) `/videos/characters/${characterID}`, options);
     }
     /**
      * Create a remix of a completed video using a refreshed prompt.

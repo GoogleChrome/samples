@@ -21,17 +21,41 @@ export declare class Videos extends APIResource {
      */
     delete(videoID: string, options?: RequestOptions): APIPromise<VideoDeleteResponse>;
     /**
+     * Create a character from an uploaded video.
+     */
+    createCharacter(body: VideoCreateCharacterParams, options?: RequestOptions): APIPromise<VideoCreateCharacterResponse>;
+    /**
      * Download the generated video bytes or a derived preview asset.
      *
      * Streams the rendered video content for the specified video job.
      */
     downloadContent(videoID: string, query?: VideoDownloadContentParams | null | undefined, options?: RequestOptions): APIPromise<Response>;
     /**
+     * Create a new video generation job by editing a source video or existing
+     * generated video.
+     */
+    edit(body: VideoEditParams, options?: RequestOptions): APIPromise<Video>;
+    /**
+     * Create an extension of a completed video.
+     */
+    extend(body: VideoExtendParams, options?: RequestOptions): APIPromise<Video>;
+    /**
+     * Fetch a character.
+     */
+    getCharacter(characterID: string, options?: RequestOptions): APIPromise<VideoGetCharacterResponse>;
+    /**
      * Create a remix of a completed video using a refreshed prompt.
      */
     remix(videoID: string, body: VideoRemixParams, options?: RequestOptions): APIPromise<Video>;
 }
 export type VideosPage = ConversationCursorPage<Video>;
+export interface ImageInputReferenceParam {
+    file_id?: string;
+    /**
+     * A fully qualified URL or base64-encoded data URL.
+     */
+    image_url?: string;
+}
 /**
  * Structured information describing a generated video job.
  */
@@ -123,15 +147,43 @@ export interface VideoDeleteResponse {
      */
     object: 'video.deleted';
 }
+export interface VideoCreateCharacterResponse {
+    /**
+     * Identifier for the character creation cameo.
+     */
+    id: string | null;
+    /**
+     * Unix timestamp (in seconds) when the character was created.
+     */
+    created_at: number;
+    /**
+     * Display name for the character.
+     */
+    name: string | null;
+}
+export interface VideoGetCharacterResponse {
+    /**
+     * Identifier for the character creation cameo.
+     */
+    id: string | null;
+    /**
+     * Unix timestamp (in seconds) when the character was created.
+     */
+    created_at: number;
+    /**
+     * Display name for the character.
+     */
+    name: string | null;
+}
 export interface VideoCreateParams {
     /**
      * Text prompt that describes the video to generate.
      */
     prompt: string;
     /**
-     * Optional multipart reference asset that guides generation.
+     * Optional reference asset upload or reference object that guides generation.
      */
-    input_reference?: Uploadable;
+    input_reference?: Uploadable | ImageInputReferenceParam;
     /**
      * The video generation model to use (allowed values: sora-2, sora-2-pro). Defaults
      * to `sora-2`.
@@ -154,11 +206,68 @@ export interface VideoListParams extends ConversationCursorPageParams {
      */
     order?: 'asc' | 'desc';
 }
+export interface VideoCreateCharacterParams {
+    /**
+     * Display name for this API character.
+     */
+    name: string;
+    /**
+     * Video file used to create a character.
+     */
+    video: Uploadable;
+}
 export interface VideoDownloadContentParams {
     /**
      * Which downloadable asset to return. Defaults to the MP4 video.
      */
     variant?: 'video' | 'thumbnail' | 'spritesheet';
+}
+export interface VideoEditParams {
+    /**
+     * Text prompt that describes how to edit the source video.
+     */
+    prompt: string;
+    /**
+     * Reference to the completed video to edit.
+     */
+    video: Uploadable | VideoEditParams.VideoReferenceInputParam;
+}
+export declare namespace VideoEditParams {
+    /**
+     * Reference to the completed video.
+     */
+    interface VideoReferenceInputParam {
+        /**
+         * The identifier of the completed video.
+         */
+        id: string;
+    }
+}
+export interface VideoExtendParams {
+    /**
+     * Updated text prompt that directs the extension generation.
+     */
+    prompt: string;
+    /**
+     * Length of the newly generated extension segment in seconds (allowed values: 4,
+     * 8, 12, 16, 20).
+     */
+    seconds: VideoSeconds;
+    /**
+     * Reference to the completed video to extend.
+     */
+    video: Uploadable | VideoExtendParams.VideoReferenceInputParam;
+}
+export declare namespace VideoExtendParams {
+    /**
+     * Reference to the completed video.
+     */
+    interface VideoReferenceInputParam {
+        /**
+         * The identifier of the completed video.
+         */
+        id: string;
+    }
 }
 export interface VideoRemixParams {
     /**
@@ -167,6 +276,6 @@ export interface VideoRemixParams {
     prompt: string;
 }
 export declare namespace Videos {
-    export { type Video as Video, type VideoCreateError as VideoCreateError, type VideoModel as VideoModel, type VideoSeconds as VideoSeconds, type VideoSize as VideoSize, type VideoDeleteResponse as VideoDeleteResponse, type VideosPage as VideosPage, type VideoCreateParams as VideoCreateParams, type VideoListParams as VideoListParams, type VideoDownloadContentParams as VideoDownloadContentParams, type VideoRemixParams as VideoRemixParams, };
+    export { type ImageInputReferenceParam as ImageInputReferenceParam, type Video as Video, type VideoCreateError as VideoCreateError, type VideoModel as VideoModel, type VideoSeconds as VideoSeconds, type VideoSize as VideoSize, type VideoDeleteResponse as VideoDeleteResponse, type VideoCreateCharacterResponse as VideoCreateCharacterResponse, type VideoGetCharacterResponse as VideoGetCharacterResponse, type VideosPage as VideosPage, type VideoCreateParams as VideoCreateParams, type VideoListParams as VideoListParams, type VideoCreateCharacterParams as VideoCreateCharacterParams, type VideoDownloadContentParams as VideoDownloadContentParams, type VideoEditParams as VideoEditParams, type VideoExtendParams as VideoExtendParams, type VideoRemixParams as VideoRemixParams, };
 }
 //# sourceMappingURL=videos.d.mts.map

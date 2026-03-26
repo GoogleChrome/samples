@@ -1,6 +1,6 @@
 ---
 title: 'Petra: Secrets of the Rose Red City'
-description: 'Discover the wonders of Petra, Jordan through our latest adventure.'
+description: 'The Rose-Red City of Petra is a wonder of the ancient world. Carved directly into vibrant sandstone cliffs by the Nabateans, this archaeological marvel reveals its secrets as you walk through the narrow Siq. Marvel at the Treasury, climb to the Monastery for panoramic views, and experience the magic of candlelit nights in a desert landscape that feels both alien and deeply human.'
 date: 2026-03-13
 tags: ['History', 'Jordan', 'Hidden Gem']
 author: ashok

@@ -34,6 +34,16 @@ export default {
     es: 'Sobre mí',
     ja: '概要',
   },
+  about_author: {
+    en: 'About {{ name }}',
+    es: 'Sobre {{ name }}',
+    ja: '{{ name }} について',
+  },
+  read_more_author: {
+    en: 'Read more posts from {{ name }}',
+    es: 'Ver más publicaciones de {{ name }}',
+    ja: '{{ name }} の記事をもっと読む',
+  },
   create: {
     en: 'Create',
     es: 'Crear',

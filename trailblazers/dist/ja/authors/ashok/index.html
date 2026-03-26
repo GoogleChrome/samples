@@ -10,7 +10,7 @@
 		<link rel="icon" type="image/svg+xml" href="/samples/trailblazers/dist/blog/create/icon.svg">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 		
 		
 		
@@ -178,6 +178,84 @@ a[href] {
 a[href]:hover {
   color: var(--color-link-hover);
 }
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #ffffff;
+  padding: 4rem 2rem;
+  border-radius: 16px;
+  margin: 2rem 0 4rem 0;
+  text-align: center;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(3.5rem, 10vw, 4.5rem);
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff !important;
+  /* Force white over gradient */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 650px;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.95;
+  color: #ffffff;
+}
+
+.hero-bloggers {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.blogger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.blogger:hover .blogger-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.5);
+}
+
+.blogger:hover .blogger-name {
+  text-decoration: underline;
+}
+
+.blogger-avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  transition: all 0.2s ease;
+}
+
+.blogger-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
 /* Post metadata */
 .post-metadata {
   display: flex;
@@ -185,12 +263,19 @@ a[href]:hover {
   align-items: center;
   gap: 1.5rem;
   padding: 0;
-  margin: 1.5rem 0 3rem 0;
+  margin: 0;
   list-style: none;
   font-size: 0.9rem;
   color: var(--color-gray-dark);
 }
 
+.post-metadata-primary {
+  margin: 1.5rem 0 1rem 0;
+}
+
+.post-metadata-secondary {
+  margin-bottom: 3rem;
+}
 .post-metadata time {
   font-weight: 600;
   color: var(--color-text);
@@ -227,6 +312,32 @@ a[href]:hover {
   filter: brightness(1.1);
 }
 
+.post-metadata-author-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.2rem;
+  /* Match tag pills height */
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.post-metadata-author-link:hover {
+  transform: translateY(-2px);
+}
+
+.post-metadata-author-avatar {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-sizing: border-box;
+  display: block;
+  /* Remove baseline space from parent picture tag */
+}
 .post-metadata-share {
   display: inline-flex;
   align-items: center;
@@ -345,13 +456,21 @@ header .nav-item a[aria-current='page'] {
 /* Post list cards */
 .postlist {
   display: grid;
+    /* Fallback for older browsers */
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 3rem;
+  gap: 2rem;
   list-style: none;
   padding: 0;
   margin: 3rem 0;
 }
 
+@supports (display: grid-lanes) {
+  .postlist {
+    display: grid-lanes;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr) minmax(350px, 1.5fr));
+    flow-tolerance: 5rem;
+  }
+}
 .postlist-item {
   background: var(--card-bg);
   border-radius: 24px;
@@ -454,6 +573,29 @@ header .nav-item a[aria-current='page'] {
   font-weight: 500;
 }
 
+.edit-post-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-primary);
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.edit-post-link:hover {
+  background-color: var(--color-link-hover);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 /* Tags */
 .tags {
   display: flex;
@@ -525,7 +667,6 @@ article h1 {
 .post-metadata {
   text-align: center;
   color: #6c757d;
-  margin-bottom: 4rem;
   font-size: 1.1rem;
 }
 
@@ -566,6 +707,48 @@ article h1 {
   max-width: none;
   border-radius: 50%;
   object-fit: cover;
+  transition: all 0.2s ease;
+  }
+  
+  .author-avatar-link {
+    display: block;
+    text-decoration: none;
+  }
+  
+  .author-avatar-link:hover .author-avatar {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(255, 20, 147, 0.4);
+  }
+  
+  .read-more-posts {
+    margin-top: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .read-more-posts a {
+    color: var(--color-link);
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .read-more-posts a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-link);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+    transform-origin: left;
+  }
+  
+  .read-more-posts a:hover::after {
+    transform: scaleX(1);
+  }
+  
+  .author-avatar {
   border: 3px solid var(--color-secondary);
 }
 
@@ -759,6 +942,16 @@ footer hr {
   }
 }
 
+@media (max-width: 767px) {
+  .postlist {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .postlist-content {
+    padding: 1.25rem;
+  }
+}
 @media (max-width: 500px) {
   body {
     padding: 0 0.75rem;
@@ -778,13 +971,11 @@ footer hr {
     font-size: 0.85rem;
   }
 
-  .postlist {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+}
 
-  .postlist-content {
-    padding: 1.25rem;
+@media (min-width: 1024px) {
+  .postlist-item:first-child {
+    grid-column: span 2;
   }
 }</style>
 		
@@ -844,7 +1035,7 @@ footer hr {
 			</div>
 			<a href="/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/" class="postlist-link">ニューヨーク：コンクリートジャングルを歩く</a>
 			<a href="/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/" class="postlist-description-link">
-				<p class="postlist-description">アメリカ、ニューヨークの魅力を最新の冒険を通してご紹介します。</p>
+				<p class="postlist-description">マンハッタンのコンクリートジャングルをナビゲート。タイムズスクエアの電気的エネルギーと、セントラルパークの静けさを体験。</p>
 			</a>
 			
 			<div class="postlist-footer">
@@ -858,7 +1049,7 @@ footer hr {
 				</a>
 				<time class="postlist-date" datetime="2026-03-16">2026年3月</time>
 			</div>
-			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fnew-york-concrete-jungle%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️</a>
+			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fnew-york-concrete-jungle%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
 		</div>
 	</li>
 	<li class="postlist-item">
@@ -875,7 +1066,7 @@ footer hr {
 			</div>
 			<a href="/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/" class="postlist-link">サントリーニ島：青と白の夢</a>
 			<a href="/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/" class="postlist-description-link">
-				<p class="postlist-description">ギリシャ、サントリーニ島の魅力を最新の冒険を通してご紹介します。</p>
+				<p class="postlist-description">サントリーニ島の白い建物と青いドームは、世界で最も美しい景色の1つです。エーゲ海を見下ろす崖の上に位置するこの火山島は、夕日とロマンスの夢です。古代ミノア文明の都市を探索し、夕日を眺めながら新鮮な魚介類を堪能し、カマリの黒砂ビーチで泳ぎましょう。</p>
 			</a>
 			
 			<div class="postlist-footer">
@@ -889,7 +1080,7 @@ footer hr {
 				</a>
 				<time class="postlist-date" datetime="2026-03-14">2026年3月</time>
 			</div>
-			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fsantorini-blue-and-white%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️</a>
+			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fsantorini-blue-and-white%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
 		</div>
 	</li>
 	<li class="postlist-item">
@@ -906,7 +1097,7 @@ footer hr {
 			</div>
 			<a href="/samples/trailblazers/dist/ja/blog/petra-rose-red-city/" class="postlist-link">ペトラ：バラ色の都市の秘密</a>
 			<a href="/samples/trailblazers/dist/ja/blog/petra-rose-red-city/" class="postlist-description-link">
-				<p class="postlist-description">ヨルダン、ペトラの魅力を最新の冒険を通してご紹介します。</p>
+				<p class="postlist-description">ペトラの赤い都市は古代世界の驚異です。ナバテア人によって砂岩の崖に直接彫られたこの考古学的驚異は、シークと呼ばれる狭い峡谷を歩くことで秘密を明らかにします。宝物庫に畏敬の念を抱き、修道院まで登ってパノラマビューを楽しみ、キャンドルの夜の魔法を。</p>
 			</a>
 			
 			<div class="postlist-footer">
@@ -920,7 +1111,7 @@ footer hr {
 				</a>
 				<time class="postlist-date" datetime="2026-03-13">2026年3月</time>
 			</div>
-			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fpetra-rose-red-city%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️</a>
+			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fpetra-rose-red-city%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
 		</div>
 	</li>
 	<li class="postlist-item">
@@ -937,7 +1128,7 @@ footer hr {
 			</div>
 			<a href="/samples/trailblazers/dist/ja/blog/tokyo-neon-nights/" class="postlist-link">東京：ネオンの夜と隠れた神社</a>
 			<a href="/samples/trailblazers/dist/ja/blog/tokyo-neon-nights/" class="postlist-description-link">
-				<p class="postlist-description">日本の首都、東京の魅力を最新の冒険を通してご紹介します。</p>
+				<p class="postlist-description">ネオン、喧騒、そして伝統が交錯する東京。明治神宮の静寂から渋谷の視覚的カオスまで、眠らない街を体感。浅草の歴史、原宿の流行、お台場の未来。新旧が完璧にブレンドされた巨大都市は、あらゆる旅行者を魅了し続けます。</p>
 			</a>
 			
 			<div class="postlist-footer">
@@ -951,7 +1142,7 @@ footer hr {
 				</a>
 				<time class="postlist-date" datetime="2026-03-06">2026年3月</time>
 			</div>
-			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Ftokyo-neon-nights%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️</a>
+			<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Ftokyo-neon-nights%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
 		</div>
 	</li>
 </ul>
@@ -991,7 +1182,7 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/authors/ashok/` was built on 2026-03-20T11:50:53.869Z -->
+		<!-- This page `/ja/authors/ashok/` was built on 2026-03-26T18:29:43.073Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
 		
 	</body>

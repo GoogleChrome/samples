@@ -1,6 +1,6 @@
 ---
 title: 'Amalfi Coast: Winding Roads and Salty Air'
-description: 'Discover the wonders of Amalfi, Italy through our latest adventure.'
+description: 'Discover the vertical landscape of Amalfi, where colorful houses cling to the cliffs and the scent of lemons fills the salty air.'
 date: 2026-03-15
 tags: ['Coast', 'Italy', 'Summer']
 author: maya

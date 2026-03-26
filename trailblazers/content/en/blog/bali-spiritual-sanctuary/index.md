@@ -1,6 +1,6 @@
 ---
 title: 'Bali: Finding Peace in the Rice Terraces'
-description: 'Discover the wonders of Ubud, Bali through our latest adventure.'
+description: 'Find peace and spiritual renewal in Ubud, the cultural heart of Bali. Wander through lush rice terraces, visit sacred temples, and discover local crafts in hidden village workshops.'
 date: 2026-03-12
 tags: ['Spirituality', 'Indonesia', 'Nature']
 author: maya

@@ -1,74 +1,56 @@
-import { GoogleGenAI as s } from "@google/genai";
-import { P as a, D as i } from "../chunks/defaults-CzvdT-At.js";
-class l extends a {
-  #n;
-  #t;
-  #e;
-  constructor(t) {
-    super(t.modelName || i.gemini.modelName), this.#n = new s({ apiKey: t.apiKey });
-  }
-  /**
-   * Creates a model session.
-   * @param {Object} options - LanguageModel options.
-   * @param {Object} sessionParams - Session parameters.
-   * @returns {Object} The session object.
-   */
-  createSession(t, e) {
-    return this.#e = e, this.#t = t.modelName || this.modelName, { model: this.#t, params: e };
-  }
-  /**
-   * Generates content (non-streaming).
-   * @param {Array} contents - The history + new message content.
-   * @returns {Promise<{text: string, usage: number}>}
-   */
-  async generateContent(t) {
-    const e = {
-      systemInstruction: this.#e.systemInstruction,
-      ...this.#e.generationConfig
-    }, n = await this.#n.models.generateContent({
-      model: this.#t,
-      contents: t,
-      config: e
-    }), o = n.usageMetadata?.promptTokenCount || 0;
-    return { text: n.text, usage: o };
-  }
-  /**
-   * Generates content stream.
-   * @param {Array} contents - The history + new content.
-   * @returns {Promise<AsyncIterable>} Stream of chunks.
-   */
-  async generateContentStream(t) {
-    const e = {
-      systemInstruction: this.#e.systemInstruction,
-      ...this.#e.generationConfig
-    }, n = await this.#n.models.generateContentStream({
-      model: this.#t,
-      contents: t,
-      config: e
-    });
-    return (async function* () {
-      for await (const o of n)
-        yield {
-          text: () => o.text,
-          usageMetadata: {
-            totalTokenCount: o.usageMetadata?.totalTokenCount || 0
-          }
-        };
-    })();
-  }
-  /**
-   * Counts tokens.
-   * @param {Array} contents - The content to count.
-   * @returns {Promise<number>} Total tokens.
-   */
-  async countTokens(t) {
-    const { totalTokens: e } = await this.#n.models.countTokens({
-      model: this.#t,
-      contents: t
-    });
-    return e;
-  }
-}
-export {
-  l as default
+import { n as e, t } from "../chunks/defaults-B5W7MP9T.js";
+import { GoogleGenAI as n } from "@google/genai";
+//#region backends/gemini.js
+var r = class extends e {
+	#e;
+	#t;
+	#n;
+	constructor(e) {
+		super(e.modelName || t.gemini.modelName), this.#e = new n({ apiKey: e.apiKey });
+	}
+	createSession(e, t) {
+		return this.#n = t, this.#t = e.modelName || this.modelName, {
+			model: this.#t,
+			params: t
+		};
+	}
+	async generateContent(e) {
+		let t = {
+			systemInstruction: this.#n.systemInstruction,
+			...this.#n.generationConfig
+		}, n = await this.#e.models.generateContent({
+			model: this.#t,
+			contents: e,
+			config: t
+		}), r = n.usageMetadata?.promptTokenCount || 0;
+		return {
+			text: n.text,
+			usage: r
+		};
+	}
+	async generateContentStream(e) {
+		let t = {
+			systemInstruction: this.#n.systemInstruction,
+			...this.#n.generationConfig
+		}, n = await this.#e.models.generateContentStream({
+			model: this.#t,
+			contents: e,
+			config: t
+		});
+		return (async function* () {
+			for await (let e of n) yield {
+				text: () => e.text,
+				usageMetadata: { totalTokenCount: e.usageMetadata?.totalTokenCount || 0 }
+			};
+		})();
+	}
+	async countTokens(e) {
+		let { totalTokens: t } = await this.#e.models.countTokens({
+			model: this.#t,
+			contents: e
+		});
+		return t;
+	}
 };
+//#endregion
+export { r as default };

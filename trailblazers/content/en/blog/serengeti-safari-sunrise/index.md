@@ -1,6 +1,6 @@
 ---
 title: 'Serengeti: A Safari Sunrise to Remember'
-description: 'Discover the wonders of Serengeti, Tanzania through our latest adventure.'
+description: 'Experience the raw beauty of a sunrise safari on the endless plains of the Serengeti.'
 date: 2026-03-09
 tags: ['Wildlife', 'Tanzania', 'Nature']
 author: julia

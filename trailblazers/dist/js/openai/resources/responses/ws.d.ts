@@ -1,5 +1,5 @@
 import * as WS from 'ws';
-import { ResponsesEmitter } from "./internal-base.js";
+import { ResponsesEmitter, ResponsesStreamMessage } from "./internal-base.js";
 import * as ResponsesAPI from "./responses.js";
 import { OpenAI } from "../../client.js";
 export declare class ResponsesWS extends ResponsesEmitter {
@@ -12,6 +12,31 @@ export declare class ResponsesWS extends ResponsesEmitter {
         code: number;
         reason: string;
     }): void;
+    /**
+     * Returns an async iterator over WebSocket lifecycle and message events,
+     * providing an alternative to the event-based `.on()` API.
+     * The iterator will exit if the socket closes but breaking out of the iterator
+     * does not close the socket.
+     *
+     * @example
+     * ```ts
+     * for await (const event of connection.stream()) {
+     *   switch (event.type) {
+     *     case 'message':
+     *       console.log('received:', event.message);
+     *       break;
+     *     case 'error':
+     *       console.error(event.error);
+     *       break;
+     *     case 'close':
+     *       console.log('connection closed');
+     *       break;
+     *   }
+     * }
+     * ```
+     */
+    stream(): AsyncIterableIterator<ResponsesStreamMessage>;
+    [Symbol.asyncIterator](): AsyncIterableIterator<ResponsesStreamMessage>;
     private authHeaders;
 }
 //# sourceMappingURL=ws.d.ts.map

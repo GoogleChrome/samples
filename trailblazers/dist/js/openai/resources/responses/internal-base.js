@@ -38,7 +38,7 @@ function buildURL(client, query) {
     if (query) {
         url.search = (0, utils_1.stringifyQuery)(query);
     }
-    url.protocol = 'wss';
+    url.protocol = url.protocol === 'http:' ? 'ws:' : 'wss:';
     return url;
 }
 function safeJSONStringify(value) {

@@ -6,8 +6,21 @@ eleventyNavigation:
   title: home
   order: 1
 permalink: /en/index.html
-numberOfLatestPostsToShow: 4
+numberOfLatestPostsToShow: 5
 ---
+<div class="hero">
+  <h1 class="hero-title">trAIlblazers</h1>
+  <p class="hero-subtitle">Your guide to authentic adventures. Discover hidden gems, itineraries, and insider tips to see the world.</p>
+  <div class="hero-bloggers">
+    {% for key, author in authors %}
+      <a href="/{{ locale }}/authors/{{ key }}/" class="blogger">
+        <img src="{{ author.avatar }}" alt="{{ author.name }}" class="blogger-avatar">
+        <span class="blogger-name">{{ author.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
 {% set postsCount = collections.posts | filterByLocale(locale) | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
 <h1>{{ 'latest_posts' | plural(latestPostsCount, locale) }}</h1>

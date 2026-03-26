@@ -93,11 +93,17 @@ import {
   Moderations,
 } from './resources/moderations';
 import {
+  ImageInputReferenceParam,
   Video,
+  VideoCreateCharacterParams,
+  VideoCreateCharacterResponse,
   VideoCreateError,
   VideoCreateParams,
   VideoDeleteResponse,
   VideoDownloadContentParams,
+  VideoEditParams,
+  VideoExtendParams,
+  VideoGetCharacterResponse,
   VideoListParams,
   VideoModel,
   VideoRemixParams,
@@ -525,8 +531,9 @@ export class OpenAI {
       : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
-    if (!isEmptyObj(defaultQuery)) {
-      query = { ...defaultQuery, ...query };
+    const pathQuery = Object.fromEntries(url.searchParams);
+    if (!isEmptyObj(defaultQuery) || !isEmptyObj(pathQuery)) {
+      query = { ...pathQuery, ...defaultQuery, ...query };
     }
 
     if (typeof query === 'object' && query && !Array.isArray(query)) {
@@ -1326,16 +1333,22 @@ export declare namespace OpenAI {
 
   export {
     Videos as Videos,
+    type ImageInputReferenceParam as ImageInputReferenceParam,
     type Video as Video,
     type VideoCreateError as VideoCreateError,
     type VideoModel as VideoModel,
     type VideoSeconds as VideoSeconds,
     type VideoSize as VideoSize,
     type VideoDeleteResponse as VideoDeleteResponse,
+    type VideoCreateCharacterResponse as VideoCreateCharacterResponse,
+    type VideoGetCharacterResponse as VideoGetCharacterResponse,
     type VideosPage as VideosPage,
     type VideoCreateParams as VideoCreateParams,
     type VideoListParams as VideoListParams,
+    type VideoCreateCharacterParams as VideoCreateCharacterParams,
     type VideoDownloadContentParams as VideoDownloadContentParams,
+    type VideoEditParams as VideoEditParams,
+    type VideoExtendParams as VideoExtendParams,
     type VideoRemixParams as VideoRemixParams,
   };
 

@@ -2,10 +2,14 @@
 
 import * as ResponsesAPI from './responses';
 import { OpenAI } from '../../client';
-
 import { EventEmitter } from '../../core/EventEmitter';
 import { OpenAIError } from '../../core/error';
 import { stringifyQuery } from '../../internal/utils';
+
+export type ResponsesStreamMessage =
+  | { type: 'connecting' | 'open' | 'closing' | 'close' }
+  | { type: 'message'; message: ResponsesAPI.ResponsesServerEvent }
+  | { type: 'error'; error: WebSocketError };
 
 export class WebSocketError extends OpenAIError {
   /**
@@ -22,7 +26,7 @@ export class WebSocketError extends OpenAIError {
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] } & {};
 
-type WebsocketEvents = Simplify<
+type WebSocketEvents = Simplify<
   {
     event: (event: ResponsesAPI.ResponsesServerEvent) => void;
     error: (error: WebSocketError) => void;
@@ -33,14 +37,14 @@ type WebsocketEvents = Simplify<
   }
 >;
 
-export abstract class ResponsesEmitter extends EventEmitter<WebsocketEvents> {
+export abstract class ResponsesEmitter extends EventEmitter<WebSocketEvents> {
   /**
    * Send an event to the API.
    */
   abstract send(event: ResponsesAPI.ResponsesClientEvent): void;
 
   /**
-   * Close the websocket connection.
+   * Close the WebSocket connection.
    */
   abstract close(props?: { code: number; reason: string }): void;
 
@@ -80,7 +84,7 @@ export function buildURL(client: OpenAI, query?: object | null): URL {
   if (query) {
     url.search = stringifyQuery(query);
   }
-  url.protocol = 'wss';
+  url.protocol = url.protocol === 'http:' ? 'ws:' : 'wss:';
   return url;
 }
 

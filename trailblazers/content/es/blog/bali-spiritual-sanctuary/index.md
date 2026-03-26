@@ -1,6 +1,6 @@
 ---
 title: 'Bali: Encontrando la Paz en las Terrazas de Arroz'
-description: 'Descubre las maravillas de Ubud, Bali, a través de nuestra última aventura.'
+description: 'Encuentra paz en Ubud, el corazón cultural de Bali. Pasea entre terrazas arrozales verdes y descubre templos sagrados únicos.'
 date: 2026-03-12
 tags: ['Espiritualidad', 'Indonesia', 'Naturaleza']
 author: maya

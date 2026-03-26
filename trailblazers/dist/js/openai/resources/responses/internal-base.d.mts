@@ -2,6 +2,15 @@ import * as ResponsesAPI from "./responses.mjs";
 import { OpenAI } from "../../client.mjs";
 import { EventEmitter } from "../../core/EventEmitter.mjs";
 import { OpenAIError } from "../../core/error.mjs";
+export type ResponsesStreamMessage = {
+    type: 'connecting' | 'open' | 'closing' | 'close';
+} | {
+    type: 'message';
+    message: ResponsesAPI.ResponsesServerEvent;
+} | {
+    type: 'error';
+    error: WebSocketError;
+};
 export declare class WebSocketError extends OpenAIError {
     /**
      * The error data that the API sent back in an error event.
@@ -12,7 +21,7 @@ export declare class WebSocketError extends OpenAIError {
 type Simplify<T> = {
     [KeyType in keyof T]: T[KeyType];
 } & {};
-type WebsocketEvents = Simplify<{
+type WebSocketEvents = Simplify<{
     event: (event: ResponsesAPI.ResponsesServerEvent) => void;
     error: (error: WebSocketError) => void;
 } & {
@@ -20,13 +29,13 @@ type WebsocketEvents = Simplify<{
         type?: EventType;
     }>) => unknown;
 }>;
-export declare abstract class ResponsesEmitter extends EventEmitter<WebsocketEvents> {
+export declare abstract class ResponsesEmitter extends EventEmitter<WebSocketEvents> {
     /**
      * Send an event to the API.
      */
     abstract send(event: ResponsesAPI.ResponsesClientEvent): void;
     /**
-     * Close the websocket connection.
+     * Close the WebSocket connection.
      */
     abstract close(props?: {
         code: number;

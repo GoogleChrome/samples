@@ -1,2 +1,2 @@
-export declare const VERSION = "6.27.0";
+export declare const VERSION = "6.33.0";
 //# sourceMappingURL=version.d.mts.map

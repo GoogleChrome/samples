@@ -1,6 +1,6 @@
 {
   "name": "openai",
-  "version": "6.27.0",
+  "version": "6.33.0",
   "description": "The official TypeScript library for the OpenAI API",
   "author": "OpenAI <support@openai.com>",
   "types": "./index.d.ts",
@@ -39,6 +39,17 @@
   },
   "bin": {
     "openai": "bin/cli"
+  },
+  "overrides": {
+    "minimatch": "^9.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "minimatch": "^9.0.5"
+    }
+  },
+  "resolutions": {
+    "minimatch": "^9.0.5"
   },
   "exports": {
     ".": {

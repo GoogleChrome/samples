@@ -1,6 +1,6 @@
 ---
 title: 'Costa Amalfitana: Caminos Sinuosos y Aire Salado'
-description: 'Descubre las maravillas de Amalfi, Italia, a través de nuestra última aventura.'
+description: 'Descubre el paisaje vertical de Amalfi, donde las casas coloridas se aferran a acantilados y limones perfuman el aire.'
 date: 2026-03-15
 tags: ['Costa', 'Italia', 'Verano']
 author: maya

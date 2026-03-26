@@ -1,6 +1,6 @@
 ---
 title: 'Banff: Turquoise Waters and Mountain Peaks'
-description: 'Discover the wonders of Banff, Canada through our latest adventure.'
+description: 'Pristine turquoise lakes and towering peaks await in the heart of the Canadian Rockies.'
 date: 2026-03-08
 tags: ['Lakes', 'Canada', 'Nature']
 author: julia

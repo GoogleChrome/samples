@@ -1,6 +1,6 @@
 ---
 title: 'Tokio: Noches de Neón y Santuarios Ocultos'
-description: 'Descubre las maravillas de Tokio, Japón, a través de nuestra última aventura.'
+description: 'Luces de neón, calles bulliciosas y tradiciones milenarias chocan en Tokio. Desde el santuario Meiji hasta la sobrecarga visual de Shibuya, vive una ciudad que nunca duerme. Explora artesanos y arquitectura futurista. Es una metrópolis que mezcla lo viejo y lo nuevo perfectamente en cada esquina y rincón histórico.'
 date: 2026-03-06
 tags: ['Ciudad', 'Japón', 'Cultura']
 author: ashok

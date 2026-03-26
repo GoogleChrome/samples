@@ -1,6 +1,6 @@
 ---
 title: 'Serengueti: Un Amanecer de Safari para Recordar'
-description: 'Descubre las maravillas del Serengueti, Tanzania, a través de nuestra última aventura.'
+description: 'Vive la belleza cruda de un safari al amanecer en las llanuras infinitas del Serengueti.'
 date: 2026-03-09
 tags: ['Vida Silvestre', 'Tanzania', 'Naturaleza']
 author: julia

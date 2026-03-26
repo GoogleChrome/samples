@@ -1,6 +1,6 @@
 ---
 title: 'Tokyo: Neon Nights and Hidden Shrines'
-description: 'Discover the wonders of Tokyo, Japan through our latest adventure.'
+description: 'Neon lights, bustling streets, and ancient traditions collide in Tokyo. From the quiet serenity of Meiji Jingu to the visual sensory overload of Shibuya and Shinjuku, experience a city that never sleeps. Explore the historic temples of Asakusa, the trendy boutiques of Harajuku, and the futuristic architecture of Odaiba. This massive metropolis offers a perfect blend of old and new, ensuring every traveler finds something to fall in love with.'
 date: 2026-03-06
 tags: ['City', 'Japan', 'Culture']
 author: ashok

@@ -1,6 +1,6 @@
 ---
 title: 'Nueva York: Navegando por la Selva de Cristal'
-description: 'Descubre las maravillas de Nueva York, EE. UU., a través de nuestra última aventura.'
+description: 'Navega por la jungla de concreto de Manhattan. Vive la energía eléctrica de Times Square y encuentra tranquilidad en Central Park en esta ciudad vibrante.'
 date: 2026-03-16
 tags: ['Ciudad', 'EE. UU.', 'Energía']
 author: ashok

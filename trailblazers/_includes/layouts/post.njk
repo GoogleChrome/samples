@@ -6,7 +6,7 @@ layout: layouts/base.njk
 <style>{% include "css/prism-diff.css" %}</style>
 <h1>{{ title }}</h1>
 
-<ul class="post-metadata">
+<ul class="post-metadata post-metadata-primary">
 	<li>
 		<time datetime="{{ page.date | htmlDateString }}">
 			<svg class="icon-calendar" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -15,6 +15,17 @@ layout: layouts/base.njk
 			{{ page.date | readableDate(locale) }}
 		</time>
 	</li>
+	{% if author and authors[author] %}
+	<li>
+		<a href="/{{ locale }}/authors/{{ author }}/" class="post-metadata-author-link">
+			<img src="{{ authors[author].avatar }}" alt="{{ authors[author].name }}" class="post-metadata-author-avatar">
+			<span>{{ authors[author].name }}</span>
+		</a>
+	</li>
+	{% endif %}
+</ul>
+
+<ul class="post-metadata post-metadata-secondary">
 	{%- for tag in tags | filterTagList %}
 	{%- set tagUrl %}/{{ locale }}/tags/{{ tag | slugifyTag }}/{% endset %}
 	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a></li>
@@ -43,10 +54,17 @@ layout: layouts/base.njk
 
 {% if author and authors[author] %}
 <aside class="author-section">
-	<img src="{{ authors[author].avatar }}" alt="{{ authors[author].name }}" class="author-avatar">
+	<a href="/{{ locale }}/authors/{{ author }}/" class="author-avatar-link">
+		<img src="{{ authors[author].avatar }}" alt="{{ authors[author].name }}" class="author-avatar">
+	</a>
 	<div class="author-info">
-		<h3>About {{ authors[author].name }}</h3>
+		<h3>{{ 'about_author' | i18n({ name: authors[author].name }, locale) }}</h3>
 		<p>{{ authors[author].bio[locale] }}</p>
+		<p class="read-more-posts">
+			<a href="/{{ locale }}/authors/{{ author }}/">
+				{{ 'read_more_author' | i18n({ name: authors[author].name }, locale) }}
+			</a>
+		</p>
 	</div>
 </aside>
 {% endif %}

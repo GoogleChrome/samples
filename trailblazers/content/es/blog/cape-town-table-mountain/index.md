@@ -1,6 +1,6 @@
 ---
 title: 'Ciudad del Cabo: La Montaña de la Mesa desde Abajo y desde Arriba'
-description: 'Descubre las maravillas de Ciudad del Cabo, Sudáfrica, a través de nuestra última aventura.'
+description: 'Table Mountain domina una ciudad de contrastes dramáticos y belleza natural impresionante. Ciudad del Cabo ofrece desde playas salvajes hasta viñedos de clase mundial en el valle Constantia. Sube a la montaña para vistas panorámicas únicas de trescientos sesenta grados, visita pingüinos en Boulders Beach y explora Robben Island con historia viva.'
 date: 2026-03-11
 tags: ['Montañas', 'Sudáfrica', 'Aventura']
 author: maya

@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var app = require('@firebase/app');
 
 var name = "firebase";
-var version = "12.10.0";
+var version = "12.11.0";
 
 /**
  * @license

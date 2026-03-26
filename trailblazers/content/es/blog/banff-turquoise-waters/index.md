@@ -1,6 +1,6 @@
 ---
 title: 'Banff: Aguas Turquesas y Picos Montañosos'
-description: 'Descubre las maravillas de Banff, Canadá, a través de nuestra última aventura.'
+description: 'Lagos turquesas y picos imponentes te esperan en las Rocosas Canadienses.'
 date: 2026-03-08
 tags: ['Lagos', 'Canadá', 'Naturaleza']
 author: julia

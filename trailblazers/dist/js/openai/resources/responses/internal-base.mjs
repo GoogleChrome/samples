@@ -32,7 +32,7 @@ export function buildURL(client, query) {
     if (query) {
         url.search = stringifyQuery(query);
     }
-    url.protocol = 'wss';
+    url.protocol = url.protocol === 'http:' ? 'ws:' : 'wss:';
     return url;
 }
 function safeJSONStringify(value) {

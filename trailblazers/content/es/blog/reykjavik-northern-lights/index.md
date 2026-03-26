@@ -1,6 +1,6 @@
 ---
 title: 'Reikiavik: Persiguiendo la Aurora Boreal'
-description: 'Descubre las maravillas de Reikiavik, Islandia, a través de nuestra última aventura.'
+description: 'Persigue auroras boreales en la capital más al norte. Relájate en lagunas azules geotérmicas y explora cataratas naturales mágicas.'
 date: 2026-03-05
 tags: ['Invierno', 'Islandia', 'Magia']
 author: julia

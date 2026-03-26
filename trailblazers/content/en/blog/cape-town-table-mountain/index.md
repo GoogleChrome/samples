@@ -1,6 +1,6 @@
 ---
 title: 'Cape Town: Table Mountain from Below and Above'
-description: 'Discover the wonders of Cape Town, South Africa through our latest adventure.'
+description: "Table Mountain looms over a city of dramatic contrasts and stunning natural beauty. Cape Town offers everything from wild ocean beaches to world-class vineyards in the Constantia Valley. Hike up the famous mountain for 360-degree views, visit the penguins at Boulders Beach, and explore the history of Robben Island. It's a city where nature and culture meet in a spectacular dance of diversity."
 date: 2026-03-11
 tags: ['Mountains', 'South Africa', 'Adventure']
 author: maya

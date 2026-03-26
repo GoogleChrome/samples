@@ -21,7 +21,7 @@ export interface ParsedResponseOutputMessage<ParsedT> extends ResponseOutputMess
 export interface ParsedResponseFunctionToolCall extends ResponseFunctionToolCall {
     parsed_arguments: any;
 }
-export type ParsedResponseOutputItem<ParsedT> = ParsedResponseOutputMessage<ParsedT> | ParsedResponseFunctionToolCall | ResponseFileSearchToolCall | ResponseFunctionWebSearch | ResponseComputerToolCall | ResponseToolSearchCall | ResponseToolSearchOutputItem | ResponseReasoningItem | ResponseCompactionItem | ResponseOutputItem.ImageGenerationCall | ResponseCodeInterpreterToolCall | ResponseOutputItem.LocalShellCall | ResponseFunctionShellToolCall | ResponseFunctionShellToolCallOutput | ResponseApplyPatchToolCall | ResponseApplyPatchToolCallOutput | ResponseOutputItem.McpCall | ResponseOutputItem.McpListTools | ResponseOutputItem.McpApprovalRequest | ResponseCustomToolCall;
+export type ParsedResponseOutputItem<ParsedT> = ParsedResponseOutputMessage<ParsedT> | ParsedResponseFunctionToolCall | ResponseFileSearchToolCall | ResponseFunctionToolCallOutputItem | ResponseFunctionWebSearch | ResponseComputerToolCall | ResponseComputerToolCallOutputItem | ResponseToolSearchCall | ResponseToolSearchOutputItem | ResponseReasoningItem | ResponseCompactionItem | ResponseOutputItem.ImageGenerationCall | ResponseCodeInterpreterToolCall | ResponseOutputItem.LocalShellCall | ResponseOutputItem.LocalShellCallOutput | ResponseFunctionShellToolCall | ResponseFunctionShellToolCallOutput | ResponseApplyPatchToolCall | ResponseApplyPatchToolCallOutput | ResponseOutputItem.McpCall | ResponseOutputItem.McpListTools | ResponseOutputItem.McpApprovalRequest | ResponseOutputItem.McpApprovalResponse | ResponseCustomToolCall | ResponseCustomToolCallOutputItem;
 export interface ParsedResponse<ParsedT> extends Response {
     output: Array<ParsedResponseOutputItem<ParsedT>>;
     output_parsed: ParsedT | null;
@@ -170,11 +170,19 @@ export declare namespace ComputerAction {
          * The y-coordinate where the click occurred.
          */
         y: number;
+        /**
+         * The keys being held while clicking.
+         */
+        keys?: Array<string> | null;
     }
     /**
      * A double click action.
      */
     interface DoubleClick {
+        /**
+         * The keys being held while double-clicking.
+         */
+        keys: Array<string> | null;
         /**
          * Specifies the event type. For a double click action, this property is always set
          * to `double_click`.
@@ -210,6 +218,10 @@ export declare namespace ComputerAction {
          * `drag`.
          */
         type: 'drag';
+        /**
+         * The keys being held while dragging the mouse.
+         */
+        keys?: Array<string> | null;
     }
     namespace Drag {
         /**
@@ -258,6 +270,10 @@ export declare namespace ComputerAction {
          * The y-coordinate to move to.
          */
         y: number;
+        /**
+         * The keys being held while moving the mouse.
+         */
+        keys?: Array<string> | null;
     }
     /**
      * A screenshot action.
@@ -294,6 +310,10 @@ export declare namespace ComputerAction {
          * The y-coordinate where the scroll occurred.
          */
         y: number;
+        /**
+         * The keys being held while scrolling.
+         */
+        keys?: Array<string> | null;
     }
     /**
      * An action to type in text.
@@ -673,6 +693,10 @@ export declare namespace NamespaceTool {
     interface Function {
         name: string;
         type: 'function';
+        /**
+         * Whether this function should be deferred and discovered via tool search.
+         */
+        defer_loading?: boolean;
         description?: string | null;
         parameters?: unknown | null;
         strict?: boolean | null;
@@ -1400,11 +1424,19 @@ export declare namespace ResponseComputerToolCall {
          * The y-coordinate where the click occurred.
          */
         y: number;
+        /**
+         * The keys being held while clicking.
+         */
+        keys?: Array<string> | null;
     }
     /**
      * A double click action.
      */
     interface DoubleClick {
+        /**
+         * The keys being held while double-clicking.
+         */
+        keys: Array<string> | null;
         /**
          * Specifies the event type. For a double click action, this property is always set
          * to `double_click`.
@@ -1440,6 +1472,10 @@ export declare namespace ResponseComputerToolCall {
          * `drag`.
          */
         type: 'drag';
+        /**
+         * The keys being held while dragging the mouse.
+         */
+        keys?: Array<string> | null;
     }
     namespace Drag {
         /**
@@ -1488,6 +1524,10 @@ export declare namespace ResponseComputerToolCall {
          * The y-coordinate to move to.
          */
         y: number;
+        /**
+         * The keys being held while moving the mouse.
+         */
+        keys?: Array<string> | null;
     }
     /**
      * A screenshot action.
@@ -1524,6 +1564,10 @@ export declare namespace ResponseComputerToolCall {
          * The y-coordinate where the scroll occurred.
          */
         y: number;
+        /**
+         * The keys being held while scrolling.
+         */
+        keys?: Array<string> | null;
     }
     /**
      * An action to type in text.
@@ -1564,6 +1608,11 @@ export interface ResponseComputerToolCallOutputItem {
      */
     output: ResponseComputerToolCallOutputScreenshot;
     /**
+     * The status of the message input. One of `in_progress`, `completed`, or
+     * `incomplete`. Populated when input items are returned via API.
+     */
+    status: 'completed' | 'incomplete' | 'failed' | 'in_progress';
+    /**
      * The type of the computer tool call output. Always `computer_call_output`.
      */
     type: 'computer_call_output';
@@ -1573,10 +1622,9 @@ export interface ResponseComputerToolCallOutputItem {
      */
     acknowledged_safety_checks?: Array<ResponseComputerToolCallOutputItem.AcknowledgedSafetyCheck>;
     /**
-     * The status of the message input. One of `in_progress`, `completed`, or
-     * `incomplete`. Populated when input items are returned via API.
+     * The identifier of the actor that created the item.
      */
-    status?: 'in_progress' | 'completed' | 'incomplete';
+    created_by?: string;
 }
 export declare namespace ResponseComputerToolCallOutputItem {
     /**
@@ -1838,6 +1886,24 @@ export interface ResponseCustomToolCallInputDoneEvent {
     type: 'response.custom_tool_call_input.done';
 }
 /**
+ * A call to a custom tool created by the model.
+ */
+export interface ResponseCustomToolCallItem extends ResponseCustomToolCall {
+    /**
+     * The unique ID of the custom tool call item.
+     */
+    id: string;
+    /**
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when items are returned via API.
+     */
+    status: 'in_progress' | 'completed' | 'incomplete';
+    /**
+     * The identifier of the actor that created the item.
+     */
+    created_by?: string;
+}
+/**
  * The output of a custom tool call from your code, being sent back to the model.
  */
 export interface ResponseCustomToolCallOutput {
@@ -1858,6 +1924,24 @@ export interface ResponseCustomToolCallOutput {
      * The unique ID of the custom tool call output in the OpenAI platform.
      */
     id?: string;
+}
+/**
+ * The output of a custom tool call from your code, being sent back to the model.
+ */
+export interface ResponseCustomToolCallOutputItem extends ResponseCustomToolCallOutput {
+    /**
+     * The unique ID of the custom tool call output item.
+     */
+    id: string;
+    /**
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when items are returned via API.
+     */
+    status: 'in_progress' | 'completed' | 'incomplete';
+    /**
+     * The identifier of the actor that created the item.
+     */
+    created_by?: string;
 }
 /**
  * An error object returned when the model fails to generate a Response.
@@ -2368,6 +2452,15 @@ export interface ResponseFunctionToolCallItem extends ResponseFunctionToolCall {
      * The unique ID of the function tool call.
      */
     id: string;
+    /**
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when items are returned via API.
+     */
+    status: 'in_progress' | 'completed' | 'incomplete';
+    /**
+     * The identifier of the actor that created the item.
+     */
+    created_by?: string;
 }
 export interface ResponseFunctionToolCallOutputItem {
     /**
@@ -2384,14 +2477,18 @@ export interface ResponseFunctionToolCallOutputItem {
      */
     output: string | Array<ResponseInputText | ResponseInputImage | ResponseInputFile>;
     /**
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when items are returned via API.
+     */
+    status: 'in_progress' | 'completed' | 'incomplete';
+    /**
      * The type of the function tool call output. Always `function_call_output`.
      */
     type: 'function_call_output';
     /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`.
-     * Populated when items are returned via API.
+     * The identifier of the actor that created the item.
      */
-    status?: 'in_progress' | 'completed' | 'incomplete';
+    created_by?: string;
 }
 /**
  * The results of a web search tool call. See the
@@ -2678,11 +2775,6 @@ export interface ResponseInputFile {
      */
     type: 'input_file';
     /**
-     * The detail level of the file to be sent to the model. One of `high` or `low`.
-     * Defaults to `high`.
-     */
-    detail?: 'low' | 'high';
-    /**
      * The content of the file to be sent to the model.
      */
     file_data?: string;
@@ -2707,11 +2799,6 @@ export interface ResponseInputFileContent {
      * The type of the input item. Always `input_file`.
      */
     type: 'input_file';
-    /**
-     * The detail level of the file to be sent to the model. One of `high` or `low`.
-     * Defaults to `high`.
-     */
-    detail?: 'high' | 'low';
     /**
      * The base64-encoded data of the file to be sent to the model.
      */
@@ -3377,14 +3464,14 @@ export interface ResponseInputMessageItem {
      */
     role: 'user' | 'system' | 'developer';
     /**
+     * The type of the message input. Always set to `message`.
+     */
+    type: 'message';
+    /**
      * The status of item. One of `in_progress`, `completed`, or `incomplete`.
      * Populated when items are returned via API.
      */
     status?: 'in_progress' | 'completed' | 'incomplete';
-    /**
-     * The type of the message input. Always set to `message`.
-     */
-    type?: 'message';
 }
 /**
  * A text input to the model.
@@ -3415,7 +3502,7 @@ export interface ResponseInputTextContent {
 /**
  * Content item used to generate a response.
  */
-export type ResponseItem = ResponseInputMessageItem | ResponseOutputMessage | ResponseFileSearchToolCall | ResponseComputerToolCall | ResponseComputerToolCallOutputItem | ResponseFunctionWebSearch | ResponseFunctionToolCallItem | ResponseFunctionToolCallOutputItem | ResponseToolSearchCall | ResponseToolSearchOutputItem | ResponseItem.ImageGenerationCall | ResponseCodeInterpreterToolCall | ResponseItem.LocalShellCall | ResponseItem.LocalShellCallOutput | ResponseFunctionShellToolCall | ResponseFunctionShellToolCallOutput | ResponseApplyPatchToolCall | ResponseApplyPatchToolCallOutput | ResponseItem.McpListTools | ResponseItem.McpApprovalRequest | ResponseItem.McpApprovalResponse | ResponseItem.McpCall;
+export type ResponseItem = ResponseInputMessageItem | ResponseOutputMessage | ResponseFileSearchToolCall | ResponseComputerToolCall | ResponseComputerToolCallOutputItem | ResponseFunctionWebSearch | ResponseFunctionToolCallItem | ResponseFunctionToolCallOutputItem | ResponseToolSearchCall | ResponseToolSearchOutputItem | ResponseReasoningItem | ResponseCompactionItem | ResponseItem.ImageGenerationCall | ResponseCodeInterpreterToolCall | ResponseItem.LocalShellCall | ResponseItem.LocalShellCallOutput | ResponseFunctionShellToolCall | ResponseFunctionShellToolCallOutput | ResponseApplyPatchToolCall | ResponseApplyPatchToolCallOutput | ResponseItem.McpListTools | ResponseItem.McpApprovalRequest | ResponseItem.McpApprovalResponse | ResponseItem.McpCall | ResponseCustomToolCallItem | ResponseCustomToolCallOutputItem;
 export declare namespace ResponseItem {
     /**
      * An image generation request made by the model.
@@ -3868,7 +3955,7 @@ export interface ResponseOutputAudio {
 /**
  * An output message from the model.
  */
-export type ResponseOutputItem = ResponseOutputMessage | ResponseFileSearchToolCall | ResponseFunctionToolCall | ResponseFunctionWebSearch | ResponseComputerToolCall | ResponseReasoningItem | ResponseToolSearchCall | ResponseToolSearchOutputItem | ResponseCompactionItem | ResponseOutputItem.ImageGenerationCall | ResponseCodeInterpreterToolCall | ResponseOutputItem.LocalShellCall | ResponseFunctionShellToolCall | ResponseFunctionShellToolCallOutput | ResponseApplyPatchToolCall | ResponseApplyPatchToolCallOutput | ResponseOutputItem.McpCall | ResponseOutputItem.McpListTools | ResponseOutputItem.McpApprovalRequest | ResponseCustomToolCall;
+export type ResponseOutputItem = ResponseOutputMessage | ResponseFileSearchToolCall | ResponseFunctionToolCall | ResponseFunctionToolCallOutputItem | ResponseFunctionWebSearch | ResponseComputerToolCall | ResponseComputerToolCallOutputItem | ResponseReasoningItem | ResponseToolSearchCall | ResponseToolSearchOutputItem | ResponseCompactionItem | ResponseOutputItem.ImageGenerationCall | ResponseCodeInterpreterToolCall | ResponseOutputItem.LocalShellCall | ResponseOutputItem.LocalShellCallOutput | ResponseFunctionShellToolCall | ResponseFunctionShellToolCallOutput | ResponseApplyPatchToolCall | ResponseApplyPatchToolCallOutput | ResponseOutputItem.McpCall | ResponseOutputItem.McpListTools | ResponseOutputItem.McpApprovalRequest | ResponseOutputItem.McpApprovalResponse | ResponseCustomToolCall | ResponseCustomToolCallOutputItem;
 export declare namespace ResponseOutputItem {
     /**
      * An image generation request made by the model.
@@ -3948,6 +4035,27 @@ export declare namespace ResponseOutputItem {
              */
             working_directory?: string | null;
         }
+    }
+    /**
+     * The output of a local shell tool call.
+     */
+    interface LocalShellCallOutput {
+        /**
+         * The unique ID of the local shell tool call generated by the model.
+         */
+        id: string;
+        /**
+         * A JSON string of the output of the local shell tool call.
+         */
+        output: string;
+        /**
+         * The type of the local shell tool call output. Always `local_shell_call_output`.
+         */
+        type: 'local_shell_call_output';
+        /**
+         * The status of the item. One of `in_progress`, `completed`, or `incomplete`.
+         */
+        status?: 'in_progress' | 'completed' | 'incomplete' | null;
     }
     /**
      * An invocation of a tool on an MCP server.
@@ -4065,6 +4173,31 @@ export declare namespace ResponseOutputItem {
          * The type of the item. Always `mcp_approval_request`.
          */
         type: 'mcp_approval_request';
+    }
+    /**
+     * A response to an MCP approval request.
+     */
+    interface McpApprovalResponse {
+        /**
+         * The unique ID of the approval response
+         */
+        id: string;
+        /**
+         * The ID of the approval request being answered.
+         */
+        approval_request_id: string;
+        /**
+         * Whether the request was approved.
+         */
+        approve: boolean;
+        /**
+         * The type of the item. Always `mcp_approval_response`.
+         */
+        type: 'mcp_approval_response';
+        /**
+         * Optional reason for the decision.
+         */
+        reason?: string | null;
     }
 }
 /**
@@ -6223,7 +6356,7 @@ export interface ResponseCompactParams {
      * [model guide](https://platform.openai.com/docs/models) to browse and compare
      * available models.
      */
-    model: 'gpt-5.4' | 'gpt-5.3-chat-latest' | 'gpt-5.2' | 'gpt-5.2-2025-12-11' | 'gpt-5.2-chat-latest' | 'gpt-5.2-pro' | 'gpt-5.2-pro-2025-12-11' | 'gpt-5.1' | 'gpt-5.1-2025-11-13' | 'gpt-5.1-codex' | 'gpt-5.1-mini' | 'gpt-5.1-chat-latest' | 'gpt-5' | 'gpt-5-mini' | 'gpt-5-nano' | 'gpt-5-2025-08-07' | 'gpt-5-mini-2025-08-07' | 'gpt-5-nano-2025-08-07' | 'gpt-5-chat-latest' | 'gpt-4.1' | 'gpt-4.1-mini' | 'gpt-4.1-nano' | 'gpt-4.1-2025-04-14' | 'gpt-4.1-mini-2025-04-14' | 'gpt-4.1-nano-2025-04-14' | 'o4-mini' | 'o4-mini-2025-04-16' | 'o3' | 'o3-2025-04-16' | 'o3-mini' | 'o3-mini-2025-01-31' | 'o1' | 'o1-2024-12-17' | 'o1-preview' | 'o1-preview-2024-09-12' | 'o1-mini' | 'o1-mini-2024-09-12' | 'gpt-4o' | 'gpt-4o-2024-11-20' | 'gpt-4o-2024-08-06' | 'gpt-4o-2024-05-13' | 'gpt-4o-audio-preview' | 'gpt-4o-audio-preview-2024-10-01' | 'gpt-4o-audio-preview-2024-12-17' | 'gpt-4o-audio-preview-2025-06-03' | 'gpt-4o-mini-audio-preview' | 'gpt-4o-mini-audio-preview-2024-12-17' | 'gpt-4o-search-preview' | 'gpt-4o-mini-search-preview' | 'gpt-4o-search-preview-2025-03-11' | 'gpt-4o-mini-search-preview-2025-03-11' | 'chatgpt-4o-latest' | 'codex-mini-latest' | 'gpt-4o-mini' | 'gpt-4o-mini-2024-07-18' | 'gpt-4-turbo' | 'gpt-4-turbo-2024-04-09' | 'gpt-4-0125-preview' | 'gpt-4-turbo-preview' | 'gpt-4-1106-preview' | 'gpt-4-vision-preview' | 'gpt-4' | 'gpt-4-0314' | 'gpt-4-0613' | 'gpt-4-32k' | 'gpt-4-32k-0314' | 'gpt-4-32k-0613' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo-0301' | 'gpt-3.5-turbo-0613' | 'gpt-3.5-turbo-1106' | 'gpt-3.5-turbo-0125' | 'gpt-3.5-turbo-16k-0613' | 'o1-pro' | 'o1-pro-2025-03-19' | 'o3-pro' | 'o3-pro-2025-06-10' | 'o3-deep-research' | 'o3-deep-research-2025-06-26' | 'o4-mini-deep-research' | 'o4-mini-deep-research-2025-06-26' | 'computer-use-preview' | 'computer-use-preview-2025-03-11' | 'gpt-5-codex' | 'gpt-5-pro' | 'gpt-5-pro-2025-10-06' | 'gpt-5.1-codex-max' | (string & {}) | null;
+    model: 'gpt-5.4' | 'gpt-5.4-mini' | 'gpt-5.4-nano' | 'gpt-5.4-mini-2026-03-17' | 'gpt-5.4-nano-2026-03-17' | 'gpt-5.3-chat-latest' | 'gpt-5.2' | 'gpt-5.2-2025-12-11' | 'gpt-5.2-chat-latest' | 'gpt-5.2-pro' | 'gpt-5.2-pro-2025-12-11' | 'gpt-5.1' | 'gpt-5.1-2025-11-13' | 'gpt-5.1-codex' | 'gpt-5.1-mini' | 'gpt-5.1-chat-latest' | 'gpt-5' | 'gpt-5-mini' | 'gpt-5-nano' | 'gpt-5-2025-08-07' | 'gpt-5-mini-2025-08-07' | 'gpt-5-nano-2025-08-07' | 'gpt-5-chat-latest' | 'gpt-4.1' | 'gpt-4.1-mini' | 'gpt-4.1-nano' | 'gpt-4.1-2025-04-14' | 'gpt-4.1-mini-2025-04-14' | 'gpt-4.1-nano-2025-04-14' | 'o4-mini' | 'o4-mini-2025-04-16' | 'o3' | 'o3-2025-04-16' | 'o3-mini' | 'o3-mini-2025-01-31' | 'o1' | 'o1-2024-12-17' | 'o1-preview' | 'o1-preview-2024-09-12' | 'o1-mini' | 'o1-mini-2024-09-12' | 'gpt-4o' | 'gpt-4o-2024-11-20' | 'gpt-4o-2024-08-06' | 'gpt-4o-2024-05-13' | 'gpt-4o-audio-preview' | 'gpt-4o-audio-preview-2024-10-01' | 'gpt-4o-audio-preview-2024-12-17' | 'gpt-4o-audio-preview-2025-06-03' | 'gpt-4o-mini-audio-preview' | 'gpt-4o-mini-audio-preview-2024-12-17' | 'gpt-4o-search-preview' | 'gpt-4o-mini-search-preview' | 'gpt-4o-search-preview-2025-03-11' | 'gpt-4o-mini-search-preview-2025-03-11' | 'chatgpt-4o-latest' | 'codex-mini-latest' | 'gpt-4o-mini' | 'gpt-4o-mini-2024-07-18' | 'gpt-4-turbo' | 'gpt-4-turbo-2024-04-09' | 'gpt-4-0125-preview' | 'gpt-4-turbo-preview' | 'gpt-4-1106-preview' | 'gpt-4-vision-preview' | 'gpt-4' | 'gpt-4-0314' | 'gpt-4-0613' | 'gpt-4-32k' | 'gpt-4-32k-0314' | 'gpt-4-32k-0613' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo-0301' | 'gpt-3.5-turbo-0613' | 'gpt-3.5-turbo-1106' | 'gpt-3.5-turbo-0125' | 'gpt-3.5-turbo-16k-0613' | 'o1-pro' | 'o1-pro-2025-03-19' | 'o3-pro' | 'o3-pro-2025-06-10' | 'o3-deep-research' | 'o3-deep-research-2025-06-26' | 'o4-mini-deep-research' | 'o4-mini-deep-research-2025-06-26' | 'computer-use-preview' | 'computer-use-preview-2025-03-11' | 'gpt-5-codex' | 'gpt-5-pro' | 'gpt-5-pro-2025-10-06' | 'gpt-5.1-codex-max' | (string & {}) | null;
     /**
      * Text, image, or file inputs to the model, used to generate a response
      */
@@ -6248,7 +6381,7 @@ export interface ResponseCompactParams {
     prompt_cache_key?: string | null;
 }
 export declare namespace Responses {
-    export { type ApplyPatchTool as ApplyPatchTool, type CompactedResponse as CompactedResponse, type ComputerAction as ComputerAction, type ComputerActionList as ComputerActionList, type ComputerTool as ComputerTool, type ComputerUsePreviewTool as ComputerUsePreviewTool, type ContainerAuto as ContainerAuto, type ContainerNetworkPolicyAllowlist as ContainerNetworkPolicyAllowlist, type ContainerNetworkPolicyDisabled as ContainerNetworkPolicyDisabled, type ContainerNetworkPolicyDomainSecret as ContainerNetworkPolicyDomainSecret, type ContainerReference as ContainerReference, type CustomTool as CustomTool, type EasyInputMessage as EasyInputMessage, type FileSearchTool as FileSearchTool, type FunctionShellTool as FunctionShellTool, type FunctionTool as FunctionTool, type InlineSkill as InlineSkill, type InlineSkillSource as InlineSkillSource, type LocalEnvironment as LocalEnvironment, type LocalSkill as LocalSkill, type NamespaceTool as NamespaceTool, type Response as Response, type ResponseApplyPatchToolCall as ResponseApplyPatchToolCall, type ResponseApplyPatchToolCallOutput as ResponseApplyPatchToolCallOutput, type ResponseAudioDeltaEvent as ResponseAudioDeltaEvent, type ResponseAudioDoneEvent as ResponseAudioDoneEvent, type ResponseAudioTranscriptDeltaEvent as ResponseAudioTranscriptDeltaEvent, type ResponseAudioTranscriptDoneEvent as ResponseAudioTranscriptDoneEvent, type ResponseCodeInterpreterCallCodeDeltaEvent as ResponseCodeInterpreterCallCodeDeltaEvent, type ResponseCodeInterpreterCallCodeDoneEvent as ResponseCodeInterpreterCallCodeDoneEvent, type ResponseCodeInterpreterCallCompletedEvent as ResponseCodeInterpreterCallCompletedEvent, type ResponseCodeInterpreterCallInProgressEvent as ResponseCodeInterpreterCallInProgressEvent, type ResponseCodeInterpreterCallInterpretingEvent as ResponseCodeInterpreterCallInterpretingEvent, type ResponseCodeInterpreterToolCall as ResponseCodeInterpreterToolCall, type ResponseCompactionItem as ResponseCompactionItem, type ResponseCompactionItemParam as ResponseCompactionItemParam, type ResponseCompletedEvent as ResponseCompletedEvent, type ResponseComputerToolCall as ResponseComputerToolCall, type ResponseComputerToolCallOutputItem as ResponseComputerToolCallOutputItem, type ResponseComputerToolCallOutputScreenshot as ResponseComputerToolCallOutputScreenshot, type ResponseContainerReference as ResponseContainerReference, type ResponseContent as ResponseContent, type ResponseContentPartAddedEvent as ResponseContentPartAddedEvent, type ResponseContentPartDoneEvent as ResponseContentPartDoneEvent, type ResponseConversationParam as ResponseConversationParam, type ResponseCreatedEvent as ResponseCreatedEvent, type ResponseCustomToolCall as ResponseCustomToolCall, type ResponseCustomToolCallInputDeltaEvent as ResponseCustomToolCallInputDeltaEvent, type ResponseCustomToolCallInputDoneEvent as ResponseCustomToolCallInputDoneEvent, type ResponseCustomToolCallOutput as ResponseCustomToolCallOutput, type ResponseError as ResponseError, type ResponseErrorEvent as ResponseErrorEvent, type ResponseFailedEvent as ResponseFailedEvent, type ResponseFileSearchCallCompletedEvent as ResponseFileSearchCallCompletedEvent, type ResponseFileSearchCallInProgressEvent as ResponseFileSearchCallInProgressEvent, type ResponseFileSearchCallSearchingEvent as ResponseFileSearchCallSearchingEvent, type ResponseFileSearchToolCall as ResponseFileSearchToolCall, type ResponseFormatTextConfig as ResponseFormatTextConfig, type ResponseFormatTextJSONSchemaConfig as ResponseFormatTextJSONSchemaConfig, type ResponseFunctionCallArgumentsDeltaEvent as ResponseFunctionCallArgumentsDeltaEvent, type ResponseFunctionCallArgumentsDoneEvent as ResponseFunctionCallArgumentsDoneEvent, type ResponseFunctionCallOutputItem as ResponseFunctionCallOutputItem, type ResponseFunctionCallOutputItemList as ResponseFunctionCallOutputItemList, type ResponseFunctionShellCallOutputContent as ResponseFunctionShellCallOutputContent, type ResponseFunctionShellToolCall as ResponseFunctionShellToolCall, type ResponseFunctionShellToolCallOutput as ResponseFunctionShellToolCallOutput, type ResponseFunctionToolCall as ResponseFunctionToolCall, type ResponseFunctionToolCallItem as ResponseFunctionToolCallItem, type ResponseFunctionToolCallOutputItem as ResponseFunctionToolCallOutputItem, type ResponseFunctionWebSearch as ResponseFunctionWebSearch, type ResponseImageGenCallCompletedEvent as ResponseImageGenCallCompletedEvent, type ResponseImageGenCallGeneratingEvent as ResponseImageGenCallGeneratingEvent, type ResponseImageGenCallInProgressEvent as ResponseImageGenCallInProgressEvent, type ResponseImageGenCallPartialImageEvent as ResponseImageGenCallPartialImageEvent, type ResponseInProgressEvent as ResponseInProgressEvent, type ResponseIncludable as ResponseIncludable, type ResponseIncompleteEvent as ResponseIncompleteEvent, type ResponseInput as ResponseInput, type ResponseInputAudio as ResponseInputAudio, type ResponseInputContent as ResponseInputContent, type ResponseInputFile as ResponseInputFile, type ResponseInputFileContent as ResponseInputFileContent, type ResponseInputImage as ResponseInputImage, type ResponseInputImageContent as ResponseInputImageContent, type ResponseInputItem as ResponseInputItem, type ResponseInputMessageContentList as ResponseInputMessageContentList, type ResponseInputMessageItem as ResponseInputMessageItem, type ResponseInputText as ResponseInputText, type ResponseInputTextContent as ResponseInputTextContent, type ResponseItem as ResponseItem, type ResponseLocalEnvironment as ResponseLocalEnvironment, type ResponseMcpCallArgumentsDeltaEvent as ResponseMcpCallArgumentsDeltaEvent, type ResponseMcpCallArgumentsDoneEvent as ResponseMcpCallArgumentsDoneEvent, type ResponseMcpCallCompletedEvent as ResponseMcpCallCompletedEvent, type ResponseMcpCallFailedEvent as ResponseMcpCallFailedEvent, type ResponseMcpCallInProgressEvent as ResponseMcpCallInProgressEvent, type ResponseMcpListToolsCompletedEvent as ResponseMcpListToolsCompletedEvent, type ResponseMcpListToolsFailedEvent as ResponseMcpListToolsFailedEvent, type ResponseMcpListToolsInProgressEvent as ResponseMcpListToolsInProgressEvent, type ResponseOutputAudio as ResponseOutputAudio, type ResponseOutputItem as ResponseOutputItem, type ResponseOutputItemAddedEvent as ResponseOutputItemAddedEvent, type ResponseOutputItemDoneEvent as ResponseOutputItemDoneEvent, type ResponseOutputMessage as ResponseOutputMessage, type ResponseOutputRefusal as ResponseOutputRefusal, type ResponseOutputText as ResponseOutputText, type ResponseOutputTextAnnotationAddedEvent as ResponseOutputTextAnnotationAddedEvent, type ResponsePrompt as ResponsePrompt, type ResponseQueuedEvent as ResponseQueuedEvent, type ResponseReasoningItem as ResponseReasoningItem, type ResponseReasoningSummaryPartAddedEvent as ResponseReasoningSummaryPartAddedEvent, type ResponseReasoningSummaryPartDoneEvent as ResponseReasoningSummaryPartDoneEvent, type ResponseReasoningSummaryTextDeltaEvent as ResponseReasoningSummaryTextDeltaEvent, type ResponseReasoningSummaryTextDoneEvent as ResponseReasoningSummaryTextDoneEvent, type ResponseReasoningTextDeltaEvent as ResponseReasoningTextDeltaEvent, type ResponseReasoningTextDoneEvent as ResponseReasoningTextDoneEvent, type ResponseRefusalDeltaEvent as ResponseRefusalDeltaEvent, type ResponseRefusalDoneEvent as ResponseRefusalDoneEvent, type ResponseStatus as ResponseStatus, type ResponseStreamEvent as ResponseStreamEvent, type ResponseTextConfig as ResponseTextConfig, type ResponseTextDeltaEvent as ResponseTextDeltaEvent, type ResponseTextDoneEvent as ResponseTextDoneEvent, type ResponseToolSearchCall as ResponseToolSearchCall, type ResponseToolSearchOutputItem as ResponseToolSearchOutputItem, type ResponseToolSearchOutputItemParam as ResponseToolSearchOutputItemParam, type ResponseUsage as ResponseUsage, type ResponseWebSearchCallCompletedEvent as ResponseWebSearchCallCompletedEvent, type ResponseWebSearchCallInProgressEvent as ResponseWebSearchCallInProgressEvent, type ResponseWebSearchCallSearchingEvent as ResponseWebSearchCallSearchingEvent, type ResponsesClientEvent as ResponsesClientEvent, type ResponsesServerEvent as ResponsesServerEvent, type SkillReference as SkillReference, type Tool as Tool, type ToolChoiceAllowed as ToolChoiceAllowed, type ToolChoiceApplyPatch as ToolChoiceApplyPatch, type ToolChoiceCustom as ToolChoiceCustom, type ToolChoiceFunction as ToolChoiceFunction, type ToolChoiceMcp as ToolChoiceMcp, type ToolChoiceOptions as ToolChoiceOptions, type ToolChoiceShell as ToolChoiceShell, type ToolChoiceTypes as ToolChoiceTypes, type ToolSearchTool as ToolSearchTool, type WebSearchPreviewTool as WebSearchPreviewTool, type WebSearchTool as WebSearchTool, type ResponseCreateParams as ResponseCreateParams, type ResponseCreateParamsNonStreaming as ResponseCreateParamsNonStreaming, type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming, type ResponseRetrieveParams as ResponseRetrieveParams, type ResponseRetrieveParamsNonStreaming as ResponseRetrieveParamsNonStreaming, type ResponseRetrieveParamsStreaming as ResponseRetrieveParamsStreaming, type ResponseCompactParams as ResponseCompactParams, };
+    export { type ApplyPatchTool as ApplyPatchTool, type CompactedResponse as CompactedResponse, type ComputerAction as ComputerAction, type ComputerActionList as ComputerActionList, type ComputerTool as ComputerTool, type ComputerUsePreviewTool as ComputerUsePreviewTool, type ContainerAuto as ContainerAuto, type ContainerNetworkPolicyAllowlist as ContainerNetworkPolicyAllowlist, type ContainerNetworkPolicyDisabled as ContainerNetworkPolicyDisabled, type ContainerNetworkPolicyDomainSecret as ContainerNetworkPolicyDomainSecret, type ContainerReference as ContainerReference, type CustomTool as CustomTool, type EasyInputMessage as EasyInputMessage, type FileSearchTool as FileSearchTool, type FunctionShellTool as FunctionShellTool, type FunctionTool as FunctionTool, type InlineSkill as InlineSkill, type InlineSkillSource as InlineSkillSource, type LocalEnvironment as LocalEnvironment, type LocalSkill as LocalSkill, type NamespaceTool as NamespaceTool, type Response as Response, type ResponseApplyPatchToolCall as ResponseApplyPatchToolCall, type ResponseApplyPatchToolCallOutput as ResponseApplyPatchToolCallOutput, type ResponseAudioDeltaEvent as ResponseAudioDeltaEvent, type ResponseAudioDoneEvent as ResponseAudioDoneEvent, type ResponseAudioTranscriptDeltaEvent as ResponseAudioTranscriptDeltaEvent, type ResponseAudioTranscriptDoneEvent as ResponseAudioTranscriptDoneEvent, type ResponseCodeInterpreterCallCodeDeltaEvent as ResponseCodeInterpreterCallCodeDeltaEvent, type ResponseCodeInterpreterCallCodeDoneEvent as ResponseCodeInterpreterCallCodeDoneEvent, type ResponseCodeInterpreterCallCompletedEvent as ResponseCodeInterpreterCallCompletedEvent, type ResponseCodeInterpreterCallInProgressEvent as ResponseCodeInterpreterCallInProgressEvent, type ResponseCodeInterpreterCallInterpretingEvent as ResponseCodeInterpreterCallInterpretingEvent, type ResponseCodeInterpreterToolCall as ResponseCodeInterpreterToolCall, type ResponseCompactionItem as ResponseCompactionItem, type ResponseCompactionItemParam as ResponseCompactionItemParam, type ResponseCompletedEvent as ResponseCompletedEvent, type ResponseComputerToolCall as ResponseComputerToolCall, type ResponseComputerToolCallOutputItem as ResponseComputerToolCallOutputItem, type ResponseComputerToolCallOutputScreenshot as ResponseComputerToolCallOutputScreenshot, type ResponseContainerReference as ResponseContainerReference, type ResponseContent as ResponseContent, type ResponseContentPartAddedEvent as ResponseContentPartAddedEvent, type ResponseContentPartDoneEvent as ResponseContentPartDoneEvent, type ResponseConversationParam as ResponseConversationParam, type ResponseCreatedEvent as ResponseCreatedEvent, type ResponseCustomToolCall as ResponseCustomToolCall, type ResponseCustomToolCallInputDeltaEvent as ResponseCustomToolCallInputDeltaEvent, type ResponseCustomToolCallInputDoneEvent as ResponseCustomToolCallInputDoneEvent, type ResponseCustomToolCallItem as ResponseCustomToolCallItem, type ResponseCustomToolCallOutput as ResponseCustomToolCallOutput, type ResponseCustomToolCallOutputItem as ResponseCustomToolCallOutputItem, type ResponseError as ResponseError, type ResponseErrorEvent as ResponseErrorEvent, type ResponseFailedEvent as ResponseFailedEvent, type ResponseFileSearchCallCompletedEvent as ResponseFileSearchCallCompletedEvent, type ResponseFileSearchCallInProgressEvent as ResponseFileSearchCallInProgressEvent, type ResponseFileSearchCallSearchingEvent as ResponseFileSearchCallSearchingEvent, type ResponseFileSearchToolCall as ResponseFileSearchToolCall, type ResponseFormatTextConfig as ResponseFormatTextConfig, type ResponseFormatTextJSONSchemaConfig as ResponseFormatTextJSONSchemaConfig, type ResponseFunctionCallArgumentsDeltaEvent as ResponseFunctionCallArgumentsDeltaEvent, type ResponseFunctionCallArgumentsDoneEvent as ResponseFunctionCallArgumentsDoneEvent, type ResponseFunctionCallOutputItem as ResponseFunctionCallOutputItem, type ResponseFunctionCallOutputItemList as ResponseFunctionCallOutputItemList, type ResponseFunctionShellCallOutputContent as ResponseFunctionShellCallOutputContent, type ResponseFunctionShellToolCall as ResponseFunctionShellToolCall, type ResponseFunctionShellToolCallOutput as ResponseFunctionShellToolCallOutput, type ResponseFunctionToolCall as ResponseFunctionToolCall, type ResponseFunctionToolCallItem as ResponseFunctionToolCallItem, type ResponseFunctionToolCallOutputItem as ResponseFunctionToolCallOutputItem, type ResponseFunctionWebSearch as ResponseFunctionWebSearch, type ResponseImageGenCallCompletedEvent as ResponseImageGenCallCompletedEvent, type ResponseImageGenCallGeneratingEvent as ResponseImageGenCallGeneratingEvent, type ResponseImageGenCallInProgressEvent as ResponseImageGenCallInProgressEvent, type ResponseImageGenCallPartialImageEvent as ResponseImageGenCallPartialImageEvent, type ResponseInProgressEvent as ResponseInProgressEvent, type ResponseIncludable as ResponseIncludable, type ResponseIncompleteEvent as ResponseIncompleteEvent, type ResponseInput as ResponseInput, type ResponseInputAudio as ResponseInputAudio, type ResponseInputContent as ResponseInputContent, type ResponseInputFile as ResponseInputFile, type ResponseInputFileContent as ResponseInputFileContent, type ResponseInputImage as ResponseInputImage, type ResponseInputImageContent as ResponseInputImageContent, type ResponseInputItem as ResponseInputItem, type ResponseInputMessageContentList as ResponseInputMessageContentList, type ResponseInputMessageItem as ResponseInputMessageItem, type ResponseInputText as ResponseInputText, type ResponseInputTextContent as ResponseInputTextContent, type ResponseItem as ResponseItem, type ResponseLocalEnvironment as ResponseLocalEnvironment, type ResponseMcpCallArgumentsDeltaEvent as ResponseMcpCallArgumentsDeltaEvent, type ResponseMcpCallArgumentsDoneEvent as ResponseMcpCallArgumentsDoneEvent, type ResponseMcpCallCompletedEvent as ResponseMcpCallCompletedEvent, type ResponseMcpCallFailedEvent as ResponseMcpCallFailedEvent, type ResponseMcpCallInProgressEvent as ResponseMcpCallInProgressEvent, type ResponseMcpListToolsCompletedEvent as ResponseMcpListToolsCompletedEvent, type ResponseMcpListToolsFailedEvent as ResponseMcpListToolsFailedEvent, type ResponseMcpListToolsInProgressEvent as ResponseMcpListToolsInProgressEvent, type ResponseOutputAudio as ResponseOutputAudio, type ResponseOutputItem as ResponseOutputItem, type ResponseOutputItemAddedEvent as ResponseOutputItemAddedEvent, type ResponseOutputItemDoneEvent as ResponseOutputItemDoneEvent, type ResponseOutputMessage as ResponseOutputMessage, type ResponseOutputRefusal as ResponseOutputRefusal, type ResponseOutputText as ResponseOutputText, type ResponseOutputTextAnnotationAddedEvent as ResponseOutputTextAnnotationAddedEvent, type ResponsePrompt as ResponsePrompt, type ResponseQueuedEvent as ResponseQueuedEvent, type ResponseReasoningItem as ResponseReasoningItem, type ResponseReasoningSummaryPartAddedEvent as ResponseReasoningSummaryPartAddedEvent, type ResponseReasoningSummaryPartDoneEvent as ResponseReasoningSummaryPartDoneEvent, type ResponseReasoningSummaryTextDeltaEvent as ResponseReasoningSummaryTextDeltaEvent, type ResponseReasoningSummaryTextDoneEvent as ResponseReasoningSummaryTextDoneEvent, type ResponseReasoningTextDeltaEvent as ResponseReasoningTextDeltaEvent, type ResponseReasoningTextDoneEvent as ResponseReasoningTextDoneEvent, type ResponseRefusalDeltaEvent as ResponseRefusalDeltaEvent, type ResponseRefusalDoneEvent as ResponseRefusalDoneEvent, type ResponseStatus as ResponseStatus, type ResponseStreamEvent as ResponseStreamEvent, type ResponseTextConfig as ResponseTextConfig, type ResponseTextDeltaEvent as ResponseTextDeltaEvent, type ResponseTextDoneEvent as ResponseTextDoneEvent, type ResponseToolSearchCall as ResponseToolSearchCall, type ResponseToolSearchOutputItem as ResponseToolSearchOutputItem, type ResponseToolSearchOutputItemParam as ResponseToolSearchOutputItemParam, type ResponseUsage as ResponseUsage, type ResponseWebSearchCallCompletedEvent as ResponseWebSearchCallCompletedEvent, type ResponseWebSearchCallInProgressEvent as ResponseWebSearchCallInProgressEvent, type ResponseWebSearchCallSearchingEvent as ResponseWebSearchCallSearchingEvent, type ResponsesClientEvent as ResponsesClientEvent, type ResponsesServerEvent as ResponsesServerEvent, type SkillReference as SkillReference, type Tool as Tool, type ToolChoiceAllowed as ToolChoiceAllowed, type ToolChoiceApplyPatch as ToolChoiceApplyPatch, type ToolChoiceCustom as ToolChoiceCustom, type ToolChoiceFunction as ToolChoiceFunction, type ToolChoiceMcp as ToolChoiceMcp, type ToolChoiceOptions as ToolChoiceOptions, type ToolChoiceShell as ToolChoiceShell, type ToolChoiceTypes as ToolChoiceTypes, type ToolSearchTool as ToolSearchTool, type WebSearchPreviewTool as WebSearchPreviewTool, type WebSearchTool as WebSearchTool, type ResponseCreateParams as ResponseCreateParams, type ResponseCreateParamsNonStreaming as ResponseCreateParamsNonStreaming, type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming, type ResponseRetrieveParams as ResponseRetrieveParams, type ResponseRetrieveParamsNonStreaming as ResponseRetrieveParamsNonStreaming, type ResponseRetrieveParamsStreaming as ResponseRetrieveParamsStreaming, type ResponseCompactParams as ResponseCompactParams, };
     export { InputItems as InputItems, type ResponseItemList as ResponseItemList, type InputItemListParams as InputItemListParams, };
     export { InputTokens as InputTokens, type InputTokenCountResponse as InputTokenCountResponse, type InputTokenCountParams as InputTokenCountParams, };
 }

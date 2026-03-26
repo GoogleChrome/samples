@@ -1,6 +1,6 @@
 ---
 title: 'Petra: Secretos de la Ciudad Rosa'
-description: 'Descubre las maravillas de Petra, Jordania, a través de nuestra última aventura.'
+description: 'La Ciudad Rosa de Petra es una maravilla del mundo antiguo. Tallada en acantilados de arenisca por los nabateos, revela secretos al caminar por el Siq estrecho rocoso. Contempla el Tesoro, sube al Monasterio y vive la magia de noches iluminadas por velas bajo el cielo del desierto que se siente alienígena y profundamente humano a la vez.'
 date: 2026-03-13
 tags: ['Historia', 'Jordania', 'Joyas Ocultas']
 author: ashok

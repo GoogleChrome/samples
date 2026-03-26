@@ -14,7 +14,7 @@ var node_path_default = {};
 var node_url_default = {};
 
 // src/env.js
-var VERSION = "4.0.0-next.7";
+var VERSION = "4.0.0-next.9";
 var HAS_SELF = typeof self !== "undefined";
 var IS_FS_AVAILABLE = !isEmpty(node_fs_default);
 var IS_PATH_AVAILABLE = !isEmpty(node_path_default);
@@ -244,7 +244,7 @@ var logger = {
   }
 };
 
-// ../../node_modules/.pnpm/@huggingface+tokenizers@0.1.2/node_modules/@huggingface/tokenizers/dist/tokenizers.mjs
+// ../../node_modules/.pnpm/@huggingface+tokenizers@0.1.3/node_modules/@huggingface/tokenizers/dist/tokenizers.mjs
 var DictionarySplitter = class {
   /**
    * @param dictionary The dictionary of words to use for splitting.
@@ -1900,10 +1900,10 @@ var BPE = class extends TokenizerModel_default {
           );
           if (byte_tokens.every((x) => this.tokens_to_ids.has(x))) {
             output_tokens.push(...byte_tokens);
-          } else {
+          } else if (this.unk_token != null) {
             output_tokens.push(this.unk_token);
           }
-        } else {
+        } else if (this.unk_token != null) {
           output_tokens.push(this.unk_token);
         }
       }
@@ -6509,13 +6509,15 @@ async function storeCachedResource(path_or_repo_id, filename, cache2, cacheKey, 
       wrapped_progress
     );
   } else if (typeof response !== "string") {
+    const headers = new Headers(response.headers);
+    headers.set("content-length", result.byteLength.toString());
     await cache2.put(
       cacheKey,
       new Response(
         /** @type {any} */
         result,
         {
-          headers: response.headers
+          headers
         }
       )
     ).catch((err) => {
@@ -11828,7 +11830,9 @@ var processors_exports = {};
 __export(processors_exports, {
   ChatterboxProcessor: () => ChatterboxProcessor,
   Florence2Processor: () => Florence2Processor,
+  Gemma3Processor: () => Gemma3Processor,
   Gemma3nProcessor: () => Gemma3nProcessor,
+  Glm46VProcessor: () => Glm46VProcessor,
   GraniteSpeechProcessor: () => GraniteSpeechProcessor,
   GroundingDinoProcessor: () => GroundingDinoProcessor,
   Idefics3Processor: () => Idefics3Processor,
@@ -14342,26 +14346,29 @@ function compute_segments(mask_probs, pred_scores, pred_labels, mask_threshold, 
   }
   return [segmentation, segments];
 }
-function smart_resize(height, width, factor = 28, min_pixels = 56 * 56, max_pixels = 14 * 14 * 4 * 1280) {
+function smart_resize(height, width, factor = 28, min_pixels = 56 * 56, max_pixels = 14 * 14 * 4 * 1280, temporal_factor = 1) {
   if (height < factor || width < factor) {
-    throw new Error(`height:${height} or width:${width} must be larger than factor:${factor}`);
-  } else if (Math.max(height, width) / Math.min(height, width) > 200) {
+    const scale = Math.max(factor / height, factor / width);
+    height = Math.round(height * scale);
+    width = Math.round(width * scale);
+  }
+  if (Math.max(height, width) / Math.min(height, width) > 200) {
     throw new Error(
       `absolute aspect ratio must be smaller than 200, got ${Math.max(height, width) / Math.min(height, width)}`
     );
   }
   let h_bar = Math.round(height / factor) * factor;
   let w_bar = Math.round(width / factor) * factor;
-  if (h_bar * w_bar > max_pixels) {
-    const beta = Math.sqrt(height * width / max_pixels);
-    h_bar = Math.floor(height / beta / factor) * factor;
-    w_bar = Math.floor(width / beta / factor) * factor;
-  } else if (h_bar * w_bar < min_pixels) {
-    const beta = Math.sqrt(min_pixels / (height * width));
+  if (temporal_factor * h_bar * w_bar > max_pixels) {
+    const beta = Math.sqrt(temporal_factor * height * width / max_pixels);
+    h_bar = Math.max(factor, Math.floor(height / beta / factor) * factor);
+    w_bar = Math.max(factor, Math.floor(width / beta / factor) * factor);
+  } else if (temporal_factor * h_bar * w_bar < min_pixels) {
+    const beta = Math.sqrt(min_pixels / (temporal_factor * height * width));
     h_bar = Math.ceil(height * beta / factor) * factor;
     w_bar = Math.ceil(width * beta / factor) * factor;
   }
-  return [h_bar, w_bar];
+  return [w_bar, h_bar];
 }
 function post_process_panoptic_segmentation(outputs, threshold = 0.5, mask_threshold = 0.5, overlap_mask_area_threshold = 0.8, label_ids_to_fuse = null, target_sizes = null) {
   if (label_ids_to_fuse === null) {
@@ -14440,7 +14447,7 @@ var ImageProcessor = class extends Callable2 {
     this.do_pad = config.do_pad;
     this.min_pixels = config.min_pixels;
     this.max_pixels = config.max_pixels;
-    if (this.do_pad && !this.pad_size && this.size && this.size.width !== void 0 && this.size.height !== void 0) {
+    if (this.do_pad && !this.pad_size && !this.size_divisibility && this.size && this.size.width !== void 0 && this.size.height !== void 0) {
       this.pad_size = this.size;
     }
     this.do_flip_channel_order = config.do_flip_channel_order ?? false;
@@ -14728,10 +14735,8 @@ var ImageProcessor = class extends Callable2 {
         const padded = this.pad_image(pixelData, [image.height, image.width, image.channels], this.pad_size);
         [pixelData, imgDims] = padded;
       } else if (this.size_divisibility) {
-        const [paddedWidth, paddedHeight] = enforce_size_divisibility(
-          [imgDims[1], imgDims[0]],
-          this.size_divisibility
-        );
+        const paddedWidth = Math.ceil(imgDims[1] / this.size_divisibility) * this.size_divisibility;
+        const paddedHeight = Math.ceil(imgDims[0] / this.size_divisibility) * this.size_divisibility;
         [pixelData, imgDims] = this.pad_image(pixelData, imgDims, { width: paddedWidth, height: paddedHeight });
       }
     }
@@ -14808,6 +14813,7 @@ var image_processors_exports = {};
 __export(image_processors_exports, {
   BeitFeatureExtractor: () => BeitFeatureExtractor,
   BitImageProcessor: () => BitImageProcessor,
+  CHMv2ImageProcessor: () => CHMv2ImageProcessor,
   CLIPFeatureExtractor: () => CLIPFeatureExtractor,
   CLIPImageProcessor: () => CLIPImageProcessor,
   ChineseCLIPFeatureExtractor: () => ChineseCLIPFeatureExtractor,
@@ -14824,6 +14830,8 @@ __export(image_processors_exports, {
   DonutImageProcessor: () => DonutImageProcessor,
   EfficientNetImageProcessor: () => EfficientNetImageProcessor,
   GLPNFeatureExtractor: () => GLPNFeatureExtractor,
+  Gemma3ImageProcessor: () => Gemma3ImageProcessor,
+  Glm46VImageProcessor: () => Glm46VImageProcessor,
   GroundingDinoImageProcessor: () => GroundingDinoImageProcessor,
   Idefics3ImageProcessor: () => Idefics3ImageProcessor,
   ImageFeatureExtractor: () => ImageProcessor,
@@ -14882,6 +14890,10 @@ var BitImageProcessor = class extends ImageProcessor {
 
 // src/models/chinese_clip/image_processing_chinese_clip.js
 var ChineseCLIPFeatureExtractor = class extends ImageProcessor {
+};
+
+// src/models/chmv2/image_processing_chmv2.js
+var CHMv2ImageProcessor = class extends ImageProcessor {
 };
 
 // src/models/clip/image_processing_clip.js
@@ -15000,6 +15012,69 @@ var EfficientNetImageProcessor = class extends ImageProcessor {
     if (this.include_top) {
       this.image_std = this.image_std.map((x) => x * x);
     }
+  }
+};
+
+// src/models/gemma3/image_processing_gemma3.js
+var Gemma3ImageProcessor = class extends ImageProcessor {
+};
+
+// src/models/qwen2_vl/image_processing_qwen2_vl.js
+var Qwen2VLImageProcessor = class extends ImageProcessor {
+  constructor(config) {
+    super(config);
+    this.min_pixels = config.min_pixels ?? config.size?.shortest_edge;
+    this.max_pixels = config.max_pixels ?? config.size?.longest_edge;
+    this.patch_size = config.patch_size;
+    this.merge_size = config.merge_size;
+  }
+  /** @type {ImageProcessor['get_resize_output_image_size']} */
+  get_resize_output_image_size(image, size) {
+    const factor = this.patch_size * this.merge_size;
+    return smart_resize(image.height, image.width, factor, this.min_pixels, this.max_pixels);
+  }
+  async _call(images, ...args) {
+    const { pixel_values, original_sizes, reshaped_input_sizes } = await super._call(images, ...args);
+    let patches = pixel_values;
+    const { temporal_patch_size, merge_size, patch_size } = this.config;
+    if (patches.dims[0] === 1) {
+      patches = cat(
+        Array.from({ length: temporal_patch_size }, () => patches),
+        0
+      );
+    }
+    const grid_t = patches.dims[0] / temporal_patch_size;
+    const channel = patches.dims[1];
+    const grid_h = Math.floor(patches.dims[2] / patch_size);
+    const grid_w = Math.floor(patches.dims[3] / patch_size);
+    const flatten_patches = patches.view(
+      grid_t,
+      temporal_patch_size,
+      channel,
+      Math.floor(grid_h / merge_size),
+      merge_size,
+      patch_size,
+      Math.floor(grid_w / merge_size),
+      merge_size,
+      patch_size
+    ).permute(0, 3, 6, 4, 7, 2, 1, 5, 8).view(grid_t * grid_h * grid_w, channel * temporal_patch_size * patch_size * patch_size);
+    const image_grid_thw = new Tensor2("int64", [grid_t, grid_h, grid_w], [1, 3]);
+    return {
+      pixel_values: flatten_patches,
+      image_grid_thw,
+      original_sizes,
+      reshaped_input_sizes
+    };
+  }
+};
+
+// src/models/glm46v/image_processing_glm46v.js
+var Glm46VImageProcessor = class extends Qwen2VLImageProcessor {
+  /** @type {Qwen2VLImageProcessor['get_resize_output_image_size']} */
+  get_resize_output_image_size(image, size) {
+    const factor = this.patch_size * this.merge_size;
+    const temporal_factor = this.config.temporal_patch_size ?? 2;
+    return smart_resize(image.height, image.width, factor, this.min_pixels, this.max_pixels, temporal_factor);
   }
 };
 
@@ -15396,7 +15471,7 @@ var Lfm2VlImageProcessor = class extends ImageProcessor {
         const img = pixel_values.unsqueeze_(0);
         const total_factor = this.encoder_patch_size * this.downsample_factor;
         const f2 = total_factor ** 2;
-        const [new_height, new_width] = smart_resize(
+        const [new_width, new_height] = smart_resize(
           Math.max(total_factor, height),
           Math.max(total_factor, width),
           total_factor,
@@ -15684,55 +15759,6 @@ var PixtralImageProcessor = class extends ImageProcessor {
 
 // src/models/pvt/image_processing_pvt.js
 var PvtImageProcessor = class extends ImageProcessor {
-};
-
-// src/models/qwen2_vl/image_processing_qwen2_vl.js
-var Qwen2VLImageProcessor = class extends ImageProcessor {
-  constructor(config) {
-    super(config);
-    this.min_pixels = config.min_pixels ?? config.size?.shortest_edge;
-    this.max_pixels = config.max_pixels ?? config.size?.longest_edge;
-    this.patch_size = config.patch_size;
-    this.merge_size = config.merge_size;
-  }
-  /** @type {ImageProcessor['get_resize_output_image_size']} */
-  get_resize_output_image_size(image, size) {
-    const factor = this.patch_size * this.merge_size;
-    return smart_resize(image.height, image.width, factor, this.min_pixels, this.max_pixels);
-  }
-  async _call(images, ...args) {
-    const { pixel_values, original_sizes, reshaped_input_sizes } = await super._call(images, ...args);
-    let patches = pixel_values;
-    const { temporal_patch_size, merge_size, patch_size } = this.config;
-    if (patches.dims[0] === 1) {
-      patches = cat(
-        Array.from({ length: temporal_patch_size }, () => patches),
-        0
-      );
-    }
-    const grid_t = patches.dims[0] / temporal_patch_size;
-    const channel = patches.dims[1];
-    const grid_h = Math.floor(patches.dims[2] / patch_size);
-    const grid_w = Math.floor(patches.dims[3] / patch_size);
-    const flatten_patches = patches.view(
-      grid_t,
-      temporal_patch_size,
-      channel,
-      Math.floor(grid_h / merge_size),
-      merge_size,
-      patch_size,
-      Math.floor(grid_w / merge_size),
-      merge_size,
-      patch_size
-    ).permute(0, 3, 6, 4, 7, 2, 1, 5, 8).view(grid_t * grid_h * grid_w, channel * temporal_patch_size * patch_size * patch_size);
-    const image_grid_thw = new Tensor2("int64", [grid_t, grid_h, grid_w], [1, 3]);
-    return {
-      pixel_values: flatten_patches,
-      image_grid_thw,
-      original_sizes,
-      reshaped_input_sizes
-    };
-  }
 };
 
 // src/models/rt_detr/image_processing_rt_detr.js
@@ -16216,6 +16242,48 @@ var Florence2Processor = class extends Processor {
   }
 };
 
+// src/models/gemma3/processing_gemma3.js
+var Gemma3Processor = class extends Processor {
+  static tokenizer_class = AutoTokenizer;
+  static image_processor_class = AutoImageProcessor;
+  static uses_processor_config = true;
+  static uses_chat_template_file = true;
+  constructor(config, components, chat_template) {
+    super(config, components, chat_template);
+    this.image_seq_length = this.config.image_seq_length;
+    const { boi_token, image_token, eoi_token } = this.tokenizer.config;
+    this.boi_token = boi_token;
+    this.image_token = image_token;
+    this.eoi_token = eoi_token;
+    const image_tokens_expanded = image_token.repeat(this.image_seq_length);
+    this.full_image_sequence = `
+
+${boi_token}${image_tokens_expanded}${eoi_token}
+
+`;
+  }
+  /**
+   * @param {string|string[]} text
+   * @param {import('../../utils/image.js').RawImage|import('../../utils/image.js').RawImage[]} [images]
+   * @param {Object} [options]
+   */
+  async _call(text, images = null, options = {}) {
+    if (typeof text === "string") {
+      text = [text];
+    }
+    let image_inputs;
+    if (images) {
+      image_inputs = await this.image_processor(images, options);
+      text = text.map((prompt) => prompt.replaceAll(this.boi_token, this.full_image_sequence));
+    }
+    const text_inputs = this.tokenizer(text, options);
+    return {
+      ...text_inputs,
+      ...image_inputs
+    };
+  }
+};
+
 // src/models/gemma3n/processing_gemma3n.js
 var Gemma3nProcessor = class extends Processor {
   static image_processor_class = AutoImageProcessor;
@@ -16286,6 +16354,56 @@ ${boi_token}${image_tokens_expanded}${eoi_token}
       ...audio_inputs
     };
   }
+};
+
+// src/models/qwen2_vl/processing_qwen2_vl.js
+var Qwen2VLProcessor = class extends Processor {
+  static image_processor_class = AutoImageProcessor;
+  static tokenizer_class = AutoTokenizer;
+  static image_token = "<|image_pad|>";
+  /**
+   *
+   * @param {string|string[]} text
+   * @param {RawImage|RawImage[]} images
+   * @param  {...any} args
+   * @returns {Promise<any>}
+   */
+  async _call(text, images = null, ...args) {
+    if (!Array.isArray(text)) {
+      text = [text];
+    }
+    let image_inputs, image_grid_thw;
+    if (images) {
+      image_inputs = await this.image_processor(images);
+      image_grid_thw = image_inputs.image_grid_thw;
+    }
+    if (image_grid_thw) {
+      let merge_length = this.image_processor.config.merge_size ** 2;
+      let index = 0;
+      const image_token = (
+        /** @type {typeof Qwen2VLProcessor} */
+        this.constructor.image_token
+      );
+      const image_grid_thw_list = image_grid_thw.tolist();
+      text = text.map((t) => {
+        while (t.includes(image_token)) {
+          const prod = Number(image_grid_thw_list[index++].reduce((a, b) => a * b, 1n));
+          t = t.replace(image_token, "<|placeholder|>".repeat(Math.floor(prod / merge_length)));
+        }
+        return t.replaceAll("<|placeholder|>", image_token);
+      });
+    }
+    const text_inputs = this.tokenizer(text);
+    return {
+      ...text_inputs,
+      ...image_inputs
+    };
+  }
+};
+
+// src/models/glm46v/processing_glm46v.js
+var Glm46VProcessor = class extends Qwen2VLProcessor {
+  static image_token = "<|image|>";
 };
 
 // src/models/granite_speech/processing_granite_speech.js
@@ -17018,47 +17136,6 @@ var PyAnnoteProcessor = class extends Processor {
   }
 };
 
-// src/models/qwen2_vl/processing_qwen2_vl.js
-var Qwen2VLProcessor = class extends Processor {
-  static image_processor_class = AutoImageProcessor;
-  static tokenizer_class = AutoTokenizer;
-  /**
-   *
-   * @param {string|string[]} text
-   * @param {RawImage|RawImage[]} images
-   * @param  {...any} args
-   * @returns {Promise<any>}
-   */
-  async _call(text, images = null, ...args) {
-    if (!Array.isArray(text)) {
-      text = [text];
-    }
-    let image_inputs, image_grid_thw;
-    if (images) {
-      image_inputs = await this.image_processor(images);
-      image_grid_thw = image_inputs.image_grid_thw;
-    }
-    if (image_grid_thw) {
-      let merge_length = this.image_processor.config.merge_size ** 2;
-      let index = 0;
-      const image_grid_thw_list = image_grid_thw.tolist();
-      text = text.map((t) => {
-        while (t.includes("<|image_pad|>")) {
-          const prod = Number(image_grid_thw_list[index++].reduce((a, b) => a * b, 1n));
-          t = t.replace("<|image_pad|>", "<|placeholder|>".repeat(Math.floor(prod / merge_length)));
-        }
-        return t.replaceAll("<|placeholder|>", "<|image_pad|>");
-      });
-    }
-    const text_inputs = this.tokenizer(text);
-    return {
-      ...text_inputs,
-      ...image_inputs
-      // TODO: ...videos_inputs,
-    };
-  }
-};
-
 // src/models/qwen2_5_vl/processing_qwen2_5_vl.js
 var Qwen2_5_VLProcessor = class extends Qwen2VLProcessor {
 };
@@ -17402,6 +17479,8 @@ function getNormalizedConfig(config) {
     case "gemma3n":
     case "lfm2_vl":
     case "chatterbox":
+    case "lighton_ocr":
+    case "glm_ocr":
     case "mistral3":
     case "qwen2_5_vl":
     case "qwen3_vl":
@@ -17477,6 +17556,8 @@ function getNormalizedConfig(config) {
       mapping["dim_kv"] = "head_dim";
       break;
     case "qwen3":
+    case "solar_open":
+    case "glm_ocr_text":
     case "gemma":
     case "gemma2":
     case "vaultgemma":
@@ -17487,6 +17568,7 @@ function getNormalizedConfig(config) {
     case "ernie4_5":
     case "hunyuan_v1_dense":
     case "falcon_h1":
+    case "nemotron_h":
     case "ministral":
     case "ministral3":
       mapping["num_heads"] = "num_key_value_heads";
@@ -17521,6 +17603,9 @@ function getNormalizedConfig(config) {
       mapping["num_attention_heads"] = "num_attention_heads";
       break;
     case "youtu":
+    case "deepseek_v3":
+    case "glm_moe_dsa":
+    case "mistral4":
       mapping["num_heads"] = "num_key_value_heads";
       mapping["num_layers"] = "num_hidden_layers";
       mapping["dim_kv"] = "qk_head_dim";
@@ -17609,6 +17694,7 @@ function getCacheShapes(config, options) {
   if (!(config instanceof PretrainedConfig)) {
     config = new PretrainedConfig(config);
   }
+  const batch_size = options?.batch_size ?? 1;
   if (["lfm2", "lfm2_moe"].includes(config.model_type)) {
     const pkv_prefix = options?.prefix ?? "past_key_values";
     const conv_prefix = pkv_prefix === "present" ? "present" : "past";
@@ -17618,7 +17704,6 @@ function getCacheShapes(config, options) {
       config
     );
     const head_dim = hidden_size / num_attention_heads;
-    const batch_size = options?.batch_size ?? 1;
     for (let i = 0; i < layer_types.length; ++i) {
       if (layer_types[i] === "full_attention") {
         for (const kv of ["key", "value"]) {
@@ -17631,31 +17716,26 @@ function getCacheShapes(config, options) {
       }
     }
     return cache_values;
-  } else if (["granitemoehybrid", "falcon_h1"].includes(config.model_type)) {
+  } else if (["granitemoehybrid", "falcon_h1", "nemotron_h"].includes(config.model_type)) {
     const pkv_prefix = options?.prefix ?? "past_key_values";
     const conv_prefix = pkv_prefix === "present" ? "present" : "past";
-    const cache_values = {};
-    const {
-      layer_types,
-      num_hidden_layers,
-      num_attention_heads,
-      num_key_value_heads,
-      hidden_size,
-      mamba_d_conv,
-      mamba_n_heads,
-      mamba_d_head,
-      mamba_d_state,
-      mamba_n_groups,
-      mamba_expand,
-      mamba_d_ssm
-    } = (
+    const c = (
       /** @type {any} */
       config
     );
-    const head_dim = hidden_size / num_attention_heads;
-    const batch_size = options?.batch_size ?? 1;
-    const conv_d_inner = (mamba_d_ssm ?? mamba_expand * hidden_size) + 2 * mamba_n_groups * mamba_d_state;
-    for (let i = 0; i < num_hidden_layers; ++i) {
+    const layer_types = c.layer_types ?? c.layers_block_type;
+    const num_layers = c.num_hidden_layers ?? layer_types?.length;
+    const num_key_value_heads = c.num_key_value_heads;
+    const head_dim = c.head_dim ?? c.hidden_size / c.num_attention_heads;
+    const mamba_n_heads = c.mamba_n_heads ?? c.mamba_num_heads;
+    const mamba_d_head = c.mamba_d_head ?? c.mamba_head_dim;
+    const mamba_d_state = c.mamba_d_state ?? c.ssm_state_size;
+    const mamba_n_groups = c.mamba_n_groups ?? c.n_groups;
+    const mamba_d_conv = c.mamba_d_conv ?? c.conv_kernel;
+    const mamba_d_ssm = c.mamba_d_ssm ?? (c.mamba_expand ? c.mamba_expand * c.hidden_size : mamba_n_heads * mamba_d_head);
+    const conv_d_inner = mamba_d_ssm + 2 * mamba_n_groups * mamba_d_state;
+    const cache_values = {};
+    for (let i = 0; i < num_layers; ++i) {
       if (!layer_types || layer_types[i] === "mamba") {
         cache_values[`${conv_prefix}_conv.${i}`] = [batch_size, conv_d_inner, mamba_d_conv];
         cache_values[`${conv_prefix}_ssm.${i}`] = [batch_size, mamba_n_heads, mamba_d_head, mamba_d_state];
@@ -17689,7 +17769,6 @@ function getCacheShapes(config, options) {
     const key_dim = linear_key_head_dim * linear_num_key_heads;
     const value_dim = linear_value_head_dim * linear_num_value_heads;
     const final_head_dim = head_dim ?? hidden_size / num_attention_heads;
-    const batch_size = options?.batch_size ?? 1;
     for (let i = 0; i < layer_types.length; ++i) {
       if (layer_types[i] === "full_attention") {
         for (const kv of ["key", "value"]) {
@@ -19385,8 +19464,7 @@ var MODEL_TYPES = {
   ImageAudioTextToText: 13,
   Supertonic: 14,
   Chatterbox: 15,
-  MultimodalLanguageModelOnly: 16,
-  VoxtralRealtime: 17
+  VoxtralRealtime: 16
 };
 var MODEL_TYPE_CONFIG = {
   [MODEL_TYPES.DecoderOnly]: {
@@ -19443,12 +19521,12 @@ var MODEL_TYPE_CONFIG = {
     can_generate: true,
     forward: image_text_to_text_forward,
     prepare_inputs: multimodal_text_to_text_prepare_inputs_for_generation,
-    sessions: (config) => {
+    sessions: (config, options, textOnly) => {
       const s = {
         embed_tokens: "embed_tokens",
-        vision_encoder: "vision_encoder",
         decoder_model_merged: "decoder_model_merged"
       };
+      if (!textOnly) s["vision_encoder"] = "vision_encoder";
       if (config.is_encoder_decoder) s["model"] = "encoder_model";
       return s;
     },
@@ -19470,12 +19548,17 @@ var MODEL_TYPE_CONFIG = {
   [MODEL_TYPES.ImageAudioTextToText]: {
     can_generate: true,
     prepare_inputs: multimodal_text_to_text_prepare_inputs_for_generation,
-    sessions: () => ({
-      embed_tokens: "embed_tokens",
-      audio_encoder: "audio_encoder",
-      vision_encoder: "vision_encoder",
-      decoder_model_merged: "decoder_model_merged"
-    }),
+    sessions: (config, options, textOnly) => {
+      const s = {
+        embed_tokens: "embed_tokens",
+        decoder_model_merged: "decoder_model_merged"
+      };
+      if (!textOnly) {
+        s["audio_encoder"] = "audio_encoder";
+        s["vision_encoder"] = "vision_encoder";
+      }
+      return s;
+    },
     optional_configs: { generation_config: "generation_config.json" }
   },
   [MODEL_TYPES.Phi3V]: {
@@ -19526,14 +19609,6 @@ var MODEL_TYPE_CONFIG = {
     cache_sessions: { model: true },
     optional_configs: { generation_config: "generation_config.json" }
   },
-  [MODEL_TYPES.MultimodalLanguageModelOnly]: {
-    can_generate: true,
-    forward: image_text_to_text_forward,
-    prepare_inputs: multimodal_text_to_text_prepare_inputs_for_generation,
-    sessions: () => ({ embed_tokens: "embed_tokens", decoder_model_merged: "decoder_model_merged" }),
-    cache_sessions: { decoder_model_merged: true },
-    optional_configs: { generation_config: "generation_config.json" }
-  },
   [MODEL_TYPES.VoxtralRealtime]: {
     can_generate: true,
     prepare_inputs: decoder_prepare_inputs_for_generation,
@@ -19559,6 +19634,19 @@ function getSessionsConfig(modelType, config, options = {}) {
     optional_configs: typeConfig.optional_configs
   };
 }
+function resolveTypeConfig(modelName, config) {
+  let modelType = MODEL_TYPE_MAPPING.get(modelName);
+  let textOnly = false;
+  const nativeArch = config?.architectures?.[0];
+  if (nativeArch && nativeArch !== modelName && modelName?.endsWith("ForCausalLM") && nativeArch.endsWith("ForConditionalGeneration")) {
+    const nativeType = MODEL_TYPE_MAPPING.get(nativeArch);
+    if (nativeType !== void 0) {
+      modelType = nativeType;
+      textOnly = true;
+    }
+  }
+  return { typeConfig: MODEL_TYPE_CONFIG[modelType] ?? MODEL_TYPE_CONFIG.default, textOnly, modelType };
+}
 var MODEL_TYPE_MAPPING = /* @__PURE__ */ new Map();
 var MODEL_NAME_TO_CLASS_MAPPING = /* @__PURE__ */ new Map();
 var MODEL_CLASS_TO_NAME_MAPPING = /* @__PURE__ */ new Map();
@@ -19578,8 +19666,7 @@ var PreTrainedModel = class extends Callable2 {
     this.sessions = sessions;
     this.configs = configs;
     const modelName = MODEL_CLASS_TO_NAME_MAPPING.get(this.constructor);
-    const modelType = MODEL_TYPE_MAPPING.get(modelName);
-    const typeConfig = MODEL_TYPE_CONFIG[modelType] ?? MODEL_TYPE_CONFIG.default;
+    const { typeConfig } = resolveTypeConfig(modelName, config);
     this.can_generate = typeConfig.can_generate;
     this._forward = typeConfig.forward;
     this._prepare_inputs_for_generation = typeConfig.prepare_inputs;
@@ -19642,9 +19729,8 @@ var PreTrainedModel = class extends Callable2 {
       session_options
     };
     const modelName = MODEL_CLASS_TO_NAME_MAPPING.get(this);
-    const modelType = MODEL_TYPE_MAPPING.get(modelName);
     config = options.config = await AutoConfig.from_pretrained(pretrained_model_name_or_path, options);
-    const typeConfig = MODEL_TYPE_CONFIG[modelType] ?? MODEL_TYPE_CONFIG.default;
+    const { typeConfig, textOnly, modelType } = resolveTypeConfig(modelName, config);
     if (modelType === void 0) {
       const type = modelName ?? config?.model_type;
       if (type !== "custom") {
@@ -19653,7 +19739,7 @@ var PreTrainedModel = class extends Callable2 {
         );
       }
     }
-    const sessions = typeConfig.sessions(config, options);
+    const sessions = typeConfig.sessions(config, options, textOnly);
     const promises = [
       constructSessions(pretrained_model_name_or_path, sessions, options, typeConfig.cache_sessions)
     ];
@@ -20317,7 +20403,9 @@ async function generic_text_to_text_forward(self2, {
         "qwen3_5",
         "qwen3_5_text",
         "qwen3_5_moe",
-        "qwen3_5_moe_text"
+        "qwen3_5_moe_text",
+        "glm_ocr",
+        "glm_ocr_text"
       ].includes(self2.config.model_type)
     ) {
       const { image_grid_thw, video_grid_thw } = kwargs;
@@ -20541,6 +20629,8 @@ __export(models_exports, {
   BloomForCausalLM: () => BloomForCausalLM,
   BloomModel: () => BloomModel,
   BloomPreTrainedModel: () => BloomPreTrainedModel,
+  CHMv2ForDepthEstimation: () => CHMv2ForDepthEstimation,
+  CHMv2PreTrainedModel: () => CHMv2PreTrainedModel,
   CLIPModel: () => CLIPModel,
   CLIPPreTrainedModel: () => CLIPPreTrainedModel,
   CLIPSegForImageSegmentation: () => CLIPSegForImageSegmentation,
@@ -20615,6 +20705,9 @@ __export(models_exports, {
   DebertaV2PreTrainedModel: () => DebertaV2PreTrainedModel,
   DecisionTransformerModel: () => DecisionTransformerModel,
   DecisionTransformerPreTrainedModel: () => DecisionTransformerPreTrainedModel,
+  DeepseekV3ForCausalLM: () => DeepseekV3ForCausalLM,
+  DeepseekV3Model: () => DeepseekV3Model,
+  DeepseekV3PreTrainedModel: () => DeepseekV3PreTrainedModel,
   DeiTForImageClassification: () => DeiTForImageClassification,
   DeiTModel: () => DeiTModel,
   DeiTPreTrainedModel: () => DeiTPreTrainedModel,
@@ -20660,6 +20753,11 @@ __export(models_exports, {
   EsmForTokenClassification: () => EsmForTokenClassification,
   EsmModel: () => EsmModel,
   EsmPreTrainedModel: () => EsmPreTrainedModel,
+  EuroBertForMaskedLM: () => EuroBertForMaskedLM,
+  EuroBertForSequenceClassification: () => EuroBertForSequenceClassification,
+  EuroBertForTokenClassification: () => EuroBertForTokenClassification,
+  EuroBertModel: () => EuroBertModel,
+  EuroBertPreTrainedModel: () => EuroBertPreTrainedModel,
   ExaoneForCausalLM: () => ExaoneForCausalLM,
   ExaoneModel: () => ExaoneModel,
   ExaonePreTrainedModel: () => ExaonePreTrainedModel,
@@ -20696,6 +20794,7 @@ __export(models_exports, {
   Gemma2Model: () => Gemma2Model,
   Gemma2PreTrainedModel: () => Gemma2PreTrainedModel,
   Gemma3ForCausalLM: () => Gemma3ForCausalLM,
+  Gemma3ForConditionalGeneration: () => Gemma3ForConditionalGeneration,
   Gemma3Model: () => Gemma3Model,
   Gemma3PreTrainedModel: () => Gemma3PreTrainedModel,
   Gemma3nForCausalLM: () => Gemma3nForCausalLM,
@@ -20706,6 +20805,10 @@ __export(models_exports, {
   GemmaPreTrainedModel: () => GemmaPreTrainedModel,
   GlmForCausalLM: () => GlmForCausalLM,
   GlmModel: () => GlmModel,
+  GlmMoeDsaForCausalLM: () => GlmMoeDsaForCausalLM,
+  GlmMoeDsaModel: () => GlmMoeDsaModel,
+  GlmMoeDsaPreTrainedModel: () => GlmMoeDsaPreTrainedModel,
+  GlmOcrForConditionalGeneration: () => GlmOcrForConditionalGeneration,
   GlmPreTrainedModel: () => GlmPreTrainedModel,
   GptOssForCausalLM: () => GptOssForCausalLM,
   GptOssModel: () => GptOssModel,
@@ -20752,6 +20855,7 @@ __export(models_exports, {
   Lfm2MoePreTrainedModel: () => Lfm2MoePreTrainedModel,
   Lfm2PreTrainedModel: () => Lfm2PreTrainedModel,
   Lfm2VlForConditionalGeneration: () => Lfm2VlForConditionalGeneration,
+  LightOnOcrForConditionalGeneration: () => LightOnOcrForConditionalGeneration,
   LiteWhisperForConditionalGeneration: () => LiteWhisperForConditionalGeneration,
   Llama4ForCausalLM: () => Llama4ForCausalLM,
   Llama4PreTrainedModel: () => Llama4PreTrainedModel,
@@ -20801,6 +20905,9 @@ __export(models_exports, {
   MimiEncoderOutput: () => MimiEncoderOutput,
   MimiModel: () => MimiModel,
   MimiPreTrainedModel: () => MimiPreTrainedModel,
+  Mistral4ForCausalLM: () => Mistral4ForCausalLM,
+  Mistral4Model: () => Mistral4Model,
+  Mistral4PreTrainedModel: () => Mistral4PreTrainedModel,
   MistralForCausalLM: () => MistralForCausalLM,
   MistralModel: () => MistralModel,
   MistralPreTrainedModel: () => MistralPreTrainedModel,
@@ -20858,6 +20965,9 @@ __export(models_exports, {
   NanoChatForCausalLM: () => NanoChatForCausalLM,
   NanoChatModel: () => NanoChatModel,
   NanoChatPreTrainedModel: () => NanoChatPreTrainedModel,
+  NemotronHForCausalLM: () => NemotronHForCausalLM,
+  NemotronHModel: () => NemotronHModel,
+  NemotronHPreTrainedModel: () => NemotronHPreTrainedModel,
   NeoBertForMaskedLM: () => NeoBertForMaskedLM,
   NeoBertForQuestionAnswering: () => NeoBertForQuestionAnswering,
   NeoBertForSequenceClassification: () => NeoBertForSequenceClassification,
@@ -20995,6 +21105,9 @@ __export(models_exports, {
   SnacEncoderModel: () => SnacEncoderModel,
   SnacModel: () => SnacModel,
   SnacPreTrainedModel: () => SnacPreTrainedModel,
+  SolarOpenForCausalLM: () => SolarOpenForCausalLM,
+  SolarOpenModel: () => SolarOpenModel,
+  SolarOpenPreTrainedModel: () => SolarOpenPreTrainedModel,
   SpeechT5ForSpeechToText: () => SpeechT5ForSpeechToText,
   SpeechT5ForTextToSpeech: () => SpeechT5ForTextToSpeech,
   SpeechT5HifiGan: () => SpeechT5HifiGan,
@@ -21169,7 +21282,7 @@ var ArceeModel = class extends ArceePreTrainedModel {
 var ArceeForCausalLM = class extends ArceePreTrainedModel {
 };
 
-// src/models/ast/modeling_ast.js
+// src/models/audio_spectrogram_transformer/modeling_audio_spectrogram_transformer.js
 var ASTPreTrainedModel = class extends PreTrainedModel {
 };
 var ASTModel = class extends ASTPreTrainedModel {
@@ -21502,6 +21615,12 @@ var ChatterboxModel = class extends ChatterboxPreTrainedModel {
 var ChineseCLIPPreTrainedModel = class extends PreTrainedModel {
 };
 var ChineseCLIPModel = class extends ChineseCLIPPreTrainedModel {
+};
+
+// src/models/chmv2/modeling_chmv2.js
+var CHMv2PreTrainedModel = class extends PreTrainedModel {
+};
+var CHMv2ForDepthEstimation = class extends CHMv2PreTrainedModel {
 };
 
 // src/models/clap/modeling_clap.js
@@ -21840,6 +21959,14 @@ var DebertaForQuestionAnswering = class extends DebertaPreTrainedModel {
   async _call(model_inputs) {
     return new QuestionAnsweringModelOutput(await super._call(model_inputs));
   }
+};
+
+// src/models/deepseek_v3/modeling_deepseek_v3.js
+var DeepseekV3PreTrainedModel = class extends PreTrainedModel {
+};
+var DeepseekV3Model = class extends DeepseekV3PreTrainedModel {
+};
+var DeepseekV3ForCausalLM = class extends DeepseekV3PreTrainedModel {
 };
 
 // src/models/deberta_v2/modeling_deberta_v2.js
@@ -22190,6 +22317,45 @@ var EsmForTokenClassification = class extends EsmPreTrainedModel {
   }
 };
 
+// src/models/eurobert/modeling_eurobert.js
+var EuroBertPreTrainedModel = class extends PreTrainedModel {
+};
+var EuroBertModel = class extends EuroBertPreTrainedModel {
+};
+var EuroBertForMaskedLM = class extends EuroBertPreTrainedModel {
+  /**
+   * Calls the model on new inputs.
+   *
+   * @param {Object} model_inputs The inputs to the model.
+   * @returns {Promise<MaskedLMOutput>} An object containing the model's output logits for masked language modeling.
+   */
+  async _call(model_inputs) {
+    return new MaskedLMOutput(await super._call(model_inputs));
+  }
+};
+var EuroBertForSequenceClassification = class extends EuroBertPreTrainedModel {
+  /**
+   * Calls the model on new inputs.
+   *
+   * @param {Object} model_inputs The inputs to the model.
+   * @returns {Promise<SequenceClassifierOutput>} An object containing the model's output logits for sequence classification.
+   */
+  async _call(model_inputs) {
+    return new SequenceClassifierOutput(await super._call(model_inputs));
+  }
+};
+var EuroBertForTokenClassification = class extends EuroBertPreTrainedModel {
+  /**
+   * Calls the model on new inputs.
+   *
+   * @param {Object} model_inputs The inputs to the model.
+   * @returns {Promise<TokenClassifierOutput>} An object containing the model's output logits for token classification.
+   */
+  async _call(model_inputs) {
+    return new TokenClassifierOutput(await super._call(model_inputs));
+  }
+};
+
 // src/models/exaone/modeling_exaone.js
 var ExaonePreTrainedModel = class extends PreTrainedModel {
 };
@@ -22347,12 +22513,35 @@ var Gemma2Model = class extends Gemma2PreTrainedModel {
 var Gemma2ForCausalLM = class extends Gemma2PreTrainedModel {
 };
 
+// src/models/llava/modeling_llava.js
+var LlavaPreTrainedModel = class extends PreTrainedModel {
+  forward_params = ["input_ids", "attention_mask", "pixel_values", "position_ids", "past_key_values"];
+};
+var LlavaForConditionalGeneration = class extends LlavaPreTrainedModel {
+  _merge_input_ids_with_image_features(kwargs) {
+    const vision_hidden_size = kwargs.image_features.dims.at(-1);
+    const reshaped_image_hidden_states = kwargs.image_features.view(-1, vision_hidden_size);
+    return default_merge_input_ids_with_image_features({
+      // @ts-ignore
+      image_token_id: this.config.image_token_index ?? this.config.image_token_id,
+      ...kwargs,
+      image_features: reshaped_image_hidden_states
+    });
+  }
+};
+var Moondream1ForConditionalGeneration = class extends LlavaForConditionalGeneration {
+};
+var LlavaQwen2ForCausalLM = class extends LlavaForConditionalGeneration {
+};
+
 // src/models/gemma3/modeling_gemma3.js
 var Gemma3PreTrainedModel = class extends PreTrainedModel {
 };
 var Gemma3Model = class extends Gemma3PreTrainedModel {
 };
-var Gemma3ForCausalLM = class extends Gemma3PreTrainedModel {
+var Gemma3ForConditionalGeneration = class extends LlavaForConditionalGeneration {
+};
+var Gemma3ForCausalLM = class extends Gemma3ForConditionalGeneration {
 };
 
 // src/models/gemma3n/modeling_gemma3n.js
@@ -22463,6 +22652,382 @@ var GlmPreTrainedModel = class extends PreTrainedModel {
 var GlmModel = class extends GlmPreTrainedModel {
 };
 var GlmForCausalLM = class extends GlmPreTrainedModel {
+};
+
+// src/models/glm_moe_dsa/modeling_glm_moe_dsa.js
+var GlmMoeDsaPreTrainedModel = class extends PreTrainedModel {
+};
+var GlmMoeDsaModel = class extends GlmMoeDsaPreTrainedModel {
+};
+var GlmMoeDsaForCausalLM = class extends GlmMoeDsaPreTrainedModel {
+};
+
+// src/models/qwen2_vl/modeling_qwen2_vl.js
+var Qwen2VLPreTrainedModel = class extends PreTrainedModel {
+  forward_params = [
+    // Text inputs
+    "input_ids",
+    "attention_mask",
+    "position_ids",
+    "past_key_values",
+    // Vision inputs
+    "pixel_values",
+    "image_grid_thw"
+  ];
+};
+var Qwen2VLForConditionalGeneration = class extends Qwen2VLPreTrainedModel {
+  // NOTE: This is used as the base class for all Qwen VL models and their CausalLM variants.
+  // CausalLM variants (e.g., Qwen2VLForCausalLM) extend this class but load only
+  // embed_tokens + decoder_model_merged (no vision_encoder) via MultimodalLanguageModelOnly type.
+  image_grid_thw_name = "grid_thw";
+  /**
+   * Compute text-only 3D rope position IDs (all 3 dims get the same 1D positions).
+   * @param {Tensor} input_ids
+   * @param {Tensor} attention_mask
+   * @returns {[Tensor, Tensor]} [position_ids, mrope_position_deltas]
+   */
+  _get_text_only_rope_index(input_ids, attention_mask) {
+    if (attention_mask) {
+      const { data, dims } = cumsum_masked_fill(attention_mask);
+      const position_ids = BigInt64Array.from({ length: 3 * data.length }, (_, i) => data[i % data.length]);
+      const mrope_position_deltas = Array.from(
+        { length: dims[0] },
+        (_, i) => max(data.subarray(dims[1] * i, dims[1] * (i + 1)))[0] + 1n + BigInt(dims[1])
+      );
+      return [
+        new Tensor2("int64", position_ids, [3, ...dims]),
+        new Tensor2("int64", mrope_position_deltas, [mrope_position_deltas.length, 1])
+      ];
+    } else {
+      const [batch_size, seq_length] = input_ids.dims;
+      const position_ids = BigInt64Array.from(
+        { length: 3 * batch_size * seq_length },
+        (_, i) => BigInt(Math.floor(i % seq_length / batch_size))
+      );
+      return [new Tensor2("int64", position_ids, [3, ...input_ids.dims]), zeros([batch_size, 1])];
+    }
+  }
+  /**
+   * Reorder per-segment position ID lists from [seg1[t,h,w], seg2[t,h,w], ...] into
+   * global [all_t, all_h, all_w] order, then write back into the position_ids array
+   * respecting attention mask.
+   * @param {number[][]} llm_pos_ids_list List of per-segment position arrays, each of length 3*seg_len
+   * @param {number[]} attn_mask Attention mask for this batch element
+   * @param {number[][][]} position_ids_list [3][batch][seq] output array to write into
+   * @param {number} batch_idx Current batch index
+   * @returns {number[]} Flat reordered positions of length total_len
+   */
+  _reorder_and_write_positions(llm_pos_ids_list, attn_mask, position_ids_list, batch_idx) {
+    const total_len = llm_pos_ids_list.reduce((acc, x) => acc + x.length, 0);
+    const llm_positions = new Array(total_len);
+    let index = 0;
+    for (let x = 0; x < 3; ++x) {
+      for (const val of llm_pos_ids_list) {
+        const seg_len = val.length / 3;
+        for (let z = x * seg_len; z < (x + 1) * seg_len; ++z) {
+          llm_positions[index++] = val[z];
+        }
+      }
+    }
+    let count2 = 0;
+    for (let y = 0; y < attn_mask.length; ++y) {
+      if (attn_mask[y] == 1) {
+        for (let x = 0; x < 3; ++x) {
+          position_ids_list[x][batch_idx][y] = llm_positions[x * total_len / 3 + count2];
+        }
+        ++count2;
+      }
+    }
+    return llm_positions;
+  }
+  /**
+   * Build per-batch position ID segments for multimodal rope.
+   * Override this in subclasses to change how vision/text segments are identified and positioned.
+   * @param {object} params
+   * @param {any[]} params.filtered_ids - attention-masked token IDs for this batch element
+   * @param {any[][]} params.image_grid_thw_list - all image grid dimensions
+   * @param {any[][]} params.video_grid_thw_list - all video grid dimensions
+   * @param {number} params.spatial_merge_size
+   * @param {{image_index: number, video_index: number}} params.state - mutable counters shared across batches
+   * @returns {number[][]} llm_pos_ids_list - segments of [t..., h..., w...] positions
+   */
+  _get_multimodal_rope_positions({
+    filtered_ids,
+    image_grid_thw_list,
+    video_grid_thw_list,
+    spatial_merge_size,
+    state
+  }) {
+    const { image_token_id, video_token_id, vision_start_token_id } = this.config;
+    const ids = filtered_ids;
+    const vision_start_indices = ids.reduce((acc, x, idx) => {
+      if (x == vision_start_token_id) acc.push(idx);
+      return acc;
+    }, []);
+    const vision_tokens = vision_start_indices.map((x) => ids[x + 1]);
+    const image_nums = vision_tokens.filter((x) => x == image_token_id).length;
+    const video_nums = vision_tokens.filter((x) => x == video_token_id).length;
+    const llm_pos_ids_list = [];
+    let st = 0;
+    let remain_images = image_nums;
+    let remain_videos = video_nums;
+    for (let j = 0; j < vision_tokens.length; ++j) {
+      const next_image_token = ids.findIndex((x, i) => i > st && x == image_token_id);
+      const next_video_token = ids.findIndex((x, i) => i > st && x == video_token_id);
+      const ed_image = remain_images > 0 && next_image_token !== -1 ? next_image_token : ids.length + 1;
+      const ed_video = remain_videos > 0 && next_video_token !== -1 ? next_video_token : ids.length + 1;
+      let ed;
+      let t, h, w;
+      if (ed_image < ed_video) {
+        [t, h, w] = image_grid_thw_list[state.image_index];
+        ++state.image_index;
+        --remain_images;
+        ed = ed_image;
+      } else {
+        [t, h, w] = video_grid_thw_list[state.video_index];
+        ++state.video_index;
+        --remain_videos;
+        ed = ed_video;
+      }
+      const [llm_grid_t, llm_grid_h, llm_grid_w] = [
+        Number(t),
+        Math.floor(Number(h) / spatial_merge_size),
+        Math.floor(Number(w) / spatial_merge_size)
+      ];
+      const text_len = ed - st;
+      const st_idx = llm_pos_ids_list.length > 0 ? max(llm_pos_ids_list.at(-1))[0] + 1 : 0;
+      llm_pos_ids_list.push(Array.from({ length: 3 * text_len }, (_, i) => st_idx + i % text_len));
+      const offset = text_len + st_idx;
+      const grid_size = llm_grid_t * llm_grid_h * llm_grid_w;
+      const t_index = Array.from(
+        { length: grid_size },
+        (_, i) => offset + Math.floor(i / (llm_grid_h * llm_grid_w))
+      );
+      const h_index = Array.from(
+        { length: grid_size },
+        (_, i) => offset + Math.floor(i / llm_grid_w) % llm_grid_h
+      );
+      const w_index = Array.from({ length: grid_size }, (_, i) => offset + i % llm_grid_w);
+      llm_pos_ids_list.push([t_index, h_index, w_index].flat());
+      st = ed + grid_size;
+    }
+    if (st < ids.length) {
+      const st_idx = llm_pos_ids_list.length > 0 ? max(llm_pos_ids_list.at(-1))[0] + 1 : 0;
+      const text_len = ids.length - st;
+      llm_pos_ids_list.push(Array.from({ length: 3 * text_len }, (_, i) => st_idx + i % text_len));
+    }
+    return llm_pos_ids_list;
+  }
+  /**
+   * Calculate the 3D rope index based on image and video's temporal, height and width in LLM.
+   *
+   * Explanation:
+   *     Each embedding sequence contains vision embedding and text embedding or just contains text embedding.
+   *
+   *     For pure text embedding sequence, the rotary position embedding has no difference with mordern LLMs.
+   *     Examples:
+   *         input_ids: [T T T T T], here T is for text.
+   *         temporal position_ids: [0, 1, 2, 3, 4]
+   *         height position_ids: [0, 1, 2, 3, 4]
+   *         width position_ids: [0, 1, 2, 3, 4]
+   *
+   *     For vision and text embedding sequence, we calculate 3D rotary position embedding for vision part
+   *     and 1D rotary position embeddin for text part.
+   *     Examples:
+   *         Assume we have a video input with 3 temporal patches, 2 height patches and 2 width patches.
+   *         input_ids: [V V V V V V V V V V V V T T T T T], here V is for vision.
+   *         vision temporal position_ids: [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]
+   *         vision height position_ids: [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1]
+   *         vision width position_ids: [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+   *         text temporal position_ids: [3, 4, 5, 6, 7]
+   *         text height position_ids: [3, 4, 5, 6, 7]
+   *         text width position_ids: [3, 4, 5, 6, 7]
+   *         Here we calculate the text start position_ids as the max vision position_ids plus 1.
+   *
+   * @param {Tensor} input_ids Indices of input sequence tokens in the vocabulary. Tensor of shape `(batch_size, sequence_length)`.
+   * @param {Tensor} image_grid_thw (Optional) The temporal, height and width of feature shape of each image in LLM. Tensor of shape `(num_images, 3)`.
+   * @param {Tensor} video_grid_thw (Optional) The temporal, height and width of feature shape of each video in LLM. Tensor of shape `(num_videos, 3)`.
+   * @param {Tensor} attention_mask (Optional) Mask to avoid performing attention on padding token indices. Tensor of shape `(batch_size, sequence_length)`.
+   * @returns {[Tensor, Tensor]} [position_ids, mrope_position_deltas]
+   */
+  get_rope_index(input_ids, image_grid_thw, video_grid_thw, attention_mask) {
+    const { vision_config } = this.config;
+    const spatial_merge_size = vision_config.spatial_merge_size ?? 2;
+    if (image_grid_thw || video_grid_thw) {
+      const total_input_ids = input_ids.tolist();
+      if (!attention_mask) {
+        attention_mask = ones_like(input_ids);
+      }
+      const attention_mask_list = attention_mask.tolist();
+      const position_ids_list = Array.from(
+        { length: 3 },
+        () => Array.from({ length: input_ids.dims[0] }, () => Array.from({ length: input_ids.dims[1] }, () => 0))
+      );
+      const image_grid_thw_list = image_grid_thw ? image_grid_thw.tolist() : [];
+      const video_grid_thw_list = video_grid_thw ? video_grid_thw.tolist() : [];
+      const state = { image_index: 0, video_index: 0 };
+      const mrope_position_deltas = [];
+      for (let i = 0; i < total_input_ids.length; ++i) {
+        const filtered_ids = total_input_ids[i].filter((_, j) => attention_mask_list[i][j] == 1);
+        const llm_pos_ids_list = this._get_multimodal_rope_positions({
+          filtered_ids,
+          image_grid_thw_list,
+          video_grid_thw_list,
+          spatial_merge_size,
+          state
+        });
+        const llm_positions = this._reorder_and_write_positions(
+          llm_pos_ids_list,
+          attention_mask_list[i],
+          position_ids_list,
+          i
+        );
+        mrope_position_deltas.push(max(llm_positions)[0] + 1 - total_input_ids[i].length);
+      }
+      return [
+        new Tensor2("int64", position_ids_list.flat(Infinity), [3, input_ids.dims[0], input_ids.dims[1]]),
+        new Tensor2("int64", mrope_position_deltas, [mrope_position_deltas.length, 1])
+      ];
+    } else {
+      return this._get_text_only_rope_index(input_ids, attention_mask);
+    }
+  }
+  async encode_image({ pixel_values, image_grid_thw }) {
+    const features = (await sessionRun(this.sessions["vision_encoder"], {
+      pixel_values,
+      [this.image_grid_thw_name]: image_grid_thw
+    })).image_features;
+    return features;
+  }
+  _merge_input_ids_with_image_features(kwargs) {
+    return default_merge_input_ids_with_image_features({
+      // @ts-ignore
+      image_token_id: this.config.image_token_id,
+      ...kwargs
+    });
+  }
+  prepare_inputs_for_generation(input_ids, model_inputs, generation_config) {
+    if (!model_inputs.attention_mask || model_inputs.position_ids) {
+      return model_inputs;
+    }
+    const session = this.sessions["decoder_model_merged"] ?? this.sessions["model"];
+    if (!session.inputNames.includes("position_ids")) {
+      return model_inputs;
+    }
+    if (!model_inputs.past_key_values) {
+      [model_inputs.position_ids, model_inputs.rope_deltas] = this.get_rope_index(
+        model_inputs.input_ids,
+        model_inputs.image_grid_thw,
+        model_inputs.video_grid_thw,
+        model_inputs.attention_mask
+      );
+    } else {
+      model_inputs.pixel_values = null;
+      const past_length = model_inputs.past_key_values.get_seq_length();
+      if (past_length < model_inputs.input_ids.dims[1]) {
+        const [full_position_ids, rope_deltas] = this.get_rope_index(
+          model_inputs.input_ids,
+          model_inputs.image_grid_thw,
+          model_inputs.video_grid_thw,
+          model_inputs.attention_mask
+        );
+        model_inputs.rope_deltas = rope_deltas;
+        model_inputs.position_ids = full_position_ids.slice(null, null, [past_length, null]);
+        model_inputs.input_ids = model_inputs.input_ids.slice(null, [past_length, null]);
+      } else {
+        if (!model_inputs.rope_deltas) {
+          [, model_inputs.rope_deltas] = this.get_rope_index(
+            model_inputs.input_ids,
+            model_inputs.image_grid_thw,
+            model_inputs.video_grid_thw,
+            model_inputs.attention_mask
+          );
+        }
+        const delta = BigInt(past_length);
+        const rope_deltas_list = model_inputs.rope_deltas.map((x) => delta + x);
+        model_inputs.position_ids = stack([rope_deltas_list, rope_deltas_list, rope_deltas_list], 0);
+      }
+    }
+    return model_inputs;
+  }
+};
+var Qwen2VLForCausalLM = class extends Qwen2VLForConditionalGeneration {
+};
+
+// src/models/qwen2_5_vl/modeling_qwen2_5_vl.js
+var Qwen2_5_VLForConditionalGeneration = class extends Qwen2VLForConditionalGeneration {
+  image_grid_thw_name = "image_grid_thw";
+};
+var Qwen2_5_VLForCausalLM = class extends Qwen2VLForCausalLM {
+  image_grid_thw_name = "image_grid_thw";
+};
+
+// src/models/glm_ocr/modeling_glm_ocr.js
+var GlmOcrForConditionalGeneration = class extends Qwen2_5_VLForConditionalGeneration {
+  /**
+   * Compute 3D positional indices for vision tokens.
+   * Temporal is constant, height is repeat-interleaved, width tiles.
+   * @param {number} start_position
+   * @param {number[]} grid_thw [T, H, W]
+   * @param {number} temp_merge_size
+   * @param {number} spatial_merge_size
+   * @returns {number[]} Flat array of length 3 * seq_len: [temporal..., height..., width...]
+   */
+  get_vision_position_ids(start_position, grid_thw, temp_merge_size, spatial_merge_size) {
+    const llm_grid_t = Math.floor(grid_thw[0] / temp_merge_size);
+    const llm_grid_h = Math.floor(grid_thw[1] / spatial_merge_size);
+    const llm_grid_w = Math.floor(grid_thw[2] / spatial_merge_size);
+    const seq_len = llm_grid_h * llm_grid_w * llm_grid_t;
+    const t_pos = Array.from({ length: seq_len }, () => start_position);
+    const h_pos = Array.from(
+      { length: seq_len },
+      (_, i) => start_position + Math.floor(i / (llm_grid_w * llm_grid_t))
+    );
+    const w_pos = Array.from({ length: seq_len }, (_, i) => start_position + i % llm_grid_w);
+    return [...t_pos, ...h_pos, ...w_pos];
+  }
+  /**
+   * GlmOcr uses mm_token_type_ids-style grouping (image tokens identified by image_token_id)
+   * instead of vision_start_token_id scanning used by Qwen2VL.
+   * After a vision segment, position advances by max(h, w) / spatial_merge_size.
+   */
+  _get_multimodal_rope_positions({
+    filtered_ids,
+    image_grid_thw_list,
+    video_grid_thw_list,
+    spatial_merge_size,
+    state
+  }) {
+    const { image_token_id } = this.config;
+    const groups = [];
+    let group_start = 0;
+    let current_type = filtered_ids[0] == image_token_id ? 1 : 0;
+    for (let j = 1; j <= filtered_ids.length; ++j) {
+      const t = j < filtered_ids.length ? filtered_ids[j] == image_token_id ? 1 : 0 : -1;
+      if (t !== current_type) {
+        groups.push([current_type, group_start, j]);
+        group_start = j;
+        current_type = t;
+      }
+    }
+    let current_pos = 0;
+    const llm_pos_ids_list = [];
+    for (const [modality_type, start_idx, end_idx] of groups) {
+      if (modality_type === 0) {
+        const text_len = end_idx - start_idx;
+        llm_pos_ids_list.push(Array.from({ length: 3 * text_len }, (_, i) => current_pos + i % text_len));
+        current_pos += text_len;
+      } else {
+        const grid_thw = image_grid_thw_list[state.image_index++].map(Number);
+        const temp_merge_size = grid_thw[0];
+        llm_pos_ids_list.push(
+          this.get_vision_position_ids(current_pos, grid_thw, temp_merge_size, spatial_merge_size)
+        );
+        current_pos += Math.max(grid_thw[1], grid_thw[2]) / spatial_merge_size;
+      }
+    }
+    return llm_pos_ids_list;
+  }
 };
 
 // src/models/glpn/modeling_glpn.js
@@ -22663,27 +23228,6 @@ var HunYuanDenseV1Model = class extends HunYuanDenseV1PreTrainedModel {
 var HunYuanDenseV1ForCausalLM = class extends HunYuanDenseV1PreTrainedModel {
 };
 
-// src/models/llava/modeling_llava.js
-var LlavaPreTrainedModel = class extends PreTrainedModel {
-  forward_params = ["input_ids", "attention_mask", "pixel_values", "position_ids", "past_key_values"];
-};
-var LlavaForConditionalGeneration = class extends LlavaPreTrainedModel {
-  _merge_input_ids_with_image_features(kwargs) {
-    const vision_hidden_size = kwargs.image_features.dims.at(-1);
-    const reshaped_image_hidden_states = kwargs.image_features.view(-1, vision_hidden_size);
-    return default_merge_input_ids_with_image_features({
-      // @ts-ignore
-      image_token_id: this.config.image_token_index ?? this.config.image_token_id,
-      ...kwargs,
-      image_features: reshaped_image_hidden_states
-    });
-  }
-};
-var Moondream1ForConditionalGeneration = class extends LlavaForConditionalGeneration {
-};
-var LlavaQwen2ForCausalLM = class extends LlavaForConditionalGeneration {
-};
-
 // src/models/idefics3/modeling_idefics3.js
 var Idefics3ForConditionalGeneration = class extends LlavaForConditionalGeneration {
   forward_params = [
@@ -22775,6 +23319,10 @@ var Lfm2PreTrainedModel = class extends PreTrainedModel {
 var Lfm2Model = class extends Lfm2PreTrainedModel {
 };
 var Lfm2ForCausalLM = class extends Lfm2PreTrainedModel {
+};
+
+// src/models/lighton_ocr/modeling_lighton_ocr.js
+var LightOnOcrForConditionalGeneration = class extends LlavaForConditionalGeneration {
 };
 
 // src/models/lfm2_moe/modeling_lfm2_moe.js
@@ -22971,6 +23519,14 @@ var MistralPreTrainedModel = class extends PreTrainedModel {
 var MistralModel = class extends MistralPreTrainedModel {
 };
 var MistralForCausalLM = class extends MistralPreTrainedModel {
+};
+
+// src/models/mistral4/modeling_mistral4.js
+var Mistral4PreTrainedModel = class extends PreTrainedModel {
+};
+var Mistral4Model = class extends Mistral4PreTrainedModel {
+};
+var Mistral4ForCausalLM = class extends Mistral4PreTrainedModel {
 };
 
 // src/models/mobilebert/modeling_mobilebert.js
@@ -23441,6 +23997,14 @@ var NanoChatModel = class extends NanoChatPreTrainedModel {
 var NanoChatForCausalLM = class extends NanoChatPreTrainedModel {
 };
 
+// src/models/nemotron_h/modeling_nemotron_h.js
+var NemotronHPreTrainedModel = class extends PreTrainedModel {
+};
+var NemotronHModel = class extends NemotronHPreTrainedModel {
+};
+var NemotronHForCausalLM = class extends NemotronHPreTrainedModel {
+};
+
 // src/models/neobert/modeling_neobert.js
 var NeoBertPreTrainedModel = class extends PreTrainedModel {
 };
@@ -23719,252 +24283,6 @@ var Qwen2MoePreTrainedModel = class extends PreTrainedModel {
 var Qwen2MoeModel = class extends Qwen2MoePreTrainedModel {
 };
 var Qwen2MoeForCausalLM = class extends Qwen2MoePreTrainedModel {
-};
-
-// src/models/qwen2_vl/modeling_qwen2_vl.js
-var Qwen2VLPreTrainedModel = class extends PreTrainedModel {
-  forward_params = [
-    // Text inputs
-    "input_ids",
-    "attention_mask",
-    "position_ids",
-    "past_key_values",
-    // Vision inputs
-    "pixel_values",
-    "image_grid_thw"
-  ];
-};
-var Qwen2VLForConditionalGeneration = class extends Qwen2VLPreTrainedModel {
-  // NOTE: This is used as the base class for all Qwen VL models and their CausalLM variants.
-  // CausalLM variants (e.g., Qwen2VLForCausalLM) extend this class but load only
-  // embed_tokens + decoder_model_merged (no vision_encoder) via MultimodalLanguageModelOnly type.
-  image_grid_thw_name = "grid_thw";
-  /**
-   * Calculate the 3D rope index based on image and video's temporal, height and width in LLM.
-   *
-   * Explanation:
-   *     Each embedding sequence contains vision embedding and text embedding or just contains text embedding.
-   *
-   *     For pure text embedding sequence, the rotary position embedding has no difference with mordern LLMs.
-   *     Examples:
-   *         input_ids: [T T T T T], here T is for text.
-   *         temporal position_ids: [0, 1, 2, 3, 4]
-   *         height position_ids: [0, 1, 2, 3, 4]
-   *         width position_ids: [0, 1, 2, 3, 4]
-   *
-   *     For vision and text embedding sequence, we calculate 3D rotary position embedding for vision part
-   *     and 1D rotary position embeddin for text part.
-   *     Examples:
-   *         Assume we have a video input with 3 temporal patches, 2 height patches and 2 width patches.
-   *         input_ids: [V V V V V V V V V V V V T T T T T], here V is for vision.
-   *         vision temporal position_ids: [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]
-   *         vision height position_ids: [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1]
-   *         vision width position_ids: [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
-   *         text temporal position_ids: [3, 4, 5, 6, 7]
-   *         text height position_ids: [3, 4, 5, 6, 7]
-   *         text width position_ids: [3, 4, 5, 6, 7]
-   *         Here we calculate the text start position_ids as the max vision position_ids plus 1.
-   *
-   * @param {Tensor} input_ids Indices of input sequence tokens in the vocabulary. Tensor of shape `(batch_size, sequence_length)`.
-   * @param {Tensor} image_grid_thw (Optional) The temporal, height and width of feature shape of each image in LLM. Tensor of shape `(num_images, 3)`.
-   * @param {Tensor} video_grid_thw (Optional) The temporal, height and width of feature shape of each video in LLM. Tensor of shape `(num_videos, 3)`.
-   * @param {Tensor} attention_mask (Optional) Mask to avoid performing attention on padding token indices. Tensor of shape `(batch_size, sequence_length)`. Mask values selected in `[0, 1]`:
-   * - 1 for tokens that are **not masked**,
-   * - 0 for tokens that are **masked**.
-   * @returns {[Tensor, Tensor]} [position_ids, mrope_position_deltas] with:
-   * - position_ids: Tensor of shape `(3, batch_size, sequence_length)`.
-   * - mrope_position_deltas: Tensor of shape `(batch_size)`.
-   */
-  get_rope_index(input_ids, image_grid_thw, video_grid_thw, attention_mask) {
-    const { vision_config, image_token_id, video_token_id, vision_start_token_id } = this.config;
-    const spatial_merge_size = vision_config.spatial_merge_size ?? 2;
-    const mrope_position_deltas = [];
-    if (image_grid_thw || video_grid_thw) {
-      let total_input_ids = input_ids.tolist();
-      if (!attention_mask) {
-        attention_mask = ones_like(input_ids);
-      }
-      const attention_mask_list = attention_mask.tolist();
-      const position_ids_list = Array.from(
-        { length: 3 },
-        (_) => Array.from({ length: input_ids.dims[0] }, (_2) => Array.from({ length: input_ids.dims[1] }, (_3) => 1))
-      );
-      const image_grid_thw_list = image_grid_thw ? image_grid_thw.tolist() : [];
-      const video_grid_thw_list = video_grid_thw ? video_grid_thw.tolist() : [];
-      let image_index = 0;
-      let video_index = 0;
-      for (let i = 0; i < total_input_ids.length; ++i) {
-        const ids = total_input_ids[i].filter((_, j) => attention_mask_list[i][j] == 1);
-        const vision_start_indices = ids.reduce((acc, x, idx) => {
-          if (x == vision_start_token_id) acc.push(idx);
-          return acc;
-        }, []);
-        const vision_tokens = vision_start_indices.map((x) => ids[x + 1]);
-        const image_nums = vision_tokens.filter((x) => x == image_token_id).length;
-        const video_nums = vision_tokens.filter((x) => x == video_token_id).length;
-        let llm_pos_ids_list = [];
-        let st = 0;
-        let remain_images = image_nums;
-        let remain_videos = video_nums;
-        for (let j = 0; j < vision_tokens.length; ++j) {
-          const next_image_token = ids.findIndex((x, i2) => i2 > st && x == image_token_id);
-          const next_video_token = ids.findIndex((x, i2) => i2 > st && x == video_token_id);
-          const ed_image = remain_images > 0 && next_image_token !== -1 ? next_image_token : ids.length + 1;
-          const ed_video = remain_videos > 0 && next_video_token !== -1 ? next_video_token : ids.length + 1;
-          let ed;
-          let t, h, w;
-          if (ed_image < ed_video) {
-            [t, h, w] = image_grid_thw_list[image_index];
-            ++image_index;
-            --remain_images;
-            ed = ed_image;
-          } else {
-            [t, h, w] = video_grid_thw_list[video_index];
-            ++video_index;
-            --remain_videos;
-            ed = ed_video;
-          }
-          const [llm_grid_t, llm_grid_h, llm_grid_w] = [
-            Number(t),
-            Math.floor(Number(h) / spatial_merge_size),
-            Math.floor(Number(w) / spatial_merge_size)
-          ];
-          const text_len = ed - st;
-          const st_idx = llm_pos_ids_list.length > 0 ? max(llm_pos_ids_list.at(-1))[0] + 1 : 0;
-          llm_pos_ids_list.push(Array.from({ length: 3 * text_len }, (_, i2) => st_idx + i2 % text_len));
-          const offset = text_len + st_idx;
-          const grid_size = llm_grid_t * llm_grid_h * llm_grid_w;
-          const t_index = Array.from(
-            { length: grid_size },
-            (_, i2) => offset + Math.floor(i2 / (llm_grid_h * llm_grid_w))
-          );
-          const h_index = Array.from(
-            { length: grid_size },
-            (_, i2) => offset + Math.floor(i2 / llm_grid_w) % llm_grid_h
-          );
-          const w_index = Array.from({ length: grid_size }, (_, i2) => offset + i2 % llm_grid_w);
-          llm_pos_ids_list.push([t_index, h_index, w_index].flat());
-          st = ed + grid_size;
-        }
-        if (st < ids.length) {
-          const st_idx = llm_pos_ids_list.length > 0 ? max(llm_pos_ids_list.at(-1))[0] + 1 : 0;
-          const text_len = ids.length - st;
-          llm_pos_ids_list.push(Array.from({ length: 3 * text_len }, (_, i2) => st_idx + i2 % text_len));
-        }
-        const num_items = llm_pos_ids_list.reduce((acc, x) => acc + x.length, 0);
-        const llm_positions = new Array(num_items);
-        let index = 0;
-        for (let x = 0; x < 3; ++x) {
-          for (let y = 0; y < llm_pos_ids_list.length; ++y) {
-            const val = llm_pos_ids_list[y];
-            const text_len = val.length / 3;
-            for (let z = x * text_len; z < (x + 1) * text_len; ++z) {
-              llm_positions[index++] = val[z];
-            }
-          }
-        }
-        let count2 = 0;
-        const attn_mask = attention_mask_list[i];
-        for (let y = 0; y < attn_mask.length; ++y) {
-          if (attn_mask[y] == 1) {
-            for (let x = 0; x < 3; ++x) {
-              position_ids_list[x][i][y] = llm_positions[x * num_items / 3 + count2];
-            }
-            ++count2;
-          }
-        }
-        const max_llm_positions = max(llm_positions)[0];
-        mrope_position_deltas.push(max_llm_positions + 1 - total_input_ids[i].length);
-      }
-      return [
-        new Tensor2("int64", position_ids_list.flat(Infinity), [3, input_ids.dims[0], input_ids.dims[1]]),
-        new Tensor2("int64", mrope_position_deltas, [mrope_position_deltas.length, 1])
-      ];
-    } else {
-      if (attention_mask) {
-        const { data, dims } = cumsum_masked_fill(attention_mask);
-        const position_ids = BigInt64Array.from({ length: 3 * data.length }, (_, i) => data[i % data.length]);
-        const mrope_position_deltas2 = Array.from(
-          { length: dims[0] },
-          (_, i) => max(data.subarray(dims[1] * i, dims[1] * (i + 1)))[0] + 1n + BigInt(dims[1])
-        );
-        return [
-          new Tensor2("int64", position_ids, [3, ...dims]),
-          new Tensor2("int64", mrope_position_deltas2, [mrope_position_deltas2.length, 1])
-        ];
-      } else {
-        const [batch_size, seq_length] = input_ids.dims;
-        const position_ids = BigInt64Array.from(
-          { length: 3 * batch_size * seq_length },
-          (_, i) => BigInt(Math.floor(i % seq_length / batch_size))
-        );
-        return [new Tensor2("int64", position_ids, [3, ...input_ids.dims]), zeros([batch_size, 1])];
-      }
-    }
-  }
-  async encode_image({ pixel_values, image_grid_thw }) {
-    const features = (await sessionRun(this.sessions["vision_encoder"], {
-      pixel_values,
-      [this.image_grid_thw_name]: image_grid_thw
-    })).image_features;
-    return features;
-  }
-  _merge_input_ids_with_image_features(kwargs) {
-    return default_merge_input_ids_with_image_features({
-      // @ts-ignore
-      image_token_id: this.config.image_token_id,
-      ...kwargs
-    });
-  }
-  prepare_inputs_for_generation(input_ids, model_inputs, generation_config) {
-    if (model_inputs.attention_mask && !model_inputs.position_ids) {
-      if (!model_inputs.past_key_values) {
-        [model_inputs.position_ids, model_inputs.rope_deltas] = this.get_rope_index(
-          model_inputs.input_ids,
-          model_inputs.image_grid_thw,
-          model_inputs.video_grid_thw,
-          model_inputs.attention_mask
-        );
-      } else {
-        model_inputs.pixel_values = null;
-        const past_length = model_inputs.past_key_values.get_seq_length();
-        if (past_length < model_inputs.input_ids.dims[1]) {
-          const [full_position_ids, rope_deltas] = this.get_rope_index(
-            model_inputs.input_ids,
-            model_inputs.image_grid_thw,
-            model_inputs.video_grid_thw,
-            model_inputs.attention_mask
-          );
-          model_inputs.rope_deltas = rope_deltas;
-          model_inputs.position_ids = full_position_ids.slice(null, null, [past_length, null]);
-          model_inputs.input_ids = model_inputs.input_ids.slice(null, [past_length, null]);
-        } else {
-          if (!model_inputs.rope_deltas) {
-            [, model_inputs.rope_deltas] = this.get_rope_index(
-              model_inputs.input_ids,
-              model_inputs.image_grid_thw,
-              model_inputs.video_grid_thw,
-              model_inputs.attention_mask
-            );
-          }
-          const delta = BigInt(past_length);
-          const rope_deltas_list = model_inputs.rope_deltas.map((x) => delta + x);
-          model_inputs.position_ids = stack([rope_deltas_list, rope_deltas_list, rope_deltas_list], 0);
-        }
-      }
-    }
-    return model_inputs;
-  }
-};
-var Qwen2VLForCausalLM = class extends Qwen2VLForConditionalGeneration {
-};
-
-// src/models/qwen2_5_vl/modeling_qwen2_5_vl.js
-var Qwen2_5_VLForConditionalGeneration = class extends Qwen2VLForConditionalGeneration {
-  image_grid_thw_name = "image_grid_thw";
-};
-var Qwen2_5_VLForCausalLM = class extends Qwen2VLForCausalLM {
-  image_grid_thw_name = "image_grid_thw";
 };
 
 // src/models/qwen3/modeling_qwen3.js
@@ -24410,6 +24728,14 @@ var SnacDecoderModel = class extends SnacPreTrainedModel {
       model_file_name: options.model_file_name ?? "decoder_model"
     });
   }
+};
+
+// src/models/solar_open/modeling_solar_open.js
+var SolarOpenPreTrainedModel = class extends PreTrainedModel {
+};
+var SolarOpenModel = class extends SolarOpenPreTrainedModel {
+};
+var SolarOpenForCausalLM = class extends SolarOpenPreTrainedModel {
 };
 
 // src/models/speecht5/modeling_speecht5.js
@@ -25528,6 +25854,7 @@ var YoutuForCausalLM = class extends YoutuPreTrainedModel {
 // src/models/registry.js
 var MODEL_MAPPING_NAMES_ENCODER_ONLY = /* @__PURE__ */ new Map([
   ["bert", "BertModel"],
+  ["eurobert", "EuroBertModel"],
   ["neobert", "NeoBertModel"],
   ["modernbert", "ModernBertModel"],
   ["nomic_bert", "NomicBertModel"],
@@ -25659,6 +25986,7 @@ var MODEL_MAPPING_NAMES_DECODER_ONLY = /* @__PURE__ */ new Map([
   ["gemma3_text", "Gemma3Model"],
   ["helium", "HeliumModel"],
   ["glm", "GlmModel"],
+  ["glm_moe_dsa", "GlmMoeDsaModel"],
   ["openelm", "OpenELMModel"],
   ["qwen2", "Qwen2Model"],
   ["qwen2_moe", "Qwen2MoeModel"],
@@ -25670,12 +25998,16 @@ var MODEL_MAPPING_NAMES_DECODER_ONLY = /* @__PURE__ */ new Map([
   ["mpt", "MptModel"],
   ["opt", "OPTModel"],
   ["mistral", "MistralModel"],
+  ["mistral4", "Mistral4Model"],
   ["ministral", "MinistralModel"],
   ["ministral3", "Ministral3Model"],
   ["ernie4_5", "Ernie4_5ForCausalLM"],
   ["starcoder2", "Starcoder2Model"],
+  ["deepseek_v3", "DeepseekV3Model"],
   ["falcon", "FalconModel"],
   ["falcon_h1", "FalconH1Model"],
+  ["nemotron_h", "NemotronHModel"],
+  ["solar_open", "SolarOpenModel"],
   ["stablelm", "StableLmModel"],
   ["modernbert-decoder", "ModernBertDecoderModel"],
   ["hunyuan_v1_dense", "HunYuanDenseV1Model"],
@@ -25695,6 +26027,7 @@ var MODEL_FOR_TEXT_TO_WAVEFORM_MAPPING_NAMES = /* @__PURE__ */ new Map([
 ]);
 var MODEL_FOR_SEQUENCE_CLASSIFICATION_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["bert", "BertForSequenceClassification"],
+  ["eurobert", "EuroBertForSequenceClassification"],
   ["neobert", "NeoBertForSequenceClassification"],
   ["modernbert", "ModernBertForSequenceClassification"],
   ["roformer", "RoFormerForSequenceClassification"],
@@ -25717,6 +26050,7 @@ var MODEL_FOR_SEQUENCE_CLASSIFICATION_MAPPING_NAMES = /* @__PURE__ */ new Map([
 ]);
 var MODEL_FOR_TOKEN_CLASSIFICATION_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["bert", "BertForTokenClassification"],
+  ["eurobert", "EuroBertForTokenClassification"],
   ["neobert", "NeoBertForTokenClassification"],
   ["modernbert", "ModernBertForTokenClassification"],
   ["roformer", "RoFormerForTokenClassification"],
@@ -25779,6 +26113,7 @@ var MODEL_FOR_CAUSAL_LM_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["gemma3", "Gemma3ForCausalLM"],
   ["helium", "HeliumForCausalLM"],
   ["glm", "GlmForCausalLM"],
+  ["glm_moe_dsa", "GlmMoeDsaForCausalLM"],
   ["openelm", "OpenELMForCausalLM"],
   ["qwen2", "Qwen2ForCausalLM"],
   ["qwen2_moe", "Qwen2MoeForCausalLM"],
@@ -25790,6 +26125,7 @@ var MODEL_FOR_CAUSAL_LM_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["qwen3_vl", "Qwen3VLForCausalLM"],
   ["qwen3_vl_moe", "Qwen3VLMoeForCausalLM"],
   ["qwen3_5", "Qwen3_5ForCausalLM"],
+  ["qwen3_5_text", "Qwen3_5ForCausalLM"],
   ["qwen3_5_moe", "Qwen3_5MoeForCausalLM"],
   ["gemma3n", "Gemma3nForCausalLM"],
   ["phi", "PhiForCausalLM"],
@@ -25798,13 +26134,17 @@ var MODEL_FOR_CAUSAL_LM_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["opt", "OPTForCausalLM"],
   ["mbart", "MBartForCausalLM"],
   ["mistral", "MistralForCausalLM"],
+  ["mistral4", "Mistral4ForCausalLM"],
   ["ministral", "MinistralForCausalLM"],
   ["ministral3", "Ministral3ForCausalLM"],
   ["ernie4_5", "Ernie4_5ForCausalLM"],
   ["starcoder2", "Starcoder2ForCausalLM"],
+  ["deepseek_v3", "DeepseekV3ForCausalLM"],
   ["falcon", "FalconForCausalLM"],
   ["falcon_h1", "FalconH1ForCausalLM"],
+  ["nemotron_h", "NemotronHForCausalLM"],
   ["trocr", "TrOCRForCausalLM"],
+  ["solar_open", "SolarOpenForCausalLM"],
   ["stablelm", "StableLmForCausalLM"],
   ["modernbert-decoder", "ModernBertDecoderForCausalLM"],
   ["hunyuan_v1_dense", "HunYuanDenseV1ForCausalLM"],
@@ -25815,6 +26155,7 @@ var MODEL_FOR_CAUSAL_LM_MAPPING_NAMES = /* @__PURE__ */ new Map([
 var MODEL_FOR_MULTIMODALITY_MAPPING_NAMES = /* @__PURE__ */ new Map([["multi_modality", "MultiModalityCausalLM"]]);
 var MODEL_FOR_MASKED_LM_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["bert", "BertForMaskedLM"],
+  ["eurobert", "EuroBertForMaskedLM"],
   ["neobert", "NeoBertForMaskedLM"],
   ["modernbert", "ModernBertForMaskedLM"],
   ["roformer", "RoFormerForMaskedLM"],
@@ -25872,8 +26213,11 @@ var MODEL_FOR_IMAGE_TEXT_TO_TEXT_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["smolvlm", "SmolVLMForConditionalGeneration"],
   ["paligemma", "PaliGemmaForConditionalGeneration"],
   ["llava_qwen2", "LlavaQwen2ForCausalLM"],
+  ["gemma3", "Gemma3ForConditionalGeneration"],
   ["gemma3n", "Gemma3nForConditionalGeneration"],
-  ["mistral3", "Mistral3ForConditionalGeneration"]
+  ["mistral3", "Mistral3ForConditionalGeneration"],
+  ["lighton_ocr", "LightOnOcrForConditionalGeneration"],
+  ["glm_ocr", "GlmOcrForConditionalGeneration"]
 ]);
 var MODEL_FOR_AUDIO_TEXT_TO_TEXT_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["granite_speech", "GraniteSpeechForConditionalGeneration"],
@@ -25978,6 +26322,7 @@ var MODEL_FOR_TIME_SERIES_PREDICTION_MAPPING_NAMES = /* @__PURE__ */ new Map([
 ]);
 var MODEL_FOR_IMAGE_TO_IMAGE_MAPPING_NAMES = /* @__PURE__ */ new Map([["swin2sr", "Swin2SRForImageSuperResolution"]]);
 var MODEL_FOR_DEPTH_ESTIMATION_MAPPING_NAMES = /* @__PURE__ */ new Map([
+  ["chmv2", "CHMv2ForDepthEstimation"],
   ["dpt", "DPTForDepthEstimation"],
   ["depth_anything", "DepthAnythingForDepthEstimation"],
   ["glpn", "GLPNForDepthEstimation"],
@@ -26063,13 +26408,6 @@ var CUSTOM_MAPPING = [
   ],
   ["SupertonicForConditionalGeneration", SupertonicForConditionalGeneration, MODEL_TYPES.Supertonic],
   ["ChatterboxModel", ChatterboxModel, MODEL_TYPES.Chatterbox],
-  ["Qwen2VLForCausalLM", Qwen2VLForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
-  ["Qwen2_5_VLForCausalLM", Qwen2_5_VLForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
-  ["Qwen3VLForCausalLM", Qwen3VLForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
-  ["Qwen3VLMoeForCausalLM", Qwen3VLMoeForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
-  ["Qwen3_5ForCausalLM", Qwen3_5ForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
-  ["Qwen3_5MoeForCausalLM", Qwen3_5MoeForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
-  ["Gemma3nForCausalLM", Gemma3nForCausalLM, MODEL_TYPES.MultimodalLanguageModelOnly],
   [
     "VoxtralRealtimeForConditionalGeneration",
     VoxtralRealtimeForConditionalGeneration,
@@ -27751,6 +28089,41 @@ var TASK_ALIASES = Object.freeze({
   embeddings: "feature-extraction"
 });
 
+// src/utils/model_registry/resolve_model_type.js
+function resolve_model_type(config, { warn = true } = {}) {
+  const architectures = (
+    /** @type {string[]} */
+    config.architectures || []
+  );
+  for (const arch of architectures) {
+    const mappedType = MODEL_TYPE_MAPPING.get(arch);
+    if (mappedType !== void 0) {
+      return mappedType;
+    }
+  }
+  if (config.model_type) {
+    const mappedType = MODEL_TYPE_MAPPING.get(config.model_type);
+    if (mappedType !== void 0) {
+      return mappedType;
+    }
+    for (const mapping of Object.values(MODEL_MAPPING_NAMES)) {
+      if (mapping.has(config.model_type)) {
+        const resolved = MODEL_TYPE_MAPPING.get(mapping.get(config.model_type));
+        if (resolved !== void 0) {
+          return resolved;
+        }
+      }
+    }
+  }
+  if (warn) {
+    const archList = architectures.length > 0 ? architectures.join(", ") : "(none)";
+    logger.warn(
+      `[resolve_model_type] Architecture(s) not found in MODEL_TYPE_MAPPING: [${archList}] for model type '${config.model_type}'. Falling back to EncoderOnly (single model.onnx file). If you encounter issues, please report at: ${GITHUB_ISSUE_URL}`
+    );
+  }
+  return MODEL_TYPES.EncoderOnly;
+}
+
 // src/utils/model_registry/get_model_files.js
 function get_config(modelId, { config = null, cache_dir = null, local_files_only = false, revision = "main" } = {}) {
   if (config !== null) {
@@ -27773,43 +28146,7 @@ async function get_model_files(modelId, { config = null, dtype: overrideDtype = 
   const subfolder = "onnx";
   const rawDevice = overrideDevice ?? custom_config.device;
   let dtype = overrideDtype ?? custom_config.dtype;
-  let modelType;
-  const architectures = (
-    /** @type {string[]} */
-    config.architectures || []
-  );
-  let foundInMapping = false;
-  for (const arch of architectures) {
-    const mappedType = MODEL_TYPE_MAPPING.get(arch);
-    if (mappedType !== void 0) {
-      modelType = mappedType;
-      foundInMapping = true;
-      break;
-    }
-  }
-  if (!foundInMapping && config.model_type) {
-    const mappedType = MODEL_TYPE_MAPPING.get(config.model_type);
-    if (mappedType !== void 0) {
-      modelType = mappedType;
-      foundInMapping = true;
-    }
-    if (!foundInMapping) {
-      for (const mapping of Object.values(MODEL_MAPPING_NAMES)) {
-        if (mapping.has(config.model_type)) {
-          modelType = MODEL_TYPE_MAPPING.get(mapping.get(config.model_type));
-          foundInMapping = true;
-          break;
-        }
-      }
-    }
-  }
-  if (!foundInMapping) {
-    const archList = architectures.length > 0 ? architectures.join(", ") : "(none)";
-    logger.warn(
-      `[get_model_files] Architecture(s) not found in MODEL_TYPE_MAPPING: [${archList}] for model type '${config.model_type}'. Falling back to EncoderOnly (single model.onnx file). If you encounter issues, please report at: ${GITHUB_ISSUE_URL}`
-    );
-    modelType = MODEL_TYPES.EncoderOnly;
-  }
+  const modelType = resolve_model_type(config);
   const add_model_file = (fileName, baseName = null) => {
     baseName = baseName ?? fileName;
     const selectedDevice = selectDevice(rawDevice, fileName);
@@ -28396,6 +28733,31 @@ async function clear_pipeline_cache(task, modelId, options = {}) {
   return await clear_files_from_cache(modelId, files, options);
 }
 
+// src/utils/model_registry/get_available_dtypes.js
+var CONCRETE_DTYPES = Object.keys(DEFAULT_DTYPE_SUFFIX_MAPPING);
+async function get_available_dtypes(modelId, { config = null, model_file_name = null, revision = "main", cache_dir = null, local_files_only = false } = {}) {
+  config = await get_config(modelId, { config, cache_dir, local_files_only, revision });
+  const subfolder = "onnx";
+  const modelType = resolve_model_type(config);
+  const { sessions } = getSessionsConfig(modelType, config, { model_file_name });
+  const baseNames = Object.values(sessions);
+  const metadataOptions = { revision, cache_dir, local_files_only };
+  const probeResults = await Promise.all(
+    CONCRETE_DTYPES.map(async (dtype) => {
+      const suffix = DEFAULT_DTYPE_SUFFIX_MAPPING[dtype] ?? "";
+      const allExist = await Promise.all(
+        baseNames.map(async (baseName) => {
+          const filename = `${subfolder}/${baseName}${suffix}.onnx`;
+          const metadata = await get_file_metadata(modelId, filename, metadataOptions);
+          return metadata.exists;
+        })
+      );
+      return { dtype, available: allExist.every(Boolean) };
+    })
+  );
+  return probeResults.filter((r) => r.available).map((r) => r.dtype);
+}
+
 // src/utils/model_registry/ModelRegistry.js
 var ModelRegistry = class {
   /**
@@ -28481,6 +28843,29 @@ var ModelRegistry = class {
    */
   static async get_processor_files(modelId) {
     return get_processor_files(modelId);
+  }
+  /**
+   * Detects which quantization levels (dtypes) are available for a model
+   * by checking which ONNX files exist on the hub or locally.
+   *
+   * A dtype is considered available if all required model session files
+   * exist for that dtype.
+   *
+   * @param {string} modelId - The model id (e.g., "onnx-community/all-MiniLM-L6-v2-ONNX")
+   * @param {Object} [options] - Optional parameters
+   * @param {import('../../configs.js').PretrainedConfig} [options.config=null] - Pre-loaded config
+   * @param {string} [options.model_file_name=null] - Override the model file name (excluding .onnx suffix)
+   * @param {string} [options.revision='main'] - Model revision
+   * @param {string} [options.cache_dir=null] - Custom cache directory
+   * @param {boolean} [options.local_files_only=false] - Only check local files
+   * @returns {Promise<string[]>} Array of available dtype strings (e.g., ['fp32', 'fp16', 'q4', 'q8'])
+   *
+   * @example
+   * const dtypes = await ModelRegistry.get_available_dtypes('onnx-community/all-MiniLM-L6-v2-ONNX');
+   * console.log(dtypes); // ['fp32', 'fp16', 'int8', 'uint8', 'q8', 'q4']
+   */
+  static async get_available_dtypes(modelId, options = {}) {
+    return get_available_dtypes(modelId, options);
   }
   /**
    * Quickly checks if a model is fully cached by verifying `config.json` is present,
@@ -28716,6 +29101,9 @@ export {
   BloomModel,
   BloomPreTrainedModel,
   BloomTokenizer,
+  CHMv2ForDepthEstimation,
+  CHMv2ImageProcessor,
+  CHMv2PreTrainedModel,
   CLIPFeatureExtractor,
   CLIPImageProcessor,
   CLIPModel,
@@ -28811,6 +29199,9 @@ export {
   DebertaV2Tokenizer,
   DecisionTransformerModel,
   DecisionTransformerPreTrainedModel,
+  DeepseekV3ForCausalLM,
+  DeepseekV3Model,
+  DeepseekV3PreTrainedModel,
   DeiTFeatureExtractor,
   DeiTForImageClassification,
   DeiTImageProcessor,
@@ -28871,6 +29262,11 @@ export {
   EsmModel,
   EsmPreTrainedModel,
   EsmTokenizer,
+  EuroBertForMaskedLM,
+  EuroBertForSequenceClassification,
+  EuroBertForTokenClassification,
+  EuroBertModel,
+  EuroBertPreTrainedModel,
   ExaoneForCausalLM,
   ExaoneModel,
   ExaonePreTrainedModel,
@@ -28917,8 +29313,11 @@ export {
   Gemma2Model,
   Gemma2PreTrainedModel,
   Gemma3ForCausalLM,
+  Gemma3ForConditionalGeneration,
+  Gemma3ImageProcessor,
   Gemma3Model,
   Gemma3PreTrainedModel,
+  Gemma3Processor,
   Gemma3nAudioFeatureExtractor,
   Gemma3nForCausalLM,
   Gemma3nForConditionalGeneration,
@@ -28928,8 +29327,14 @@ export {
   GemmaModel,
   GemmaPreTrainedModel,
   GemmaTokenizer,
+  Glm46VImageProcessor,
+  Glm46VProcessor,
   GlmForCausalLM,
   GlmModel,
+  GlmMoeDsaForCausalLM,
+  GlmMoeDsaModel,
+  GlmMoeDsaPreTrainedModel,
+  GlmOcrForConditionalGeneration,
   GlmPreTrainedModel,
   GptOssForCausalLM,
   GptOssModel,
@@ -28995,6 +29400,7 @@ export {
   Lfm2VlForConditionalGeneration,
   Lfm2VlImageProcessor,
   Lfm2VlProcessor,
+  LightOnOcrForConditionalGeneration,
   LiteWhisperForConditionalGeneration,
   Llama4ForCausalLM,
   Llama4PreTrainedModel,
@@ -29064,6 +29470,9 @@ export {
   MimiPreTrainedModel,
   MinLengthLogitsProcessor,
   MinNewTokensLengthLogitsProcessor,
+  Mistral4ForCausalLM,
+  Mistral4Model,
+  Mistral4PreTrainedModel,
   MistralForCausalLM,
   MistralModel,
   MistralPreTrainedModel,
@@ -29135,6 +29544,9 @@ export {
   NanoChatForCausalLM,
   NanoChatModel,
   NanoChatPreTrainedModel,
+  NemotronHForCausalLM,
+  NemotronHModel,
+  NemotronHPreTrainedModel,
   NeoBertForMaskedLM,
   NeoBertForQuestionAnswering,
   NeoBertForSequenceClassification,
@@ -29324,6 +29736,9 @@ export {
   SnacFeatureExtractor,
   SnacModel,
   SnacPreTrainedModel,
+  SolarOpenForCausalLM,
+  SolarOpenModel,
+  SolarOpenPreTrainedModel,
   SpeechT5FeatureExtractor,
   SpeechT5ForSpeechToText,
   SpeechT5ForTextToSpeech,

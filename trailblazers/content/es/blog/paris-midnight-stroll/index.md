@@ -1,6 +1,6 @@
 ---
 title: 'París: Un Paseo de Medianoche por la Historia'
-description: 'Descubre las maravillas de París, Francia, a través de nuestra última aventura.'
+description: 'Un paseo de medianoche por el Sena es la máxima expresión del romance parisino.'
 date: 2026-03-10
 tags: ['Ciudad', 'Francia', 'Romance']
 author: maya

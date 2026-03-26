@@ -1,6 +1,6 @@
 ---
 title: 'Reykjavik: Chasing the Northern Lights'
-description: 'Discover the wonders of Reykjavik, Iceland through our latest adventure.'
+description: "Chase the ethereal Northern Lights in the world's northernmost capital. Relax in geothermal blue lagoons, marvel at waterfalls, and explore the unique quirky culture of Reykjavik."
 date: 2026-03-05
 tags: ['Winter', 'Iceland', 'Magic']
 author: julia

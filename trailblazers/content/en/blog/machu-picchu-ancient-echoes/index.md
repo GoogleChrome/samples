@@ -1,6 +1,6 @@
 ---
 title: 'Machu Picchu: Echoes of an Ancient Empire'
-description: 'Discover the wonders of Machu Picchu, Peru through our latest adventure.'
+description: 'Climb through the clouds to the ancient Incan citadel of Machu Picchu. Explore the mist-shrouded ruins, navigate intricate stonework, and experience the quiet majesty of a lost city perched high in the Andes.'
 date: 2026-03-07
 tags: ['History', 'Peru', 'UNESCO']
 author: maya

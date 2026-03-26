@@ -1,186 +1,140 @@
-import { env as p, pipeline as m, TextStreamer as h } from "@huggingface/transformers";
-import { P as f, D as c } from "../chunks/defaults-CzvdT-At.js";
-class w extends f {
-  #e;
-  #t;
-  #r;
-  #a;
-  #n;
-  constructor(t = {}) {
-    if (super(t.modelName || c.transformers.modelName), this.#r = t.device || c.transformers.device, this.#a = t.dtype || c.transformers.dtype, t.isDefault && console.log(
-      `Polyfill: No backend configuration found. Defaulting to Transformers.js with model: ${this.modelName}`
-    ), p.experimental_useCrossOriginStorage = !0, t.env) {
-      const e = (n, o) => {
-        for (const [r, s] of Object.entries(o))
-          s && typeof s == "object" && !Array.isArray(s) && n[r] && typeof n[r] == "object" ? e(n[r], s) : n[r] = s;
-      };
-      e(p, t.env);
-    }
-  }
-  /**
-   * Loaded models can be large, so we initialize them lazily.
-   * @param {EventTarget} [monitorTarget] - The event target to dispatch download progress events to.
-   * @returns {Promise<Object>} The generator.
-   */
-  async #s(t) {
-    if (!this.#e) {
-      const e = (o) => {
-        if (!t)
-          return;
-        const r = 1 / 65536, s = Math.floor(o / r) * r;
-        s <= t.__lastProgressLoaded || (t.dispatchEvent(
-          new ProgressEvent("downloadprogress", {
-            loaded: s,
-            total: 1,
-            lengthComputable: !0
-          })
-        ), t.__lastProgressLoaded = s);
-      }, n = (o) => {
-        o.status === "progress_total" ? e(o.progress / 100) : o.status === "ready" && e(1);
-      };
-      e(0), this.#e = await m("text-generation", this.modelName, {
-        device: this.#r,
-        dtype: this.#a,
-        progress_callback: n
-      }), this.#t = this.#e.tokenizer;
-    }
-    return this.#e;
-  }
-  /**
-   * Checks if the backend is available given the options.
-   * @param {Object} options - LanguageModel options.
-   * @returns {string} 'available' or 'unavailable'.
-   */
-  static availability(t) {
-    if (t?.expectedInputs && Array.isArray(t.expectedInputs)) {
-      for (const e of t.expectedInputs)
-        if (e.type === "audio" || e.type === "image")
-          return "unavailable";
-    }
-    return "available";
-  }
-  /**
-   * Creates a new session.
-   * @param {Object} options - LanguageModel options.
-   * @param {Object} sessionParams - Session parameters.
-   * @param {EventTarget} [monitorTarget] - The event target to dispatch download progress events to.
-   * @returns {Promise<Object>} The generator.
-   */
-  async createSession(t, e, n) {
-    return await this.#s(n), this.generationConfig = {
-      max_new_tokens: 512,
-      // Default limit
-      do_sample: !1,
-      return_full_text: !1
-    }, this.#n = e.systemInstruction, this.responseSchema = e.generationConfig?.responseSchema, this.responseSchema && console.warn(
-      "Polyfill: `responseConstraint` is not natively supported by the Transformers.js backend and is implemented via prompt engineering, which may fail. For better results, consider adding few-shot examples to your prompt."
-    ), this.#e;
-  }
-  /**
-   * Generates content (non-streaming).
-   * @param {Array} contents - The history + new message content.
-   * @returns {Promise<{text: string, usage: number}>}
-   */
-  async generateContent(t) {
-    const e = await this.#s(), n = this.#o(t), o = this.#t.apply_chat_template(n, {
-      tokenize: !1,
-      add_generation_prompt: !0
-    }), s = (await e(o, {
-      ...this.generationConfig,
-      add_special_tokens: !1
-    }))[0].generated_text, i = await this.countTokens(t);
-    return { text: s, usage: i };
-  }
-  /**
-   * Generates content stream.
-   * @param {Array} contents - The history + new content.
-   * @returns {Promise<AsyncIterable>} Stream of chunks.
-   */
-  async generateContentStream(t) {
-    const e = await this.#s(), n = this.#o(t), o = this.#t.apply_chat_template(n, {
-      tokenize: !1,
-      add_generation_prompt: !0
-    }), r = [];
-    let s, i = new Promise((a) => s = a), l = !1;
-    const u = (a) => {
-      r.push(a), s && (s(), s = null);
-    }, d = new h(this.#t, {
-      skip_prompt: !0,
-      skip_special_tokens: !0,
-      callback_function: u
-    });
-    return e(o, {
-      ...this.generationConfig,
-      add_special_tokens: !1,
-      streamer: d
-    }).then(() => {
-      l = !0, s && (s(), s = null);
-    }).catch((a) => {
-      console.error("[Transformers.js] Generation error:", a), l = !0, s && (s(), s = null);
-    }), (async function* () {
-      for (; ; ) {
-        for (r.length === 0 && !l && (s || (i = new Promise((a) => s = a)), await i); r.length > 0; ) {
-          const a = r.shift();
-          yield {
-            text: () => a,
-            usageMetadata: { totalTokenCount: 0 }
-          };
-        }
-        if (l)
-          break;
-      }
-    })();
-  }
-  /**
-   * Counts tokens.
-   * @param {Array} contents - The content to count.
-   * @returns {Promise<number>} Total tokens.
-   */
-  async countTokens(t) {
-    await this.#s();
-    const e = this.#o(t);
-    return this.#t.apply_chat_template(e, {
-      tokenize: !0,
-      add_generation_prompt: !1,
-      return_tensor: !1
-    }).length;
-  }
-  #o(t) {
-    const e = t.map((n) => {
-      let o = n.role === "model" ? "assistant" : n.role === "system" ? "system" : "user";
-      const r = n.parts.map((s) => s.text).join("");
-      return { role: o, content: r };
-    });
-    if (this.#n && !e.some((n) => n.role === "system") && e.unshift({ role: "system", content: this.#n }), this.#i(e), this.modelName.toLowerCase().includes("gemma")) {
-      const n = e.findIndex((o) => o.role === "system");
-      if (n !== -1) {
-        const o = e[n], r = e.findIndex(
-          (s, i) => s.role === "user" && i > n
-        );
-        r !== -1 ? (e[r].content = o.content + `
-
-` + e[r].content, e.splice(n, 1)) : (o.content += `
-
-`, o.role = "user");
-      }
-    }
-    return e;
-  }
-  #i(t) {
-    if (this.responseSchema) {
-      const e = `Respond ONLY with a raw JSON object matching this JSON Schema:
+import { n as e, t } from "../chunks/defaults-B5W7MP9T.js";
+import { TextStreamer as n, env as r, pipeline as i } from "@huggingface/transformers";
+//#region backends/transformers.js
+var a = class extends e {
+	#e;
+	#t;
+	#n;
+	#r;
+	#i;
+	constructor(e = {}) {
+		if (super(e.modelName || t.transformers.modelName), this.#n = e.device || t.transformers.device || "webgpu", this.#r = e.dtype || t.transformers.dtype || "q4f16", e.isDefault && console.log(`Polyfill: No backend configuration found. Defaulting to Transformers.js with model: ${this.modelName}`), r.experimental_useCrossOriginStorage = !0, e.env) {
+			let t = (e, n) => {
+				for (let [r, i] of Object.entries(n)) i && typeof i == "object" && !Array.isArray(i) && e[r] && typeof e[r] == "object" ? t(e[r], i) : e[r] = i;
+			};
+			t(r, e.env);
+		}
+	}
+	async #a(e) {
+		if (!this.#e) {
+			let t = (t) => {
+				if (!e) return;
+				let n = 1 / 65536, r = Math.floor(t / n) * n;
+				r <= e.__lastProgressLoaded || (e.dispatchEvent(new ProgressEvent("downloadprogress", {
+					loaded: r,
+					total: 1,
+					lengthComputable: !0
+				})), e.__lastProgressLoaded = r);
+			};
+			t(0), this.#e = await i("text-generation", this.modelName, {
+				device: this.#n,
+				dtype: this.#r,
+				progress_callback: (e) => {
+					e.status === "progress_total" ? t(e.progress / 100) : e.status === "ready" && t(1);
+				}
+			}), this.#t = this.#e.tokenizer;
+		}
+		return this.#e;
+	}
+	static availability(e) {
+		if (e?.expectedInputs && Array.isArray(e.expectedInputs)) {
+			for (let t of e.expectedInputs) if (t.type === "audio" || t.type === "image") return "unavailable";
+		}
+		return "available";
+	}
+	async createSession(e, t, n) {
+		return await this.#a(n), this.generationConfig = {
+			max_new_tokens: 512,
+			do_sample: !1,
+			return_full_text: !1
+		}, this.#i = t.systemInstruction, this.responseSchema = t.generationConfig?.responseSchema, this.responseSchema && console.warn("Polyfill: `responseConstraint` is not natively supported by the Transformers.js backend and is implemented via prompt engineering, which may fail. For better results, consider adding few-shot examples to your prompt."), this.#e;
+	}
+	async generateContent(e) {
+		let t = await this.#a(), n = this.#o(e);
+		return {
+			text: (await t(this.#t.apply_chat_template(n, {
+				tokenize: !1,
+				add_generation_prompt: !0
+			}), {
+				...this.generationConfig,
+				add_special_tokens: !1
+			}))[0].generated_text,
+			usage: await this.countTokens(e)
+		};
+	}
+	async generateContentStream(e) {
+		let t = await this.#a(), r = this.#o(e), i = this.#t.apply_chat_template(r, {
+			tokenize: !1,
+			add_generation_prompt: !0
+		}), a = [], o, s = new Promise((e) => o = e), c = !1, l = new n(this.#t, {
+			skip_prompt: !0,
+			skip_special_tokens: !0,
+			callback_function: (e) => {
+				a.push(e), o &&= (o(), null);
+			}
+		});
+		return t(i, {
+			...this.generationConfig,
+			add_special_tokens: !1,
+			streamer: l
+		}).then(() => {
+			c = !0, o &&= (o(), null);
+		}).catch((e) => {
+			console.error("[Transformers.js] Generation error:", e), c = !0, o &&= (o(), null);
+		}), (async function* () {
+			for (;;) {
+				for (a.length === 0 && !c && (o || (s = new Promise((e) => o = e)), await s); a.length > 0;) {
+					let e = a.shift();
+					yield {
+						text: () => e,
+						usageMetadata: { totalTokenCount: 0 }
+					};
+				}
+				if (c) break;
+			}
+		})();
+	}
+	async countTokens(e) {
+		await this.#a();
+		let t = this.#o(e);
+		return this.#t.apply_chat_template(t, {
+			tokenize: !0,
+			add_generation_prompt: !1,
+			return_tensor: !1
+		}).length;
+	}
+	#o(e) {
+		let t = e.map((e) => ({
+			role: e.role === "model" ? "assistant" : e.role === "system" ? "system" : "user",
+			content: e.parts.map((e) => e.text).join("")
+		}));
+		if (this.#i && !t.some((e) => e.role === "system") && t.unshift({
+			role: "system",
+			content: this.#i
+		}), this.#s(t), this.modelName.toLowerCase().includes("gemma")) {
+			let e = t.findIndex((e) => e.role === "system");
+			if (e !== -1) {
+				let n = t[e], r = t.findIndex((t, n) => t.role === "user" && n > e);
+				r === -1 ? (n.content += "\n\n", n.role = "user") : (t[r].content = n.content + "\n\n" + t[r].content, t.splice(e, 1));
+			}
+		}
+		return t;
+	}
+	#s(e) {
+		if (this.responseSchema) {
+			let t = `Respond ONLY with a raw JSON object matching this JSON Schema:
 
 \`\`\`json
 ${JSON.stringify(this.responseSchema, null, 2)}
 \`\`\`
 
 DO NOT include Markdown code blocks, explanations, or any other text.`;
-      t.length > 0 && t[0].role === "system" ? t[0].content = e + `
-
-` + t[0].content : t.unshift({ role: "system", content: e });
-    }
-  }
-}
-export {
-  w as default
+			e.length > 0 && e[0].role === "system" ? e[0].content = t + "\n\n" + e[0].content : e.unshift({
+				role: "system",
+				content: t
+			});
+		}
+	}
 };
+//#endregion
+export { a as default };

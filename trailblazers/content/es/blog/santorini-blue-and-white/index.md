@@ -1,6 +1,6 @@
 ---
 title: 'Santorini: El Sueño Azul y Blanco'
-description: 'Descubre las maravillas de Santorini, Grecia, a través de nuestra última aventura.'
+description: 'Los edificios blancos y cúpulas azules de Santorini ofrecen uno de los espectáculos más impresionantes. Sobre acantilados del Egeo, esta isla volcánica es un sueño de atardeceres. Explora ciudades antiguas minoicas y relájate en playas de arena negra volcánica de Kamari, mientras disfrutas de gastronomía fresca marina de calidad internacional.'
 date: 2026-03-14
 tags: ['Islas', 'Grecia', 'Relajación']
 author: ashok

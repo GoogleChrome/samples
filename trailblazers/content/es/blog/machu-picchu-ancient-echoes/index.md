@@ -1,6 +1,6 @@
 ---
 title: 'Machu Picchu: Ecos de un Antiguo Imperio'
-description: 'Descubre las maravillas de Machu Picchu, Perú, a través de nuestra última aventura.'
+description: 'Sube entre las nubes a la ciudadela inca de Machu Picchu. Explora ruinas cubiertas de niebla y vive la majestuosidad silenciosa de una ciudad perdida en lo alto de los Andes.'
 date: 2026-03-07
 tags: ['Historia', 'Perú', 'UNESCO']
 author: maya

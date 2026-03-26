@@ -1,6 +1,6 @@
 ---
 title: 'Paris: A Midnight Stroll Through History'
-description: 'Discover the wonders of Paris, France through our latest adventure.'
+description: 'A midnight stroll along the Seine is the ultimate Parisian romance.'
 date: 2026-03-10
 tags: ['City', 'France', 'Romance']
 author: maya
