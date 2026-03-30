@@ -43,6 +43,8 @@
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+		<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+		<script src="/pagefind/pagefind-ui.js" eleventy:ignore></script>
 		{% block head %}{% endblock %}
 	</head>
 	<body>
@@ -61,11 +63,25 @@
 						<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title | i18n({}, locale) }}</a></li>
 					{%- endfor %}
 						<li class="nav-item admin-only" style="display: none;"><a href="/{{ locale }}/blog/create/"{% if page.url == '/' + locale + '/blog/create/' %} aria-current="page"{% endif %}>{{ 'create' | i18n({}, locale) }}</a></li>
+						<li class="nav-item search-item">
+							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
+									<path d="M10 2a8 8 0 105.29 14.01L21 21.71 22.71 20l-5.7-5.71A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" fill="currentColor"/>
+								</svg>
+							</button>
+						</li>
 						{% block extra_nav %}{% endblock %}
 					</ul>
 				</nav>
 			</div>
 		</header>
+
+		<dialog id="search-overlay" class="search-overlay">
+			<div class="search-overlay-content">
+				<button id="search-close" aria-label="Close" class="search-close-btn">&times;</button>
+				<div id="search"></div>
+			</div>
+		</dialog>
 
 		<main id="main">
 			<heading-anchors>
@@ -155,6 +171,40 @@
 					}
 				});
 			}
+		</script>
+		<script>
+			window.addEventListener('DOMContentLoaded', (event) => {
+				const searchToggle = document.getElementById('search-toggle');
+				const searchOverlay = document.getElementById('search-overlay');
+				const searchClose = document.getElementById('search-close');
+				let pagefindInitialized = false;
+
+				if (searchToggle && searchOverlay) {
+					searchToggle.addEventListener('click', () => {
+						searchOverlay.showModal();
+						if (!pagefindInitialized) {
+							new PagefindUI({ 
+								element: "#search",
+								showSubResults: true,
+								resetStyles: false,
+								translations: {
+									clear_search: "×"
+								}
+							});
+							pagefindInitialized = true;
+						}
+						// Focus input after init
+						setTimeout(() => {
+							const input = searchOverlay.querySelector('input');
+							if (input) input.focus();
+						}, 100);
+					});
+
+					searchClose.addEventListener('click', () => {
+						searchOverlay.close();
+					});
+				}
+			});
 		</script>
 	</body>
 </html>

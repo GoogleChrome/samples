@@ -4,7 +4,7 @@
   "description": "An independent blog editor and content management tool built on top of Eleventy.",
   "type": "module",
   "scripts": {
-    "build": "npx @11ty/eleventy",
+    "build": "npx @11ty/eleventy && npx pagefind --site dist",
     "build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
     "start": "npx @11ty/eleventy --serve --quiet",
     "debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
@@ -30,7 +30,8 @@
     "prettier": "^3.8.1",
     "prismjs": "^1.30.0",
     "zod": "^4.3.6",
-    "zod-validation-error": "^5.0.0"
+    "zod-validation-error": "^5.0.0",
+    "pagefind": "^1.4.0"
   },
   "dependencies": {
     "@zachleat/heading-anchors": "^1.0.5",

@@ -935,7 +935,6 @@ footer hr {
     box-shadow 0.3s ease;
 }
 
-
 .newsletter-image-container {
   flex: 1;
   min-width: 40%;
@@ -949,7 +948,6 @@ footer hr {
   object-fit: cover;
   transition: transform 0.5s ease;
 }
-
 
 .newsletter-content {
   flex: 1.5;
@@ -1168,8 +1166,138 @@ footer hr {
   .postlist-item:first-child {
     grid-column: span 2;
   }
+}
+
+/* Search Overlay (Dialog Mode) */
+dialog.search-overlay {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+}
+
+dialog.search-overlay[open] {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+dialog.search-overlay::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.search-overlay-content {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 4.5rem 3rem 3rem 3rem;
+  /* Pushes content down away from Close button */
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+
+  --pagefind-ui-primary: var(--color-secondary);
+  --pagefind-ui-text: var(--color-text);
+  --pagefind-ui-background: transparent;
+  --pagefind-ui-border: var(--border-color);
+  --pagefind-ui-font: var(--font-family);
+}
+
+.search-close-btn {
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  z-index: 10;
+  padding: 0.5rem;
+  line-height: 1;
+}
+
+.search-close-btn:hover {
+  color: var(--color-secondary);
+  transform: scale(1.2) rotate(90deg);
+}
+
+.search-toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.search-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.search-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Pagefind UI refinements */
+.pagefind-ui .pagefind-ui__search-clear {
+  background: transparent !important;
+  color: var(--color-text) !important;
+  border: none !important;
+  font-size: 1.8rem !important;
+  /* Premium X */
+  padding: 0.2rem 0.5rem !important;
+  opacity: 0.6;
+  right: 1.5rem !important;
+}
+
+.pagefind-ui .pagefind-ui__search-clear:hover {
+  opacity: 1;
+  background: transparent !important;
+}
+
+/* Fix dark mode placeholder visibility */
+.pagefind-ui .pagefind-ui__search-input::placeholder {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link {
+  color: var(--color-primary) !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagefind-ui .pagefind-ui__result-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline;
+}
+
+.pagefind-ui .pagefind-ui__result-excerpt {
+  color: var(--color-text);
+  opacity: 0.8;
 }</style>
 		
+		<link href="/samples/trailblazers/dist/pagefind/pagefind-ui.css" rel="stylesheet">
+		<script src="/samples/trailblazers/dist/pagefind/pagefind-ui.js"></script>
 		
 	</head>
 	<body>
@@ -1189,11 +1317,25 @@ footer hr {
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/about/">私たちについて</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/feed/feed.xml">フィード</a></li>
 						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/ja/blog/create/">作成</a></li>
+						<li class="nav-item search-item">
+							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
+									<path d="M10 2a8 8 0 105.29 14.01L21 21.71 22.71 20l-5.7-5.71A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" fill="currentColor"></path>
+								</svg>
+							</button>
+						</li>
 						
 					</ul>
 				</nav>
 			</div>
 		</header>
+
+		<dialog id="search-overlay" class="search-overlay">
+			<div class="search-overlay-content">
+				<button id="search-close" aria-label="Close" class="search-close-btn">&times;</button>
+				<div id="search"></div>
+			</div>
+		</dialog>
 
 		<main id="main">
 			<heading-anchors>
@@ -1304,8 +1446,9 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/tags/ロマンス/` was built on 2026-03-30T09:36:42.981Z -->
-		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
+		<!-- This page `/ja/tags/ロマンス/` was built on 2026-03-30T10:32:47.254Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
+		
 		
 	</body>
 </html>

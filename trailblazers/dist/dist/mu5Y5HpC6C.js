@@ -1,0 +1,338 @@
+(function() {
+    const shareButtons = document.querySelectorAll('.share-button');
+    if (!navigator.share || shareButtons.length === 0) return;
+
+    const footerShare = document.querySelector('.post-share-footer');
+    if (footerShare) footerShare.style.display = 'block';
+
+    const onShare = async () => {
+      const title = "Banff: Aguas Turquesas y Picos Montañosos";
+      const text = "Lagos turquesas y picos imponentes te esperan en las Rocosas Canadienses." || title;
+      const url = window.location.href;
+      const shareData = { title, text, url };
+
+      // Try to find the hero image (first img in main)
+      // We look for images that are likely from the blog content
+      const firstImg = document.querySelector('main heading-anchors img');
+      if (firstImg && firstImg.src) {
+        try {
+          const response = await fetch(firstImg.src);
+          const blob = await response.blob();
+          
+          // Determine extension from mime type
+          let extension = blob.type.split('/')[1] || 'jpg';
+          if (extension === 'jpeg') extension = 'jpg';
+          
+          const file = new File([blob], `hero.${extension}`, { type: blob.type });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            shareData.files = [file];
+          }
+        } catch (e) {
+          console.warn('Could not fetch image for sharing:', e);
+        }
+      }
+
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Error sharing:', err);
+        }
+      }
+    };
+
+    shareButtons.forEach(btn => {
+      btn.style.display = 'inline-flex';
+      btn.addEventListener('click', onShare);
+    });
+  })();
+// Thank you to https://github.com/daviddarnes/heading-anchors
+// Thank you to https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+
+let globalInstanceIndex = 0;
+
+class HeadingAnchors extends HTMLElement {
+	static register(tagName = "heading-anchors", registry = window.customElements) {
+		if(registry && !registry.get(tagName)) {
+			registry.define(tagName, this);
+		}
+	}
+
+	static attributes = {
+		exclude: "data-ha-exclude",
+		prefix: "prefix",
+		content: "content",
+	}
+
+	static classes = {
+		anchor: "ha",
+		placeholder: "ha-placeholder",
+		srOnly: "ha-visualhide",
+	}
+
+	static defaultSelector = "h2,h3,h4,h5,h6";
+
+	static css = `
+.${HeadingAnchors.classes.srOnly} {
+	clip: rect(0 0 0 0);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+}
+.${HeadingAnchors.classes.anchor} {
+	position: absolute;
+	left: var(--ha_offsetx);
+	top: var(--ha_offsety);
+	text-decoration: none;
+	opacity: 0;
+}
+.${HeadingAnchors.classes.placeholder} {
+	opacity: .3;
+}
+.${HeadingAnchors.classes.anchor}:is(:focus-within, :hover) {
+	opacity: 1;
+}
+.${HeadingAnchors.classes.anchor},
+.${HeadingAnchors.classes.placeholder} {
+	display: inline-block;
+	padding: 0 .25em;
+
+	/* Disable selection of visually hidden label */
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+@supports (anchor-name: none) {
+	.${HeadingAnchors.classes.anchor} {
+		position: absolute;
+		left: anchor(left);
+		top: anchor(top);
+	}
+}`;
+
+	get supports() {
+		return "replaceSync" in CSSStyleSheet.prototype;
+	}
+
+	get supportsAnchorPosition() {
+		return CSS.supports("anchor-name: none");
+	}
+
+	constructor() {
+		super();
+
+		if(!this.supports) {
+			return;
+		}
+
+		let sheet = new CSSStyleSheet();
+		sheet.replaceSync(HeadingAnchors.css);
+		document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+
+		this.headingStyles = {};
+		this.instanceIndex = globalInstanceIndex++;
+	}
+
+	connectedCallback() {
+		if (!this.supports) {
+			return;
+		}
+
+		this.headings.forEach((heading, index) => {
+			if(!heading.hasAttribute(HeadingAnchors.attributes.exclude)) {
+				let anchor = this.getAnchorElement(heading);
+				let placeholder = this.getPlaceholderElement();
+
+				// Prefers anchor position approach for better accessibility
+				// https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+				if(this.supportsAnchorPosition) {
+					let anchorName = `--ha_${this.instanceIndex}_${index}`;
+					placeholder.style.setProperty("anchor-name", anchorName);
+					anchor.style.positionAnchor = anchorName;
+				}
+
+				heading.appendChild(placeholder);
+				heading.after(anchor);
+			}
+		});
+	}
+
+	// Polyfill-only
+	positionAnchorFromPlaceholder(placeholder) {
+		if(!placeholder) {
+			return;
+		}
+
+		let heading = placeholder.closest("h1,h2,h3,h4,h5,h6");
+		if(!heading.nextElementSibling) {
+			return;
+		}
+
+		// TODO next element could be more defensive
+		this.positionAnchor(heading.nextElementSibling);
+	}
+
+	// Polyfill-only
+	positionAnchor(anchor) {
+		if(!anchor || !anchor.previousElementSibling) {
+			return;
+		}
+
+		// TODO previous element could be more defensive
+		let heading = anchor.previousElementSibling;
+		this.setFontProp(heading, anchor);
+
+		if(this.supportsAnchorPosition) {
+			// quit early
+			return;
+		}
+
+		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
+		if(placeholder) {
+			anchor.style.setProperty("--ha_offsetx", `${placeholder.offsetLeft}px`);
+			anchor.style.setProperty("--ha_offsety", `${placeholder.offsetTop}px`);
+		}
+	}
+
+	setFontProp(heading, anchor) {
+		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
+		if(placeholder) {
+			let style = getComputedStyle(placeholder);
+			let props = ["font-weight", "font-size", "line-height", "font-family"];
+			let [weight, size, lh, family] = props.map(name => style.getPropertyValue(name));
+			anchor.style.setProperty("font", `${weight} ${size}/${lh} ${family}`);
+			let vars = style.getPropertyValue("font-variation-settings");
+			if(vars) {
+				anchor.style.setProperty("font-variation-settings", vars);
+			}
+		}
+	}
+
+	getAccessibleTextPrefix() {
+		// Useful for i18n
+		return this.getAttribute(HeadingAnchors.attributes.prefix) || "Jump to section titled";
+	}
+
+	getContent() {
+		if(this.hasAttribute(HeadingAnchors.attributes.content)) {
+			return this.getAttribute(HeadingAnchors.attributes.content);
+		}
+		return "#";
+	}
+
+	// Placeholder nests inside of heading
+	getPlaceholderElement() {
+		let ph = document.createElement("span");
+		ph.setAttribute("aria-hidden", true);
+		ph.classList.add(HeadingAnchors.classes.placeholder);
+		let content = this.getContent();
+		if(content) {
+			ph.textContent = content;
+		}
+
+		ph.addEventListener("mouseover", (e) => {
+			let placeholder = e.target.closest(`.${HeadingAnchors.classes.placeholder}`);
+			if(placeholder) {
+				this.positionAnchorFromPlaceholder(placeholder);
+			}
+		});
+
+		return ph;
+	}
+
+	getAnchorElement(heading) {
+		let anchor = document.createElement("a");
+		anchor.href = `#${heading.id}`;
+		anchor.classList.add(HeadingAnchors.classes.anchor);
+
+		let content = this.getContent();
+		anchor.innerHTML = `<span class="${HeadingAnchors.classes.srOnly}">${this.getAccessibleTextPrefix()}: ${heading.textContent}</span>${content ? `<span aria-hidden="true">${content}</span>` : ""}`;
+
+		anchor.addEventListener("focus", e => {
+			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+			if(anchor) {
+				this.positionAnchor(anchor);
+			}
+		});
+
+		anchor.addEventListener("mouseover", (e) => {
+			// when CSS anchor positioning is supported, this is only used to set the font
+			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+			this.positionAnchor(anchor);
+		});
+
+		return anchor;
+	}
+
+	get headings() {
+		return this.querySelectorAll(this.selector.split(",").map(entry => `${entry.trim()}[id]`));
+	}
+
+	get selector() {
+		return this.getAttribute("selector") || HeadingAnchors.defaultSelector;
+	}
+}
+
+HeadingAnchors.register();
+
+export { HeadingAnchors }
+const urlParams = new URLSearchParams(window.location.search);
+			const adminFromUrl = urlParams.get('admin') === 'true';
+			const adminFromStorage = localStorage.getItem('admin') === 'true';
+
+			if (adminFromUrl) {
+				localStorage.setItem('admin', 'true');
+			} else if (adminFromStorage) {
+				urlParams.set('admin', 'true');
+				window.location.search = urlParams.toString();
+			}
+
+			const isAdmin = adminFromUrl || adminFromStorage;
+			if(isAdmin) {
+				document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'initial');
+				// Append ?admin=true to all internal links to maintain state
+				document.querySelectorAll('a[href^="/"]').forEach(a => {
+					const url = new URL(a.href, window.location.origin);
+					if (!url.searchParams.has('admin')) {
+						url.searchParams.set('admin', 'true');
+						a.href = url.pathname + url.search + url.hash;
+					}
+				});
+			}
+window.addEventListener('DOMContentLoaded', (event) => {
+				const searchToggle = document.getElementById('search-toggle');
+				const searchOverlay = document.getElementById('search-overlay');
+				const searchClose = document.getElementById('search-close');
+				let pagefindInitialized = false;
+
+				if (searchToggle && searchOverlay) {
+					searchToggle.addEventListener('click', () => {
+						searchOverlay.style.display = 'flex';
+						if (!pagefindInitialized) {
+							new PagefindUI({ 
+								element: "#search",
+								showSubResults: true,
+								resetStyles: false // We override styles or want standard
+							});
+							pagefindInitialized = true;
+						}
+						// Focus input after init
+						setTimeout(() => {
+							const input = searchOverlay.querySelector('input');
+							if (input) input.focus();
+						}, 100);
+					});
+
+					searchClose.addEventListener('click', () => {
+						searchOverlay.style.display = 'none';
+					});
+
+					// Close on ESC
+					document.addEventListener('keydown', (e) => {
+						if (e.key === 'Escape' && searchOverlay.style.display === 'flex') {
+							searchOverlay.style.display = 'none';
+						}
+					});
+				}
+			});
