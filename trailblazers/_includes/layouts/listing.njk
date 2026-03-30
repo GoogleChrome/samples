@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+---
+<div class="listing-content-grid">
+	<div class="listing-main">
+		{{ content | safe }}
+	</div>
+
+	<aside class="sidebar">
+		<div class="sidebar-widget popular-posts">
+			<h2 class="widget-title">Popular Posts</h2>
+			<ul class="popular-list">
+			{% set topTags = collections | filterTagsByLocale(locale) | sortByPostCount(collections, locale) | head(5) %}
+			{% for tag in topTags %}
+				{% set posts = collections[tag] | filterByLocale(locale) %}
+				{% if posts.length > 0 %}
+				<li class="popular-item">
+					<img src="{{ posts[0].url }}cover.jpg" alt="{{ posts[0].data.title }}" class="popular-thumbnail" loading="lazy">
+					<div class="popular-item-content">
+						<span class="tag-badge">{{ tag }}</span>
+						<a href="{{ posts[0].url }}" class="popular-link">{{ posts[0].data.title }}</a>
+					</div>
+				</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</div>
+
+		<div class="sidebar-widget newsletter-widget glass">
+			<h2 class="widget-title">Newsletter</h2>
+			<p>Subscribe to our newsletter for the latest travel stories!</p>
+			<form class="sidebar-newsletter-form">
+				<input type="email" placeholder="Your email..." required class="sidebar-newsletter-input">
+				<button type="submit" class="sidebar-newsletter-btn btn">Subscribe</button>
+			</form>
+		</div>
+	</aside>
+</div>

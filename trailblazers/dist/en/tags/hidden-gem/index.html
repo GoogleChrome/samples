@@ -105,7 +105,7 @@ html {
 }
 
 body {
-  max-width: 64rem;
+  max-width: 80rem;
   /* Slightly wider for cards */
   padding: 0 1rem;
 }
@@ -188,7 +188,7 @@ a[href]:hover {
   color: #ffffff;
   padding: 4rem 2rem;
   border-radius: 16px;
-  margin: 2rem 0 4rem 0;
+  margin: 2rem 0 1.5rem 0; /* Reduced bottom margin from 4rem to 1.5rem */
   text-align: center;
   box-shadow: var(--shadow);
   display: flex;
@@ -393,7 +393,7 @@ a[href]:hover {
 }
 
 .header-content {
-  max-width: 64rem;
+  max-width: 80rem;
   width: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -465,7 +465,7 @@ header .nav-item a[aria-current='page'] {
   gap: 2rem;
   list-style: none;
   padding: 0;
-  margin: 3rem 0;
+  margin: 1.5rem 0; /* Reduced from 3rem 0 for tighter layout */
 }
 
 @supports (display: grid-lanes) {
@@ -1223,7 +1223,9 @@ dialog.search-overlay::backdrop {
   font-size: 2rem;
   color: var(--color-text);
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
   z-index: 10;
   padding: 0.5rem;
   line-height: 1;
@@ -1244,7 +1246,9 @@ dialog.search-overlay::backdrop {
   justify-content: center;
   padding: 0.5rem;
   border-radius: 50%;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .search-toggle-btn:hover {
@@ -1294,6 +1298,225 @@ dialog.search-overlay::backdrop {
 .pagefind-ui .pagefind-ui__result-excerpt {
   color: var(--color-text);
   opacity: 0.8;
+}
+
+/* Sidebar and Grid Layout */
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding: 0;
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 80em) {
+  .app-container {
+    grid-template-columns: 1fr 20rem;
+    align-items: start;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.sidebar-widget {
+  padding: 2.5rem;
+  border-radius: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.widget-title {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 0.5rem;
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+}
+
+.popular-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.popular-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed var(--border-color);
+  align-items: center;
+}
+
+.popular-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (max-width: 64em) {
+  /* Hide items 4 and 5 on narrow viewports */
+  .popular-item:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+.popular-thumbnail {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.popular-item:hover .popular-thumbnail {
+  transform: scale(1.05);
+}
+
+.popular-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.tag-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vivid-pink-p3, deeppink);
+  font-weight: 800;
+}
+
+.popular-link {
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--color-primary) !important;
+}
+
+.popular-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline !important;
+}
+
+.sidebar-newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-newsletter-input {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-family: var(--font-family);
+  transition: border-color 0.2s;
+}
+
+.sidebar-newsletter-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.sidebar-newsletter-btn:hover {
+  background-color: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+/* Inlined Newsletter Card Fix - Stacks on narrow containers */
+.postlist-item-newsletter .newsletter-input-group {
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  padding: 0;
+  gap: 1rem;
+}
+
+.postlist-item-newsletter .newsletter-input {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--card-bg);
+}
+
+.postlist-item-newsletter .newsletter-button {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Listing Grid Layout for sidebars below headers */
+@media (min-width: 80em) {
+  .listing-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 22rem; /* Give sidebar a bit more breathing room */
+    gap: 3rem;
+    align-items: start;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .listing-main {
+    display: contents; /* Unwraps children into direct grid items! */
+  }
+
+  .hero,
+  .listing-main > h1 {
+    grid-column: 1 / -1;
+  }
+
+  .postlist {
+    grid-column: 1;
+  }
+
+  .sidebar {
+    grid-column: 2;
+    margin-top: 1.5rem; /* Matches the new .postlist top margin exactly */
+    position: sticky;
+    top: 2rem; /* Stays visible when scrolling */
+    height: fit-content; /* Needed to override grid stretch */
+  }
 }</style>
 		
 		<link href="/samples/trailblazers/dist/pagefind/pagefind-ui.css" rel="stylesheet">
@@ -1339,7 +1562,9 @@ dialog.search-overlay::backdrop {
 
 		<main id="main">
 			<heading-anchors>
-				<h1 id="tagged-hidden-gem">Tagged “Hidden Gem”</h1>
+				<div class="listing-content-grid">
+	<div class="listing-main">
+		<h1 id="tagged-hidden-gem">Tagged “Hidden Gem”</h1>
 
 
 <ul class="postlist">
@@ -1385,7 +1610,7 @@ dialog.search-overlay::backdrop {
 				
 				<form class="newsletter-form">
 					<div class="newsletter-input-group">
-						<input type="email" placeholder="Email address" required="" class="newsletter-input">
+						<input type="email" placeholder="Your email…" required="" class="newsletter-input">
 						<button type="submit" class="newsletter-button">Sign up</button>
 					</div>
 				</form>
@@ -1398,8 +1623,86 @@ dialog.search-overlay::backdrop {
 
 <p>See <a href="/samples/trailblazers/dist/en/tags/">all tags</a>.</p>
 
+	</div>
+
+	<aside class="sidebar">
+		<div class="sidebar-widget popular-posts">
+			<h2 class="widget-title" id="popular-posts">Popular Posts</h2>
+			<ul class="popular-list">
+			
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/Zo2dj1BQuY-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/Zo2dj1BQuY-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/Zo2dj1BQuY-3000.jpeg" alt="Banff: Turquoise Waters and Mountain Peaks" class="popular-thumbnail" width="3000" height="2148"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">Nature</span>
+						<a href="/samples/trailblazers/dist/en/blog/banff-turquoise-waters/" class="popular-link">Banff: Turquoise Waters and Mountain Peaks</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/iFW5b38xmH-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/iFW5b38xmH-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/iFW5b38xmH-3000.jpeg" alt="Tokyo: Neon Nights and Hidden Shrines" class="popular-thumbnail" width="3000" height="1997"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">City</span>
+						<a href="/samples/trailblazers/dist/en/blog/tokyo-neon-nights/" class="popular-link">Tokyo: Neon Nights and Hidden Shrines</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.jpeg" alt="Machu Picchu: Echoes of an Ancient Empire" class="popular-thumbnail" width="3000" height="1987"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">History</span>
+						<a href="/samples/trailblazers/dist/en/blog/machu-picchu-ancient-echoes/" class="popular-link">Machu Picchu: Echoes of an Ancient Empire</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.jpeg" alt="Bali: Finding Peace in the Rice Terraces" class="popular-thumbnail" width="3000" height="2000"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">Spirituality</span>
+						<a href="/samples/trailblazers/dist/en/blog/bali-spiritual-sanctuary/" class="popular-link">Bali: Finding Peace in the Rice Terraces</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.jpeg" alt="Bali: Finding Peace in the Rice Terraces" class="popular-thumbnail" width="3000" height="2000"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">Indonesia</span>
+						<a href="/samples/trailblazers/dist/en/blog/bali-spiritual-sanctuary/" class="popular-link">Bali: Finding Peace in the Rice Terraces</a>
+					</div>
+				</li>
+				
+			
+			</ul>
+		</div>
+
+		<div class="sidebar-widget newsletter-widget glass">
+			<h2 class="widget-title" id="newsletter">Newsletter</h2>
+			<p>Subscribe to our newsletter for the latest travel stories!</p>
+			<form class="sidebar-newsletter-form">
+				<input type="email" placeholder="Your email..." required="" class="sidebar-newsletter-input">
+				<button type="submit" class="sidebar-newsletter-btn btn">Subscribe</button>
+			</form>
+		</div>
+	</aside>
+</div>
+
 			</heading-anchors>
 		</main>
+
 
 		<footer>
 			<div class="footer-classic">
@@ -1465,7 +1768,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/en/tags/hidden-gem/` was built on 2026-03-30T10:50:44.472Z -->
+		<!-- This page `/en/tags/hidden-gem/` was built on 2026-03-30T16:32:41.231Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

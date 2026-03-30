@@ -160,8 +160,8 @@ export default {
     ja: '100万人以上の読者に混じって、最新ニュースや詳細なガイド、お得な情報を手に入れましょう。',
   },
   newsletter_placeholder: {
-    en: 'Email address',
-    es: 'Dirección de correo electrónico',
+    en: 'Your email…',
+    es: 'Tu dirección de correo electrónico',
     ja: 'メールアドレス',
   },
   newsletter_button: {
