@@ -40,7 +40,7 @@ layout: layouts/base.njk
 	</li>
 </ul>
 
-{{ content | safe }}
+{{ content | insertNewsletter(locale) | safe }}
 
 <div class="post-share-footer" style="display: none;">
 	<p>{{ 'liked_share' | i18n({}, locale) }}</p>

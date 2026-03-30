@@ -143,4 +143,42 @@ export default function (eleventyConfig) {
       return itemLocale === locale;
     }).length;
   });
+
+  eleventyConfig.addFilter(
+    'insertNewsletter',
+    function (content, locale = 'en') {
+      if (!content) return '';
+
+      const i18n = eleventyConfig.getFilter('i18n');
+      const t = (key) => i18n.call(this, key, { locale }, locale);
+
+      const newsletterHtml = `
+<div class="newsletter-breakup">
+  <div class="newsletter-image-container">
+    <img src="/img/newsletter.png" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="newsletter-content">
+    <span class="newsletter-label">${t('newsletter_label')}</span>
+    <h3 class="newsletter-title">${t('newsletter_title')}</h3>
+    <p class="newsletter-description">${t('newsletter_description')}</p>
+    <form class="newsletter-form">
+      <div class="newsletter-input-group">
+        <input type="email" placeholder="${t('newsletter_placeholder')}" required class="newsletter-input">
+        <button type="submit" class="newsletter-button">${t('newsletter_button')}</button>
+      </div>
+    </form>
+    <p class="newsletter-disclaimer">${t('newsletter_disclaimer')}</p>
+  </div>
+</div>
+`;
+
+      const paragraphs = content.split('</p>');
+      if (paragraphs.length > 2) {
+        paragraphs[1] += '</p>' + newsletterHtml;
+        return paragraphs.join('</p>');
+      }
+
+      return content + newsletterHtml;
+    },
+  );
 }

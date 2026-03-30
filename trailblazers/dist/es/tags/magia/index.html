@@ -180,7 +180,11 @@ a[href]:hover {
 }
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
   color: #ffffff;
   padding: 4rem 2rem;
   border-radius: 16px;
@@ -456,7 +460,7 @@ header .nav-item a[aria-current='page'] {
 /* Post list cards */
 .postlist {
   display: grid;
-    /* Fallback for older browsers */
+  /* Fallback for older browsers */
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
   list-style: none;
@@ -467,7 +471,10 @@ header .nav-item a[aria-current='page'] {
 @supports (display: grid-lanes) {
   .postlist {
     display: grid-lanes;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr) minmax(350px, 1.5fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(280px, 1fr) minmax(350px, 1.5fr)
+    );
     flow-tolerance: 5rem;
   }
 }
@@ -708,47 +715,47 @@ article h1 {
   border-radius: 50%;
   object-fit: cover;
   transition: all 0.2s ease;
-  }
-  
-  .author-avatar-link {
-    display: block;
-    text-decoration: none;
-  }
-  
-  .author-avatar-link:hover .author-avatar {
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(255, 20, 147, 0.4);
-  }
-  
-  .read-more-posts {
-    margin-top: 1.5rem;
-    font-weight: 700;
-  }
-  
-  .read-more-posts a {
-    color: var(--color-link);
-    text-decoration: none;
-    position: relative;
-  }
-  
-  .read-more-posts a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-link);
-    transform: scaleX(0);
-    transition: transform 0.2s ease;
-    transform-origin: left;
-  }
-  
-  .read-more-posts a:hover::after {
-    transform: scaleX(1);
-  }
-  
-  .author-avatar {
+}
+
+.author-avatar-link {
+  display: block;
+  text-decoration: none;
+}
+
+.author-avatar-link:hover .author-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(255, 20, 147, 0.4);
+}
+
+.read-more-posts {
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+
+.read-more-posts a {
+  color: var(--color-link);
+  text-decoration: none;
+  position: relative;
+}
+
+.read-more-posts a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-link);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+  transform-origin: left;
+}
+
+.read-more-posts a:hover::after {
+  transform: scaleX(1);
+}
+
+.author-avatar {
   border: 3px solid var(--color-secondary);
 }
 
@@ -791,6 +798,42 @@ footer {
 }
 .footer-nav a:hover {
   text-decoration: underline;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--color-link);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Clips square SVGs to circle */
+}
+
+.footer-social a:hover {
+  transform: scale(1.15);
+  background: var(--color-link);
+  color: white !important;
+  border-color: var(--color-link);
+  box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2);
+}
+
+.social-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 footer hr {
@@ -876,8 +919,157 @@ footer hr {
   transform: scale(1.1);
 }
 
-.postlist-author-avatar {
+/* Newsletter Breakup Card */
+.newsletter-breakup {
+  display: flex;
+  align-items: stretch;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 4rem auto;
+  max-width: 45rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.newsletter-image-container {
+  flex: 1;
+  min-width: 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+
+.newsletter-content {
+  flex: 1.5;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.newsletter-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.newsletter-title {
+  font-size: 1.75rem;
+  margin: 0 0 1rem;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.newsletter-description {
+  font-size: 1rem;
+  margin: 0 0 2rem;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-input-group {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--card-bg);
+  padding: 0.5rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.newsletter-input-group:focus-within {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.1);
+}
+
+.newsletter-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  outline: none;
+}
+
+.newsletter-button {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.newsletter-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.newsletter-disclaimer {
+  font-size: 0.75rem;
+  color: #868e96;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.newsletter-disclaimer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+  .newsletter-breakup {
+    flex-direction: column;
+    max-width: none;
+  }
+
+  .newsletter-image-container {
+    height: 250px;
+  }
+
+  .newsletter-content {
+    padding: 2rem;
+  }
+
+  .newsletter-input-group {
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: 1rem;
+  }
+
+  .newsletter-input {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+  }
 }
 
 /* Responsive */
@@ -970,7 +1162,6 @@ footer hr {
   header .nav-item a {
     font-size: 0.85rem;
   }
-
 }
 
 @media (min-width: 1024px) {
@@ -995,7 +1186,7 @@ footer hr {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/">Inicio</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/blog/">Archivo</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre mí</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/feed/feed.xml">Feed</a></li>
 						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Crear</a></li>
 						
@@ -1054,10 +1245,43 @@ footer hr {
 				<p>&copy; 2026 trAIlblazers Travel Blog. All rights reserved.</p>
 				<p>Travel tales by <strong>Maya, Ashok, and Julia</strong>.</p>
 				<nav class="footer-nav">
-					<a href="/samples/trailblazers/dist/es/about/">Sobre mí</a> | 
+					<a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a> | 
 					<a href="/samples/trailblazers/dist/es/imprint/">Aviso Legal</a> | 
 					<a href="/samples/trailblazers/dist/es/privacy/">Política de Privacidad</a>
 				</nav>
+				<div class="footer-social">
+					<a href="https://bsky.app/profile/developer.chrome.com" aria-label="Bluesky" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="social-icon">
+							<path d="M0 0h512v512H0" fill="#fff"></path>
+							<path d="M159 126c-28-22-74-38-74 14 0 11 6 88 9 101 13 43 57 54 97 48-69 11-87 50-49 89 72 75 104-18 112-42l2-5 2 5c8 24 40 117 112 42 38-39 20-78-49-89 40 6 84-5 97-48 3-13 9-90 9-101 0-52-46-36-74-14-39 29-82 89-97 121-15-32-58-92-97-121Z" fill="#1185fe"></path>
+						</svg>
+					</a>
+					<a href="https://chromium.social/@developers" aria-label="Mastodon" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" class="social-icon">
+							<path d="M0 0h512v512H0"></path>
+							<linearGradient id="mastodon-a" y2="1">
+								<stop offset="0" stop-color="#6364ff"></stop>
+								<stop offset="1" stop-color="#563acc"></stop>
+							</linearGradient>
+							<path fill="url(#mastodon-a)" d="M317 408q-55 32-138 9-57-23-70-69-6-21-9-53-9-116 3-147 19-48 75-58 64-10 162 0 53 9 72 58 6 15 3 116-5 67-72 80-80 13-149-2-1 67 123 39"></path>
+							<path d="M360 202q0-51-43-60-35-5-51 21l-9 15-9-15q-18-26-51-21-43 9-44 60v91h36V205q0-31 30-28 20 3 20 34v47h36V211q0-31 20-34 28-3 29 23v93h36"></path>
+						</svg>
+					</a>
+					<a href="https://www.linkedin.com/showcase/chrome-for-developers" aria-label="LinkedIn" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" class="social-icon">
+							<path d="M0 0h512v512H0" fill="#0077b5"></path>
+							<circle cx="142" cy="138" r="37"></circle>
+							<path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"></path>
+							<path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"></path>
+						</svg>
+					</a>
+					<a href="https://www.youtube.com/user/ChromeDevelopers" aria-label="YouTube" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" class="social-icon">
+							<path d="M0 0h512v512H0"></path>
+							<path d="M313 256l-93-53V309Zm114-87c9 37 9 138 0 174-4 15-17 27-32 31-37 10-242 10-278 0-15-4-28-16-32-31-10-39-9-136 0-174 4-15 17-27 32-31 39-10 244-9 278 0 15 4 28 16 32 31Z" fill="#ed1d24"></path>
+						</svg>
+					</a>
+				</div>
 			</div>
 			<hr>
 			<form>
@@ -1080,7 +1304,7 @@ footer hr {
 			</form>
 		</footer>
 
-		<!-- This page `/es/tags/magia/` was built on 2026-03-26T18:29:43.472Z -->
+		<!-- This page `/es/tags/magia/` was built on 2026-03-30T09:36:42.806Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/tZ-SLEJvvt.js"></script>
 		
 	</body>

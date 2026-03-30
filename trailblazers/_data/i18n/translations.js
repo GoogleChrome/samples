@@ -31,8 +31,8 @@ export default {
   },
   about: {
     en: 'About',
-    es: 'Sobre mí',
-    ja: '概要',
+    es: 'Sobre nosotros',
+    ja: '私たちについて',
   },
   about_author: {
     en: 'About {{ name }}',
@@ -143,5 +143,35 @@ export default {
     en: 'Liked what you read? Share it!',
     es: '¿Te ha gustado lo que has leído? ¡Compártelo!',
     ja: '気に入ったら、ぜひシェアしてください！',
+  },
+  newsletter_label: {
+    en: 'Daily newsletter',
+    es: 'Boletín diario',
+    ja: 'デイリーニュースレター',
+  },
+  newsletter_title: {
+    en: 'Reward your inbox with the Trailblazers Daily newsletter',
+    es: 'Recompensa tu bandeja de entrada con el boletín diario de Trailblazers',
+    ja: 'Trailblazersのデイリーニュースレターを購読しましょう',
+  },
+  newsletter_description: {
+    en: 'Join over 1,000,000 readers for breaking news, in-depth guides, and exclusive deals.',
+    es: 'Únete a más de 1.000.000 de lectores para recibir noticias de última hora, guías detalladas y ofertas exclusivas.',
+    ja: '100万人以上の読者に混じって、最新ニュースや詳細なガイド、お得な情報を手に入れましょう。',
+  },
+  newsletter_placeholder: {
+    en: 'Email address',
+    es: 'Dirección de correo electrónico',
+    ja: 'メールアドレス',
+  },
+  newsletter_button: {
+    en: 'Sign up',
+    es: 'Registrarse',
+    ja: '登録する',
+  },
+  newsletter_disclaimer: {
+    en: 'By signing up, you agree to our <a href="/{{ locale }}/imprint/">Terms of Use</a> and acknowledge the data practices in our <a href="/{{ locale }}/privacy/">Privacy Policy</a>.',
+    es: 'Al registrarte, aceptas nuestras <a href="/{{ locale }}/imprint/">Condiciones de uso</a> y reconoces las prácticas de datos en nuestra <a href="/{{ locale }}/privacy/">Política de privacidad</a>.',
+    ja: '登録すると、<a href="/{{ locale }}/imprint/">利用規約</a>に同意し、<a href="/{{ locale }}/privacy/">プライバシーポリシー</a>のデータ取り扱い方法を認めたことになります。',
   },
 };
