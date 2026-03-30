@@ -181,4 +181,21 @@ export default function (eleventyConfig) {
       return content + newsletterHtml;
     },
   );
+
+  eleventyConfig.addFilter('addNewsletter', function (posts) {
+    if (!posts || posts.length === 0) return posts;
+
+    const result = [...posts];
+
+    let index;
+    if (result.length > 3) {
+      // Random between 2 (3rd position) and result.length (last position)
+      index = Math.floor(Math.random() * (result.length - 1)) + 2;
+    } else {
+      index = result.length;
+    }
+
+    result.splice(index, 0, { isNewsletter: true });
+    return result;
+  });
 }
