@@ -247,7 +247,9 @@ if ("launchQueue" in window && "targetURL" in window.LaunchParams.prototype) {
       log(
         `Recieved launch params with ${
           launchParams.files.length
-        } files ${JSON.stringify(launchParams.files.map((file) => file.name))}`
+        } files ${JSON.stringify(launchParams.files.map((file) => file.name))} and targetURL: ${
+          launchParams.targetURL
+        }.`
       );
       for (let file of launchParams.files) {
         const blob = await file.getFile();

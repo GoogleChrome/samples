@@ -56,6 +56,7 @@ if ("launchQueue" in window) {
         "Oh poo, no files. Consider granting the permission next time!";
       return;
     }
+    console.log("launchParams.targetURL: " + launchParams.targetURL);
 
     if (window.location.search.substr(1) == "plaintext") {
       for (const launchFile of launchParams.files) {
