@@ -4,6 +4,26 @@ export default {
     es: 'Inicio',
     ja: 'ホーム',
   },
+  destinations: {
+    en: 'Destinations',
+    es: 'Destinos',
+    ja: '目的地',
+  },
+  destinations_subtitle: {
+    en: 'Explore all the places we\'ve written about. Click any highlighted country to read the story.',
+    es: 'Explora todos los lugares sobre los que hemos escrito. Haz clic en un país resaltado para leer la historia.',
+    ja: '私たちが書いた場所をすべて探索してください。ハイライトされた国をクリックして記事を読みましょう。',
+  },
+  destinations_hint: {
+    en: 'Hover over a highlighted country to see the destination, click to read the article.',
+    es: 'Pasa el cursor sobre un país resaltado para ver el destino y haz clic para leer el artículo.',
+    ja: 'ハイライトされた国にカーソルを合わせて目的地を確認し、クリックして記事を読みましょう。',
+  },
+  destinations_all: {
+    en: 'All Destinations',
+    es: 'Todos los destinos',
+    ja: 'すべての目的地',
+  },
   posts: {
     en: 'Posts',
     es: 'Publicaciones',

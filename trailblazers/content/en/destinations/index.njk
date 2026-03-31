@@ -1,0 +1,370 @@
+---
+layout: layouts/base.njk
+locale: en
+title: destinations
+eleventyNavigation:
+  key: Destinations-en
+  title: destinations
+  order: 4
+permalink: /en/destinations/index.html
+---
+
+<style>
+.destinations-page { max-width: 80rem; margin: 0 auto; }
+
+.destinations-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.destinations-intro h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 0.5rem;
+}
+
+.destinations-intro p {
+  font-size: 1.1rem;
+  color: var(--color-gray-dark);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#world-map-container {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 3rem;
+  cursor: grab;
+}
+
+#world-map-container:active {
+  cursor: grabbing;
+}
+
+#world-map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 70vh;
+}
+
+/* Land base */
+#world-map-container svg .landxx {
+  fill: var(--map-land);
+  stroke: var(--map-stroke);
+  stroke-width: 0.3;
+  fill-rule: evenodd;
+}
+
+#world-map-container svg .coastxx {
+  stroke: var(--map-stroke);
+  stroke-width: 0.2;
+  fill: none;
+}
+
+#world-map-container svg .limitxx {
+  opacity: 0;
+}
+
+#world-map-container svg .antxx {
+  fill: var(--map-land);
+  opacity: 0.6;
+}
+
+#world-map-container svg text {
+  fill: var(--color-gray-dark);
+  font-family: var(--font-family);
+  font-size: 7px;
+  pointer-events: none;
+}
+
+/* Destination highlights */
+#world-map-container .destination-highlight,
+#world-map-container .destination-highlight path,
+#world-map-container .destination-highlight > * {
+  fill: var(--color-secondary) !important;
+  stroke: var(--background-color);
+  stroke-width: 0.8;
+  cursor: pointer;
+}
+
+#world-map-container .destination-highlight:hover,
+#world-map-container .destination-highlight:hover path,
+#world-map-container .destination-highlight:hover > * {
+  fill: var(--color-primary) !important;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-secondary) 60%, transparent));
+}
+
+/* Tooltip */
+.map-tooltip {
+  position: absolute;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: var(--font-family-headings);
+  color: var(--color-primary);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.map-tooltip::before {
+  content: '📍';
+  font-size: 0.8rem;
+}
+
+.map-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-gray-dark);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Destination cards grid */
+.destination-cards-section h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 1.5rem;
+}
+
+.destination-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.destination-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  color: inherit;
+}
+
+.destination-card-thumb {
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.destination-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.5s ease;
+}
+
+.destination-card:hover .destination-card-thumb img {
+  transform: scale(1.08);
+}
+
+.destination-card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.destination-card-country {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+}
+
+.destination-card-title {
+  font-family: var(--font-family-headings);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+</style>
+
+<div class="destinations-page">
+  <div class="destinations-intro">
+    <h1>{{ 'destinations' | i18n({}, locale) }}</h1>
+    <p>{{ 'destinations_subtitle' | i18n({}, locale) }}</p>
+  </div>
+
+  <div id="world-map-container">
+    {% include "maps/world.svg" %}
+    <div class="map-tooltip" id="map-tooltip"></div>
+  </div>
+
+  <p class="map-hint">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    {{ 'destinations_hint' | i18n({}, locale) }}
+  </p>
+
+  <section class="destination-cards-section">
+    <h2>{{ 'destinations_all' | i18n({}, locale) }}</h2>
+    <ul class="destination-cards">
+      {%- for slug, dest in destinations %}
+      {%- set postUrl = '/' + locale + '/blog/' + slug + '/' %}
+      <li>
+        <a href="{{ postUrl }}" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="{{ postUrl }}cover.jpg" alt="{{ slug }}" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">{{ dest.country[locale] or dest.country['en'] }}</span>
+            {%- set postData = collections['posts_' + locale] | filterByLocale(locale) %}
+            {%- for post in collections['posts_' + locale] %}
+              {%- if post.fileSlug == slug %}
+              <span class="destination-card-title">{{ post.data.title }}</span>
+              {%- endif %}
+            {%- endfor %}
+          </div>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+</div>
+
+{% js %}
+(function () {
+  const destinations = {{ destinations | dump | safe }};
+  const locale = {{ locale | dump | safe }};
+
+  const container = document.getElementById('world-map-container');
+  const tooltip = document.getElementById('map-tooltip');
+  if (!container) return;
+
+  // Map slug → { countryCode, country }
+  const destEntries = Object.entries(destinations);
+
+  // Highlight each destination country
+  destEntries.forEach(([slug, dest]) => {
+    const code = dest.countryCode.toLowerCase();
+    const el = container.querySelector('#' + code);
+    if (!el) return;
+
+    el.classList.add('destination-highlight');
+    el.setAttribute('data-dest-slug', slug);
+    el.setAttribute('data-dest-name', dest.country[locale] || dest.country['en']);
+    el.setAttribute('data-dest-url', '/' + locale + '/blog/' + slug + '/');
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', (dest.country[locale] || dest.country['en']) + ' — click to read article');
+
+    // Click to navigate
+    el.addEventListener('click', (e) => {
+      window.location.href = '/' + locale + '/blog/' + slug + '/';
+    });
+
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        window.location.href = '/' + locale + '/blog/' + slug + '/';
+      }
+    });
+  });
+
+  // Tooltip follow-mouse
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    tooltip.style.left = (x + 14) + 'px';
+    tooltip.style.top = (y - 36) + 'px';
+  });
+
+  container.addEventListener('mouseover', (e) => {
+    const highlight = e.target.closest('.destination-highlight');
+    if (highlight) {
+      const name = highlight.getAttribute('data-dest-name');
+      if (name) {
+        tooltip.textContent = name;
+        // re-add the ::before via data attr trick isn't needed – we override textContent,
+        // so use innerHTML instead
+        tooltip.innerHTML = '📍 ' + name;
+        tooltip.style.opacity = '1';
+      }
+    }
+  });
+
+  container.addEventListener('mouseout', (e) => {
+    const highlight = e.target.closest('.destination-highlight');
+    if (highlight && !highlight.contains(e.relatedTarget)) {
+      tooltip.style.opacity = '0';
+    }
+  });
+
+  // Pan & zoom
+  let scale = 1, panX = 0, panY = 0;
+  let isPanning = false, startX = 0, startY = 0;
+
+  const svg = container.querySelector('svg');
+  if (!svg) return;
+
+  function applyTransform() {
+    svg.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    svg.style.transformOrigin = 'center center';
+  }
+
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    scale = Math.min(Math.max(scale * delta, 1), 6);
+    if (scale === 1) { panX = 0; panY = 0; }
+    applyTransform();
+  }, { passive: false });
+
+  container.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return;
+    isPanning = true;
+    startX = e.clientX - panX;
+    startY = e.clientY - panY;
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isPanning) return;
+    panX = e.clientX - startX;
+    panY = e.clientY - startY;
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => { isPanning = false; });
+
+  // Double-click to reset
+  container.addEventListener('dblclick', () => {
+    scale = 1; panX = 0; panY = 0;
+    applyTransform();
+  });
+})();
+{% endjs %}
