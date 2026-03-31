@@ -52,6 +52,8 @@ layout: layouts/base.njk
 	</button>
 </div>
 
+{% include "country-map.njk" %}
+
 {% if author and authors[author] %}
 <aside class="author-section">
 	<a href="/{{ locale }}/authors/{{ author }}/" class="author-avatar-link">

@@ -1,0 +1,10 @@
+{%- set destSlug = page.fileSlug -%}
+{%- set destInfo = destinations[destSlug] -%}
+{%- if destInfo %}
+<div class="post-country-map">
+  <p class="post-country-map-label">{{ destInfo.country[locale] or destInfo.country['en'] }}</p>
+  <div class="post-country-map-svg">
+    {% include "maps/countries/" + destInfo.countryCode + ".svg" %}
+  </div>
+</div>
+{%- endif %}

@@ -1517,6 +1517,78 @@ dialog.search-overlay::backdrop {
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
   }
+}
+
+/* ============================================================
+   Map CSS Variables
+   ============================================================ */
+:root {
+  --map-land: #d6e8e0;
+  --map-stroke: #b0ccc3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --map-land: #1c3329;
+    --map-stroke: #2a4a3e;
+  }
+}
+
+/* ============================================================
+   Post Country Map
+   ============================================================ */
+.post-country-map {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem 2rem 1rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.post-country-map-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+  margin: 0 0 1rem 0;
+}
+
+.post-country-map-svg {
+  display: flex;
+  justify-content: center;
+}
+
+.post-country-map-svg svg {
+  width: 100%;
+  max-width: 480px;
+  max-height: 300px;
+  height: auto;
+  display: block;
+  /* Override the source SVG's default blue fill with brand color */
+  fill: var(--color-primary);
+  stroke: var(--background-color);
+  stroke-width: 0.4;
+  /* Suppress image-related styling applied globally */
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0.88;
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-country-map-svg svg {
+    fill: var(--color-primary);
+    stroke: var(--background-color);
+    opacity: 0.75;
+  }
+}
+
+.post-country-map-svg svg:hover {
+  opacity: 1;
 }</style>
 		
 		<link href="/samples/trailblazers/dist/pagefind/pagefind-ui.css" rel="stylesheet">
@@ -1538,6 +1610,7 @@ dialog.search-overlay::backdrop {
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/">Inicio</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/blog/">Archivo</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/es/destinations/">Destinos</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/feed/feed.xml">Feed</a></li>
 						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Crear</a></li>
 						<li class="nav-item search-item">
@@ -1584,23 +1657,15 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/es/tags/romance/" class="post-tag">Romance <span class="tag-count">(1)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/es/tags/unesco/" class="post-tag">UNESCO <span class="tag-count">(1)</span></a>
 
 	
 	
+	<a href="/samples/trailblazers/dist/es/tags/romance/" class="post-tag">Romance <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/es/tags/tanzania/" class="post-tag">Tanzania <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/lagos/" class="post-tag">Lagos <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/canada/" class="post-tag">Canadá <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1616,19 +1681,15 @@ dialog.search-overlay::backdrop {
 
 	
 	
+	<a href="/samples/trailblazers/dist/es/tags/lagos/" class="post-tag">Lagos <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/canada/" class="post-tag">Canadá <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/es/tags/espiritualidad/" class="post-tag">Espiritualidad <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/ee-uu/" class="post-tag">EE. UU. <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/energia/" class="post-tag">Energía <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/peru/" class="post-tag">Perú <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1644,6 +1705,18 @@ dialog.search-overlay::backdrop {
 
 	
 	
+	<a href="/samples/trailblazers/dist/es/tags/peru/" class="post-tag">Perú <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/ee-uu/" class="post-tag">EE. UU. <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/energia/" class="post-tag">Energía <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/es/tags/francia/" class="post-tag">Francia <span class="tag-count">(1)</span></a>
 
 	
@@ -1656,18 +1729,6 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/es/tags/invierno/" class="post-tag">Invierno <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/islandia/" class="post-tag">Islandia <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/es/tags/magia/" class="post-tag">Magia <span class="tag-count">(1)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/es/tags/islas/" class="post-tag">Islas <span class="tag-count">(1)</span></a>
 
 	
@@ -1677,6 +1738,18 @@ dialog.search-overlay::backdrop {
 	
 	
 	<a href="/samples/trailblazers/dist/es/tags/relajacion/" class="post-tag">Relajación <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/invierno/" class="post-tag">Invierno <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/islandia/" class="post-tag">Islandia <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/es/tags/magia/" class="post-tag">Magia <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1761,7 +1834,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/es/tags/` was built on 2026-03-30T16:32:40.749Z -->
+		<!-- This page `/es/tags/` was built on 2026-03-31T21:40:26.404Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

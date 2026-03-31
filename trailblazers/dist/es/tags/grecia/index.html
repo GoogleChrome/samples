@@ -1517,6 +1517,78 @@ dialog.search-overlay::backdrop {
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
   }
+}
+
+/* ============================================================
+   Map CSS Variables
+   ============================================================ */
+:root {
+  --map-land: #d6e8e0;
+  --map-stroke: #b0ccc3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --map-land: #1c3329;
+    --map-stroke: #2a4a3e;
+  }
+}
+
+/* ============================================================
+   Post Country Map
+   ============================================================ */
+.post-country-map {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem 2rem 1rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.post-country-map-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+  margin: 0 0 1rem 0;
+}
+
+.post-country-map-svg {
+  display: flex;
+  justify-content: center;
+}
+
+.post-country-map-svg svg {
+  width: 100%;
+  max-width: 480px;
+  max-height: 300px;
+  height: auto;
+  display: block;
+  /* Override the source SVG's default blue fill with brand color */
+  fill: var(--color-primary);
+  stroke: var(--background-color);
+  stroke-width: 0.4;
+  /* Suppress image-related styling applied globally */
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0.88;
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-country-map-svg svg {
+    fill: var(--color-primary);
+    stroke: var(--background-color);
+    opacity: 0.75;
+  }
+}
+
+.post-country-map-svg svg:hover {
+  opacity: 1;
 }</style>
 		
 		<link href="/samples/trailblazers/dist/pagefind/pagefind-ui.css" rel="stylesheet">
@@ -1538,6 +1610,7 @@ dialog.search-overlay::backdrop {
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/">Inicio</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/blog/">Archivo</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/es/destinations/">Destinos</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/feed/feed.xml">Feed</a></li>
 						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Crear</a></li>
 						<li class="nav-item search-item">
@@ -1678,10 +1751,10 @@ dialog.search-overlay::backdrop {
 				
 				
 				<li class="popular-item">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/vl8VYA-VsZ-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/vl8VYA-VsZ-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/vl8VYA-VsZ-3000.jpeg" alt="París: Un Paseo de Medianoche por la Historia" class="popular-thumbnail" width="3000" height="2122"></picture>
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.jpeg" alt="Machu Picchu: Ecos de un Antiguo Imperio" class="popular-thumbnail" width="3000" height="1987"></picture>
 					<div class="popular-item-content">
-						<span class="tag-badge">Romance</span>
-						<a href="/samples/trailblazers/dist/es/blog/paris-midnight-stroll/" class="popular-link">París: Un Paseo de Medianoche por la Historia</a>
+						<span class="tag-badge">UNESCO</span>
+						<a href="/samples/trailblazers/dist/es/blog/machu-picchu-ancient-echoes/" class="popular-link">Machu Picchu: Ecos de un Antiguo Imperio</a>
 					</div>
 				</li>
 				
@@ -1768,7 +1841,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/es/tags/grecia/` was built on 2026-03-30T16:32:41.537Z -->
+		<!-- This page `/es/tags/grecia/` was built on 2026-03-31T21:40:30.003Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		
