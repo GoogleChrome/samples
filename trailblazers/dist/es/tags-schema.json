@@ -5,7 +5,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Aventura","Canadá","Ciudad","Costa","Cultura","EE. UU.","Energía","Espiritualidad","Francia","Grecia","Historia","Indonesia","Invierno","Islandia","Islas","Italia","Japón","Jordania","Joyas Ocultas","Lagos","Magia","Montañas","Naturaleza","Perú","Relajación","Romance","Sudáfrica","Tanzania","UNESCO","Verano","Vida Silvestre"]
+        "enum": ["Alemania","Argentina","Australia","Aventura","Brasil","Canadá","Ciudad","Corea del Sur","Costa","Croacia","Cuba","Cultura","Descanso","EE. UU.","Energía","Escocia","Espiritualidad","Fauna","Francia","Grecia","Historia","India","Indonesia","Invierno","Islandia","Islas","Italia","Japón","Jordania","Joyas Ocultas","Kenia","Lagos","Magia","Marruecos","México","Montañas","Naturaleza","Nueva Zelanda","Países Bajos","Perú","Playa","Portugal","Relajación","República Checa","Romance","Sudáfrica","Tailandia","Tanzania","Turquía","UNESCO","Verano","Vida Silvestre","Vietnam"]
       }
     }
   },

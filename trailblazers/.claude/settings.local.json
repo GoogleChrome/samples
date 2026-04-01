@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:unsplash.com)",
+      "WebSearch",
+      "Bash(BASE=/Users/tsteiner/Documents/websites/samples/trailblazers/content)",
+      "Bash(for slug:*)",
+      "Bash(do)",
+      "Bash(mkdir -p \"$BASE/en/blog/$slug\")",
+      "Bash(mkdir -p \"$BASE/es/blog/$slug\")",
+      "Read(//Users/tsteiner/Documents/websites/samples/trailblazers/**)",
+      "Bash(do echo:*)"
+    ]
+  }
+}

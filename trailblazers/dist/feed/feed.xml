@@ -5,306 +5,290 @@
   <subtitle>Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.</subtitle>
   <link href="/samples/trailblazers/dist/feed/feed.xml" rel="self" />
   <link href="" />
-  <updated>2026-03-16T00:00:00Z</updated>
+  <updated>2026-03-20T00:00:00Z</updated>
   <id></id>
   <author>
     <name>trAIlblazers Team</name>
     <email>hello@trailblazers.example.com</email>
   </author>
   <entry xml:lang="ja">
-    <title>ニューヨーク：コンクリートジャングルを歩く</title>
-    <link href="/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/" />
-    <updated>2026-03-16T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.jpeg&quot; alt=&quot;アメリカ、ニューヨーク&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;ニューヨークは単に眠らない街ではありません。常に振動しています。都市のエネルギーを糧にする写真家にとって、NYCは究極の遊び場です。あらゆる角がフレームであり、地下鉄のあらゆる移動が物語。この「コンクリートジャングル」には、私が訪れたどの森にも負けない美しさがあります。&lt;/p&gt;
-&lt;h3 id=&quot;&quot;&gt;街路の頭上で&lt;/h3&gt;
-&lt;p&gt;ある朝、歴史的な貨物鉄道の跡地に作られた空中庭園、&lt;strong&gt;ハイライン（The High Line）&lt;strong&gt;を散策しました。超高層ビルの間を縫うように走るこの場所は、都市再開発の手本のような場所で、街の建築を覗き見るようなユニークな視点を与えてくれます。昼食には食料を買い込み、セントラルパークのシープ・メドウ（Sheep Meadow）で&lt;/strong&gt;ピクニック&lt;/strong&gt;をしました。周囲の「ビリオネアズ・ロウ（億万長者通り）」のスカイラインを背景にした緑の芝生のコントラストは、まさにニューヨークならではの光景です。&lt;/p&gt;
-&lt;p&gt;一日の締めくくりには、エンパイア・ステート・ビルディングは避け（混雑しすぎているため！）、ロックフェラー・センターの**トップ・オブ・ザ・ロック（Top of the Rock）**へ向かいました。プロのアドバイス：こここそが、夕暮れ時に明かりが灯るエンパイア・ステート・ビルディングを最も美しく眺められる場所です。&lt;/p&gt;
-&lt;h3 id=&quot;-2&quot;&gt;天国の一切れ（とベーグル）&lt;/h3&gt;
-&lt;p&gt;ニューヨークに来て、5つの区をまたいで食べ歩かないわけにはいきません。一日の始まりは、地元のデリで買ったクラシックな&lt;strong&gt;エブリシング・ベーグル（スモークサーモンとクリームチーズたっぷり）&lt;strong&gt;から。ここではこれが唯一の正しい朝食です。夕食には、カーマイン通りの「ジョーズ・ピザ（Joe&#39;s Pizza）」で、歩道に立って4ドルの&lt;/strong&gt;ペパロニピザのスライス&lt;/strong&gt;を頬張るという「ニューヨーク流」を楽しみました。薄くて、折りたたんで食べる。これこそが完璧な味です。&lt;/p&gt;
+    <title>ソウル：古代の宮殿とネオンの未来が交わる街</title>
+    <link href="/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/" />
+    <updated>2026-03-20T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/dEprmgX_-Y-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/dEprmgX_-Y-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/dEprmgX_-Y-1200.jpeg&quot; alt=&quot;韓国、ソウル&quot; width=&quot;1200&quot; height=&quot;798&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;ソウルは他の都市が目指すスピードで動く。交通機関は完璧で頻繁、コンビニは深夜も開いていて genuinely 便利、食文化は革新的であると同時に深く伝統的、そして市内に5つの朝鮮王朝の王宮が無傷で残る街の過去との関係は、アジアのどこにおいても新旧の間で最も優雅な都市交渉のひとつだ。ソウルは遺産と野心のどちらかを選ぶ必要がないことを証明する街だ。&lt;/p&gt;
+&lt;h3 id=&quot;&quot;&gt;景福宮と北村&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;景福宮&lt;/strong&gt;——朝鮮王朝の主な王宮——は1395年に最初に建てられ、元々500棟あった建物のうち300棟以上が再建されたエリアに囲まれている。正門での衛兵交代式（毎日午前10時と午後2時）は注意を要するほどの精密さと色彩で執り行われる。すぐ北には&lt;strong&gt;北村韓屋村&lt;/strong&gt;がある——二つの大きな宮殿の間の丘に保存された伝統的な韓国家屋（韓屋）の住宅地——細い路地、木の軒、石の壁、そして改装された韓屋の内部を占める市内最高のカフェ。&lt;/p&gt;
+&lt;h3 id=&quot;-2&quot;&gt;弘大と漢江&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;弘大&lt;/strong&gt;——弘益大学周辺の地区——はソウルの若者文化が最も濃縮された形で展開される場所だ。インディ音楽ライブハウス、ストリートダンサー、独立系ファッションデザイナー、午前4時まで開くストリートフードスタンド。宮殿地区から地下鉄で30分のこのコントラストは絶対的で、ソウルについての正確な指摘だ。街を二分する&lt;strong&gt;漢江&lt;/strong&gt;は多くの訪問者が十分に活用していないものだ——河川公園（汝矣島、盤浦）には毎晩&lt;strong&gt;盤浦大橋レインボー噴水&lt;/strong&gt;（世界最長の橋噴水）を見ながらサイクリング、ピクニック、家族連れのソウル市民が溢れる。その輪に加わることは街を理解する最良の方法のひとつだ。&lt;/p&gt;
 &lt;h3 id=&quot;-3&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;メトロカードは万能&lt;/strong&gt;: マンハッタンでUberを使う必要はありません。地下鉄の方が速くて安いです。スマートフォンの非接触決済「OMNY」を使えば、券売機の列に並ぶ必要もありません。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ファッションより快適さ&lt;/strong&gt;: 気づかないうちに一日に15キロ以上歩くことになります。「おしゃれな」靴ではなく、最高のスニーカーを履いてください。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;上を見る&lt;/strong&gt;: ニューヨークの人々はうつむいたり、前だけを見て歩くことで有名です。でも、ふと上を見上げれば、世界で最も美しいアールデコの装飾を目にすることができるでしょう。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;T-moneyカード&lt;/strong&gt;: 地下鉄、バス、タクシーで使える交通カードはソウルの必須ツールだ——小さなデポジットで任意のコンビニ（GS25、CU、7-Eleven）で購入でき、どこでもチャージ可能で、現金払いより若干安い運賃になる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;チムジルバン体験&lt;/strong&gt;: &lt;strong&gt;チムジルバン&lt;/strong&gt;（韓国の公衆浴場）は多くの観光客が見逃すソウルの必須体験だ。入場料を払い（約10,000〜15,000ウォン）、ユニフォームをもらって、様々な温度のサウナ、共用室、仮眠エリアを利用できる。24時間営業のところも多い。韓国語が話せなくても完全にアクセス可能で、卓越した体験だ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;韓国BBQのプロトコル&lt;/strong&gt;: &lt;strong&gt;サムギョプサル&lt;/strong&gt;（豚バラ肉BBQ）レストランでは、テーブルに炭火がある。小鉢料理（バンチャン）は共用で無限にお代わりできる。チャミスル（焼酎）やマッコリは必須だ。えごまの葉のラップとデンジャンチゲもあわせて注文しよう。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;-4&quot;&gt;ハイライト&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;ハイライン&lt;/strong&gt;: グレーの都市の中を走る穏やかな緑のリボン。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;トップ・オブ・ザ・ロック&lt;/strong&gt;: 街を360度見渡す最高の展望台。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ジョーズ・ピザ&lt;/strong&gt;: 評判に違わぬ、料理のランドマーク。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;セントラルパーク&lt;/strong&gt;: 「都市の肺」であり、人間観察に最高の場所。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;南山タワーとソウル城郭&lt;/strong&gt;: 600年前の城壁の残存区間を通ってNソウルタワーまでハイキングすることは、メガシティの真ん中での瞑想的な体験だ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;広蔵市場&lt;/strong&gt;: ソウル最古の市場で、生の絹、ヴィンテージ生地、そしてビンデトク（緑豆のお好み焼き）とマヤク・キンパブ（ごまご飯巻き）が定番のフードコートがある。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DMZ日帰り旅行&lt;/strong&gt;: 北朝鮮との非武装地帯はガイド付きツアーでソウルから2時間。地球上で最も歴史的に緊張感のある景観のひとつだ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;仁寺洞&lt;/strong&gt;: 伝統芸術地区で、ギャラリー、お茶の家、市内最高の伝統工芸店がある——韓紙製品、青磁の湯飲み、手作りの墨一本を買おう。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;ニューヨークは、常に全力投球を求めてくる街です。騒々しく、速く、そして最高に刺激的です。&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/O_f6M_J_v_I&quot;&gt;Luca Bravo&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;ソウルは訪れるたびに驚かせてくれる街だ。層は明かし続け、与える時間が増えるほど深みは増していく。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/YmawptEadgc&quot;&gt;Markus Winkler&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry xml:lang="es">
-    <title>Nueva York: Navegando por la Selva de Cristal</title>
-    <link href="/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/" />
-    <updated>2026-03-16T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.jpeg&quot; alt=&quot;Nueva York, EE. UU.&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;Nueva York es una ciudad que no solo duerme, sino que vibra. Como fotógrafo que se nutre de la energía urbana, Nueva York es mi patio de recreo definitivo. Cada esquina es un fotograma, cada viaje en metro es una historia, y la &amp;quot;selva de cristal&amp;quot; tiene una belleza que rivaliza con cualquier bosque que haya visitado.&lt;/p&gt;
-&lt;h3 id=&quot;sobre-las-calles&quot;&gt;Sobre las Calles&lt;/h3&gt;
-&lt;p&gt;Pasamos una mañana paseando por &lt;strong&gt;The High Line&lt;/strong&gt;, un parque elevado construido sobre una histórica línea de ferrocarril de mercancías. Es una clase magistral de renovación urbana, que serpentea entre rascacielos y ofrece vistas &amp;quot;voyeuristas&amp;quot; únicas de la arquitectura de la ciudad. Para el almuerzo, compramos suministros y tuvimos un &lt;strong&gt;picnic en Central Park&lt;/strong&gt;, en el Sheep Meadow; el contraste de la hierba verde con el horizonte circundante de la &amp;quot;Milla de los Millonarios&amp;quot; es la esencia de Nueva York.&lt;/p&gt;
-&lt;p&gt;Para terminar el día, nos saltamos el Empire State Building (¡demasiada gente!) y fuimos al &lt;strong&gt;Top of the Rock&lt;/strong&gt; en el Rockefeller Center. Consejo profesional: aquí es donde obtienes la mejor vista &lt;em&gt;del&lt;/em&gt; Empire State Building, especialmente cuando se encienden las luces al atardecer.&lt;/p&gt;
-&lt;h3 id=&quot;una-porcion-y-un-bagel-del-cielo&quot;&gt;Una Porción (y un Bagel) del Cielo&lt;/h3&gt;
-&lt;p&gt;No puedes venir a Nueva York y no comer a tu paso por los cinco distritos. Empezamos el día con un clásico &lt;strong&gt;bagel de todo con salmón ahumado y un &amp;quot;schmear&amp;quot; de queso crema&lt;/strong&gt; de una tienda local. Es la única forma de desayunar aquí. Para la cena, hicimos el &amp;quot;paso de NY&amp;quot;: de pie en la acera comiendo una porción de 4 dólares de &lt;strong&gt;pizza de pepperoni de Joe&#39;s en Carmine Street&lt;/strong&gt;. Es fina, plegable y exactamente a qué sabe la perfección.&lt;/p&gt;
+    <title>Seúl: Donde los Palacios Antiguos Se Encuentran con los Futuros de Neón</title>
+    <link href="/samples/trailblazers/dist/es/blog/seoul-ancient-modern/" />
+    <updated>2026-03-20T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/es/blog/seoul-ancient-modern/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/seoul-ancient-modern/dEprmgX_-Y-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/seoul-ancient-modern/dEprmgX_-Y-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/es/blog/seoul-ancient-modern/dEprmgX_-Y-1200.jpeg&quot; alt=&quot;Seúl, Corea del Sur&quot; width=&quot;1200&quot; height=&quot;798&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;Seúl se mueve a una velocidad a la que otras ciudades aspiran. El sistema de transporte es impecable y frecuente, las tiendas de conveniencia abren toda la noche y son genuinamente convenientes, la cultura gastronómica es innovadora y profundamente tradicional simultáneamente, y la relación de la ciudad con su propio pasado — cinco palacios reales de la dinastía Joseon intactos dentro del área metropolitana — es una de las negociaciones urbanas más elegantes entre lo viejo y lo nuevo en cualquier lugar de Asia. Seúl es la ciudad que demuestra que no tienes que elegir entre herencia y ambición.&lt;/p&gt;
+&lt;h3 id=&quot;el-palacio-gyeongbokgung-y-bukchon&quot;&gt;El Palacio Gyeongbokgung y Bukchon&lt;/h3&gt;
+&lt;p&gt;El &lt;strong&gt;Palacio Gyeongbokgung&lt;/strong&gt; — el palacio real principal de la dinastía Joseon — fue construido por primera vez en 1395 y está rodeado por más de trescientos edificios tradicionales reconstruidos en un recinto que originalmente albergaba quinientos. La ceremonia del cambio de guardia en la puerta principal (a las 10:00 y 14:00 todos los días) se ejecuta con una precisión y un colorido que merecen atención. Inmediatamente al norte, el &lt;strong&gt;Pueblo Hanok de Bukchon&lt;/strong&gt; es un barrio residencial de casas tradicionales coreanas (hanok) preservadas en una ladera entre los dos grandes palacios — callejones estrechos, aleros de madera, muros de piedra y las mejores cafeterías de la ciudad ocupando interiores de hanok reconvertidos.&lt;/p&gt;
+&lt;h3 id=&quot;hongdae-y-el-rio-han&quot;&gt;Hongdae y el Río Han&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hongdae&lt;/strong&gt; — el barrio alrededor de la Universidad Hongik — es donde la cultura juvenil de Seúl corre en su forma más concentrada: locales de música indie, bailarines callejeros, diseñadores de moda independientes y puestos de street food abiertos hasta las 4 de la mañana. El contraste con el barrio del palacio a treinta minutos en metro es absoluto y es precisamente el punto sobre Seúl. El &lt;strong&gt;Río Han&lt;/strong&gt; que biseca la ciudad es algo que la mayoría de visitantes infrautiliza — los parques fluviales (Yeouido, Banpo) se llenan de seulitas haciendo ciclismo, picnics y viendo la &lt;strong&gt;Fuente Arcoíris del Puente Banpo&lt;/strong&gt; (la fuente de puente más larga del mundo) todas las noches. Unirse a ellos es una de las mejores formas de entender la ciudad.&lt;/p&gt;
 &lt;h3 id=&quot;consejos-y-trucos&quot;&gt;Consejos y Trucos&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;La MetroCard es el Rey&lt;/strong&gt;: No te molestes con Ubers en Manhattan; el metro es más rápido y barato. Usa &amp;quot;OMNY&amp;quot; (pago con un toque) con tu teléfono para saltarte las colas en los quioscos.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Comodidad antes que Moda&lt;/strong&gt;: Caminarás más de 15 km al día sin darte cuenta. Usa tus mejores zapatillas de deporte, no tus zapatos &amp;quot;elegantes&amp;quot;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mira hacia Arriba&lt;/strong&gt;: Los neoyorquinos son famosos por mirar hacia abajo o hacia adelante. Si miras hacia arriba, verás algunos de los detalles Art Deco más hermosos del mundo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tarjeta T-money&lt;/strong&gt;: La tarjeta de transporte que funciona en metro, autobús y taxis es una herramienta imprescindible en Seúl — disponible en cualquier tienda de conveniencia (GS25, CU, 7-Eleven) por un pequeño depósito, recargable en cualquier lugar, y que da tarifas ligeramente más baratas que pagar en efectivo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La Experiencia del Jjimjilbang&lt;/strong&gt;: Un &lt;strong&gt;jjimjilbang&lt;/strong&gt; (baño público coreano) es la experiencia esencial de Seúl que la mayoría de turistas se pierden. Pagas la entrada (alrededor de 10.000-15.000 won), te dan un uniforme y accedes a saunas a diferentes temperaturas, salas comunes y zonas para dormir. Muchos abren las 24 horas. Es extraordinario y totalmente accesible para no hablantes de coreano.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Protocolo de la Barbacoa Coreana&lt;/strong&gt;: En un restaurante de &lt;strong&gt;samgyeopsal&lt;/strong&gt; (panceta de cerdo a la barbacoa), la parrilla está en tu mesa, los acompañamientos (banchan) son comunales y rellenables, y el soju o makgeolli es esencial. Pide los envoltorios de hoja de perilla y el doenjang jjigae junto a la carne.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;puntos-destacados&quot;&gt;Puntos Destacados&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;The High Line&lt;/strong&gt;: Una tranquila cinta verde en una ciudad gris.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Top of the Rock&lt;/strong&gt;: La mejor vista de 360 grados de la ciudad.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Joe&#39;s Pizza&lt;/strong&gt;: Un hito culinario que está a la altura de las expectativas.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Central Park&lt;/strong&gt;: Los &amp;quot;Pulmones de la Ciudad&amp;quot; y el mejor lugar para observar a la gente.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Torre Namsan y la Muralla de la Ciudad de Seúl&lt;/strong&gt;: La caminata hasta la Torre N de Seúl a través del tramo restante de la muralla de la ciudad de 600 años es una experiencia meditativa en medio de una megalópolis.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mercado Gwangjang&lt;/strong&gt;: El mercado más antiguo de Seúl, con seda cruda, tela vintage y un legendario patio de comidas donde los bindaetteok (tortitas de judía mungo) y el mayak kimbap (rollitos de arroz con sésamo) son los aperitivos definitorios.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Excursión de un Día a la DMZ&lt;/strong&gt;: La Zona Desmilitarizada en la frontera con Corea del Norte, alcanzable en una visita guiada desde Seúl en dos horas, es uno de los paisajes históricamente más cargados del mundo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Insadong&lt;/strong&gt;: El barrio de las artes tradicionales, con galerías, casas de té y las mejores tiendas de artesanía tradicional de la ciudad — compra un producto de papel hanji, una taza de celadón o un tintero hecho a mano.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Nueva York es una ciudad que exige que des lo mejor de ti. Es ruidosa, es rápida y es absolutamente embriagadora.&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Foto de &lt;a href=&quot;https://unsplash.com/photos/O_f6M_J_v_I&quot;&gt;Luca Bravo&lt;/a&gt; en Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Seúl es una ciudad que sorprende en cada visita. Las capas no dejan de revelarse, y la profundidad sigue aumentando cuanto más tiempo le dedicas.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Foto de &lt;a href=&quot;https://unsplash.com/photos/YmawptEadgc&quot;&gt;Markus Winkler&lt;/a&gt; en Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry xml:lang="en">
-    <title>New York: Navigating the Concrete Jungle</title>
-    <link href="/samples/trailblazers/dist/en/blog/new-york-concrete-jungle/" />
-    <updated>2026-03-16T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/en/blog/new-york-concrete-jungle/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/en/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.jpeg&quot; alt=&quot;New York, USA&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;New York is a city that doesn&#39;t just sleep; it vibrates. As a photographer who thrives on urban energy, NYC is my ultimate playground. Every corner is a frame, every subway ride is a story, and the &amp;quot;concrete jungle&amp;quot; has a beauty that rivals any forest I&#39;ve ever visited.&lt;/p&gt;
-&lt;h3 id=&quot;above-the-streets&quot;&gt;Above the Streets&lt;/h3&gt;
-&lt;p&gt;We spent a morning walking &lt;strong&gt;The High Line&lt;/strong&gt;, an elevated park built on a historic freight rail line. It’s a masterclass in urban renewal, weaving between skyscrapers and offering unique &amp;quot;voyeuristic&amp;quot; views into the city&#39;s architecture. For lunch, we grabbed supplies and had a &lt;strong&gt;Central Park picnic&lt;/strong&gt; on the Sheep Meadow—the contrast of the green grass against the surrounding Billionaires&#39; Row skyline is quintessentially New York.&lt;/p&gt;
-&lt;p&gt;To end the day, we skipped the Empire State Building (too crowded!) and went to the &lt;strong&gt;Top of the Rock&lt;/strong&gt; at the Rockefeller Center. Pro tip: this is where you get the best view &lt;em&gt;of&lt;/em&gt; the Empire State Building, especially as the lights come on at dusk.&lt;/p&gt;
-&lt;h3 id=&quot;a-slice-and-a-bagel-of-heaven&quot;&gt;A Slice (and a Bagel) of Heaven&lt;/h3&gt;
-&lt;p&gt;You can&#39;t come to New York and not eat your way through the five boroughs. We started our day with a classic &lt;strong&gt;everything bagel with lox and a &amp;quot;schmear&amp;quot; of cream cheese&lt;/strong&gt; from a local deli. It’s the only way to breakfast here. For dinner, we did the &amp;quot;NY shuffle&amp;quot;—standing on the sidewalk eating a $4 slice of &lt;strong&gt;pepperoni pizza from Joe’s on Carmine Street&lt;/strong&gt;. It’s thin, foldable, and exactly what perfection tastes like.&lt;/p&gt;
+    <title>Seoul: Where Ancient Palaces Meet Neon Futures</title>
+    <link href="/samples/trailblazers/dist/en/blog/seoul-ancient-modern/" />
+    <updated>2026-03-20T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/en/blog/seoul-ancient-modern/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/seoul-ancient-modern/dEprmgX_-Y-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/seoul-ancient-modern/dEprmgX_-Y-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/en/blog/seoul-ancient-modern/dEprmgX_-Y-1200.jpeg&quot; alt=&quot;Seoul, South Korea&quot; width=&quot;1200&quot; height=&quot;798&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;Seoul moves at a speed that other cities aspire to. The transit system is immaculate and frequent, the convenience stores are open all night and genuinely convenient, the food culture is innovative and deeply traditional simultaneously, and the city&#39;s relationship with its own past — five royal palaces from the Joseon dynasty intact within the metropolitan area — is one of the most graceful urban negotiations between old and new anywhere in Asia. Seoul is the city that proves you do not have to choose between heritage and ambition.&lt;/p&gt;
+&lt;h3 id=&quot;gyeongbokgung-palace-and-bukchon&quot;&gt;Gyeongbokgung Palace and Bukchon&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Gyeongbokgung Palace&lt;/strong&gt; — the main royal palace of the Joseon dynasty — was first built in 1395 and is surrounded by over three hundred reconstructed traditional buildings on a site that originally held five hundred. The changing of the guard ceremony at the main gate (10 AM and 2 PM daily) is performed with a precision and colour that rewards attention. Immediately north, the &lt;strong&gt;Bukchon Hanok Village&lt;/strong&gt; is a residential neighbourhood of preserved traditional Korean houses (hanok) on a hillside between the two great palaces — narrow lanes, wooden eaves, stone walls, and the best coffee shops in the city occupying converted hanok interiors.&lt;/p&gt;
+&lt;h3 id=&quot;hongdae-and-the-han-river&quot;&gt;Hongdae and the Han River&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hongdae&lt;/strong&gt; — the neighbourhood around Hongik University — is where Seoul&#39;s youth culture runs at its most concentrated: indie music venues, street dancers, independent fashion designers, and street food stalls open until 4 AM. The contrast with the palace district thirty minutes away by metro is absolute and is precisely the point about Seoul. The &lt;strong&gt;Han River&lt;/strong&gt; that bisects the city is something that most visitors underuse — the river parks (Yeouido, Banpo) fill with Seoulites cycling, having picnics, and watching the &lt;strong&gt;Banpo Bridge Rainbow Fountain&lt;/strong&gt; (the world&#39;s longest bridge fountain) every evening. Joining them is one of the best ways to understand the city.&lt;/p&gt;
 &lt;h3 id=&quot;gotchas-and-tips&quot;&gt;Gotchas &amp;amp; Tips&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;The MetroCard is King&lt;/strong&gt;: Don&#39;t bother with Ubers in Manhattan; the subway is faster and cheaper. Use &amp;quot;OMNY&amp;quot; (tap-to-pay) with your phone to skip the lines at the kiosks.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Comfort over Fashion&lt;/strong&gt;: You will walk 10+ miles a day without realizing it. Wear your best sneakers, not your &amp;quot;fancy&amp;quot; shoes.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Look Up&lt;/strong&gt;: New Yorkers are famous for looking down or straight ahead. If you look up, you’ll see some of the most beautiful Art Deco details in the world.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;T-money Card&lt;/strong&gt;: The transit card that works on metro, bus, and taxis is a non-negotiable Seoul tool — available at any convenience store (GS25, CU, 7-Eleven) for a small deposit, top-up-able anywhere, and giving slightly cheaper fares than paying cash.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Jjimjilbang Experience&lt;/strong&gt;: A &lt;strong&gt;jjimjilbang&lt;/strong&gt; (Korean public bathhouse) is the essential Seoul experience that most tourists miss. You pay entry (around 10,000–15,000 won), get a uniform, and access saunas at different temperatures, common rooms, and sleeping areas. Many are open 24 hours. It is extraordinary and entirely accessible to non-Korean speakers.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Korean BBQ Protocol&lt;/strong&gt;: At a &lt;strong&gt;samgyeopsal&lt;/strong&gt; (pork belly BBQ) restaurant, the grill is at your table, the side dishes (banchan) are communal and refillable, and the soju or makgeolli is essential. Order the perilla leaf wraps and the doenjang jjigae alongside.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;highlights&quot;&gt;Highlights&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;The High Line&lt;/strong&gt;: A peaceful green ribbon in a gray city.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Top of the Rock&lt;/strong&gt;: The best 360-degree view of the city.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Joe&#39;s Pizza&lt;/strong&gt;: A culinary landmark that lives up to the hype.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Central Park&lt;/strong&gt;: The &amp;quot;Lungs of the City&amp;quot; and the best place for people-watching.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Namsan Tower and Seoul City Wall&lt;/strong&gt;: The hike up to N Seoul Tower through the remaining section of the 600-year-old city wall is a meditative experience in the middle of a megacity.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gwangjang Market&lt;/strong&gt;: Seoul&#39;s oldest market, with raw silk, vintage fabric, and a legendary food court where the bindaetteok (mung bean pancakes) and mayak kimbap (sesame rice rolls) are the defining snacks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DMZ Day Trip&lt;/strong&gt;: The Demilitarised Zone on the North Korean border, reachable on a guided tour from Seoul in two hours, is one of the most historically charged landscapes on earth.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Insadong&lt;/strong&gt;: The traditional arts district, with galleries, tea houses, and the best traditional craft shops in the city — buy a hanji paper product, a celadon teacup, or a handmade ink stick.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;New York is a city that demands you bring your &amp;quot;A&amp;quot; game. It’s loud, it’s fast, and it’s absolutely intoxicating.&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/O_f6M_J_v_I&quot;&gt;Luca Bravo&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Seoul is a city that surprises on every visit. The layers keep revealing themselves, and the depth keeps increasing the more time you give it.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/YmawptEadgc&quot;&gt;Markus Winkler&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry xml:lang="ja">
-    <title>アマルフィ海岸：曲がりくねった道と潮風</title>
-    <link href="/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/" />
-    <updated>2026-03-15T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.jpeg&quot; alt=&quot;イタリア、アマルフィ&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;アマルフィ海岸は、色とりどりの家々が崖にフジツボのようにへばりついた、垂直の風景が広がる場所です。歴史オタクの私は、贅沢なビーチクラブよりも、この険しい海岸線がかつて地中海で最も強力な海運共和国の一つであったという事実に魅了されました。&lt;/p&gt;
-&lt;h3 id=&quot;&quot;&gt;夢のドライブ（と悪夢）&lt;/h3&gt;
-&lt;p&gt;「1000のカーブを持つ道」と呼ばれるSS163をドライブすることに勝る体験はありません。窓から吹き込むレモンの香りと地中海の潮風を感じるのは至福のひとときです。ヘアピンカーブで観光バスが向かってくるスリルさえ気にならなければ！&lt;/p&gt;
-&lt;p&gt;気分転換に、&lt;strong&gt;神々の道（Sentiero degli Dei）&lt;strong&gt;をハイキングしました。海のはるか上を行くこのトレイルからの景色は、思わず足を止めて息を呑むほどでした。一日の締めくくりには、プライベートな&lt;/strong&gt;ポジターノ・ボートツアー&lt;/strong&gt;に参加し、太陽が地平線に沈む中、パステルカラーの家々がピラミッドのように重なる街並みを振り返りました。ポジターノの壮大さを本当に理解するには、海から眺めるのが唯一の方法です。&lt;/p&gt;
-&lt;h3 id=&quot;-2&quot;&gt;シーフード・シンフォニー&lt;/h3&gt;
-&lt;p&gt;アマルフィでのディナーは、通常レモンで始まりレモンで終わります。メイン広場から少し離れた小さなトラットリアで、**シャラティエッリ・アイ・フルッティ・ディ・マーレ（Scialatielli ai frutti di mare）&lt;strong&gt;をいただきました。手打ちの太麺パスタに、アサリ、ムール貝、エビがたっぷり入った一品です。そしてもちろん、冷えた地元の&lt;/strong&gt;リモンチェッロ（Limoncello）**なしでは食事は完結しません。まさに「液体の太陽」です！&lt;/p&gt;
+    <title>モルディブ：世界の果てに浮かぶ水上のパラダイス</title>
+    <link href="/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/" />
+    <updated>2026-03-19T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.jpeg&quot; alt=&quot;モルディブ&quot; width=&quot;1200&quot; height=&quot;900&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;水上バンガローから眼下を見下ろして、20メートル下のサンゴが完全に見える透明な水——そして海ガメが絶対的に急がない優雅さでそこを通り過ぎる——その瞬間に何かが再調整される。モルディブは、写真が示唆していた以上に自然の現実が genuinely 可能なことを超えているそうした場所のひとつだ。水は他の海が目指している色をしている。リーフは「生きている」という言葉の理解を再調整するほどに生きている。そしてここの静けさは積極的なもの——音の不在ではなく、海の存在だ。&lt;/p&gt;
+&lt;h3 id=&quot;&quot;&gt;水上バンガローの体験&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;水上バンガロー&lt;/strong&gt;はモルディブの定義的な建築だ——木の支柱の上に水の上に建てられた構造体で、下のリーフの上にガラス張りの床パネルがあり、水へと直接下りる梯子がある。モルディブのすべてのリゾートが何らかのバリエーションを持っており、シンプルで手頃なものから専用プールとバトラーサービスが付く贅沢なものまで様々だ。重要な変数はバンガロー直下のリーフだ——生き生きとした色とりどりのサンゴがあるリゾートもあれば、劣化や白化したリーフのリゾートもある。予約前にその特定のリーフの状態を調べること——これが夜明けにデッキから行うシュノーケリングの体験に大きな差をもたらす。&lt;/p&gt;
+&lt;h3 id=&quot;-2&quot;&gt;リーフとその住人たち&lt;/h3&gt;
+&lt;p&gt;モルディブは水中の山脈の上に位置する——環礁は古代火山の頂上だ——そして環礁間を移動する栄養豊かな海流が卓越した海洋生物多様性を支えている。&lt;strong&gt;ジンベエザメ&lt;/strong&gt;——地球上で最大の魚——はサウス・アリ環礁で6月から11月にかけて確実に目撃できる。&lt;strong&gt;マンタレイ&lt;/strong&gt;は環礁全体のクリーニングステーションに集まり、小魚が寄生虫を取り除く共生のバレエを演じる。優れたリゾートの&lt;strong&gt;ハウスリーフ&lt;/strong&gt;は、どんな朝のシュノーケリングでも、大半の人が生涯に見たよりも多くのリーフフィッシュの種を提供するだろう。&lt;/p&gt;
 &lt;h3 id=&quot;-3&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;車は諦める&lt;/strong&gt;: 鋼の心臓を持っていない限り、SITAバスかフェリーを利用しましょう。駐車場はほとんどなく、非常に高価です。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;「階段税」&lt;/strong&gt;: 何千段もの階段を覚悟してください。足腰に不安がある場合は、ポジターノよりもアマルフィやマイオーリに滞在することをお勧めします。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;予約が命&lt;/strong&gt;: 夕日が見える席を希望する場合は、夏季は少なくとも2〜3日前に予約してください。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;アマルフィ海岸は、劇的な美しさと深い歴史が共存する場所です。確かに少し混雑していますが、有名なのにはそれなりの理由があります。&lt;/p&gt;
-&lt;h3 id=&quot;-4&quot;&gt;ハイライト&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;神々の道&lt;/strong&gt;: イタリアで最高の無料絶景スポット。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;海からのポジターノ&lt;/strong&gt;: まさに映画のような魔法。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;シャラティエッリ&lt;/strong&gt;: パスタの食感は忘れられません。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;アマルフィ大聖堂&lt;/strong&gt;: アラブ・ノーマン様式の見事な融合。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;イタリアの夏からのさらなるアップデートをお楽しみに！&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/1zkHXas1GIo&quot;&gt;Tom Podmore&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry xml:lang="es">
-    <title>Costa Amalfitana: Caminos Sinuosos y Aire Salado</title>
-    <link href="/samples/trailblazers/dist/es/blog/amalfi-coast-winding-roads/" />
-    <updated>2026-03-15T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/es/blog/amalfi-coast-winding-roads/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/es/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.jpeg&quot; alt=&quot;Amalfi, Italia&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;La Costa Amalfitana es un paisaje vertical donde las casas de colores se aferran a los acantilados como percebes de colores brillantes. Como soy un poco fanática de la historia, me interesaban menos los clubes de playa de lujo y más el hecho de que esta escarpada costa fue una vez una de las repúblicas marítimas más poderosas del Mediterráneo.&lt;/p&gt;
-&lt;h3 id=&quot;conduciendo-el-sueno-y-la-pesadilla&quot;&gt;Conduciendo el Sueño (y la Pesadilla)&lt;/h3&gt;
-&lt;p&gt;No hay nada como conducir por la SS163, la &amp;quot;Carretera de las Mil Curvas&amp;quot;. Con el aroma de los limones entrando por la ventana y el aire salado del Mediterráneo, es pura felicidad, ¡si no te importa la adrenalina de que un autobús turístico se te acerque en una curva de horquilla!&lt;/p&gt;
-&lt;p&gt;Para cambiar de ritmo, caminamos por el &lt;strong&gt;Sendero de los Dioses (Sentiero degli Dei)&lt;/strong&gt;. Este sendero en lo alto del mar ofrece vistas que realmente me hicieron detenerme y recuperar el aliento. Terminamos nuestro día con un &lt;strong&gt;tour privado en barco por Positano&lt;/strong&gt;, mirando hacia atrás a la pirámide de casas en colores pastel mientras el sol se hundía bajo el horizonte. Ver Positano desde el agua es la única forma de comprender verdaderamente su escala.&lt;/p&gt;
-&lt;h3 id=&quot;una-sinfonia-de-mariscos&quot;&gt;Una Sinfonía de Mariscos&lt;/h3&gt;
-&lt;p&gt;La cena en Amalfi suele empezar y terminar con limones. Nos sentamos en una pequeña trattoria apartada de la plaza principal y comimos &lt;strong&gt;Scialatielli ai frutti di mare&lt;/strong&gt;, pasta gruesa enrollada a mano servida con abundante cantidad de almejas, mejillones y camarones. Y, por supuesto, ninguna comida está completa sin una copa fría de &lt;strong&gt;Limoncello&lt;/strong&gt; local. ¡Es sol líquido!&lt;/p&gt;
-&lt;h3 id=&quot;consejos-y-trucos&quot;&gt;Consejos y Trucos&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Deja el coche&lt;/strong&gt;: A menos que tengas nervios de acero, toma el autobús SITA o el ferry. El aparcamiento es casi inexistente e increíblemente caro.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;El &amp;quot;Impuesto de los Pasos&amp;quot;&lt;/strong&gt;: Prepárate para los escalones. Miles de ellos. Si tienes problemas de movilidad, quédate en Amalfi o Maiori en lugar de Positano.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Las Reservas son la Clave&lt;/strong&gt;: Si quieres una mesa con vista para el atardecer, reserva con al menos 2-3 días de antelación durante los meses de verano.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;La Costa Amalfitana es un lugar de belleza dramática e historia profunda. Es un poco concurrido, sí, pero algunas cosas son famosas por una razón.&lt;/p&gt;
-&lt;h3 id=&quot;puntos-destacados&quot;&gt;Puntos Destacados&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Sendero de los Dioses&lt;/strong&gt;: La mejor vista gratuita de Italia.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Positano desde el agua&lt;/strong&gt;: Pura magia cinematográfica.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Scialatielli&lt;/strong&gt;: La textura de la pasta es inolvidable.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Catedral de Amalfi&lt;/strong&gt;: Una impresionante mezcla de arquitectura árabe-normanda.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;¡Estén atentos para más actualizaciones de nuestro verano italiano!&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Foto de &lt;a href=&quot;https://unsplash.com/photos/1zkHXas1GIo&quot;&gt;Tom Podmore&lt;/a&gt; en Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry xml:lang="en">
-    <title>Amalfi Coast: Winding Roads and Salty Air</title>
-    <link href="/samples/trailblazers/dist/en/blog/amalfi-coast-winding-roads/" />
-    <updated>2026-03-15T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/en/blog/amalfi-coast-winding-roads/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/en/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.jpeg&quot; alt=&quot;Amalfi, Italy&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;The Amalfi Coast is a vertical landscape where colorful houses cling to the cliffs like brightly colored barnacles. Being a bit of a history geek, I was less interested in the luxury beach clubs and more fascinated by the fact that this rugged coastline was once one of the most powerful maritime republics in the Mediterranean.&lt;/p&gt;
-&lt;h3 id=&quot;driving-the-dream-and-the-nightmare&quot;&gt;Driving the Dream (and the Nightmare)&lt;/h3&gt;
-&lt;p&gt;There is nothing quite like driving the SS163, the &amp;quot;Road of a Thousand Bends.&amp;quot; With the scent of lemons blowing through the window and the salty Mediterranean air, it’s pure bliss—if you don&#39;t mind the white-knuckle adrenaline of a tour bus coming at you on a hairpin turn!&lt;/p&gt;
-&lt;p&gt;For a change of pace, we hiked the &lt;strong&gt;Path of the Gods (Sentiero degli Dei)&lt;/strong&gt;. This trail high above the sea offers views that genuinely made me stop and catch my breath. We ended our day with a private &lt;strong&gt;Positano boat tour&lt;/strong&gt;, looking back at the pyramid of pastel houses as the sun dipped below the horizon. Seeing Positano from the water is the only way to truly understand its scale.&lt;/p&gt;
-&lt;h3 id=&quot;a-seafood-symphony&quot;&gt;A Seafood Symphony&lt;/h3&gt;
-&lt;p&gt;Dinner in Amalfi usually starts and ends with lemons. We sat at a tiny trattoria tucked away from the main piazza and had &lt;strong&gt;Scialatielli ai frutti di mare&lt;/strong&gt;—thick, hand-rolled pasta served with a bounty of clams, mussels, and shrimp. And of course, no meal is complete without a chilled glass of local &lt;strong&gt;Limoncello&lt;/strong&gt;. It’s liquid sunshine!&lt;/p&gt;
-&lt;h3 id=&quot;gotchas-and-tips&quot;&gt;Gotchas &amp;amp; Tips&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Ditch the Car&lt;/strong&gt;: Unless you have nerves of steel, take the SITA bus or the ferry. Parking is nearly non-existent and incredibly expensive.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;The &amp;quot;Steps&amp;quot; Tax&lt;/strong&gt;: Be prepared for steps. Thousands of them. If you have mobility issues, stay in Amalfi or Maiori rather than Positano.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reservations are King&lt;/strong&gt;: If you want a table with a view for sunset, book at least 2-3 days in advance during the summer months.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The Amalfi Coast is a place of dramatic beauty and deep history. It’s a bit crowded, yes, but some things are famous for a reason.&lt;/p&gt;
-&lt;h3 id=&quot;highlights&quot;&gt;Highlights&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Path of the Gods&lt;/strong&gt;: The best free view in Italy.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Positano from the water&lt;/strong&gt;: Pure cinematic magic.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Scialatielli&lt;/strong&gt;: The texture of the pasta is unforgettable.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Amalfi Cathedral&lt;/strong&gt;: A stunning blend of Arab-Norman architecture.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Stay tuned for more updates from our Italian summer!&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/1zkHXas1GIo&quot;&gt;Tom Podmore&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry xml:lang="ja">
-    <title>サントリーニ島：青と白の夢</title>
-    <link href="/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/" />
-    <updated>2026-03-14T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/mHBp0glhnT-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/mHBp0glhnT-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/mHBp0glhnT-3000.jpeg&quot; alt=&quot;ギリシャ、サントリーニ島&quot; width=&quot;3000&quot; height=&quot;4000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;写真家にとって、サントリーニ島は最高の夢であると同時に、最も困難な挑戦でもあります。あの信じられないほど青いドーム屋根と、さらに青く見える海とのコントラストをどうやって切り取ればいいのでしょうか。ここは、光があまりにも鮮明で、手を伸ばせばその破片を掴み取れるのではないかと感じさせる場所です。&lt;/p&gt;
-&lt;h3 id=&quot;&quot;&gt;カルデラ・ハイキング&lt;/h3&gt;
-&lt;p&gt;私たちは観光用のロバは利用せず、&lt;strong&gt;フィラからイアまでの伝説的な10kmのハイキング&lt;/strong&gt;に挑戦しました。荒々しく砂埃の舞う道ですが、島で最も息をのむようなカルデラの景色を楽しむことができます。ゴールデンアワーが始まるちょうどその時にイアへ到着するように時間を合わせました。メインストリートは非常に混雑していましたが、私たちは&lt;strong&gt;ビザンチン城跡&lt;/strong&gt;の近くに静かな場所を見つけ、エーゲ海に太陽が沈むのを眺めました。有名なのには理由があります。空は、私が存在すら知らなかったような色に染まりました。&lt;/p&gt;
-&lt;p&gt;また、&lt;strong&gt;ネア・カメニ火山へのボートツアー&lt;/strong&gt;にも参加しました。黒い溶岩の上を歩き、その後、オレンジ色に染まったパレア・カメニの温かい温泉で泳ぐ体験は、山の上に広がる真っ白な村々とは対照的で素晴らしいものでした。&lt;/p&gt;
-&lt;h3 id=&quot;-2&quot;&gt;火山性土壌の味&lt;/h3&gt;
-&lt;p&gt;サントリーニ島の火山性土壌は、私がこれまでに食べた中で最も味わい深い野菜を育みます。ピルゴスの地元のタベルナで午後を過ごした際、**ファバ（Fava）&lt;strong&gt;という料理に夢中になりました。クリーミーなイエロースプリットピーのピューレに、ケッパーと赤玉ねぎがのっています。しかし、真の主役は&lt;/strong&gt;トマケフテデス（Tomatokeftedes、トマトのフリッター）**でした。外はカリッと、中は太陽をたっぷり浴びて熟したミニトマトの果汁が溢れ出します。&lt;/p&gt;
-&lt;h3 id=&quot;-3&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;大型客船の波&lt;/strong&gt;: 島に滞在しているなら、大型客船がいつ入港するかを調べておきましょう。その時間帯は、フィラやイアではなく、エンポリオやピルゴスといった内陸の村を探索するのが賢明です。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;強烈な太陽&lt;/strong&gt;: フィラからイアへのハイキングコースには日陰がほとんどありません。帽子をかぶり、午前8時前には出発するようにしましょう。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;アクロティリは必見&lt;/strong&gt;: 表面的な美しさだけに目を向けないでください。先史時代のアクロティリ遺跡（「ギリシャのポンペイ」）は、驚くほど詳細に保存されており、圧倒されます。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;予算の現実&lt;/strong&gt;: モルディブはリゾートレベルでは高価だ——すべてのリゾートが独自の島だからだ（サプライチェーンは複雑で、引き出せる地元の村の経済がない）。代替手段は&lt;strong&gt;地元の島のネットワーク&lt;/strong&gt;——マアフシやウクラスのような有人島のゲストハウスに泊まることで、はるかに手頃で真にオーセンティックなモルディブの日常生活を体験できる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;転送のロジスティクス&lt;/strong&gt;: ほとんどのリゾートは水上飛行機（壮観で、モルディブ旅行の最初の15分）またはマレーからのスピードボートで到達する。水上飛行機は日中しか運航しない——到着便が日暮れ後に着陸する場合、リゾートのウェブサイトが何を示唆していようとも、マレーで一泊することになる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;リーフへの敬意&lt;/strong&gt;: モルディブのサンゴ礁生態系は深刻な気候圧力下にある。責任を持ってシュノーケルとダイビングをしよう——触れない、サンゴの上に立たない、日焼け止めは使用しない（鉱物系のリーフセーフSPFのみ使用）、魚に餌を与えない。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;-4&quot;&gt;ハイライト&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;フィラからイアへのハイキング&lt;/strong&gt;: 10kmにわたる、海岸線の劇的なロケーション。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ビザンチン城跡の夕日&lt;/strong&gt;: 世界で最も有名な夕日の一つ。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;アクロティリ&lt;/strong&gt;: 青銅器時代の都市を垣間見ることができる魅力的な場所。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;トマトのフリッター&lt;/strong&gt;: キクラデス諸島で見つけられる最高のスナック。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;デッキからの夜明けのシュノーケル&lt;/strong&gt;: 他のゲストが目覚める前、バンガロー下のリーフは完全にあなたのもの——この時間帯の水を通した光は卓越している。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ドーニーでの夕日クルーズ&lt;/strong&gt;: 伝統的な木造モルディブ帆船（ドーニー）での日没、環礁が地平線まで広がる中——これがここでのあらゆる一日を終える正しい方法だ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;夜のシュノーケル&lt;/strong&gt;: 多くのリゾートがトーチを使ったナイトシュノーケルを提供している——発光性プランクトン、粘液の寝袋で眠るブダイ、自由に動くウツボが見られる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;マスフニの朝食&lt;/strong&gt;: 燻製マグロ、削りたてのココナッツ、唐辛子と玉ねぎをロシ（フラットブレッド）とともに食べる伝統的なモルディブの朝食は、地元の島の一部のリゾートで食べられる——シンプルさの中に卓越したものがある。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;サントリーニ島は火と光の場所です。しばらくの間、携帯電話を置いて、ただ水平線を眺めることを求めてくる島なのです。&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/1pS6mK3n7oU&quot;&gt;Heidi Kaden&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;モルディブはあなたに他のどこかにいることを求めない。滞在する時間の間、ここで十分だ。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/fWER_4yEs-I&quot;&gt;Ishan @seefromthesky&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry xml:lang="es">
-    <title>Santorini: El Sueño Azul y Blanco</title>
-    <link href="/samples/trailblazers/dist/es/blog/santorini-blue-and-white/" />
-    <updated>2026-03-14T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/es/blog/santorini-blue-and-white/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/santorini-blue-and-white/mHBp0glhnT-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/santorini-blue-and-white/mHBp0glhnT-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/es/blog/santorini-blue-and-white/mHBp0glhnT-3000.jpeg&quot; alt=&quot;Santorini, Grecia&quot; width=&quot;3000&quot; height=&quot;4000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;Como fotógrafo, Santorini es tanto mi mayor sueño como mi desafío más difícil. ¿Cómo capturar el contraste de esas cúpulas azules imposibles contra un mar que parece ser aún más azul? Es un lugar donde la luz es tan nítida que sientes que podrías estirar la mano y arrancar un trozo de ella.&lt;/p&gt;
-&lt;h3 id=&quot;la-caminata-por-la-caldera&quot;&gt;La Caminata por la Caldera&lt;/h3&gt;
-&lt;p&gt;Evitamos los burros turísticos e hicimos la &lt;strong&gt;legendaria caminata de 10 km desde Fira hasta Oia&lt;/strong&gt;. Es escarpada, polvorienta y ofrece las vistas de la caldera más impresionantes de la isla. Calculamos el tiempo para llegar a Oia justo cuando comenzaba la &amp;quot;hora dorada&amp;quot;. Mientras las calles principales estaban llenas, encontramos un lugar tranquilo cerca de las &lt;strong&gt;ruinas del Castillo Bizantino&lt;/strong&gt; para ver el sol hundirse en el Egeo. Es un cliché por una razón: el cielo adquiere colores que ni siquiera sabía que existían.&lt;/p&gt;
-&lt;p&gt;También tomamos un &lt;strong&gt;tour en barco al volcán Nea Kameni&lt;/strong&gt;. Caminar sobre la roca volcánica oscura y luego nadar en las cálidas aguas termales de color naranja de Palea Kameni es el contrapunto perfecto a los prístinos pueblos blancos que se encuentran arriba.&lt;/p&gt;
-&lt;h3 id=&quot;un-sabor-de-la-tierra-volcanica&quot;&gt;Un Sabor de la Tierra Volcánica&lt;/h3&gt;
-&lt;p&gt;El suelo volcánico de Santorini produce algunas de las verduras más sabrosas que he probado jamás. Pasamos una tarde en una taberna local en Pyrgos donde me enamoré de la &lt;strong&gt;Fava&lt;/strong&gt;: un puré cremoso de guisantes amarillos cubierto con alcaparras y cebolla roja. Pero la verdadera estrella fueron los &lt;strong&gt;Tomatokeftedes&lt;/strong&gt; (buñuelos de tomate). Crujientes por fuera, estallando con el jugo de los tomates cherry madurados al sol por dentro.&lt;/p&gt;
+    <title>Maldivas: Paraíso Sobre el Agua al Borde del Mundo</title>
+    <link href="/samples/trailblazers/dist/es/blog/maldives-overwater-paradise/" />
+    <updated>2026-03-19T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/es/blog/maldives-overwater-paradise/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/es/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.jpeg&quot; alt=&quot;Maldivas&quot; width=&quot;1200&quot; height=&quot;900&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;La primera vez que miras hacia abajo desde un bungalow sobre el agua en aguas tan cristalinas que el coral a veinte metros de profundidad es perfectamente visible — y una tortuga marina se mueve a través de él con una elegancia absolutamente tranquila — algo se recalibra. Las Maldivas son uno de esos lugares donde la realidad natural genuinamente supera lo que las fotografías sugerían que era posible. El agua es el color que los demás océanos intentan ser. Los arrecifes están vivos de una manera que recalibra tu comprensión de la palabra vivo. Y la quietud aquí es algo activo — no la ausencia de ruido sino la presencia del océano.&lt;/p&gt;
+&lt;h3 id=&quot;la-experiencia-del-bungalow-sobre-el-agua&quot;&gt;La Experiencia del Bungalow Sobre el Agua&lt;/h3&gt;
+&lt;p&gt;El &lt;strong&gt;bungalow sobre el agua&lt;/strong&gt; es la arquitectura definitoria de las Maldivas — una estructura construida sobre el lago sobre pilotes de madera, con un panel de suelo de cristal sobre el arrecife de abajo y una escalera que desciende directamente al agua. Todos los resorts de las Maldivas los tienen en alguna variación, desde simples y asequibles hasta el tipo de lujo que incluye su propia piscina privada y servicio de mayordomo. La variable clave es el arrecife directamente debajo: algunos resorts tienen coral vivo y colorido bajo sus bungalows; otros, arrecifes degradados o blanqueados. Investiga la condición específica del arrecife antes de reservar — marca una diferencia enorme en la experiencia de bucear desde tu terraza al amanecer.&lt;/p&gt;
+&lt;h3 id=&quot;el-arrecife-y-sus-habitantes&quot;&gt;El Arrecife y Sus Habitantes&lt;/h3&gt;
+&lt;p&gt;Las Maldivas se asientan sobre una cadena de montañas submarinas — los atolones son las cimas de antiguos volcanes — y las corrientes ricas en nutrientes que se mueven entre los atolones sostienen una extraordinaria biodiversidad marina. Los &lt;strong&gt;tiburones ballena&lt;/strong&gt; — los peces más grandes del mundo — se ven de forma fiable en el atolón de South Ari de junio a noviembre. Las &lt;strong&gt;mantarrayas&lt;/strong&gt; se congregan en estaciones de limpieza en todo el archipiélago, flotando mientras los pequeños peces les quitan los parásitos en un ballet simbiótico. El &lt;strong&gt;arrecife doméstico&lt;/strong&gt; de un buen resort ofrecerá, en cualquier buceo matutino, más especies de peces de arrecife de las que la mayoría de personas han visto en toda una vida.&lt;/p&gt;
 &lt;h3 id=&quot;consejos-y-trucos&quot;&gt;Consejos y Trucos&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;La Ola de Cruceros&lt;/strong&gt;: Si te quedas en la isla, averigua cuándo atracan los cruceros. Usa esas horas para explorar los pueblos del interior como Emporio o Pyrgos en lugar de Fira u Oia.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;El Sol es Real&lt;/strong&gt;: Hay muy poca sombra en la caminata Fira-Oia. Usa un sombrero y comienza antes de las 8 AM.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Akrotiri es una Joya&lt;/strong&gt;: No te quedes solo en la superficie. Las ruinas prehistóricas de Akrotiri (la &amp;quot;Pompeya griega&amp;quot;) están preservadas con tal detalle que es alucinante.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La Realidad Económica&lt;/strong&gt;: Las Maldivas son caras a nivel de resort porque cada resort es su propia isla — las cadenas de suministro son complejas y no hay economía de pueblo local de la que nutrirse. La alternativa es la &lt;strong&gt;red de islas locales&lt;/strong&gt; — alojarse en pensiones en islas habitadas como Maafushi o Ukulhas da una experiencia muy diferente, mucho más asequible y genuinamente auténtica de la vida cotidiana maldiva.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Logística de Transferencia&lt;/strong&gt;: La mayoría de resorts se alcanzan en hidroavión (espectacular, y los primeros quince minutos de cualquier viaje a las Maldivas) o lancha rápida desde Malé. Los hidroaviones solo operan de día — si tu vuelo de llegada aterriza después del anochecer, pernoctarás en Malé independientemente de lo que implique la web del resort.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Respeto al Arrecife&lt;/strong&gt;: El ecosistema de arrecife de coral de las Maldivas está bajo seria presión climática. Bucea y practica snorkel de forma responsable: sin tocar, sin pisar el coral, sin protector solar (usa solo FPS mineral respetuoso con los arrecifes), sin dar de comer a los peces.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;puntos-destacados&quot;&gt;Puntos Destacados&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Caminata de Fira a Oia&lt;/strong&gt;: 10 km de puro drama costero.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Atardecer en el Castillo Bizantino&lt;/strong&gt;: El atardecer más famoso del mundo por una razón.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Akrotiri&lt;/strong&gt;: Una mirada fascinante a una ciudad de la Edad del Bronce.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Buñuelos de Tomate&lt;/strong&gt;: El mejor refrigerio que encontrarás en las Cícladas.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Snorkel al Amanecer desde Tu Terraza&lt;/strong&gt;: Antes de que los demás huéspedes se despierten, el arrecife bajo el bungalow te pertenece completamente — la luz a esa hora a través del agua es extraordinaria.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Crucero al Atardecer en Dhoni&lt;/strong&gt;: Un velero maldivo tradicional de madera (dhoni) al atardecer, con los atolones extendiéndose hasta el horizonte — esta es la forma correcta de terminar cualquier día aquí.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Snorkel Nocturno&lt;/strong&gt;: Muchos resorts ofrecen snorkel nocturno con linternas — plancton bioluminiscente, peces loro durmiendo en sus sacos de moco y morenas moviéndose libremente son todos visibles.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Desayuno Mas Huni&lt;/strong&gt;: El desayuno maldivo tradicional de atún ahumado, coco rallado, chile y cebolla con el pan plano roshi está disponible en las islas locales y en algunos resorts — extraordinario en su sencillez.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Santorini es un lugar de fuego y luz. Es una isla que exige que dejes el teléfono y simplemente te quedes mirando el horizonte por un rato.&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Foto de &lt;a href=&quot;https://unsplash.com/photos/1pS6mK3n7oU&quot;&gt;Heidi Kaden&lt;/a&gt; en Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Las Maldivas no te piden que estés en ningún otro lugar. Todo el tiempo que te quedes, aquí es enteramente suficiente.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Foto de &lt;a href=&quot;https://unsplash.com/photos/fWER_4yEs-I&quot;&gt;Ishan @seefromthesky&lt;/a&gt; en Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry xml:lang="en">
-    <title>Santorini: The Blue and White Dream</title>
-    <link href="/samples/trailblazers/dist/en/blog/santorini-blue-and-white/" />
-    <updated>2026-03-14T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/en/blog/santorini-blue-and-white/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/santorini-blue-and-white/mHBp0glhnT-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/santorini-blue-and-white/mHBp0glhnT-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/en/blog/santorini-blue-and-white/mHBp0glhnT-3000.jpeg&quot; alt=&quot;Santorini, Greece&quot; width=&quot;3000&quot; height=&quot;4000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;As a photographer, Santorini is both my greatest dream and my hardest challenge. How do you capture the contrast of those impossible blue domes against a sea that seems even bluer? It’s a place where the light is so crisp it feels like you could reach out and snap off a piece of it.&lt;/p&gt;
-&lt;h3 id=&quot;the-caldera-hike&quot;&gt;The Caldera Hike&lt;/h3&gt;
-&lt;p&gt;We avoided the tourist donkeys and took the &lt;strong&gt;legendary 10km hike from Fira to Oia&lt;/strong&gt;. It’s rugged, dusty, and offers the most breathtaking caldera views on the island. We timed it so we arrived in Oia just as the golden hour began. While the main streets were packed, we found a quiet spot near the &lt;strong&gt;Byzantine Castle ruins&lt;/strong&gt; to watch the sun dip into the Aegean. It’s a cliché for a reason—the sky turns colors I didn&#39;t know existed.&lt;/p&gt;
-&lt;p&gt;We also took a &lt;strong&gt;boat tour to the Nea Kameni volcano&lt;/strong&gt;. Walking on the dark, volcanic rock and then swimming in the warm, orange-tinted Palea Kameni hot springs is the perfect counterpoint to the pristine white villages above.&lt;/p&gt;
-&lt;h3 id=&quot;a-taste-of-the-volcanic-soil&quot;&gt;A Taste of the Volcanic Soil&lt;/h3&gt;
-&lt;p&gt;The volcanic soil of Santorini produces some of the most flavorful vegetables I&#39;ve ever tasted. We spent an afternoon at a local taverna in Pyrgos where I fell in love with &lt;strong&gt;Fava&lt;/strong&gt;—a creamy yellow split pea purée topped with capers and red onion. But the real star was the &lt;strong&gt;Tomatokeftedes&lt;/strong&gt; (tomato fritters). Crispy on the outside, bursting with the juice of sun-ripened cherry tomatoes on the inside.&lt;/p&gt;
+    <title>Maldives: Overwater Paradise at the Edge of the World</title>
+    <link href="/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/" />
+    <updated>2026-03-19T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.jpeg&quot; alt=&quot;Maldives&quot; width=&quot;1200&quot; height=&quot;900&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;The first time you look down from an overwater bungalow into water so clear that the coral twenty metres below is perfectly visible — and a sea turtle moves through it with absolute unhurried elegance — something recalibrates. The Maldives is one of those places where the natural reality genuinely exceeds what the photographs suggested was possible. The water is the colour that other oceans are trying to be. The reefs are alive in a way that recalibrates your understanding of the word alive. And the stillness here is an active thing — not the absence of noise but the presence of the ocean.&lt;/p&gt;
+&lt;h3 id=&quot;the-overwater-bungalow-experience&quot;&gt;The Overwater Bungalow Experience&lt;/h3&gt;
+&lt;p&gt;The &lt;strong&gt;overwater bungalow&lt;/strong&gt; is the defining architecture of the Maldives — a structure built over the lagoon on wooden stilts, with a glass floor panel above the reef below and a ladder descending directly into the water. Every resort in the Maldives has them in some variation, ranging from simple and affordable to the kind of lavishness that comes with its own plunge pool and butler service. The key variable is the reef directly below: some resorts have live, colourful coral beneath their bungalows; others, degraded or bleached reef. Research the specific reef condition before booking — it makes an enormous difference to the experience of snorkelling from your deck at dawn.&lt;/p&gt;
+&lt;h3 id=&quot;the-reef-and-what-lives-in-it&quot;&gt;The Reef and What Lives In It&lt;/h3&gt;
+&lt;p&gt;The Maldives sits atop an underwater mountain range — the atolls are the tips of ancient volcanoes — and the nutrient-rich currents that move between the atolls support extraordinary marine biodiversity. &lt;strong&gt;Whale sharks&lt;/strong&gt; — the largest fish on earth — are reliably seen in South Ari Atoll from June to November. &lt;strong&gt;Manta rays&lt;/strong&gt; congregate at cleaning stations across the atolls, hovering while small fish remove parasites in a symbiotic ballet. The &lt;strong&gt;house reef&lt;/strong&gt; of a good resort will offer, on any given morning snorkel, more reef fish species than most people have seen in a lifetime.&lt;/p&gt;
 &lt;h3 id=&quot;gotchas-and-tips&quot;&gt;Gotchas &amp;amp; Tips&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;The Cruise Ship Wave&lt;/strong&gt;: If you&#39;re staying on the island, find out when the cruise ships are docked. Use those hours to explore the inland villages like Emporio or Pyrgos instead of Fira/Oia.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;The Sun is Real&lt;/strong&gt;: There is very little shade on the Fira-Oia hike. Wear a hat and start before 8 AM.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Akrotiri is a Gem&lt;/strong&gt;: Don&#39;t just stay on the surface. The prehistoric ruins of Akrotiri (the &amp;quot;Greek Pompeii&amp;quot;) are preserved in such detail it’s mind-blowing.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Budget Reality&lt;/strong&gt;: The Maldives is expensive at the resort level because every resort is its own island — supply chains are complex and there is no local village economy to draw on. The alternative is the &lt;strong&gt;local island network&lt;/strong&gt; — staying in guesthouses on inhabited islands like Maafushi or Ukulhas gives a very different, far more affordable, and genuinely authentic experience of Maldivian daily life.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transfer Logistics&lt;/strong&gt;: Most resorts are reached by seaplane (spectacular, and the first fifteen minutes of any Maldives trip) or speedboat from Malé. Seaplanes only operate in daylight — if your arrival flight lands after dark, you will overnight in Malé regardless of what the resort website implies.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reef Respect&lt;/strong&gt;: The Maldives coral reef ecosystem is under serious climate pressure. Snorkel and dive responsibly: no touching, no standing on coral, no sunscreen (use reef-safe mineral-based SPF only), no feeding of fish.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;highlights&quot;&gt;Highlights&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Fira to Oia Hike&lt;/strong&gt;: 10km of pure coastal drama.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Byzantine Castle Sunset&lt;/strong&gt;: The most famous sunset in the world for a reason.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Akrotiri&lt;/strong&gt;: A fascinating look into a Bronze Age city.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Tomato Fritters&lt;/strong&gt;: The best snack you’ll find in the Cyclades.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dawn Snorkel from Your Deck&lt;/strong&gt;: Before other guests are awake, the reef below the bungalow belongs entirely to you — the light at this hour through the water is extraordinary.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dhoni Sunset Cruise&lt;/strong&gt;: A traditional wooden Maldivian sailing boat (dhoni) at sunset, with the atolls spreading to the horizon — this is the correct way to end any day here.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Night Snorkel&lt;/strong&gt;: Many resorts offer night snorkelling with torches — bioluminescent plankton, sleeping parrotfish in their mucous sleeping bags, and moray eels moving freely are all visible.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mas Huni Breakfast&lt;/strong&gt;: The traditional Maldivian breakfast of smoked tuna, grated coconut, chilli, and onion with flatbread roshi is available on the local islands and at some resorts — extraordinary in simplicity.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Santorini is a place of fire and light. It’s an island that demands you put down your phone and just stare at the horizon for a while.&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/1pS6mK3n7oU&quot;&gt;Heidi Kaden&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;The Maldives does not ask you to be anywhere else. For however long you stay, here is entirely sufficient.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/fWER_4yEs-I&quot;&gt;Ishan @seefromthesky&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry xml:lang="ja">
-    <title>ペトラ：バラ色の都市の秘密</title>
-    <link href="/samples/trailblazers/dist/ja/blog/petra-rose-red-city/" />
-    <updated>2026-03-13T00:00:00Z</updated>
-    <id>/samples/trailblazers/dist/ja/blog/petra-rose-red-city/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/petra-rose-red-city/fiCl4aJmQy-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/petra-rose-red-city/fiCl4aJmQy-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/petra-rose-red-city/fiCl4aJmQy-3000.jpeg&quot; alt=&quot;ヨルダン、ペトラ&quot; width=&quot;3000&quot; height=&quot;2250&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;ペトラは単なる目的地ではありません。タイムマシンです。写真家として「宝物殿（エル・カズネ）」の画像は数千枚見てきましたが、シーク（Siq）を通り抜けて最初に目にするその姿には、どんな準備も役に立ちません。朝の光がバラ色の砂岩を照らす様子は、カメラのレンズを持つ人にとっても、あるいはただ感性を持つ人にとっても、夢のような光景です。&lt;/p&gt;
-&lt;h3 id=&quot;&quot;&gt;過去への旅&lt;/h3&gt;
-&lt;p&gt;私たちの一日は午前6時に始まりました。もし私から一つだけアドバイスを受けるなら、**「早めに行くこと」**です。太陽が断崖から顔を出し始めた頃、1キロ以上続く狭く曲がりくねった峡谷、シークに入りました。高さ80メートルの壁に挟まれて歩いていると、2000年前のナバテア人のキャラバンの足音が聞こえてくるようです。&lt;/p&gt;
-&lt;p&gt;そして、その時が来ます。壁が開け、目の前に現れるのが&lt;strong&gt;エル・カズネ（宝物殿）&lt;strong&gt;です。どんな写真よりも高く、精巧です。私は人生で最高の&lt;/strong&gt;ベドウィンのペパーミントティー&lt;/strong&gt;をすすりながら、コリント様式の柱に落ちる影の変化を楽しんで、たっぷり一時間を過ごしました。&lt;/p&gt;
-&lt;h3 id=&quot;-2&quot;&gt;エド・ディル（修道院）への登頂&lt;/h3&gt;
-&lt;p&gt;ほとんどの観光客は宝物殿で足を止めますが、私たちはさらに先へ進みました。**エド・ディル（修道院）**への800段の階段は、カメラバッグを背負っているとなおさら、冗談抜きで過酷です。しかし、そこからの眺めはその苦労に十分見合うものです。宝物殿よりもさらに巨大で、そしてはるかに静寂に包まれています。&lt;/p&gt;
-&lt;h3 id=&quot;-3&quot;&gt;ヨルダンの味&lt;/h3&gt;
-&lt;p&gt;ヨルダンを訪れて、食べ物の話をしないわけにはいきません。ハイキングの後、伝統的な**マンサフ（Mansaf）**をいただきました。発酵させた乾燥ヨーグルトのソースで煮込まれた柔らかいラム肉を、山盛りのライスの皿にのせた料理です。濃厚で味わい深く、トレッキング後には最高のコンフォートフードです。プロのアドバイス：地元の人々と同じように右手で食べてみてください。体験がより本物らしく感じられます。&lt;/p&gt;
-&lt;h3 id=&quot;-4&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
+    <title>プラハ：おとぎ話の街</title>
+    <link href="/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/" />
+    <updated>2026-03-18T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/f37S2GjjqI-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/f37S2GjjqI-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/f37S2GjjqI-1200.jpeg&quot; alt=&quot;チェコ共和国、プラハ&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;夜明けの&lt;strong&gt;カレル橋&lt;/strong&gt;に立つ一瞬がある——人混みの前、観光グループの前、朝の霧がバロック様式の像の間にまだ漂い、眼下のヴルタヴァ川が完全に静止している時——プラハは街というより、中央ヨーロッパの歴史が最も凝縮されて最も美しかった瞬間を実証したかった誰かが設計したセットのように見える。それは尖塔と石畳とビアホールとカフカの街であり、そのすべてを矛盾なく抱えている。&lt;/p&gt;
+&lt;h3 id=&quot;&quot;&gt;プラハ城と旧市街&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;プラハ城&lt;/strong&gt;は世界最大の古城コンプレックス——大聖堂、王宮、ギャラリー、庭園、そしてかつての錬金術師の工房が並ぶ黄金の路地を含む、丘の上の街そのものだ。城内の&lt;strong&gt;聖ヴィート大聖堂&lt;/strong&gt;はゴシックの最高峰で、アルフォンス・ミュシャによるステンドグラスはヨーロッパ最高クラスだ。城壁からの赤屋根の旧市街と河川橋のパノラマは、プラハの quintessential なイメージだ。下には、天文時計（オルロイ）とティーン教会の二つの尖塔が立つ&lt;strong&gt;旧市街広場&lt;/strong&gt;が中世の市民生活の中心として続く——混雑しているが、それでも genuinely 壮大だ。&lt;/p&gt;
+&lt;h3 id=&quot;-2&quot;&gt;ヨセフォフとユダヤ人地区&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;ヨセフォフ&lt;/strong&gt;の&lt;strong&gt;ユダヤ人地区&lt;/strong&gt;には六つの歴史的なシナゴーグとヨーロッパで二番目に古いユダヤ人墓地がある——何千もの墓石が层になって積み重なり、碑文は何世紀もの風雨で磨耗し、埋葬者の数には狭すぎるスペースに。&lt;strong&gt;旧新シナゴーグ&lt;/strong&gt;は1270年に遡りヨーロッパで現役最古のシナゴーグの一つで、伝説によれば屋根裏にラビ・レーヴが作ったゴーレム——ユダヤ人コミュニティを守る土でできた存在——が宿るという。この歴史、伝説、そして真の悲劇の層は、ヨセフォフを任意のヨーロッパの都市の中で最も心に迫る地区のひとつにしている。&lt;/p&gt;
+&lt;h3 id=&quot;-3&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;靴について&lt;/strong&gt;: 自分が持っている中で最も快適なハイキングブーツを履いてください。一日に15〜20キロは余裕で歩くことになります。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ロバの乗り物&lt;/strong&gt;: たくさんの勧誘があります。健康な方なら、歩くことをお勧めします。道中そのものが物語の一部であり、動物愛護の観点からも賛否両論あるためです。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;水分補給&lt;/strong&gt;: 砂漠の暑さは容赦ありません。必要だと思う以上の水を持って歩きましょう。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;カレル橋のタイミング&lt;/strong&gt;: 人混みなしでカレル橋を体験するには夜明けか午後9時以降に訪れよう。それ以外の時間は橋がゆっくり動く観光客の塊になる。像——1683年から1714年の間に追加された三十の像——は卓越している。ヤン・ネポムクのプラーク（何百万もの手で光る）に触れると幸運があるという。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ビールの現実&lt;/strong&gt;: チェコビール——特に&lt;strong&gt;ピルスナー・ウルケル&lt;/strong&gt;とボヘミア産のラガースタイル——は genuinely 卓越していて驚くほど安価だ。&lt;strong&gt;ロカール&lt;/strong&gt;レストランチェーンは正しい温度と圧力でタンクから生のままのピルスナー・ウルケルを提供し、完全なチェコのメニューを添える。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;旧市街の先&lt;/strong&gt;: プラハは観光の中心から離れて歩くことを報いる。&lt;strong&gt;ヴィノフラディ&lt;/strong&gt;（アール・ヌーヴォーのアパートビル、独立系ワインバー）と&lt;strong&gt;ジジコフ&lt;/strong&gt;（ボヘミアン、ビール密度が高い、赤ちゃんの彫刻が付いた巨大テレビ塔）が現代プラハの住む場所だ。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;ペトラは敬意を求め、好奇心に応えてくれる場所です。まだアンマンへの航空券を予約していないなら、何を迷っているのですか？&lt;/p&gt;
-&lt;h3 id=&quot;-5&quot;&gt;ハイライト&lt;/h3&gt;
+&lt;h3 id=&quot;-4&quot;&gt;ハイライト&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;シーク&lt;/strong&gt;: 都市の核心部へと続く、1.2キロの劇的なアプローチ。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;宝物殿&lt;/strong&gt;: 午前9時から11時の間が、光の加減が最高で最も美しく見えます。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;マンサフ&lt;/strong&gt;: 絶対に試すべき、ヨルダンの国民的料理。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ベドウィンのホスピタリティ&lt;/strong&gt;: 出されたお茶は決して断らないこと！&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;聖ヴィート大聖堂のステンドグラス&lt;/strong&gt;: アルフォンス・ミュシャの身廊の窓が色彩で輝き、それが大聖堂の残りをその設定のように感じさせる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ペトシーン丘&lt;/strong&gt;: マラー・ストラナからケーブルカーでアクセスできる、ミニチュアのエッフェル塔観覧台がある森の丘——頂上からの眺めは城の全体像を文脈に収める。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;カフェ・サヴォイ&lt;/strong&gt;: マラー・ストラナの修復された大きなカフェはプラハで朝食を食べる最良の場所——ヴォールトされたネオ・ルネサンスの天井、卓越したペストリー、完璧なコーヒー。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;クトナー・ホラ&lt;/strong&gt;: プラハから電車で1時間の&lt;strong&gt;セドレツ納骨堂&lt;/strong&gt;——4万人の骨で飾られた教会——はグロテスクで芸術的で、決して忘れられない。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;ヨルダン横断の旅のさらなるアップデートをお楽しみに！&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/5_Bu25SV6X8&quot;&gt;Alex Vasey&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;プラハはその美しさを intact に保って生き残るという慎重な決定をした。古い通りに立つと、それが正しい決定だったとわかる。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/ubQDHALqKiM&quot;&gt;Jaromír Kavan&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:lang="es">
+    <title>Praga: La Ciudad de Cuento de Hadas</title>
+    <link href="/samples/trailblazers/dist/es/blog/prague-fairy-tale-city/" />
+    <updated>2026-03-18T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/es/blog/prague-fairy-tale-city/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/prague-fairy-tale-city/f37S2GjjqI-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/es/blog/prague-fairy-tale-city/f37S2GjjqI-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/es/blog/prague-fairy-tale-city/f37S2GjjqI-1200.jpeg&quot; alt=&quot;Praga, República Checa&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;Hay un momento en el &lt;strong&gt;Puente de Carlos&lt;/strong&gt; al amanecer — antes de las multitudes, antes de los grupos de turistas, cuando la niebla matinal aún se entreteje entre las estatuas barrocas y el río Moldava debajo está perfectamente quieto — en que Praga parece menos una ciudad y más un decorado diseñado por alguien que quería demostrar cómo lucía la historia de Europa Central en su momento más concentrado y hermoso. Es una ciudad de agujas y adoquines y bodegas de cerveza y Kafka, y de algún modo sostiene todas estas cosas sin contradicción.&lt;/p&gt;
+&lt;h3 id=&quot;el-castillo-de-praga-y-el-casco-antiguo&quot;&gt;El Castillo de Praga y el Casco Antiguo&lt;/h3&gt;
+&lt;p&gt;El &lt;strong&gt;Castillo de Praga&lt;/strong&gt; es el complejo de castillo antiguo más grande del mundo — una ciudad en lo alto de una colina que contiene una catedral, un palacio real, galerías, jardines y un callejón dorado de antiguos talleres de alquimistas. La &lt;strong&gt;Catedral de San Vito&lt;/strong&gt; dentro del recinto del castillo es gótica del más alto orden, su vidriería de Alfons Mucha entre las mejores de Europa. Desde las murallas del castillo, el panorama sobre los tejados rojos del casco antiguo y los puentes del río es la imagen quintaesencial de Praga. Abajo, la &lt;strong&gt;Plaza de la Ciudad Vieja&lt;/strong&gt; con su reloj astronómico (Orloj) y las dos agujas de la Iglesia de Týn es el corazón cívico medieval — lleno de multitudes pero genuinamente magnífico incluso así.&lt;/p&gt;
+&lt;h3 id=&quot;josefov-y-el-barrio-judio&quot;&gt;Josefov y el Barrio Judío&lt;/h3&gt;
+&lt;p&gt;El &lt;strong&gt;Barrio Judío&lt;/strong&gt; de &lt;strong&gt;Josefov&lt;/strong&gt; contiene seis sinagogas históricas y el segundo cementerio judío más antiguo de Europa — miles de lápidas apiladas en capas, las inscripciones gastadas por siglos de intemperie, en un espacio demasiado pequeño para la cantidad de personas enterradas allí. La &lt;strong&gt;Sinagoga Vieja Nueva&lt;/strong&gt;, que data de 1270, es una de las sinagogas activas más antiguas de Europa y contiene en su ático, según la leyenda, al Gólem creado por el rabino Loew — un ser construido de arcilla que protegía a la comunidad judía. Esta capa de historia, leyenda y tragedia genuina hace de Josefov uno de los barrios más emotivos de cualquier ciudad europea.&lt;/p&gt;
+&lt;h3 id=&quot;consejos-y-trucos&quot;&gt;Consejos y Trucos&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Horario del Puente de Carlos&lt;/strong&gt;: Visita el Puente de Carlos al amanecer o después de las 21:00 para vivirlo sin multitudes. En cualquier otro momento, el puente es una masa de turistas en movimiento lento. Las estatuas — treinta figuras barrocas añadidas entre 1683 y 1714 — son extraordinarias; toca la placa de San Juan de Nepomuceno (reluciente por millones de manos) para tener suerte.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La Realidad de la Cerveza&lt;/strong&gt;: La cerveza checa — específicamente el &lt;strong&gt;Pilsner Urquell&lt;/strong&gt; y los distintos estilos de lager de Bohemia — es genuinamente extraordinaria y sorprendentemente asequible. La cadena de restaurantes &lt;strong&gt;Lokál&lt;/strong&gt; sirve Pilsner Urquell de tanque sin pasteurizar a la temperatura y presión correctas y ofrece un completo menú checo junto a él.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Más Allá del Casco Antiguo&lt;/strong&gt;: Praga recompensa alejarse del centro turístico. Los barrios de &lt;strong&gt;Vinohrady&lt;/strong&gt; (bloques Art Nouveau, bares de vino independientes) y &lt;strong&gt;Žižkov&lt;/strong&gt; (bohemio, denso en cerveza, la enorme torre de televisión con esculturas de bebés) son donde vive el Praga contemporáneo.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;puntos-destacados&quot;&gt;Puntos Destacados&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Vidriería de la Catedral de San Vito&lt;/strong&gt;: La ventana de la nave de Alfons Mucha brilla con color de una manera que hace que el resto de la catedral parezca un escenario para ella.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Colina de Petřín&lt;/strong&gt;: Una colina boscosa con una pequeña plataforma de observación imitando la Torre Eiffel, accesible en funicular desde Malá Strana — la vista desde arriba contextualiza todo el complejo del castillo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Café Savoy&lt;/strong&gt;: El gran café restaurado en Malá Strana es el mejor lugar de Praga para desayunar — techo neorrenacentista abovedado, bollería extraordinaria, café impecable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kutná Hora&lt;/strong&gt;: A una hora de Praga en tren, la &lt;strong&gt;Capilla de los Huesos de Sedlec&lt;/strong&gt; — una iglesia decorada con los huesos de 40.000 personas — es macabra, artística e imposible de olvidar.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Praga tomó la cuidadosa decisión de sobrevivir con su belleza intacta. De pie en sus calles antiguas, entiendes que fue exactamente la decisión correcta.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Foto de &lt;a href=&quot;https://unsplash.com/photos/ubQDHALqKiM&quot;&gt;Jaromír Kavan&lt;/a&gt; en Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Prague: The Fairy-Tale City</title>
+    <link href="/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/" />
+    <updated>2026-03-18T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/f37S2GjjqI-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/f37S2GjjqI-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/f37S2GjjqI-1200.jpeg&quot; alt=&quot;Prague, Czech Republic&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;There is a moment on &lt;strong&gt;Charles Bridge&lt;/strong&gt; at dawn — before the crowds, before the tour groups, when the morning mist is still threading between the baroque statues and the Vltava River below is perfectly still — when Prague looks less like a city and more like a set designed by someone who wanted to demonstrate what Central European history looked like at its most concentrated and beautiful. It is a city of spires and cobblestones and beer cellars and Kafka, and somehow it holds all of these things without contradiction.&lt;/p&gt;
+&lt;h3 id=&quot;prague-castle-and-the-old-town&quot;&gt;Prague Castle and the Old Town&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Prague Castle&lt;/strong&gt; is the largest ancient castle complex in the world — a hilltop city unto itself, containing a cathedral, royal palace, galleries, gardens, and a golden lane of former alchemists&#39; workshops. &lt;strong&gt;St. Vitus Cathedral&lt;/strong&gt; within the castle complex is Gothic of the highest order, its stained glass by Alfons Mucha among the finest in Europe. From the castle walls, the panorama over the city&#39;s red-roofed old town and the river bridges is the quintessential Prague image. Below, the &lt;strong&gt;Old Town Square&lt;/strong&gt; with its astronomical clock (Orloj) and the twin spires of Týn Church is the medieval civic heart — full of crowds but genuinely magnificent even so.&lt;/p&gt;
+&lt;h3 id=&quot;josefov-and-the-jewish-quarter&quot;&gt;Josefov and the Jewish Quarter&lt;/h3&gt;
+&lt;p&gt;The &lt;strong&gt;Jewish Quarter&lt;/strong&gt; of &lt;strong&gt;Josefov&lt;/strong&gt; contains six historic synagogues and Europe&#39;s second-oldest Jewish cemetery — thousands of gravestones stacked in layers, the inscriptions worn by centuries of weather, in a space too small for the number of people buried there. The &lt;strong&gt;Old-New Synagogue&lt;/strong&gt;, dating from 1270, is one of the oldest active synagogues in Europe and contains in its attic, according to legend, the Golem created by Rabbi Loew — a constructed being of clay who protected the Jewish community. This layer of history, legend, and genuine tragedy makes Josefov one of the most affecting districts in any European city.&lt;/p&gt;
+&lt;h3 id=&quot;gotchas-and-tips&quot;&gt;Gotchas &amp;amp; Tips&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Charles Bridge Timing&lt;/strong&gt;: Visit Charles Bridge at dawn or after 9 PM to experience it without crowds. At any other time, the bridge is a slowly moving mass of tourists. The statues — thirty baroque figures added between 1683 and 1714 — are extraordinary; touch the plaque of St. John of Nepomuk (gleaming from millions of hands) for luck.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Beer Reality&lt;/strong&gt;: Czech beer — specifically &lt;strong&gt;Pilsner Urquell&lt;/strong&gt; and the various Bohemian lager styles — is genuinely extraordinary and remarkably inexpensive. The &lt;strong&gt;Lokál&lt;/strong&gt; restaurant chain serves tank-unpasteurised Pilsner Urquell at the correct temperature and pressure and does a complete Czech menu alongside.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Beyond the Old Town&lt;/strong&gt;: Prague rewards walking away from the tourist centre. The neighbourhoods of &lt;strong&gt;Vinohrady&lt;/strong&gt; (Art Nouveau apartment blocks, independent wine bars) and &lt;strong&gt;Žižkov&lt;/strong&gt; (bohemian, beer-dense, the enormous television tower with baby sculptures) are where contemporary Prague lives.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;highlights&quot;&gt;Highlights&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;St. Vitus Cathedral Stained Glass&lt;/strong&gt;: Alfons Mucha&#39;s nave window glows with colour in a way that makes the rest of the cathedral feel like a setting for it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Petřín Hill&lt;/strong&gt;: A forested hill with a miniature Eiffel Tower observation platform, accessible by funicular from Malá Strana — the view from the top contextualises the entire castle complex.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Café Savoy&lt;/strong&gt;: The restored grand café in Malá Strana is the finest place in Prague for breakfast — vaulted neo-Renaissance ceiling, extraordinary pastries, impeccable coffee.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kutná Hora&lt;/strong&gt;: An hour from Prague by train, the &lt;strong&gt;Sedlec Ossuary&lt;/strong&gt; — a church decorated with the bones of 40,000 people — is macabre, artistic, and impossible to forget.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Prague is the city that made a careful decision to survive with its beauty intact. Standing in its ancient streets, you understand that this was exactly the right decision.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/ubQDHALqKiM&quot;&gt;Jaromír Kavan&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:lang="ja">
+    <title>メキシコシティ：古代の礎と現代の鼓動</title>
+    <link href="/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/" />
+    <updated>2026-03-17T00:00:00Z</updated>
+    <id>/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/IvUlpaVk4g-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/IvUlpaVk4g-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/IvUlpaVk4g-1200.jpeg&quot; alt=&quot;メキシコ、メキシコシティ&quot; width=&quot;1200&quot; height=&quot;801&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;メキシコシティは湖の上に建てられた。アステカの首都テノチティトランは、堤道で結ばれた人工島としてテスココ湖の水面から立ち上がり、スペイン人が1521年に征服した後、その上に直接植民地の首都を建設した。それ以来、街は湖底の基礎に沈み続けている——植民地時代の建物が他の場所では建設業者を警戒させるような角度で傾いている——しかしその通りの下に圧縮された文明の層こそが、メキシコシティをアメリカ大陸で最も歴史的に密度が高く、文化的に卓越した都市のひとつにしている。&lt;/p&gt;
+&lt;h3 id=&quot;&quot;&gt;ソカロと古代のメキシコ&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;ソカロ&lt;/strong&gt;——正式名称は憲法広場——は世界最高の公共広場のひとつだ。大都市大聖堂（部分的にアステカの神殿の石で建てられた）、国立宮殿（ディエゴ・リベラの壁画に覆われている）、そして&lt;strong&gt;テンプロ・マヨール&lt;/strong&gt;の遺跡が隣接する広大な平坦な空間。テンプロ・マヨールはテノチティトランの儀式の中枢で、1978年に工事作業員が偶然ピッケルでそれに当たるまで現代の通りの下に埋もれていた。隣接する&lt;strong&gt;テンプロ・マヨール博物館&lt;/strong&gt;は非凡な発見物を展示し、アステカの宇宙論を明瞭さと深さをもって説明している——これほどのことを達成する博物館は稀だ。&lt;/p&gt;
+&lt;h3 id=&quot;-2&quot;&gt;ローマとコンデサ——現代の街&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;ローマ&lt;/strong&gt;と&lt;strong&gt;コンデサ&lt;/strong&gt;地区はメキシコシティの現代的な創造的生活を体現している——アール・ヌーヴォーとアール・デコの建物が並ぶ並木道が、優れたレストラン、カフェ、書店、ギャラリーへと転換されている。&lt;strong&gt;メルカド・メデジン&lt;/strong&gt;の朝の市場は地区の料理人たちが買い物をする場所で——新鮮な農産物、チーズ、花のスタンドは圧巻だ。&lt;strong&gt;チャプルテペク国立人類学博物館&lt;/strong&gt;はおそらく世界最高の人類学博物館だ——アステカの太陽の石だけで訪問を正当化するが、メキシコのすべての先コロンブス期文化にまたがるコレクションはその範囲と質において圧倒される。&lt;/p&gt;
+&lt;h3 id=&quot;-3&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;標高の現実&lt;/strong&gt;: メキシコシティは標高2,240メートル——一部の訪問者に高山病を引き起こすほど高い。水を大量に飲み、初日はアルコールを避け、最初の24時間は体調に関わらずゆっくりと過ごそう。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;タコスの地理&lt;/strong&gt;: メキシコシティのタコス文化は圧倒的でかつ壮大だ。回転する串から切る&lt;strong&gt;アル・パストール&lt;/strong&gt;（コンデサエリアが最高）と日曜の朝に伝統市場で食べる&lt;strong&gt;バルバコアのコンソメ&lt;/strong&gt;が二つの必須体験だ。観光向けのタコスチェーンは避けること。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;交通とトランスポート&lt;/strong&gt;: メキシコシティの地下鉄はラテンアメリカで二番目に大きく、驚くほど安く、通常は街を横断する最速の方法だ。地上の交通は実際に困難だ。Metro アプリをダウンロードしてナビゲートしよう。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;-4&quot;&gt;ハイライト&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;フリーダ・カーロ博物館（ラ・カサ・アスル）&lt;/strong&gt;: コヨアカンにあるカーロの家は世界最高の芸術的巡礼地のひとつ——鮮やかで、親密で、真に感動的だ。入場券は数週間前に予約すること。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ソチミルコのトラヒネラス&lt;/strong&gt;: 街の南の古代運河ネットワークで、色鮮やかな平底ボートが毎週末チナンパ（浮き農園）を通じて家族やミュージシャンを運ぶ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ルチャ・リブレ&lt;/strong&gt;: &lt;strong&gt;アレナ・メキシコ&lt;/strong&gt;での金曜夜の試合——マスク、アクロバティクス、演劇的な悪役——は偉大なメキシカン文化の光景のひとつだ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ベジャス・アルテス宮殿&lt;/strong&gt;: アール・ヌーヴォー/アール・デコのオペラハウスと文化センターには、驚くべき質のリベラ、シケイロス、オロスコの壁画が収蔵されている。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;メキシコシティは見下ろすことをしない。すべてを——歴史、食べ物、芸術、混沌、美——提供し、それを通り抜けて自分の道を見つけることを信頼している。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/sH85-pkNmoA&quot;&gt;Dennis Schrader&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

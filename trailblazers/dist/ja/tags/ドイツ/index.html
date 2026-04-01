@@ -1,0 +1,1850 @@
+<!doctype html>
+<html lang="ja" dir="">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>‘ドイツ’ のタグが付いた投稿</title>
+		<meta name="description" content="Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.">
+		<meta name="color-scheme" content="light dark">
+		<link rel="alternate" href="/samples/trailblazers/dist/ja/feed/feed.xml" type="application/atom+xml" title="trAIlblazers">
+		<link rel="icon" type="image/svg+xml" href="/samples/trailblazers/dist/blog/create/icon.svg">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+/* Defaults */
+:root {
+  color-scheme: light dark;
+
+  /* Fonts */
+  --font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+  --font-family-headings: 'Outfit', sans-serif;
+  --font-family-monospace:
+    Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+    Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+    Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+
+  /* Theme colors - Premium Travel Palette */
+  --color-primary: #004b23; /* Deep Jungle Green */
+  --color-secondary: #ff9100; /* Sunset Orange */
+  --color-accent: #f4f1de; /* Soft Sand */
+  --color-text: #1d3557; /* Deep Navy */
+  --color-link: #0077b6; /* Ocean Blue */
+  --color-link-hover: #023e8a;
+  --color-gray-dark: #495057;
+  --color-gray-90: #1a1a1b;
+  --background-color: #fdfdfd;
+  --card-bg: #ffffff;
+  --border-color: #e9ecef;
+  --tag-bg: #e9ecef;
+  --tag-color: #495057;
+
+  --syntax-tab-size: 2;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --bg-dot-color: #e9ecef; /* Light gray on near white */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #48cae4;
+    --color-secondary: #ffb703;
+    --color-accent: #023e8a;
+    --color-text: #e9ecef;
+    --color-link: #90e0ef;
+    --color-link-hover: #caf0f8;
+    --color-gray-dark: #ced4da;
+    --color-gray-90: #e9ecef;
+
+    --background-color: #0d1b2a;
+    --card-bg: #1b263b;
+    --border-color: #415a77;
+    --tag-bg: #415a77;
+    --tag-color: #e9ecef;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --bg-dot-color: rgba(
+      255,
+      255,
+      255,
+      0.15
+    ); /* Brighter white/gray on near-black */
+  }
+}
+
+/* Global stylesheet */
+* {
+  box-sizing: border-box;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--background-color);
+  background-image: radial-gradient(
+    circle at 2px 2px,
+    var(--bg-dot-color) 1px,
+    transparent 0
+  );
+  background-size: 40px 40px;
+  line-height: 1.6;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  max-width: 80rem;
+  /* Slightly wider for cards */
+  padding: 0 1rem;
+}
+
+/* Screen Reader / A11y */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-secondary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+#skip-link:focus {
+  top: 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-primary);
+  text-wrap: pretty;
+  /* Premium typographic orphans control */
+}
+
+/* Fluid images and standard visuals */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+a[href] {
+  color: var(--color-link);
+  transition: color 0.2s ease;
+}
+
+a[href]:hover {
+  color: var(--color-link-hover);
+}
+/* Hero Section */
+.hero {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: #ffffff;
+  padding: 4rem 2rem;
+  border-radius: 16px;
+  margin: 2rem 0 1.5rem 0; /* Reduced bottom margin from 4rem to 1.5rem */
+  text-align: center;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(3.5rem, 10vw, 4.5rem);
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff !important;
+  /* Force white over gradient */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 650px;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.95;
+  color: #ffffff;
+}
+
+.hero-bloggers {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.blogger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.blogger:hover .blogger-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.5);
+}
+
+.blogger:hover .blogger-name {
+  text-decoration: underline;
+}
+
+.blogger-avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  transition: all 0.2s ease;
+}
+
+.blogger-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+/* Post metadata */
+.post-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--color-gray-dark);
+}
+
+.post-metadata-primary {
+  margin: 1.5rem 0 1rem 0;
+}
+
+.post-metadata-secondary {
+  margin-bottom: 3rem;
+}
+.post-metadata time {
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon-calendar {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+.post-metadata .post-tag {
+  background: var(--vivid-pink-p3, deeppink);
+  color: white;
+  padding: 0 1rem;
+  height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 20, 147, 0.2);
+}
+.post-metadata .post-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.3);
+  filter: brightness(1.1);
+}
+
+.post-metadata-author-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.2rem;
+  /* Match tag pills height */
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.post-metadata-author-link:hover {
+  transform: translateY(-2px);
+}
+
+.post-metadata-author-avatar {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-sizing: border-box;
+  display: block;
+  /* Remove baseline space from parent picture tag */
+}
+.post-metadata-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-link);
+  color: light-dark(white, #0d1b2a);
+  border: none;
+  padding: 0 1.2rem;
+  height: 2.2rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
+}
+.post-metadata-share:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 119, 182, 0.3);
+}
+
+.icon-share {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Integrated Header Hero */
+.hero-header {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
+    var(--hero-image-url, url('/img/hero.jpg'));
+  background-size: cover;
+  background-position: center;
+  min-height: 220px;
+  /* Slimmer, space-efficient header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 3rem;
+  border-bottom: none !important;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.header-content {
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: rotate(-3deg);
+}
+
+header .logo:hover {
+  transform: rotate(0deg) scale(1.08);
+}
+
+.logo-image {
+  height: clamp(80px, 15vw, 120px);
+  width: clamp(80px, 15vw, 120px);
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Glassmorphism Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0.6rem 2rem;
+  margin: 0;
+  gap: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  /* Translucent white */
+  backdrop-filter: blur(12px);
+  /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 40px;
+  /* Pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+header .nav-item a {
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header .nav-item a:hover,
+header .nav-item a[aria-current='page'] {
+  color: var(--color-secondary) !important;
+}
+
+/* Post list cards */
+.postlist {
+  display: grid;
+  /* Fallback for older browsers */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0; /* Reduced from 3rem 0 for tighter layout */
+}
+
+@supports (display: grid-lanes) {
+  .postlist {
+    display: grid-lanes;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(280px, 1fr) minmax(350px, 1.5fr)
+    );
+    flow-tolerance: 5rem;
+  }
+}
+.postlist-item {
+  background: var(--card-bg);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+.postlist-item:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+.postlist-thumbnail-container {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.postlist-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.6s ease;
+}
+.postlist-item:hover .postlist-thumbnail {
+  transform: scale(1.1);
+}
+
+.postlist-content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.postlist-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-primary) !important;
+  text-decoration: none !important;
+  margin-bottom: 1rem;
+  display: block;
+  transition: all 0.2s ease;
+}
+.postlist-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline !important;
+}
+
+.postlist-description {
+  font-size: 1rem;
+  color: var(--color-text);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.postlist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.postlist-item-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.postlist-author-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  max-width: none;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: none;
+  border: 2px solid var(--border-color);
+}
+
+.postlist-author-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.postlist-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.edit-post-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-primary);
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.edit-post-link:hover {
+  background-color: var(--color-link-hover);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  /* More space at bottom */
+}
+.post-tag {
+  display: inline-block;
+  background-color: rgb(255, 20, 147);
+  /* DeepPink fallback */
+  background-color: color(display-p3 0.99 0.08 0.58);
+  /* Vivid P3 DeepPink */
+  color: white !important;
+  padding: 0.35rem 1rem;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  box-shadow: 0 2px 8px rgba(255, 20, 147, 0.2);
+}
+
+.tags-landing {
+  gap: 1.25rem;
+  margin: 3rem 0;
+  justify-content: center;
+  /* Center them for a more "hero" landing page feel */
+}
+
+.tags-landing .post-tag {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 20, 147, 0.15);
+}
+
+.tag-count {
+  font-weight: 500;
+  opacity: 0.85;
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+  font-family: var(--font-family-monospace);
+}
+
+.post-tag:hover {
+  background-color: rgb(255, 20, 147);
+  background-color: color(display-p3 1 0 0.6);
+  /* Even more vivid on hover */
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.4);
+}
+
+/* Post Content */
+article {
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+article h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.post-metadata {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+.post-share-footer {
+  text-align: center;
+  margin: 4rem 0 2rem;
+  padding: 3rem 0;
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.post-share-footer p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: var(--font-family-headings);
+  letter-spacing: -0.01em;
+}
+
+.author-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 24px;
+  margin-top: 5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.author-avatar {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  max-width: none;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.2s ease;
+}
+
+.author-avatar-link {
+  display: block;
+  text-decoration: none;
+}
+
+.author-avatar-link:hover .author-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(255, 20, 147, 0.4);
+}
+
+.read-more-posts {
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+
+.read-more-posts a {
+  color: var(--color-link);
+  text-decoration: none;
+  position: relative;
+}
+
+.read-more-posts a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-link);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+  transform-origin: left;
+}
+
+.read-more-posts a:hover::after {
+  transform: scaleX(1);
+}
+
+.author-avatar {
+  border: 3px solid var(--color-secondary);
+}
+
+.author-info h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.author-info p {
+  margin: 0.75rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 5rem 0;
+  border-top: 1px solid var(--border-color);
+  margin-top: 6rem;
+  color: #6c757d;
+}
+
+.footer-classic {
+  margin-bottom: 2rem;
+}
+
+.footer-classic p {
+  margin: 0.5rem 0;
+}
+
+.footer-nav {
+  margin-top: 1rem;
+}
+.footer-nav a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--color-link);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Clips square SVGs to circle */
+}
+
+.footer-social a:hover {
+  transform: scale(1.15);
+  background: var(--color-link);
+  color: white !important;
+  border-color: var(--color-link);
+  box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2);
+}
+
+.social-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+footer hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+/* Language Switcher */
+#lang-switcher {
+  background: var(--card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+#lang-switcher:hover {
+  border-color: var(--color-secondary);
+}
+
+/* Author Page */
+.author-page-header {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.author-page-avatar {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  max-width: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-secondary);
+  box-shadow: var(--shadow);
+}
+
+.author-page-info h1 {
+  margin: 0;
+  font-size: 3.5rem;
+  color: var(--color-primary);
+}
+
+.author-page-bio {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-top: 1rem;
+  max-width: 600px;
+}
+
+/* Card Link Interactivity */
+.postlist-thumbnail-link,
+.postlist-description-link,
+.postlist-author-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+}
+
+.postlist-thumbnail-link:hover .postlist-thumbnail {
+  transform: scale(1.05);
+}
+
+.postlist-description-link:hover .postlist-description {
+  color: var(--color-secondary) !important;
+}
+
+.postlist-author-link:hover .postlist-author-name {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.postlist-author-link:hover .postlist-author-avatar {
+  border-color: var(--color-secondary);
+  transform: scale(1.1);
+}
+
+/* Newsletter Breakup Card */
+.newsletter-breakup {
+  display: flex;
+  align-items: stretch;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 4rem auto;
+  max-width: 45rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.newsletter-image-container {
+  flex: 1;
+  min-width: 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.newsletter-content {
+  flex: 1.5;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.newsletter-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.newsletter-title {
+  font-size: 1.75rem;
+  margin: 0 0 1rem;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.newsletter-description {
+  font-size: 1rem;
+  margin: 0 0 2rem;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-input-group {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--card-bg);
+  padding: 0.5rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.newsletter-input-group:focus-within {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.1);
+}
+
+.newsletter-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  outline: none;
+}
+
+.newsletter-button {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.newsletter-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.newsletter-disclaimer {
+  font-size: 0.75rem;
+  color: #868e96;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.newsletter-disclaimer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+  .newsletter-breakup {
+    flex-direction: column;
+    max-width: none;
+  }
+
+  .newsletter-image-container {
+    height: 250px;
+  }
+
+  .newsletter-content {
+    padding: 2rem;
+  }
+
+  .newsletter-input-group {
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: 1rem;
+  }
+
+  .newsletter-input {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .postlist {
+    gap: 2rem;
+  }
+}
+@media (max-width: 800px) {
+  .author-page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .author-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .post-share-footer {
+    padding: 2rem 1rem;
+    margin: 2.5rem 0 1rem;
+  }
+}
+@media (max-width: 768px) {
+  .hero-header {
+    min-height: 380px;
+    padding: 2rem 0;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header .logo {
+    transform: rotate(0deg);
+  }
+
+  .nav {
+    padding: 0.5rem 1.5rem;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .article-hero-bleed {
+    height: 300px;
+  }
+
+  article h1 {
+    font-size: 2.2rem;
+  }
+
+  .post-metadata {
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .postlist {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .postlist-content {
+    padding: 1.25rem;
+  }
+}
+@media (max-width: 500px) {
+  body {
+    padding: 0 0.75rem;
+  }
+
+  .hero-header {
+    min-height: 320px;
+  }
+
+  .nav {
+    gap: 0.75rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  header .nav-item a {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .postlist-item:first-child {
+    grid-column: span 2;
+  }
+}
+
+/* Search Overlay (Dialog Mode) */
+dialog.search-overlay {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+}
+
+dialog.search-overlay[open] {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+dialog.search-overlay::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.search-overlay-content {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 4.5rem 3rem 3rem 3rem;
+  /* Pushes content down away from Close button */
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+
+  --pagefind-ui-primary: var(--color-secondary);
+  --pagefind-ui-text: var(--color-text);
+  --pagefind-ui-background: transparent;
+  --pagefind-ui-border: var(--border-color);
+  --pagefind-ui-font: var(--font-family);
+}
+
+.search-close-btn {
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+  z-index: 10;
+  padding: 0.5rem;
+  line-height: 1;
+}
+
+.search-close-btn:hover {
+  color: var(--color-secondary);
+  transform: scale(1.2) rotate(90deg);
+}
+
+.search-toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.search-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.search-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Pagefind UI refinements */
+.pagefind-ui .pagefind-ui__search-clear {
+  background: transparent !important;
+  color: var(--color-text) !important;
+  border: none !important;
+  font-size: 1.8rem !important;
+  /* Premium X */
+  padding: 0.2rem 0.5rem !important;
+  opacity: 0.6;
+  right: 1.5rem !important;
+}
+
+.pagefind-ui .pagefind-ui__search-clear:hover {
+  opacity: 1;
+  background: transparent !important;
+}
+
+/* Fix dark mode placeholder visibility */
+.pagefind-ui .pagefind-ui__search-input::placeholder {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link {
+  color: var(--color-primary) !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagefind-ui .pagefind-ui__result-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline;
+}
+
+.pagefind-ui .pagefind-ui__result-excerpt {
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+/* Sidebar and Grid Layout */
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding: 0;
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 80em) {
+  .app-container {
+    grid-template-columns: 1fr 20rem;
+    align-items: start;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.sidebar-widget {
+  padding: 2.5rem;
+  border-radius: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.widget-title {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 0.5rem;
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+}
+
+.popular-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.popular-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed var(--border-color);
+  align-items: center;
+}
+
+.popular-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (max-width: 64em) {
+  /* Hide items 4 and 5 on narrow viewports */
+  .popular-item:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+.popular-thumbnail {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.popular-item:hover .popular-thumbnail {
+  transform: scale(1.05);
+}
+
+.popular-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.tag-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vivid-pink-p3, deeppink);
+  font-weight: 800;
+}
+
+.popular-link {
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--color-primary) !important;
+}
+
+.popular-link:hover {
+  color: var(--color-secondary) !important;
+  text-decoration: underline !important;
+}
+
+.sidebar-newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-newsletter-input {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-family: var(--font-family);
+  transition: border-color 0.2s;
+}
+
+.sidebar-newsletter-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.sidebar-newsletter-btn:hover {
+  background-color: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+/* Inlined Newsletter Card Fix - Stacks on narrow containers */
+.postlist-item-newsletter .newsletter-input-group {
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  padding: 0;
+  gap: 1rem;
+}
+
+.postlist-item-newsletter .newsletter-input {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--card-bg);
+}
+
+.postlist-item-newsletter .newsletter-button {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Listing Grid Layout for sidebars below headers */
+@media (min-width: 80em) {
+  .listing-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 22rem; /* Give sidebar a bit more breathing room */
+    gap: 3rem;
+    align-items: start;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .listing-main {
+    display: contents; /* Unwraps children into direct grid items! */
+  }
+
+  .hero,
+  .listing-main > h1 {
+    grid-column: 1 / -1;
+  }
+
+  .postlist {
+    grid-column: 1;
+  }
+
+  .sidebar {
+    grid-column: 2;
+    margin-top: 1.5rem; /* Matches the new .postlist top margin exactly */
+    position: sticky;
+    top: 2rem; /* Stays visible when scrolling */
+    height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+/* ============================================================
+   Map CSS Variables
+   ============================================================ */
+:root {
+  --map-land: #d6e8e0;
+  --map-stroke: #b0ccc3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --map-land: #1c3329;
+    --map-stroke: #2a4a3e;
+  }
+}
+
+/* ============================================================
+   Post Country Map
+   ============================================================ */
+.post-country-map {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem 2rem 1rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.post-country-map-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+  margin: 0 0 1rem 0;
+}
+
+.post-country-map-svg {
+  display: flex;
+  justify-content: center;
+}
+
+.post-country-map-svg svg {
+  width: 100%;
+  max-width: 480px;
+  max-height: 300px;
+  height: auto;
+  display: block;
+  /* Override the source SVG's default blue fill with brand color */
+  fill: var(--color-primary);
+  stroke: var(--background-color);
+  stroke-width: 0.4;
+  /* Suppress image-related styling applied globally */
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0.88;
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-country-map-svg svg {
+    fill: var(--color-primary);
+    stroke: var(--background-color);
+    opacity: 0.75;
+  }
+}
+
+.post-country-map-svg svg:hover {
+  opacity: 1;
+}</style>
+		
+		<link href="/samples/trailblazers/dist/pagefind/pagefind-ui.css" rel="stylesheet">
+		<script src="/samples/trailblazers/dist/pagefind/pagefind-ui.js"></script>
+		
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">メインコンテンツへスキップ</a>
+
+		<header class="site-header hero-header" style="--hero-image-url: url('/samples/trailblazers/dist/img/hero.jpg');">
+			<div class="header-content">
+				<a href="/samples/trailblazers/dist/ja/" class="logo">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
+				</a>
+
+				<nav>
+					<h2 class="visually-hidden" id="">トップレベルのナビゲーションメニュー</h2>
+					<ul class="nav">
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/">ホーム</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/blog/">アーカイブ</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/about/">私たちについて</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/destinations/">目的地</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/feed/feed.xml">フィード</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/ja/blog/create/">作成</a></li>
+						<li class="nav-item search-item">
+							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
+									<path d="M10 2a8 8 0 105.29 14.01L21 21.71 22.71 20l-5.7-5.71A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" fill="currentColor"></path>
+								</svg>
+							</button>
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<dialog id="search-overlay" class="search-overlay">
+			<div class="search-overlay-content">
+				<button id="search-close" aria-label="Close" class="search-close-btn">&times;</button>
+				<div id="search"></div>
+			</div>
+		</dialog>
+
+		<main id="main">
+			<heading-anchors>
+				<div class="listing-content-grid">
+	<div class="listing-main">
+		<h1 id="-2">タグ付けされた “ドイツ”</h1>
+
+
+<ul class="postlist">
+		<li class="postlist-item">
+			<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="postlist-thumbnail-link">
+				<div class="postlist-thumbnail-container">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="postlist-thumbnail" width="1200" height="800"></picture>
+				</div>
+			</a>
+			<div class="postlist-content">
+				<div class="tags">
+						<a href="/samples/trailblazers/dist/ja/tags/" class="post-tag">都市</a>
+						<a href="/samples/trailblazers/dist/ja/tags/" class="post-tag">ドイツ</a>
+						<a href="/samples/trailblazers/dist/ja/tags/" class="post-tag">歴史</a>
+						<a href="/samples/trailblazers/dist/ja/tags/" class="post-tag">文化</a>
+				</div>
+				<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="postlist-link">ベルリン：壁を越えてその先へ</a>
+				<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="postlist-description-link">
+					<p class="postlist-description">ベルリンは歴史を全身で纏う街であり、過去を生きたアートへと変換することにかけて、地球上で並ぶ都市はない。</p>
+				</a>
+				
+				<div class="postlist-footer">
+					<a href="/samples/trailblazers/dist/ja/authors/ashok/" class="postlist-author-link">
+						<div class="postlist-item-author">
+							
+								<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/PZ3GfjbWSC-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/PZ3GfjbWSC-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/PZ3GfjbWSC-1024.png" alt="Ashok" class="postlist-author-avatar" width="1024" height="1024"></picture>
+								<span class="postlist-author-name">Ashok</span>
+							
+						</div>
+					</a>
+					<time class="postlist-date" datetime="2026-03-01">2026年3月</time>
+				</div>
+				<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fja%2Fblog%2Fberlin-through-the-wall%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
+			</div>
+		</li>
+		<li class="postlist-item postlist-item-newsletter">
+			<div class="postlist-thumbnail-container">
+				<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.avif 2048w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.webp 2048w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.jpeg" alt="Newsletter" class="postlist-thumbnail" width="2048" height="2048"></picture>
+			</div>
+			<div class="postlist-content">
+				<span class="newsletter-label">デイリーニュースレター</span>
+				<h3 class="newsletter-title" id="trailblazers">Trailblazersのデイリーニュースレターを購読しましょう</h3>
+				<p class="postlist-description">100万人以上の読者に混じって、最新ニュースや詳細なガイド、お得な情報を手に入れましょう。</p>
+				
+				<form class="newsletter-form">
+					<div class="newsletter-input-group">
+						<input type="email" placeholder="メールアドレス" required="" class="newsletter-input">
+						<button type="submit" class="newsletter-button">登録する</button>
+					</div>
+				</form>
+				
+				<p class="newsletter-disclaimer">登録すると、<a href="//imprint/">利用規約</a>に同意し、<a href="//privacy/">プライバシーポリシー</a>のデータ取り扱い方法を認めたことになります。</p>
+			</div>
+		</li>
+</ul>
+
+
+<p><a href="/samples/trailblazers/dist/ja/tags/">すべてのタグを表示</a>.</p>
+
+	</div>
+
+	<aside class="sidebar">
+		<div class="sidebar-widget popular-posts">
+			<h2 class="widget-title" id="popular-posts">Popular Posts</h2>
+			<ul class="popular-list">
+			
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">都市</span>
+						<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="popular-link">ベルリン：壁を越えてその先へ</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">文化</span>
+						<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="popular-link">ベルリン：壁を越えてその先へ</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">歴史</span>
+						<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="popular-link">ベルリン：壁を越えてその先へ</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.jpeg" alt="シドニー：ハーバーに昇る夜明け" class="popular-thumbnail" width="1200" height="800"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">自然</span>
+						<a href="/samples/trailblazers/dist/ja/blog/sydney-harbour-sunrise/" class="popular-link">シドニー：ハーバーに昇る夜明け</a>
+					</div>
+				</li>
+				
+			
+				
+				
+				<li class="popular-item">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="マラケシュ：メディナの迷宮に迷い込む" class="popular-thumbnail" width="1200" height="800"></picture>
+					<div class="popular-item-content">
+						<span class="tag-badge">冒険</span>
+						<a href="/samples/trailblazers/dist/ja/blog/marrakech-medina-maze/" class="popular-link">マラケシュ：メディナの迷宮に迷い込む</a>
+					</div>
+				</li>
+				
+			
+			</ul>
+		</div>
+
+		<div class="sidebar-widget newsletter-widget glass">
+			<h2 class="widget-title" id="newsletter">Newsletter</h2>
+			<p>Subscribe to our newsletter for the latest travel stories!</p>
+			<form class="sidebar-newsletter-form">
+				<input type="email" placeholder="Your email..." required="" class="sidebar-newsletter-input">
+				<button type="submit" class="sidebar-newsletter-btn btn">Subscribe</button>
+			</form>
+		</div>
+	</aside>
+</div>
+
+			</heading-anchors>
+		</main>
+
+
+		<footer>
+			<div class="footer-classic">
+				<p>&copy; 2026 trAIlblazers Travel Blog. All rights reserved.</p>
+				<p>Travel tales by <strong>Maya, Ashok, and Julia</strong>.</p>
+				<nav class="footer-nav">
+					<a href="/samples/trailblazers/dist/ja/about/">私たちについて</a> | 
+					<a href="/samples/trailblazers/dist/ja/imprint/">インプリント</a> | 
+					<a href="/samples/trailblazers/dist/ja/privacy/">プライバシーポリシー</a>
+				</nav>
+				<div class="footer-social">
+					<a href="https://bsky.app/profile/developer.chrome.com" aria-label="Bluesky" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="social-icon">
+							<path d="M0 0h512v512H0" fill="#fff"></path>
+							<path d="M159 126c-28-22-74-38-74 14 0 11 6 88 9 101 13 43 57 54 97 48-69 11-87 50-49 89 72 75 104-18 112-42l2-5 2 5c8 24 40 117 112 42 38-39 20-78-49-89 40 6 84-5 97-48 3-13 9-90 9-101 0-52-46-36-74-14-39 29-82 89-97 121-15-32-58-92-97-121Z" fill="#1185fe"></path>
+						</svg>
+					</a>
+					<a href="https://chromium.social/@developers" aria-label="Mastodon" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" class="social-icon">
+							<path d="M0 0h512v512H0"></path>
+							<linearGradient id="mastodon-a" y2="1">
+								<stop offset="0" stop-color="#6364ff"></stop>
+								<stop offset="1" stop-color="#563acc"></stop>
+							</linearGradient>
+							<path fill="url(#mastodon-a)" d="M317 408q-55 32-138 9-57-23-70-69-6-21-9-53-9-116 3-147 19-48 75-58 64-10 162 0 53 9 72 58 6 15 3 116-5 67-72 80-80 13-149-2-1 67 123 39"></path>
+							<path d="M360 202q0-51-43-60-35-5-51 21l-9 15-9-15q-18-26-51-21-43 9-44 60v91h36V205q0-31 30-28 20 3 20 34v47h36V211q0-31 20-34 28-3 29 23v93h36"></path>
+						</svg>
+					</a>
+					<a href="https://www.linkedin.com/showcase/chrome-for-developers" aria-label="LinkedIn" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" class="social-icon">
+							<path d="M0 0h512v512H0" fill="#0077b5"></path>
+							<circle cx="142" cy="138" r="37"></circle>
+							<path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"></path>
+							<path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"></path>
+						</svg>
+					</a>
+					<a href="https://www.youtube.com/user/ChromeDevelopers" aria-label="YouTube" target="_blank" rel="noopener">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" class="social-icon">
+							<path d="M0 0h512v512H0"></path>
+							<path d="M313 256l-93-53V309Zm114-87c9 37 9 138 0 174-4 15-17 27-32 31-37 10-242 10-278 0-15-4-28-16-32-31-10-39-9-136 0-174 4-15 17-27 32-31 39-10 244-9 278 0 15 4 28 16 32 31Z" fill="#ed1d24"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+			<hr>
+			<form>
+				<label for="lang-switcher">言語:</label>
+				<select id="lang-switcher" onchange="location = this.value;">
+					
+					<option value="/samples/trailblazers/dist/en/tags/ドイツ/">
+						English
+					</option>
+					
+					<option value="/samples/trailblazers/dist/es/tags/ドイツ/">
+						Español
+					</option>
+					
+					<option value="/samples/trailblazers/dist/ja/tags/ドイツ/" selected="">
+						日本語
+					</option>
+					
+				</select>
+			</form>
+		</footer>
+
+		<!-- This page `/ja/tags/ドイツ/` was built on 2026-04-01T10:41:18.736Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
+		
+		
+	</body>
+</html>
