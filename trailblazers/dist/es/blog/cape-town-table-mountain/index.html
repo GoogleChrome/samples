@@ -1496,7 +1496,9 @@ dialog.search-overlay::backdrop {
     margin: 0 auto;
     padding: 0 2rem;
   }
+}
 
+@media (min-width: 80em) {
   .listing-main {
     display: contents; /* Unwraps children into direct grid items! */
   }
@@ -1516,6 +1518,24 @@ dialog.search-overlay::backdrop {
     position: sticky;
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 79.9375em) {
+  /* Sidebar is below in this range — cap at two columns to avoid a
+     three-column grid appearing alongside a stacked sidebar. */
+  .postlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 95em) {
+  body {
+    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  }
+
+  .listing-content-grid {
+    max-width: 1800px;
   }
 }
 
@@ -1777,10 +1797,10 @@ pre[class*='language-diff-'] {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/">Inicio</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/blog/">Archivo</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/destinations/">Destinos</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/feed/feed.xml">Feed</a></li>
-						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Crear</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Admin</a></li>
 						<li class="nav-item search-item">
 							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
@@ -1990,7 +2010,7 @@ pre[class*='language-diff-'] {
 			</form>
 		</footer>
 
-		<!-- This page `/es/blog/cape-town-table-mountain/` was built on 2026-04-01T10:40:35.716Z -->
+		<!-- This page `/es/blog/cape-town-table-mountain/` was built on 2026-04-01T14:08:18.305Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/jqT5aTvx9p.js"></script>
 		
 		

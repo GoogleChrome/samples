@@ -1496,7 +1496,9 @@ dialog.search-overlay::backdrop {
     margin: 0 auto;
     padding: 0 2rem;
   }
+}
 
+@media (min-width: 80em) {
   .listing-main {
     display: contents; /* Unwraps children into direct grid items! */
   }
@@ -1516,6 +1518,24 @@ dialog.search-overlay::backdrop {
     position: sticky;
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 79.9375em) {
+  /* Sidebar is below in this range — cap at two columns to avoid a
+     three-column grid appearing alongside a stacked sidebar. */
+  .postlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 95em) {
+  body {
+    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  }
+
+  .listing-content-grid {
+    max-width: 1800px;
   }
 }
 
@@ -1853,10 +1873,10 @@ dialog.search-overlay::backdrop {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/">Inicio</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/blog/">Archivo</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/destinations/" aria-current="page">Destinos</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/feed/feed.xml">Feed</a></li>
-						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Crear</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Admin</a></li>
 						<li class="nav-item search-item">
 							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
@@ -5209,6 +5229,226 @@ dialog.search-overlay::backdrop {
           </div>
         </a>
       </li>
+      <li>
+        <a href="undefinedes/blog/amsterdam-canal-city/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/amsterdam-canal-city/cover.jpg" alt="amsterdam-canal-city" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Países Bajos</span>
+              <span class="destination-card-title">Ámsterdam: La Vida a lo Largo de los Canales</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/bangkok-golden-temples/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/bangkok-golden-temples/cover.jpg" alt="bangkok-golden-temples" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Tailandia</span>
+              <span class="destination-card-title">Bangkok: La Ciudad de los Templos Dorados</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/berlin-through-the-wall/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/berlin-through-the-wall/cover.jpg" alt="berlin-through-the-wall" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Alemania</span>
+              <span class="destination-card-title">Berlín: A Través del Muro y Más Allá</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/buenos-aires-tango-nights/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/buenos-aires-tango-nights/cover.jpg" alt="buenos-aires-tango-nights" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Argentina</span>
+              <span class="destination-card-title">Buenos Aires: Noches de Tango y Grandeza Belle Époque</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/dubrovnik-walls-adriatic/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/dubrovnik-walls-adriatic/cover.jpg" alt="dubrovnik-walls-adriatic" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Croacia</span>
+              <span class="destination-card-title">Dubrovnik: Caminando las Murallas sobre el Adriático</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/edinburgh-castle-highlands/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/edinburgh-castle-highlands/cover.jpg" alt="edinburgh-castle-highlands" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Reino Unido</span>
+              <span class="destination-card-title">Edimburgo: Castillo, Callejones y la Llamada de las Highlands</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/halong-bay-emerald-waters/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/halong-bay-emerald-waters/cover.jpg" alt="halong-bay-emerald-waters" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Vietnam</span>
+              <span class="destination-card-title">Bahía de Ha Long: Aguas Esmeraldas y Gigantes de Piedra Caliza</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/havana-vintage-streets/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/havana-vintage-streets/cover.jpg" alt="havana-vintage-streets" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Cuba</span>
+              <span class="destination-card-title">La Habana: Calles de Época e Historia Viva</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/istanbul-two-continents/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/istanbul-two-continents/cover.jpg" alt="istanbul-two-continents" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Turquía</span>
+              <span class="destination-card-title">Estambul: La Ciudad Entre Dos Mundos</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/lisbon-seven-hills/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/lisbon-seven-hills/cover.jpg" alt="lisbon-seven-hills" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Portugal</span>
+              <span class="destination-card-title">Lisboa: Ciudad de Siete Colinas y Luz Eterna</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/maldives-overwater-paradise/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/maldives-overwater-paradise/cover.jpg" alt="maldives-overwater-paradise" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Maldivas</span>
+              <span class="destination-card-title">Maldivas: Paraíso Sobre el Agua al Borde del Mundo</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/marrakech-medina-maze/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/marrakech-medina-maze/cover.jpg" alt="marrakech-medina-maze" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Marruecos</span>
+              <span class="destination-card-title">Marrakech: Perdida en el Laberinto de la Medina</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/masai-mara-great-migration/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/masai-mara-great-migration/cover.jpg" alt="masai-mara-great-migration" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Kenia</span>
+              <span class="destination-card-title">Masái Mara: Testigo de la Gran Migración</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/mexico-city-ancient-modern/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/mexico-city-ancient-modern/cover.jpg" alt="mexico-city-ancient-modern" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">México</span>
+              <span class="destination-card-title">Ciudad de México: Cimientos Antiguos, Pulso Moderno</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/mumbai-city-of-dreams/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/mumbai-city-of-dreams/cover.jpg" alt="mumbai-city-of-dreams" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">India</span>
+              <span class="destination-card-title">Bombay: La Ciudad de los Sueños</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/prague-fairy-tale-city/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/prague-fairy-tale-city/cover.jpg" alt="prague-fairy-tale-city" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">República Checa</span>
+              <span class="destination-card-title">Praga: La Ciudad de Cuento de Hadas</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/queenstown-adventure-capital/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/queenstown-adventure-capital/cover.jpg" alt="queenstown-adventure-capital" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Nueva Zelanda</span>
+              <span class="destination-card-title">Queenstown: La Capital de la Aventura del Hemisferio Sur</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/rio-carnival-colours/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/rio-carnival-colours/cover.jpg" alt="rio-carnival-colours" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Brasil</span>
+              <span class="destination-card-title">Río de Janeiro: La Ciudad de los Colores del Carnaval</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/seoul-ancient-modern/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/seoul-ancient-modern/cover.jpg" alt="seoul-ancient-modern" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Corea del Sur</span>
+              <span class="destination-card-title">Seúl: Donde los Palacios Antiguos Se Encuentran con los Futuros de Neón</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedes/blog/sydney-harbour-sunrise/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/es/destinations/undefinedes/blog/sydney-harbour-sunrise/cover.jpg" alt="sydney-harbour-sunrise" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Australia</span>
+              <span class="destination-card-title">Sídney: Amanecer Sobre el Puerto</span>
+          </div>
+        </a>
+      </li>
     </ul>
   </section>
 </div>
@@ -5283,8 +5523,8 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/es/destinations/` was built on 2026-04-01T10:40:35.406Z -->
-		<script type="module" src="/samples/trailblazers/dist/dist/A3AQwII-0u.js"></script>
+		<!-- This page `/es/destinations/` was built on 2026-04-01T14:08:17.774Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/mya3WDQ2jB.js"></script>
 		
 		
 	</body>

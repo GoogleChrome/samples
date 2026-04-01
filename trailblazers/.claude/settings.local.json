@@ -9,7 +9,21 @@
       "Bash(mkdir -p \"$BASE/en/blog/$slug\")",
       "Bash(mkdir -p \"$BASE/es/blog/$slug\")",
       "Read(//Users/tsteiner/Documents/websites/samples/trailblazers/**)",
-      "Bash(do echo:*)"
+      "Bash(do echo:*)",
+      "WebFetch(domain:api.unsplash.com)",
+      "Bash(curl -L \"https://images.unsplash.com/photo-nWkt_TNAhG4?w=1200&q=80&fm=jpg\" -v)",
+      "Bash(curl -s \"https://oembed.com/providers.json\")",
+      "Bash(curl -s \"https://unsplash.com/oembed?url=https://unsplash.com/photos/edinburgh-castle-and-city-skyline-at-dusk-nWkt_TNAhG4\")",
+      "Bash(curl -sI \"https://unsplash.com/photos/edinburgh-castle-and-city-skyline-at-dusk-nWkt_TNAhG4\")",
+      "Bash(curl -s \"https://unsplash.com/photos/edinburgh-castle-and-city-skyline-at-dusk-nWkt_TNAhG4\" -H \"User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36\")",
+      "Bash(python3 -c \":*)",
+      "Bash(curl -L \"https://images.unsplash.com/photo-1751922090004-6386496669c8?w=1200&q=80&fm=jpg\" -o /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/edinburgh-castle-highlands/cover.jpg -w \"\\\\nHTTP %{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -L \"https://images.unsplash.com/photo-1753284679118-2ba6c37ee55d?w=1200&q=80&fm=jpg\" -o /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/lisbon-seven-hills/cover.jpg -w \"\\\\nHTTP %{http_code} size=%{size_download}\\\\n\")",
+      "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/edinburgh-castle-highlands/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/es/blog/edinburgh-castle-highlands/cover.jpg)",
+      "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/edinburgh-castle-highlands/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/blog/edinburgh-castle-highlands/cover.jpg)",
+      "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/lisbon-seven-hills/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/es/blog/lisbon-seven-hills/cover.jpg)",
+      "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/lisbon-seven-hills/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/blog/lisbon-seven-hills/cover.jpg)",
+      "Bash(npm run:*)"
     ]
   }
 }

@@ -1496,7 +1496,9 @@ dialog.search-overlay::backdrop {
     margin: 0 auto;
     padding: 0 2rem;
   }
+}
 
+@media (min-width: 80em) {
   .listing-main {
     display: contents; /* Unwraps children into direct grid items! */
   }
@@ -1516,6 +1518,24 @@ dialog.search-overlay::backdrop {
     position: sticky;
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 79.9375em) {
+  /* Sidebar is below in this range — cap at two columns to avoid a
+     three-column grid appearing alongside a stacked sidebar. */
+  .postlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 95em) {
+  body {
+    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  }
+
+  .listing-content-grid {
+    max-width: 1800px;
   }
 }
 
@@ -1853,10 +1873,10 @@ dialog.search-overlay::backdrop {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/en/">Home</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/en/blog/">Archive</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/en/about/">About</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/en/destinations/" aria-current="page">Destinations</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/en/about/">About</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/en/feed/feed.xml">Feed</a></li>
-						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/en/blog/create/">Create</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/en/blog/create/">Admin</a></li>
 						<li class="nav-item search-item">
 							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
@@ -5209,6 +5229,226 @@ dialog.search-overlay::backdrop {
           </div>
         </a>
       </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/amsterdam-canal-city/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-n6MsVyjzs-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-n6MsVyjzs-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-n6MsVyjzs-1200.jpeg" alt="amsterdam-canal-city" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Netherlands</span>
+              <span class="destination-card-title">Amsterdam: Life Along the Canals</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/bangkok-golden-temples/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/ewbHYOhlUq-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/ewbHYOhlUq-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/ewbHYOhlUq-1200.jpeg" alt="bangkok-golden-temples" width="1200" height="929"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Thailand</span>
+              <span class="destination-card-title">Bangkok: City of Golden Temples</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/berlin-through-the-wall/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="berlin-through-the-wall" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Germany</span>
+              <span class="destination-card-title">Berlin: Through the Wall and Beyond</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/buenos-aires-tango-nights/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/NAyRty2jBc-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/NAyRty2jBc-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/NAyRty2jBc-1200.jpeg" alt="buenos-aires-tango-nights" width="1200" height="1601"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Argentina</span>
+              <span class="destination-card-title">Buenos Aires: Tango Nights and Belle Époque Grandeur</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/dubrovnik-walls-adriatic/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/v_Gk1AlO4E-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/v_Gk1AlO4E-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/v_Gk1AlO4E-1200.jpeg" alt="dubrovnik-walls-adriatic" width="1200" height="583"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Croatia</span>
+              <span class="destination-card-title">Dubrovnik: Walking the Walls Above the Adriatic</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/edinburgh-castle-highlands/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/aUWCdG5mqf-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/aUWCdG5mqf-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/aUWCdG5mqf-1200.jpeg" alt="edinburgh-castle-highlands" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">United Kingdom</span>
+              <span class="destination-card-title">Edinburgh: Castle, Closes, and the Call of the Highlands</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/halong-bay-emerald-waters/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.jpeg" alt="halong-bay-emerald-waters" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Vietnam</span>
+              <span class="destination-card-title">Ha Long Bay: Emerald Waters and Limestone Giants</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/havana-vintage-streets/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/_kP_Ka6iAp-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/_kP_Ka6iAp-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/_kP_Ka6iAp-1200.jpeg" alt="havana-vintage-streets" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Cuba</span>
+              <span class="destination-card-title">Havana: Vintage Streets and Living History</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/istanbul-two-continents/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/Htr97-HtsY-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/Htr97-HtsY-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/Htr97-HtsY-1200.jpeg" alt="istanbul-two-continents" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Turkey</span>
+              <span class="destination-card-title">Istanbul: The City Between Two Worlds</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/lisbon-seven-hills/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.jpeg" alt="lisbon-seven-hills" width="1200" height="801"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Portugal</span>
+              <span class="destination-card-title">Lisbon: City of Seven Hills and Endless Light</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/p0fGyDl6h7-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/p0fGyDl6h7-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/p0fGyDl6h7-1200.jpeg" alt="maldives-overwater-paradise" width="1200" height="900"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Maldives</span>
+              <span class="destination-card-title">Maldives: Overwater Paradise at the Edge of the World</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/marrakech-medina-maze/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="marrakech-medina-maze" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Morocco</span>
+              <span class="destination-card-title">Marrakech: Lost in the Medina Maze</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/masai-mara-great-migration/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/hIC5bKZOPN-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/hIC5bKZOPN-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/hIC5bKZOPN-1200.jpeg" alt="masai-mara-great-migration" width="1200" height="802"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Kenya</span>
+              <span class="destination-card-title">Masai Mara: Witness to the Great Migration</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/mexico-city-ancient-modern/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/IvUlpaVk4g-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/IvUlpaVk4g-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/IvUlpaVk4g-1200.jpeg" alt="mexico-city-ancient-modern" width="1200" height="801"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Mexico</span>
+              <span class="destination-card-title">Mexico City: Ancient Foundations, Modern Pulse</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/mumbai-city-of-dreams/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/bQQeGFifLG-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/bQQeGFifLG-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/bQQeGFifLG-1200.jpeg" alt="mumbai-city-of-dreams" width="1200" height="1500"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">India</span>
+              <span class="destination-card-title">Mumbai: The City of Dreams</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/f37S2GjjqI-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/f37S2GjjqI-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/f37S2GjjqI-1200.jpeg" alt="prague-fairy-tale-city" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Czech Republic</span>
+              <span class="destination-card-title">Prague: The Fairy-Tale City</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/queenstown-adventure-capital/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/GKULPR8C0--1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/GKULPR8C0--1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/GKULPR8C0--1200.jpeg" alt="queenstown-adventure-capital" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">New Zealand</span>
+              <span class="destination-card-title">Queenstown: Adventure Capital of the Southern Hemisphere</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/rio-carnival-colours/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/5GvG9JWWOT-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/5GvG9JWWOT-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/5GvG9JWWOT-1200.jpeg" alt="rio-carnival-colours" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Brazil</span>
+              <span class="destination-card-title">Rio de Janeiro: City of Carnival Colours</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/seoul-ancient-modern/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dEprmgX_-Y-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dEprmgX_-Y-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dEprmgX_-Y-1200.jpeg" alt="seoul-ancient-modern" width="1200" height="798"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">South Korea</span>
+              <span class="destination-card-title">Seoul: Where Ancient Palaces Meet Neon Futures</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/sydney-harbour-sunrise/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.jpeg" alt="sydney-harbour-sunrise" width="1200" height="800"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Australia</span>
+              <span class="destination-card-title">Sydney: Sunrise Over the Harbour</span>
+          </div>
+        </a>
+      </li>
     </ul>
   </section>
 </div>
@@ -5283,8 +5523,8 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/en/destinations/` was built on 2026-04-01T10:40:35.406Z -->
-		<script type="module" src="/samples/trailblazers/dist/dist/oP_UqwhMW3.js"></script>
+		<!-- This page `/en/destinations/` was built on 2026-04-01T14:08:17.774Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/NCMLa4rI_B.js"></script>
 		
 		
 	</body>

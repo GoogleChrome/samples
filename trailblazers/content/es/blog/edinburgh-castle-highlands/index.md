@@ -33,4 +33,4 @@ La colina volcánica de **Arthur's Seat** se eleva desde el **Holyrood Park** en
 
 Edimburgo recompensa a los curiosos y a los dispuestos a subir cuestas. La ciudad devuelve en proporción al esfuerzo invertido.
 
-<small>_Foto de [K. Mitch Hodge](https://unsplash.com/photos/edinburgh-castle-scotland-CgFyNhXa2Ig) en Unsplash_</small>
+<small>_Foto de [Rob Wingate](https://unsplash.com/photos/nWkt_TNAhG4) en Unsplash_</small>

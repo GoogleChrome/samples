@@ -1496,7 +1496,9 @@ dialog.search-overlay::backdrop {
     margin: 0 auto;
     padding: 0 2rem;
   }
+}
 
+@media (min-width: 80em) {
   .listing-main {
     display: contents; /* Unwraps children into direct grid items! */
   }
@@ -1516,6 +1518,24 @@ dialog.search-overlay::backdrop {
     position: sticky;
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 79.9375em) {
+  /* Sidebar is below in this range — cap at two columns to avoid a
+     three-column grid appearing alongside a stacked sidebar. */
+  .postlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 95em) {
+  body {
+    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  }
+
+  .listing-content-grid {
+    max-width: 1800px;
   }
 }
 
@@ -1853,10 +1873,10 @@ dialog.search-overlay::backdrop {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/">ホーム</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/blog/">アーカイブ</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/about/">私たちについて</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/destinations/" aria-current="page">目的地</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/about/">私たちについて</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/feed/feed.xml">フィード</a></li>
-						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/ja/blog/create/">作成</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/ja/blog/create/">Admin</a></li>
 						<li class="nav-item search-item">
 							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
@@ -5209,6 +5229,226 @@ dialog.search-overlay::backdrop {
           </div>
         </a>
       </li>
+      <li>
+        <a href="undefinedja/blog/amsterdam-canal-city/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/amsterdam-canal-city/cover.jpg" alt="amsterdam-canal-city" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">オランダ</span>
+              <span class="destination-card-title">アムステルダム：運河沿いの暮らし</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/bangkok-golden-temples/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/bangkok-golden-temples/cover.jpg" alt="bangkok-golden-temples" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">タイ</span>
+              <span class="destination-card-title">バンコク：黄金の寺院の都</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/berlin-through-the-wall/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/berlin-through-the-wall/cover.jpg" alt="berlin-through-the-wall" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">ドイツ</span>
+              <span class="destination-card-title">ベルリン：壁を越えてその先へ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/buenos-aires-tango-nights/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/buenos-aires-tango-nights/cover.jpg" alt="buenos-aires-tango-nights" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">アルゼンチン</span>
+              <span class="destination-card-title">ブエノスアイレス：タンゴの夜とベル・エポックの壮麗さ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/dubrovnik-walls-adriatic/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/dubrovnik-walls-adriatic/cover.jpg" alt="dubrovnik-walls-adriatic" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">クロアチア</span>
+              <span class="destination-card-title">ドゥブロヴニク：アドリア海を見下ろす城壁を歩く</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/edinburgh-castle-highlands/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/edinburgh-castle-highlands/cover.jpg" alt="edinburgh-castle-highlands" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">イギリス</span>
+              <span class="destination-card-title">エディンバラ：城と路地、そしてハイランドの呼び声</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/halong-bay-emerald-waters/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/halong-bay-emerald-waters/cover.jpg" alt="halong-bay-emerald-waters" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">ベトナム</span>
+              <span class="destination-card-title">ハロン湾：エメラルドの海と石灰岩の巨人たち</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/havana-vintage-streets/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/havana-vintage-streets/cover.jpg" alt="havana-vintage-streets" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">キューバ</span>
+              <span class="destination-card-title">ハバナ：ヴィンテージの街と生きた歴史</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/istanbul-two-continents/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/istanbul-two-continents/cover.jpg" alt="istanbul-two-continents" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">トルコ</span>
+              <span class="destination-card-title">イスタンブール：二つの世界の間の街</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/lisbon-seven-hills/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/lisbon-seven-hills/cover.jpg" alt="lisbon-seven-hills" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">ポルトガル</span>
+              <span class="destination-card-title">リスボン：七つの丘と終わりなき光の都</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/maldives-overwater-paradise/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/maldives-overwater-paradise/cover.jpg" alt="maldives-overwater-paradise" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">モルディブ</span>
+              <span class="destination-card-title">モルディブ：世界の果てに浮かぶ水上のパラダイス</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/marrakech-medina-maze/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/marrakech-medina-maze/cover.jpg" alt="marrakech-medina-maze" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">モロッコ</span>
+              <span class="destination-card-title">マラケシュ：メディナの迷宮に迷い込む</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/masai-mara-great-migration/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/masai-mara-great-migration/cover.jpg" alt="masai-mara-great-migration" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">ケニア</span>
+              <span class="destination-card-title">マサイ・マラ：グレート・マイグレーションの目撃者</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/mexico-city-ancient-modern/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/mexico-city-ancient-modern/cover.jpg" alt="mexico-city-ancient-modern" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">メキシコ</span>
+              <span class="destination-card-title">メキシコシティ：古代の礎と現代の鼓動</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/mumbai-city-of-dreams/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/mumbai-city-of-dreams/cover.jpg" alt="mumbai-city-of-dreams" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">インド</span>
+              <span class="destination-card-title">ムンバイ：夢の街</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/prague-fairy-tale-city/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/prague-fairy-tale-city/cover.jpg" alt="prague-fairy-tale-city" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">チェコ共和国</span>
+              <span class="destination-card-title">プラハ：おとぎ話の街</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/queenstown-adventure-capital/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/queenstown-adventure-capital/cover.jpg" alt="queenstown-adventure-capital" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">ニュージーランド</span>
+              <span class="destination-card-title">クイーンズタウン：南半球のアドベンチャーキャピタル</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/rio-carnival-colours/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/rio-carnival-colours/cover.jpg" alt="rio-carnival-colours" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">ブラジル</span>
+              <span class="destination-card-title">リオ・デ・ジャネイロ：カーニバルの彩りの都</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/seoul-ancient-modern/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/seoul-ancient-modern/cover.jpg" alt="seoul-ancient-modern" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">韓国</span>
+              <span class="destination-card-title">ソウル：古代の宮殿とネオンの未来が交わる街</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="undefinedja/blog/sydney-harbour-sunrise/" class="destination-card">
+          <div class="destination-card-thumb">
+            <img src="content/ja/destinations/undefinedja/blog/sydney-harbour-sunrise/cover.jpg" alt="sydney-harbour-sunrise" loading="lazy">
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">オーストラリア</span>
+              <span class="destination-card-title">シドニー：ハーバーに昇る夜明け</span>
+          </div>
+        </a>
+      </li>
     </ul>
   </section>
 </div>
@@ -5283,8 +5523,8 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/destinations/` was built on 2026-04-01T10:40:35.406Z -->
-		<script type="module" src="/samples/trailblazers/dist/dist/02zMvsH_04.js"></script>
+		<!-- This page `/ja/destinations/` was built on 2026-04-01T14:08:17.774Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/r3OZGROlLV.js"></script>
 		
 		
 	</body>

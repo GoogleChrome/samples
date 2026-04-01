@@ -65,9 +65,9 @@ export default {
     ja: '{{ name }} の記事をもっと読む',
   },
   create: {
-    en: 'Create',
-    es: 'Crear',
-    ja: '作成',
+    en: 'Admin',
+    es: 'Admin',
+    ja: 'Admin',
   },
   feed: {
     en: 'Feed',

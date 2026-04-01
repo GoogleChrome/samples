@@ -33,4 +33,4 @@ The **Arthur's Seat** volcanic hill rises from **Holyrood Park** in the middle o
 
 Edinburgh rewards the curious and the willing to walk uphill. The city gives back in proportion to the effort put in.
 
-<small>_Photo by [K. Mitch Hodge](https://unsplash.com/photos/edinburgh-castle-scotland-CgFyNhXa2Ig) on Unsplash_</small>
+<small>_Photo by [Rob Wingate](https://unsplash.com/photos/nWkt_TNAhG4) on Unsplash_</small>

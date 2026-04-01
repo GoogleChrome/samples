@@ -1496,7 +1496,9 @@ dialog.search-overlay::backdrop {
     margin: 0 auto;
     padding: 0 2rem;
   }
+}
 
+@media (min-width: 80em) {
   .listing-main {
     display: contents; /* Unwraps children into direct grid items! */
   }
@@ -1516,6 +1518,24 @@ dialog.search-overlay::backdrop {
     position: sticky;
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 79.9375em) {
+  /* Sidebar is below in this range — cap at two columns to avoid a
+     three-column grid appearing alongside a stacked sidebar. */
+  .postlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 95em) {
+  body {
+    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  }
+
+  .listing-content-grid {
+    max-width: 1800px;
   }
 }
 
@@ -1609,10 +1629,10 @@ dialog.search-overlay::backdrop {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/">ホーム</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/blog/">アーカイブ</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/about/">私たちについて</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/destinations/">目的地</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/about/">私たちについて</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/ja/feed/feed.xml">フィード</a></li>
-						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/ja/blog/create/">作成</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/ja/blog/create/">Admin</a></li>
 						<li class="nav-item search-item">
 							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
@@ -1736,60 +1756,45 @@ dialog.search-overlay::backdrop {
 			<ul class="popular-list">
 			
 			
-				
-				
 				<li class="popular-item">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture>
+					<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture></a>
 					<div class="popular-item-content">
 						<span class="tag-badge">都市</span>
 						<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="popular-link">ベルリン：壁を越えてその先へ</a>
 					</div>
 				</li>
-				
 			
-				
-				
 				<li class="popular-item">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture>
-					<div class="popular-item-content">
-						<span class="tag-badge">文化</span>
-						<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="popular-link">ベルリン：壁を越えてその先へ</a>
-					</div>
-				</li>
-				
-			
-				
-				
-				<li class="popular-item">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="ベルリン：壁を越えてその先へ" class="popular-thumbnail" width="1200" height="800"></picture>
-					<div class="popular-item-content">
-						<span class="tag-badge">歴史</span>
-						<a href="/samples/trailblazers/dist/ja/blog/berlin-through-the-wall/" class="popular-link">ベルリン：壁を越えてその先へ</a>
-					</div>
-				</li>
-				
-			
-				
-				
-				<li class="popular-item">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.jpeg" alt="シドニー：ハーバーに昇る夜明け" class="popular-thumbnail" width="1200" height="800"></picture>
+					<a href="/samples/trailblazers/dist/ja/blog/sydney-harbour-sunrise/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.jpeg" alt="シドニー：ハーバーに昇る夜明け" class="popular-thumbnail" width="1200" height="800"></picture></a>
 					<div class="popular-item-content">
 						<span class="tag-badge">自然</span>
 						<a href="/samples/trailblazers/dist/ja/blog/sydney-harbour-sunrise/" class="popular-link">シドニー：ハーバーに昇る夜明け</a>
 					</div>
 				</li>
-				
 			
-				
-				
 				<li class="popular-item">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="マラケシュ：メディナの迷宮に迷い込む" class="popular-thumbnail" width="1200" height="800"></picture>
+					<a href="/samples/trailblazers/dist/ja/blog/marrakech-medina-maze/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="マラケシュ：メディナの迷宮に迷い込む" class="popular-thumbnail" width="1200" height="800"></picture></a>
 					<div class="popular-item-content">
 						<span class="tag-badge">冒険</span>
 						<a href="/samples/trailblazers/dist/ja/blog/marrakech-medina-maze/" class="popular-link">マラケシュ：メディナの迷宮に迷い込む</a>
 					</div>
 				</li>
-				
+			
+				<li class="popular-item">
+					<a href="/samples/trailblazers/dist/ja/blog/lisbon-seven-hills/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.jpeg" alt="リスボン：七つの丘と終わりなき光の都" class="popular-thumbnail" width="1200" height="801"></picture></a>
+					<div class="popular-item-content">
+						<span class="tag-badge">ロマンス</span>
+						<a href="/samples/trailblazers/dist/ja/blog/lisbon-seven-hills/" class="popular-link">リスボン：七つの丘と終わりなき光の都</a>
+					</div>
+				</li>
+			
+				<li class="popular-item">
+					<a href="/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/mHBp0glhnT-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/mHBp0glhnT-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/mHBp0glhnT-3000.jpeg" alt="サントリーニ島：青と白の夢" class="popular-thumbnail" width="3000" height="4000"></picture></a>
+					<div class="popular-item-content">
+						<span class="tag-badge">島</span>
+						<a href="/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/" class="popular-link">サントリーニ島：青と白の夢</a>
+					</div>
+				</li>
 			
 			</ul>
 		</div>
@@ -1873,7 +1878,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/tags/山/` was built on 2026-04-01T10:41:18.747Z -->
+		<!-- This page `/ja/tags/山/` was built on 2026-04-01T14:08:21.005Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

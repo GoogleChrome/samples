@@ -33,4 +33,4 @@ author: julia
 
 エディンバラは好奇心旺盛で丘を登る気のある人を報いる。街は投じた努力に比例して返してくれる。
 
-<small>_Photo by [K. Mitch Hodge](https://unsplash.com/photos/edinburgh-castle-scotland-CgFyNhXa2Ig) on Unsplash_</small>
+<small>_Photo by [Rob Wingate](https://unsplash.com/photos/nWkt_TNAhG4) on Unsplash_</small>

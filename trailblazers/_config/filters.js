@@ -117,6 +117,36 @@ export default function (eleventyConfig) {
     return (collection || []).filter((item) => item.data.author === author);
   });
 
+  eleventyConfig.addFilter('popularPosts', function (collections, locale, count = 5) {
+    const internalTags = ['all', 'posts', 'posts_en', 'posts_es', 'posts_ja'];
+    const getLocale = (item) => {
+      if (!item || !item.data) return '';
+      return item.data.locale || (item.url ? item.url.split('/')[1] : '');
+    };
+    const localeFilter = (item) => getLocale(item) === locale;
+
+    const tags = Object.keys(collections)
+      .filter((tag) => !internalTags.includes(tag))
+      .filter((tag) => (collections[tag] || []).some(localeFilter))
+      .sort((a, b) => {
+        const ca = (collections[a] || []).filter(localeFilter).length;
+        const cb = (collections[b] || []).filter(localeFilter).length;
+        return cb - ca;
+      });
+
+    const seen = new Set();
+    const result = [];
+    for (const tag of tags) {
+      if (result.length >= count) break;
+      const post = (collections[tag] || []).find(localeFilter);
+      if (post && !seen.has(post.url)) {
+        seen.add(post.url);
+        result.push({ tag, post });
+      }
+    }
+    return result;
+  });
+
   eleventyConfig.addFilter(
     'sortByPostCount',
     function (tags, collections, locale) {

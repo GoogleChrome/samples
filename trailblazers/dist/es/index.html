@@ -1496,7 +1496,9 @@ dialog.search-overlay::backdrop {
     margin: 0 auto;
     padding: 0 2rem;
   }
+}
 
+@media (min-width: 80em) {
   .listing-main {
     display: contents; /* Unwraps children into direct grid items! */
   }
@@ -1516,6 +1518,24 @@ dialog.search-overlay::backdrop {
     position: sticky;
     top: 2rem; /* Stays visible when scrolling */
     height: fit-content; /* Needed to override grid stretch */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 79.9375em) {
+  /* Sidebar is below in this range — cap at two columns to avoid a
+     three-column grid appearing alongside a stacked sidebar. */
+  .postlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 95em) {
+  body {
+    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  }
+
+  .listing-content-grid {
+    max-width: 1800px;
   }
 }
 
@@ -1609,10 +1629,10 @@ dialog.search-overlay::backdrop {
 					<ul class="nav">
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/" aria-current="page">Inicio</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/blog/">Archivo</a></li>
-						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/destinations/">Destinos</a></li>
+						<li class="nav-item"><a href="/samples/trailblazers/dist/es/about/">Sobre nosotros</a></li>
 						<li class="nav-item"><a href="/samples/trailblazers/dist/es/feed/feed.xml">Feed</a></li>
-						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Crear</a></li>
+						<li class="nav-item admin-only" style="display: none;"><a href="/samples/trailblazers/dist/es/blog/create/">Admin</a></li>
 						<li class="nav-item search-item">
 							<button id="search-toggle" aria-label="Search" class="search-toggle-btn">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
@@ -1660,7 +1680,7 @@ dialog.search-overlay::backdrop {
 
 
 
-<h1 id="ultimas-5-publicaciones">Últimas 5 publicaciones</h1>
+<h1 id="ultimas-7-publicaciones">Últimas 7 publicaciones</h1>
 
 
 
@@ -1844,12 +1864,75 @@ dialog.search-overlay::backdrop {
 				<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fes%2Fblog%2Fqueenstown-adventure-capital%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
 			</div>
 		</li>
+		<li class="postlist-item">
+			<a href="/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/" class="postlist-thumbnail-link">
+				<div class="postlist-thumbnail-container">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/t9VX-0sKGQ-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/t9VX-0sKGQ-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/t9VX-0sKGQ-3000.jpeg" alt="Nueva York: Navegando por la Selva de Cristal" class="postlist-thumbnail" width="3000" height="2000"></picture>
+				</div>
+			</a>
+			<div class="postlist-content">
+				<div class="tags">
+						<a href="/samples/trailblazers/dist/es/tags/ciudad/" class="post-tag">Ciudad</a>
+						<a href="/samples/trailblazers/dist/es/tags/ee-uu/" class="post-tag">EE. UU.</a>
+						<a href="/samples/trailblazers/dist/es/tags/energia/" class="post-tag">Energía</a>
+				</div>
+				<a href="/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/" class="postlist-link">Nueva York: Navegando por la Selva de Cristal</a>
+				<a href="/samples/trailblazers/dist/es/blog/new-york-concrete-jungle/" class="postlist-description-link">
+					<p class="postlist-description">Navega por la jungla de concreto de Manhattan. Vive la energía eléctrica de Times Square y encuentra tranquilidad en Central Park en esta ciudad vibrante.</p>
+				</a>
+				
+				<div class="postlist-footer">
+					<a href="/samples/trailblazers/dist/es/authors/ashok/" class="postlist-author-link">
+						<div class="postlist-item-author">
+							
+								<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/PZ3GfjbWSC-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/PZ3GfjbWSC-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/PZ3GfjbWSC-1024.png" alt="Ashok" class="postlist-author-avatar" width="1024" height="1024"></picture>
+								<span class="postlist-author-name">Ashok</span>
+							
+						</div>
+					</a>
+					<time class="postlist-date" datetime="2026-03-16">mar 2026</time>
+				</div>
+				<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fes%2Fblog%2Fnew-york-concrete-jungle%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
+			</div>
+		</li>
+		<li class="postlist-item">
+			<a href="/samples/trailblazers/dist/es/blog/halong-bay-emerald-waters/" class="postlist-thumbnail-link">
+				<div class="postlist-thumbnail-container">
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.jpeg" alt="Bahía de Ha Long: Aguas Esmeraldas y Gigantes de Piedra Caliza" class="postlist-thumbnail" width="1200" height="800"></picture>
+				</div>
+			</a>
+			<div class="postlist-content">
+				<div class="tags">
+						<a href="/samples/trailblazers/dist/es/tags/naturaleza/" class="post-tag">Naturaleza</a>
+						<a href="/samples/trailblazers/dist/es/tags/vietnam/" class="post-tag">Vietnam</a>
+						<a href="/samples/trailblazers/dist/es/tags/aventura/" class="post-tag">Aventura</a>
+						<a href="/samples/trailblazers/dist/es/tags/islas/" class="post-tag">Islas</a>
+				</div>
+				<a href="/samples/trailblazers/dist/es/blog/halong-bay-emerald-waters/" class="postlist-link">Bahía de Ha Long: Aguas Esmeraldas y Gigantes de Piedra Caliza</a>
+				<a href="/samples/trailblazers/dist/es/blog/halong-bay-emerald-waters/" class="postlist-description-link">
+					<p class="postlist-description">La Bahía de Ha Long parece un mito hecho físico — miles de islas de piedra caliza emergiendo de aguas verdes hasta donde alcanza la vista.</p>
+				</a>
+				
+				<div class="postlist-footer">
+					<a href="/samples/trailblazers/dist/es/authors/julia/" class="postlist-author-link">
+						<div class="postlist-item-author">
+							
+								<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/xxDgAglpAm-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/xxDgAglpAm-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/xxDgAglpAm-1024.png" alt="Julia" class="postlist-author-avatar" width="1024" height="1024"></picture>
+								<span class="postlist-author-name">Julia</span>
+							
+						</div>
+					</a>
+					<time class="postlist-date" datetime="2026-03-15">mar 2026</time>
+				</div>
+				<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fes%2Fblog%2Fhalong-bay-emerald-waters%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
+			</div>
+		</li>
 </ul>
 
 
 
 
-<p>Se pueden encontrar 27 publicaciones más en <a href="/samples/trailblazers/dist/es/blog/">el archivo</a>.</p>
+<p>Se pueden encontrar 25 publicaciones más en <a href="/samples/trailblazers/dist/es/blog/">el archivo</a>.</p>
 
 
 
@@ -1921,7 +2004,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/es/` was built on 2026-04-01T10:40:35.720Z -->
+		<!-- This page `/es/` was built on 2026-04-01T14:08:18.309Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		
