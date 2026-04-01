@@ -120,11 +120,6 @@ permalink: /ja/destinations/index.html
   gap: 0.4rem;
 }
 
-.map-tooltip::before {
-  content: '📍';
-  font-size: 0.8rem;
-}
-
 .map-hint {
   text-align: center;
   font-size: 0.85rem;
@@ -234,7 +229,7 @@ permalink: /ja/destinations/index.html
     <h2>{{ 'destinations_all' | i18n({}, locale) }}</h2>
     <ul class="destination-cards">
       {%- for slug, dest in destinations %}
-      {%- set postUrl = '/' + locale + '/blog/' + slug + '/' %}
+      {%- set postUrl = siteBase + locale + '/blog/' + slug + '/' %}
       <li>
         <a href="{{ postUrl }}" class="destination-card">
           <div class="destination-card-thumb">
@@ -260,6 +255,7 @@ permalink: /ja/destinations/index.html
 (function () {
   const destinations = {{ destinations | dump | safe }};
   const locale = {{ locale | dump | safe }};
+  const siteBase = {{ '/' | url | dump | safe }};
 
   const container = document.getElementById('world-map-container');
   const tooltip = document.getElementById('map-tooltip');
@@ -277,19 +273,19 @@ permalink: /ja/destinations/index.html
     el.classList.add('destination-highlight');
     el.setAttribute('data-dest-slug', slug);
     el.setAttribute('data-dest-name', dest.country[locale] || dest.country['en']);
-    el.setAttribute('data-dest-url', '/' + locale + '/blog/' + slug + '/');
+    el.setAttribute('data-dest-url', siteBase + locale + '/blog/' + slug + '/');
     el.setAttribute('tabindex', '0');
     el.setAttribute('role', 'button');
     el.setAttribute('aria-label', (dest.country[locale] || dest.country['en']) + ' — click to read article');
 
     // Click to navigate
     el.addEventListener('click', (e) => {
-      window.location.href = '/' + locale + '/blog/' + slug + '/';
+      window.location.href = siteBase + locale + '/blog/' + slug + '/';
     });
 
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
-        window.location.href = '/' + locale + '/blog/' + slug + '/';
+        window.location.href = siteBase + locale + '/blog/' + slug + '/';
       }
     });
   });
