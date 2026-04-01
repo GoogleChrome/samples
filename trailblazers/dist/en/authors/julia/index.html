@@ -1530,8 +1530,10 @@ dialog.search-overlay::backdrop {
 }
 
 @media (min-width: 95em) {
-  body {
-    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  /* Widen the body only on pages that have a listing grid (home, archive, tags).
+     Post pages keep the default 80rem body width so their content stays centred. */
+  body:has(.listing-content-grid) {
+    max-width: 1900px;
   }
 
   .listing-content-grid {
@@ -1798,6 +1800,25 @@ dialog.search-overlay::backdrop {
 				<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fen%2Fblog%2Fmasai-mara-great-migration%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
 			</div>
 		</li>
+		<li class="postlist-item postlist-item-newsletter">
+			<div class="postlist-thumbnail-container">
+				<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.avif 2048w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.webp 2048w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.jpeg" alt="Newsletter" class="postlist-thumbnail" width="2048" height="2048"></picture>
+			</div>
+			<div class="postlist-content">
+				<span class="newsletter-label">Daily newsletter</span>
+				<h3 class="newsletter-title" id="reward-your-inbox-with-the-trailblazers-daily-newsletter">Reward your inbox with the Trailblazers Daily newsletter</h3>
+				<p class="postlist-description">Join over 1,000,000 readers for breaking news, in-depth guides, and exclusive deals.</p>
+				
+				<form class="newsletter-form">
+					<div class="newsletter-input-group">
+						<input type="email" placeholder="Your email…" required="" class="newsletter-input">
+						<button type="submit" class="newsletter-button">Sign up</button>
+					</div>
+				</form>
+				
+				<p class="newsletter-disclaimer">By signing up, you agree to our <a href="//imprint/">Terms of Use</a> and acknowledge the data practices in our <a href="//privacy/">Privacy Policy</a>.</p>
+			</div>
+		</li>
 		<li class="postlist-item">
 			<a href="/samples/trailblazers/dist/en/blog/serengeti-safari-sunrise/" class="postlist-thumbnail-link">
 				<div class="postlist-thumbnail-container">
@@ -1890,25 +1911,6 @@ dialog.search-overlay::backdrop {
 					<time class="postlist-date" datetime="2026-03-08">Mar 2026</time>
 				</div>
 				<a href="/samples/trailblazers/dist/blog/create/?edit=.%2Fcontent%2Fen%2Fblog%2Fbanff-turquoise-waters%2Findex.md" class="admin-only edit-post-link btn" style="display: none;">✏️ Edit</a>
-			</div>
-		</li>
-		<li class="postlist-item postlist-item-newsletter">
-			<div class="postlist-thumbnail-container">
-				<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.avif 2048w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.webp 2048w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/XPa3BM1XjF-2048.jpeg" alt="Newsletter" class="postlist-thumbnail" width="2048" height="2048"></picture>
-			</div>
-			<div class="postlist-content">
-				<span class="newsletter-label">Daily newsletter</span>
-				<h3 class="newsletter-title" id="reward-your-inbox-with-the-trailblazers-daily-newsletter">Reward your inbox with the Trailblazers Daily newsletter</h3>
-				<p class="postlist-description">Join over 1,000,000 readers for breaking news, in-depth guides, and exclusive deals.</p>
-				
-				<form class="newsletter-form">
-					<div class="newsletter-input-group">
-						<input type="email" placeholder="Your email…" required="" class="newsletter-input">
-						<button type="submit" class="newsletter-button">Sign up</button>
-					</div>
-				</form>
-				
-				<p class="newsletter-disclaimer">By signing up, you agree to our <a href="//imprint/">Terms of Use</a> and acknowledge the data practices in our <a href="//privacy/">Privacy Policy</a>.</p>
 			</div>
 		</li>
 		<li class="postlist-item">
@@ -2077,7 +2079,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/en/authors/julia/` was built on 2026-04-01T14:08:19.483Z -->
+		<!-- This page `/en/authors/julia/` was built on 2026-04-01T15:00:23.075Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

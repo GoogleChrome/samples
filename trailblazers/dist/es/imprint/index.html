@@ -1530,8 +1530,10 @@ dialog.search-overlay::backdrop {
 }
 
 @media (min-width: 95em) {
-  body {
-    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  /* Widen the body only on pages that have a listing grid (home, archive, tags).
+     Post pages keep the default 80rem body width so their content stays centred. */
+  body:has(.listing-content-grid) {
+    max-width: 1900px;
   }
 
   .listing-content-grid {
@@ -1749,7 +1751,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/es/imprint/` was built on 2026-04-01T14:08:17.773Z -->
+		<!-- This page `/es/imprint/` was built on 2026-04-01T15:00:21.534Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

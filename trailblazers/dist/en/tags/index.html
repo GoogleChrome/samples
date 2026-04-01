@@ -1530,8 +1530,10 @@ dialog.search-overlay::backdrop {
 }
 
 @media (min-width: 95em) {
-  body {
-    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  /* Widen the body only on pages that have a listing grid (home, archive, tags).
+     Post pages keep the default 80rem body width so their content stays centred. */
+  body:has(.listing-content-grid) {
+    max-width: 1900px;
   }
 
   .listing-content-grid {
@@ -1673,11 +1675,11 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/adventure/" class="post-tag">Adventure <span class="tag-count">(8)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/nature/" class="post-tag">Nature <span class="tag-count">(8)</span></a>
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/nature/" class="post-tag">Nature <span class="tag-count">(8)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/adventure/" class="post-tag">Adventure <span class="tag-count">(8)</span></a>
 
 	
 	
@@ -1697,10 +1699,6 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/wildlife/" class="post-tag">Wildlife <span class="tag-count">(2)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/en/tags/relaxation/" class="post-tag">Relaxation <span class="tag-count">(2)</span></a>
 
 	
@@ -1709,15 +1707,15 @@ dialog.search-overlay::backdrop {
 
 	
 	
+	<a href="/samples/trailblazers/dist/en/tags/wildlife/" class="post-tag">Wildlife <span class="tag-count">(2)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/en/tags/energy/" class="post-tag">Energy <span class="tag-count">(2)</span></a>
 
 	
 	
 	<a href="/samples/trailblazers/dist/en/tags/netherlands/" class="post-tag">Netherlands <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/en/tags/thailand/" class="post-tag">Thailand <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1745,7 +1743,19 @@ dialog.search-overlay::backdrop {
 
 	
 	
+	<a href="/samples/trailblazers/dist/en/tags/thailand/" class="post-tag">Thailand <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/en/tags/germany/" class="post-tag">Germany <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/en/tags/argentina/" class="post-tag">Argentina <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/en/tags/south-africa/" class="post-tag">South Africa <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1757,19 +1767,15 @@ dialog.search-overlay::backdrop {
 
 	
 	
+	<a href="/samples/trailblazers/dist/en/tags/scotland/" class="post-tag">Scotland <span class="tag-count">(1)</span></a>
+
+	
+	
 	<a href="/samples/trailblazers/dist/en/tags/cuba/" class="post-tag">Cuba <span class="tag-count">(1)</span></a>
 
 	
 	
 	<a href="/samples/trailblazers/dist/en/tags/turkey/" class="post-tag">Turkey <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/en/tags/south-africa/" class="post-tag">South Africa <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/en/tags/scotland/" class="post-tag">Scotland <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1785,15 +1791,15 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/germany/" class="post-tag">Germany <span class="tag-count">(1)</span></a>
-
-	
-	
-	<a href="/samples/trailblazers/dist/en/tags/morocco/" class="post-tag">Morocco <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/mexico/" class="post-tag">Mexico <span class="tag-count">(1)</span></a>
 
 	
 	
 	<a href="/samples/trailblazers/dist/en/tags/kenya/" class="post-tag">Kenya <span class="tag-count">(1)</span></a>
+
+	
+	
+	<a href="/samples/trailblazers/dist/en/tags/morocco/" class="post-tag">Morocco <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1805,7 +1811,7 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/france/" class="post-tag">France <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/czech-republic/" class="post-tag">Czech Republic <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1817,7 +1823,7 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/czech-republic/" class="post-tag">Czech Republic <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/france/" class="post-tag">France <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1841,15 +1847,11 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/mexico/" class="post-tag">Mexico <span class="tag-count">(1)</span></a>
-
-	
-	
 	<a href="/samples/trailblazers/dist/en/tags/greece/" class="post-tag">Greece <span class="tag-count">(1)</span></a>
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/south-korea/" class="post-tag">South Korea <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/tanzania/" class="post-tag">Tanzania <span class="tag-count">(1)</span></a>
 
 	
 	
@@ -1857,11 +1859,11 @@ dialog.search-overlay::backdrop {
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/japan/" class="post-tag">Japan <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/south-korea/" class="post-tag">South Korea <span class="tag-count">(1)</span></a>
 
 	
 	
-	<a href="/samples/trailblazers/dist/en/tags/tanzania/" class="post-tag">Tanzania <span class="tag-count">(1)</span></a>
+	<a href="/samples/trailblazers/dist/en/tags/japan/" class="post-tag">Japan <span class="tag-count">(1)</span></a>
 
 </div>
 
@@ -1934,7 +1936,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/en/tags/` was built on 2026-04-01T14:08:18.309Z -->
+		<!-- This page `/en/tags/` was built on 2026-04-01T15:00:22.065Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

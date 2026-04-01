@@ -1530,8 +1530,10 @@ dialog.search-overlay::backdrop {
 }
 
 @media (min-width: 95em) {
-  body {
-    max-width: 1900px; /* Let the layout container reach its 1800px max */
+  /* Widen the body only on pages that have a listing grid (home, archive, tags).
+     Post pages keep the default 80rem body width so their content stays centred. */
+  body:has(.listing-content-grid) {
+    max-width: 1900px;
   }
 
   .listing-content-grid {
@@ -1765,18 +1767,18 @@ dialog.search-overlay::backdrop {
 				</li>
 			
 				<li class="popular-item">
-					<a href="/samples/trailblazers/dist/en/blog/marrakech-medina-maze/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="Marrakech: Lost in the Medina Maze" class="popular-thumbnail" width="1200" height="800"></picture></a>
-					<div class="popular-item-content">
-						<span class="tag-badge">Adventure</span>
-						<a href="/samples/trailblazers/dist/en/blog/marrakech-medina-maze/" class="popular-link">Marrakech: Lost in the Medina Maze</a>
-					</div>
-				</li>
-			
-				<li class="popular-item">
 					<a href="/samples/trailblazers/dist/en/blog/sydney-harbour-sunrise/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.jpeg" alt="Sydney: Sunrise Over the Harbour" class="popular-thumbnail" width="1200" height="800"></picture></a>
 					<div class="popular-item-content">
 						<span class="tag-badge">Nature</span>
 						<a href="/samples/trailblazers/dist/en/blog/sydney-harbour-sunrise/" class="popular-link">Sydney: Sunrise Over the Harbour</a>
+					</div>
+				</li>
+			
+				<li class="popular-item">
+					<a href="/samples/trailblazers/dist/en/blog/marrakech-medina-maze/"><picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="Marrakech: Lost in the Medina Maze" class="popular-thumbnail" width="1200" height="800"></picture></a>
+					<div class="popular-item-content">
+						<span class="tag-badge">Adventure</span>
+						<a href="/samples/trailblazers/dist/en/blog/marrakech-medina-maze/" class="popular-link">Marrakech: Lost in the Medina Maze</a>
 					</div>
 				</li>
 			
@@ -1878,7 +1880,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/en/tags/wildlife/` was built on 2026-04-01T14:08:20.014Z -->
+		<!-- This page `/en/tags/wildlife/` was built on 2026-04-01T15:00:23.620Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		
