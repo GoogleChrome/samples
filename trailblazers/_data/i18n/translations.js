@@ -229,4 +229,44 @@ export default {
     es: 'Reservar en Trip.com',
     ja: 'Trip.comで予約',
   },
+  travel_agent_widget_label: {
+    en: 'Talk about {{ city }} with a travel agent',
+    es: 'Habla sobre {{ city }} con un agente de viajes',
+    ja: '{{ city }}について旅行代理店に相談する',
+  },
+  travel_agent_widget_tagline: {
+    en: 'Have questions about <strong>{{ city }}</strong>? Chat with an AI travel agent!',
+    es: '¿Tienes preguntas sobre <strong>{{ city }}</strong>? ¡Habla con un agente de viajes con IA!',
+    ja: '<strong>{{ city }}</strong>について質問がありますか？AIの旅行代理店とチャットしましょう！',
+  },
+  travel_agent_widget_button: {
+    en: 'Talk to a travel agent',
+    es: 'Hablar con un agente',
+    ja: '旅行代理店に相談',
+  },
+  tshirt_widget_label: {
+    en: 'Get {{ city }} on a t-shirt',
+    es: 'Lleva {{ city }} en una camiseta',
+    ja: '{{ city }}をTシャツに',
+  },
+  tshirt_widget_tagline: {
+    en: 'Love <strong>{{ city }}</strong>? Wear it! Get the hero photo printed on a premium t-shirt.',
+    es: '¿Amas <strong>{{ city }}</strong>? ¡Llévalo puesto! Imprime la foto en una camiseta premium.',
+    ja: '<strong>{{ city }}</strong>が好きなら、着て出かけよう！ヒーロー写真をプレミアムTシャツにプリント。',
+  },
+  tshirt_widget_colors: {
+    en: 'Pick a colour:',
+    es: 'Elige un color:',
+    ja: 'カラーを選ぶ:',
+  },
+  tshirt_widget_button: {
+    en: 'Order on Nykaa',
+    es: 'Pedir en Nykaa',
+    ja: 'Nykaaで注文',
+  },
+  tshirt_widget_ai_color: {
+    en: 'Let AI pick the perfect color for you',
+    es: 'Deja que la IA elija el color perfecto para ti',
+    ja: 'AIが最適なカラーを選んでくれます',
+  },
 };

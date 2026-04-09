@@ -50,6 +50,7 @@ export function generateMarkdown(
     `title: ${escapeYamlValue(title)}`,
     `description: ${escapeYamlValue(description)}`,
     `date: ${date}`,
+    draft.author ? `author: ${draft.author}` : '',
     tagsYaml,
     classifierIds.length > 0
       ? `ad_categories: ${JSON.stringify(classifierIds)}`

@@ -40,6 +40,7 @@ const tagEditor = initTagEditor(ui, doSync);
 ui.titleInput.oninput = doSync;
 ui.descInput.oninput = doSync;
 ui.dateInput.oninput = doSync;
+ui.authorSelect.onchange = doSync;
 ui.contentInput.oninput = doSync;
 window.addEventListener('classifier-updated', doSync);
 

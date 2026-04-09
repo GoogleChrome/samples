@@ -5,7 +5,7 @@ export default {
   description:
     'Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.',
   author: {
-    name: 'trAIlblazers Team',
+    name: 'Maya, Ashok & Julia',
     email: 'hello@trailblazers.example.com',
     url: 'https://trailblazers.example.com/about/',
   },

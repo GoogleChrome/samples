@@ -1630,7 +1630,7 @@ dialog.search-overlay::backdrop {
   margin-bottom: 1rem;
 }
 
-.souvenir-widget-label {  
+.souvenir-widget-label {
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1686,7 +1686,7 @@ dialog.search-overlay::backdrop {
 }
 
 .souvenir-widget-item-name {
-  margin: 0;      
+  margin: 0;
   color: var(--color-text);
 }
 
@@ -1844,7 +1844,6 @@ dialog.search-overlay::backdrop {
   flex-shrink: 0;
   box-shadow: none;
   border: white 5px solid;
-  
 }
 
 @media (max-width: 480px) {
@@ -1857,6 +1856,285 @@ dialog.search-overlay::backdrop {
   .flight-widget-icon {
     width: 60px;
     height: 60px;
+  }
+}
+
+/* ============================================================
+   Travel Agent Widget
+   ============================================================ */
+.travel-agent-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+}
+
+.travel-agent-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.travel-agent-widget-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+}
+
+.travel-agent-widget-affiliate-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-dark);
+  background: var(--tag-bg);
+  border-radius: 20px;
+  padding: 0.2em 0.7em;
+  opacity: 0.75;
+}
+
+.travel-agent-widget-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.travel-agent-widget-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.travel-agent-widget-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .travel-agent-widget-icon {
+    opacity: 0.85;
+  }
+}
+
+.travel-agent-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.travel-agent-widget-tagline {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.travel-agent-widget-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.travel-agent-widget-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.travel-agent-widget-logo {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background-color: #fefefe;
+  box-shadow: none;
+}
+
+@media (max-width: 480px) {
+  .travel-agent-widget-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .travel-agent-widget-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ============================================================
+   T-shirt Widget
+   ============================================================ */
+.tshirt-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+}
+
+.tshirt-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.tshirt-widget-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+}
+
+.tshirt-widget-affiliate-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-dark);
+  background: var(--tag-bg);
+  border-radius: 20px;
+  padding: 0.2em 0.7em;
+  opacity: 0.75;
+}
+
+.tshirt-widget-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.tshirt-widget-preview {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tshirt-canvas {
+  width: 190px;
+  height: 215px;
+  display: block;
+  border-radius: 8px;
+}
+
+.tshirt-widget-swatches {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tshirt-swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease, outline-offset 0.15s ease;
+}
+
+.tshirt-swatch:hover {
+  transform: scale(1.15);
+}
+
+.tshirt-swatch.active {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.tshirt-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.tshirt-widget-tagline {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.tshirt-widget-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f59e0b 100%);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  align-self: flex-start;
+}
+
+.tshirt-widget-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.55);
+}
+
+.tshirt-widget-nykaa-logo {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.tshirt-widget-sparkle {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 560px) {
+  .tshirt-widget-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tshirt-widget-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .tshirt-widget-button {
+    align-self: center;
   }
 }
 /**
@@ -2262,6 +2540,63 @@ pre[class*='language-diff-'] {
 
 
 
+<div class="travel-agent-widget">
+  <div class="travel-agent-widget-top">
+    <span class="travel-agent-widget-label">Habla sobre Amalfi Coast con un agente de viajes</span>
+    <span class="travel-agent-widget-affiliate-badge">Enlace de afiliado</span>
+  </div>
+  <div class="travel-agent-widget-body">
+    <div class="travel-agent-widget-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path>
+      </svg>
+    </div>
+    <div class="travel-agent-widget-content">
+      <p class="travel-agent-widget-tagline">¿Tienes preguntas sobre <strong>Amalfi Coast</strong>? ¡Habla con un agente de viajes con IA!</p>
+      <a href="https://his-tour-search-agent.vercel.app/?destination=Amalfi%20Coast" class="travel-agent-widget-button" target="_blank" rel="noopener" aria-label="Talk about Amalfi Coast with an AI travel agent (opens in new tab)">
+        <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Fhis-logo.jpg&width=400&format=avif&via=transform 400w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Fhis-logo.jpg&width=400&format=webp&via=transform 400w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Fhis-logo.jpg&width=400&format=jpeg&via=transform" alt="HIS Travel" class="travel-agent-widget-logo" width="400" height="400"></picture>
+        Hablar con un agente
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="tshirt-widget">
+  <div class="tshirt-widget-top">
+    <span class="tshirt-widget-label">Lleva Amalfi Coast en una camiseta</span>
+    <span class="tshirt-widget-affiliate-badge">Enlace de afiliado</span>
+  </div>
+  <div class="tshirt-widget-body">
+    <div class="tshirt-widget-preview">
+      <canvas id="tshirt-canvas" class="tshirt-canvas" width="300" height="340" aria-label="T-shirt preview"></canvas>
+      <div class="tshirt-widget-swatches" aria-label="Elige un color:">
+        <button class="tshirt-swatch active" data-color="#ffffff" style="background:#ffffff;" aria-label="White" title="White"></button>
+        <button class="tshirt-swatch" data-color="#333333" style="background:#333333;" aria-label="Charcoal" title="Charcoal"></button>
+        <button class="tshirt-swatch" data-color="#1e3a5f" style="background:#1e3a5f;" aria-label="Navy" title="Navy"></button>
+        <button class="tshirt-swatch" data-color="#b91c1c" style="background:#b91c1c;" aria-label="Crimson" title="Crimson"></button>
+        <button class="tshirt-swatch" data-color="#3d5a3e" style="background:#3d5a3e;" aria-label="Forest Green" title="Forest Green"></button>
+        <button class="tshirt-swatch" data-color="#7c3d99" style="background:#7c3d99;" aria-label="Purple" title="Purple"></button>
+      </div>
+    </div>
+    <div class="tshirt-widget-content">
+      <p class="tshirt-widget-tagline">¿Amas <strong>Amalfi Coast</strong>? ¡Llévalo puesto! Imprime la foto en una camiseta premium.</p>
+      <a href="https://www.nykaafashion.com/image-search" class="tshirt-widget-button" target="_blank" rel="noopener sponsored" aria-label="Order a Amalfi Coast t-shirt on Nykaa (affiliate link, opens in new tab)">
+        <img src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Fnykaa-logo.jpg&width=240&format=webp&via=transform" alt="Nykaa" class="tshirt-widget-nykaa-logo" width="240" height="240" loading="lazy" decoding="async">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="tshirt-widget-sparkle">
+          <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2zm0 10l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"></path>
+        </svg>
+        <span>Deja que la IA elija el color perfecto para ti</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <div class="post-country-map">
   <p class="post-country-map-label">Italia</p>
   <div class="post-country-map-svg">
@@ -2342,8 +2677,8 @@ pre[class*='language-diff-'] {
 			</form>
 		</footer>
 
-		<!-- This page `/es/blog/amalfi-coast-winding-roads/` was built on 2026-04-09T14:46:36.035Z -->
-		<script type="module" src="/samples/trailblazers/dist/dist/JhrVhBhcbG.js"></script>
+		<!-- This page `/es/blog/amalfi-coast-winding-roads/` was built on 2026-04-09T17:58:40.134Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/cERBT1CjbY.js"></script>
 		
 		
 	</body>

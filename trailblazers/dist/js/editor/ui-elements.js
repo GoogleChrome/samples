@@ -12,6 +12,7 @@ export const ui = {
     'ai-suggest-description-btn',
   ),
   dateInput: document.getElementById('post-date'),
+  authorSelect: document.getElementById('post-author'),
   tagsInput: document.getElementById('post-tags'),
   tagPills: document.getElementById('tag-pills'),
   tagInput: document.getElementById('tag-input'),

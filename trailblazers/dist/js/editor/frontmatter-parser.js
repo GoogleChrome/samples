@@ -52,6 +52,9 @@ export async function populateUIFromMetadata(metadata, ui, tagEditor) {
   if (metadata.date) {
     ui.dateInput.value = metadata.date;
   }
+  if (metadata.author && ui.authorSelect) {
+    ui.authorSelect.value = metadata.author;
+  }
   if (metadata.tags) {
     const tags = Array.isArray(metadata.tags)
       ? metadata.tags.join(', ')

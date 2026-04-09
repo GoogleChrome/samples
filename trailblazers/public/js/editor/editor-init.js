@@ -54,6 +54,7 @@ export async function initEditor(ui, loadDraft, renderList, sync, tagEditor) {
         title: postData.title || '',
         description: postData.description || '',
         date: postData.date || '',
+        author: postData.author || '',
         tags: postData.tags || '',
         content: postData.content || '',
         ad_categories: postData.ad_categories,

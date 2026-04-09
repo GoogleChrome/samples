@@ -176,6 +176,16 @@ eleventyExcludeFromCollections: true
 				</div>
 
 				<div class="form-group">
+					<label for="post-author">Author</label>
+					<select id="post-author">
+						<option value="">— Select Author —</option>
+						{% for key, author in authors %}
+						<option value="{{ key }}">{{ author.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="form-group">
 					<label for="tag-input">Tags</label>
 					<div class="tag-container">
 						<div id="tag-pills" class="tag-pills"></div>
