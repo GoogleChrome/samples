@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Hahoetal (Korean traditional mask) -->
+  <!-- Face shape - oval with chin -->
+  <path d="M20 42 C20 22 32 12 50 12 C68 12 80 22 80 42 C80 58 74 70 66 76 L50 84 L34 76 C26 70 20 58 20 42 Z" fill="currentColor"/>
+  <!-- Eyes - elongated and upturned -->
+  <path d="M28 40 C30 34 38 32 44 36 C38 40 30 44 28 40 Z" fill="white" opacity="0.3"/>
+  <path d="M72 40 C70 34 62 32 56 36 C62 40 70 44 72 40 Z" fill="white" opacity="0.3"/>
+  <!-- Eye pupils -->
+  <ellipse cx="37" cy="37" rx="5" ry="4" fill="currentColor"/>
+  <ellipse cx="63" cy="37" rx="5" ry="4" fill="currentColor"/>
+  <!-- Eyebrows - arched -->
+  <path d="M28 32 C32 26 42 26 46 30" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+  <path d="M72 32 C68 26 58 26 54 30" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+  <!-- Nose - small bumped nose -->
+  <path d="M44 50 C44 54 46 58 50 60 C54 58 56 54 56 50" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+  <ellipse cx="50" cy="56" rx="5" ry="3" fill="white" opacity="0.15"/>
+  <!-- Mouth - wide smile -->
+  <path d="M34 68 Q50 82 66 68" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <!-- Chin dimple -->
+  <path d="M46 80 Q50 84 54 80" stroke="white" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <!-- Cheek dimples / blush -->
+  <ellipse cx="27" cy="56" rx="6" ry="4" fill="white" opacity="0.15"/>
+  <ellipse cx="73" cy="56" rx="6" ry="4" fill="white" opacity="0.15"/>
+  <!-- Forehead crown marking -->
+  <path d="M38 20 C42 16 58 16 62 20" stroke="white" stroke-width="1.5" fill="none" opacity="0.3"/>
+</svg>

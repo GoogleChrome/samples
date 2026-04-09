@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Paella pan -->
+  <!-- Pan handles -->
+  <rect x="2" y="44" width="16" height="12" rx="6" fill="currentColor"/>
+  <rect x="82" y="44" width="16" height="12" rx="6" fill="currentColor"/>
+  <!-- Pan body (shallow, wide) -->
+  <ellipse cx="50" cy="56" rx="44" ry="12" fill="currentColor" opacity="0.7"/>
+  <path d="M8 50 L92 50 L88 68 Q50 76 12 68 Z" fill="currentColor"/>
+  <!-- Pan rim -->
+  <ellipse cx="50" cy="50" rx="42" ry="10" fill="currentColor"/>
+  <ellipse cx="50" cy="50" rx="38" ry="8" fill="white" opacity="0.15"/>
+  <!-- Rice/paella contents (top view) -->
+  <!-- Rice base -->
+  <ellipse cx="50" cy="52" rx="34" ry="8" fill="white" opacity="0.2"/>
+  <!-- Shrimp (curved U shapes) -->
+  <path d="M28 50 C26 46 32 44 34 50" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <path d="M68 50 C70 46 64 44 62 50" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <!-- Mussel shapes -->
+  <ellipse cx="42" cy="48" rx="5" ry="3" fill="white" opacity="0.3" transform="rotate(-20 42 48)"/>
+  <ellipse cx="58" cy="48" rx="5" ry="3" fill="white" opacity="0.3" transform="rotate(20 58 48)"/>
+  <!-- Saffron coloring suggestion -->
+  <ellipse cx="50" cy="52" rx="18" ry="5" fill="white" opacity="0.15"/>
+  <!-- Peas dots -->
+  <circle cx="36" cy="54" r="2" fill="white" opacity="0.35"/>
+  <circle cx="50" cy="54" r="2" fill="white" opacity="0.35"/>
+  <circle cx="64" cy="54" r="2" fill="white" opacity="0.35"/>
+  <circle cx="43" cy="56" r="2" fill="white" opacity="0.35"/>
+  <circle cx="57" cy="56" r="2" fill="white" opacity="0.35"/>
+</svg>

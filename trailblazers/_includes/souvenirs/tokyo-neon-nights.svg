@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Maneki-neko (lucky waving cat) -->
+  <!-- Body -->
+  <ellipse cx="50" cy="66" rx="24" ry="22" fill="currentColor"/>
+  <!-- Head (large, round) -->
+  <circle cx="50" cy="36" r="22" fill="currentColor"/>
+  <!-- Ears -->
+  <path d="M32 20 L28 8 L42 18 Z" fill="currentColor"/>
+  <path d="M68 20 L72 8 L58 18 Z" fill="currentColor"/>
+  <!-- Inner ears -->
+  <path d="M33 19 L30 11 L40 18 Z" fill="white" opacity="0.4"/>
+  <path d="M67 19 L70 11 L60 18 Z" fill="white" opacity="0.4"/>
+  <!-- Face -->
+  <!-- Eyes (large, round) -->
+  <ellipse cx="40" cy="34" rx="7" ry="8" fill="white" opacity="0.85"/>
+  <ellipse cx="60" cy="34" rx="7" ry="8" fill="white" opacity="0.85"/>
+  <circle cx="40" cy="35" r="4" fill="currentColor"/>
+  <circle cx="60" cy="35" r="4" fill="currentColor"/>
+  <!-- Eye shine -->
+  <circle cx="42" cy="32" r="2" fill="white" opacity="0.6"/>
+  <circle cx="62" cy="32" r="2" fill="white" opacity="0.6"/>
+  <!-- Nose -->
+  <ellipse cx="50" cy="42" rx="3" ry="2" fill="white" opacity="0.5"/>
+  <!-- Whiskers left -->
+  <line x1="28" y1="42" x2="44" y2="44" stroke="white" stroke-width="1.5" opacity="0.5"/>
+  <line x1="28" y1="46" x2="44" y2="46" stroke="white" stroke-width="1.5" opacity="0.5"/>
+  <!-- Whiskers right -->
+  <line x1="72" y1="42" x2="56" y2="44" stroke="white" stroke-width="1.5" opacity="0.5"/>
+  <line x1="72" y1="46" x2="56" y2="46" stroke="white" stroke-width="1.5" opacity="0.5"/>
+  <!-- Smile -->
+  <path d="M44 48 Q50 54 56 48" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+  <!-- Raised paw (left arm up - waving) -->
+  <path d="M28 56 C20 48 16 36 22 28 C26 24 32 26 34 32 C30 38 28 46 28 56 Z" fill="currentColor"/>
+  <!-- Paw fingers -->
+  <path d="M22 28 C20 24 22 20 24 22" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M28 26 C28 20 30 18 32 20" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M34 28 C36 22 38 22 38 26" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Other arm (lower) -->
+  <path d="M72 58 C78 54 82 62 78 68 L72 68 Z" fill="currentColor"/>
+  <!-- Coin / koban detail on chest -->
+  <circle cx="50" cy="68" r="10" fill="white" opacity="0.2"/>
+  <circle cx="50" cy="68" r="6" fill="white" opacity="0.15"/>
+  <!-- Collar -->
+  <path d="M28 56 Q50 58 72 56" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/>
+  <!-- Bell on collar -->
+  <circle cx="50" cy="57" r="3" fill="white" opacity="0.4"/>
+</svg>

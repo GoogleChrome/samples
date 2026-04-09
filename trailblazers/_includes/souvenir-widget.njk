@@ -1,0 +1,30 @@
+{%- set destSlug = page.fileSlug -%}
+{%- set destInfo = destinations[destSlug] -%}
+{%- if destInfo and destInfo.souvenir %}
+<div class="souvenir-widget">
+  <div class="souvenir-widget-top">
+    <span class="souvenir-widget-label">{{ 'souvenir_widget_label' | i18n({ city: destInfo.cityName }, locale) }}</span>
+    <span class="souvenir-widget-affiliate-badge">{{ 'affiliate_link' | i18n({}, locale) }}</span>
+  </div>
+  <div class="souvenir-widget-body">
+    <div class="souvenir-widget-icon" aria-hidden="true">
+      {% include "souvenirs/" + destSlug + ".svg" %}
+    </div>
+    <div class="souvenir-widget-content">
+      <p class="souvenir-widget-item-name">{{ 'souvenir_widget_item' | i18n({ name: destInfo.souvenir.name }, locale) | safe }}</p>
+      <a href="{{ destInfo.souvenir.temuUrl }}"
+         class="souvenir-widget-button"
+         target="_blank"
+         rel="noopener sponsored"
+         aria-label="Buy a {{ destInfo.souvenir.name }} on Temu (affiliate link, opens in new tab)">
+        <img src="/img/temu-logo.svg"
+             alt="Temu"
+             class="souvenir-widget-temu-logo"
+             width="1024"
+             height="1024">
+        {{ 'souvenir_widget_button' | i18n({}, locale) }}
+      </a>
+    </div>
+  </div>
+</div>
+{%- endif %}

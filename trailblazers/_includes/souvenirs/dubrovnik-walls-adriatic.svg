@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Lavender sachet bag -->
+  <!-- Bag body -->
+  <path d="M28 42 C26 50 26 58 28 68 C30 76 38 84 50 84 C62 84 70 76 72 68 C74 58 74 50 72 42 Z" fill="currentColor"/>
+  <!-- Bag top gathered -->
+  <path d="M34 38 C36 32 38 28 50 28 C62 28 64 32 66 38 C64 44 58 46 50 46 C42 46 36 44 34 38 Z" fill="currentColor" opacity="0.8"/>
+  <!-- Ribbon tie -->
+  <!-- Bow center -->
+  <ellipse cx="50" cy="38" rx="4" ry="4" fill="white" opacity="0.7"/>
+  <!-- Bow left wing -->
+  <path d="M30 30 C36 28 44 34 46 38 C42 38 34 36 30 30 Z" fill="white" opacity="0.5"/>
+  <!-- Bow right wing -->
+  <path d="M70 30 C64 28 56 34 54 38 C58 38 66 36 70 30 Z" fill="white" opacity="0.5"/>
+  <!-- Ribbon tails -->
+  <path d="M46 40 C42 52 38 58 36 64" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <path d="M54 40 C58 52 62 58 64 64" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <!-- Lavender sprigs -->
+  <circle cx="40" cy="62" r="3" fill="white" opacity="0.25"/>
+  <circle cx="50" cy="65" r="3" fill="white" opacity="0.25"/>
+  <circle cx="60" cy="62" r="3" fill="white" opacity="0.25"/>
+  <circle cx="45" cy="70" r="2.5" fill="white" opacity="0.25"/>
+  <circle cx="55" cy="72" r="2.5" fill="white" opacity="0.25"/>
+</svg>

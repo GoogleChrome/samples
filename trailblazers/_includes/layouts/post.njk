@@ -52,8 +52,6 @@ layout: layouts/base.njk
 	</button>
 </div>
 
-{% include "country-map.njk" %}
-
 {% if author and authors[author] %}
 <aside class="author-section">
 	<a href="/{{ locale }}/authors/{{ author }}/" class="author-avatar-link">
@@ -70,6 +68,12 @@ layout: layouts/base.njk
 	</div>
 </aside>
 {% endif %}
+
+{% include "souvenir-widget.njk" %}
+
+{% include "flight-widget.njk" %}
+
+{% include "country-map.njk" %}
 
 {%- if collections['posts_' + locale] %}
 {%- set previousPost = collections['posts_' + locale] | getPreviousCollectionItem %}

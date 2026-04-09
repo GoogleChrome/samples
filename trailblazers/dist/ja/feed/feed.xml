@@ -6,18 +6,51 @@
   <subtitle>Exploring the world one peak, one beach, and one city at a time with Maya, Ashok, and Julia.</subtitle>
   <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/feed/feed.xml" rel="self" />
   <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/" />
-  <updated>2026-03-20T00:00:00Z</updated>
+  <updated>2026-04-09T00:00:00Z</updated>
   <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/</id>
   <author>
     <name>trAIlblazers Team</name>
     <email>hello@trailblazers.example.com</email>
   </author>
   <entry>
+    <title>バレンシア：光と、パエリアと、未来的な夢の街</title>
+    <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/valencia-city-of-light/" />
+    <updated>2026-04-09T00:00:00Z</updated>
+    <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/valencia-city-of-light/</id>
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fvalencia-city-of-light%2Fcover.jpg&amp;width=6240&amp;format=avif&amp;via=transform 6240w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fvalencia-city-of-light%2Fcover.jpg&amp;width=6240&amp;format=webp&amp;via=transform 6240w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fvalencia-city-of-light%2Fcover.jpg&amp;width=6240&amp;format=jpeg&amp;via=transform&quot; alt=&quot;スペイン、バレンシア&quot; width=&quot;6240&quot; height=&quot;4160&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;バレンシアはスペインの地中海沿岸に、穏やかな自信をまとって佇む。マドリードの政治的な熱量でもなく、バルセロナの落ち着きのない自己表現でもない——この街は二千年をかけて着実に歩みを重ね、その証となる層を幾重にも積み上げてきた。ショッピングストリートの地下に眠るローマのフォルム。大聖堂と見まがうゴシック様式のシルク取引所。聖杯を祀るかもしれない大聖堂。そして、1957年の壊滅的な洪水の後に流路を変えられた古いトゥリア川床に沿って広がる、20世紀最も大胆な都市デザインプロジェクトのひとつ——芸術科学都市。チタンとコンクリートで作られたその複合施設はあまりに異世界的で、初めて見た旅人は足を止めずにはいられない。&lt;/p&gt;
+&lt;h3 id=&quot;&quot;&gt;芸術科学都市&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;シウタット・デ・レス・アルツ・イ・レス・シエンシエス&lt;/strong&gt;（芸術科学都市）は、現代のバレンシアを世界の建築マップに刻み込んだプロジェクトだ。主にサンティアゴ・カラトラバが設計し（フェリックス・カンデラがL&#39;UmbracleとL&#39;Hemisfèricを担当）、旧トゥリア川床に沿ってほぼ2キロにわたって広がる。巨大な目のような形をした&lt;strong&gt;L&#39;Hemisfèric&lt;/strong&gt;はIMAXシネマとプラネタリウムを備える。&lt;strong&gt;ムセウ・デ・レス・シエンシエス・プリンセプ・フェリプ&lt;/strong&gt;は先史時代の鯨の骨格のように見える。フェリックス・カンデラが設計した&lt;strong&gt;L&#39;Oceanogràfic&lt;/strong&gt;——ヨーロッパ最大の水族館——は睡蓮の葉を思わせる双曲放物面シェルの連なりだ。建物が長い池に映り込み、光がすべてを金色に染める夕暮れ時に訪れるのがおすすめだ。&lt;/p&gt;
+&lt;h3 id=&quot;-2&quot;&gt;旧市街と大聖堂&lt;/h3&gt;
+&lt;p&gt;旧市街の中心は&lt;strong&gt;プラサ・デ・ラ・ビルヘン&lt;/strong&gt;（処女広場）——ローマ時代からバレンシアの市民の心臓部として機能してきたバロック様式の広場だ。&lt;strong&gt;バレンシア大聖堂&lt;/strong&gt;は、元のモスクの上にロマネスク、ゴシック、ルネサンス、バロックの要素が幾層にも重なった、積み重なった世紀の研究のようだ。内部の聖杯礼拝堂に安置された小さなメノウのカップは、最後の晩餐で使われた杯だという学者もいる。その主張を受け入れるかどうかはともかく、&lt;strong&gt;ミゲレテの鐘楼&lt;/strong&gt;からは旧市街のテラコッタ色の屋根が織りなす最高のパノラマを望める。&lt;/p&gt;
+&lt;p&gt;二ブロック先の&lt;strong&gt;ラ・ロンハ・デ・ラ・セダ&lt;/strong&gt;（絹の取引所）はスペイン最高のゴシック建築のひとつで、ユネスコ世界遺産にも登録されている。24本の螺旋状の石柱が天井ヴォールトへと伸びる「商談の間（サラ・デ・コントラタシオン）」は、バレンシアがイベリア半島で最も豊かな都市だった15世紀に建てられた。&lt;/p&gt;
+&lt;h3 id=&quot;-3&quot;&gt;パエリアとバレンシアの食卓&lt;/h3&gt;
+&lt;p&gt;パエリアが生まれたのはバレンシアであり、バレンシア人はその点について一切妥協しない。本物の&lt;strong&gt;パエリア・バレンシアナ&lt;/strong&gt;には鶏肉、うさぎ肉、平たいサヤインゲン、白いんげん豆、サフラン、そしてオレンジの木を燃やした炎で調理した短粒米が入っており、絶対に魚介類は入らない（それは別の料理、&lt;em&gt;パエリア・デ・マリスコ&lt;/em&gt;だ）。最高の食べ方は日曜日に&lt;strong&gt;マルバローサ海岸&lt;/strong&gt;のプロムナードに並ぶレストランで食べること。ここでは週末の儀式として家族連れの地元客に供されている。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;メルカード・セントラル&lt;/strong&gt;（中央市場）——陶製タイルのドームを持つ壮麗なアール・ヌーヴォー様式の建物に入るバレンシアの中央市場——はヨーロッパ屈指の食品市場だ。千を超える屋台が、ムーア時代から街を養い続けてきた&lt;strong&gt;ウエルタ&lt;/strong&gt;（バレンシアを囲む集約的な農地）の農産物を売る。&lt;/p&gt;
+&lt;h3 id=&quot;-4&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;トゥリアの庭園&lt;/strong&gt;: 旧トゥリア川床は今や市街の中心を走る9キロの公園になっている。自転車を借りて全長を走ろう——芸術科学都市からビオパルクまで——バレンシアの地理を知る最良の方法だ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;パエリアは昼食に&lt;/strong&gt;: バレンシアではパエリアは厳密に昼食の料理だ。本格的なレストランで夕食に注文すると、丁寧だが断固とした断りを受けるか、温め直されたものが出てくる。日曜の昼食が正統派のタイミングだ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ラス・ファリャス祭&lt;/strong&gt;: 3月中旬に訪れるなら、街は&lt;strong&gt;ファリャス祭&lt;/strong&gt;で燃え上がる——巨大な風刺的彫刻が各地区をパレードし、最終夜に儀式的に焼かれる。宿泊の予約は数ヶ月前に。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地下鉄vs徒歩&lt;/strong&gt;: 旧市街はコンパクトで徒歩が最適。地下鉄はセンターからビーチ、空港、芸術科学都市を効率よく結んでいる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;-5&quot;&gt;ハイライト&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;夕暮れの芸術科学都市&lt;/strong&gt;: 池に映り込む黄金色の反射は、現代ヨーロッパ建築の中で最も絵になる光景のひとつだ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ラ・ロンハ・デ・ラ・セダ&lt;/strong&gt;: 静かで壮大なゴシックの荘厳さを、セビリャやトレドの匹敵する遺跡に押し寄せる人混みなしに楽しめる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;メルカード・セントラル&lt;/strong&gt;: 平日の午前10時に到着すると、市場が最も活気に満ちている瞬間に立ち会え、店主との会話も楽しめる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;マルバローサ海岸&lt;/strong&gt;: 旧市街から地下鉄で15分の本物の都市型ビーチ。良い波と、パエリアレストランが並ぶ長いプロムナードが待っている。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;バレンシアはゆっくりとした旅を報いてくれる。時間をかけるほど、それ以上のものを返してくれる街だ。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/the-city-of-arts-and-sciences-in-valencia-5-O5f9NxD2s&quot;&gt;Matthew Ye&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>ソウル：古代の宮殿とネオンの未来が交わる街</title>
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/" />
     <updated>2026-03-20T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/dEprmgX_-Y-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/dEprmgX_-Y-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/seoul-ancient-modern/dEprmgX_-Y-1200.jpeg&quot; alt=&quot;韓国、ソウル&quot; width=&quot;1200&quot; height=&quot;798&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fseoul-ancient-modern%2Fcover.jpg&amp;width=1200&amp;format=avif&amp;via=transform 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fseoul-ancient-modern%2Fcover.jpg&amp;width=1200&amp;format=webp&amp;via=transform 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fseoul-ancient-modern%2Fcover.jpg&amp;width=1200&amp;format=jpeg&amp;via=transform&quot; alt=&quot;韓国、ソウル&quot; width=&quot;1200&quot; height=&quot;798&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;ソウルは他の都市が目指すスピードで動く。交通機関は完璧で頻繁、コンビニは深夜も開いていて genuinely 便利、食文化は革新的であると同時に深く伝統的、そして市内に5つの朝鮮王朝の王宮が無傷で残る街の過去との関係は、アジアのどこにおいても新旧の間で最も優雅な都市交渉のひとつだ。ソウルは遺産と野心のどちらかを選ぶ必要がないことを証明する街だ。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;景福宮と北村&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;景福宮&lt;/strong&gt;——朝鮮王朝の主な王宮——は1395年に最初に建てられ、元々500棟あった建物のうち300棟以上が再建されたエリアに囲まれている。正門での衛兵交代式（毎日午前10時と午後2時）は注意を要するほどの精密さと色彩で執り行われる。すぐ北には&lt;strong&gt;北村韓屋村&lt;/strong&gt;がある——二つの大きな宮殿の間の丘に保存された伝統的な韓国家屋（韓屋）の住宅地——細い路地、木の軒、石の壁、そして改装された韓屋の内部を占める市内最高のカフェ。&lt;/p&gt;
@@ -45,7 +78,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/" />
     <updated>2026-03-19T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/maldives-overwater-paradise/p0fGyDl6h7-1200.jpeg&quot; alt=&quot;モルディブ&quot; width=&quot;1200&quot; height=&quot;900&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fmaldives-overwater-paradise%2Fcover.jpg&amp;width=1200&amp;format=avif&amp;via=transform 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fmaldives-overwater-paradise%2Fcover.jpg&amp;width=1200&amp;format=webp&amp;via=transform 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fmaldives-overwater-paradise%2Fcover.jpg&amp;width=1200&amp;format=jpeg&amp;via=transform&quot; alt=&quot;モルディブ&quot; width=&quot;1200&quot; height=&quot;900&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;水上バンガローから眼下を見下ろして、20メートル下のサンゴが完全に見える透明な水——そして海ガメが絶対的に急がない優雅さでそこを通り過ぎる——その瞬間に何かが再調整される。モルディブは、写真が示唆していた以上に自然の現実が genuinely 可能なことを超えているそうした場所のひとつだ。水は他の海が目指している色をしている。リーフは「生きている」という言葉の理解を再調整するほどに生きている。そしてここの静けさは積極的なもの——音の不在ではなく、海の存在だ。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;水上バンガローの体験&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;水上バンガロー&lt;/strong&gt;はモルディブの定義的な建築だ——木の支柱の上に水の上に建てられた構造体で、下のリーフの上にガラス張りの床パネルがあり、水へと直接下りる梯子がある。モルディブのすべてのリゾートが何らかのバリエーションを持っており、シンプルで手頃なものから専用プールとバトラーサービスが付く贅沢なものまで様々だ。重要な変数はバンガロー直下のリーフだ——生き生きとした色とりどりのサンゴがあるリゾートもあれば、劣化や白化したリーフのリゾートもある。予約前にその特定のリーフの状態を調べること——これが夜明けにデッキから行うシュノーケリングの体験に大きな差をもたらす。&lt;/p&gt;
@@ -73,7 +106,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/" />
     <updated>2026-03-18T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/f37S2GjjqI-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/f37S2GjjqI-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/prague-fairy-tale-city/f37S2GjjqI-1200.jpeg&quot; alt=&quot;チェコ共和国、プラハ&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fprague-fairy-tale-city%2Fcover.jpg&amp;width=1200&amp;format=avif&amp;via=transform 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fprague-fairy-tale-city%2Fcover.jpg&amp;width=1200&amp;format=webp&amp;via=transform 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fprague-fairy-tale-city%2Fcover.jpg&amp;width=1200&amp;format=jpeg&amp;via=transform&quot; alt=&quot;チェコ共和国、プラハ&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;夜明けの&lt;strong&gt;カレル橋&lt;/strong&gt;に立つ一瞬がある——人混みの前、観光グループの前、朝の霧がバロック様式の像の間にまだ漂い、眼下のヴルタヴァ川が完全に静止している時——プラハは街というより、中央ヨーロッパの歴史が最も凝縮されて最も美しかった瞬間を実証したかった誰かが設計したセットのように見える。それは尖塔と石畳とビアホールとカフカの街であり、そのすべてを矛盾なく抱えている。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;プラハ城と旧市街&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;プラハ城&lt;/strong&gt;は世界最大の古城コンプレックス——大聖堂、王宮、ギャラリー、庭園、そしてかつての錬金術師の工房が並ぶ黄金の路地を含む、丘の上の街そのものだ。城内の&lt;strong&gt;聖ヴィート大聖堂&lt;/strong&gt;はゴシックの最高峰で、アルフォンス・ミュシャによるステンドグラスはヨーロッパ最高クラスだ。城壁からの赤屋根の旧市街と河川橋のパノラマは、プラハの quintessential なイメージだ。下には、天文時計（オルロイ）とティーン教会の二つの尖塔が立つ&lt;strong&gt;旧市街広場&lt;/strong&gt;が中世の市民生活の中心として続く——混雑しているが、それでも genuinely 壮大だ。&lt;/p&gt;
@@ -101,7 +134,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/" />
     <updated>2026-03-17T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/IvUlpaVk4g-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/IvUlpaVk4g-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/mexico-city-ancient-modern/IvUlpaVk4g-1200.jpeg&quot; alt=&quot;メキシコ、メキシコシティ&quot; width=&quot;1200&quot; height=&quot;801&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fmexico-city-ancient-modern%2Fcover.jpg&amp;width=1200&amp;format=avif&amp;via=transform 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fmexico-city-ancient-modern%2Fcover.jpg&amp;width=1200&amp;format=webp&amp;via=transform 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fmexico-city-ancient-modern%2Fcover.jpg&amp;width=1200&amp;format=jpeg&amp;via=transform&quot; alt=&quot;メキシコ、メキシコシティ&quot; width=&quot;1200&quot; height=&quot;801&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;メキシコシティは湖の上に建てられた。アステカの首都テノチティトランは、堤道で結ばれた人工島としてテスココ湖の水面から立ち上がり、スペイン人が1521年に征服した後、その上に直接植民地の首都を建設した。それ以来、街は湖底の基礎に沈み続けている——植民地時代の建物が他の場所では建設業者を警戒させるような角度で傾いている——しかしその通りの下に圧縮された文明の層こそが、メキシコシティをアメリカ大陸で最も歴史的に密度が高く、文化的に卓越した都市のひとつにしている。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;ソカロと古代のメキシコ&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;ソカロ&lt;/strong&gt;——正式名称は憲法広場——は世界最高の公共広場のひとつだ。大都市大聖堂（部分的にアステカの神殿の石で建てられた）、国立宮殿（ディエゴ・リベラの壁画に覆われている）、そして&lt;strong&gt;テンプロ・マヨール&lt;/strong&gt;の遺跡が隣接する広大な平坦な空間。テンプロ・マヨールはテノチティトランの儀式の中枢で、1978年に工事作業員が偶然ピッケルでそれに当たるまで現代の通りの下に埋もれていた。隣接する&lt;strong&gt;テンプロ・マヨール博物館&lt;/strong&gt;は非凡な発見物を展示し、アステカの宇宙論を明瞭さと深さをもって説明している——これほどのことを達成する博物館は稀だ。&lt;/p&gt;
@@ -129,7 +162,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/queenstown-adventure-capital/" />
     <updated>2026-03-16T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/queenstown-adventure-capital/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/queenstown-adventure-capital/GKULPR8C0--1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/queenstown-adventure-capital/GKULPR8C0--1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/queenstown-adventure-capital/GKULPR8C0--1200.jpeg&quot; alt=&quot;ニュージーランド、クイーンズタウン&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fqueenstown-adventure-capital%2Fcover.jpg&amp;width=1200&amp;format=avif&amp;via=transform 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fqueenstown-adventure-capital%2Fcover.jpg&amp;width=1200&amp;format=webp&amp;via=transform 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fqueenstown-adventure-capital%2Fcover.jpg&amp;width=1200&amp;format=jpeg&amp;via=transform&quot; alt=&quot;ニュージーランド、クイーンズタウン&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;クイーンズタウンは、アドレナリンを加速させるために特別に設計されたかのような山々に囲まれた盆地に位置する。&lt;strong&gt;ザ・リマーカブルズ&lt;/strong&gt;山脈がワカティプ湖の南岸から切り立った片岩の壁として直接そびえ立ち、コロネット・ピークが北の地平線を支配し、そして湖自体は——84キロメートルの長さで、Z字型の形は地元の伝説では眠る巨人の輪郭とされている——完璧な鏡の水の透明さですべてを反映する。このような景観は、その風景に対して十分な存在感を持つために何か極端なことをしたくさせる。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;ザ・リマーカブルズとスカイライン・ゴンドラ&lt;/h3&gt;
 &lt;p&gt;冬には&lt;strong&gt;ザ・リマーカブルズ・スキーエリア&lt;/strong&gt;が南半球で最も景観に優れたスキー場のひとつを提供する——ほぼすべてのコースから湖が見え、6月から9月に安定した積雪がある。夏には同じ地形がマウンテンバイクと質の高いハイキングの場所となる。&lt;strong&gt;スカイライン・ゴンドラ&lt;/strong&gt;は街の中心から450メートル上昇して尾根まで至り、そこからの湖と周囲の山脈のパノラマは完全に吸収するために長い休止が必要だ。頂上から&lt;strong&gt;ベン・ローモンド・トラック&lt;/strong&gt;がさらに1,748メートル高く続き、二つの山脈を見渡す眺めで報いる丸一日の山頂ハイクとなる。&lt;/p&gt;
@@ -157,7 +190,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/" />
     <updated>2026-03-16T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/new-york-concrete-jungle/t9VX-0sKGQ-3000.jpeg&quot; alt=&quot;アメリカ、ニューヨーク&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fnew-york-concrete-jungle%2Fcover.jpg&amp;width=3000&amp;format=avif&amp;via=transform 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fnew-york-concrete-jungle%2Fcover.jpg&amp;width=3000&amp;format=webp&amp;via=transform 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fnew-york-concrete-jungle%2Fcover.jpg&amp;width=3000&amp;format=jpeg&amp;via=transform&quot; alt=&quot;アメリカ、ニューヨーク&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;ニューヨークは単に眠らない街ではありません。常に振動しています。都市のエネルギーを糧にする写真家にとって、NYCは究極の遊び場です。あらゆる角がフレームであり、地下鉄のあらゆる移動が物語。この「コンクリートジャングル」には、私が訪れたどの森にも負けない美しさがあります。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;街路の頭上で&lt;/h3&gt;
 &lt;p&gt;ある朝、歴史的な貨物鉄道の跡地に作られた空中庭園、&lt;strong&gt;ハイライン（The High Line）&lt;strong&gt;を散策しました。超高層ビルの間を縫うように走るこの場所は、都市再開発の手本のような場所で、街の建築を覗き見るようなユニークな視点を与えてくれます。昼食には食料を買い込み、セントラルパークのシープ・メドウ（Sheep Meadow）で&lt;/strong&gt;ピクニック&lt;/strong&gt;をしました。周囲の「ビリオネアズ・ロウ（億万長者通り）」のスカイラインを背景にした緑の芝生のコントラストは、まさにニューヨークならではの光景です。&lt;/p&gt;
@@ -186,7 +219,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/halong-bay-emerald-waters/" />
     <updated>2026-03-15T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/halong-bay-emerald-waters/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/halong-bay-emerald-waters/IVgDdqCnxD-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/halong-bay-emerald-waters/IVgDdqCnxD-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/halong-bay-emerald-waters/IVgDdqCnxD-1200.jpeg&quot; alt=&quot;ベトナム、ハロン湾&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fhalong-bay-emerald-waters%2Fcover.jpg&amp;width=1200&amp;format=avif&amp;via=transform 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fhalong-bay-emerald-waters%2Fcover.jpg&amp;width=1200&amp;format=webp&amp;via=transform 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fhalong-bay-emerald-waters%2Fcover.jpg&amp;width=1200&amp;format=jpeg&amp;via=transform&quot; alt=&quot;ベトナム、ハロン湾&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;ハロン湾&lt;/strong&gt;のカルスト石灰岩の島々は、形成されたというより設計されたかのような形でヒスイ色の海面から浮かび上がる——地元の伝説によれば、ベトナムを侵略者から守るために天から降りた龍に起因するという尖塔、アーチ、洞窟、塔。湾には約2千の島があり、ほとんどが無人で亜熱帯のジャングルに覆われ、ほぼ水際まで森が迫る。それらを船で通り抜けること——それが唯一の真の方法だ——は、人間の心が完全に処理できないほどの景観を通り過ぎる持続した感覚を生み出す。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;湾のクルーズ&lt;/h3&gt;
 &lt;p&gt;ハロン湾は&lt;strong&gt;伝統的なジャンク船での2〜3泊クルーズ&lt;/strong&gt;で最もよく体験される。予算オプションは混雑した南部エリアを航行し、プレミアムオペレーターはUNESCO登録の核心ゾーンとより静かなカットバ島エリアを航行する。船上の生活のリズム——デッキでのゆっくりとした朝食、浸水した洞窟システムへのカヤッキング、石灰岩の後ろに太陽が沈む中での泳ぎ——は、東南アジアのどこへの旅行においても最も上質な移動方法のひとつだ。ハロン湾に隣接しカットバ島の管轄に入る&lt;strong&gt;ランハ湾&lt;/strong&gt;は、ほぼ同じ景観でほんの一部の訪問者数しかない。&lt;/p&gt;
@@ -214,7 +247,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/" />
     <updated>2026-03-15T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amalfi-coast-winding-roads/IRwP0Zg7Ka-3000.jpeg&quot; alt=&quot;イタリア、アマルフィ&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Famalfi-coast-winding-roads%2Fcover.jpg&amp;width=3000&amp;format=avif&amp;via=transform 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Famalfi-coast-winding-roads%2Fcover.jpg&amp;width=3000&amp;format=webp&amp;via=transform 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Famalfi-coast-winding-roads%2Fcover.jpg&amp;width=3000&amp;format=jpeg&amp;via=transform&quot; alt=&quot;イタリア、アマルフィ&quot; width=&quot;3000&quot; height=&quot;2000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;アマルフィ海岸は、色とりどりの家々が崖にフジツボのようにへばりついた、垂直の風景が広がる場所です。歴史オタクの私は、贅沢なビーチクラブよりも、この険しい海岸線がかつて地中海で最も強力な海運共和国の一つであったという事実に魅了されました。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;夢のドライブ（と悪夢）&lt;/h3&gt;
 &lt;p&gt;「1000のカーブを持つ道」と呼ばれるSS163をドライブすることに勝る体験はありません。窓から吹き込むレモンの香りと地中海の潮風を感じるのは至福のひとときです。ヘアピンカーブで観光バスが向かってくるスリルさえ気にならなければ！&lt;/p&gt;
@@ -244,7 +277,7 @@
     <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/" />
     <updated>2026-03-14T00:00:00Z</updated>
     <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/mHBp0glhnT-3000.avif 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/mHBp0glhnT-3000.webp 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/santorini-blue-and-white/mHBp0glhnT-3000.jpeg&quot; alt=&quot;ギリシャ、サントリーニ島&quot; width=&quot;3000&quot; height=&quot;4000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fsantorini-blue-and-white%2Fcover.jpg&amp;width=3000&amp;format=avif&amp;via=transform 3000w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fsantorini-blue-and-white%2Fcover.jpg&amp;width=3000&amp;format=webp&amp;via=transform 3000w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/.11ty/image/?src=content%2Fja%2Fblog%2Fsantorini-blue-and-white%2Fcover.jpg&amp;width=3000&amp;format=jpeg&amp;via=transform&quot; alt=&quot;ギリシャ、サントリーニ島&quot; width=&quot;3000&quot; height=&quot;4000&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;写真家にとって、サントリーニ島は最高の夢であると同時に、最も困難な挑戦でもあります。あの信じられないほど青いドーム屋根と、さらに青く見える海とのコントラストをどうやって切り取ればいいのでしょうか。ここは、光があまりにも鮮明で、手を伸ばせばその破片を掴み取れるのではないかと感じさせる場所です。&lt;/p&gt;
 &lt;h3 id=&quot;&quot;&gt;カルデラ・ハイキング&lt;/h3&gt;
 &lt;p&gt;私たちは観光用のロバは利用せず、&lt;strong&gt;フィラからイアまでの伝説的な10kmのハイキング&lt;/strong&gt;に挑戦しました。荒々しく砂埃の舞う道ですが、島で最も息をのむようなカルデラの景色を楽しむことができます。ゴールデンアワーが始まるちょうどその時にイアへ到着するように時間を合わせました。メインストリートは非常に混雑していましたが、私たちは&lt;strong&gt;ビザンチン城跡&lt;/strong&gt;の近くに静かな場所を見つけ、エーゲ海に太陽が沈むのを眺めました。有名なのには理由があります。空は、私が存在すら知らなかったような色に染まりました。&lt;/p&gt;
@@ -266,34 +299,6 @@
 &lt;/ul&gt;
 &lt;p&gt;サントリーニ島は火と光の場所です。しばらくの間、携帯電話を置いて、ただ水平線を眺めることを求めてくる島なのです。&lt;/p&gt;
 &lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/1pS6mK3n7oU&quot;&gt;Heidi Kaden&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>アムステルダム：運河沿いの暮らし</title>
-    <link href="https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amsterdam-canal-city/" />
-    <updated>2026-03-14T00:00:00Z</updated>
-    <id>https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amsterdam-canal-city/</id>
-    <content type="html">&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amsterdam-canal-city/-n6MsVyjzs-1200.avif 1200w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amsterdam-canal-city/-n6MsVyjzs-1200.webp 1200w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://trailblazers-blog.example.com/samples/trailblazers/dist/ja/blog/amsterdam-canal-city/-n6MsVyjzs-1200.jpeg&quot; alt=&quot;オランダ、アムステルダム&quot; width=&quot;1200&quot; height=&quot;800&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;p&gt;アムステルダムは信じられないほどの基礎の上に建てられた——湿地の地盤に打ち込まれた何百万本もの木の杭、手で掘られた165本の運河のネットワーク、海が明らかに戻したがっていた土地を取り戻すための集団的な決意。その結果は、これまでに建設された最も美しく住みやすい都市のひとつだ——17世紀の商人の家々が水面の自分の反映に向かって友好的な角度で傾き、数えきれないほどの橋で結ばれ、鞍の上で生まれた人の自信で自転車で移動される。&lt;/p&gt;
-&lt;h3 id=&quot;&quot;&gt;運河リングと黄金時代&lt;/h3&gt;
-&lt;p&gt;UNESCO登録の運河リング&lt;strong&gt;グラハテンゴルデル&lt;/strong&gt;は、アムステルダムが世界で最も豊かな都市だったオランダの黄金時代、17世紀に一気に野心的に建設された。&lt;strong&gt;ケイザースフラフト&lt;/strong&gt;、&lt;strong&gt;ヘーレンフラフト&lt;/strong&gt;、&lt;strong&gt;プリンセンフラフト&lt;/strong&gt;の運河を歩くことは、最盛期の繁栄の物理的な建築の中を歩くことだ。運河の家は幅が狭く（幅で課税された）、高く、独特の巻き上げビームが屋根に付いており今でも時折実際に使われる。プリンセンフラフトの&lt;strong&gt;アンネ・フランクの家&lt;/strong&gt;はヨーロッパで最も重要な歴史的遺跡のひとつ——ナチス占領下に隠れ住んだユダヤ人一家の隠れ家が、驚くべき配慮で保存されている。&lt;/p&gt;
-&lt;h3 id=&quot;-2&quot;&gt;美術館とヨルダーン地区&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;国立美術館（ライクスミュージアム）&lt;strong&gt;は世界最高のコレクションのひとつを所蔵している——レンブラントの「夜警」とフェルメールの「牛乳を注ぐ女」が同じ建物に——少なくとも半日を費やす価値がある。隣の&lt;/strong&gt;ファン・ゴッホ美術館&lt;/strong&gt;はファン・ゴッホ作品の世界最大のコレクションを持つ——200点の絵画、500点の素描、750点の手紙。現代アートには&lt;strong&gt;ステデリック美術館&lt;/strong&gt;が卓越している。しかしアムステルダムの最良の時間は美術館ではなく&lt;strong&gt;ヨルダーン&lt;/strong&gt;地区で過ごすものかもしれない——運河リングのすぐ西にあるかつての労働者階級の地区は、今では独立系ギャラリー、骨董店、優れたカフェ、そして地区のブラウンカフェ（ブライネ・クローエヘン）で市内最高の&lt;strong&gt;ビッターバーレン&lt;/strong&gt;（オランダの揚げ物スナック）が楽しめる場所だ。&lt;/p&gt;
-&lt;h3 id=&quot;-3&quot;&gt;ヒントとアドバイス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;自転車サバイバル&lt;/strong&gt;: アムステルダムの自転車インフラは卓越しているがルールは厳格だ。自転車レーン（赤いアスファルトまたはマークされた車線）は歩行者の道ではない——歩くと地元の人から本物の不満を買う。観光スタンドではなく、適切なショップから自転車をレンタルして安全な機械を使おう。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;美術館の行列&lt;/strong&gt;: 国立美術館とファン・ゴッホ美術館は、数時間の行列を避けるためにオンラインで事前予約が必要だ。4月（チューリップシーズン）と夏は交渉の余地なし。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;チューリップの窓&lt;/strong&gt;: オランダの有名なチューリップシーズンは3月中旬から5月中旬まで。アムステルダムから30分の&lt;strong&gt;キューケンホフ・ガーデン&lt;/strong&gt;は、この時期に地球最高の花園だ——入場チケットは数ヶ月前に予約すること。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;-4&quot;&gt;ハイライト&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;フォーム写真美術館&lt;/strong&gt;: 転換された運河の家にある欧州最高クラスの写真美術館——一貫して優れたプログラムを提供。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;日曜のフォンデルパーク&lt;/strong&gt;: 晴れた週末の午後、中央公園はピクニック、ストリートミュージシャン、インラインスケーターの祭典になる。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ニーウェ・ハリング（新鮮なニシン）&lt;/strong&gt;: オランダの生ニシンシーズンは6月に始まる。伝統的な方法で——後ろへ傾けて、尾を持って——「フィスマルクト」の屋台で食べることは、オーセンティックなアムステルダムの通過儀礼だ。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;夕暮れ時の運河ボート&lt;/strong&gt;: 黄金の時間帯のプライベートボートレンタルまたは運河クルーズ——破風の窓が光を受け、その反映が下の水面で揺らめく——アムステルダムが最も完璧に自分らしくある瞬間だ。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;アムステルダムはゆっくりを報いる街だ。通り抜ける速度が遅ければ遅いほど、より多くを理解できる。&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/Vgr-_65__lw&quot;&gt;Eirik Skarstein&lt;/a&gt; on Unsplash&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

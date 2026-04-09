@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Santorini blue-domed church miniature -->
+  <!-- Bell tower (left) -->
+  <rect x="12" y="46" width="16" height="36" rx="2" fill="currentColor"/>
+  <!-- Bell arch -->
+  <path d="M12 52 L20 44 L28 52" fill="currentColor"/>
+  <path d="M14 50 Q20 44 26 50" fill="white" opacity="0.25"/>
+  <!-- Cross on tower -->
+  <rect x="18" y="38" width="4" height="10" rx="1" fill="currentColor"/>
+  <rect x="14" y="41" width="12" height="4" rx="1" fill="currentColor"/>
+  <!-- Main church body -->
+  <rect x="26" y="52" width="60" height="30" rx="2" fill="currentColor"/>
+  <!-- Blue dome -->
+  <path d="M30 52 C30 36 70 36 70 52 Z" fill="currentColor"/>
+  <ellipse cx="50" cy="52" rx="20" ry="6" fill="currentColor" opacity="0.6"/>
+  <!-- Cross on dome -->
+  <rect x="48" y="30" width="4" height="10" rx="1" fill="currentColor"/>
+  <rect x="44" y="33" width="12" height="4" rx="1" fill="currentColor"/>
+  <!-- Door arch -->
+  <path d="M42 82 L42 66 Q50 60 58 66 L58 82 Z" fill="white" opacity="0.25"/>
+  <!-- Window -->
+  <ellipse cx="32" cy="64" rx="5" ry="6" fill="white" opacity="0.25"/>
+  <ellipse cx="68" cy="64" rx="5" ry="6" fill="white" opacity="0.25"/>
+  <!-- Base / ground steps -->
+  <rect x="10" y="82" width="80" height="6" rx="2" fill="currentColor" opacity="0.8"/>
+  <rect x="14" y="88" width="72" height="5" rx="2" fill="currentColor" opacity="0.65"/>
+</svg>

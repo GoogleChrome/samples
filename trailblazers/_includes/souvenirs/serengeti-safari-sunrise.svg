@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- African elephant wood carving -->
+  <!-- Body -->
+  <ellipse cx="50" cy="60" rx="30" ry="24" fill="currentColor"/>
+  <!-- Head (large, forward-facing) -->
+  <ellipse cx="22" cy="48" rx="20" ry="18" fill="currentColor"/>
+  <!-- Massive ears -->
+  <path d="M8 34 C2 28 2 18 8 14 C14 10 20 14 22 22 C18 26 14 30 8 34 Z" fill="currentColor" opacity="0.85"/>
+  <!-- Ear inner -->
+  <path d="M10 32 C6 28 6 20 10 16 C14 12 18 16 20 22 C16 26 12 28 10 32 Z" fill="white" opacity="0.15"/>
+  <!-- Trunk hanging down -->
+  <path d="M12 56 C10 64 10 74 16 80 C18 84 22 84 24 80 C20 76 18 68 20 60" stroke="currentColor" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <!-- Trunk curl at tip -->
+  <path d="M16 78 C14 82 18 86 22 84" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- Tusk -->
+  <path d="M16 52 C10 56 8 64 12 68" stroke="white" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <!-- Eye -->
+  <circle cx="16" cy="42" r="3.5" fill="white" opacity="0.7"/>
+  <circle cx="16" cy="42" r="1.8" fill="currentColor"/>
+  <!-- Legs -->
+  <rect x="26" y="80" width="10" height="16" rx="5" fill="currentColor"/>
+  <rect x="38" y="82" width="10" height="14" rx="5" fill="currentColor"/>
+  <rect x="52" y="82" width="10" height="14" rx="5" fill="currentColor"/>
+  <rect x="64" y="80" width="10" height="16" rx="5" fill="currentColor"/>
+  <!-- Tail -->
+  <path d="M80 62 C84 66 84 72 80 76" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Wood grain texture on body -->
+  <path d="M42 50 C46 46 54 48 58 52" stroke="white" stroke-width="1" fill="none" opacity="0.2"/>
+  <path d="M38 60 C44 56 56 58 62 62" stroke="white" stroke-width="1" fill="none" opacity="0.2"/>
+</svg>

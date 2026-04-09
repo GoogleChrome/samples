@@ -1,0 +1,52 @@
+{%- set destSlug = page.fileSlug -%}
+{%- set destInfo = destinations[destSlug] -%}
+{%- if destInfo and destInfo.cityName %}
+<div class="flight-widget">
+  <div class="flight-widget-top">
+    <span class="flight-widget-label">{{ 'flight_widget_label' | i18n({ city: destInfo.cityName }, locale) }}</span>
+    <span class="flight-widget-affiliate-badge">{{ 'affiliate_link' | i18n({}, locale) }}</span>
+  </div>
+  <div class="flight-widget-body">
+    <div class="flight-widget-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+        <!-- Fuselage -->
+        <path d="M50 6 C46 6 42 10 40 18 L38 46 L22 54 L22 62 L38 58 L39 72 L32 76 L32 82 L50 78 L68 82 L68 76 L61 72 L62 58 L78 62 L78 54 L62 46 L60 18 C58 10 54 6 50 6 Z" fill="currentColor"/>
+        <!-- Nose highlight -->
+        <ellipse cx="50" cy="12" rx="4" ry="6" fill="white" opacity="0.25"/>
+        <!-- Cockpit windows -->
+        <ellipse cx="46" cy="22" rx="3" ry="4" fill="white" opacity="0.45"/>
+        <ellipse cx="54" cy="22" rx="3" ry="4" fill="white" opacity="0.45"/>
+        <!-- Fuselage centre line -->
+        <line x1="50" y1="28" x2="50" y2="68" stroke="white" stroke-width="1.5" opacity="0.2"/>
+        <!-- Wing markings -->
+        <path d="M40 50 L24 58 L24 60 L40 56 Z" fill="white" opacity="0.2"/>
+        <path d="M60 50 L76 58 L76 60 L60 56 Z" fill="white" opacity="0.2"/>
+        <!-- Tail fin markings -->
+        <path d="M42 72 L34 78 L34 80 L42 76 Z" fill="white" opacity="0.2"/>
+        <path d="M58 72 L66 78 L66 80 L58 76 Z" fill="white" opacity="0.2"/>
+        <!-- Engine pods on wings -->
+        <ellipse cx="30" cy="56" rx="5" ry="3" fill="currentColor" opacity="0.8"/>
+        <ellipse cx="70" cy="56" rx="5" ry="3" fill="currentColor" opacity="0.8"/>
+        <!-- Engine intake rings -->
+        <ellipse cx="30" cy="56" rx="3" ry="2" fill="white" opacity="0.25"/>
+        <ellipse cx="70" cy="56" rx="3" ry="2" fill="white" opacity="0.25"/>
+      </svg>
+    </div>
+    <div class="flight-widget-content">
+      <p class="flight-widget-tagline">{{ 'flight_widget_tagline' | i18n({ city: destInfo.cityName }, locale) | safe }}</p>
+      <a href="https://www.trip.com/global-search/searchlist/search/?keyword={{ destInfo.cityName | urlencode }}&from=home"
+         class="flight-widget-button"
+         target="_blank"
+         rel="noopener sponsored"
+         aria-label="Book a flight to {{ destInfo.cityName }} on Trip.com (affiliate link, opens in new tab)">
+        <img src="/img/trip-logo.webp"
+             alt="Trip.com"
+             class="flight-widget-trip-logo"
+             width="828"
+             height="200">
+        {{ 'flight_widget_button' | i18n({}, locale) }}
+      </a>
+    </div>
+  </div>
+</div>
+{%- endif %}

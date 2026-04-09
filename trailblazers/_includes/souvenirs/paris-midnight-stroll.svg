@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Eiffel Tower keyring -->
+  <!-- Keyring at top -->
+  <circle cx="50" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="3.5"/>
+  <!-- Link to tower -->
+  <rect x="47.5" y="11" width="5" height="6" fill="currentColor"/>
+  <!-- Tower peak -->
+  <polygon points="50,16 47,22 53,22" fill="currentColor"/>
+  <!-- Antenna -->
+  <rect x="49" y="14" width="2" height="4" fill="currentColor"/>
+  <!-- Level 3 / top section -->
+  <path d="M46 22 L44 30 L56 30 L54 22 Z" fill="currentColor"/>
+  <!-- Level 2 deck -->
+  <rect x="42" y="30" width="16" height="4" rx="1" fill="currentColor"/>
+  <!-- Level 2 to Level 1 -->
+  <path d="M42 34 L38 52 L62 52 L58 34 Z" fill="currentColor"/>
+  <!-- Level 1 arches -->
+  <path d="M38 52 L34 56 L38 56" fill="none" stroke="currentColor" stroke-width="0" />
+  <!-- Level 1 deck -->
+  <rect x="34" y="52" width="32" height="5" rx="1" fill="currentColor"/>
+  <!-- Base / legs spreading out -->
+  <path d="M34 57 L24 88 L36 88 L42 68 L58 68 L64 88 L76 88 L66 57 Z" fill="currentColor"/>
+  <!-- Arch at base -->
+  <path d="M36 88 L36 76 Q50 68 64 76 L64 88" fill="white" opacity="0.2"/>
+  <!-- Cross bracing lines -->
+  <line x1="40" y1="60" x2="60" y2="60" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="38" y1="66" x2="62" y2="66" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="36" y1="72" x2="64" y2="72" stroke="white" stroke-width="1" opacity="0.3"/>
+  <line x1="34" y1="78" x2="66" y2="78" stroke="white" stroke-width="1" opacity="0.3"/>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Viking helmet -->
+  <!-- Horns -->
+  <path d="M18 44 C10 36 8 22 16 18 C20 16 26 20 28 28 Z" fill="currentColor"/>
+  <path d="M82 44 C90 36 92 22 84 18 C80 16 74 20 72 28 Z" fill="currentColor"/>
+  <!-- Dome of helmet -->
+  <path d="M20 60 C18 44 22 28 50 24 C78 28 82 44 80 60 Z" fill="currentColor"/>
+  <!-- Rim band -->
+  <rect x="18" y="58" width="64" height="8" rx="4" fill="currentColor" opacity="0.85"/>
+  <!-- Nose guard -->
+  <rect x="46" y="60" width="8" height="24" rx="4" fill="currentColor"/>
+  <!-- Cheek guards -->
+  <path d="M20 66 C16 72 16 80 20 84 L30 84 L28 66 Z" fill="currentColor" opacity="0.8"/>
+  <path d="M80 66 C84 72 84 80 80 84 L70 84 L72 66 Z" fill="currentColor" opacity="0.8"/>
+  <!-- Rivets on rim -->
+  <circle cx="26" cy="62" r="3" fill="white" opacity="0.4"/>
+  <circle cx="38" cy="62" r="3" fill="white" opacity="0.4"/>
+  <circle cx="50" cy="62" r="3" fill="white" opacity="0.4"/>
+  <circle cx="62" cy="62" r="3" fill="white" opacity="0.4"/>
+  <circle cx="74" cy="62" r="3" fill="white" opacity="0.4"/>
+  <!-- Metal shine on dome -->
+  <path d="M36 30 C32 36 30 44 30 52" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.25"/>
+</svg>

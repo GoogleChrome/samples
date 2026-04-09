@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Vietnamese conical hat (Nón lá) -->
+  <!-- Main cone shape -->
+  <path d="M50 8 L8 82 L92 82 Z" fill="currentColor"/>
+  <!-- Rim band -->
+  <rect x="8" y="78" width="84" height="8" rx="4" fill="currentColor" opacity="0.8"/>
+  <!-- Concentric ring details (bamboo ribs) -->
+  <path d="M50 8 C44 24 30 48 16 68" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M50 8 C52 26 54 44 56 62" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M50 8 C56 24 70 48 84 68" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+  <!-- Horizontal rib lines -->
+  <line x1="35" y1="40" x2="65" y2="40" stroke="white" stroke-width="1" opacity="0.25"/>
+  <line x1="24" y1="58" x2="76" y2="58" stroke="white" stroke-width="1" opacity="0.25"/>
+  <!-- Chin strap ribbon -->
+  <path d="M28 82 C36 90 50 92 50 92 C50 92 64 90 72 82" stroke="white" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+</svg>

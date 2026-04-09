@@ -346,22 +346,20 @@ a[href]:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--color-link);
-  color: light-dark(white, #0d1b2a);
+  background: var(--color-primary);
+  color: white;
   border: none;
-  padding: 0 1.2rem;
-  height: 2.2rem;
-  border-radius: 20px;
+  padding: 0 1.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
 }
 .post-metadata-share:hover {
-  background: var(--color-link-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 119, 182, 0.3);
+  background: var(--color-secondary);
+  transform: scale(1.02);
 }
 
 .icon-share {
@@ -1612,6 +1610,255 @@ dialog.search-overlay::backdrop {
 .post-country-map-svg svg:hover {
   opacity: 1;
 }
+
+/* ============================================================
+   Souvenir Widget
+   ============================================================ */
+.souvenir-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+}
+
+.souvenir-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.souvenir-widget-label {  
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+}
+
+.souvenir-widget-affiliate-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-dark);
+  background: var(--tag-bg);
+  border-radius: 20px;
+  padding: 0.2em 0.7em;
+  opacity: 0.75;
+}
+
+.souvenir-widget-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.souvenir-widget-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.souvenir-widget-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .souvenir-widget-icon {
+    color: var(--color-primary);
+    opacity: 0.85;
+  }
+}
+
+.souvenir-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.souvenir-widget-item-name {
+  margin: 0;      
+  color: var(--color-text);
+}
+
+.souvenir-widget-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.souvenir-widget-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.souvenir-widget-temu-logo {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: white;
+}
+
+@media (max-width: 480px) {
+  .souvenir-widget-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .souvenir-widget-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* ============================================================
+   Flight Widget
+   ============================================================ */
+.flight-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+}
+
+.flight-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.flight-widget-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+}
+
+.flight-widget-affiliate-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-dark);
+  background: var(--tag-bg);
+  border-radius: 20px;
+  padding: 0.2em 0.7em;
+  opacity: 0.75;
+}
+
+.flight-widget-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.flight-widget-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.flight-widget-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .flight-widget-icon {
+    opacity: 0.85;
+  }
+}
+
+.flight-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flight-widget-tagline {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.flight-widget-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.flight-widget-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.flight-widget-trip-logo {
+  height: 50px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  box-shadow: none;
+  border: white 5px solid;
+  
+}
+
+@media (max-width: 480px) {
+  .flight-widget-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .flight-widget-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
 .destinations-page { max-width: 80rem; margin: 0 auto; }
 
 .destinations-intro {
@@ -1867,7 +2114,7 @@ dialog.search-overlay::backdrop {
 		<header class="site-header hero-header" style="--hero-image-url: url('/samples/trailblazers/dist/img/hero.jpg');">
 			<div class="header-content">
 				<a href="/samples/trailblazers/dist/en/" class="logo">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Flogo.png&width=1024&format=avif&via=transform 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Flogo.png&width=1024&format=webp&via=transform 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Flogo.png&width=1024&format=png&via=transform" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
 				</a>
 
 				<nav>
@@ -5102,7 +5349,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/amalfi-coast-winding-roads/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/IRwP0Zg7Ka-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/IRwP0Zg7Ka-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/IRwP0Zg7Ka-3000.jpeg" alt="amalfi-coast-winding-roads" width="3000" height="2000"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Famalfi-coast-winding-roads%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Famalfi-coast-winding-roads%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Famalfi-coast-winding-roads%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="amalfi-coast-winding-roads" width="3000" height="2000"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Italy</span>
@@ -5113,7 +5360,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/bali-spiritual-sanctuary/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/O3Mi_dqgwz-3000.jpeg" alt="bali-spiritual-sanctuary" width="3000" height="2000"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbali-spiritual-sanctuary%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbali-spiritual-sanctuary%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbali-spiritual-sanctuary%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="bali-spiritual-sanctuary" width="3000" height="2000"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Indonesia</span>
@@ -5124,7 +5371,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/banff-turquoise-waters/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/Zo2dj1BQuY-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/Zo2dj1BQuY-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/Zo2dj1BQuY-3000.jpeg" alt="banff-turquoise-waters" width="3000" height="2148"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbanff-turquoise-waters%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbanff-turquoise-waters%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbanff-turquoise-waters%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="banff-turquoise-waters" width="3000" height="2148"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Canada</span>
@@ -5135,7 +5382,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/cape-town-table-mountain/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/eA6kvoWk_a-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/eA6kvoWk_a-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/eA6kvoWk_a-3000.jpeg" alt="cape-town-table-mountain" width="3000" height="2000"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fcape-town-table-mountain%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fcape-town-table-mountain%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fcape-town-table-mountain%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="cape-town-table-mountain" width="3000" height="2000"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">South Africa</span>
@@ -5146,7 +5393,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/machu-picchu-ancient-echoes/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/3fMS8Ty_9n-3000.jpeg" alt="machu-picchu-ancient-echoes" width="3000" height="1987"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmachu-picchu-ancient-echoes%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmachu-picchu-ancient-echoes%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmachu-picchu-ancient-echoes%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="machu-picchu-ancient-echoes" width="3000" height="1987"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Peru</span>
@@ -5157,7 +5404,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/new-york-concrete-jungle/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/t9VX-0sKGQ-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/t9VX-0sKGQ-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/t9VX-0sKGQ-3000.jpeg" alt="new-york-concrete-jungle" width="3000" height="2000"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fnew-york-concrete-jungle%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fnew-york-concrete-jungle%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fnew-york-concrete-jungle%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="new-york-concrete-jungle" width="3000" height="2000"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">United States</span>
@@ -5168,7 +5415,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/paris-midnight-stroll/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/vl8VYA-VsZ-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/vl8VYA-VsZ-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/vl8VYA-VsZ-3000.jpeg" alt="paris-midnight-stroll" width="3000" height="2122"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fparis-midnight-stroll%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fparis-midnight-stroll%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fparis-midnight-stroll%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="paris-midnight-stroll" width="3000" height="2122"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">France</span>
@@ -5179,7 +5426,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/petra-rose-red-city/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/fiCl4aJmQy-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/fiCl4aJmQy-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/fiCl4aJmQy-3000.jpeg" alt="petra-rose-red-city" width="3000" height="2250"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fpetra-rose-red-city%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fpetra-rose-red-city%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fpetra-rose-red-city%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="petra-rose-red-city" width="3000" height="2250"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Jordan</span>
@@ -5190,7 +5437,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/reykjavik-northern-lights/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/Smie_eEJlo-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/Smie_eEJlo-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/Smie_eEJlo-3000.jpeg" alt="reykjavik-northern-lights" width="3000" height="1699"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Freykjavik-northern-lights%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Freykjavik-northern-lights%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Freykjavik-northern-lights%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="reykjavik-northern-lights" width="3000" height="1699"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Iceland</span>
@@ -5201,7 +5448,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/santorini-blue-and-white/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/mHBp0glhnT-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/mHBp0glhnT-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/mHBp0glhnT-3000.jpeg" alt="santorini-blue-and-white" width="3000" height="4000"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fsantorini-blue-and-white%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fsantorini-blue-and-white%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fsantorini-blue-and-white%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="santorini-blue-and-white" width="3000" height="4000"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Greece</span>
@@ -5212,7 +5459,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/serengeti-safari-sunrise/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/3xH6pTS7KU-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/3xH6pTS7KU-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/3xH6pTS7KU-3000.jpeg" alt="serengeti-safari-sunrise" width="3000" height="1792"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fserengeti-safari-sunrise%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fserengeti-safari-sunrise%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fserengeti-safari-sunrise%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="serengeti-safari-sunrise" width="3000" height="1792"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Tanzania</span>
@@ -5223,7 +5470,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/tokyo-neon-nights/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/iFW5b38xmH-3000.avif 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/iFW5b38xmH-3000.webp 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/iFW5b38xmH-3000.jpeg" alt="tokyo-neon-nights" width="3000" height="1997"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Ftokyo-neon-nights%2Fcover.jpg&width=3000&format=avif&via=transform 3000w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Ftokyo-neon-nights%2Fcover.jpg&width=3000&format=webp&via=transform 3000w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Ftokyo-neon-nights%2Fcover.jpg&width=3000&format=jpeg&via=transform" alt="tokyo-neon-nights" width="3000" height="1997"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Japan</span>
@@ -5234,7 +5481,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/amsterdam-canal-city/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-n6MsVyjzs-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-n6MsVyjzs-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-n6MsVyjzs-1200.jpeg" alt="amsterdam-canal-city" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Famsterdam-canal-city%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Famsterdam-canal-city%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Famsterdam-canal-city%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="amsterdam-canal-city" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Netherlands</span>
@@ -5245,7 +5492,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/bangkok-golden-temples/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/ewbHYOhlUq-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/ewbHYOhlUq-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/ewbHYOhlUq-1200.jpeg" alt="bangkok-golden-temples" width="1200" height="929"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbangkok-golden-temples%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbangkok-golden-temples%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbangkok-golden-temples%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="bangkok-golden-temples" width="1200" height="929"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Thailand</span>
@@ -5256,7 +5503,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/berlin-through-the-wall/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/-tevcJXGk_-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/-tevcJXGk_-1200.jpeg" alt="berlin-through-the-wall" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fberlin-through-the-wall%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fberlin-through-the-wall%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fberlin-through-the-wall%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="berlin-through-the-wall" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Germany</span>
@@ -5267,7 +5514,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/buenos-aires-tango-nights/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/NAyRty2jBc-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/NAyRty2jBc-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/NAyRty2jBc-1200.jpeg" alt="buenos-aires-tango-nights" width="1200" height="1601"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbuenos-aires-tango-nights%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbuenos-aires-tango-nights%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fbuenos-aires-tango-nights%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="buenos-aires-tango-nights" width="1200" height="1601"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Argentina</span>
@@ -5278,7 +5525,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/dubrovnik-walls-adriatic/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/v_Gk1AlO4E-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/v_Gk1AlO4E-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/v_Gk1AlO4E-1200.jpeg" alt="dubrovnik-walls-adriatic" width="1200" height="583"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fdubrovnik-walls-adriatic%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fdubrovnik-walls-adriatic%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fdubrovnik-walls-adriatic%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="dubrovnik-walls-adriatic" width="1200" height="583"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Croatia</span>
@@ -5289,7 +5536,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/edinburgh-castle-highlands/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/aUWCdG5mqf-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/aUWCdG5mqf-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/aUWCdG5mqf-1200.jpeg" alt="edinburgh-castle-highlands" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fedinburgh-castle-highlands%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fedinburgh-castle-highlands%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fedinburgh-castle-highlands%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="edinburgh-castle-highlands" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">United Kingdom</span>
@@ -5300,7 +5547,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/halong-bay-emerald-waters/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/IVgDdqCnxD-1200.jpeg" alt="halong-bay-emerald-waters" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fhalong-bay-emerald-waters%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fhalong-bay-emerald-waters%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fhalong-bay-emerald-waters%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="halong-bay-emerald-waters" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Vietnam</span>
@@ -5311,7 +5558,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/havana-vintage-streets/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/_kP_Ka6iAp-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/_kP_Ka6iAp-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/_kP_Ka6iAp-1200.jpeg" alt="havana-vintage-streets" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fhavana-vintage-streets%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fhavana-vintage-streets%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fhavana-vintage-streets%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="havana-vintage-streets" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Cuba</span>
@@ -5322,7 +5569,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/istanbul-two-continents/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/Htr97-HtsY-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/Htr97-HtsY-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/Htr97-HtsY-1200.jpeg" alt="istanbul-two-continents" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fistanbul-two-continents%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fistanbul-two-continents%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fistanbul-two-continents%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="istanbul-two-continents" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Turkey</span>
@@ -5333,7 +5580,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/lisbon-seven-hills/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/A8cZK2HwCI-1200.jpeg" alt="lisbon-seven-hills" width="1200" height="801"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Flisbon-seven-hills%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Flisbon-seven-hills%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Flisbon-seven-hills%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="lisbon-seven-hills" width="1200" height="801"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Portugal</span>
@@ -5344,7 +5591,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/maldives-overwater-paradise/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/p0fGyDl6h7-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/p0fGyDl6h7-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/p0fGyDl6h7-1200.jpeg" alt="maldives-overwater-paradise" width="1200" height="900"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmaldives-overwater-paradise%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmaldives-overwater-paradise%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmaldives-overwater-paradise%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="maldives-overwater-paradise" width="1200" height="900"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Maldives</span>
@@ -5355,7 +5602,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/marrakech-medina-maze/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dYGNTg3LYk-1200.jpeg" alt="marrakech-medina-maze" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmarrakech-medina-maze%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmarrakech-medina-maze%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmarrakech-medina-maze%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="marrakech-medina-maze" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Morocco</span>
@@ -5366,7 +5613,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/masai-mara-great-migration/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/hIC5bKZOPN-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/hIC5bKZOPN-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/hIC5bKZOPN-1200.jpeg" alt="masai-mara-great-migration" width="1200" height="802"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmasai-mara-great-migration%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmasai-mara-great-migration%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmasai-mara-great-migration%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="masai-mara-great-migration" width="1200" height="802"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Kenya</span>
@@ -5377,7 +5624,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/mexico-city-ancient-modern/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/IvUlpaVk4g-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/IvUlpaVk4g-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/IvUlpaVk4g-1200.jpeg" alt="mexico-city-ancient-modern" width="1200" height="801"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmexico-city-ancient-modern%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmexico-city-ancient-modern%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmexico-city-ancient-modern%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="mexico-city-ancient-modern" width="1200" height="801"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Mexico</span>
@@ -5388,7 +5635,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/mumbai-city-of-dreams/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/bQQeGFifLG-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/bQQeGFifLG-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/bQQeGFifLG-1200.jpeg" alt="mumbai-city-of-dreams" width="1200" height="1500"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmumbai-city-of-dreams%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmumbai-city-of-dreams%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fmumbai-city-of-dreams%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="mumbai-city-of-dreams" width="1200" height="1500"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">India</span>
@@ -5399,7 +5646,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/prague-fairy-tale-city/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/f37S2GjjqI-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/f37S2GjjqI-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/f37S2GjjqI-1200.jpeg" alt="prague-fairy-tale-city" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fprague-fairy-tale-city%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fprague-fairy-tale-city%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fprague-fairy-tale-city%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="prague-fairy-tale-city" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Czech Republic</span>
@@ -5410,7 +5657,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/queenstown-adventure-capital/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/GKULPR8C0--1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/GKULPR8C0--1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/GKULPR8C0--1200.jpeg" alt="queenstown-adventure-capital" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fqueenstown-adventure-capital%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fqueenstown-adventure-capital%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fqueenstown-adventure-capital%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="queenstown-adventure-capital" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">New Zealand</span>
@@ -5421,7 +5668,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/rio-carnival-colours/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/5GvG9JWWOT-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/5GvG9JWWOT-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/5GvG9JWWOT-1200.jpeg" alt="rio-carnival-colours" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Frio-carnival-colours%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Frio-carnival-colours%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Frio-carnival-colours%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="rio-carnival-colours" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Brazil</span>
@@ -5432,7 +5679,7 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/seoul-ancient-modern/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/dEprmgX_-Y-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/dEprmgX_-Y-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/dEprmgX_-Y-1200.jpeg" alt="seoul-ancient-modern" width="1200" height="798"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fseoul-ancient-modern%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fseoul-ancient-modern%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fseoul-ancient-modern%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="seoul-ancient-modern" width="1200" height="798"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">South Korea</span>
@@ -5443,11 +5690,22 @@ dialog.search-overlay::backdrop {
       <li>
         <a href="/samples/trailblazers/dist/en/blog/sydney-harbour-sunrise/" class="destination-card">
           <div class="destination-card-thumb">
-            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.avif 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.webp 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/QoRj3nEHFo-1200.jpeg" alt="sydney-harbour-sunrise" width="1200" height="800"></picture>
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fsydney-harbour-sunrise%2Fcover.jpg&width=1200&format=avif&via=transform 1200w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fsydney-harbour-sunrise%2Fcover.jpg&width=1200&format=webp&via=transform 1200w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fsydney-harbour-sunrise%2Fcover.jpg&width=1200&format=jpeg&via=transform" alt="sydney-harbour-sunrise" width="1200" height="800"></picture>
           </div>
           <div class="destination-card-body">
             <span class="destination-card-country">Australia</span>
               <span class="destination-card-title">Sydney: Sunrise Over the Harbour</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/samples/trailblazers/dist/en/blog/valencia-city-of-light/" class="destination-card">
+          <div class="destination-card-thumb">
+            <picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fvalencia-city-of-light%2Fcover.jpg&width=6240&format=avif&via=transform 6240w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fvalencia-city-of-light%2Fcover.jpg&width=6240&format=webp&via=transform 6240w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fen%2Fblog%2Fvalencia-city-of-light%2Fcover.jpg&width=6240&format=jpeg&via=transform" alt="valencia-city-of-light" width="6240" height="4160"></picture>
+          </div>
+          <div class="destination-card-body">
+            <span class="destination-card-country">Spain</span>
+              <span class="destination-card-title">Valencia: City of Light, Paella, and Futuristic Dreams</span>
           </div>
         </a>
       </li>
@@ -5525,8 +5783,8 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/en/destinations/` was built on 2026-04-01T15:00:21.534Z -->
-		<script type="module" src="/samples/trailblazers/dist/dist/NCMLa4rI_B.js"></script>
+		<!-- This page `/en/destinations/` was built on 2026-04-09T14:46:35.481Z -->
+		<script type="module" src="/samples/trailblazers/dist/dist/vtlZxmJ1PV.js"></script>
 		
 		
 	</body>

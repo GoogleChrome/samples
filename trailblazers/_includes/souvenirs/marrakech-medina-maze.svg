@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Moroccan lantern -->
+  <!-- Hanging ring -->
+  <path d="M50 6 C50 6 56 6 56 10 L44 10 C44 6 50 6 50 6 Z" fill="currentColor"/>
+  <!-- Top cap -->
+  <path d="M38 10 L50 4 L62 10 L58 18 L42 18 Z" fill="currentColor"/>
+  <!-- Upper body -->
+  <path d="M38 18 L36 30 L64 30 L62 18 Z" fill="currentColor"/>
+  <!-- Main lantern body (hexagonal sides) -->
+  <path d="M36 30 L30 34 L30 72 L36 76 L64 76 L70 72 L70 34 L64 30 Z" fill="currentColor"/>
+  <!-- Lattice/star cutouts (as white shapes) -->
+  <!-- Large central star -->
+  <polygon points="50,38 52,46 60,44 54,50 60,56 52,54 50,62 48,54 40,56 46,50 40,44 48,46" fill="white" opacity="0.25"/>
+  <!-- Side cutouts -->
+  <ellipse cx="36" cy="52" rx="4" ry="8" fill="white" opacity="0.2"/>
+  <ellipse cx="64" cy="52" rx="4" ry="8" fill="white" opacity="0.2"/>
+  <!-- Bottom cap -->
+  <path d="M36 76 L42 84 L50 88 L58 84 L64 76 Z" fill="currentColor"/>
+  <!-- Final point -->
+  <path d="M44 84 L50 94 L56 84 Z" fill="currentColor" opacity="0.8"/>
+</svg>

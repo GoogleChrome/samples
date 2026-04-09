@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Jordanian sand art bottle -->
+  <!-- Cork -->
+  <ellipse cx="50" cy="10" rx="8" ry="5" fill="currentColor"/>
+  <!-- Neck -->
+  <rect x="44" y="13" width="12" height="12" rx="2" fill="currentColor"/>
+  <!-- Bottle body (rounded rectangle) -->
+  <path d="M34 25 C30 28 28 36 28 55 C28 72 35 88 50 88 C65 88 72 72 72 55 C72 36 70 28 66 25 Z" fill="currentColor" opacity="0.2"/>
+  <path d="M34 25 C30 28 28 36 28 55 C28 72 35 88 50 88 C65 88 72 72 72 55 C72 36 70 28 66 25 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+  <!-- Sand layers (horizontal bands in bottle) -->
+  <!-- Layer 1 - top (lightest) -->
+  <path d="M30 36 Q50 32 70 36 L70 44 Q50 40 30 44 Z" fill="currentColor" opacity="0.3"/>
+  <!-- Layer 2 -->
+  <path d="M29 44 Q50 48 71 44 L72 52 Q50 56 28 52 Z" fill="currentColor" opacity="0.5"/>
+  <!-- Layer 3 -->
+  <path d="M28 52 Q50 56 72 52 L72 62 Q50 58 28 62 Z" fill="currentColor" opacity="0.7"/>
+  <!-- Layer 4 -->
+  <path d="M28 62 Q50 58 72 62 L70 72 Q50 76 30 72 Z" fill="currentColor" opacity="0.85"/>
+  <!-- Layer 5 - bottom (darkest) -->
+  <path d="M30 72 Q50 76 70 72 L68 82 Q50 86 32 82 Z" fill="currentColor"/>
+  <!-- Bottle outline on top -->
+  <path d="M34 25 C30 28 28 36 28 55 C28 72 35 88 50 88 C65 88 72 72 72 55 C72 36 70 28 66 25 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+</svg>

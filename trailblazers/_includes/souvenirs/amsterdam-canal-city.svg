@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Dutch wooden clog (klompen) -->
+  <!-- Main clog body -->
+  <path d="M12 62 C12 62 14 44 28 40 C35 38 44 38 52 38 C60 38 65 41 67 43 L80 43 C86 43 90 48 90 53 C90 58 86 62 80 62 Z" fill="currentColor"/>
+  <!-- Sole/bottom -->
+  <path d="M12 62 L80 62 C80 62 82 70 75 72 L18 72 C11 70 12 62 12 62 Z" fill="currentColor" opacity="0.75"/>
+  <!-- Toe curl highlight -->
+  <path d="M20 48 C18 50 17 54 17 58" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <!-- Opening of clog -->
+  <ellipse cx="42" cy="46" rx="15" ry="9" fill="white" opacity="0.2"/>
+  <!-- Decorative stripe on toe -->
+  <path d="M22 64 L22 70" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  <path d="M28 64 L28 70" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  <path d="M34 64 L34 70" stroke="white" stroke-width="1.5" opacity="0.4"/>
+</svg>

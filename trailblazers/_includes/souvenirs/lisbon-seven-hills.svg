@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Portuguese azulejo decorative tile -->
+  <!-- Tile border -->
+  <rect x="10" y="10" width="80" height="80" rx="4" fill="currentColor"/>
+  <!-- Inner frame -->
+  <rect x="16" y="16" width="68" height="68" rx="2" fill="white" opacity="0.15"/>
+  <!-- Corner ornaments -->
+  <circle cx="22" cy="22" r="6" fill="white" opacity="0.3"/>
+  <circle cx="78" cy="22" r="6" fill="white" opacity="0.3"/>
+  <circle cx="22" cy="78" r="6" fill="white" opacity="0.3"/>
+  <circle cx="78" cy="78" r="6" fill="white" opacity="0.3"/>
+  <!-- Central motif: stylized flower/rosette -->
+  <circle cx="50" cy="50" r="14" fill="white" opacity="0.2"/>
+  <circle cx="50" cy="50" r="8" fill="white" opacity="0.3"/>
+  <!-- Petal shapes around center -->
+  <ellipse cx="50" cy="34" rx="4" ry="7" fill="white" opacity="0.35"/>
+  <ellipse cx="50" cy="66" rx="4" ry="7" fill="white" opacity="0.35"/>
+  <ellipse cx="34" cy="50" rx="7" ry="4" fill="white" opacity="0.35"/>
+  <ellipse cx="66" cy="50" rx="7" ry="4" fill="white" opacity="0.35"/>
+  <!-- Diagonal petals -->
+  <ellipse cx="40" cy="40" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(-45 40 40)"/>
+  <ellipse cx="60" cy="40" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(45 60 40)"/>
+  <ellipse cx="40" cy="60" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(45 40 60)"/>
+  <ellipse cx="60" cy="60" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(-45 60 60)"/>
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="4" fill="white" opacity="0.5"/>
+</svg>

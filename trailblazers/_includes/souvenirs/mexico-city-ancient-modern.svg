@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Sugar skull (Calavera) -->
+  <!-- Skull base -->
+  <ellipse cx="50" cy="48" rx="32" ry="36" fill="currentColor"/>
+  <!-- Jaw -->
+  <path d="M24 64 Q24 80 50 82 Q76 80 76 64 Z" fill="currentColor" opacity="0.85"/>
+  <!-- Eye sockets - large ornate circles -->
+  <circle cx="37" cy="44" r="12" fill="white" opacity="0.3"/>
+  <circle cx="63" cy="44" r="12" fill="white" opacity="0.3"/>
+  <!-- Eye pupils -->
+  <circle cx="37" cy="44" r="7" fill="currentColor"/>
+  <circle cx="63" cy="44" r="7" fill="currentColor"/>
+  <!-- Eye shine -->
+  <circle cx="40" cy="41" r="3" fill="white" opacity="0.5"/>
+  <circle cx="66" cy="41" r="3" fill="white" opacity="0.5"/>
+  <!-- Nose -->
+  <path d="M44 56 Q50 62 56 56" stroke="white" stroke-width="2.5" fill="none" opacity="0.6"/>
+  <path d="M46 58 L44 64 L56 64 L54 58" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Teeth -->
+  <line x1="38" y1="72" x2="38" y2="80" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <line x1="44" y1="72" x2="44" y2="80" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <line x1="50" y1="72" x2="50" y2="80" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <line x1="56" y1="72" x2="56" y2="80" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <line x1="62" y1="72" x2="62" y2="80" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <!-- Decorative flowers on forehead -->
+  <circle cx="50" cy="24" r="8" fill="white" opacity="0.2"/>
+  <circle cx="50" cy="24" r="4" fill="white" opacity="0.3"/>
+  <!-- Swirl decorations on cheeks -->
+  <path d="M26 52 C24 48 28 44 30 48" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M74 52 C76 48 72 44 70 48" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
+</svg>

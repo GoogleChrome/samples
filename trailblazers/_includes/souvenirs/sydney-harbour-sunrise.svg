@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Sydney Opera House model -->
+  <!-- Base platform -->
+  <rect x="8" y="78" width="84" height="8" rx="2" fill="currentColor"/>
+  <rect x="12" y="72" width="76" height="8" rx="2" fill="currentColor"/>
+  <!-- Shell 1 (largest, left) -->
+  <path d="M14 72 C14 56 22 38 36 30 C36 40 34 52 30 64 Z" fill="currentColor"/>
+  <path d="M14 72 C18 58 26 42 40 34 C40 44 38 56 34 68 Z" fill="currentColor" opacity="0.75"/>
+  <!-- Shell 2 (medium, center-left) -->
+  <path d="M28 72 C28 58 34 44 44 38 C44 48 42 58 40 68 Z" fill="currentColor"/>
+  <path d="M28 72 C32 60 38 48 48 42 C48 52 46 62 44 70 Z" fill="currentColor" opacity="0.75"/>
+  <!-- Shell 3 (large, right) -->
+  <path d="M44 72 C44 54 52 36 64 26 C64 38 62 52 58 66 Z" fill="currentColor"/>
+  <path d="M44 72 C48 56 56 40 68 30 C68 42 66 56 62 68 Z" fill="currentColor" opacity="0.75"/>
+  <!-- Shell 4 (small, far right) -->
+  <path d="M62 72 C62 60 66 50 72 44 C72 52 70 62 68 70 Z" fill="currentColor"/>
+  <path d="M62 72 C64 62 68 54 74 48 C74 56 72 64 70 70 Z" fill="currentColor" opacity="0.75"/>
+  <!-- Shell rib lines -->
+  <path d="M20 68 C22 56 28 44 36 36" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M34 68 C36 56 40 46 46 40" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M50 68 C52 54 58 40 66 32" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+  <!-- Harbor water reflection line -->
+  <path d="M8 78 C30 75 70 75 92 78" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+</svg>

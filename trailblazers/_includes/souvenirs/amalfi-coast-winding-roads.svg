@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Limoncello bottle -->
+  <!-- Cork/cap -->
+  <rect x="45" y="6" width="10" height="7" rx="2" fill="currentColor"/>
+  <!-- Neck -->
+  <rect x="43" y="12" width="14" height="16" rx="2" fill="currentColor"/>
+  <!-- Shoulder curve -->
+  <path d="M36 28 C33 34 32 42 32 55 C32 72 39 88 50 88 C61 88 68 72 68 55 C68 42 67 34 64 28 Z" fill="currentColor"/>
+  <!-- Label area -->
+  <rect x="37" y="44" width="26" height="22" rx="3" fill="white" opacity="0.25"/>
+  <!-- Lemon slice on label -->
+  <circle cx="50" cy="55" r="8" fill="white" opacity="0.3"/>
+  <line x1="50" y1="47" x2="50" y2="63" stroke="white" stroke-width="1.2" opacity="0.5"/>
+  <line x1="42" y1="55" x2="58" y2="55" stroke="white" stroke-width="1.2" opacity="0.5"/>
+  <line x1="44" y1="49.7" x2="56" y2="60.3" stroke="white" stroke-width="1" opacity="0.4"/>
+  <line x1="56" y1="49.7" x2="44" y2="60.3" stroke="white" stroke-width="1" opacity="0.4"/>
+</svg>

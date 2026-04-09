@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- 1950s classic car (side view) -->
+  <!-- Car body lower -->
+  <path d="M8 62 L8 72 L92 72 L92 62 C92 56 88 54 84 54 L76 54 L76 52 L72 48 L28 48 L18 52 L16 54 L8 54 C4 54 8 62 8 62 Z" fill="currentColor"/>
+  <!-- Car roof cabin -->
+  <path d="M28 48 L32 34 C34 30 38 28 42 28 L58 28 C62 28 66 30 68 34 L72 48 Z" fill="currentColor"/>
+  <!-- Windows -->
+  <path d="M35 46 L38 34 C39 31 41 30 44 30 L50 30 L50 46 Z" fill="white" opacity="0.3"/>
+  <path d="M52 30 L56 30 C59 30 61 31 62 34 L65 46 L52 46 Z" fill="white" opacity="0.3"/>
+  <!-- B-pillar -->
+  <line x1="51" y1="28" x2="51" y2="47" stroke="currentColor" stroke-width="2.5"/>
+  <!-- Wheels -->
+  <circle cx="24" cy="72" r="12" fill="currentColor"/>
+  <circle cx="24" cy="72" r="7" fill="white" opacity="0.25"/>
+  <circle cx="24" cy="72" r="3" fill="currentColor"/>
+  <circle cx="76" cy="72" r="12" fill="currentColor"/>
+  <circle cx="76" cy="72" r="7" fill="white" opacity="0.25"/>
+  <circle cx="76" cy="72" r="3" fill="currentColor"/>
+  <!-- Headlight -->
+  <ellipse cx="88" cy="60" rx="4" ry="3" fill="white" opacity="0.4"/>
+  <!-- Chrome bumper -->
+  <path d="M8 68 L8 72" stroke="white" stroke-width="2" opacity="0.4"/>
+  <path d="M92 68 L92 72" stroke="white" stroke-width="2" opacity="0.4"/>
+</svg>

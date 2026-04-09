@@ -346,22 +346,20 @@ a[href]:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--color-link);
-  color: light-dark(white, #0d1b2a);
+  background: var(--color-primary);
+  color: white;
   border: none;
-  padding: 0 1.2rem;
-  height: 2.2rem;
-  border-radius: 20px;
+  padding: 0 1.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
 }
 .post-metadata-share:hover {
-  background: var(--color-link-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 119, 182, 0.3);
+  background: var(--color-secondary);
+  transform: scale(1.02);
 }
 
 .icon-share {
@@ -1611,6 +1609,255 @@ dialog.search-overlay::backdrop {
 
 .post-country-map-svg svg:hover {
   opacity: 1;
+}
+
+/* ============================================================
+   Souvenir Widget
+   ============================================================ */
+.souvenir-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+}
+
+.souvenir-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.souvenir-widget-label {  
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+}
+
+.souvenir-widget-affiliate-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-dark);
+  background: var(--tag-bg);
+  border-radius: 20px;
+  padding: 0.2em 0.7em;
+  opacity: 0.75;
+}
+
+.souvenir-widget-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.souvenir-widget-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.souvenir-widget-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .souvenir-widget-icon {
+    color: var(--color-primary);
+    opacity: 0.85;
+  }
+}
+
+.souvenir-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.souvenir-widget-item-name {
+  margin: 0;      
+  color: var(--color-text);
+}
+
+.souvenir-widget-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.souvenir-widget-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.souvenir-widget-temu-logo {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: white;
+}
+
+@media (max-width: 480px) {
+  .souvenir-widget-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .souvenir-widget-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* ============================================================
+   Flight Widget
+   ============================================================ */
+.flight-widget {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow);
+}
+
+.flight-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.flight-widget-label {
+  font-family: var(--font-family-headings);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+}
+
+.flight-widget-affiliate-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-dark);
+  background: var(--tag-bg);
+  border-radius: 20px;
+  padding: 0.2em 0.7em;
+  opacity: 0.75;
+}
+
+.flight-widget-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.flight-widget-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.flight-widget-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .flight-widget-icon {
+    opacity: 0.85;
+  }
+}
+
+.flight-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flight-widget-tagline {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.flight-widget-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.flight-widget-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.02);
+}
+
+.flight-widget-trip-logo {
+  height: 50px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  box-shadow: none;
+  border: white 5px solid;
+  
+}
+
+@media (max-width: 480px) {
+  .flight-widget-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .flight-widget-icon {
+    width: 60px;
+    height: 60px;
+  }
 }</style>
 		
 		<link href="/samples/trailblazers/dist/pagefind/pagefind-ui.css" rel="stylesheet">
@@ -1623,7 +1870,7 @@ dialog.search-overlay::backdrop {
 		<header class="site-header hero-header" style="--hero-image-url: url('/samples/trailblazers/dist/img/hero.jpg');">
 			<div class="header-content">
 				<a href="/samples/trailblazers/dist/ja/" class="logo">
-					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.avif 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/img/wtNjumP-NS-1024.webp 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/img/wtNjumP-NS-1024.png" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
+					<picture><source type="image/avif" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Flogo.png&width=1024&format=avif&via=transform 1024w"><source type="image/webp" srcset="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Flogo.png&width=1024&format=webp&via=transform 1024w"><img loading="lazy" decoding="async" src="/samples/trailblazers/dist/.11ty/image/?src=content%2Fimg%2Flogo.png&width=1024&format=png&via=transform" alt="trAIlblazers Travel Blog" class="logo-image" width="1024" height="1024"></picture>
 				</a>
 
 				<nav>
@@ -1751,7 +1998,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/ja/imprint/` was built on 2026-04-01T15:00:21.534Z -->
+		<!-- This page `/ja/imprint/` was built on 2026-04-09T14:46:35.481Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

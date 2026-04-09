@@ -1,4 +1,4 @@
-import { n as e, t } from "../chunks/defaults-B5W7MP9T.js";
+import { n as e, t } from "../chunks/defaults-BHsuqSiF.js";
 import { initializeApp as n } from "firebase/app";
 import { GoogleAIBackend as r, InferenceMode as i, Schema as a, VertexAIBackend as o, getAI as s, getGenerativeModel as c } from "firebase/ai";
 //#region node_modules/@firebase/util/dist/postinstall.mjs

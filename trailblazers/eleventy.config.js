@@ -32,6 +32,8 @@ export default async function (eleventyConfig) {
     './public/': '/',
     './content/img/hero.jpg': '/img/hero.jpg',
     './content/img/logo.png': '/img/logo.png',
+    './content/img/temu-logo.svg': '/img/temu-logo.svg',
+    './content/img/trip-logo.webp': '/img/trip-logo.webp',
     './node_modules/@google/genai/dist/web/index.mjs': '/js/google-genai.js',
     './node_modules/@huggingface/transformers/dist/':
       '/js/huggingface-transformers/',

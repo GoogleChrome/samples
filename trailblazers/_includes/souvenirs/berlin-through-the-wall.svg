@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Brandenburg Gate model -->
+  <!-- Roof/attic -->
+  <rect x="18" y="18" width="64" height="12" rx="1" fill="currentColor"/>
+  <!-- Quadriga platform -->
+  <rect x="22" y="14" width="56" height="6" rx="1" fill="currentColor"/>
+  <!-- Simple chariot/quadriga suggestion -->
+  <ellipse cx="50" cy="10" rx="14" ry="5" fill="currentColor" opacity="0.7"/>
+  <!-- Columns - 5 columns with 4 gaps -->
+  <rect x="20" y="30" width="8" height="40" rx="2" fill="currentColor"/>
+  <rect x="34" y="30" width="8" height="40" rx="2" fill="currentColor"/>
+  <rect x="46" y="30" width="8" height="40" rx="2" fill="currentColor"/>
+  <rect x="58" y="30" width="8" height="40" rx="2" fill="currentColor"/>
+  <rect x="72" y="30" width="8" height="40" rx="2" fill="currentColor"/>
+  <!-- Passage arch between middle columns -->
+  <path d="M44 70 L44 50 Q50 44 56 50 L56 70 Z" fill="white" opacity="0.25"/>
+  <!-- Base step -->
+  <rect x="16" y="70" width="68" height="6" rx="1" fill="currentColor"/>
+  <rect x="14" y="76" width="72" height="6" rx="1" fill="currentColor" opacity="0.8"/>
+</svg>

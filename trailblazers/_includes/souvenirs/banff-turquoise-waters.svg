@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Canadian maple leaf -->
+  <path d="M50 8
+    L54 22 L58 18 L55 30 L70 25 L65 35 L80 35 L72 45 L84 50
+    L72 55 L76 68 L64 62 L60 78 L52 70 L50 82
+    L48 70 L40 78 L36 62 L24 68 L28 55
+    L16 50 L28 45 L20 35 L35 35 L30 25
+    L45 30 L42 18 L46 22 Z" fill="currentColor"/>
+  <!-- Stem -->
+  <rect x="47" y="80" width="6" height="14" rx="3" fill="currentColor"/>
+</svg>

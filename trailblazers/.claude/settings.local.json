@@ -23,7 +23,24 @@
       "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/edinburgh-castle-highlands/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/blog/edinburgh-castle-highlands/cover.jpg)",
       "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/lisbon-seven-hills/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/es/blog/lisbon-seven-hills/cover.jpg)",
       "Bash(cp /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/lisbon-seven-hills/cover.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/blog/lisbon-seven-hills/cover.jpg)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(mkdir -p /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/valencia-city-of-light)",
+      "Bash(curl -L -o /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/valencia-city-of-light/cover.jpg \"https://unsplash.com/photos/jKywkUgB4X4/download?force=true\" -w \"\\\\nHTTP Status: %{http_code}\" --max-time 30 -s)",
+      "Bash(curl -L -o /tmp/valencia-test.jpg \"https://unsplash.com/photos/5-O5f9NxD2s/download?force=true\" -w \"\\\\nHTTP Status: %{http_code}\" --max-time 30 -s)",
+      "Read(//tmp/**)",
+      "Bash(identify /tmp/valencia-test.jpg)",
+      "Bash(cp /tmp/valencia-test.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/valencia-city-of-light/cover.jpg)",
+      "Bash(mkdir -p /Users/tsteiner/Documents/websites/samples/trailblazers/content/es/blog/valencia-city-of-light)",
+      "Bash(cp /tmp/valencia-test.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/es/blog/valencia-city-of-light/cover.jpg)",
+      "Bash(mkdir -p /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/blog/valencia-city-of-light)",
+      "Bash(cp /tmp/valencia-test.jpg /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/blog/valencia-city-of-light/cover.jpg)",
+      "Bash(grep -l \"map\\\\|Map\\\\|coordinates\\\\|lat\\\\|lng\" /Users/tsteiner/Documents/websites/samples/trailblazers/content/en/blog/*/index.md)",
+      "Bash(wc -c /Users/tsteiner/Documents/websites/samples/trailblazers/_includes/maps/countries/*.svg)",
+      "Bash(xargs ls:*)",
+      "Bash(grep -l \"souvenir-widget-button\" /Users/tsteiner/Documents/websites/samples/trailblazers/dist/en/blog/*/index.html)",
+      "Bash(curl -L -o /Users/tsteiner/Documents/websites/samples/trailblazers/content/img/tripcom-logo.svg \"https://ak-d.tripcdn.com/images/05E5212000cga1e0a5303.svg\")",
+      "Bash(grep -v \"^\\\\-\\\\-$\\\\|font\\\\|text\\\\|color\\\\|padding\\\\|margin\\\\|display\\\\|font\")",
+      "Bash(grep -v \"^\\\\-\\\\-$\\\\|font\\\\|text\\\\|color\\\\|padding\\\\|margin\\\\|display\")"
     ]
   }
 }

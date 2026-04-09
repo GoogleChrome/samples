@@ -5,7 +5,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Adventure","Argentina","Australia","Beach","Brazil","Canada","City","Coast","Croatia","Cuba","Culture","Czech Republic","Energy","France","Germany","Greece","Hidden Gem","History","Iceland","India","Indonesia","Islands","Italy","Japan","Jordan","Kenya","Lakes","Magic","Mexico","Morocco","Mountains","Nature","Netherlands","New Zealand","Peru","Portugal","Relaxation","Romance","Scotland","South Africa","South Korea","Spirituality","Summer","Tanzania","Thailand","Turkey","UNESCO","USA","Vietnam","Wildlife","Winter"]
+        "enum": ["Adventure","Argentina","Australia","Beach","Brazil","Canada","City","Coast","Croatia","Cuba","Culture","Czech Republic","Energy","Food","France","Germany","Greece","Hidden Gem","History","Iceland","India","Indonesia","Islands","Italy","Japan","Jordan","Kenya","Lakes","Magic","Mexico","Morocco","Mountains","Nature","Netherlands","New Zealand","Peru","Portugal","Relaxation","Romance","Scotland","South Africa","South Korea","Spain","Spirituality","Summer","Tanzania","Thailand","Turkey","UNESCO","USA","Vietnam","Wildlife","Winter"]
       }
     }
   },

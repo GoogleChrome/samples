@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Alpaca silhouette -->
+  <!-- Body -->
+  <ellipse cx="52" cy="62" rx="26" ry="20" fill="currentColor"/>
+  <!-- Fluffy neck -->
+  <ellipse cx="36" cy="46" rx="12" ry="18" fill="currentColor"/>
+  <!-- Head -->
+  <ellipse cx="30" cy="28" rx="12" ry="10" fill="currentColor"/>
+  <!-- Snout/muzzle -->
+  <ellipse cx="22" cy="32" rx="8" ry="6" fill="currentColor"/>
+  <!-- Ear left -->
+  <path d="M26 20 C24 12 20 10 20 16 C20 20 24 22 26 20 Z" fill="currentColor"/>
+  <!-- Ear right -->
+  <path d="M36 18 C38 10 42 10 40 16 C39 20 36 20 36 18 Z" fill="currentColor"/>
+  <!-- Eye -->
+  <circle cx="24" cy="27" r="2.5" fill="white" opacity="0.8"/>
+  <circle cx="24" cy="27" r="1.2" fill="currentColor"/>
+  <!-- Fluffy coat texture -->
+  <path d="M30 45 C26 40 22 42 24 48" stroke="white" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <path d="M40 44 C38 38 34 40 36 46" stroke="white" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <!-- Legs -->
+  <rect x="34" y="78" width="7" height="16" rx="3" fill="currentColor"/>
+  <rect x="44" y="78" width="7" height="18" rx="3" fill="currentColor"/>
+  <rect x="56" y="78" width="7" height="18" rx="3" fill="currentColor"/>
+  <rect x="66" y="78" width="7" height="16" rx="3" fill="currentColor"/>
+  <!-- Tail -->
+  <ellipse cx="78" cy="56" rx="6" ry="8" fill="currentColor"/>
+</svg>

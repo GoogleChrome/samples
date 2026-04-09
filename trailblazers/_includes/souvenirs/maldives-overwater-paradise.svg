@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Conch / tropical shell -->
+  <!-- Outer spiral body -->
+  <path d="M50 12 C72 12 86 28 86 50 C86 68 76 80 62 86 C54 90 44 88 36 82 C26 74 22 62 24 50 C26 36 34 24 46 18 Z" fill="currentColor"/>
+  <!-- Spire tip -->
+  <path d="M50 12 C48 8 44 6 44 10 C44 14 48 16 50 12 Z" fill="currentColor"/>
+  <!-- Inner spiral channel -->
+  <path d="M44 28 C36 34 34 44 36 54 C38 62 44 68 50 70" stroke="white" stroke-width="3" fill="none" opacity="0.35" stroke-linecap="round"/>
+  <!-- Aperture/opening -->
+  <path d="M28 64 C28 64 30 72 36 78 C40 82 46 84 50 84" stroke="white" stroke-width="4" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <!-- Surface ridge lines -->
+  <path d="M56 18 C64 22 72 32 76 44" stroke="white" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <path d="M64 26 C70 32 76 42 78 56" stroke="white" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <!-- Shine -->
+  <ellipse cx="60" cy="32" rx="8" ry="5" fill="white" opacity="0.2" transform="rotate(-30 60 32)"/>
+</svg>

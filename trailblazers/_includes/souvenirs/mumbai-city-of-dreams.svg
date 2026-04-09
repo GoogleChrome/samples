@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Decorated elephant figurine (Ganesha style) -->
+  <!-- Body -->
+  <ellipse cx="50" cy="62" rx="28" ry="24" fill="currentColor"/>
+  <!-- Head -->
+  <ellipse cx="50" cy="36" rx="22" ry="20" fill="currentColor"/>
+  <!-- Large ears -->
+  <ellipse cx="24" cy="38" rx="14" ry="18" fill="currentColor"/>
+  <ellipse cx="76" cy="38" rx="14" ry="18" fill="currentColor"/>
+  <!-- Inner ear -->
+  <ellipse cx="24" cy="38" rx="9" ry="12" fill="white" opacity="0.2"/>
+  <ellipse cx="76" cy="38" rx="9" ry="12" fill="white" opacity="0.2"/>
+  <!-- Trunk -->
+  <path d="M50 54 C44 58 40 66 42 76 C44 82 50 84 50 84" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <!-- Tusks -->
+  <path d="M38 50 C32 56 28 64 30 70" stroke="white" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <path d="M62 50 C68 56 72 64 70 70" stroke="white" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <!-- Eyes -->
+  <circle cx="38" cy="32" r="4" fill="white" opacity="0.7"/>
+  <circle cx="62" cy="32" r="4" fill="white" opacity="0.7"/>
+  <circle cx="38" cy="32" r="2" fill="currentColor"/>
+  <circle cx="62" cy="32" r="2" fill="currentColor"/>
+  <!-- Forehead bindi decoration -->
+  <circle cx="50" cy="24" r="4" fill="white" opacity="0.4"/>
+  <!-- Decorative body patterns -->
+  <path d="M36 60 C38 56 44 54 50 56 C56 54 62 56 64 60" stroke="white" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <!-- Legs -->
+  <rect x="30" y="82" width="10" height="12" rx="5" fill="currentColor"/>
+  <rect x="42" y="84" width="10" height="10" rx="5" fill="currentColor"/>
+  <rect x="54" y="84" width="10" height="10" rx="5" fill="currentColor"/>
+  <rect x="66" y="82" width="10" height="12" rx="5" fill="currentColor"/>
+</svg>

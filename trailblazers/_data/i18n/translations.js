@@ -10,7 +10,7 @@ export default {
     ja: '目的地',
   },
   destinations_subtitle: {
-    en: 'Explore all the places we\'ve written about. Click any highlighted country to read the story.',
+    en: "Explore all the places we've written about. Click any highlighted country to read the story.",
     es: 'Explora todos los lugares sobre los que hemos escrito. Haz clic en un país resaltado para leer la historia.',
     ja: '私たちが書いた場所をすべて探索してください。ハイライトされた国をクリックして記事を読みましょう。',
   },
@@ -193,5 +193,40 @@ export default {
     en: 'By signing up, you agree to our <a href="/{{ locale }}/imprint/">Terms of Use</a> and acknowledge the data practices in our <a href="/{{ locale }}/privacy/">Privacy Policy</a>.',
     es: 'Al registrarte, aceptas nuestras <a href="/{{ locale }}/imprint/">Condiciones de uso</a> y reconoces las prácticas de datos en nuestra <a href="/{{ locale }}/privacy/">Política de privacidad</a>.',
     ja: '登録すると、<a href="/{{ locale }}/imprint/">利用規約</a>に同意し、<a href="/{{ locale }}/privacy/">プライバシーポリシー</a>のデータ取り扱い方法を認めたことになります。',
+  },
+  affiliate_link: {
+    en: 'Affiliate link',
+    es: 'Enlace de afiliado',
+    ja: 'アフィリエイトリンク',
+  },
+  souvenir_widget_label: {
+    en: 'Take a piece home from {{ city }}',
+    es: 'Llévate un recuerdo de {{ city }}',
+    ja: '{{ city }}のお土産を持ち帰ろう',
+  },
+  souvenir_widget_item: {
+    en: 'Buy a <strong>{{ name }}</strong> for you or a loved one!',
+    es: '¡Compra <strong>{{ name }}</strong> para ti o para alguien especial!',
+    ja: '<strong>{{ name }}</strong>をあなたや大切な人へのお土産に！',
+  },
+  souvenir_widget_button: {
+    en: 'Buy on Temu',
+    es: 'Comprar en Temu',
+    ja: 'Temuで購入',
+  },
+  flight_widget_label: {
+    en: 'Book a flight to {{ city }}',
+    es: 'Reserva un vuelo a {{ city }}',
+    ja: '{{ city }}へのフライトを予約',
+  },
+  flight_widget_tagline: {
+    en: 'Ready to visit <strong>{{ city }}</strong>? Search for flights.',
+    es: '¿Listo para visitar <strong>{{ city }}</strong>? Busca vuelos.',
+    ja: '<strong>{{ city }}</strong>を訪れる準備はできましたか？フライトを検索しましょう。',
+  },
+  flight_widget_button: {
+    en: 'Book on Trip.com',
+    es: 'Reservar en Trip.com',
+    ja: 'Trip.comで予約',
   },
 };

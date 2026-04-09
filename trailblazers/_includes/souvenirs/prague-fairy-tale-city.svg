@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Bohemian crystal wine glass -->
+  <!-- Stem -->
+  <rect x="47" y="64" width="6" height="22" fill="currentColor"/>
+  <!-- Base -->
+  <ellipse cx="50" cy="86" rx="18" ry="5" fill="currentColor"/>
+  <!-- Bowl -->
+  <path d="M28 18 C28 44 34 60 50 64 C66 60 72 44 72 18 Z" fill="currentColor"/>
+  <!-- Rim -->
+  <ellipse cx="50" cy="18" rx="22" ry="5" fill="currentColor"/>
+  <!-- Crystal facet lines on bowl -->
+  <line x1="38" y1="20" x2="44" y2="62" stroke="white" stroke-width="1.5" opacity="0.3"/>
+  <line x1="50" y1="18" x2="50" y2="64" stroke="white" stroke-width="2" opacity="0.3"/>
+  <line x1="62" y1="20" x2="56" y2="62" stroke="white" stroke-width="1.5" opacity="0.3"/>
+  <line x1="32" y1="22" x2="36" y2="50" stroke="white" stroke-width="1" opacity="0.25"/>
+  <line x1="68" y1="22" x2="64" y2="50" stroke="white" stroke-width="1" opacity="0.25"/>
+  <!-- Horizontal facet lines -->
+  <path d="M30 34 Q50 30 70 34" stroke="white" stroke-width="1" fill="none" opacity="0.25"/>
+  <path d="M30 48 Q50 44 70 48" stroke="white" stroke-width="1" fill="none" opacity="0.25"/>
+  <!-- Bowl shine / highlight -->
+  <path d="M34 24 C32 30 32 38 34 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.3"/>
+</svg>

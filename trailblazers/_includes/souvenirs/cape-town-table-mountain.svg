@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- Beaded bracelet / bangle -->
+  <!-- Outer ring -->
+  <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="10"/>
+  <!-- Bead pattern around the ring (circles at intervals) -->
+  <circle cx="50" cy="14" r="5" fill="currentColor"/>
+  <circle cx="75" cy="22" r="5" fill="currentColor"/>
+  <circle cx="86" cy="50" r="5" fill="currentColor"/>
+  <circle cx="75" cy="78" r="5" fill="currentColor"/>
+  <circle cx="50" cy="86" r="5" fill="currentColor"/>
+  <circle cx="25" cy="78" r="5" fill="currentColor"/>
+  <circle cx="14" cy="50" r="5" fill="currentColor"/>
+  <circle cx="25" cy="22" r="5" fill="currentColor"/>
+  <!-- Inner bead dots (alternating, smaller) -->
+  <circle cx="50" cy="14" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="75" cy="22" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="86" cy="50" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="75" cy="78" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="50" cy="86" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="25" cy="78" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="14" cy="50" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="25" cy="22" r="2.5" fill="white" opacity="0.5"/>
+</svg>
