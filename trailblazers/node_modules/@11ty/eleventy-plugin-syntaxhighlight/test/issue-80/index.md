@@ -1,3 +1,0 @@
-```diff-javascript
-- foo()
-```
