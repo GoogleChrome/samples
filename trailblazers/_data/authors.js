@@ -6,7 +6,7 @@ export default {
       es: 'Buscadora de aventuras y amante de la playa. Maya ha viajado a más de 30 países, siempre buscando el atardecer perfecto.',
       ja: '冒険好きで海を愛するトラベラー。これまでに30カ国以上を旅し、常に最高の夕日を探し求めています。',
     },
-    avatar: '/img/avatars/maya.png',
+    avatar: '/img/avatars/maya.jpg',
   },
   ashok: {
     name: 'Ashok',
@@ -15,7 +15,7 @@ export default {
       es: 'Historiador y explorador de ciudades. A Ashok le encanta descubrir las historias ocultas detrás de la arquitectura antigua y las bulliciosas calles metropolitanas.',
       ja: '歴史家であり、都市探検家。古代建築の背後に隠された物語や、活気ある大都市の路地裏を探索するのが大好きです。',
     },
-    avatar: '/img/avatars/ashok.png',
+    avatar: '/img/avatars/ashok.jpg',
   },
   julia: {
     name: 'Julia',
@@ -24,6 +24,6 @@ export default {
       es: 'Senderista solitaria y entusiasta de las montañas. Julia encuentra la paz en las grandes altitudes y los senderos accidentados del mundo.',
       ja: 'ソロハイカーであり、山を愛する冒険家。世界の高峰や険しい道を歩くことで、心の安らぎを見出しています。',
     },
-    avatar: '/img/avatars/julia.png',
+    avatar: '/img/avatars/julia.jpg',
   },
 };
