@@ -11,7 +11,7 @@
     "debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
     "format": "npx prettier --write .",
-    "deploy": "npm run build && git add . --force && git commit -a -m 'New release' && git push"
+    "deploy": "npm run build && git add . && git add ./dist/ --force && git commit -a -m 'New release' && git push"
   },
   "license": "MIT",
   "engines": {
