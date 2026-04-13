@@ -1,0 +1,1 @@
+{"version":3,"file":"processing_whisper.d.ts","sourceRoot":"","sources":["../../../src/models/whisper/processing_whisper.js"],"names":[],"mappings":"AAIA;;GAEG;AACH;IACI,6CAAuC;IACvC,4DAAsD;IAEtD;;;;OAIG;IACH,aAHW,GAAG,GACD,OAAO,CAAC,GAAG,CAAC,CAIxB;CACJ;0BAjByB,2BAA2B;8BADvB,8BAA8B;qCADvB,oCAAoC"}

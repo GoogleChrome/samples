@@ -1,0 +1,4 @@
+---
+eleventyNavigation:
+  key: Mammals
+---

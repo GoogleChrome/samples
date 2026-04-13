@@ -1,0 +1,138 @@
+label:has(input[switch]),
+input[switch] {
+  animation: none;
+}
+
+/* Base styles for the polyfilled switch */
+input.switch {
+  /* Default fallback color */
+  --switch-accent: #2196f3;
+  --switch-background: rgba(192, 192, 192, 1);
+  --switch-thumb: white;
+  appearance: none;
+  height: 1em;
+  width: 2em;
+  border-radius: 1em;
+  box-shadow: inset -1em 0px 0px 0px var(--switch-background);
+  background-color: var(--switch-thumb);
+  border: 1px solid var(--switch-background);
+  font-size: inherit;
+  position: relative;
+  top: 0.2em;
+  touch-action: none;
+}
+
+input.switch:is(:hover, :active, :focus) {
+  transition:
+    box-shadow 0.2s,
+    border 0.2s,
+    opacity 0.2s;
+}
+
+[dir='rtl'] input.switch {
+  transform: rotate(180deg);
+}
+
+.vertical-rl,
+.vertical-lr {
+  transform: rotate(90deg);
+}
+
+.sideways-rl {
+  transform: rotate(90deg);
+  right: 1.6em;
+}
+
+label:has(.sideways-rl) {
+  margin-block-end: 0.8em;
+}
+
+.sideways-lr {
+  transform: rotate(-90deg);
+  left: 1.4em;
+  margin-inline-start: 0.8em;
+}
+
+label:has(.sideways-lr) {
+  margin-block-start: -1.2em;
+}
+
+input.switch:checked {
+  /* Use color-mix to replicate the 0.5 alpha on the box-shadow 
+     while keeping the border solid.
+  */
+  box-shadow: inset 1em 0px 0px 0px
+    color-mix(in srgb, var(--switch-accent), transparent 50%);
+  border: 1px solid var(--switch-accent);
+}
+
+input.switch[disabled] {
+  opacity: 0.5;
+}
+
+/* Fallback for browsers that don't support color-mix 
+   (Older browsers will just see the solid default blue)
+*/
+@supports not (color: color-mix(in srgb, red, blue)) {
+  input.switch:checked {
+    box-shadow: inset 1em 0px 0px 0px rgba(33, 150, 243, 0.5);
+    border: 1px solid rgba(33, 150, 243, 1);
+  }
+}
+
+@media (prefers-contrast: more) {
+  input.switch {
+    border: 1px solid ButtonText;
+  }
+
+  /* Shared styles for the indicator */
+  input.switch::after {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    font-size: 0.5em;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+  }
+
+  /* Default (OFF) state: unchecked and not visually-on, OR visually-off */
+  input.switch:not(:checked):not(.visually-on)::after,
+  input.switch.visually-off::after {
+    content: '◯';
+    position: absolute;
+    left: 50%;
+  }
+
+  /* Checked (ON) state: checked and not visually-off, OR visually-on */
+  input.switch:checked:not(.visually-off),
+  input.switch.visually-on {
+    border-color: ButtonText;
+  }
+
+  input.switch:checked:not(.visually-off)::after,
+  input.switch.visually-on::after {
+    content: '❙';
+    position: absolute;
+    left: 0;
+    color: contrast-color(var(--switch-accent));
+  }
+}
+
+@media (forced-colors: active) {
+  input.switch {
+    forced-color-adjust: none;
+    --switch-accent: Canvas;
+    --switch-background: Canvas;
+    --switch-thumb: ButtonText;
+    border-color: ButtonText;
+  }
+
+  input.switch:checked {
+    box-shadow: inset 1em 0px 0px 0px var(--switch-accent);
+    border-color: ButtonText;
+  }
+}

@@ -1,0 +1,3 @@
+```diff-javascript
+- foo()
+```

@@ -1,0 +1,42 @@
+{
+  "name": "@11ty/dependency-tree",
+  "version": "4.0.2",
+  "description": "Finds all JavaScript CommmonJS require() dependencies from a filename.",
+  "main": "main.js",
+  "files": [
+    "main.js",
+    "!test",
+    "!test/**"
+  ],
+  "scripts": {
+    "test": "npx ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/11ty/eleventy-dependency-tree.git"
+  },
+  "author": {
+    "name": "Zach Leatherman",
+    "email": "zach@zachleat.com",
+    "url": "https://zachleat.com/"
+  },
+  "license": "MIT",
+  "ava": {
+    "files": [
+      "./test/*.js"
+    ],
+    "watchMode": {
+      "ignoreChanged": [
+        "./test/stubs/**"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@sindresorhus/is": "^4.6.0",
+    "ava": "^6.4.1",
+    "semver": "^7.7.3"
+  },
+  "dependencies": {
+    "@11ty/eleventy-utils": "^2.0.1"
+  }
+}

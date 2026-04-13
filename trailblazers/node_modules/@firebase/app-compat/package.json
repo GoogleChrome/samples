@@ -1,0 +1,71 @@
+{
+  "name": "@firebase/app-compat",
+  "version": "0.5.10",
+  "description": "The primary entrypoint to the Firebase JS SDK",
+  "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
+  "main": "dist/index.cjs.js",
+  "browser": "dist/esm/index.esm.js",
+  "module": "dist/esm/index.esm.js",
+  "lite": "dist/index.lite.js",
+  "exports": {
+    ".": {
+      "types": "./dist/app-compat-public.d.ts",
+      "require": "./dist/index.cjs.js",
+      "lite": "./dist/index.lite.js",
+      "default": "./dist/esm/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "lint:fix": "eslint --fix -c .eslintrc.js '**/*.ts'  --ignore-path '../../.gitignore'",
+    "build": "rollup -c && yarn api-report",
+    "build:deps": "lerna run --scope @firebase/app-compat --include-dependencies build",
+    "dev": "rollup -c -w",
+    "test": "run-p --npm-path npm lint test:all",
+    "test:all": "run-p --npm-path npm test:browser test:node",
+    "test:ci": "node ../../scripts/run_tests_in_ci.js -s test:all",
+    "test:browser": "karma start",
+    "test:browser:debug": "karma start --browsers Chrome --auto-watch",
+    "test:node": "TS_NODE_FILES=true TS_NODE_CACHE=NO TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' nyc --reporter lcovonly -- mocha test/**/*.test.* src/**/*.test.ts --config ../../config/mocharc.node.js",
+    "trusted-type-check": "tsec -p tsconfig.json --noEmit",
+    "api-report": "api-extractor run --local --verbose",
+    "typings:public": "node ../../scripts/build/use_typings.js ./dist/app-compat-public.d.ts"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@firebase/app": "0.14.10",
+    "@firebase/util": "1.15.0",
+    "@firebase/logger": "0.5.0",
+    "@firebase/component": "0.7.2",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "rollup": "2.79.2",
+    "@rollup/plugin-json": "6.1.0",
+    "rollup-plugin-replace": "2.2.0",
+    "rollup-plugin-typescript2": "0.36.0",
+    "typescript": "5.5.4"
+  },
+  "repository": {
+    "directory": "packages/app-compat",
+    "type": "git",
+    "url": "git+https://github.com/firebase/firebase-js-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/firebase/firebase-js-sdk/issues"
+  },
+  "typings": "./dist/app-compat-public.d.ts",
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "reportDir": "./coverage/node"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

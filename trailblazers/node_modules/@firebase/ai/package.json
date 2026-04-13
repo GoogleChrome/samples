@@ -1,0 +1,85 @@
+{
+  "name": "@firebase/ai",
+  "version": "2.10.0",
+  "description": "The Firebase AI SDK",
+  "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "main": "dist/index.cjs.js",
+  "browser": "dist/esm/index.esm.js",
+  "module": "dist/esm/index.esm.js",
+  "exports": {
+    ".": {
+      "types": "./dist/ai-public.d.ts",
+      "node": {
+        "require": "./dist/index.node.cjs.js",
+        "import": "./dist/index.node.mjs"
+      },
+      "browser": {
+        "require": "./dist/index.cjs.js",
+        "import": "./dist/esm/index.esm.js"
+      },
+      "default": "./dist/esm/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "lint:fix": "eslint --fix -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "build": "rollup -c && yarn api-report",
+    "build:deps": "lerna run --scope @firebase/ai --include-dependencies build",
+    "dev": "rollup -c -w",
+    "update-responses": "../../scripts/update_vertexai_responses.sh",
+    "testsetup": "yarn update-responses && yarn ts-node ./test-utils/convert-mocks.ts",
+    "test": "run-p --npm-path npm lint type-check test:browser",
+    "test:ci": "yarn testsetup && node ../../scripts/run_tests_in_ci.js -s test",
+    "test:skip-clone": "karma start",
+    "test:browser": "yarn testsetup && karma start",
+    "test:node": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register --require src/index.node.ts 'src/**/!(*-browser)*.test.ts' --config ../../config/mocharc.node.js",
+    "test:integration": "karma start --integration",
+    "test:integration:node": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha integration/**/*.test.ts --config ../../config/mocharc.node.js",
+    "api-report": "api-extractor run --local --verbose",
+    "typings:public": "node ../../scripts/build/use_typings.js ./dist/ai-public.d.ts",
+    "type-check": "yarn tsc --noEmit",
+    "trusted-type-check": "tsec -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@firebase/app": "0.x",
+    "@firebase/app-types": "0.x"
+  },
+  "dependencies": {
+    "@firebase/app-check-interop-types": "0.3.3",
+    "@firebase/component": "0.7.2",
+    "@firebase/logger": "0.5.0",
+    "@firebase/util": "1.15.0",
+    "tslib": "^2.1.0"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@firebase/app": "0.14.10",
+    "@rollup/plugin-json": "6.1.0",
+    "rollup": "2.79.2",
+    "rollup-plugin-replace": "2.2.0",
+    "rollup-plugin-typescript2": "0.36.0",
+    "typescript": "5.5.4"
+  },
+  "repository": {
+    "directory": "packages/ai",
+    "type": "git",
+    "url": "git+https://github.com/firebase/firebase-js-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/firebase/firebase-js-sdk/issues"
+  },
+  "typings": "./dist/ai-public.d.ts",
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "reportDir": "./coverage/node"
+  }
+}

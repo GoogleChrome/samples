@@ -1,0 +1,61 @@
+{
+  "name": "browser-fs-access",
+  "version": "0.38.0",
+  "description": "File System Access API with legacy fallback in the browser.",
+  "type": "module",
+  "source": "./src/index.js",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "module": "./dist/index.modern.js",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs",
+      "browser": "./dist/index.modern.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.modern.js",
+  "types": "./index.d.ts",
+  "files": [
+    "dist/",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "start": "npx http-server -o /demo/",
+    "clean": "shx rm -rf ./dist",
+    "build": "npm run clean && microbundle -f modern,cjs --no-sourcemap --no-generateTypes",
+    "dev": "microbundle watch",
+    "prepare": "npm run lint && npm run fix && npm run build",
+    "lint": "npx eslint . --ext .js,.mjs --fix --ignore-pattern dist/",
+    "fix": "npx prettier --write ."
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoogleChromeLabs/browser-fs-access.git"
+  },
+  "keywords": [
+    "file system access",
+    "file system access api",
+    "file system",
+    "ponyfill"
+  ],
+  "author": "Thomas Steiner (https://blog.tomayac.com/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/GoogleChromeLabs/browser-fs-access/issues"
+  },
+  "homepage": "https://github.com/GoogleChromeLabs/browser-fs-access#readme",
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^10.1.5",
+    "http-server": "^14.1.1",
+    "microbundle": "^0.15.1",
+    "prettier": "^3.5.3",
+    "shx": "^0.4.0"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "@huggingface/tokenizers",
+  "version": "0.1.3",
+  "description": "🤗 Tokenizers.js: A pure JS/TS implementation of today's most used tokenizers",
+  "type": "module",
+  "main": "dist/tokenizers.mjs",
+  "browser": "dist/tokenizers.mjs",
+  "module": "dist/tokenizers.mjs",
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "node": {
+        "require": "./dist/tokenizers.cjs",
+        "import": "./dist/tokenizers.mjs"
+      },
+      "browser": {
+        "import": "./dist/tokenizers.mjs"
+      },
+      "default": "./dist/tokenizers.mjs"
+    }
+  },
+  "files": [
+    "dist",
+    "types",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "rimraf dist types",
+    "build": "npm run clean && node scripts/build.mjs",
+    "dev": "npm run clean && node scripts/dev.mjs",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "node --experimental-vm-modules --expose-gc --max-old-space-size=4096 node_modules/jest/bin/jest.js --verbose --logHeapUsage --maxWorkers=10%",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.9.2",
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
+    "@typescript-eslint/parser": "^8.46.0",
+    "dotenv": "^17.2.3",
+    "esbuild": "^0.25.5",
+    "eslint": "^9.37.0",
+    "jest": "^30.2.0",
+    "jest-environment-node": "^30.2.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "terser": "^5.40.0",
+    "ts-jest": "^29.4.4",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huggingface/tokenizers.js.git"
+  },
+  "author": "Hugging Face",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/huggingface/tokenizers.js/issues"
+  },
+  "homepage": "https://github.com/huggingface/tokenizers.js#readme"
+}

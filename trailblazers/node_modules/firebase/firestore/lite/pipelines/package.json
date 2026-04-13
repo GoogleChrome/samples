@@ -1,0 +1,7 @@
+{
+  "name": "firebase/firestore/lite/pipelines",
+  "main": "dist/pipelines.cjs.js",
+  "browser": "dist/esm/pipelines.esm.js",
+  "module": "dist/esm/pipelines.esm.js",
+  "typings": "dist/firestore/lite/pipelines/index.d.ts"
+}

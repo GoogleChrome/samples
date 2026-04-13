@@ -1,0 +1,40 @@
+{
+  "name": "brotli-size",
+  "version": "4.0.0",
+  "description": "Get the brotli compressed size of a string or buffer",
+  "license": "MIT",
+  "repository": "erwinmombay/brotli-size",
+  "main": "dist/index.js",
+  "author": {
+    "name": "Erwin Mombay",
+    "email": "erwin.mombay@gmail.com"
+  },
+  "engines": {
+    "node": ">= 10.16.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "pretest": "npm run build",
+    "test": "ava -v",
+    "release": "np",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "size",
+    "tool",
+    "brotli",
+    "compressed"
+  ],
+  "dependencies": {
+    "duplexer": "0.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "12.7.1",
+    "ava": "2.2.0",
+    "np": "5.0.3",
+    "typescript": "3.5.2"
+  }
+}

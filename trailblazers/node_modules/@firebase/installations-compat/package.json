@@ -1,0 +1,66 @@
+{
+  "name": "@firebase/installations-compat",
+  "version": "0.2.21",
+  "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
+  "main": "dist/index.cjs.js",
+  "module": "dist/esm/index.esm.js",
+  "browser": "dist/esm/index.esm.js",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "require": "./dist/index.cjs.js",
+      "default": "./dist/esm/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typings": "dist/src/index.d.ts",
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "lint:fix": "eslint --fix -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "build": "rollup -c",
+    "build:deps": "lerna run --scope @firebase/installations-compat --include-dependencies build",
+    "build:release": "rollup -c rollup.config.release.js",
+    "dev": "rollup -c -w",
+    "test": "yarn type-check && yarn test:karma && yarn lint",
+    "test:ci": "node ../../scripts/run_tests_in_ci.js",
+    "test:karma": "karma start",
+    "test:debug": "karma start --browsers=Chrome --auto-watch",
+    "trusted-type-check": "tsec -p tsconfig.json --noEmit",
+    "type-check": "tsc -p . --noEmit",
+    "serve": "yarn serve:build && yarn serve:host",
+    "serve:build": "rollup -c test-app/rollup.config.js",
+    "serve:host": "http-server -c-1 test-app"
+  },
+  "repository": {
+    "directory": "packages/installations-compat",
+    "type": "git",
+    "url": "git+https://github.com/firebase/firebase-js-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/firebase/firebase-js-sdk/issues"
+  },
+  "devDependencies": {
+    "@firebase/app-compat": "0.5.10",
+    "rollup": "2.79.2",
+    "@rollup/plugin-commonjs": "21.1.0",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.0",
+    "rollup-plugin-typescript2": "0.36.0",
+    "rollup-plugin-uglify": "6.0.4",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "@firebase/app-compat": "0.x"
+  },
+  "dependencies": {
+    "@firebase/installations": "0.6.21",
+    "@firebase/installations-types": "0.5.3",
+    "@firebase/util": "1.15.0",
+    "@firebase/component": "0.7.2",
+    "tslib": "^2.1.0"
+  }
+}

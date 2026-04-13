@@ -1,0 +1,67 @@
+{
+  "name": "@firebase/analytics-compat",
+  "version": "0.2.27",
+  "description": "",
+  "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
+  "main": "dist/index.cjs.js",
+  "browser": "dist/esm/index.esm.js",
+  "module": "dist/esm/index.esm.js",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "require": "./dist/index.cjs.js",
+      "default": "./dist/esm/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@firebase/app-compat": "0.x"
+  },
+  "devDependencies": {
+    "@firebase/app-compat": "0.5.10",
+    "rollup": "2.79.2",
+    "@rollup/plugin-json": "6.1.0",
+    "rollup-plugin-typescript2": "0.36.0",
+    "typescript": "5.5.4"
+  },
+  "repository": {
+    "directory": "packages/analytics-compat",
+    "type": "git",
+    "url": "git+https://github.com/firebase/firebase-js-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/firebase/firebase-js-sdk/issues"
+  },
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "lint:fix": "eslint --fix -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "build": "rollup -c",
+    "build:deps": "lerna run --scope @firebase/analytics-compat --include-dependencies build",
+    "build:release": "yarn build && yarn add-compat-overloads",
+    "dev": "rollup -c -w",
+    "test": "run-p --npm-path npm lint test:browser",
+    "test:ci": "node ../../scripts/run_tests_in_ci.js -s test:browser",
+    "test:browser": "karma start",
+    "test:browser:debug": "karma start --browsers=Chrome --auto-watch",
+    "trusted-type-check": "tsec -p tsconfig.json --noEmit",
+    "add-compat-overloads": "ts-node-script ../../scripts/build/create-overloads.ts -i ../analytics/dist/analytics-public.d.ts -o dist/src/index.d.ts -a -r Analytics:FirebaseAnalytics -r FirebaseApp:FirebaseAppCompat --moduleToEnhance @firebase/analytics"
+  },
+  "typings": "dist/src/index.d.ts",
+  "dependencies": {
+    "@firebase/component": "0.7.2",
+    "@firebase/analytics": "0.10.21",
+    "@firebase/analytics-types": "0.8.3",
+    "@firebase/util": "1.15.0",
+    "tslib": "^2.1.0"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "reportDir": "./coverage/node"
+  }
+}

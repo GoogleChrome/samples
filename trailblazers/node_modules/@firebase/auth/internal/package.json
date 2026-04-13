@@ -1,0 +1,12 @@
+{
+  "name": "@firebase/auth/internal",
+  "description": "An internal version of the Auth SDK for use in the compatibility layer",
+  "main": "../dist/node/internal.js",
+  "module": "../dist/esm/internal.js",
+  "browser": "../dist/esm/internal.js",
+  "typings": "../dist/esm/internal/index.d.ts",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

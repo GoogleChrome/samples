@@ -1,0 +1,18 @@
+<script webc:type="render" webc:is="template" webc:raw webc:nokeep>
+function() {
+	let errorPrefix = "[11ty/eleventy-plugin-syntaxhighlight] <syntax-highlight> WebC component: ";
+
+	if(!this.slots || !this.slots.text) {
+		throw new Error(errorPrefix + "requires WebC v0.6.0");
+	}
+
+	if(!this.helpers || !this.helpers.highlight) {
+		throw new Error(errorPrefix+ "missing the `highlight` helper! Did you run addPlugin on the syntax highlighter in your Eleventy config file?");
+	}
+
+	let content = this.slots.text.default;
+  // Using the helper in this way should respect plugin `options` too.
+  // TODO wire up @attributes to `options.preAttributes`
+	return this.helpers.highlight(this.language, content);
+}
+</script>

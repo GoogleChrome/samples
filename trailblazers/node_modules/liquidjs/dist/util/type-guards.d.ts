@@ -1,0 +1,13 @@
+import { RangeToken, NumberToken, QuotedToken, LiteralToken, PropertyAccessToken, OutputToken, HTMLToken, TagToken, IdentifierToken, DelimitedToken, OperatorToken, ValueToken } from '../tokens';
+export declare function isDelimitedToken(val: any): val is DelimitedToken;
+export declare function isOperatorToken(val: any): val is OperatorToken;
+export declare function isHTMLToken(val: any): val is HTMLToken;
+export declare function isOutputToken(val: any): val is OutputToken;
+export declare function isTagToken(val: any): val is TagToken;
+export declare function isQuotedToken(val: any): val is QuotedToken;
+export declare function isLiteralToken(val: any): val is LiteralToken;
+export declare function isNumberToken(val: any): val is NumberToken;
+export declare function isPropertyAccessToken(val: any): val is PropertyAccessToken;
+export declare function isWordToken(val: any): val is IdentifierToken;
+export declare function isRangeToken(val: any): val is RangeToken;
+export declare function isValueToken(val: any): val is ValueToken;

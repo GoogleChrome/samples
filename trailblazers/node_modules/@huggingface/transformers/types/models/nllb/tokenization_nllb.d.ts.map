@@ -1,0 +1,1 @@
+{"version":3,"file":"tokenization_nllb.d.ts","sourceRoot":"","sources":["../../../src/models/nllb/tokenization_nllb.js"],"names":[],"mappings":"AAEA;;;;;;;;;;;;GAYG;AACH;IACI,sDAMC;IAHG,sBAA+C;IAC/C,yBAAuF;IACvF,+BAA6B;IAGjC;;;;;;OAMG;IACH,sCALW,MAAM,GAAC,MAAM,EAAE,qDAOzB;CACJ;oCAlC8D,6BAA6B"}

@@ -1,0 +1,8 @@
+export class Qwen2MoePreTrainedModel extends PreTrainedModel {
+}
+export class Qwen2MoeModel extends Qwen2MoePreTrainedModel {
+}
+export class Qwen2MoeForCausalLM extends Qwen2MoePreTrainedModel {
+}
+import { PreTrainedModel } from '../modeling_utils.js';
+//# sourceMappingURL=modeling_qwen2_moe.d.ts.map

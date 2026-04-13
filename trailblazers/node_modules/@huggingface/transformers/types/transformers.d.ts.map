@@ -1,0 +1,1 @@
+{"version":3,"file":"transformers.d.ts","sourceRoot":"","sources":["../src/transformers.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;qCA8Da,OAAO,gBAAgB,EAAE,sBAAsB;yCAC/C,OAAO,uBAAuB,EAAE,0BAA0B;sBAC1D,OAAO,yBAAyB,EAAE,OAAO;yCACzC,OAAO,yBAAyB,EAAE,0BAA0B;uBAC5D,OAAO,mBAAmB,EAAE,QAAQ;yBACpC,OAAO,oBAAoB,EAAE,UAAU;+BACvC,OAAO,iBAAiB,EAAE,gBAAgB;2BAC1C,OAAO,iBAAiB,EAAE,YAAY"}

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ dir }}">
+<head>
+  <meta charset="UTF-8">
+  <title>eleventy-plugin-i18n</title>
+</head>
+<body>
+  {{ 'hello' | i18n }}
+  {{ content | safe }}
+  {% include 'components/footer.njk' %}
+</body>
+</html>
