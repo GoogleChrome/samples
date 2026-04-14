@@ -4,6 +4,7 @@ export type { Logger, LogLevel } from "./internal/utils/log.js";
 import * as Opts from "./internal/request-options.js";
 import * as Errors from "./core/error.js";
 import * as Pagination from "./core/pagination.js";
+import type { WorkloadIdentity } from "./auth/types.js";
 import { type ConversationCursorPageParams, ConversationCursorPageResponse, type CursorPageParams, CursorPageResponse, PageResponse } from "./core/pagination.js";
 import * as Uploads from "./core/uploads.js";
 import * as API from "./resources/index.js";
@@ -47,6 +48,7 @@ export interface ClientOptions {
      * - The function must return a non-empty string; otherwise an OpenAIError is thrown.
      * - If the function throws, the error is wrapped in an OpenAIError with the original
      *   error available as `cause`.
+     * - Mutually exclusive with `workloadIdentity`.
      */
     apiKey?: string | ApiKeySetter | undefined;
     /**
@@ -126,6 +128,11 @@ export interface ClientOptions {
      * Defaults to globalThis.console.
      */
     logger?: Logger | undefined;
+    /**
+     * Workload identity configuration for OAuth2 token exchange authentication.
+     * Mutually exclusive with `apiKey`.
+     */
+    workloadIdentity?: WorkloadIdentity | undefined;
 }
 /**
  * API Client for interfacing with the OpenAI API.
@@ -145,6 +152,7 @@ export declare class OpenAI {
     private fetch;
     protected idempotencyHeader?: string;
     protected _options: ClientOptions;
+    private _workloadIdentityAuth?;
     /**
      * API Client for interfacing with the OpenAI API.
      *
@@ -161,7 +169,7 @@ export declare class OpenAI {
      * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
      * @param {boolean} [opts.dangerouslyAllowBrowser=false] - By default, client-side use of this library is not allowed, as it risks exposing your secret API credentials to attackers.
      */
-    constructor({ baseURL, apiKey, organization, project, webhookSecret, ...opts }?: ClientOptions);
+    constructor({ baseURL, apiKey, organization, project, webhookSecret, workloadIdentity, ...opts }?: ClientOptions);
     /**
      * Create a new client instance re-using the same options given to the current client with optional overriding.
      */
@@ -199,6 +207,7 @@ export declare class OpenAI {
     private makeRequest;
     getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(path: string, Page: new (...args: any[]) => PageClass, opts?: PromiseOrValue<RequestOptions>): Pagination.PagePromise<PageClass, Item>;
     requestAPIList<Item = unknown, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass, options: PromiseOrValue<FinalRequestOptions>): Pagination.PagePromise<PageClass, Item>;
+    protected fetchWithAuth(url: RequestInfo, init: RequestInit, timeout: number, controller: AbortController): Promise<Response>;
     fetchWithTimeout(url: RequestInfo, init: RequestInit | undefined, ms: number, controller: AbortController): Promise<Response>;
     private shouldRetry;
     private retryRequest;
@@ -322,6 +331,7 @@ export declare namespace OpenAI {
     export type FunctionDefinition = API.FunctionDefinition;
     export type FunctionParameters = API.FunctionParameters;
     export type Metadata = API.Metadata;
+    export type OAuthErrorCode = API.OAuthErrorCode;
     export type Reasoning = API.Reasoning;
     export type ReasoningEffort = API.ReasoningEffort;
     export type ResponseFormatJSONObject = API.ResponseFormatJSONObject;

@@ -4,7 +4,7 @@ exports = module.exports = function (...args) {
   return new exports.default(...args)
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AzureOpenAI = exports.InvalidWebhookSignatureError = exports.UnprocessableEntityError = exports.PermissionDeniedError = exports.InternalServerError = exports.AuthenticationError = exports.BadRequestError = exports.RateLimitError = exports.ConflictError = exports.NotFoundError = exports.APIUserAbortError = exports.APIConnectionTimeoutError = exports.APIConnectionError = exports.APIError = exports.OpenAIError = exports.PagePromise = exports.OpenAI = exports.APIPromise = exports.toFile = exports.default = void 0;
+exports.AzureOpenAI = exports.SubjectTokenProviderError = exports.OAuthError = exports.InvalidWebhookSignatureError = exports.UnprocessableEntityError = exports.PermissionDeniedError = exports.InternalServerError = exports.AuthenticationError = exports.BadRequestError = exports.RateLimitError = exports.ConflictError = exports.NotFoundError = exports.APIUserAbortError = exports.APIConnectionTimeoutError = exports.APIConnectionError = exports.APIError = exports.OpenAIError = exports.PagePromise = exports.OpenAI = exports.APIPromise = exports.toFile = exports.default = void 0;
 var client_1 = require("./client.js");
 Object.defineProperty(exports, "default", { enumerable: true, get: function () { return client_1.OpenAI; } });
 var uploads_1 = require("./core/uploads.js");
@@ -30,6 +30,8 @@ Object.defineProperty(exports, "InternalServerError", { enumerable: true, get: f
 Object.defineProperty(exports, "PermissionDeniedError", { enumerable: true, get: function () { return error_1.PermissionDeniedError; } });
 Object.defineProperty(exports, "UnprocessableEntityError", { enumerable: true, get: function () { return error_1.UnprocessableEntityError; } });
 Object.defineProperty(exports, "InvalidWebhookSignatureError", { enumerable: true, get: function () { return error_1.InvalidWebhookSignatureError; } });
+Object.defineProperty(exports, "OAuthError", { enumerable: true, get: function () { return error_1.OAuthError; } });
+Object.defineProperty(exports, "SubjectTokenProviderError", { enumerable: true, get: function () { return error_1.SubjectTokenProviderError; } });
 var azure_1 = require("./azure.js");
 Object.defineProperty(exports, "AzureOpenAI", { enumerable: true, get: function () { return azure_1.AzureOpenAI; } });
 //# sourceMappingURL=index.js.map

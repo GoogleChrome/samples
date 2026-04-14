@@ -1,6 +1,6 @@
 {
   "name": "openai",
-  "version": "6.33.0",
+  "version": "6.34.0",
   "description": "The official TypeScript library for the OpenAI API",
   "author": "OpenAI <support@openai.com>",
   "types": "./index.d.ts",
@@ -79,6 +79,16 @@
     },
     "./api-promise.mjs": {
       "default": "./api-promise.mjs"
+    },
+    "./auth/*.mjs": {
+      "default": "./auth/*.mjs"
+    },
+    "./auth/*.js": {
+      "default": "./auth/*.js"
+    },
+    "./auth/*": {
+      "import": "./auth/*.mjs",
+      "require": "./auth/*.js"
     },
     "./azure": {
       "import": "./azure.mjs",

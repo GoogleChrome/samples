@@ -1,4 +1,4 @@
-import { n as e, t } from "../chunks/defaults-BHsuqSiF.js";
+import { n as e, t } from "../chunks/defaults-B5W7MP9T.js";
 import { initializeApp as n } from "firebase/app";
 import { GoogleAIBackend as r, InferenceMode as i, Schema as a, VertexAIBackend as o, getAI as s, getGenerativeModel as c } from "firebase/ai";
 //#region node_modules/@firebase/util/dist/postinstall.mjs
@@ -558,7 +558,7 @@ var qe = class {
 function Je(e) {
 	return e.getComponent()?.type === "VERSION";
 }
-var O = "@firebase/app", Ye = "0.14.10", k = new Ae("@firebase/app"), Xe = "@firebase/app-compat", Ze = "@firebase/analytics-compat", Qe = "@firebase/analytics", $e = "@firebase/app-check-compat", et = "@firebase/app-check", tt = "@firebase/auth", nt = "@firebase/auth-compat", rt = "@firebase/database", it = "@firebase/data-connect", at = "@firebase/database-compat", ot = "@firebase/functions", st = "@firebase/functions-compat", ct = "@firebase/installations", lt = "@firebase/installations-compat", ut = "@firebase/messaging", dt = "@firebase/messaging-compat", ft = "@firebase/performance", pt = "@firebase/performance-compat", mt = "@firebase/remote-config", ht = "@firebase/remote-config-compat", gt = "@firebase/storage", _t = "@firebase/storage-compat", vt = "@firebase/firestore", yt = "@firebase/ai", bt = "@firebase/firestore-compat", xt = "firebase", St = "[DEFAULT]", Ct = {
+var O = "@firebase/app", Ye = "0.14.11", k = new Ae("@firebase/app"), Xe = "@firebase/app-compat", Ze = "@firebase/analytics-compat", Qe = "@firebase/analytics", $e = "@firebase/app-check-compat", et = "@firebase/app-check", tt = "@firebase/auth", nt = "@firebase/auth-compat", rt = "@firebase/database", it = "@firebase/data-connect", at = "@firebase/database-compat", ot = "@firebase/functions", st = "@firebase/functions-compat", ct = "@firebase/installations", lt = "@firebase/installations-compat", ut = "@firebase/messaging", dt = "@firebase/messaging-compat", ft = "@firebase/performance", pt = "@firebase/performance-compat", mt = "@firebase/remote-config", ht = "@firebase/remote-config-compat", gt = "@firebase/storage", _t = "@firebase/storage-compat", vt = "@firebase/firestore", yt = "@firebase/ai", bt = "@firebase/firestore-compat", xt = "firebase", St = "[DEFAULT]", Ct = {
 	[O]: "fire-core",
 	[Xe]: "fire-core-compat",
 	[Qe]: "fire-analytics",

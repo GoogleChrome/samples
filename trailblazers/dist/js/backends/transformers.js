@@ -1,4 +1,4 @@
-import { n as e, t } from "../chunks/defaults-BHsuqSiF.js";
+import { n as e, t } from "../chunks/defaults-B5W7MP9T.js";
 import { TextStreamer as n, env as r, pipeline as i } from "@huggingface/transformers";
 //#region backends/transformers.js
 var a = class extends e {

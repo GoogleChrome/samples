@@ -1,3 +1,4 @@
+import type { OAuthErrorCode } from "../resources/shared.mjs";
 export declare class OpenAIError extends Error {
 }
 export declare class APIError<TStatus extends number | undefined = number | undefined, THeaders extends Headers | undefined = Headers | undefined, TError extends Object | undefined = Object | undefined> extends OpenAIError {
@@ -55,5 +56,19 @@ export declare class ContentFilterFinishReasonError extends OpenAIError {
 }
 export declare class InvalidWebhookSignatureError extends Error {
     constructor(message: string);
+}
+/**
+ * Error thrown by the API server during OAuth token exchange.
+ * Can have status codes 400, 401, or 403.
+ * Other status codes from OAuth endpoints are raised as normal APIError types.
+ */
+export declare class OAuthError extends APIError<400 | 401 | 403, Headers> {
+    readonly error_code: OAuthErrorCode | undefined;
+    constructor(status: 400 | 401 | 403, error: Object | undefined, headers: Headers);
+}
+export declare class SubjectTokenProviderError extends OpenAIError {
+    readonly provider: string;
+    readonly cause: Error | undefined;
+    constructor(message: string, provider: string, cause?: Error);
 }
 //# sourceMappingURL=error.d.mts.map

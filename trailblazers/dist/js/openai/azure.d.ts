@@ -1,7 +1,8 @@
 import type { RequestInit } from "./internal/builtin-types.js";
 import type { NullableHeaders } from "./internal/headers.js";
 import { FinalRequestOptions } from "./internal/request-options.js";
-import { ClientOptions, OpenAI } from "./client.js";
+import { OpenAI } from "./client.js";
+import type { ClientOptions } from "./client.js";
 /** API Client for interfacing with the Azure OpenAI API. */
 export interface AzureClientOptions extends ClientOptions {
     /**

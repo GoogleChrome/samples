@@ -1213,6 +1213,10 @@ var Modality;
      * Indicates the model should return audio.
      */
     Modality["AUDIO"] = "AUDIO";
+    /**
+     * Indicates the model should return video.
+     */
+    Modality["VIDEO"] = "VIDEO";
 })(Modality || (Modality = {}));
 /** The stage of the underlying model. This enum is not supported in Vertex AI. */
 var ModelStage;
@@ -1807,6 +1811,102 @@ var TurnCompleteReason;
      * Needs more input from the user.
      */
     TurnCompleteReason["NEED_MORE_INPUT"] = "NEED_MORE_INPUT";
+    /**
+     * Input content is prohibited.
+     */
+    TurnCompleteReason["PROHIBITED_INPUT_CONTENT"] = "PROHIBITED_INPUT_CONTENT";
+    /**
+     * Input image contains prohibited content.
+     */
+    TurnCompleteReason["IMAGE_PROHIBITED_INPUT_CONTENT"] = "IMAGE_PROHIBITED_INPUT_CONTENT";
+    /**
+     * Input text contains prominent person reference.
+     */
+    TurnCompleteReason["INPUT_TEXT_CONTAIN_PROMINENT_PERSON_PROHIBITED"] = "INPUT_TEXT_CONTAIN_PROMINENT_PERSON_PROHIBITED";
+    /**
+     * Input image contains celebrity.
+     */
+    TurnCompleteReason["INPUT_IMAGE_CELEBRITY"] = "INPUT_IMAGE_CELEBRITY";
+    /**
+     * Input image contains photo realistic child.
+     */
+    TurnCompleteReason["INPUT_IMAGE_PHOTO_REALISTIC_CHILD_PROHIBITED"] = "INPUT_IMAGE_PHOTO_REALISTIC_CHILD_PROHIBITED";
+    /**
+     * Input text contains NCII content.
+     */
+    TurnCompleteReason["INPUT_TEXT_NCII_PROHIBITED"] = "INPUT_TEXT_NCII_PROHIBITED";
+    /**
+     * Other input safety issue.
+     */
+    TurnCompleteReason["INPUT_OTHER"] = "INPUT_OTHER";
+    /**
+     * Input contains IP violation.
+     */
+    TurnCompleteReason["INPUT_IP_PROHIBITED"] = "INPUT_IP_PROHIBITED";
+    /**
+     * Input matched blocklist.
+     */
+    TurnCompleteReason["BLOCKLIST"] = "BLOCKLIST";
+    /**
+     * Input is unsafe for image generation.
+     */
+    TurnCompleteReason["UNSAFE_PROMPT_FOR_IMAGE_GENERATION"] = "UNSAFE_PROMPT_FOR_IMAGE_GENERATION";
+    /**
+     * Generated image failed safety check.
+     */
+    TurnCompleteReason["GENERATED_IMAGE_SAFETY"] = "GENERATED_IMAGE_SAFETY";
+    /**
+     * Generated content failed safety check.
+     */
+    TurnCompleteReason["GENERATED_CONTENT_SAFETY"] = "GENERATED_CONTENT_SAFETY";
+    /**
+     * Generated audio failed safety check.
+     */
+    TurnCompleteReason["GENERATED_AUDIO_SAFETY"] = "GENERATED_AUDIO_SAFETY";
+    /**
+     * Generated video failed safety check.
+     */
+    TurnCompleteReason["GENERATED_VIDEO_SAFETY"] = "GENERATED_VIDEO_SAFETY";
+    /**
+     * Generated content is prohibited.
+     */
+    TurnCompleteReason["GENERATED_CONTENT_PROHIBITED"] = "GENERATED_CONTENT_PROHIBITED";
+    /**
+     * Generated content matched blocklist.
+     */
+    TurnCompleteReason["GENERATED_CONTENT_BLOCKLIST"] = "GENERATED_CONTENT_BLOCKLIST";
+    /**
+     * Generated image is prohibited.
+     */
+    TurnCompleteReason["GENERATED_IMAGE_PROHIBITED"] = "GENERATED_IMAGE_PROHIBITED";
+    /**
+     * Generated image contains celebrity.
+     */
+    TurnCompleteReason["GENERATED_IMAGE_CELEBRITY"] = "GENERATED_IMAGE_CELEBRITY";
+    /**
+     * Generated image contains prominent people detected by rewriter.
+     */
+    TurnCompleteReason["GENERATED_IMAGE_PROMINENT_PEOPLE_DETECTED_BY_REWRITER"] = "GENERATED_IMAGE_PROMINENT_PEOPLE_DETECTED_BY_REWRITER";
+    /**
+     * Generated image contains identifiable people.
+     */
+    TurnCompleteReason["GENERATED_IMAGE_IDENTIFIABLE_PEOPLE"] = "GENERATED_IMAGE_IDENTIFIABLE_PEOPLE";
+    /**
+     * Generated image contains minors.
+     */
+    TurnCompleteReason["GENERATED_IMAGE_MINORS"] = "GENERATED_IMAGE_MINORS";
+    /**
+     * Generated image contains IP violation.
+     */
+    TurnCompleteReason["OUTPUT_IMAGE_IP_PROHIBITED"] = "OUTPUT_IMAGE_IP_PROHIBITED";
+    /**
+     * Other generated content issue.
+     */
+    TurnCompleteReason["GENERATED_OTHER"] = "GENERATED_OTHER";
+    /**
+     * Max regeneration attempts reached.
+     */
+    TurnCompleteReason["MAX_REGENERATION_REACHED"] = "MAX_REGENERATION_REACHED";
 })(TurnCompleteReason || (TurnCompleteReason = {}));
 /** Server content modalities. */
 var MediaModality;
@@ -4052,6 +4152,12 @@ function createBatchJobConfigToMldev(fromObject, parentObject) {
     if (getValueByPath(fromObject, ['dest']) !== undefined) {
         throw new Error('dest parameter is not supported in Gemini API.');
     }
+    const fromWebhookConfig = getValueByPath(fromObject, [
+        'webhookConfig',
+    ]);
+    if (parentObject !== undefined && fromWebhookConfig != null) {
+        setValueByPath(parentObject, ['batch', 'webhookConfig'], fromWebhookConfig);
+    }
     return toObject;
 }
 function createBatchJobConfigToVertex(fromObject, parentObject) {
@@ -4063,6 +4169,9 @@ function createBatchJobConfigToVertex(fromObject, parentObject) {
     const fromDest = getValueByPath(fromObject, ['dest']);
     if (parentObject !== undefined && fromDest != null) {
         setValueByPath(parentObject, ['outputConfig'], batchJobDestinationToVertex(tBatchJobDestination(fromDest)));
+    }
+    if (getValueByPath(fromObject, ['webhookConfig']) !== undefined) {
+        throw new Error('webhookConfig parameter is not supported in Vertex AI.');
     }
     return toObject;
 }
@@ -4222,6 +4331,12 @@ function embedContentConfigToMldev$1(fromObject, parentObject) {
     }
     if (getValueByPath(fromObject, ['autoTruncate']) !== undefined) {
         throw new Error('autoTruncate parameter is not supported in Gemini API.');
+    }
+    if (getValueByPath(fromObject, ['documentOcr']) !== undefined) {
+        throw new Error('documentOcr parameter is not supported in Gemini API.');
+    }
+    if (getValueByPath(fromObject, ['audioTrackExtraction']) !== undefined) {
+        throw new Error('audioTrackExtraction parameter is not supported in Gemini API.');
     }
     return toObject;
 }
@@ -4389,7 +4504,7 @@ function generateContentConfigToMldev$1(apiClient, fromObject, parentObject) {
         let transformedList = fromSafetySettings;
         if (Array.isArray(transformedList)) {
             transformedList = transformedList.map((item) => {
-                return safetySettingToMldev$1(item);
+                return safetySettingToMldev$3(item);
             });
         }
         setValueByPath(parentObject, ['safetySettings'], transformedList);
@@ -4796,7 +4911,7 @@ function partToMldev$4(fromObject) {
     }
     return toObject;
 }
-function safetySettingToMldev$1(fromObject) {
+function safetySettingToMldev$3(fromObject) {
     const toObject = {};
     const fromCategory = getValueByPath(fromObject, ['category']);
     if (fromCategory != null) {
@@ -7914,7 +8029,7 @@ function generationConfigToVertex$1(fromObject) {
     }
     const fromSpeechConfig = getValueByPath(fromObject, ['speechConfig']);
     if (fromSpeechConfig != null) {
-        setValueByPath(toObject, ['speechConfig'], speechConfigToVertex$1(fromSpeechConfig));
+        setValueByPath(toObject, ['speechConfig'], fromSpeechConfig);
     }
     const fromStopSequences = getValueByPath(fromObject, [
         'stopSequences',
@@ -8089,6 +8204,22 @@ function liveConnectConfigToMldev$1(fromObject, parentObject) {
     if (getValueByPath(fromObject, ['explicitVadSignal']) !== undefined) {
         throw new Error('explicitVadSignal parameter is not supported in Gemini API.');
     }
+    const fromAvatarConfig = getValueByPath(fromObject, ['avatarConfig']);
+    if (parentObject !== undefined && fromAvatarConfig != null) {
+        setValueByPath(parentObject, ['setup', 'avatarConfig'], fromAvatarConfig);
+    }
+    const fromSafetySettings = getValueByPath(fromObject, [
+        'safetySettings',
+    ]);
+    if (parentObject !== undefined && fromSafetySettings != null) {
+        let transformedList = fromSafetySettings;
+        if (Array.isArray(transformedList)) {
+            transformedList = transformedList.map((item) => {
+                return safetySettingToMldev$2(item);
+            });
+        }
+        setValueByPath(parentObject, ['setup', 'safetySettings'], transformedList);
+    }
     return toObject;
 }
 function liveConnectConfigToVertex(fromObject, parentObject) {
@@ -8135,7 +8266,7 @@ function liveConnectConfigToVertex(fromObject, parentObject) {
     }
     const fromSpeechConfig = getValueByPath(fromObject, ['speechConfig']);
     if (parentObject !== undefined && fromSpeechConfig != null) {
-        setValueByPath(parentObject, ['setup', 'generationConfig', 'speechConfig'], speechConfigToVertex$1(tLiveSpeechConfig(fromSpeechConfig)));
+        setValueByPath(parentObject, ['setup', 'generationConfig', 'speechConfig'], tLiveSpeechConfig(fromSpeechConfig));
     }
     const fromThinkingConfig = getValueByPath(fromObject, [
         'thinkingConfig',
@@ -8204,6 +8335,22 @@ function liveConnectConfigToVertex(fromObject, parentObject) {
     ]);
     if (parentObject !== undefined && fromExplicitVadSignal != null) {
         setValueByPath(parentObject, ['setup', 'explicitVadSignal'], fromExplicitVadSignal);
+    }
+    const fromAvatarConfig = getValueByPath(fromObject, ['avatarConfig']);
+    if (parentObject !== undefined && fromAvatarConfig != null) {
+        setValueByPath(parentObject, ['setup', 'avatarConfig'], fromAvatarConfig);
+    }
+    const fromSafetySettings = getValueByPath(fromObject, [
+        'safetySettings',
+    ]);
+    if (parentObject !== undefined && fromSafetySettings != null) {
+        let transformedList = fromSafetySettings;
+        if (Array.isArray(transformedList)) {
+            transformedList = transformedList.map((item) => {
+                return item;
+            });
+        }
+        setValueByPath(parentObject, ['setup', 'safetySettings'], transformedList);
     }
     return toObject;
 }
@@ -8395,22 +8542,6 @@ function liveServerMessageFromVertex(fromObject) {
     }
     return toObject;
 }
-function multiSpeakerVoiceConfigToVertex$1(fromObject) {
-    const toObject = {};
-    const fromSpeakerVoiceConfigs = getValueByPath(fromObject, [
-        'speakerVoiceConfigs',
-    ]);
-    if (fromSpeakerVoiceConfigs != null) {
-        let transformedList = fromSpeakerVoiceConfigs;
-        if (Array.isArray(transformedList)) {
-            transformedList = transformedList.map((item) => {
-                return speakerVoiceConfigToVertex$1(item);
-            });
-        }
-        setValueByPath(toObject, ['speakerVoiceConfigs'], transformedList);
-    }
-    return toObject;
-}
 function partToMldev$2(fromObject) {
     const toObject = {};
     const fromMediaResolution = getValueByPath(fromObject, [
@@ -8552,17 +8683,18 @@ function partToVertex$1(fromObject) {
     }
     return toObject;
 }
-function replicatedVoiceConfigToVertex$1(fromObject) {
+function safetySettingToMldev$2(fromObject) {
     const toObject = {};
-    const fromMimeType = getValueByPath(fromObject, ['mimeType']);
-    if (fromMimeType != null) {
-        setValueByPath(toObject, ['mimeType'], fromMimeType);
+    const fromCategory = getValueByPath(fromObject, ['category']);
+    if (fromCategory != null) {
+        setValueByPath(toObject, ['category'], fromCategory);
     }
-    const fromVoiceSampleAudio = getValueByPath(fromObject, [
-        'voiceSampleAudio',
-    ]);
-    if (fromVoiceSampleAudio != null) {
-        setValueByPath(toObject, ['voiceSampleAudio'], fromVoiceSampleAudio);
+    if (getValueByPath(fromObject, ['method']) !== undefined) {
+        throw new Error('method parameter is not supported in Gemini API.');
+    }
+    const fromThreshold = getValueByPath(fromObject, ['threshold']);
+    if (fromThreshold != null) {
+        setValueByPath(toObject, ['threshold'], fromThreshold);
     }
     return toObject;
 }
@@ -8574,36 +8706,6 @@ function sessionResumptionConfigToMldev$1(fromObject) {
     }
     if (getValueByPath(fromObject, ['transparent']) !== undefined) {
         throw new Error('transparent parameter is not supported in Gemini API.');
-    }
-    return toObject;
-}
-function speakerVoiceConfigToVertex$1(fromObject) {
-    const toObject = {};
-    const fromSpeaker = getValueByPath(fromObject, ['speaker']);
-    if (fromSpeaker != null) {
-        setValueByPath(toObject, ['speaker'], fromSpeaker);
-    }
-    const fromVoiceConfig = getValueByPath(fromObject, ['voiceConfig']);
-    if (fromVoiceConfig != null) {
-        setValueByPath(toObject, ['voiceConfig'], voiceConfigToVertex$1(fromVoiceConfig));
-    }
-    return toObject;
-}
-function speechConfigToVertex$1(fromObject) {
-    const toObject = {};
-    const fromVoiceConfig = getValueByPath(fromObject, ['voiceConfig']);
-    if (fromVoiceConfig != null) {
-        setValueByPath(toObject, ['voiceConfig'], voiceConfigToVertex$1(fromVoiceConfig));
-    }
-    const fromLanguageCode = getValueByPath(fromObject, ['languageCode']);
-    if (fromLanguageCode != null) {
-        setValueByPath(toObject, ['languageCode'], fromLanguageCode);
-    }
-    const fromMultiSpeakerVoiceConfig = getValueByPath(fromObject, [
-        'multiSpeakerVoiceConfig',
-    ]);
-    if (fromMultiSpeakerVoiceConfig != null) {
-        setValueByPath(toObject, ['multiSpeakerVoiceConfig'], multiSpeakerVoiceConfigToVertex$1(fromMultiSpeakerVoiceConfig));
     }
     return toObject;
 }
@@ -8837,22 +8939,6 @@ function voiceActivityFromVertex(fromObject) {
     const fromVoiceActivityType = getValueByPath(fromObject, ['type']);
     if (fromVoiceActivityType != null) {
         setValueByPath(toObject, ['voiceActivityType'], fromVoiceActivityType);
-    }
-    return toObject;
-}
-function voiceConfigToVertex$1(fromObject) {
-    const toObject = {};
-    const fromReplicatedVoiceConfig = getValueByPath(fromObject, [
-        'replicatedVoiceConfig',
-    ]);
-    if (fromReplicatedVoiceConfig != null) {
-        setValueByPath(toObject, ['replicatedVoiceConfig'], replicatedVoiceConfigToVertex$1(fromReplicatedVoiceConfig));
-    }
-    const fromPrebuiltVoiceConfig = getValueByPath(fromObject, [
-        'prebuiltVoiceConfig',
-    ]);
-    if (fromPrebuiltVoiceConfig != null) {
-        setValueByPath(toObject, ['prebuiltVoiceConfig'], fromPrebuiltVoiceConfig);
     }
     return toObject;
 }
@@ -9405,6 +9491,12 @@ function embedContentConfigToMldev(fromObject, parentObject, _rootObject) {
     if (getValueByPath(fromObject, ['autoTruncate']) !== undefined) {
         throw new Error('autoTruncate parameter is not supported in Gemini API.');
     }
+    if (getValueByPath(fromObject, ['documentOcr']) !== undefined) {
+        throw new Error('documentOcr parameter is not supported in Gemini API.');
+    }
+    if (getValueByPath(fromObject, ['audioTrackExtraction']) !== undefined) {
+        throw new Error('audioTrackExtraction parameter is not supported in Gemini API.');
+    }
     return toObject;
 }
 function embedContentConfigToVertex(fromObject, parentObject, rootObject) {
@@ -9424,7 +9516,7 @@ function embedContentConfigToVertex(fromObject, parentObject, rootObject) {
     else if (discriminatorTaskType === 'EMBED_CONTENT') {
         const fromTaskType = getValueByPath(fromObject, ['taskType']);
         if (parentObject !== undefined && fromTaskType != null) {
-            setValueByPath(parentObject, ['taskType'], fromTaskType);
+            setValueByPath(parentObject, ['embedContentConfig', 'taskType'], fromTaskType);
         }
     }
     let discriminatorTitle = getValueByPath(rootObject, [
@@ -9442,7 +9534,7 @@ function embedContentConfigToVertex(fromObject, parentObject, rootObject) {
     else if (discriminatorTitle === 'EMBED_CONTENT') {
         const fromTitle = getValueByPath(fromObject, ['title']);
         if (parentObject !== undefined && fromTitle != null) {
-            setValueByPath(parentObject, ['title'], fromTitle);
+            setValueByPath(parentObject, ['embedContentConfig', 'title'], fromTitle);
         }
     }
     let discriminatorOutputDimensionality = getValueByPath(rootObject, [
@@ -9464,7 +9556,7 @@ function embedContentConfigToVertex(fromObject, parentObject, rootObject) {
             'outputDimensionality',
         ]);
         if (parentObject !== undefined && fromOutputDimensionality != null) {
-            setValueByPath(parentObject, ['outputDimensionality'], fromOutputDimensionality);
+            setValueByPath(parentObject, ['embedContentConfig', 'outputDimensionality'], fromOutputDimensionality);
         }
     }
     let discriminatorMimeType = getValueByPath(rootObject, [
@@ -9498,7 +9590,33 @@ function embedContentConfigToVertex(fromObject, parentObject, rootObject) {
             'autoTruncate',
         ]);
         if (parentObject !== undefined && fromAutoTruncate != null) {
-            setValueByPath(parentObject, ['autoTruncate'], fromAutoTruncate);
+            setValueByPath(parentObject, ['embedContentConfig', 'autoTruncate'], fromAutoTruncate);
+        }
+    }
+    let discriminatorDocumentOcr = getValueByPath(rootObject, [
+        'embeddingApiType',
+    ]);
+    if (discriminatorDocumentOcr === undefined) {
+        discriminatorDocumentOcr = 'PREDICT';
+    }
+    if (discriminatorDocumentOcr === 'EMBED_CONTENT') {
+        const fromDocumentOcr = getValueByPath(fromObject, ['documentOcr']);
+        if (parentObject !== undefined && fromDocumentOcr != null) {
+            setValueByPath(parentObject, ['embedContentConfig', 'documentOcr'], fromDocumentOcr);
+        }
+    }
+    let discriminatorAudioTrackExtraction = getValueByPath(rootObject, [
+        'embeddingApiType',
+    ]);
+    if (discriminatorAudioTrackExtraction === undefined) {
+        discriminatorAudioTrackExtraction = 'PREDICT';
+    }
+    if (discriminatorAudioTrackExtraction === 'EMBED_CONTENT') {
+        const fromAudioTrackExtraction = getValueByPath(fromObject, [
+            'audioTrackExtraction',
+        ]);
+        if (parentObject !== undefined && fromAudioTrackExtraction != null) {
+            setValueByPath(parentObject, ['embedContentConfig', 'audioTrackExtraction'], fromAudioTrackExtraction);
         }
     }
     return toObject;
@@ -9843,7 +9961,7 @@ function generateContentConfigToMldev(apiClient, fromObject, parentObject, rootO
         let transformedList = fromSafetySettings;
         if (Array.isArray(transformedList)) {
             transformedList = transformedList.map((item) => {
-                return safetySettingToMldev(item);
+                return safetySettingToMldev$1(item);
             });
         }
         setValueByPath(parentObject, ['safetySettings'], transformedList);
@@ -10059,7 +10177,7 @@ function generateContentConfigToVertex(apiClient, fromObject, parentObject, root
     }
     const fromSpeechConfig = getValueByPath(fromObject, ['speechConfig']);
     if (fromSpeechConfig != null) {
-        setValueByPath(toObject, ['speechConfig'], speechConfigToVertex(tSpeechConfig(fromSpeechConfig)));
+        setValueByPath(toObject, ['speechConfig'], tSpeechConfig(fromSpeechConfig));
     }
     const fromAudioTimestamp = getValueByPath(fromObject, [
         'audioTimestamp',
@@ -10567,6 +10685,12 @@ function generateVideosConfigToMldev(fromObject, parentObject, rootObject) {
     if (getValueByPath(fromObject, ['labels']) !== undefined) {
         throw new Error('labels parameter is not supported in Gemini API.');
     }
+    const fromWebhookConfig = getValueByPath(fromObject, [
+        'webhookConfig',
+    ]);
+    if (parentObject !== undefined && fromWebhookConfig != null) {
+        setValueByPath(parentObject, ['webhookConfig'], fromWebhookConfig);
+    }
     return toObject;
 }
 function generateVideosConfigToVertex(fromObject, parentObject, rootObject) {
@@ -10660,6 +10784,9 @@ function generateVideosConfigToVertex(fromObject, parentObject, rootObject) {
     const fromLabels = getValueByPath(fromObject, ['labels']);
     if (parentObject !== undefined && fromLabels != null) {
         setValueByPath(parentObject, ['labels'], fromLabels);
+    }
+    if (getValueByPath(fromObject, ['webhookConfig']) !== undefined) {
+        throw new Error('webhookConfig parameter is not supported in Vertex AI.');
     }
     return toObject;
 }
@@ -10930,7 +11057,7 @@ function generatedVideoFromVertex(fromObject, rootObject) {
     }
     return toObject;
 }
-function generationConfigToVertex(fromObject, rootObject) {
+function generationConfigToVertex(fromObject, _rootObject) {
     const toObject = {};
     const fromModelSelectionConfig = getValueByPath(fromObject, [
         'modelSelectionConfig',
@@ -11026,7 +11153,7 @@ function generationConfigToVertex(fromObject, rootObject) {
     }
     const fromSpeechConfig = getValueByPath(fromObject, ['speechConfig']);
     if (fromSpeechConfig != null) {
-        setValueByPath(toObject, ['speechConfig'], speechConfigToVertex(fromSpeechConfig));
+        setValueByPath(toObject, ['speechConfig'], fromSpeechConfig);
     }
     const fromStopSequences = getValueByPath(fromObject, [
         'stopSequences',
@@ -11483,22 +11610,6 @@ function modelFromVertex(fromObject, rootObject) {
     }
     return toObject;
 }
-function multiSpeakerVoiceConfigToVertex(fromObject, rootObject) {
-    const toObject = {};
-    const fromSpeakerVoiceConfigs = getValueByPath(fromObject, [
-        'speakerVoiceConfigs',
-    ]);
-    if (fromSpeakerVoiceConfigs != null) {
-        let transformedList = fromSpeakerVoiceConfigs;
-        if (Array.isArray(transformedList)) {
-            transformedList = transformedList.map((item) => {
-                return speakerVoiceConfigToVertex(item);
-            });
-        }
-        setValueByPath(toObject, ['speakerVoiceConfigs'], transformedList);
-    }
-    return toObject;
-}
 function partToMldev$1(fromObject, rootObject) {
     const toObject = {};
     const fromMediaResolution = getValueByPath(fromObject, [
@@ -11808,20 +11919,6 @@ function referenceImageAPIInternalToVertex(fromObject, rootObject) {
     }
     return toObject;
 }
-function replicatedVoiceConfigToVertex(fromObject, _rootObject) {
-    const toObject = {};
-    const fromMimeType = getValueByPath(fromObject, ['mimeType']);
-    if (fromMimeType != null) {
-        setValueByPath(toObject, ['mimeType'], fromMimeType);
-    }
-    const fromVoiceSampleAudio = getValueByPath(fromObject, [
-        'voiceSampleAudio',
-    ]);
-    if (fromVoiceSampleAudio != null) {
-        setValueByPath(toObject, ['voiceSampleAudio'], fromVoiceSampleAudio);
-    }
-    return toObject;
-}
 function safetyAttributesFromMldev(fromObject, _rootObject) {
     const toObject = {};
     const fromCategories = getValueByPath(fromObject, [
@@ -11866,7 +11963,7 @@ function safetyAttributesFromVertex(fromObject, _rootObject) {
     }
     return toObject;
 }
-function safetySettingToMldev(fromObject, _rootObject) {
+function safetySettingToMldev$1(fromObject, _rootObject) {
     const toObject = {};
     const fromCategory = getValueByPath(fromObject, ['category']);
     if (fromCategory != null) {
@@ -11968,36 +12065,6 @@ function segmentImageSourceToVertex(fromObject, parentObject, rootObject) {
     ]);
     if (parentObject !== undefined && fromScribbleImage != null) {
         setValueByPath(parentObject, ['instances[0]', 'scribble'], scribbleImageToVertex(fromScribbleImage));
-    }
-    return toObject;
-}
-function speakerVoiceConfigToVertex(fromObject, rootObject) {
-    const toObject = {};
-    const fromSpeaker = getValueByPath(fromObject, ['speaker']);
-    if (fromSpeaker != null) {
-        setValueByPath(toObject, ['speaker'], fromSpeaker);
-    }
-    const fromVoiceConfig = getValueByPath(fromObject, ['voiceConfig']);
-    if (fromVoiceConfig != null) {
-        setValueByPath(toObject, ['voiceConfig'], voiceConfigToVertex(fromVoiceConfig));
-    }
-    return toObject;
-}
-function speechConfigToVertex(fromObject, rootObject) {
-    const toObject = {};
-    const fromVoiceConfig = getValueByPath(fromObject, ['voiceConfig']);
-    if (fromVoiceConfig != null) {
-        setValueByPath(toObject, ['voiceConfig'], voiceConfigToVertex(fromVoiceConfig));
-    }
-    const fromLanguageCode = getValueByPath(fromObject, ['languageCode']);
-    if (fromLanguageCode != null) {
-        setValueByPath(toObject, ['languageCode'], fromLanguageCode);
-    }
-    const fromMultiSpeakerVoiceConfig = getValueByPath(fromObject, [
-        'multiSpeakerVoiceConfig',
-    ]);
-    if (fromMultiSpeakerVoiceConfig != null) {
-        setValueByPath(toObject, ['multiSpeakerVoiceConfig'], multiSpeakerVoiceConfigToVertex(fromMultiSpeakerVoiceConfig));
     }
     return toObject;
 }
@@ -12483,22 +12550,6 @@ function videoToVertex(fromObject, _rootObject) {
     }
     return toObject;
 }
-function voiceConfigToVertex(fromObject, rootObject) {
-    const toObject = {};
-    const fromReplicatedVoiceConfig = getValueByPath(fromObject, [
-        'replicatedVoiceConfig',
-    ]);
-    if (fromReplicatedVoiceConfig != null) {
-        setValueByPath(toObject, ['replicatedVoiceConfig'], replicatedVoiceConfigToVertex(fromReplicatedVoiceConfig));
-    }
-    const fromPrebuiltVoiceConfig = getValueByPath(fromObject, [
-        'prebuiltVoiceConfig',
-    ]);
-    if (fromPrebuiltVoiceConfig != null) {
-        setValueByPath(toObject, ['prebuiltVoiceConfig'], fromPrebuiltVoiceConfig);
-    }
-    return toObject;
-}
 
 /**
  * @license
@@ -12744,10 +12795,11 @@ const CONTENT_TYPE_HEADER = 'Content-Type';
 const SERVER_TIMEOUT_HEADER = 'X-Server-Timeout';
 const USER_AGENT_HEADER = 'User-Agent';
 const GOOGLE_API_CLIENT_HEADER = 'x-goog-api-client';
-const SDK_VERSION = '1.48.0'; // x-release-please-version
+const SDK_VERSION = '1.50.0'; // x-release-please-version
 const LIBRARY_LABEL = `google-genai-sdk/${SDK_VERSION}`;
 const VERTEX_AI_API_DEFAULT_VERSION = 'v1beta1';
 const GOOGLE_AI_API_DEFAULT_VERSION = 'v1beta';
+const MULTI_REGIONAL_LOCATIONS = new Set(['us', 'eu']);
 // Default retry options.
 // The config is based on https://cloud.google.com/storage/docs/retry-strategy.
 const DEFAULT_RETRY_ATTEMPTS = 5; // Including the initial call
@@ -12806,7 +12858,7 @@ class ApiClient {
             }
             else if (this.clientOptions.project &&
                 this.clientOptions.location &&
-                this.clientOptions.location === 'us') {
+                MULTI_REGIONAL_LOCATIONS.has(this.clientOptions.location)) {
                 initHttpOptions.baseUrl = `https://aiplatform.${this.clientOptions.location}.rep.googleapis.com/`;
             }
             else if (this.clientOptions.project && this.clientOptions.location) {
@@ -14373,6 +14425,10 @@ class Models extends BaseModule {
          */
         this.embedContent = async (params) => {
             if (!this.apiClient.isVertexAI()) {
+                const isGeminiEmbedding2Model = params.model.includes('gemini-embedding-2');
+                if (isGeminiEmbedding2Model) {
+                    params.contents = tContents(params.contents);
+                }
                 return await this.embedContentInternal(params);
             }
             const isVertexEmbedContentModel = (params.model.includes('gemini') &&
@@ -15309,29 +15365,15 @@ class Models extends BaseModule {
     /**
      * Recontextualizes an image.
      *
-     * There are two types of recontextualization currently supported:
-     * 1) Imagen Product Recontext - Generate images of products in new scenes
-     *    and contexts.
-     * 2) Virtual Try-On: Generate images of persons modeling fashion products.
+     * There is one type of recontextualization currently supported:
+     * 1) Virtual Try-On: Generate images of persons modeling fashion products.
      *
      * @param params - The parameters for recontextualizing an image.
      * @return The response from the API.
      *
      * @example
      * ```ts
-     * const response1 = await ai.models.recontextImage({
-     *  model: 'imagen-product-recontext-preview-06-30',
-     *  source: {
-     *    prompt: 'In a modern kitchen setting.',
-     *    productImages: [productImage],
-     *  },
-     *  config: {
-     *    numberOfImages: 1,
-     *  },
-     * });
-     * console.log(response1?.generatedImages?.[0]?.image?.imageBytes);
-     *
-     * const response2 = await ai.models.recontextImage({
+     * const response = await ai.models.recontextImage({
      *  model: 'virtual-try-on-001',
      *  source: {
      *    personImage: personImage,
@@ -15341,7 +15383,7 @@ class Models extends BaseModule {
      *    numberOfImages: 1,
      *  },
      * });
-     * console.log(response2?.generatedImages?.[0]?.image?.imageBytes);
+     * console.log(response?.generatedImages?.[0]?.image?.imageBytes);
      * ```
      */
     async recontextImage(params) {
@@ -16366,6 +16408,22 @@ function liveConnectConfigToMldev(fromObject, parentObject) {
     if (getValueByPath(fromObject, ['explicitVadSignal']) !== undefined) {
         throw new Error('explicitVadSignal parameter is not supported in Gemini API.');
     }
+    const fromAvatarConfig = getValueByPath(fromObject, ['avatarConfig']);
+    if (parentObject !== undefined && fromAvatarConfig != null) {
+        setValueByPath(parentObject, ['setup', 'avatarConfig'], fromAvatarConfig);
+    }
+    const fromSafetySettings = getValueByPath(fromObject, [
+        'safetySettings',
+    ]);
+    if (parentObject !== undefined && fromSafetySettings != null) {
+        let transformedList = fromSafetySettings;
+        if (Array.isArray(transformedList)) {
+            transformedList = transformedList.map((item) => {
+                return safetySettingToMldev(item);
+            });
+        }
+        setValueByPath(parentObject, ['setup', 'safetySettings'], transformedList);
+    }
     return toObject;
 }
 function liveConnectConstraintsToMldev(apiClient, fromObject) {
@@ -16449,6 +16507,21 @@ function partToMldev(fromObject) {
     const fromPartMetadata = getValueByPath(fromObject, ['partMetadata']);
     if (fromPartMetadata != null) {
         setValueByPath(toObject, ['partMetadata'], fromPartMetadata);
+    }
+    return toObject;
+}
+function safetySettingToMldev(fromObject) {
+    const toObject = {};
+    const fromCategory = getValueByPath(fromObject, ['category']);
+    if (fromCategory != null) {
+        setValueByPath(toObject, ['category'], fromCategory);
+    }
+    if (getValueByPath(fromObject, ['method']) !== undefined) {
+        throw new Error('method parameter is not supported in Gemini API.');
+    }
+    const fromThreshold = getValueByPath(fromObject, ['threshold']);
+    if (fromThreshold != null) {
+        setValueByPath(toObject, ['threshold'], fromThreshold);
     }
     return toObject;
 }
@@ -17921,7 +17994,8 @@ class BaseInteractions extends APIResource {
         return this._client.delete(path `/${api_version}/interactions/${id}`, options);
     }
     /**
-     * Cancels an interaction by id. This only applies to background interactions that are still running.
+     * Cancels an interaction by id. This only applies to background interactions that
+     * are still running.
      *
      * @example
      * ```ts
@@ -17942,6 +18016,66 @@ class BaseInteractions extends APIResource {
 }
 BaseInteractions._key = Object.freeze(['interactions']);
 class Interactions extends BaseInteractions {
+}
+
+/**
+ * @license
+ * Copyright 2025 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
+class BaseWebhooks extends APIResource {
+    /**
+     * Creates a new Webhook.
+     */
+    create(params, options) {
+        const { api_version = this._client.apiVersion, webhook_id } = params, body = __rest(params, ["api_version", "webhook_id"]);
+        return this._client.post(path `/${api_version}/webhooks`, Object.assign({ query: { webhook_id }, body }, options));
+    }
+    /**
+     * Gets a specific Webhook.
+     */
+    retrieve(id, params = {}, options) {
+        const { api_version = this._client.apiVersion } = params !== null && params !== void 0 ? params : {};
+        return this._client.get(path `/${api_version}/webhooks/${id}`, options);
+    }
+    /**
+     * Updates an existing Webhook.
+     */
+    update(id, params, options) {
+        const { api_version = this._client.apiVersion, update_mask } = params, body = __rest(params, ["api_version", "update_mask"]);
+        return this._client.patch(path `/${api_version}/webhooks/${id}`, Object.assign({ query: { update_mask }, body }, options));
+    }
+    /**
+     * Lists all Webhooks.
+     */
+    list(params = {}, options) {
+        const _a = params !== null && params !== void 0 ? params : {}, { api_version = this._client.apiVersion } = _a, query = __rest(_a, ["api_version"]);
+        return this._client.get(path `/${api_version}/webhooks`, Object.assign({ query }, options));
+    }
+    /**
+     * Deletes a Webhook.
+     */
+    delete(id, params = {}, options) {
+        const { api_version = this._client.apiVersion } = params !== null && params !== void 0 ? params : {};
+        return this._client.delete(path `/${api_version}/webhooks/${id}`, options);
+    }
+    /**
+     * Sends a ping event to a Webhook.
+     */
+    ping(id, params = undefined, options) {
+        const { api_version = this._client.apiVersion, body } = params !== null && params !== void 0 ? params : {};
+        return this._client.post(path `/${api_version}/webhooks/${id}:ping`, Object.assign({ body: body }, options));
+    }
+    /**
+     * Generates a new signing secret for a Webhook.
+     */
+    rotateSigningSecret(id, params = {}, options) {
+        const _a = params !== null && params !== void 0 ? params : {}, { api_version = this._client.apiVersion } = _a, body = __rest(_a, ["api_version"]);
+        return this._client.post(path `/${api_version}/webhooks/${id}:rotateSigningSecret`, Object.assign({ body }, options));
+    }
+}
+BaseWebhooks._key = Object.freeze(['webhooks']);
+class Webhooks extends BaseWebhooks {
 }
 
 /**
@@ -18685,12 +18819,12 @@ const buildHeaders = (newHeaders) => {
  * Will return undefined if the environment variable doesn't exist or cannot be accessed.
  */
 const readEnv = (env) => {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e;
     if (typeof globalThis.process !== 'undefined') {
-        return (_c = (_b = (_a = globalThis.process.env) === null || _a === void 0 ? void 0 : _a[env]) === null || _b === void 0 ? void 0 : _b.trim()) !== null && _c !== void 0 ? _c : undefined;
+        return ((_b = (_a = globalThis.process.env) === null || _a === void 0 ? void 0 : _a[env]) === null || _b === void 0 ? void 0 : _b.trim()) || undefined;
     }
     if (typeof globalThis.Deno !== 'undefined') {
-        return (_f = (_e = (_d = globalThis.Deno.env) === null || _d === void 0 ? void 0 : _d.get) === null || _e === void 0 ? void 0 : _e.call(_d, env)) === null || _f === void 0 ? void 0 : _f.trim();
+        return ((_e = (_d = (_c = globalThis.Deno.env) === null || _c === void 0 ? void 0 : _c.get) === null || _d === void 0 ? void 0 : _d.call(_c, env)) === null || _e === void 0 ? void 0 : _e.trim()) || undefined;
     }
     return undefined;
 };
@@ -18777,7 +18911,7 @@ class BaseGeminiNextGenAPIClient {
         if (this.apiKey) {
             return buildHeaders([{ 'x-goog-api-key': this.apiKey }]);
         }
-        if (this.clientAdapter.isVertexAI()) {
+        if (this.clientAdapter && this.clientAdapter.isVertexAI()) {
             return buildHeaders([await this.clientAdapter.getAuthHeaders()]);
         }
         return undefined;
@@ -19131,6 +19265,7 @@ class GeminiNextGenAPIClient extends BaseGeminiNextGenAPIClient {
     constructor() {
         super(...arguments);
         this.interactions = new Interactions(this);
+        this.webhooks = new Webhooks(this);
     }
 }
 _a = GeminiNextGenAPIClient;
@@ -19150,6 +19285,7 @@ GeminiNextGenAPIClient.PermissionDeniedError = PermissionDeniedError;
 GeminiNextGenAPIClient.UnprocessableEntityError = UnprocessableEntityError;
 GeminiNextGenAPIClient.toFile = toFile;
 GeminiNextGenAPIClient.Interactions = Interactions;
+GeminiNextGenAPIClient.Webhooks = Webhooks;
 
 /**
  * @license
@@ -20650,28 +20786,41 @@ const LANGUAGE_LABEL_PREFIX = 'gl-node/';
  *
  */
 class GoogleGenAI {
-    get interactions() {
+    getNextGenClient() {
         var _a;
-        if (this._interactions !== undefined) {
-            return this._interactions;
-        }
-        console.warn('GoogleGenAI.interactions: Interactions usage is experimental and may change in future versions.');
         const httpOpts = this.httpOptions;
+        if (this._nextGenClient === undefined) {
+            const httpOpts = this.httpOptions;
+            this._nextGenClient = new GeminiNextGenAPIClient({
+                baseURL: this.apiClient.getBaseUrl(),
+                apiKey: this.apiKey,
+                apiVersion: this.apiClient.getApiVersion(),
+                clientAdapter: this.apiClient,
+                defaultHeaders: this.apiClient.getDefaultHeaders(),
+                timeout: httpOpts === null || httpOpts === void 0 ? void 0 : httpOpts.timeout,
+                maxRetries: (_a = httpOpts === null || httpOpts === void 0 ? void 0 : httpOpts.retryOptions) === null || _a === void 0 ? void 0 : _a.attempts,
+            });
+        }
         // Unsupported Options Warnings
         if (httpOpts === null || httpOpts === void 0 ? void 0 : httpOpts.extraBody) {
             console.warn('GoogleGenAI.interactions: Client level httpOptions.extraBody is not supported by the interactions client and will be ignored.');
         }
-        const nextGenClient = new GeminiNextGenAPIClient({
-            baseURL: this.apiClient.getBaseUrl(),
-            apiKey: this.apiKey,
-            apiVersion: this.apiClient.getApiVersion(),
-            clientAdapter: this.apiClient,
-            defaultHeaders: this.apiClient.getDefaultHeaders(),
-            timeout: httpOpts === null || httpOpts === void 0 ? void 0 : httpOpts.timeout,
-            maxRetries: (_a = httpOpts === null || httpOpts === void 0 ? void 0 : httpOpts.retryOptions) === null || _a === void 0 ? void 0 : _a.attempts,
-        });
-        this._interactions = nextGenClient.interactions;
+        return this._nextGenClient;
+    }
+    get interactions() {
+        if (this._interactions !== undefined) {
+            return this._interactions;
+        }
+        console.warn('GoogleGenAI.interactions: Interactions usage is experimental and may change in future versions.');
+        this._interactions = this.getNextGenClient().interactions;
         return this._interactions;
+    }
+    get webhooks() {
+        if (this._webhooks !== undefined) {
+            return this._webhooks;
+        }
+        this._webhooks = this.getNextGenClient().webhooks;
+        return this._webhooks;
     }
     constructor(options) {
         var _a;
