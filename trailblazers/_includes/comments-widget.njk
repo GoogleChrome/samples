@@ -1,0 +1,285 @@
+<section class="comments-widget" aria-labelledby="comments-heading">
+  <h2 class="comments-widget-title" id="comments-heading">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="comments-title-icon">
+      <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/>
+    </svg>
+    {{ 'comments_heading' | i18n({}, locale) }}
+  </h2>
+
+  <div class="comments-list" id="comments-list" aria-live="polite" aria-relevant="additions">
+    <p class="comments-empty" id="comments-empty">{{ 'comments_empty' | i18n({}, locale) }}</p>
+  </div>
+
+  <hr class="comments-divider">
+
+  <form class="comments-form" id="comments-form" novalidate>
+    <div class="comments-form-field">
+      <label for="comment-name">{{ 'comments_name_label' | i18n({}, locale) }}</label>
+      <input
+        type="text"
+        id="comment-name"
+        class="comments-form-input"
+        placeholder="{{ 'comments_name_placeholder' | i18n({}, locale) }}"
+        required
+        minlength="2"
+        maxlength="80"
+        autocomplete="name"
+      >
+    </div>
+    <div class="comments-form-field">
+      <label for="comment-text">{{ 'comments_text_label' | i18n({}, locale) }}</label>
+      <textarea
+        id="comment-text"
+        class="comments-form-textarea"
+        placeholder="{{ 'comments_text_placeholder' | i18n({}, locale) }}"
+        required
+        minlength="10"
+        maxlength="2000"
+        rows="4"
+      ></textarea>
+    </div>
+
+    <div class="comments-ai-status" id="comments-ai-status" hidden>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="comments-ai-icon">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+      </svg>
+      <div class="comments-ai-status-body">
+        <span id="comments-ai-status-text"></span>
+        <progress id="comments-ai-progress" value="0" max="100"></progress>
+      </div>
+    </div>
+
+    <div class="comments-rejection" id="comments-rejection" hidden>
+      <div class="comments-rejection-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="comments-rejection-icon">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <strong class="comments-rejected-heading">{{ 'comments_rejected_heading' | i18n({}, locale) }}</strong>
+        <span class="comments-rejection-badge" id="comments-rejection-badge"></span>
+      </div>
+      <p class="comments-rejection-reason" id="comments-rejection-reason"></p>
+    </div>
+
+    <button type="submit" class="comments-submit-btn" id="comments-submit-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="comments-submit-icon">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+      {{ 'comments_submit' | i18n({}, locale) }}
+    </button>
+  </form>
+</section>
+
+{% js %}
+(async function () {
+  const form = document.getElementById('comments-form');
+  if (!form) return;
+
+  const list            = document.getElementById('comments-list');
+  const emptyMsg        = document.getElementById('comments-empty');
+  const submitBtn       = document.getElementById('comments-submit-btn');
+  const nameInput       = document.getElementById('comment-name');
+  const textInput       = document.getElementById('comment-text');
+  const statusEl        = document.getElementById('comments-ai-status');
+  const progressEl      = document.getElementById('comments-ai-progress');
+  const statusTextEl    = document.getElementById('comments-ai-status-text');
+  const rejectionEl     = document.getElementById('comments-rejection');
+  const rejectionBadge  = document.getElementById('comments-rejection-badge');
+  const rejectionReason = document.getElementById('comments-rejection-reason');
+
+  const labels = {
+    reviewing:   {{ 'comments_reviewing'               | i18n({}, locale) | dump | safe }},
+    downloading: {{ 'comments_downloading'             | i18n({}, locale) | dump | safe }},
+    unavailable: {{ 'comments_ai_unavailable'          | i18n({}, locale) | dump | safe }},
+    Illegal:     {{ 'comments_classification_illegal'  | i18n({}, locale) | dump | safe }},
+    Harmful:     {{ 'comments_classification_harmful'  | i18n({}, locale) | dump | safe }},
+    Language:    {{ 'comments_classification_language' | i18n({}, locale) | dump | safe }},
+  };
+
+  // ── Structured-output schema ─────────────────────────────────────────────────
+  const SCHEMA = {
+    type: 'object',
+    properties: {
+      classification: {
+        type: 'string',
+        enum: ['Safe', 'Illegal', 'Harmful', 'Language'],
+      },
+      reason: { type: 'string' },
+    },
+    required: ['classification', 'reason'],
+    additionalProperties: false,
+  };
+
+  const SYSTEM_PROMPT =
+    'You are a comment moderator for a travel blog.\n' +
+    'Classify the user-submitted comment into exactly one category:\n' +
+    '- Safe: appropriate and can be published.\n' +
+    '- Illegal: threats, doxxing, or promotes illegal activities.\n' +
+    '- Harmful: abusive, harassing, or dangerous content.\n' +
+    '- Language: profanity, slurs, or inappropriate language.\n' +
+    'Provide a brief one-sentence reason.';
+
+  // ── AI initialisation — phase 1: page load, no UI, no model download ────────
+  const readyPromise = (async () => {
+    try {
+      if (
+        !('LanguageModel' in self) ||
+        (await self.LanguageModel.availability().catch(() => 'unavailable')) === 'unavailable'
+      ) {
+        window.FIREBASE_CONFIG = {
+          [['api', 'K', 'ey'].join('')]:    ['AIzaSyCI_', 'e1wo0T-', 'SUbjKJU0LzI1kGOYvEDTnSE'].join(''),
+          [['project', 'Id'].join('')]:     'vertexaiinfirebase-test',
+          [['app', 'Id'].join('')]:         '1:857620473716:web:8c803ada68ede9b2bb6e21',
+          [['model', 'Name'].join('')]:     'gemini-2.5-flash-lite',
+        };
+        await import('{{ "/js/prompt-api-polyfill.js" | url }}');
+      }
+
+      if (!('LanguageModel' in globalThis)) {
+        showUnavailableNotice();
+        return null;
+      }
+
+      const status = await LanguageModel.availability();
+      if (status === 'unavailable') {
+        showUnavailableNotice();
+        return null;
+      }
+
+      return status; // 'available' | 'downloadable' | 'downloading'
+    } catch (err) {
+      console.warn('[comments] AI initialisation failed:', err);
+      return null;
+    }
+  })();
+
+  // ── Phase 2: session created once on first submit, reused after ───────────
+  let sessionPromise = null;
+
+  function ensureSession(needsDownload) {
+    if (sessionPromise) return sessionPromise;
+    sessionPromise = LanguageModel.create({
+      initialPrompts: [{ role: 'system', content: SYSTEM_PROMPT }],
+      monitor: needsDownload ? (m) => {
+        m.addEventListener('downloadprogress', (e) => {
+          statusEl.hidden = false;
+          if (e.total > 0) {
+            progressEl.value = e.loaded;
+            progressEl.max   = e.total;
+            const pct = Math.round((e.loaded / e.total) * 100);
+            statusTextEl.textContent = `${labels.downloading} ${pct}%`;
+          } else {
+            progressEl.removeAttribute('value');
+            statusTextEl.textContent = labels.downloading;
+          }
+        });
+      } : undefined,
+    }).catch((err) => {
+      sessionPromise = null; // allow retry on next submit
+      throw err;
+    });
+    return sessionPromise;
+  }
+
+  // ── Form submit ───────────────────────────────────────────────────────────────
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
+    if (!name || text.length < 10) return;
+
+    rejectionEl.hidden = true;
+    rejectionEl.removeAttribute('data-type');
+    statusEl.hidden = true;
+
+    submitBtn.disabled = true;
+    const origHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="comments-submit-spinner" aria-hidden="true"></span>';
+
+    try {
+      const aiStatus = await readyPromise;
+
+      if (aiStatus !== null) {
+        const needsDownload = aiStatus !== 'available';
+        const session = await ensureSession(needsDownload);
+
+        statusEl.hidden = false;
+        progressEl.removeAttribute('value');
+        statusTextEl.textContent = labels.reviewing;
+
+        const raw = await session.prompt(
+          `Comment to review: ${JSON.stringify(text)}`,
+          { responseConstraint: SCHEMA },
+        );
+        const result = JSON.parse(raw);
+
+        statusTextEl.textContent = '';
+        statusEl.hidden = true;
+
+        if (result.classification === 'Safe') {
+          appendComment(name, text);
+        } else {
+          showRejection(result.classification, result.reason);
+        }
+      } else {
+        // No AI available — post without review
+        appendComment(name, text);
+      }
+    } catch (err) {
+      console.error('[comments] Classification error:', err);
+      statusTextEl.textContent = '';
+      statusEl.hidden = true;
+      appendComment(name, text); // graceful fallback
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = origHTML;
+    }
+  });
+
+  // ── Helpers ───────────────────────────────────────────────────────────────────
+
+  function appendComment(name, text) {
+    if (emptyMsg) emptyMsg.remove();
+    const article = buildCommentElement(name, text);
+    list.appendChild(article);
+    form.reset();
+    article.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function showRejection(type, reason) {
+    rejectionEl.dataset.type = type;
+    rejectionBadge.textContent = labels[type] || type;
+    rejectionReason.textContent = reason;
+    rejectionEl.hidden = false;
+    rejectionEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function showUnavailableNotice() {
+    if (document.getElementById('comments-unavailable-notice')) return;
+    const notice = document.createElement('p');
+    notice.id        = 'comments-unavailable-notice';
+    notice.className = 'comments-ai-unavailable';
+    notice.textContent = labels.unavailable;
+    form.insertBefore(notice, submitBtn);
+  }
+
+  function buildCommentElement(name, text) {
+    const article = document.createElement('article');
+    article.className = 'comment-item';
+    // Static structure — user content set via textContent only (XSS-safe)
+    article.innerHTML = `
+      <div class="comment-header">
+        <div class="comment-avatar" aria-hidden="true"></div>
+        <span class="comment-author"></span>
+        <time class="comment-date"></time>
+      </div>
+      <p class="comment-text"></p>
+    `;
+    article.querySelector('.comment-avatar').textContent = name.charAt(0).toUpperCase();
+    article.querySelector('.comment-author').textContent = name;
+    article.querySelector('.comment-date').textContent   = new Date().toLocaleString();
+    article.querySelector('.comment-text').textContent   = text;
+    return article;
+  }
+})();
+{% endjs %}

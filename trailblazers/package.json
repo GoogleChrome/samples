@@ -28,11 +28,11 @@
     "luxon": "^3.7.2",
     "node-addon-api": "^8.7.0",
     "node-gyp": "^12.2.0",
+    "pagefind": "^1.5.2",
     "prettier": "^3.8.2",
     "prismjs": "^1.30.0",
     "zod": "^4.3.6",
-    "zod-validation-error": "^5.0.0",
-    "pagefind": "^1.5.2"
+    "zod-validation-error": "^5.0.0"
   },
   "dependencies": {
     "@zachleat/heading-anchors": "^1.0.5",

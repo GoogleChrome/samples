@@ -269,4 +269,79 @@ export default {
     es: 'Deja que la IA elija el color perfecto para ti',
     ja: 'AIが最適なカラーを選んでくれます',
   },
+  comments_heading: {
+    en: 'Comments',
+    es: 'Comentarios',
+    ja: 'コメント',
+  },
+  comments_empty: {
+    en: 'Be the first to leave a comment!',
+    es: '¡Sé el primero en dejar un comentario!',
+    ja: '最初のコメントを残してください！',
+  },
+  comments_name_label: {
+    en: 'Name',
+    es: 'Nombre',
+    ja: '名前',
+  },
+  comments_name_placeholder: {
+    en: 'Your name',
+    es: 'Tu nombre',
+    ja: 'お名前',
+  },
+  comments_text_label: {
+    en: 'Comment',
+    es: 'Comentario',
+    ja: 'コメント内容',
+  },
+  comments_text_placeholder: {
+    en: 'Share your thoughts or ask a question…',
+    es: 'Comparte tus pensamientos o haz una pregunta…',
+    ja: 'ご感想やご質問をどうぞ…',
+  },
+  comments_submit: {
+    en: 'Post Comment',
+    es: 'Publicar comentario',
+    ja: 'コメントを投稿',
+  },
+  comments_reviewing: {
+    en: 'Reviewing your comment with AI…',
+    es: 'Revisando tu comentario con IA…',
+    ja: 'AIでコメントを確認しています…',
+  },
+  comments_downloading: {
+    en: 'Downloading AI model…',
+    es: 'Descargando modelo de IA…',
+    ja: 'AIモデルをダウンロード中…',
+  },
+  comments_ai_unavailable: {
+    en: 'AI moderation is not available in this browser. Your comment will be posted without review.',
+    es: 'La moderación con IA no está disponible en este navegador. Tu comentario se publicará sin revisión.',
+    ja: 'このブラウザではAIモデレーションが利用できません。コメントはレビューなしで投稿されます。',
+  },
+  comments_classification_safe: {
+    en: 'AI-verified',
+    es: 'Verificado por IA',
+    ja: 'AI確認済み',
+  },
+  comments_classification_illegal: {
+    en: 'Illegal content',
+    es: 'Contenido ilegal',
+    ja: '違法コンテンツ',
+  },
+  comments_classification_harmful: {
+    en: 'Harmful content',
+    es: 'Contenido perjudicial',
+    ja: '有害コンテンツ',
+  },
+  comments_classification_language: {
+    en: 'Inappropriate language',
+    es: 'Lenguaje inapropiado',
+    ja: '不適切な言語',
+  },
+  comments_rejected_heading: {
+    en: 'Comment not posted',
+    es: 'Comentario no publicado',
+    ja: 'コメントは投稿されませんでした',
+  },
 };

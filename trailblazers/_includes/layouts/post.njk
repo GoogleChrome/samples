@@ -1,6 +1,20 @@
 ---
 layout: layouts/base.njk
 ---
+{% block head %}
+<script type="importmap" eleventy:ignore>
+{
+  "imports": {
+    "prompt-api-polyfill": "{{ '/js/prompt-api-polyfill.js' | url }}",
+    "/js/prompt-api-polyfill.js": "{{ '/js/prompt-api-polyfill.js' | url }}",
+    "firebase/app": "{{ '/js/firebase/firebase-app.js' | url }}",
+    "firebase/ai": "{{ '/js/firebase/firebase-ai.js' | url }}",
+    "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js": "{{ '/js/firebase/firebase-app.js' | url }}",
+    "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js": "{{ '/js/firebase/firebase-app.js' | url }}"
+  }
+}
+</script>
+{% endblock %}
 {# Only include the syntax highlighter CSS on blog posts, included with the CSS per-page bundle #}
 <style>{% include "node_modules/prismjs/themes/prism-okaidia.css" %}</style>
 <style>{% include "css/prism-diff.css" %}</style>
@@ -89,6 +103,8 @@ layout: layouts/base.njk
 </ul>
 {%- endif %}
 {%- endif %}
+
+{% include "comments-widget.njk" %}
 
 {% js %}
   (function() {
