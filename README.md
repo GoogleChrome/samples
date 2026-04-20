@@ -6,6 +6,7 @@ Some samples correspond to an entry in https://www.chromestatus.com/features, an
 interface is currently the best way to browse.
 
 Contributing a sample for a ChromeStatus feature
+Updated by Meenu
 ===
 Please use [`SAMPLE_STARTING_POINT`](SAMPLE_STARTING_POINT) as a starting point.
 
