@@ -4,7 +4,7 @@ Samples tied to new functionality in Google Chrome and general samples.
 
 Some samples correspond to an entry in https://www.chromestatus.com/features, and using that
 interface is currently the best way to browse.
-
+This is my contribution
 Contributing a sample for a ChromeStatus feature
 ===
 Please use [`SAMPLE_STARTING_POINT`](SAMPLE_STARTING_POINT) as a starting point.
