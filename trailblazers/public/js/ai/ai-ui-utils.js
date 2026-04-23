@@ -77,9 +77,7 @@ export function refreshAIVisibility(ui) {
   if (ui.aiRewriterSection) {
     ui.aiRewriterSection.style.display = aiEnabled ? 'block' : 'none';
   }
-  if (ui.aiClassifierSection) {
-    ui.aiClassifierSection.style.display = aiEnabled ? 'block' : 'none';
-  }
+
   if (ui.aiTranslationSection) {
     ui.aiTranslationSection.style.display = translateEnabled ? 'block' : 'none';
   }
