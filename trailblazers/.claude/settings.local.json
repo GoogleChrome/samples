@@ -79,7 +79,16 @@
       "Bash(rm tight.png filled.png r.png g_neg.png)",
       "Bash(magick identify:*)",
       "Bash(magick /Users/tsteiner/Documents/websites/samples/trailblazers/content/img/tshirt-mask.png -format 'Center chest \\(300,300\\): %[hex:u.p{300,300}]\\\\nTop-left bg \\(10,10\\): %[hex:u.p{10,10}]\\\\nLeft arm \\(60,300\\): %[hex:u.p{60,300}]\\\\nRight side shirt \\(400,280\\): %[hex:u.p{400,280}]\\\\nBottom shirt \\(300,520\\): %[hex:u.p{300,520}]' info:)",
-      "Bash(ls -la /Users/tsteiner/Documents/websites/samples/trailblazers/content/img/*.png)"
+      "Bash(ls -la /Users/tsteiner/Documents/websites/samples/trailblazers/content/img/*.png)",
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__navigate_page",
+      "Bash(sed -n '49,57p' /Users/tsteiner/Documents/websites/samples/trailblazers/content/es/about/index.njk)",
+      "Bash(sed -n '49,57p' /Users/tsteiner/Documents/websites/samples/trailblazers/content/ja/about/index.njk)",
+      "Bash(git stash *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
