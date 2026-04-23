@@ -540,7 +540,7 @@ body {
   }
 }
 
-.form-group input,
+.form-group input:not([switch]),
 .form-group textarea,
 .form-group select {
   width: 100%;
