@@ -51,7 +51,7 @@ export async function runAIAction(
     await actionFn();
   } catch (err) {
     console.error(err);
-    customAlert(ui, 'AI Action failed.');
+    customAlert(ui, 'AI Action failed.', err.message || String(err));
   } finally {
     ui.activeAiStreams--;
     btn.disabled = false;
