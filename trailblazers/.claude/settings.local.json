@@ -88,7 +88,17 @@
       "Bash(git stash *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "mcp__chrome-devtools__list_pages",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(kill 66638 66325 65411)",
+      "mcp__chrome-devtools__evaluate_script",
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers diff -- public/css/create-post.css dist/css/create-post.css)",
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers log --oneline -3)",
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers add trailblazers/public/css/create-post.css trailblazers/dist/css/create-post.css)",
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers commit -m ' *)",
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers add public/css/create-post.css dist/css/create-post.css)",
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers push)"
     ]
   }
 }
