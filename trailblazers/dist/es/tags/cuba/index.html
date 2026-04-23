@@ -419,7 +419,6 @@ header .logo:hover {
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  border: 3px solid rgba(255, 255, 255, 0.9);
 }
 
 /* Glassmorphism Navigation */
@@ -456,6 +455,26 @@ header .nav-item a[aria-current='page'] {
 }
 
 /* Post list cards */
+.listing-main > h1 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* On tag pages, keep "See all tags" immediately below the heading
+   on all screen sizes. display:contents at 80em+ overrides the flex. */
+.listing-main:has(.tag-see-all) {
+  display: flex;
+  flex-direction: column;
+}
+
+.listing-main:has(.tag-see-all) > h1 { order: 1; }
+.listing-main:has(.tag-see-all) .tag-see-all { order: 2; }
+.listing-main:has(.tag-see-all) .postlist { order: 3; }
+
+.hero {
+  margin-bottom: 0.75rem;
+}
+
 .postlist {
   display: grid;
   /* Fallback for older browsers */
@@ -1506,16 +1525,69 @@ dialog.search-overlay::backdrop {
     grid-column: 1 / -1;
   }
 
-  .postlist {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    text-align: left;
+    padding: 1.5rem 3rem;
+    gap: 0.4rem 3rem;
+    align-items: center;
+  }
+
+  .hero-title {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .hero-subtitle {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    max-width: none;
+  }
+
+  .hero-bloggers {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    margin-top: 0;
+    gap: 1.5rem;
+  }
+
+  .postlist,
+  .listing-main > p {
     grid-column: 1;
   }
 
   .sidebar {
     grid-column: 2;
-    margin-top: 1.5rem; /* Matches the new .postlist top margin exactly */
+    margin-top: 1.5rem;
     position: sticky;
-    top: 2rem; /* Stays visible when scrolling */
-    height: fit-content; /* Needed to override grid stretch */
+    top: 2rem;
+    height: fit-content;
+  }
+
+  /* Tag pages: place "See all tags" between heading and posts,
+     sidebar alongside the posts (not above them). */
+  .listing-content-grid:has(.tag-see-all) .listing-main > h1 {
+    grid-row: 1;
+  }
+
+  .listing-content-grid:has(.tag-see-all) .tag-see-all {
+    grid-row: 2;
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .listing-content-grid:has(.tag-see-all) .postlist {
+    grid-row: 3;
+  }
+
+  .listing-content-grid:has(.tag-see-all) .sidebar {
+    grid-row: 3;
+    margin-top: 0;
   }
 }
 
@@ -2624,7 +2696,7 @@ dialog.search-overlay::backdrop {
 </ul>
 
 
-<p>Ver <a href="/samples/trailblazers/dist/es/tags/">todas las etiquetas</a>.</p>
+<p class="tag-see-all">Ver <a href="/samples/trailblazers/dist/es/tags/">todas las etiquetas</a>.</p>
 
 	</div>
 
@@ -2756,7 +2828,7 @@ dialog.search-overlay::backdrop {
 			</form>
 		</footer>
 
-		<!-- This page `/es/tags/cuba/` was built on 2026-04-17T11:13:46.653Z -->
+		<!-- This page `/es/tags/cuba/` was built on 2026-04-23T00:34:04.523Z -->
 		<script type="module" src="/samples/trailblazers/dist/dist/ogpROWI0ob.js"></script>
 		
 		

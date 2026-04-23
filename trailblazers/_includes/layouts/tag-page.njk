@@ -6,4 +6,4 @@ layout: layouts/listing.njk
 {% set postslist = collections[ tag ] | filterByLocale(locale) %}
 {% include "postslist.njk" %}
 
-<p>{{ 'see' | i18n({}, locale) }}<a href="/{{ locale }}/tags/">{{ 'all tags' | i18n({}, locale) }}</a>.</p>
+<p class="tag-see-all">{{ 'see' | i18n({}, locale) }}<a href="/{{ locale }}/tags/">{{ 'all tags' | i18n({}, locale) }}</a>.</p>
