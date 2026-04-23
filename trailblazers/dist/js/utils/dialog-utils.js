@@ -2,10 +2,18 @@
  * Shows a custom modal alert dialog.
  * @param {Object} ui - The UI elements.
  * @param {string} message - The message to display.
+ * @param {string} [details] - Optional expandable detail text (e.g. error reason).
  * @return {Promise<void>}
  */
-export async function customAlert(ui, message) {
+export async function customAlert(ui, message, details) {
   ui.alertMessage.textContent = message;
+  if (details) {
+    ui.alertDetailsMessage.textContent = details;
+    ui.alertDetails.hidden = false;
+    ui.alertDetails.open = false;
+  } else {
+    ui.alertDetails.hidden = true;
+  }
   ui.alertDialog.showModal();
   return new Promise((resolve) => {
     ui.alertDialog.addEventListener('close', () => resolve(), { once: true });

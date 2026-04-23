@@ -98,7 +98,10 @@
       "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers add trailblazers/public/css/create-post.css trailblazers/dist/css/create-post.css)",
       "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers commit -m ' *)",
       "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers add public/css/create-post.css dist/css/create-post.css)",
-      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers push)"
+      "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers push)",
+      "Bash(pkill -f \"chrome-devtools-mcp\")",
+      "Bash(pkill -f \"Google Chrome for Testing\")",
+      "mcp__chrome-devtools__take_snapshot"
     ]
   }
 }

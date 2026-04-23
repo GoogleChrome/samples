@@ -66,6 +66,8 @@ export const ui = {
   aiTranslateAllBtn: document.getElementById('ai-translate-all-btn'),
   alertDialog: document.getElementById('alert-dialog'),
   alertMessage: document.getElementById('alert-message'),
+  alertDetails: document.getElementById('alert-details'),
+  alertDetailsMessage: document.getElementById('alert-details-message'),
   confirmDialog: document.getElementById('confirm-dialog'),
   confirmMessage: document.getElementById('confirm-message'),
   ghTokenInput: document.getElementById('gh-token'),
