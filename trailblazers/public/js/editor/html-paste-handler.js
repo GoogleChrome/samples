@@ -59,8 +59,12 @@ export async function handleHtmlPaste(e, ui, drafts, sync) {
       const blob = await resp.blob();
       let name = src.split('/').pop().split('?')[0] || 'pasted-image.png';
       if (name === 'image.png' || !name.includes('.')) {
-        name = `pasted-image-${Date.now()}-${imgIdx++}.png`;
+        name = `pasted-image-${Date.now()}-${imgIdx}.png`;
+      } else {
+        const dot = name.lastIndexOf('.');
+        name = `${name.slice(0, dot)}-${Date.now()}-${imgIdx}${name.slice(dot)}`;
       }
+      imgIdx++;
       const info = await processImage(
         new File([blob], name, { type: blob.type }),
         id,
