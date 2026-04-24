@@ -103,7 +103,14 @@ export async function handleFiles(
   ui.dropZone.setAttribute('data-disabled', 'true');
 
   try {
-    for (const file of files) {
+    let imgIdx = 0;
+    for (let file of files) {
+      if (file.name === 'image.png' || !file.name.includes('.')) {
+        file = new File([file], `pasted-image-${Date.now()}-${imgIdx}.png`, {
+          type: file.type,
+        });
+      }
+      imgIdx++;
       const start = ui.contentInput.selectionStart;
       const end = ui.contentInput.selectionEnd;
       const before = ui.contentInput.value.substring(0, start);
