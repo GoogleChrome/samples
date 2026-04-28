@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98.5%;
+    --foreground: 0 0% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+    --primary: 0 0% 12%;
+    --primary-foreground: 0 0% 98.5%;
+    --secondary: 0 0% 96.5%;
+    --secondary-foreground: 0 0% 38%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 58%;
+    --accent: 0 0% 96.5%;
+    --accent-foreground: 0 0% 12%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 50%;
+    --radius: 0.625rem;
+
+    --shadow-card: 0 1px 3px rgb(0 0 0 / 0.05), 0 1px 1px rgb(0 0 0 / 0.03);
+    --shadow-float: 0 8px 24px -6px rgb(0 0 0 / 0.1), 0 2px 8px -2px rgb(0 0 0 / 0.04);
+    --shadow-composer: 0 1px 2px rgb(0 0 0 / 0.04);
+    --shadow-composer-focus: 0 0 0 1px rgb(0 0 0 / 0.06), 0 2px 8px -2px rgb(0 0 0 / 0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 0 0% 19.5%;
+      --foreground: 0 0% 94%;
+      --card: 0 0% 22.5%;
+      --card-foreground: 0 0% 94%;
+      --primary: 0 0% 94%;
+      --primary-foreground: 0 0% 19.5%;
+      --secondary: 0 0% 26%;
+      --secondary-foreground: 0 0% 75%;
+      --muted: 0 0% 16.5%;
+      --muted-foreground: 0 0% 60%;
+      --accent: 0 0% 26%;
+      --accent-foreground: 0 0% 94%;
+      --destructive: 0 63% 31%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 0 0% 27%;
+      --input: 0 0% 27%;
+      --ring: 0 0% 45%;
+
+      --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(0 0 0 / 0.2), 0 0.5px 1px rgb(0 0 0 / 0.15);
+      --shadow-float: 0 0 0 1px rgb(255 255 255 / 0.06), 0 16px 48px -6px rgb(0 0 0 / 0.35), 0 6px 12px -2px rgb(0 0 0 / 0.2);
+      --shadow-composer: 0 1px 3px rgb(0 0 0 / 0.2), inset 0 1px 0 rgb(255 255 255 / 0.03);
+      --shadow-composer-focus: 0 0 0 1px rgb(255 255 255 / 0.1), 0 4px 16px -4px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.04);
+    }
+  }
+
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(0 0 0 / 0.12) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
