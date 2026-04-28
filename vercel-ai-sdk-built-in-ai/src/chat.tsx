@@ -28,7 +28,7 @@ function createLazyGoogleModel() {
   };
 
   return {
-    specificationVersion: 'v1' as const,
+    specificationVersion: 'v3' as const,
     provider: 'google.generative-ai',
     modelId: 'gemini-2.5-flash',
     defaultObjectGenerationMode: 'json' as const,
