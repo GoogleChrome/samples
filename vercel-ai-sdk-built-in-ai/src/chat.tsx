@@ -138,7 +138,7 @@ function Chat({ agent }: { agent: ToolLoopAgent }) {
     <div className="flex flex-col h-dvh max-w-3xl mx-auto">
       <header className="flex items-center justify-between px-4 py-3 border-b border-border/50">
         <span className="text-sm font-medium">Built-in AI Chatbot</span>
-        <a href="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">← Back</a>
+        <a href="index.html" className="text-xs text-muted-foreground hover:text-foreground transition-colors">← Back</a>
       </header>
 
       <div className="relative flex-1 bg-background overflow-hidden">
