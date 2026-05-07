@@ -1,0 +1,315 @@
+<!--
+  Copyright 2026 Google LLC
+  SPDX-License-Identifier: Apache-2.0
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summarizer API performance Benchmark</title>
+    <style>
+      :root {
+        color-scheme: dark light;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 1200px;
+        margin: 1rem auto;
+        padding: 0 1rem;
+      }
+      textarea {
+        width: 100%;
+        height: 150px;
+      }
+      .controls {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 0.5rem 0;
+        align-items: flex-end;
+      }
+      .controls label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .sides {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .side {
+        border: 1px solid #999;
+        padding: 0.75rem;
+      }
+      .side h3 {
+        margin: 0 0 0.5rem;
+      }
+      .output {
+        white-space: pre-wrap;
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        min-height: 80px;
+        margin-top: 0.5rem;
+      }
+      .time {
+        font-weight: bold;
+        margin: 0.25rem 0;
+        min-height: 1.2em;
+      }
+      #status {
+        margin: 0.5rem 0;
+        min-height: 1.2em;
+      }
+      button {
+        cursor: pointer;
+      }
+      #chart {
+        margin-top: 1rem;
+      }
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.3rem 0;
+      }
+      .bar-label {
+        width: 9rem;
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .bar {
+        flex: 1;
+        background: #ddd;
+        height: 1.1rem;
+      }
+      .bar-fill {
+        height: 100%;
+        background: red;
+      }
+      .bar-ms {
+        flex-shrink: 0;
+        width: 5rem;
+      }
+      #winner {
+        margin-top: 0.5rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Summarizer API <code>performance</code> Benchmark</h1>
+    <p>
+      Left vs. right, sequential. A warm-up run fires first to avoid cold-start
+      bias.
+    </p>
+
+    <textarea id="input">
+The web is a vast place. Built-in AI APIs like the Summarizer API allow developers to process information directly on the user's device. This improves privacy and performance. By using polyfills, we can bridge the gap between experimental specs and today's browsers. The Prompt API is a foundational piece that powers many of these task-specific APIs. Transformers.js and other local backends enable this to happen without a cloud connection.</textarea
+    >
+
+    <div class="controls">
+      <label>
+        Type
+        <select id="type">
+          <option value="tldr">tldr</option>
+          <option value="teaser">teaser</option>
+          <option value="key-points" selected>key-points</option>
+          <option value="headline">headline</option>
+        </select>
+      </label>
+      <label>
+        Format
+        <select id="format">
+          <option value="plain-text" selected>plain-text</option>
+          <option value="markdown">markdown</option>
+        </select>
+      </label>
+      <label>
+        Length
+        <select id="length">
+          <option value="short" selected>short</option>
+          <option value="medium">medium</option>
+          <option value="long">long</option>
+        </select>
+      </label>
+      <label>
+        Preference
+        <select id="leftPerf">
+          <option value="speed" selected>speed</option>
+          <option value="capability">capability</option>
+        </select>
+      </label>
+      <button id="runBtn">Run Benchmark</button>
+    </div>
+
+    <div id="status"></div>
+
+    <div id="chart" style="display: none">
+      <div class="bar-row">
+        <span class="bar-label">Left (<span id="chartLeftLabel"></span>)</span>
+        <div class="bar"><div class="bar-fill" id="leftBar"></div></div>
+        <span class="bar-ms" id="chartLeftMs"></span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Right (auto)</span>
+        <div class="bar"><div class="bar-fill" id="rightBar"></div></div>
+        <span class="bar-ms" id="chartRightMs"></span>
+      </div>
+      <div id="winner"></div>
+    </div>
+
+    <div class="sides">
+      <div class="side">
+        <h3>
+          Left &mdash;
+          <code>preference: <span id="leftPerfLabel">speed</span></code>
+        </h3>
+        <div class="time" id="leftTime"></div>
+        <div class="output" id="leftOutput"></div>
+      </div>
+      <div class="side">
+        <h3>Right &mdash; <code>preference: auto</code></h3>
+        <div class="time" id="rightTime"></div>
+        <div class="output" id="rightOutput"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      const inputEl = document.getElementById('input');
+      const typeEl = document.getElementById('type');
+      const formatEl = document.getElementById('format');
+      const lengthEl = document.getElementById('length');
+      const leftPerfEl = document.getElementById('leftPerf');
+      const leftPerfLabel = document.getElementById('leftPerfLabel');
+      const runBtn = document.getElementById('runBtn');
+      const statusEl = document.getElementById('status');
+      const leftTimeEl = document.getElementById('leftTime');
+      const leftOutputEl = document.getElementById('leftOutput');
+      const rightTimeEl = document.getElementById('rightTime');
+      const rightOutputEl = document.getElementById('rightOutput');
+
+      const chartEl = document.getElementById('chart');
+      const chartLeftLabel = document.getElementById('chartLeftLabel');
+      const leftBarEl = document.getElementById('leftBar');
+      const rightBarEl = document.getElementById('rightBar');
+      const chartLeftMs = document.getElementById('chartLeftMs');
+      const chartRightMs = document.getElementById('chartRightMs');
+      const winnerEl = document.getElementById('winner');
+
+      leftPerfEl.addEventListener('change', () => {
+        leftPerfLabel.textContent = leftPerfEl.value;
+      });
+
+      function showChart(leftMs, rightMs, leftLabel) {
+        const max = Math.max(leftMs, rightMs);
+        chartLeftLabel.textContent = leftLabel;
+        leftBarEl.style.width = `${((leftMs / max) * 100).toFixed(1)}%`;
+        rightBarEl.style.width = `${((rightMs / max) * 100).toFixed(1)}%`;
+        chartLeftMs.textContent = `${leftMs.toFixed(0)} ms`;
+        chartRightMs.textContent = `${rightMs.toFixed(0)} ms`;
+        const diff = Math.abs(leftMs - rightMs).toFixed(0);
+        winnerEl.textContent =
+          leftMs < rightMs
+            ? `Left wins — ${diff} ms faster`
+            : rightMs < leftMs
+              ? `Right wins — ${diff} ms faster`
+              : 'Tie!';
+        chartEl.style.display = 'block';
+      }
+
+      async function runOne(preference, sharedOptions) {
+        const start = performance.now();
+        const summarizer = await Summarizer.create({
+          ...sharedOptions,
+          preference,
+        });
+        const result = await summarizer.summarize(inputEl.value);
+        const elapsed = performance.now() - start;
+        summarizer.destroy();
+        return { result, elapsed };
+      }
+
+      runBtn.addEventListener('click', async () => {
+        runBtn.disabled = true;
+        chartEl.style.display = 'none';
+        leftTimeEl.textContent = '';
+        leftOutputEl.textContent = '';
+        rightTimeEl.textContent = '';
+        rightOutputEl.textContent = '';
+
+        statusEl.textContent = 'Checking availability…';
+        const avail = await Summarizer.availability();
+        if (avail === 'unavailable') {
+          statusEl.textContent =
+            'Error: Summarizer API unavailable on this device.';
+          runBtn.disabled = false;
+          return;
+        }
+        if (avail === 'downloadable' || avail === 'downloading') {
+          statusEl.textContent = `Model not yet downloaded (status: ${avail}). Please wait and try again.`;
+          runBtn.disabled = false;
+          return;
+        }
+
+        // Warm-up to eliminate cold-start bias
+        statusEl.textContent = 'Warming up (eliminating cold-start)…';
+        const warmup = await Summarizer.create({
+          outputLanguage: 'en',
+          type: 'headline',
+          format: 'plain-text',
+        });
+        await warmup.summarize('Lorem ipsum');
+        warmup.destroy();
+
+        const sharedOptions = {
+          type: typeEl.value,
+          format: formatEl.value,
+          length: lengthEl.value,
+          outputLanguage: 'en',
+        };
+
+        // Left run
+        const leftPreference = leftPerfEl.value;
+        statusEl.textContent = `Running left (preference: ${leftPreference})…`;
+        leftOutputEl.textContent = '…';
+        let leftMs = null;
+        try {
+          const { result, elapsed } = await runOne(
+            leftPreference,
+            sharedOptions
+          );
+          leftMs = elapsed;
+          leftTimeEl.textContent = `${elapsed.toFixed(0)} ms`;
+          leftOutputEl.textContent = result;
+        } catch (err) {
+          leftTimeEl.textContent = '';
+          leftOutputEl.textContent = `Error: ${err.message}`;
+        }
+
+        // Right run
+        statusEl.textContent = 'Running right (preference: auto)…';
+        rightOutputEl.textContent = '…';
+        let rightMs = null;
+        try {
+          const { result, elapsed } = await runOne('auto', sharedOptions);
+          rightMs = elapsed;
+          rightTimeEl.textContent = `${elapsed.toFixed(0)} ms`;
+          rightOutputEl.textContent = result;
+        } catch (err) {
+          rightTimeEl.textContent = '';
+          rightOutputEl.textContent = `Error: ${err.message}`;
+        }
+
+        if (leftMs !== null && rightMs !== null) {
+          showChart(leftMs, rightMs, leftPreference);
+        }
+
+        statusEl.textContent = 'Done.';
+        runBtn.disabled = false;
+      });
+    </script>
+  </body>
+</html>
