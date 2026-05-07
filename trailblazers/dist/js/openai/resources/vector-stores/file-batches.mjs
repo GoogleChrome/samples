@@ -14,6 +14,7 @@ export class FileBatches extends APIResource {
             body,
             ...options,
             headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -24,6 +25,7 @@ export class FileBatches extends APIResource {
         return this._client.get(path `/vector_stores/${vector_store_id}/file_batches/${batchID}`, {
             ...options,
             headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -35,6 +37,7 @@ export class FileBatches extends APIResource {
         return this._client.post(path `/vector_stores/${vector_store_id}/file_batches/${batchID}/cancel`, {
             ...options,
             headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -49,7 +52,12 @@ export class FileBatches extends APIResource {
      */
     listFiles(batchID, params, options) {
         const { vector_store_id, ...query } = params;
-        return this._client.getAPIList(path `/vector_stores/${vector_store_id}/file_batches/${batchID}/files`, (CursorPage), { query, ...options, headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]) });
+        return this._client.getAPIList(path `/vector_stores/${vector_store_id}/file_batches/${batchID}/files`, (CursorPage), {
+            query,
+            ...options,
+            headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Wait for the given file batch to be processed.

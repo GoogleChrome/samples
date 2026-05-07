@@ -22,14 +22,21 @@ class Runs extends resource_1.APIResource {
      * schema specified in the config of the evaluation.
      */
     create(evalID, body, options) {
-        return this._client.post((0, path_1.path) `/evals/${evalID}/runs`, { body, ...options });
+        return this._client.post((0, path_1.path) `/evals/${evalID}/runs`, {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Get an evaluation run by ID.
      */
     retrieve(runID, params, options) {
         const { eval_id } = params;
-        return this._client.get((0, path_1.path) `/evals/${eval_id}/runs/${runID}`, options);
+        return this._client.get((0, path_1.path) `/evals/${eval_id}/runs/${runID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Get a list of runs for an evaluation.
@@ -38,6 +45,7 @@ class Runs extends resource_1.APIResource {
         return this._client.getAPIList((0, path_1.path) `/evals/${evalID}/runs`, (pagination_1.CursorPage), {
             query,
             ...options,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -45,14 +53,20 @@ class Runs extends resource_1.APIResource {
      */
     delete(runID, params, options) {
         const { eval_id } = params;
-        return this._client.delete((0, path_1.path) `/evals/${eval_id}/runs/${runID}`, options);
+        return this._client.delete((0, path_1.path) `/evals/${eval_id}/runs/${runID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Cancel an ongoing evaluation run.
      */
     cancel(runID, params, options) {
         const { eval_id } = params;
-        return this._client.post((0, path_1.path) `/evals/${eval_id}/runs/${runID}`, options);
+        return this._client.post((0, path_1.path) `/evals/${eval_id}/runs/${runID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Runs = Runs;

@@ -15,25 +15,35 @@ export class Conversations extends APIResource {
      * Create a conversation.
      */
     create(body = {}, options) {
-        return this._client.post('/conversations', { body, ...options });
+        return this._client.post('/conversations', { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Get a conversation
      */
     retrieve(conversationID, options) {
-        return this._client.get(path `/conversations/${conversationID}`, options);
+        return this._client.get(path `/conversations/${conversationID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Update a conversation
      */
     update(conversationID, body, options) {
-        return this._client.post(path `/conversations/${conversationID}`, { body, ...options });
+        return this._client.post(path `/conversations/${conversationID}`, {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Delete a conversation. Items in the conversation will not be deleted.
      */
     delete(conversationID, options) {
-        return this._client.delete(path `/conversations/${conversationID}`, options);
+        return this._client.delete(path `/conversations/${conversationID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 Conversations.Items = Items;

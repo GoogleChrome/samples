@@ -15,6 +15,7 @@ export class Items extends APIResource {
             query: { include },
             body,
             ...options,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -22,20 +23,27 @@ export class Items extends APIResource {
      */
     retrieve(itemID, params, options) {
         const { conversation_id, ...query } = params;
-        return this._client.get(path `/conversations/${conversation_id}/items/${itemID}`, { query, ...options });
+        return this._client.get(path `/conversations/${conversation_id}/items/${itemID}`, {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List all items for a conversation with the given ID.
      */
     list(conversationID, query = {}, options) {
-        return this._client.getAPIList(path `/conversations/${conversationID}/items`, (ConversationCursorPage), { query, ...options });
+        return this._client.getAPIList(path `/conversations/${conversationID}/items`, (ConversationCursorPage), { query, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Delete an item from a conversation with the given IDs.
      */
     delete(itemID, params, options) {
         const { conversation_id } = params;
-        return this._client.delete(path `/conversations/${conversation_id}/items/${itemID}`, options);
+        return this._client.delete(path `/conversations/${conversation_id}/items/${itemID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 //# sourceMappingURL=items.mjs.map

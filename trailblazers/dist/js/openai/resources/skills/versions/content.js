@@ -14,6 +14,7 @@ class Content extends resource_1.APIResource {
         return this._client.get((0, path_1.path) `/skills/${skill_id}/versions/${version}/content`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ Accept: 'application/binary' }, options?.headers]),
+            __security: { bearerAuth: true },
             __binaryResponse: true,
         });
     }

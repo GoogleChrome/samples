@@ -550,7 +550,9 @@ var i = class i extends EventTarget {
 			this.#r.systemInstruction && e.unshift({
 				role: "system",
 				parts: [{ text: this.#r.systemInstruction }]
-			}), this.#a = await this.#e.countTokens(e) || 0;
+			});
+			let t = await this.#e.countTokens(e);
+			this.#a = t || 0;
 		} catch {}
 		this.#a > this.contextWindow && this.dispatchEvent(new Event("contextoverflow"));
 	}

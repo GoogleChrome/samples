@@ -18,6 +18,7 @@ class Items extends resource_1.APIResource {
             query: { include },
             body,
             ...options,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -25,20 +26,27 @@ class Items extends resource_1.APIResource {
      */
     retrieve(itemID, params, options) {
         const { conversation_id, ...query } = params;
-        return this._client.get((0, path_1.path) `/conversations/${conversation_id}/items/${itemID}`, { query, ...options });
+        return this._client.get((0, path_1.path) `/conversations/${conversation_id}/items/${itemID}`, {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List all items for a conversation with the given ID.
      */
     list(conversationID, query = {}, options) {
-        return this._client.getAPIList((0, path_1.path) `/conversations/${conversationID}/items`, (pagination_1.ConversationCursorPage), { query, ...options });
+        return this._client.getAPIList((0, path_1.path) `/conversations/${conversationID}/items`, (pagination_1.ConversationCursorPage), { query, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Delete an item from a conversation with the given IDs.
      */
     delete(itemID, params, options) {
         const { conversation_id } = params;
-        return this._client.delete((0, path_1.path) `/conversations/${conversation_id}/items/${itemID}`, options);
+        return this._client.delete((0, path_1.path) `/conversations/${conversation_id}/items/${itemID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Items = Items;

@@ -20,6 +20,7 @@ export class Steps extends APIResource {
             query,
             ...options,
             headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -33,6 +34,7 @@ export class Steps extends APIResource {
             query,
             ...options,
             headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
 }

@@ -12,7 +12,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var firebase__default = /*#__PURE__*/_interopDefaultLegacy(firebase);
 
 var name$1 = "firebase";
-var version$1 = "12.12.0";
+var version$1 = "12.12.1";
 
 /**
  * @license
@@ -33,7 +33,7 @@ var version$1 = "12.12.0";
 firebase__default["default"].registerVersion(name$1, version$1, 'app-compat');
 
 var name = "firebase";
-var version = "12.12.0";
+var version = "12.12.1";
 
 /**
  * @license

@@ -71,11 +71,12 @@ export class AzureOpenAI extends OpenAI {
         }
         return super.buildRequest(options, props);
     }
-    async authHeaders(opts) {
-        if (typeof this._options.apiKey === 'string') {
+    async authHeaders(opts, schemes) {
+        const security = schemes ?? { bearerAuth: true, adminAPIKeyAuth: true };
+        if (security.bearerAuth && typeof this._options.apiKey === 'string') {
             return buildHeaders([{ 'api-key': this.apiKey }]);
         }
-        return super.authHeaders(opts);
+        return super.authHeaders(opts, security);
     }
 }
 const _deployments_endpoints = new Set([

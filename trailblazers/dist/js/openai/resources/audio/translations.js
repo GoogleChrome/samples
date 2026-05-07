@@ -9,7 +9,7 @@ const uploads_1 = require("../../internal/uploads.js");
  */
 class Translations extends resource_1.APIResource {
     create(body, options) {
-        return this._client.post('/audio/translations', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __metadata: { model: body.model } }, this._client));
+        return this._client.post('/audio/translations', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __metadata: { model: body.model }, __security: { bearerAuth: true } }, this._client));
     }
 }
 exports.Translations = Translations;

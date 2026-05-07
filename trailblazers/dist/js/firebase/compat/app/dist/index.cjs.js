@@ -7,7 +7,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var firebase__default = /*#__PURE__*/_interopDefaultLegacy(firebase);
 
 var name = "firebase";
-var version = "12.12.0";
+var version = "12.12.1";
 
 /**
  * @license

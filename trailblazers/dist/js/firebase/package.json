@@ -1,6 +1,6 @@
 {
   "name": "firebase",
-  "version": "12.12.0",
+  "version": "12.12.1",
   "description": "Firebase JavaScript library for web and Node.js",
   "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
   "license": "Apache-2.0",
@@ -423,7 +423,7 @@
     "trusted-type-check": "tsec -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@firebase/ai": "2.11.0",
+    "@firebase/ai": "2.11.1",
     "@firebase/app": "0.14.11",
     "@firebase/app-compat": "0.5.11",
     "@firebase/app-types": "0.9.4",

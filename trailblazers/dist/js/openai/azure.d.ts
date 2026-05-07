@@ -59,6 +59,9 @@ export declare class AzureOpenAI extends OpenAI {
         url: string;
         timeout: number;
     }>;
-    protected authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined>;
+    protected authHeaders(opts: FinalRequestOptions, schemes?: {
+        bearerAuth?: boolean;
+        adminAPIKeyAuth?: boolean;
+    }): Promise<NullableHeaders | undefined>;
 }
 //# sourceMappingURL=azure.d.ts.map

@@ -1,10 +1,12 @@
 "use strict";
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Webhooks = exports.Videos = exports.VectorStores = exports.Uploads = exports.Skills = exports.Responses = exports.Realtime = exports.Moderations = exports.Models = exports.Images = exports.Graders = exports.FineTuning = exports.Files = exports.Evals = exports.Embeddings = exports.Conversations = exports.Containers = exports.Completions = exports.Beta = exports.Batches = exports.Audio = void 0;
+exports.Webhooks = exports.Videos = exports.VectorStores = exports.Uploads = exports.Skills = exports.Responses = exports.Realtime = exports.Moderations = exports.Models = exports.Images = exports.Graders = exports.FineTuning = exports.Files = exports.Evals = exports.Embeddings = exports.Conversations = exports.Containers = exports.Completions = exports.Beta = exports.Batches = exports.Audio = exports.Admin = void 0;
 const tslib_1 = require("../internal/tslib.js");
 tslib_1.__exportStar(require("./chat/index.js"), exports);
 tslib_1.__exportStar(require("./shared.js"), exports);
+var admin_1 = require("./admin/admin.js");
+Object.defineProperty(exports, "Admin", { enumerable: true, get: function () { return admin_1.Admin; } });
 var audio_1 = require("./audio/audio.js");
 Object.defineProperty(exports, "Audio", { enumerable: true, get: function () { return audio_1.Audio; } });
 var batches_1 = require("./batches.js");

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 export * from "./chat/index.mjs";
 export * from "./shared.mjs";
+export { Admin } from "./admin/admin.mjs";
 export { Audio } from "./audio/audio.mjs";
 export { Batches, } from "./batches.mjs";
 export { Beta } from "./beta/beta.mjs";

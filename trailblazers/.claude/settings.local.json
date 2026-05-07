@@ -101,7 +101,13 @@
       "Bash(git -C /Users/tsteiner/Documents/websites/samples/trailblazers push)",
       "Bash(pkill -f \"chrome-devtools-mcp\")",
       "Bash(pkill -f \"Google Chrome for Testing\")",
-      "mcp__chrome-devtools__take_snapshot"
+      "mcp__chrome-devtools__take_snapshot",
+      "Bash(python3 -c \"import sys,json; p=json.load\\(sys.stdin\\); print\\(p.get\\('repository', 'no repo'\\)\\)\")",
+      "Bash(find /Users/tsteiner/Documents -name \"prompt-api-polyfill\" -maxdepth 5 -type d 2>/dev/null | grep -v \"node_modules\" | head -10)",
+      "Read(//Users/tsteiner/Documents/**)",
+      "Bash(python3 -c \"import sys,json; p=json.load\\(sys.stdin\\); print\\(json.dumps\\(p.get\\('scripts', {}\\), indent=2\\)\\)\")",
+      "Bash(git -C /Users/tsteiner/Documents/javascript/web-ai-demos/prompt-api-polyfill status)",
+      "Bash(git -C /Users/tsteiner/Documents/javascript/web-ai-demos/prompt-api-polyfill branch --show-current)"
     ]
   }
 }

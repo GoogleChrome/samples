@@ -13,7 +13,11 @@ export class InputTokens extends APIResource {
      * ```
      */
     count(body = {}, options) {
-        return this._client.post('/responses/input_tokens', { body, ...options });
+        return this._client.post('/responses/input_tokens', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 //# sourceMappingURL=input-tokens.mjs.map

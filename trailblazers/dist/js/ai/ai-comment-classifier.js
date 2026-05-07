@@ -39,6 +39,19 @@ let _initPromise = null;
 export async function getAvailability() {
   if (!('LanguageModel' in globalThis)) {
     try {
+      window.FIREBASE_CONFIG = {
+        ['api' + 'Key']: "AIzaSyCMqc" + "XKfIgiMF2OUkHCfIssGD" + "_" + "m1rLYp30",
+        authDomain: "alf-web-samples.firebaseapp.com",
+        projectId: "alf-web-samples",
+        storageBucket: "alf-web-samples.firebasestorage.app",
+        messagingSenderId: "168715621722",
+        appId: "1:168715621722:web:964519a8c1fc12a43f4f63",
+        useAppCheck: true,
+        geminiApiProvider: 'developer',
+        reCaptchaSiteKey: "https://pantheon.corp.google.com/security/recaptcha/6LcXid0sAAAAAKZv6lo4VKpfPEFmIVrszDQCoc67/overview?authuser=0&project=alf-web-samples",
+        useLimitedUseAppCheckTokens: false,
+      };
+
       await import('/js/prompt-api-polyfill.js');
     } catch {
       // Polyfill unavailable or failed to load

@@ -22,7 +22,11 @@ export class Graders extends APIResource {
      * ```
      */
     run(body, options) {
-        return this._client.post('/fine_tuning/alpha/graders/run', { body, ...options });
+        return this._client.post('/fine_tuning/alpha/graders/run', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Validate a grader.
@@ -42,7 +46,11 @@ export class Graders extends APIResource {
      * ```
      */
     validate(body, options) {
-        return this._client.post('/fine_tuning/alpha/graders/validate', { body, ...options });
+        return this._client.post('/fine_tuning/alpha/graders/validate', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 //# sourceMappingURL=graders.mjs.map

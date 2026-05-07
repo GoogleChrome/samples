@@ -25,7 +25,11 @@ class Graders extends resource_1.APIResource {
      * ```
      */
     run(body, options) {
-        return this._client.post('/fine_tuning/alpha/graders/run', { body, ...options });
+        return this._client.post('/fine_tuning/alpha/graders/run', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Validate a grader.
@@ -45,7 +49,11 @@ class Graders extends resource_1.APIResource {
      * ```
      */
     validate(body, options) {
-        return this._client.post('/fine_tuning/alpha/graders/validate', { body, ...options });
+        return this._client.post('/fine_tuning/alpha/graders/validate', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Graders = Graders;

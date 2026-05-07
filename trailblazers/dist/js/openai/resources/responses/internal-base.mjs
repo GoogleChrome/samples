@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 import { EventEmitter } from "../../core/EventEmitter.mjs";
 import { OpenAIError } from "../../core/error.mjs";
-import { stringifyQuery } from "../../internal/utils.mjs";
 export class WebSocketError extends OpenAIError {
     constructor(message, event) {
         super(message);
@@ -25,14 +24,11 @@ export class ResponsesEmitter extends EventEmitter {
         this._emit('error', error);
     }
 }
-export function buildURL(client, query) {
-    const path = '/responses';
-    const baseURL = client.baseURL;
-    const url = new URL(baseURL + (baseURL.endsWith('/') ? path.slice(1) : path));
-    if (query) {
-        url.search = stringifyQuery(query);
-    }
-    url.protocol = url.protocol === 'http:' ? 'ws:' : 'wss:';
+export function buildURL(client, parameters) {
+    const { ...query } = parameters;
+    const endpoint = '/responses';
+    const url = new URL(client.buildURL(endpoint, query, undefined));
+    url.protocol = url.protocol === 'http:' || url.protocol === 'ws:' ? 'ws:' : 'wss:';
     return url;
 }
 function safeJSONStringify(value) {

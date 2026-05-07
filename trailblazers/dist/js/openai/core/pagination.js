@@ -2,7 +2,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 var _AbstractPage_client;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConversationCursorPage = exports.CursorPage = exports.Page = exports.PagePromise = exports.AbstractPage = void 0;
+exports.NextCursorPage = exports.ConversationCursorPage = exports.CursorPage = exports.Page = exports.PagePromise = exports.AbstractPage = void 0;
 const tslib_1 = require("../internal/tslib.js");
 const error_1 = require("./error.js");
 const parse_1 = require("../internal/parse.js");
@@ -153,4 +153,35 @@ class ConversationCursorPage extends AbstractPage {
     }
 }
 exports.ConversationCursorPage = ConversationCursorPage;
+class NextCursorPage extends AbstractPage {
+    constructor(client, response, body, options) {
+        super(client, response, body, options);
+        this.data = body.data || [];
+        this.has_more = body.has_more || false;
+        this.next = body.next || null;
+    }
+    getPaginatedItems() {
+        return this.data ?? [];
+    }
+    hasNextPage() {
+        if (this.has_more === false) {
+            return false;
+        }
+        return super.hasNextPage();
+    }
+    nextPageRequestOptions() {
+        const cursor = this.next;
+        if (!cursor) {
+            return null;
+        }
+        return {
+            ...this.options,
+            query: {
+                ...(0, values_1.maybeObj)(this.options.query),
+                after: cursor,
+            },
+        };
+    }
+}
+exports.NextCursorPage = NextCursorPage;
 //# sourceMappingURL=pagination.js.map

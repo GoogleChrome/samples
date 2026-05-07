@@ -28,7 +28,11 @@ class ClientSecrets extends resource_1.APIResource {
      * ```
      */
     create(body, options) {
-        return this._client.post('/realtime/client_secrets', { body, ...options });
+        return this._client.post('/realtime/client_secrets', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.ClientSecrets = ClientSecrets;

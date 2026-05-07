@@ -851,7 +851,7 @@ export interface Response {
      * of 24 hours.
      * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
      */
-    prompt_cache_retention?: 'in-memory' | '24h' | null;
+    prompt_cache_retention?: 'in_memory' | '24h' | null;
     /**
      * **gpt-5 and o-series models only**
      *
@@ -2775,6 +2775,12 @@ export interface ResponseInputFile {
      */
     type: 'input_file';
     /**
+     * The detail level of the file to be sent to the model. Use `low` for the default
+     * rendering behavior, or `high` to render the file at higher quality. Defaults to
+     * `low`.
+     */
+    detail?: 'low' | 'high';
+    /**
      * The content of the file to be sent to the model.
      */
     file_data?: string;
@@ -2799,6 +2805,12 @@ export interface ResponseInputFileContent {
      * The type of the input item. Always `input_file`.
      */
     type: 'input_file';
+    /**
+     * The detail level of the file to be sent to the model. Use `low` for the default
+     * rendering behavior, or `high` to render the file at higher quality. Defaults to
+     * `low`.
+     */
+    detail?: 'low' | 'high';
     /**
      * The base64-encoded data of the file to be sent to the model.
      */
@@ -5303,7 +5315,7 @@ export interface ResponsesClientEvent {
      * of 24 hours.
      * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
      */
-    prompt_cache_retention?: 'in-memory' | '24h' | null;
+    prompt_cache_retention?: 'in_memory' | '24h' | null;
     /**
      * **gpt-5 and o-series models only**
      *
@@ -6119,7 +6131,7 @@ export interface ResponseCreateParamsBase {
      * of 24 hours.
      * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
      */
-    prompt_cache_retention?: 'in-memory' | '24h' | null;
+    prompt_cache_retention?: 'in_memory' | '24h' | null;
     /**
      * **gpt-5 and o-series models only**
      *
@@ -6379,6 +6391,10 @@ export interface ResponseCompactParams {
      * A key to use when reading from or writing to the prompt cache.
      */
     prompt_cache_key?: string | null;
+    /**
+     * How long to retain a prompt cache entry created by this request.
+     */
+    prompt_cache_retention?: 'in_memory' | '24h' | null;
 }
 export declare namespace Responses {
     export { type ApplyPatchTool as ApplyPatchTool, type CompactedResponse as CompactedResponse, type ComputerAction as ComputerAction, type ComputerActionList as ComputerActionList, type ComputerTool as ComputerTool, type ComputerUsePreviewTool as ComputerUsePreviewTool, type ContainerAuto as ContainerAuto, type ContainerNetworkPolicyAllowlist as ContainerNetworkPolicyAllowlist, type ContainerNetworkPolicyDisabled as ContainerNetworkPolicyDisabled, type ContainerNetworkPolicyDomainSecret as ContainerNetworkPolicyDomainSecret, type ContainerReference as ContainerReference, type CustomTool as CustomTool, type EasyInputMessage as EasyInputMessage, type FileSearchTool as FileSearchTool, type FunctionShellTool as FunctionShellTool, type FunctionTool as FunctionTool, type InlineSkill as InlineSkill, type InlineSkillSource as InlineSkillSource, type LocalEnvironment as LocalEnvironment, type LocalSkill as LocalSkill, type NamespaceTool as NamespaceTool, type Response as Response, type ResponseApplyPatchToolCall as ResponseApplyPatchToolCall, type ResponseApplyPatchToolCallOutput as ResponseApplyPatchToolCallOutput, type ResponseAudioDeltaEvent as ResponseAudioDeltaEvent, type ResponseAudioDoneEvent as ResponseAudioDoneEvent, type ResponseAudioTranscriptDeltaEvent as ResponseAudioTranscriptDeltaEvent, type ResponseAudioTranscriptDoneEvent as ResponseAudioTranscriptDoneEvent, type ResponseCodeInterpreterCallCodeDeltaEvent as ResponseCodeInterpreterCallCodeDeltaEvent, type ResponseCodeInterpreterCallCodeDoneEvent as ResponseCodeInterpreterCallCodeDoneEvent, type ResponseCodeInterpreterCallCompletedEvent as ResponseCodeInterpreterCallCompletedEvent, type ResponseCodeInterpreterCallInProgressEvent as ResponseCodeInterpreterCallInProgressEvent, type ResponseCodeInterpreterCallInterpretingEvent as ResponseCodeInterpreterCallInterpretingEvent, type ResponseCodeInterpreterToolCall as ResponseCodeInterpreterToolCall, type ResponseCompactionItem as ResponseCompactionItem, type ResponseCompactionItemParam as ResponseCompactionItemParam, type ResponseCompletedEvent as ResponseCompletedEvent, type ResponseComputerToolCall as ResponseComputerToolCall, type ResponseComputerToolCallOutputItem as ResponseComputerToolCallOutputItem, type ResponseComputerToolCallOutputScreenshot as ResponseComputerToolCallOutputScreenshot, type ResponseContainerReference as ResponseContainerReference, type ResponseContent as ResponseContent, type ResponseContentPartAddedEvent as ResponseContentPartAddedEvent, type ResponseContentPartDoneEvent as ResponseContentPartDoneEvent, type ResponseConversationParam as ResponseConversationParam, type ResponseCreatedEvent as ResponseCreatedEvent, type ResponseCustomToolCall as ResponseCustomToolCall, type ResponseCustomToolCallInputDeltaEvent as ResponseCustomToolCallInputDeltaEvent, type ResponseCustomToolCallInputDoneEvent as ResponseCustomToolCallInputDoneEvent, type ResponseCustomToolCallItem as ResponseCustomToolCallItem, type ResponseCustomToolCallOutput as ResponseCustomToolCallOutput, type ResponseCustomToolCallOutputItem as ResponseCustomToolCallOutputItem, type ResponseError as ResponseError, type ResponseErrorEvent as ResponseErrorEvent, type ResponseFailedEvent as ResponseFailedEvent, type ResponseFileSearchCallCompletedEvent as ResponseFileSearchCallCompletedEvent, type ResponseFileSearchCallInProgressEvent as ResponseFileSearchCallInProgressEvent, type ResponseFileSearchCallSearchingEvent as ResponseFileSearchCallSearchingEvent, type ResponseFileSearchToolCall as ResponseFileSearchToolCall, type ResponseFormatTextConfig as ResponseFormatTextConfig, type ResponseFormatTextJSONSchemaConfig as ResponseFormatTextJSONSchemaConfig, type ResponseFunctionCallArgumentsDeltaEvent as ResponseFunctionCallArgumentsDeltaEvent, type ResponseFunctionCallArgumentsDoneEvent as ResponseFunctionCallArgumentsDoneEvent, type ResponseFunctionCallOutputItem as ResponseFunctionCallOutputItem, type ResponseFunctionCallOutputItemList as ResponseFunctionCallOutputItemList, type ResponseFunctionShellCallOutputContent as ResponseFunctionShellCallOutputContent, type ResponseFunctionShellToolCall as ResponseFunctionShellToolCall, type ResponseFunctionShellToolCallOutput as ResponseFunctionShellToolCallOutput, type ResponseFunctionToolCall as ResponseFunctionToolCall, type ResponseFunctionToolCallItem as ResponseFunctionToolCallItem, type ResponseFunctionToolCallOutputItem as ResponseFunctionToolCallOutputItem, type ResponseFunctionWebSearch as ResponseFunctionWebSearch, type ResponseImageGenCallCompletedEvent as ResponseImageGenCallCompletedEvent, type ResponseImageGenCallGeneratingEvent as ResponseImageGenCallGeneratingEvent, type ResponseImageGenCallInProgressEvent as ResponseImageGenCallInProgressEvent, type ResponseImageGenCallPartialImageEvent as ResponseImageGenCallPartialImageEvent, type ResponseInProgressEvent as ResponseInProgressEvent, type ResponseIncludable as ResponseIncludable, type ResponseIncompleteEvent as ResponseIncompleteEvent, type ResponseInput as ResponseInput, type ResponseInputAudio as ResponseInputAudio, type ResponseInputContent as ResponseInputContent, type ResponseInputFile as ResponseInputFile, type ResponseInputFileContent as ResponseInputFileContent, type ResponseInputImage as ResponseInputImage, type ResponseInputImageContent as ResponseInputImageContent, type ResponseInputItem as ResponseInputItem, type ResponseInputMessageContentList as ResponseInputMessageContentList, type ResponseInputMessageItem as ResponseInputMessageItem, type ResponseInputText as ResponseInputText, type ResponseInputTextContent as ResponseInputTextContent, type ResponseItem as ResponseItem, type ResponseLocalEnvironment as ResponseLocalEnvironment, type ResponseMcpCallArgumentsDeltaEvent as ResponseMcpCallArgumentsDeltaEvent, type ResponseMcpCallArgumentsDoneEvent as ResponseMcpCallArgumentsDoneEvent, type ResponseMcpCallCompletedEvent as ResponseMcpCallCompletedEvent, type ResponseMcpCallFailedEvent as ResponseMcpCallFailedEvent, type ResponseMcpCallInProgressEvent as ResponseMcpCallInProgressEvent, type ResponseMcpListToolsCompletedEvent as ResponseMcpListToolsCompletedEvent, type ResponseMcpListToolsFailedEvent as ResponseMcpListToolsFailedEvent, type ResponseMcpListToolsInProgressEvent as ResponseMcpListToolsInProgressEvent, type ResponseOutputAudio as ResponseOutputAudio, type ResponseOutputItem as ResponseOutputItem, type ResponseOutputItemAddedEvent as ResponseOutputItemAddedEvent, type ResponseOutputItemDoneEvent as ResponseOutputItemDoneEvent, type ResponseOutputMessage as ResponseOutputMessage, type ResponseOutputRefusal as ResponseOutputRefusal, type ResponseOutputText as ResponseOutputText, type ResponseOutputTextAnnotationAddedEvent as ResponseOutputTextAnnotationAddedEvent, type ResponsePrompt as ResponsePrompt, type ResponseQueuedEvent as ResponseQueuedEvent, type ResponseReasoningItem as ResponseReasoningItem, type ResponseReasoningSummaryPartAddedEvent as ResponseReasoningSummaryPartAddedEvent, type ResponseReasoningSummaryPartDoneEvent as ResponseReasoningSummaryPartDoneEvent, type ResponseReasoningSummaryTextDeltaEvent as ResponseReasoningSummaryTextDeltaEvent, type ResponseReasoningSummaryTextDoneEvent as ResponseReasoningSummaryTextDoneEvent, type ResponseReasoningTextDeltaEvent as ResponseReasoningTextDeltaEvent, type ResponseReasoningTextDoneEvent as ResponseReasoningTextDoneEvent, type ResponseRefusalDeltaEvent as ResponseRefusalDeltaEvent, type ResponseRefusalDoneEvent as ResponseRefusalDoneEvent, type ResponseStatus as ResponseStatus, type ResponseStreamEvent as ResponseStreamEvent, type ResponseTextConfig as ResponseTextConfig, type ResponseTextDeltaEvent as ResponseTextDeltaEvent, type ResponseTextDoneEvent as ResponseTextDoneEvent, type ResponseToolSearchCall as ResponseToolSearchCall, type ResponseToolSearchOutputItem as ResponseToolSearchOutputItem, type ResponseToolSearchOutputItemParam as ResponseToolSearchOutputItemParam, type ResponseUsage as ResponseUsage, type ResponseWebSearchCallCompletedEvent as ResponseWebSearchCallCompletedEvent, type ResponseWebSearchCallInProgressEvent as ResponseWebSearchCallInProgressEvent, type ResponseWebSearchCallSearchingEvent as ResponseWebSearchCallSearchingEvent, type ResponsesClientEvent as ResponsesClientEvent, type ResponsesServerEvent as ResponsesServerEvent, type SkillReference as SkillReference, type Tool as Tool, type ToolChoiceAllowed as ToolChoiceAllowed, type ToolChoiceApplyPatch as ToolChoiceApplyPatch, type ToolChoiceCustom as ToolChoiceCustom, type ToolChoiceFunction as ToolChoiceFunction, type ToolChoiceMcp as ToolChoiceMcp, type ToolChoiceOptions as ToolChoiceOptions, type ToolChoiceShell as ToolChoiceShell, type ToolChoiceTypes as ToolChoiceTypes, type ToolSearchTool as ToolSearchTool, type WebSearchPreviewTool as WebSearchPreviewTool, type WebSearchTool as WebSearchTool, type ResponseCreateParams as ResponseCreateParams, type ResponseCreateParamsNonStreaming as ResponseCreateParamsNonStreaming, type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming, type ResponseRetrieveParams as ResponseRetrieveParams, type ResponseRetrieveParamsNonStreaming as ResponseRetrieveParamsNonStreaming, type ResponseRetrieveParamsStreaming as ResponseRetrieveParamsStreaming, type ResponseCompactParams as ResponseCompactParams, };

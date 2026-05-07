@@ -18,14 +18,17 @@ class Versions extends resource_1.APIResource {
      * Create a new immutable skill version.
      */
     create(skillID, body = {}, options) {
-        return this._client.post((0, path_1.path) `/skills/${skillID}/versions`, (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post((0, path_1.path) `/skills/${skillID}/versions`, (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Get a specific skill version.
      */
     retrieve(version, params, options) {
         const { skill_id } = params;
-        return this._client.get((0, path_1.path) `/skills/${skill_id}/versions/${version}`, options);
+        return this._client.get((0, path_1.path) `/skills/${skill_id}/versions/${version}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List skill versions for a skill.
@@ -34,6 +37,7 @@ class Versions extends resource_1.APIResource {
         return this._client.getAPIList((0, path_1.path) `/skills/${skillID}/versions`, (pagination_1.CursorPage), {
             query,
             ...options,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -41,7 +45,10 @@ class Versions extends resource_1.APIResource {
      */
     delete(version, params, options) {
         const { skill_id } = params;
-        return this._client.delete((0, path_1.path) `/skills/${skill_id}/versions/${version}`, options);
+        return this._client.delete((0, path_1.path) `/skills/${skill_id}/versions/${version}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Versions = Versions;

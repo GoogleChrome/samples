@@ -23,6 +23,7 @@ class Sessions extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -40,6 +41,7 @@ class Sessions extends resource_1.APIResource {
         return this._client.post((0, path_1.path) `/chatkit/sessions/${sessionID}/cancel`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
 }

@@ -41,5 +41,16 @@ export declare class EventEmitter<EventTypes extends Record<string, (...args: an
     protected _emit<Event extends keyof EventTypes>(this: EventEmitter<EventTypes>, event: Event, ...args: EventParameters<EventTypes, Event>): void;
     protected _hasListener(event: keyof EventTypes): boolean;
 }
+/**
+ * An EventEmitter variant that exposes `_emit()` publicly.
+ *
+ * The base {@link EventEmitter} keeps `_emit` protected so that consumers
+ * can only listen, not dispatch. When you need a separate emitter instance
+ * that your own code can emit on, without exposing emit on the
+ * consumer-facing emitter, use this class.
+ */
+export declare class InternalEventEmitter<EventTypes extends Record<string, (...args: any) => any>> extends EventEmitter<EventTypes> {
+    _emit<Event extends keyof EventTypes>(event: Event, ...args: EventParameters<EventTypes, Event>): void;
+}
 export {};
 //# sourceMappingURL=EventEmitter.d.ts.map

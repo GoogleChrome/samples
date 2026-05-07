@@ -17,31 +17,39 @@ export class Skills extends APIResource {
      * Create a new skill.
      */
     create(body = {}, options) {
-        return this._client.post('/skills', maybeMultipartFormRequestOptions({ body, ...options }, this._client));
+        return this._client.post('/skills', maybeMultipartFormRequestOptions({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Get a skill by its ID.
      */
     retrieve(skillID, options) {
-        return this._client.get(path `/skills/${skillID}`, options);
+        return this._client.get(path `/skills/${skillID}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Update the default version pointer for a skill.
      */
     update(skillID, body, options) {
-        return this._client.post(path `/skills/${skillID}`, { body, ...options });
+        return this._client.post(path `/skills/${skillID}`, {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List all skills for the current project.
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/skills', (CursorPage), { query, ...options });
+        return this._client.getAPIList('/skills', (CursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Delete a skill by its ID.
      */
     delete(skillID, options) {
-        return this._client.delete(path `/skills/${skillID}`, options);
+        return this._client.delete(path `/skills/${skillID}`, { ...options, __security: { bearerAuth: true } });
     }
 }
 Skills.Content = Content;

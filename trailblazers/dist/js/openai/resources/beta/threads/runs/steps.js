@@ -23,6 +23,7 @@ class Steps extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -36,6 +37,7 @@ class Steps extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
 }

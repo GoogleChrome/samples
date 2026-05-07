@@ -24,7 +24,7 @@ class Messages extends resource_1.APIResource {
      * ```
      */
     list(completionID, query = {}, options) {
-        return this._client.getAPIList((0, path_1.path) `/chat/completions/${completionID}/messages`, (pagination_1.CursorPage), { query, ...options });
+        return this._client.getAPIList((0, path_1.path) `/chat/completions/${completionID}/messages`, (pagination_1.CursorPage), { query, ...options, __security: { bearerAuth: true } });
     }
 }
 exports.Messages = Messages;

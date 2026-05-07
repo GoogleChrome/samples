@@ -14,7 +14,7 @@ var node_path_default = {};
 var node_url_default = {};
 
 // src/env.js
-var VERSION = "4.0.1";
+var VERSION = "4.2.0";
 var HAS_SELF = typeof self !== "undefined";
 var IS_FS_AVAILABLE = !isEmpty(node_fs_default);
 var IS_PATH_AVAILABLE = !isEmpty(node_path_default);
@@ -8931,8 +8931,14 @@ var DATA_TYPES = Object.freeze({
   uint8: "uint8",
   q4: "q4",
   bnb4: "bnb4",
-  q4f16: "q4f16"
-  // fp16 model with int4 block weight quantization
+  q4f16: "q4f16",
+  // fp16 model with 4-bit block weight quantization
+  q2: "q2",
+  q2f16: "q2f16",
+  // fp16 model with 2-bit block weight quantization
+  q1: "q1",
+  q1f16: "q1f16"
+  // fp16 model with 1-bit block weight quantization
 });
 var DEFAULT_DEVICE_DTYPE = DATA_TYPES.fp32;
 var DEFAULT_DEVICE_DTYPE_MAPPING = Object.freeze({
@@ -8946,7 +8952,11 @@ var DEFAULT_DTYPE_SUFFIX_MAPPING = Object.freeze({
   [DATA_TYPES.uint8]: "_uint8",
   [DATA_TYPES.q8]: "_quantized",
   [DATA_TYPES.q4]: "_q4",
+  [DATA_TYPES.q2]: "_q2",
+  [DATA_TYPES.q1]: "_q1",
   [DATA_TYPES.q4f16]: "_q4f16",
+  [DATA_TYPES.q2f16]: "_q2f16",
+  [DATA_TYPES.q1f16]: "_q1f16",
   [DATA_TYPES.bnb4]: "_bnb4"
 });
 function selectDtype(dtype, fileName, selectedDevice, { configDtype = null, warn } = {}) {
@@ -10274,7 +10284,8 @@ function getSpecialTokens(tokenizer) {
   }
   return special;
 }
-var PreTrainedTokenizer = class extends Callable {
+var PreTrainedTokenizer = class extends /** @type {new (tokenizerJSON: Object, tokenizerConfig: Object) => PreTrainedTokenizerCallback} */
+Callable {
   return_token_type_ids = false;
   padding_side = "right";
   /**
@@ -10369,36 +10380,20 @@ var PreTrainedTokenizer = class extends Callable {
     }
   }
   /**
-   * @typedef {number[]|number[][]|Tensor} BatchEncodingItem
-   *
-   * @typedef {Object} BatchEncoding Holds the output of the tokenizer's call function.
-   * @property {BatchEncodingItem} input_ids List of token ids to be fed to a model.
-   * @property {BatchEncodingItem} attention_mask List of indices specifying which tokens should be attended to by the model.
-   * @property {BatchEncodingItem} [token_type_ids] List of token type ids to be fed to a model.
-   */
-  /**
    * Encode/tokenize the given text(s).
-   * @param {string|string[]} text The text to tokenize.
-   * @param {Object} options An optional object containing the following properties:
-   * @param {string|string[]} [options.text_pair=null] Optional second sequence to be encoded. If set, must be the same type as text.
-   * @param {boolean|'max_length'} [options.padding=false] Whether to pad the input sequences.
-   * @param {boolean} [options.add_special_tokens=true] Whether or not to add the special tokens associated with the corresponding model.
-   * @param {boolean|null} [options.truncation=null] Whether to truncate the input sequences.
-   * @param {number|null} [options.max_length=null] Maximum length of the returned list and optionally padding length.
-   * @param {boolean} [options.return_tensor=true] Whether to return the results as Tensors or arrays.
-   * @param {boolean|null} [options.return_token_type_ids=null] Whether to return the token type ids.
-   * @returns {BatchEncoding} Object to be passed to the model.
+   * @template {string|string[]} TText
+   * @template {boolean} [TReturnTensor=true]
+   * @param {TText} text The text to tokenize.
+   * @param {TokenizerCallOptions<TText, TReturnTensor>} [options] Additional tokenization options.
+   * @returns {BatchEncoding<BatchEncodingItem<TText, TReturnTensor>>} Object to be passed to the model.
    */
-  _call(text, {
-    text_pair = null,
-    add_special_tokens = true,
-    padding = false,
-    truncation = null,
-    max_length = null,
-    return_tensor = true,
-    // Different to HF
-    return_token_type_ids = null
-  } = {}) {
+  _call(text, options = {}) {
+    const { text_pair = null, add_special_tokens = true, padding = false, return_token_type_ids = null } = options;
+    let { truncation = null, max_length = null } = options;
+    const return_tensor = (
+      /** @type {TReturnTensor} */
+      options.return_tensor ?? true
+    );
     const isBatched = Array.isArray(text);
     let encodedTokens;
     if (isBatched) {
@@ -10502,7 +10497,7 @@ var PreTrainedTokenizer = class extends Callable {
       }
     }
     return (
-      /** @type {BatchEncoding} */
+      /** @type {BatchEncoding<BatchEncodingItem<TText, TReturnTensor>>} */
       result
     );
   }
@@ -10688,7 +10683,10 @@ var PreTrainedTokenizer = class extends Callable {
    *
    * @param {Message[]} conversation A list of message objects with `"role"` and `"content"` keys,
    * representing the chat history so far.
-   * @param {Object} options An optional object containing the following properties:
+   * @template {boolean} [TTokenize=true]
+   * @template {boolean} [TReturnTensor=true]
+   * @template {boolean} [TReturnDict=true]
+   * @param {Object} [options] An optional object containing the following properties:
    * @param {string|null} [options.chat_template=null] A Jinja template to use for this conversion. If
    * this is not passed, the model's chat template will be used instead.
    * @param {Object[]} [options.tools=null]
@@ -10707,30 +10705,43 @@ var PreTrainedTokenizer = class extends Callable {
    * the start of an assistant message. This is useful when you want to generate a response from the model.
    * Note that this argument will be passed to the chat template, and so it must be supported in the
    * template for this argument to have any effect.
-   * @param {boolean} [options.tokenize=true] Whether to tokenize the output. If false, the output will be a string.
+   * @param {TTokenize} [options.tokenize=true] Whether to tokenize the output. If false, the output will be a string.
    * @param {boolean} [options.padding=false] Whether to pad sequences to the maximum length. Has no effect if tokenize is false.
    * @param {boolean} [options.truncation=false] Whether to truncate sequences to the maximum length. Has no effect if tokenize is false.
    * @param {number|null} [options.max_length=null] Maximum length (in tokens) to use for padding or truncation. Has no effect if tokenize is false.
    * If not specified, the tokenizer's `max_length` attribute will be used as a default.
-   * @param {boolean} [options.return_tensor=true] Whether to return the output as a Tensor or an Array. Has no effect if tokenize is false.
-   * @param {boolean} [options.return_dict=true] Whether to return a dictionary with named outputs. Has no effect if tokenize is false.
+   * @param {TReturnTensor} [options.return_tensor=true] Whether to return the output as a Tensor or an Array. Has no effect if tokenize is false.
+   * @param {TReturnDict} [options.return_dict=true] Whether to return a dictionary with named outputs. Has no effect if tokenize is false.
    * @param {Object} [options.tokenizer_kwargs={}] Additional options to pass to the tokenizer.
-   * @returns {string | Tensor | number[]| number[][]|BatchEncoding} The tokenized output.
+   * @returns {ApplyChatTemplateReturn<TTokenize, TReturnTensor, TReturnDict>} The tokenized output.
    */
-  apply_chat_template(conversation, {
-    tools = null,
-    documents = null,
-    chat_template = null,
-    add_generation_prompt = false,
-    tokenize: tokenize2 = true,
-    padding = false,
-    truncation = false,
-    max_length = null,
-    return_tensor = true,
-    return_dict = true,
-    tokenizer_kwargs = {},
-    ...kwargs
-  } = {}) {
+  apply_chat_template(conversation, options = (
+    /** @type {ApplyChatTemplateOptions<TTokenize, TReturnTensor, TReturnDict>} */
+    {}
+  )) {
+    let {
+      tools = null,
+      documents = null,
+      chat_template = null,
+      add_generation_prompt = false,
+      tokenize: tokenize2 = (
+        /** @type {TTokenize} */
+        true
+      ),
+      padding = false,
+      truncation = false,
+      max_length = null,
+      return_tensor = (
+        /** @type {TReturnTensor} */
+        true
+      ),
+      return_dict = (
+        /** @type {TReturnDict} */
+        true
+      ),
+      tokenizer_kwargs = {},
+      ...kwargs
+    } = options;
     chat_template = this.get_chat_template({ chat_template, tools });
     if (typeof chat_template !== "string") {
       throw Error(`chat_template must be a string, but got ${typeof chat_template}`);
@@ -10764,9 +10775,15 @@ var PreTrainedTokenizer = class extends Callable {
         return_tensor,
         ...tokenizer_kwargs
       });
-      return return_dict ? out : out.input_ids;
+      return (
+        /** @type {ApplyChatTemplateReturn<TTokenize, TReturnTensor, TReturnDict>} */
+        return_dict ? out : out.input_ids
+      );
     }
-    return rendered;
+    return (
+      /** @type {ApplyChatTemplateReturn<TTokenize, TReturnTensor, TReturnDict>} */
+      rendered
+    );
   }
 };
 function _build_translation_inputs(self2, raw_inputs, tokenizer_options, generate_kwargs) {
@@ -12046,7 +12063,7 @@ async function saveBlob(path, blob) {
 }
 
 // src/utils/audio.js
-async function read_audio(url, sampling_rate) {
+async function load_audio(url, sampling_rate) {
   if (typeof AudioContext === "undefined") {
     throw Error(
       "Unable to load audio from path/URL since `AudioContext` is not available in your environment. Instead, audio data should be passed directly to the pipeline/processor. For more information and some example code, see https://huggingface.co/docs/transformers.js/guides/node-audio-processing."
@@ -12072,6 +12089,7 @@ async function read_audio(url, sampling_rate) {
   }
   return audio;
 }
+var read_audio = load_audio;
 function generalized_cosine_window(M, a_0) {
   if (M < 1) {
     return new Float64Array();
@@ -18241,110 +18259,70 @@ function getNormalizedConfig(config) {
   }
   return normalized_config;
 }
-function getCacheShapes(config, options) {
+function getCacheNames(config, options) {
   if (!(config instanceof PretrainedConfig)) {
     config = new PretrainedConfig(config);
   }
-  const batch_size = options?.batch_size ?? 1;
+  const pkv_prefix = options?.prefix ?? "past_key_values";
+  const conv_prefix = pkv_prefix === "present" ? "present" : "past";
+  const names = /* @__PURE__ */ new Set();
   if (["lfm2", "lfm2_moe"].includes(config.model_type)) {
-    const pkv_prefix = options?.prefix ?? "past_key_values";
-    const conv_prefix = pkv_prefix === "present" ? "present" : "past";
-    const cache_values = {};
-    const { layer_types, num_attention_heads, num_key_value_heads, hidden_size, conv_L_cache } = (
+    const { layer_types } = (
       /** @type {any} */
       config
     );
-    const head_dim = hidden_size / num_attention_heads;
     for (let i = 0; i < layer_types.length; ++i) {
       if (layer_types[i] === "full_attention") {
-        for (const kv of ["key", "value"]) {
-          cache_values[`${pkv_prefix}.${i}.${kv}`] = [batch_size, num_key_value_heads, 0, head_dim];
-        }
+        names.add(`${pkv_prefix}.${i}.key`);
+        names.add(`${pkv_prefix}.${i}.value`);
       } else if (layer_types[i] === "conv") {
-        cache_values[`${conv_prefix}_conv.${i}`] = [batch_size, hidden_size, conv_L_cache];
+        names.add(`${conv_prefix}_conv.${i}`);
       } else {
         throw new Error(`Unsupported layer type: ${layer_types[i]}`);
       }
     }
-    return cache_values;
+    return names;
   } else if (["granitemoehybrid", "falcon_h1", "nemotron_h"].includes(config.model_type)) {
-    const pkv_prefix = options?.prefix ?? "past_key_values";
-    const conv_prefix = pkv_prefix === "present" ? "present" : "past";
     const c = (
       /** @type {any} */
       config
     );
     const layer_types = c.layer_types ?? c.layers_block_type;
     const num_layers = c.num_hidden_layers ?? layer_types?.length;
-    const num_key_value_heads = c.num_key_value_heads;
-    const head_dim = c.head_dim ?? c.hidden_size / c.num_attention_heads;
-    const mamba_n_heads = c.mamba_n_heads ?? c.mamba_num_heads;
-    const mamba_d_head = c.mamba_d_head ?? c.mamba_head_dim;
-    const mamba_d_state = c.mamba_d_state ?? c.ssm_state_size;
-    const mamba_n_groups = c.mamba_n_groups ?? c.n_groups;
-    const mamba_d_conv = c.mamba_d_conv ?? c.conv_kernel;
-    const mamba_d_ssm = c.mamba_d_ssm ?? (c.mamba_expand ? c.mamba_expand * c.hidden_size : mamba_n_heads * mamba_d_head);
-    const conv_d_inner = mamba_d_ssm + 2 * mamba_n_groups * mamba_d_state;
-    const cache_values = {};
     for (let i = 0; i < num_layers; ++i) {
       if (!layer_types || layer_types[i] === "mamba") {
-        cache_values[`${conv_prefix}_conv.${i}`] = [batch_size, conv_d_inner, mamba_d_conv];
-        cache_values[`${conv_prefix}_ssm.${i}`] = [batch_size, mamba_n_heads, mamba_d_head, mamba_d_state];
+        names.add(`${conv_prefix}_conv.${i}`);
+        names.add(`${conv_prefix}_ssm.${i}`);
       }
       if (!layer_types || layer_types[i] === "attention") {
-        for (const kv of ["key", "value"]) {
-          cache_values[`${pkv_prefix}.${i}.${kv}`] = [batch_size, num_key_value_heads, 0, head_dim];
-        }
+        names.add(`${pkv_prefix}.${i}.key`);
+        names.add(`${pkv_prefix}.${i}.value`);
       }
     }
-    return cache_values;
+    return names;
   } else if (["qwen3_next", "qwen3_5_text", "qwen3_5_moe_text", "olmo_hybrid"].includes(config.model_type)) {
-    const pkv_prefix = options?.prefix ?? "past_key_values";
-    const conv_prefix = pkv_prefix === "present" ? "present" : "past";
-    const cache_values = {};
-    const {
-      head_dim,
-      layer_types,
-      num_attention_heads,
-      num_key_value_heads,
-      hidden_size,
-      linear_num_value_heads,
-      linear_num_key_heads,
-      linear_key_head_dim,
-      linear_value_head_dim,
-      linear_conv_kernel_dim
-    } = (
+    const { layer_types } = (
       /** @type {any} */
       config
     );
-    const key_dim = linear_key_head_dim * linear_num_key_heads;
-    const value_dim = linear_value_head_dim * linear_num_value_heads;
-    const final_head_dim = head_dim ?? hidden_size / num_attention_heads;
     for (let i = 0; i < layer_types.length; ++i) {
       if (layer_types[i] === "full_attention") {
-        for (const kv of ["key", "value"]) {
-          cache_values[`${pkv_prefix}.${i}.${kv}`] = [batch_size, num_key_value_heads, 0, final_head_dim];
-        }
+        names.add(`${pkv_prefix}.${i}.key`);
+        names.add(`${pkv_prefix}.${i}.value`);
       } else if (layer_types[i] === "linear_attention") {
         if (config.model_type === "olmo_hybrid") {
-          cache_values[`${conv_prefix}_conv.${i}.key`] = [batch_size, key_dim, linear_conv_kernel_dim];
-          cache_values[`${conv_prefix}_conv.${i}.value`] = [batch_size, value_dim, linear_conv_kernel_dim];
-          cache_values[`${conv_prefix}_conv.${i}.query`] = [batch_size, key_dim, linear_conv_kernel_dim];
+          names.add(`${conv_prefix}_conv.${i}.key`);
+          names.add(`${conv_prefix}_conv.${i}.value`);
+          names.add(`${conv_prefix}_conv.${i}.query`);
         } else {
-          const conv_dim = key_dim * 2 + value_dim;
-          cache_values[`${conv_prefix}_conv.${i}`] = [batch_size, conv_dim, linear_conv_kernel_dim];
+          names.add(`${conv_prefix}_conv.${i}`);
         }
-        cache_values[`${conv_prefix}_recurrent.${i}`] = [
-          batch_size,
-          linear_num_value_heads,
-          linear_key_head_dim,
-          linear_value_head_dim
-        ];
+        names.add(`${conv_prefix}_recurrent.${i}`);
       } else {
         throw new Error(`Unsupported layer type: ${layer_types[i]}`);
       }
     }
-    return cache_values;
+    return names;
   } else if (["gemma4", "gemma4_text"].includes(config.model_type)) {
     const c = (
       /** @type {any} */
@@ -18353,22 +18331,14 @@ function getCacheShapes(config, options) {
         config.text_config
       ) : config
     );
-    const pkv_prefix = options?.prefix ?? "past_key_values";
-    const cache_values = {};
     const num_hidden_layers = c.num_hidden_layers;
     const num_kv_shared_layers = c.num_kv_shared_layers ?? 0;
     const num_kv_layers = num_hidden_layers - num_kv_shared_layers;
-    const num_key_value_heads = c.num_key_value_heads;
-    const head_dim = c.head_dim;
-    const global_head_dim = c.global_head_dim ?? head_dim;
-    const layer_types = c.layer_types ?? [];
     for (let i = 0; i < num_kv_layers; ++i) {
-      const dim = layer_types[i] === "full_attention" ? global_head_dim : head_dim;
-      for (const kv of ["key", "value"]) {
-        cache_values[`${pkv_prefix}.${i}.${kv}`] = [batch_size, num_key_value_heads, 0, dim];
-      }
+      names.add(`${pkv_prefix}.${i}.key`);
+      names.add(`${pkv_prefix}.${i}.value`);
     }
-    return cache_values;
+    return names;
   } else if (["lfm2_vl", "qwen3_5", "qwen3_5_moe", "voxtral_realtime"].includes(config.model_type)) {
     let subConfig;
     if (config.model_type === "voxtral_realtime" && options?.session_name === "audio_encoder") {
@@ -18378,61 +18348,31 @@ function getCacheShapes(config, options) {
       subConfig = /** @type {any} */
       config.text_config;
     }
-    return getCacheShapes(subConfig, options);
+    return getCacheNames(subConfig, options);
   }
-  return getKeyValueShapes(config, options);
+  return getKeyValueNames(config, { prefix: pkv_prefix });
 }
-function getKeyValueShapes(config, { prefix = "past_key_values", batch_size = 1 } = {}) {
-  const decoderFeeds = {};
+function getKeyValueNames(config, { prefix = "past_key_values" } = {}) {
+  const names = /* @__PURE__ */ new Set();
   const normalized_config = config.normalized_config;
   if (normalized_config.is_encoder_decoder && "num_encoder_heads" in normalized_config && "num_decoder_heads" in normalized_config) {
-    const encoder_dim_kv = normalized_config.encoder_dim_kv ?? normalized_config.encoder_hidden_size / normalized_config.num_encoder_heads;
-    const decoder_dim_kv = normalized_config.decoder_dim_kv ?? normalized_config.decoder_hidden_size / normalized_config.num_decoder_heads;
-    const encoder_dims = [batch_size, normalized_config.num_encoder_heads, 0, encoder_dim_kv];
-    const decoder_dims = [batch_size, normalized_config.num_decoder_heads, 0, decoder_dim_kv];
     for (let i = 0; i < normalized_config.num_decoder_layers; ++i) {
-      decoderFeeds[`${prefix}.${i}.encoder.key`] = encoder_dims;
-      decoderFeeds[`${prefix}.${i}.encoder.value`] = encoder_dims;
-      decoderFeeds[`${prefix}.${i}.decoder.key`] = decoder_dims;
-      decoderFeeds[`${prefix}.${i}.decoder.value`] = decoder_dims;
+      names.add(`${prefix}.${i}.encoder.key`);
+      names.add(`${prefix}.${i}.encoder.value`);
+      names.add(`${prefix}.${i}.decoder.key`);
+      names.add(`${prefix}.${i}.decoder.value`);
+    }
+  } else if (normalized_config.multi_query) {
+    for (let i = 0; i < normalized_config.num_layers; ++i) {
+      names.add(`${prefix}.${i}.key_value`);
     }
   } else {
-    const num_heads = normalized_config.num_heads;
-    const num_layers = normalized_config.num_layers;
-    const dim_kv = normalized_config.dim_kv ?? normalized_config.hidden_size / (normalized_config.num_attention_heads ?? num_heads);
-    if (normalized_config.model_type === "falcon") {
-      const dims = [batch_size * num_heads, 0, dim_kv];
-      for (let i = 0; i < num_layers; ++i) {
-        decoderFeeds[`${prefix}.${i}.key`] = dims;
-        decoderFeeds[`${prefix}.${i}.value`] = dims;
-      }
-    } else if (normalized_config.multi_query) {
-      const dims = [batch_size * num_heads, 0, 2 * dim_kv];
-      for (let i = 0; i < num_layers; ++i) {
-        decoderFeeds[`${prefix}.${i}.key_value`] = dims;
-      }
-    } else if (normalized_config.model_type === "bloom") {
-      const keyDims = [batch_size * num_heads, dim_kv, 0];
-      const valueDims = [batch_size * num_heads, 0, dim_kv];
-      for (let i = 0; i < num_layers; ++i) {
-        decoderFeeds[`${prefix}.${i}.key`] = keyDims;
-        decoderFeeds[`${prefix}.${i}.value`] = valueDims;
-      }
-    } else if (normalized_config.model_type === "openelm") {
-      for (let i = 0; i < num_layers; ++i) {
-        const dims = [batch_size, num_heads[i], 0, dim_kv];
-        decoderFeeds[`${prefix}.${i}.key`] = dims;
-        decoderFeeds[`${prefix}.${i}.value`] = dims;
-      }
-    } else {
-      const dims = [batch_size, num_heads, 0, dim_kv];
-      for (let i = 0; i < num_layers; ++i) {
-        decoderFeeds[`${prefix}.${i}.key`] = dims;
-        decoderFeeds[`${prefix}.${i}.value`] = dims;
-      }
+    for (let i = 0; i < normalized_config.num_layers; ++i) {
+      names.add(`${prefix}.${i}.key`);
+      names.add(`${prefix}.${i}.value`);
     }
   }
-  return decoderFeeds;
+  return names;
 }
 var PretrainedConfig = class _PretrainedConfig {
   // NOTE: Typo in original
@@ -18573,11 +18513,6 @@ async function getSession(pretrained_model_name_or_path, fileName, options, cach
   !apis.IS_NODE_ENV && selectedDtype === DATA_TYPES.fp16 && !await isWebGpuFp16Supported()) {
     throw new Error(`The device (${selectedDevice}) does not support fp16.`);
   }
-  const kv_cache_dtype_config = custom_config.kv_cache_dtype;
-  const kv_cache_dtype = kv_cache_dtype_config ? typeof kv_cache_dtype_config === "string" ? kv_cache_dtype_config : kv_cache_dtype_config[selectedDtype] ?? "float32" : void 0;
-  if (kv_cache_dtype && !["float32", "float16"].includes(kv_cache_dtype)) {
-    throw new Error(`Invalid kv_cache_dtype: ${kv_cache_dtype}. Should be one of: float32, float16`);
-  }
   const suffix = DEFAULT_DTYPE_SUFFIX_MAPPING[selectedDtype];
   const session_options = { ...options.session_options };
   session_options.executionProviders ??= executionProviders;
@@ -18602,14 +18537,14 @@ async function getSession(pretrained_model_name_or_path, fileName, options, cach
   if (externalData.length > 0 && (!apis.IS_NODE_ENV || externalData.some((data) => typeof data !== "string"))) {
     session_options.externalData = externalData;
   }
-  if (cache_config && selectedDevice === "webgpu" && kv_cache_dtype_config !== false) {
-    const shapes = getCacheShapes(options.config, {
+  if (cache_config && selectedDevice === "webgpu") {
+    const names = getCacheNames(options.config, {
       prefix: "present",
       session_name
     });
-    if (Object.keys(shapes).length > 0 && !isONNXProxy()) {
+    if (names.size > 0 && !isONNXProxy()) {
       const preferredOutputLocation = {};
-      for (const key in shapes) {
+      for (const key of names) {
         preferredOutputLocation[key] = "gpu-buffer";
       }
       session_options.preferredOutputLocation = preferredOutputLocation;
@@ -18618,7 +18553,6 @@ async function getSession(pretrained_model_name_or_path, fileName, options, cach
   const buffer_or_path = await bufferOrPathPromise;
   const session_config = {
     dtype: selectedDtype,
-    kv_cache_dtype,
     device: selectedDevice
   };
   return { buffer_or_path, session_options, session_config };
@@ -19988,12 +19922,29 @@ var _DynamicCache = class {
       /** @type {any} */
       this
     );
+    if (Object.keys(self2).length === 0) {
+      return 0;
+    }
     for (const name in self2) {
       if (name.startsWith("past_key_values.")) {
         return self2[name].dims.at(-2);
       }
     }
     throw new Error("Unable to determine sequence length from the cache.");
+  }
+  /**
+   * Update the cache in-place with new entries, disposing replaced GPU tensors.
+   * @param {Record<string, Tensor>} newEntries The new name → Tensor mappings.
+   */
+  update(newEntries) {
+    for (const key in newEntries) {
+      const oldValue = this[key];
+      const newValue = newEntries[key];
+      if (oldValue && oldValue !== newValue && oldValue.location === "gpu-buffer") {
+        oldValue.dispose();
+      }
+      this[key] = newValue;
+    }
   }
   /**
    * Dispose all contained tensors whose data resides on the GPU.
@@ -20682,7 +20633,7 @@ var PreTrainedModel = class extends Callable {
    * @returns {Object} The updated model inputs for the next generation iteration.
    */
   _update_model_kwargs_for_generation({ generated_input_ids, outputs, model_inputs, is_encoder_decoder }) {
-    model_inputs["past_key_values"] = this.getPastKeyValues(outputs, model_inputs.past_key_values);
+    model_inputs["past_key_values"] = getPastKeyValues(outputs, model_inputs.past_key_values);
     model_inputs["input_ids"] = new Tensor2("int64", generated_input_ids.flat(), [generated_input_ids.length, 1]);
     if (!is_encoder_decoder) {
       model_inputs.attention_mask = cat(
@@ -20831,7 +20782,10 @@ var PreTrainedModel = class extends Callable {
     generation_config = this._prepare_generation_config(generation_config, kwargs);
     let { inputs_tensor, model_inputs, model_input_name } = this._prepare_model_inputs({
       inputs,
-      model_kwargs: kwargs
+      model_kwargs: (
+        /** @type {Record<string, Tensor|number[]>} */
+        kwargs
+      )
     });
     const is_encoder_decoder = this.config.is_encoder_decoder;
     if (!is_encoder_decoder) {
@@ -20881,7 +20835,7 @@ var PreTrainedModel = class extends Callable {
       outputs = await this.forward(model_inputs);
       if (generation_config.return_dict_in_generate) {
         if (generation_config.output_attentions) {
-          const token_attentions = this.getAttentions(outputs);
+          const token_attentions = getAttentions(outputs);
           for (const key in token_attentions) {
             if (!(key in attentions)) {
               attentions[key] = [];
@@ -20923,8 +20877,18 @@ var PreTrainedModel = class extends Callable {
     if (streamer) {
       streamer.end();
     }
-    const past_key_values = this.getPastKeyValues(outputs, model_inputs.past_key_values, true);
     const sequences = new Tensor2("int64", all_input_ids.flat(), [all_input_ids.length, all_input_ids[0].length]);
+    const past_key_values = getPastKeyValues(outputs, model_inputs.past_key_values);
+    const cachedTensors = new Set(Object.values(past_key_values));
+    for (const tensor of Object.values(outputs)) {
+      if (tensor.location === "gpu-buffer" && !cachedTensors.has(tensor)) {
+        tensor.dispose();
+      }
+    }
+    const keepCacheAlive = "past_key_values" in kwargs || generation_config.return_dict_in_generate;
+    if (!keepCacheAlive) {
+      await past_key_values.dispose();
+    }
     if (generation_config.return_dict_in_generate) {
       return {
         sequences,
@@ -20935,84 +20899,8 @@ var PreTrainedModel = class extends Callable {
         // scores,
         // logits,
       };
-    } else {
-      for (const tensor of Object.values(outputs)) {
-        if (tensor.location === "gpu-buffer") {
-          tensor.dispose();
-        }
-      }
-      return sequences;
     }
-  }
-  /**
-   * Returns a DynamicCache containing past key values from the given decoder results object.
-   *
-   * @param {Object} decoderResults The decoder results object.
-   * @param {DynamicCache} pastKeyValues The previous past key values.
-   * @param {boolean} [disposeEncoderPKVs=false] Whether to dispose encoder past key values.
-   * @returns {DynamicCache} A new DynamicCache containing the updated past key values.
-   */
-  getPastKeyValues(decoderResults, pastKeyValues, disposeEncoderPKVs = false) {
-    const pkvs = /* @__PURE__ */ Object.create(null);
-    for (const name in decoderResults) {
-      if (name.startsWith("present")) {
-        const newName = name.replace("present_ssm", "past_ssm").replace("present_conv", "past_conv").replace("present_recurrent", "past_recurrent").replace("present", "past_key_values");
-        const is_encoder_pkv = name.includes("encoder");
-        if (is_encoder_pkv && pastKeyValues) {
-          pkvs[newName] = pastKeyValues[newName];
-        } else {
-          pkvs[newName] = decoderResults[name];
-        }
-        if (pastKeyValues && (!is_encoder_pkv || disposeEncoderPKVs)) {
-          const t = pastKeyValues[newName];
-          if (t.location === "gpu-buffer") {
-            t.dispose();
-          }
-        }
-      }
-    }
-    return new DynamicCache(pkvs);
-  }
-  /**
-   * Returns an object containing attentions from the given model output object.
-   *
-   * @param {Object} model_output The output of the model.
-   * @returns {{cross_attentions?: Tensor[]}} An object containing attentions.
-   */
-  getAttentions(model_output) {
-    const attentions = {};
-    for (const attnName of ["cross_attentions", "encoder_attentions", "decoder_attentions"]) {
-      for (const name in model_output) {
-        if (name.startsWith(attnName)) {
-          if (!(attnName in attentions)) {
-            attentions[attnName] = [];
-          }
-          attentions[attnName].push(model_output[name]);
-        }
-      }
-    }
-    return attentions;
-  }
-  /**
-   * Adds past key values to the decoder feeds object. If pastKeyValues is null, creates new tensors for past key values.
-   *
-   * @param {Record<string, any>} decoderFeeds The decoder feeds object to add past key values to.
-   * @param {DynamicCache|null} pastKeyValues The cache containing past key values.
-   */
-  addPastKeyValues(decoderFeeds, pastKeyValues) {
-    if (pastKeyValues) {
-      Object.assign(decoderFeeds, pastKeyValues);
-    } else {
-      const session = this.sessions["decoder_model_merged"] ?? this.sessions["model"];
-      const batch_size = (decoderFeeds[this.main_input_name] ?? decoderFeeds.attention_mask)?.dims?.[0] ?? 1;
-      const dtype = session?.config?.kv_cache_dtype ?? "float32";
-      const cls = dtype === "float16" ? DataTypeMap.float16 : DataTypeMap.float32;
-      const shapes = getCacheShapes(this.config, { batch_size });
-      for (const name in shapes) {
-        const size = shapes[name].reduce((a, b) => a * b, 1);
-        decoderFeeds[name] = new Tensor2(dtype, new cls(size), shapes[name]);
-      }
-    }
+    return sequences;
   }
   /**
    * Helper function to select valid inputs and run through the appropriate encoder (vision, text, audio) based on the input type.
@@ -21084,11 +20972,81 @@ async function auto_encoder_forward(self2, model_inputs) {
   const decoded = await self2.decode(encoded);
   return decoded;
 }
+function getPastKeyValues(decoderResults, pastKeyValues) {
+  const pkvs = /* @__PURE__ */ Object.create(null);
+  for (const name in decoderResults) {
+    if (name.startsWith("present")) {
+      const newName = name.replace("present_ssm", "past_ssm").replace("present_conv", "past_conv").replace("present_recurrent", "past_recurrent").replace("present", "past_key_values");
+      const is_encoder_pkv = name.includes("encoder");
+      if (is_encoder_pkv && pastKeyValues) {
+        pkvs[newName] = pastKeyValues[newName];
+      } else {
+        pkvs[newName] = decoderResults[name];
+      }
+    }
+  }
+  if (pastKeyValues) {
+    pastKeyValues.update(pkvs);
+    return pastKeyValues;
+  }
+  return new DynamicCache(pkvs);
+}
+function getAttentions(model_output) {
+  const attentions = {};
+  for (const attnName of ["cross_attentions", "encoder_attentions", "decoder_attentions"]) {
+    for (const name in model_output) {
+      if (name.startsWith(attnName)) {
+        if (!(attnName in attentions)) {
+          attentions[attnName] = [];
+        }
+        attentions[attnName].push(model_output[name]);
+      }
+    }
+  }
+  return attentions;
+}
+function resolveCacheShape(metadataShape, symbols) {
+  return metadataShape.map((d) => {
+    if (typeof d === "number") return d;
+    return symbols[d] ?? 0;
+  });
+}
+function addPastKeyValues(self2, decoderFeeds, pastKeyValues) {
+  if (pastKeyValues && Object.keys(pastKeyValues).length > 0) {
+    Object.assign(decoderFeeds, pastKeyValues);
+    return pastKeyValues;
+  }
+  const session = self2.sessions["decoder_model_merged"] ?? self2.sessions["model"];
+  const batch_size = (decoderFeeds[self2.main_input_name] ?? decoderFeeds.attention_mask)?.dims?.[0] ?? 1;
+  const names = getCacheNames(self2.config);
+  const num_heads = self2.config?.normalized_config?.num_heads;
+  const symbols = { batch_size };
+  if (typeof num_heads === "number") {
+    symbols["batch_size x num_heads"] = batch_size * num_heads;
+  }
+  const entries = /* @__PURE__ */ Object.create(null);
+  for (const meta of session.inputMetadata) {
+    if (!names.has(meta.name)) continue;
+    const shape = resolveCacheShape(meta.shape, symbols);
+    const size = shape.reduce((a, b) => a * b, 1);
+    const cls = DataTypeMap[meta.type];
+    const t = new Tensor2(meta.type, new cls(size), shape);
+    decoderFeeds[meta.name] = t;
+    entries[meta.name] = t;
+  }
+  if (pastKeyValues) {
+    pastKeyValues.update(entries);
+    return pastKeyValues;
+  }
+  return new DynamicCache(entries);
+}
 async function decoder_forward(self2, model_inputs, is_encoder_decoder = false) {
   const session = self2.sessions[is_encoder_decoder ? "decoder_model_merged" : "model"];
   const { past_key_values, ...new_model_inputs } = model_inputs;
   if (session.inputNames.includes("use_cache_branch")) {
-    new_model_inputs.use_cache_branch = boolTensor(!!past_key_values);
+    new_model_inputs.use_cache_branch = boolTensor(
+      past_key_values != null && Object.keys(past_key_values).length > 0
+    );
   }
   if (session.inputNames.includes("position_ids") && new_model_inputs.attention_mask && !new_model_inputs.position_ids) {
     const start_index = ["paligemma", "gemma3_text", "gemma3"].includes(self2.config.model_type) ? 1 : 0;
@@ -21097,7 +21055,7 @@ async function decoder_forward(self2, model_inputs, is_encoder_decoder = false) 
   if (session.inputNames.includes("num_logits_to_keep") && !new_model_inputs.num_logits_to_keep) {
     new_model_inputs.num_logits_to_keep = new Tensor2("int64", [0n], []);
   }
-  self2.addPastKeyValues(new_model_inputs, past_key_values);
+  addPastKeyValues(self2, new_model_inputs, past_key_values);
   const fixed = pick(new_model_inputs, session.inputNames);
   return await sessionRun(session, fixed);
 }
@@ -21758,6 +21716,9 @@ __export(models_exports, {
   OlmoHybridPreTrainedModel: () => OlmoHybridPreTrainedModel,
   OlmoModel: () => OlmoModel,
   OlmoPreTrainedModel: () => OlmoPreTrainedModel,
+  OpenAIPrivacyFilterForTokenClassification: () => OpenAIPrivacyFilterForTokenClassification,
+  OpenAIPrivacyFilterModel: () => OpenAIPrivacyFilterModel,
+  OpenAIPrivacyFilterPreTrainedModel: () => OpenAIPrivacyFilterPreTrainedModel,
   OpenELMForCausalLM: () => OpenELMForCausalLM,
   OpenELMModel: () => OpenELMModel,
   OpenELMPreTrainedModel: () => OpenELMPreTrainedModel,
@@ -21868,6 +21829,7 @@ __export(models_exports, {
   SmolLM3ForCausalLM: () => SmolLM3ForCausalLM,
   SmolLM3Model: () => SmolLM3Model,
   SmolLM3PreTrainedModel: () => SmolLM3PreTrainedModel,
+  SmolVLMForConditionalGeneration: () => SmolVLMForConditionalGeneration,
   SnacDecoderModel: () => SnacDecoderModel,
   SnacEncoderModel: () => SnacEncoderModel,
   SnacModel: () => SnacModel,
@@ -22362,6 +22324,7 @@ var ChatterboxModel = class extends ChatterboxPreTrainedModel {
       })
     );
     const new_tokens = sequences.slice(null, [
+      /** @type {Tensor} */
       params.input_ids.dims[1],
       // Exclude start of speech token
       -1
@@ -24696,7 +24659,10 @@ var MultiModalityCausalLM = class extends MultiModalityPreTrainedModel {
    */
   async generate_images(options) {
     this._generation_mode = "image";
-    const start_num_tokens = (options.inputs ?? options[this.main_input_name]).dims[1];
+    const start_num_tokens = (
+      /** @type {Tensor} */
+      (options.inputs ?? options[this.main_input_name]).dims[1]
+    );
     const all_tokens = await super.generate(options);
     const generated_tokens = (
       /** @type {Tensor} */
@@ -24894,6 +24860,23 @@ var OlmoHybridPreTrainedModel = class extends PreTrainedModel {
 var OlmoHybridModel = class extends OlmoHybridPreTrainedModel {
 };
 var OlmoHybridForCausalLM = class extends OlmoHybridPreTrainedModel {
+};
+
+// src/models/openai_privacy_filter/modeling_openai_privacy_filter.js
+var OpenAIPrivacyFilterPreTrainedModel = class extends PreTrainedModel {
+};
+var OpenAIPrivacyFilterModel = class extends OpenAIPrivacyFilterPreTrainedModel {
+};
+var OpenAIPrivacyFilterForTokenClassification = class extends OpenAIPrivacyFilterPreTrainedModel {
+  /**
+   * Calls the model on new inputs.
+   *
+   * @param {Object} model_inputs The inputs to the model.
+   * @returns {Promise<SequenceClassifierOutput>} An object containing the model's output logits for sequence classification.
+   */
+  async _call(model_inputs) {
+    return new SequenceClassifierOutput(await super._call(model_inputs));
+  }
 };
 
 // src/models/openelm/modeling_openelm.js
@@ -25488,6 +25471,10 @@ var SmolLM3Model = class extends SmolLM3PreTrainedModel {
 var SmolLM3ForCausalLM = class extends SmolLM3PreTrainedModel {
 };
 
+// src/models/smolvlm/modeling_smolvlm.js
+var SmolVLMForConditionalGeneration = class extends Idefics3ForConditionalGeneration {
+};
+
 // src/models/snac/modeling_snac.js
 var SnacPreTrainedModel = class extends PreTrainedModel {
   main_input_name = "input_values";
@@ -25604,9 +25591,9 @@ var SpeechT5ForTextToSpeech = class extends SpeechT5PreTrainedModel {
         speaker_embeddings,
         encoder_hidden_states: encoder_outputs
       };
-      this.addPastKeyValues(decoderFeeds, past_key_values);
+      addPastKeyValues(this, decoderFeeds, past_key_values);
       decoder_outputs = await sessionRun(this.sessions["decoder_model_merged"], decoderFeeds);
-      past_key_values = this.getPastKeyValues(decoder_outputs, past_key_values);
+      past_key_values = getPastKeyValues(decoder_outputs, past_key_values);
       const { prob, spectrum } = decoder_outputs;
       spectrogramParts.push(spectrum);
       if (idx >= minlen && // Finished when stop token or maximum length is reached.
@@ -26005,18 +25992,26 @@ function createEncoderState(model, input_features) {
   const { num_mel_bins, hidden_size: enc_hidden_size } = audio_config;
   const PADDING_CACHE_CHANNELS = num_mel_bins + enc_hidden_size;
   const enc_kv_cache = new DynamicCache();
-  const enc_dtype = encoder_session?.config?.kv_cache_dtype ?? "float32";
-  const enc_cls = enc_dtype === "float16" ? DataTypeMap.float16 : DataTypeMap.float32;
-  const enc_shapes = getCacheShapes(audio_config, { batch_size: 1 });
-  for (const name in enc_shapes) {
-    const size = enc_shapes[name].reduce((a, b) => a * b, 1);
-    enc_kv_cache[name] = new Tensor2(enc_dtype, new enc_cls(size), enc_shapes[name]);
+  const enc_names = getCacheNames(audio_config);
+  const enc_symbols = { batch_size: 1 };
+  let padding_type = "float32";
+  for (const meta of encoder_session.inputMetadata) {
+    if (meta.name === "past_padding_cache") {
+      padding_type = meta.type;
+      continue;
+    }
+    if (!enc_names.has(meta.name)) continue;
+    const shape = resolveCacheShape(meta.shape, enc_symbols);
+    const size = shape.reduce((a, b) => a * b, 1);
+    const cls = DataTypeMap[meta.type];
+    enc_kv_cache[meta.name] = new Tensor2(meta.type, new cls(size), shape);
   }
-  const enc_padding_cache = new Tensor2(enc_dtype, new enc_cls(PADDING_CACHE_CHANNELS * CONV1_LEFT_PAD), [
-    1,
-    PADDING_CACHE_CHANNELS,
-    CONV1_LEFT_PAD
-  ]);
+  const padding_cls = DataTypeMap[padding_type];
+  const enc_padding_cache = new Tensor2(
+    padding_type,
+    new padding_cls(PADDING_CACHE_CHANNELS * CONV1_LEFT_PAD),
+    [1, PADDING_CACHE_CHANNELS, CONV1_LEFT_PAD]
+  );
   const chunks_iter = input_features[Symbol.asyncIterator]?.() ?? input_features[Symbol.iterator]?.();
   if (!chunks_iter) {
     throw new Error("input_features must be iterable or async iterable");
@@ -26129,7 +26124,7 @@ var VoxtralRealtimeForConditionalGeneration = class extends VoxtralRealtimePreTr
       addAudioEmbeddings(enc, inputs_embeds, current_len);
     }
     const decoder_feeds = { inputs_embeds, ...kwargs };
-    this.addPastKeyValues(decoder_feeds, past_key_values);
+    addPastKeyValues(this, decoder_feeds, past_key_values);
     const session = this.sessions["decoder_model_merged"];
     const fixed = pick(decoder_feeds, session.inputNames);
     return await sessionRun(session, fixed);
@@ -26385,7 +26380,7 @@ var WhisperForConditionalGeneration = class extends WhisperPreTrainedModel {
     ...kwargs
   }) {
     generation_config = this._prepare_generation_config(generation_config, kwargs);
-    const init_tokens = kwargs.decoder_input_ids ?? this._retrieve_init_tokens(generation_config);
+    const init_tokens = kwargs.decoder_input_ids instanceof Tensor2 ? prepareTensorForDecode(kwargs.decoder_input_ids) : kwargs.decoder_input_ids ?? this._retrieve_init_tokens(generation_config);
     if (generation_config.return_timestamps) {
       logits_processor ??= new LogitsProcessorList();
       logits_processor.push(new WhisperTimeStampLogitsProcessor(generation_config, init_tokens));
@@ -26882,7 +26877,8 @@ var MODEL_MAPPING_NAMES_ENCODER_ONLY = /* @__PURE__ */ new Map([
   ["mobilenet_v4", "MobileNetV4Model"],
   ["maskformer", "MaskFormerModel"],
   ["mgp-str", "MgpstrForSceneTextRecognition"],
-  ["style_text_to_speech_2", "StyleTextToSpeech2Model"]
+  ["style_text_to_speech_2", "StyleTextToSpeech2Model"],
+  ["openai_privacy_filter", "OpenAIPrivacyFilterModel"]
 ]);
 var MODEL_MAPPING_NAMES_ENCODER_DECODER = /* @__PURE__ */ new Map([
   ["t5", "T5Model"],
@@ -27015,7 +27011,8 @@ var MODEL_FOR_TOKEN_CLASSIFICATION_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["distilbert", "DistilBertForTokenClassification"],
   ["roberta", "RobertaForTokenClassification"],
   ["xlm", "XLMForTokenClassification"],
-  ["xlm-roberta", "XLMRobertaForTokenClassification"]
+  ["xlm-roberta", "XLMRobertaForTokenClassification"],
+  ["openai_privacy_filter", "OpenAIPrivacyFilterForTokenClassification"]
 ]);
 var MODEL_FOR_SEQ_TO_SEQ_CAUSAL_LM_MAPPING_NAMES = /* @__PURE__ */ new Map([
   ["t5", "T5ForConditionalGeneration"],
@@ -27686,7 +27683,12 @@ Pipeline {
 // src/pipelines/token-classification.js
 var TokenClassificationPipeline = class extends /** @type {new (options: TextPipelineConstructorArgs) => TokenClassificationPipelineType} */
 Pipeline {
-  async _call(texts, { ignore_labels = ["O"] } = {}) {
+  async _call(texts, { ignore_labels = ["O"], aggregation_strategy = "none" } = {}) {
+    if (aggregation_strategy !== "none" && aggregation_strategy !== "simple") {
+      throw new Error(
+        `Invalid aggregation_strategy: "${aggregation_strategy}". Must be one of "none" or "simple".`
+      );
+    }
     const isBatched = Array.isArray(texts);
     const model_inputs = this.tokenizer(isBatched ? texts : [texts], {
       padding: true,
@@ -27697,20 +27699,16 @@ Pipeline {
     const id2label = this.model.config.id2label;
     const toReturn = [];
     for (let i = 0; i < logits.dims[0]; ++i) {
-      const ids = model_inputs.input_ids[i];
+      const ids = model_inputs.input_ids[i].tolist();
       const batch = logits[i];
       const tokens = [];
       for (let j = 0; j < batch.dims[0]; ++j) {
         const tokenData = batch[j];
         const topScoreIndex = max(tokenData.data)[1];
         const entity = id2label ? id2label[topScoreIndex] : `LABEL_${topScoreIndex}`;
-        if (ignore_labels.includes(entity)) {
-          continue;
-        }
-        const word = this.tokenizer.decode([ids[j].item()], { skip_special_tokens: true });
-        if (word === "") {
-          continue;
-        }
+        if (ignore_labels.includes(entity)) continue;
+        const word = this.tokenizer.decode([ids[j]], { skip_special_tokens: true });
+        if (word === "") continue;
         const scores = softmax(tokenData.data);
         tokens.push({
           entity,
@@ -27718,15 +27716,45 @@ Pipeline {
           index: j,
           word
           // TODO: Add support for start and end
-          // start: null,
-          // end: null,
         });
       }
-      toReturn.push(tokens);
+      toReturn.push(aggregation_strategy === "simple" ? groupEntities(tokens, ids, this.tokenizer) : tokens);
     }
     return isBatched ? toReturn : toReturn[0];
   }
 };
+function getTag(entity) {
+  const p = entity[0];
+  return entity[1] === "-" && (p === "B" || p === "I" || p === "E" || p === "S") ? [p, entity.slice(2)] : ["I", entity];
+}
+function groupEntities(tokens, ids, tokenizer) {
+  const groups = [];
+  let openTag = null;
+  for (let i = 0; i < tokens.length; ++i) {
+    const [prefix, tag] = getTag(tokens[i].entity);
+    const extend = openTag === tag && prefix !== "B" && prefix !== "S";
+    if (extend) {
+      groups[groups.length - 1].end = i + 1;
+      if (prefix === "E") openTag = null;
+    } else {
+      groups.push({ tag, start: i, end: i + 1 });
+      openTag = prefix === "S" ? null : tag;
+    }
+  }
+  return groups.map(({ tag, start, end }) => {
+    let scoreSum = 0;
+    const groupIds = [];
+    for (let i = start; i < end; ++i) {
+      scoreSum += tokens[i].score;
+      groupIds.push(ids[tokens[i].index]);
+    }
+    return {
+      entity_group: tag,
+      score: scoreSum / (end - start),
+      word: tokenizer.decode(groupIds, { skip_special_tokens: true })
+    };
+  });
+}
 
 // src/pipelines/question-answering.js
 var QuestionAnsweringPipeline = class extends /** @type {new (options: TextPipelineConstructorArgs) => QuestionAnsweringPipelineType} */
@@ -27839,6 +27867,11 @@ Pipeline {
 // src/pipelines/text2text-generation.js
 var Text2TextGenerationPipeline = class extends /** @type {new (options: TextPipelineConstructorArgs) => Text2TextGenerationPipelineType} */
 Pipeline {
+  _default_generation_config = {
+    max_new_tokens: 256
+    // do_sample: true,
+    // temperature: 0.7,
+  };
   /** @type {'generated_text'} */
   _key = "generated_text";
   /** @type {Text2TextGenerationPipelineCallback} */
@@ -27866,7 +27899,11 @@ Pipeline {
     } else {
       inputs = tokenizer(texts, tokenizer_options);
     }
-    const outputTokenIds = await this.model.generate({ ...inputs, ...generate_kwargs });
+    const outputTokenIds = await this.model.generate({
+      ...inputs,
+      ...this._default_generation_config,
+      ...generate_kwargs
+    });
     return tokenizer.batch_decode(
       /** @type {Tensor} */
       outputTokenIds,
@@ -27899,15 +27936,29 @@ function isChat(x) {
 }
 var TextGenerationPipeline = class extends /** @type {new (options: TextPipelineConstructorArgs) => TextGenerationPipelineType} */
 Pipeline {
+  _default_generation_config = {
+    max_new_tokens: 256
+    // do_sample: true,
+    // temperature: 0.7,
+  };
   /**
    * @param {string | string[] | import('../tokenization_utils.js').Message[] | import('../tokenization_utils.js').Message[][]} texts
    * @param {Partial<TextGenerationConfig>} generate_kwargs
    */
   async _call(texts, generate_kwargs = {}) {
+    const {
+      add_special_tokens: add_special_tokens_arg,
+      return_full_text: return_full_text_arg,
+      tools,
+      documents,
+      chat_template,
+      tokenizer_encode_kwargs,
+      ...generation_kwargs
+    } = generate_kwargs;
     let isBatched = false;
     let isChatInput = false;
-    let add_special_tokens = generate_kwargs.add_special_tokens ?? (this.tokenizer.add_bos_token || this.tokenizer.add_eos_token) ?? false;
-    let tokenizer_kwargs = generate_kwargs.tokenizer_encode_kwargs;
+    let add_special_tokens = add_special_tokens_arg ?? (this.tokenizer.add_bos_token || this.tokenizer.add_eos_token) ?? false;
+    let tokenizer_kwargs = tokenizer_encode_kwargs;
     let inputs;
     if (typeof texts === "string") {
       inputs = texts = [texts];
@@ -27927,19 +27978,25 @@ Pipeline {
         throw new Error("Input must be a string, an array of strings, a Chat, or an array of Chats");
       }
       isChatInput = true;
+      const chat_template_kwargs = {
+        tokenize: false,
+        add_generation_prompt: true,
+        ...pick({ tools, documents, chat_template }, ["tools", "documents", "chat_template"]),
+        ...tokenizer_kwargs
+      };
       inputs = /** @type {string[]} */
       /** @type {Chat[]} */
       texts.map(
-        (x) => this.tokenizer.apply_chat_template(x, {
-          tokenize: false,
-          add_generation_prompt: true,
-          ...tokenizer_kwargs
-        })
+        (x) => (
+          /** @type {string} */
+          /** @type {unknown} */
+          this.tokenizer.apply_chat_template(x, chat_template_kwargs)
+        )
       );
       add_special_tokens = false;
       tokenizer_kwargs = void 0;
     }
-    const return_full_text = isChatInput ? false : generate_kwargs.return_full_text ?? true;
+    const return_full_text = isChatInput ? false : return_full_text_arg ?? true;
     this.tokenizer.padding_side = "left";
     const text_inputs = this.tokenizer(inputs, {
       add_special_tokens,
@@ -27951,7 +28008,8 @@ Pipeline {
       /** @type {Tensor} */
       await this.model.generate({
         ...text_inputs,
-        ...generate_kwargs
+        ...this._default_generation_config,
+        ...generation_kwargs
       })
     );
     const decoded = this.tokenizer.batch_decode(outputTokenIds, {
@@ -28119,7 +28177,16 @@ Pipeline {
 // src/pipelines/automatic-speech-recognition.js
 var AutomaticSpeechRecognitionPipeline = class extends /** @type {new (options: TextAudioPipelineConstructorArgs) => AutomaticSpeechRecognitionPipelineType} */
 Pipeline {
+  _default_generation_config = {
+    // TODO: figure out good defaults for ASR generation parameters
+    // max_new_tokens: 256,
+    // num_beams: 5,
+  };
   async _call(audio, kwargs = {}) {
+    kwargs = {
+      ...this._default_generation_config,
+      ...kwargs
+    };
     switch (this.model.config.model_type) {
       case "whisper":
       case "lite-whisper":
@@ -28711,6 +28778,9 @@ Pipeline {
 // src/pipelines/document-question-answering.js
 var DocumentQuestionAnsweringPipeline = class extends /** @type {new (options: TextImagePipelineConstructorArgs) => DocumentQuestionAnsweringPipelineType} */
 Pipeline {
+  _default_generation_config = {
+    max_new_tokens: 256
+  };
   async _call(image, question, generate_kwargs = {}) {
     if (Array.isArray(image)) {
       if (image.length !== 1) {
@@ -28731,6 +28801,7 @@ Pipeline {
       // @ts-expect-error Ts2339
       max_length: this.model.config.decoder.max_position_embeddings,
       decoder_input_ids,
+      ...this._default_generation_config,
       ...generate_kwargs
     });
     const decoded = this.tokenizer.batch_decode(
@@ -30489,6 +30560,9 @@ export {
   OlmoHybridPreTrainedModel,
   OlmoModel,
   OlmoPreTrainedModel,
+  OpenAIPrivacyFilterForTokenClassification,
+  OpenAIPrivacyFilterModel,
+  OpenAIPrivacyFilterPreTrainedModel,
   OpenELMForCausalLM,
   OpenELMModel,
   OpenELMPreTrainedModel,
@@ -30642,6 +30716,7 @@ export {
   SmolLM3ForCausalLM,
   SmolLM3Model,
   SmolLM3PreTrainedModel,
+  SmolVLMForConditionalGeneration,
   Idefics3ImageProcessor as SmolVLMImageProcessor,
   Idefics3Processor as SmolVLMProcessor,
   SnacDecoderModel,
@@ -30822,6 +30897,7 @@ export {
   interpolate,
   interpolate_4d,
   layer_norm,
+  load_audio,
   load_image,
   load_video,
   log_softmax,

@@ -21,7 +21,12 @@ class Completions extends resource_1.APIResource {
         this.messages = new MessagesAPI.Messages(this._client);
     }
     create(body, options) {
-        return this._client.post('/chat/completions', { body, ...options, stream: body.stream ?? false });
+        return this._client.post('/chat/completions', {
+            body,
+            ...options,
+            stream: body.stream ?? false,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Get a stored chat completion. Only Chat Completions that have been created with
@@ -34,7 +39,10 @@ class Completions extends resource_1.APIResource {
      * ```
      */
     retrieve(completionID, options) {
-        return this._client.get((0, path_1.path) `/chat/completions/${completionID}`, options);
+        return this._client.get((0, path_1.path) `/chat/completions/${completionID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Modify a stored chat completion. Only Chat Completions that have been created
@@ -50,7 +58,11 @@ class Completions extends resource_1.APIResource {
      * ```
      */
     update(completionID, body, options) {
-        return this._client.post((0, path_1.path) `/chat/completions/${completionID}`, { body, ...options });
+        return this._client.post((0, path_1.path) `/chat/completions/${completionID}`, {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List stored Chat Completions. Only Chat Completions that have been stored with
@@ -65,7 +77,11 @@ class Completions extends resource_1.APIResource {
      * ```
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/chat/completions', (pagination_1.CursorPage), { query, ...options });
+        return this._client.getAPIList('/chat/completions', (pagination_1.CursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Delete a stored chat completion. Only Chat Completions that have been created
@@ -78,7 +94,10 @@ class Completions extends resource_1.APIResource {
      * ```
      */
     delete(completionID, options) {
-        return this._client.delete((0, path_1.path) `/chat/completions/${completionID}`, options);
+        return this._client.delete((0, path_1.path) `/chat/completions/${completionID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     parse(body, options) {
         (0, parser_1.validateInputTools)(body.tools);

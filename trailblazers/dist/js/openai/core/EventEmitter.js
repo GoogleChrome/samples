@@ -1,7 +1,7 @@
 "use strict";
 var _EventEmitter_listeners;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EventEmitter = void 0;
+exports.InternalEventEmitter = exports.EventEmitter = void 0;
 const tslib_1 = require("../internal/tslib.js");
 class EventEmitter {
     constructor() {
@@ -76,4 +76,18 @@ class EventEmitter {
 }
 exports.EventEmitter = EventEmitter;
 _EventEmitter_listeners = new WeakMap();
+/**
+ * An EventEmitter variant that exposes `_emit()` publicly.
+ *
+ * The base {@link EventEmitter} keeps `_emit` protected so that consumers
+ * can only listen, not dispatch. When you need a separate emitter instance
+ * that your own code can emit on, without exposing emit on the
+ * consumer-facing emitter, use this class.
+ */
+class InternalEventEmitter extends EventEmitter {
+    _emit(event, ...args) {
+        super._emit(event, ...args);
+    }
+}
+exports.InternalEventEmitter = InternalEventEmitter;
 //# sourceMappingURL=EventEmitter.js.map

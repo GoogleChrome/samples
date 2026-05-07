@@ -106,9 +106,12 @@ export class Responses extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Response> | APIPromise<Stream<ResponseStreamEvent>> {
     return (
-      this._client.post('/responses', { body, ...options, stream: body.stream ?? false }) as
-        | APIPromise<Response>
-        | APIPromise<Stream<ResponseStreamEvent>>
+      this._client.post('/responses', {
+        body,
+        ...options,
+        stream: body.stream ?? false,
+        __security: { bearerAuth: true },
+      }) as APIPromise<Response> | APIPromise<Stream<ResponseStreamEvent>>
     )._thenUnwrap((rsp) => {
       if ('object' in rsp && rsp.object === 'response') {
         addOutputText(rsp as Response);
@@ -153,6 +156,7 @@ export class Responses extends APIResource {
         query,
         ...options,
         stream: query?.stream ?? false,
+        __security: { bearerAuth: true },
       }) as APIPromise<Response> | APIPromise<Stream<ResponseStreamEvent>>
     )._thenUnwrap((rsp) => {
       if ('object' in rsp && rsp.object === 'response') {
@@ -177,6 +181,7 @@ export class Responses extends APIResource {
     return this._client.delete(path`/responses/${responseID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __security: { bearerAuth: true },
     });
   }
 
@@ -212,7 +217,10 @@ export class Responses extends APIResource {
    * ```
    */
   cancel(responseID: string, options?: RequestOptions): APIPromise<Response> {
-    return this._client.post(path`/responses/${responseID}/cancel`, options);
+    return this._client.post(path`/responses/${responseID}/cancel`, {
+      ...options,
+      __security: { bearerAuth: true },
+    });
   }
 
   /**
@@ -231,7 +239,7 @@ export class Responses extends APIResource {
    * ```
    */
   compact(body: ResponseCompactParams, options?: RequestOptions): APIPromise<CompactedResponse> {
-    return this._client.post('/responses/compact', { body, ...options });
+    return this._client.post('/responses/compact', { body, ...options, __security: { bearerAuth: true } });
   }
 }
 
@@ -1120,7 +1128,7 @@ export interface Response {
    * of 24 hours.
    * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
    */
-  prompt_cache_retention?: 'in-memory' | '24h' | null;
+  prompt_cache_retention?: 'in_memory' | '24h' | null;
 
   /**
    * **gpt-5 and o-series models only**
@@ -3424,6 +3432,13 @@ export interface ResponseInputFile {
   type: 'input_file';
 
   /**
+   * The detail level of the file to be sent to the model. Use `low` for the default
+   * rendering behavior, or `high` to render the file at higher quality. Defaults to
+   * `low`.
+   */
+  detail?: 'low' | 'high';
+
+  /**
    * The content of the file to be sent to the model.
    */
   file_data?: string;
@@ -3452,6 +3467,13 @@ export interface ResponseInputFileContent {
    * The type of the input item. Always `input_file`.
    */
   type: 'input_file';
+
+  /**
+   * The detail level of the file to be sent to the model. Use `low` for the default
+   * rendering behavior, or `high` to render the file at higher quality. Defaults to
+   * `low`.
+   */
+  detail?: 'low' | 'high';
 
   /**
    * The base64-encoded data of the file to be sent to the model.
@@ -6551,7 +6573,7 @@ export interface ResponsesClientEvent {
    * of 24 hours.
    * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
    */
-  prompt_cache_retention?: 'in-memory' | '24h' | null;
+  prompt_cache_retention?: 'in_memory' | '24h' | null;
 
   /**
    * **gpt-5 and o-series models only**
@@ -7571,7 +7593,7 @@ export interface ResponseCreateParamsBase {
    * of 24 hours.
    * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
    */
-  prompt_cache_retention?: 'in-memory' | '24h' | null;
+  prompt_cache_retention?: 'in_memory' | '24h' | null;
 
   /**
    * **gpt-5 and o-series models only**
@@ -7965,6 +7987,11 @@ export interface ResponseCompactParams {
    * A key to use when reading from or writing to the prompt cache.
    */
   prompt_cache_key?: string | null;
+
+  /**
+   * How long to retain a prompt cache entry created by this request.
+   */
+  prompt_cache_retention?: 'in_memory' | '24h' | null;
 }
 
 Responses.InputItems = InputItems;

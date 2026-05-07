@@ -1634,7 +1634,7 @@ function isVersionServiceProvider(provider) {
     const component = provider.getComponent();
     return component?.type === "VERSION" /* ComponentType.VERSION */;
 }
-const name$q = "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+const name$q = "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 const version$1 = "0.14.11";
 /**
  * @license
@@ -1652,7 +1652,7 @@ const version$1 = "0.14.11";
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const logger = new Logger('https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js');
+const logger = new Logger('https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js');
 const name$p = "@firebase/app-compat";
 const name$o = "@firebase/analytics-compat";
 const name$n = "@firebase/analytics";
@@ -1679,7 +1679,7 @@ const name$3 = "@firebase/firestore";
 const name$2 = "@firebase/ai";
 const name$1 = "@firebase/firestore-compat";
 const name$r = "firebase";
-const version$2 = "12.12.0";
+const version$2 = "12.12.1";
 /**
  * @license
  * Copyright 2019 Google LLC
@@ -2774,7 +2774,7 @@ function registerCoreComponents(variant) {
 registerCoreComponents('');
 
 var name = "firebase";
-var version = "12.12.0";
+var version = "12.12.1";
 
 /**
  * @license

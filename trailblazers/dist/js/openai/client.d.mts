@@ -5,7 +5,7 @@ import * as Opts from "./internal/request-options.mjs";
 import * as Errors from "./core/error.mjs";
 import * as Pagination from "./core/pagination.mjs";
 import type { WorkloadIdentity } from "./auth/types.mjs";
-import { type ConversationCursorPageParams, ConversationCursorPageResponse, type CursorPageParams, CursorPageResponse, PageResponse } from "./core/pagination.mjs";
+import { type ConversationCursorPageParams, ConversationCursorPageResponse, type CursorPageParams, CursorPageResponse, type NextCursorPageParams, NextCursorPageResponse, PageResponse } from "./core/pagination.mjs";
 import * as Uploads from "./core/uploads.mjs";
 import * as API from "./resources/index.mjs";
 import { APIPromise } from "./core/api-promise.mjs";
@@ -17,6 +17,7 @@ import { Image, ImageCreateVariationParams, ImageEditCompletedEvent, ImageEditPa
 import { Model, ModelDeleted, Models, ModelsPage } from "./resources/models.mjs";
 import { Moderation, ModerationCreateParams, ModerationCreateResponse, ModerationImageURLInput, ModerationModel, ModerationMultiModalInput, ModerationTextInput, Moderations } from "./resources/moderations.mjs";
 import { ImageInputReferenceParam, Video, VideoCreateCharacterParams, VideoCreateCharacterResponse, VideoCreateError, VideoCreateParams, VideoDeleteResponse, VideoDownloadContentParams, VideoEditParams, VideoExtendParams, VideoGetCharacterResponse, VideoListParams, VideoModel, VideoRemixParams, VideoSeconds, VideoSize, Videos, VideosPage } from "./resources/videos.mjs";
+import { Admin } from "./resources/admin/admin.mjs";
 import { Audio, AudioModel, AudioResponseFormat } from "./resources/audio/audio.mjs";
 import { Beta } from "./resources/beta/beta.mjs";
 import { Chat } from "./resources/chat/chat.mjs";
@@ -50,7 +51,11 @@ export interface ClientOptions {
      *   error available as `cause`.
      * - Mutually exclusive with `workloadIdentity`.
      */
-    apiKey?: string | ApiKeySetter | undefined;
+    apiKey?: string | ApiKeySetter | null | undefined;
+    /**
+     * Defaults to process.env['OPENAI_ADMIN_KEY'].
+     */
+    adminAPIKey?: string | null | undefined;
     /**
      * Defaults to process.env['OPENAI_ORG_ID'].
      */
@@ -139,7 +144,8 @@ export interface ClientOptions {
  */
 export declare class OpenAI {
     #private;
-    apiKey: string;
+    apiKey: string | null;
+    adminAPIKey: string | null;
     organization: string | null;
     project: string | null;
     webhookSecret: string | null;
@@ -156,7 +162,8 @@ export declare class OpenAI {
     /**
      * API Client for interfacing with the OpenAI API.
      *
-     * @param {string | undefined} [opts.apiKey=process.env['OPENAI_API_KEY'] ?? undefined]
+     * @param {string | null | undefined} [opts.apiKey=process.env['OPENAI_API_KEY'] ?? null]
+     * @param {string | null | undefined} [opts.adminAPIKey=process.env['OPENAI_ADMIN_KEY'] ?? null]
      * @param {string | null | undefined} [opts.organization=process.env['OPENAI_ORG_ID'] ?? null]
      * @param {string | null | undefined} [opts.project=process.env['OPENAI_PROJECT_ID'] ?? null]
      * @param {string | null | undefined} [opts.webhookSecret=process.env['OPENAI_WEBHOOK_SECRET'] ?? null]
@@ -169,14 +176,22 @@ export declare class OpenAI {
      * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
      * @param {boolean} [opts.dangerouslyAllowBrowser=false] - By default, client-side use of this library is not allowed, as it risks exposing your secret API credentials to attackers.
      */
-    constructor({ baseURL, apiKey, organization, project, webhookSecret, workloadIdentity, ...opts }?: ClientOptions);
+    constructor({ baseURL, apiKey, adminAPIKey, organization, project, webhookSecret, workloadIdentity, ...opts }?: ClientOptions);
     /**
      * Create a new client instance re-using the same options given to the current client with optional overriding.
      */
     withOptions(options: Partial<ClientOptions>): this;
     protected defaultQuery(): Record<string, string | undefined> | undefined;
-    protected validateHeaders({ values, nulls }: NullableHeaders): void;
-    protected authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined>;
+    protected validateHeaders({ values, nulls }: NullableHeaders, schemes?: {
+        bearerAuth?: boolean;
+        adminAPIKeyAuth?: boolean;
+    }): void;
+    protected authHeaders(opts: FinalRequestOptions, schemes?: {
+        bearerAuth?: boolean;
+        adminAPIKeyAuth?: boolean;
+    }): Promise<NullableHeaders | undefined>;
+    protected bearerAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined>;
+    protected adminAPIKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined>;
     protected stringifyQuery(query: object | Record<string, unknown>): string;
     private getUserAgent;
     protected defaultIdempotencyKey(): string;
@@ -207,7 +222,10 @@ export declare class OpenAI {
     private makeRequest;
     getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(path: string, Page: new (...args: any[]) => PageClass, opts?: PromiseOrValue<RequestOptions>): Pagination.PagePromise<PageClass, Item>;
     requestAPIList<Item = unknown, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass, options: PromiseOrValue<FinalRequestOptions>): Pagination.PagePromise<PageClass, Item>;
-    protected fetchWithAuth(url: RequestInfo, init: RequestInit, timeout: number, controller: AbortController): Promise<Response>;
+    protected fetchWithAuth(url: RequestInfo, init: RequestInit, timeout: number, controller: AbortController, schemes?: {
+        bearerAuth?: boolean;
+        adminAPIKeyAuth?: boolean;
+    }): Promise<Response>;
     fetchWithTimeout(url: RequestInfo, init: RequestInit | undefined, ms: number, controller: AbortController): Promise<Response>;
     private shouldRetry;
     private retryRequest;
@@ -278,6 +296,7 @@ export declare class OpenAI {
      * Use Uploads to upload large files in multiple parts.
      */
     uploads: API.Uploads;
+    admin: API.Admin;
     responses: API.Responses;
     realtime: API.Realtime;
     /**
@@ -300,6 +319,8 @@ export declare namespace OpenAI {
     export { type CursorPageParams as CursorPageParams, type CursorPageResponse as CursorPageResponse };
     export import ConversationCursorPage = Pagination.ConversationCursorPage;
     export { type ConversationCursorPageParams as ConversationCursorPageParams, type ConversationCursorPageResponse as ConversationCursorPageResponse, };
+    export import NextCursorPage = Pagination.NextCursorPage;
+    export { type NextCursorPageParams as NextCursorPageParams, type NextCursorPageResponse as NextCursorPageResponse, };
     export { Completions as Completions, type Completion as Completion, type CompletionChoice as CompletionChoice, type CompletionUsage as CompletionUsage, type CompletionCreateParams as CompletionCreateParams, type CompletionCreateParamsNonStreaming as CompletionCreateParamsNonStreaming, type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming, };
     export { Chat as Chat, type ChatCompletion as ChatCompletion, type ChatCompletionAllowedToolChoice as ChatCompletionAllowedToolChoice, type ChatCompletionAssistantMessageParam as ChatCompletionAssistantMessageParam, type ChatCompletionAudio as ChatCompletionAudio, type ChatCompletionAudioParam as ChatCompletionAudioParam, type ChatCompletionChunk as ChatCompletionChunk, type ChatCompletionContentPart as ChatCompletionContentPart, type ChatCompletionContentPartImage as ChatCompletionContentPartImage, type ChatCompletionContentPartInputAudio as ChatCompletionContentPartInputAudio, type ChatCompletionContentPartRefusal as ChatCompletionContentPartRefusal, type ChatCompletionContentPartText as ChatCompletionContentPartText, type ChatCompletionCustomTool as ChatCompletionCustomTool, type ChatCompletionDeleted as ChatCompletionDeleted, type ChatCompletionDeveloperMessageParam as ChatCompletionDeveloperMessageParam, type ChatCompletionFunctionCallOption as ChatCompletionFunctionCallOption, type ChatCompletionFunctionMessageParam as ChatCompletionFunctionMessageParam, type ChatCompletionFunctionTool as ChatCompletionFunctionTool, type ChatCompletionMessage as ChatCompletionMessage, type ChatCompletionMessageCustomToolCall as ChatCompletionMessageCustomToolCall, type ChatCompletionMessageFunctionToolCall as ChatCompletionMessageFunctionToolCall, type ChatCompletionMessageParam as ChatCompletionMessageParam, type ChatCompletionMessageToolCall as ChatCompletionMessageToolCall, type ChatCompletionModality as ChatCompletionModality, type ChatCompletionNamedToolChoice as ChatCompletionNamedToolChoice, type ChatCompletionNamedToolChoiceCustom as ChatCompletionNamedToolChoiceCustom, type ChatCompletionPredictionContent as ChatCompletionPredictionContent, type ChatCompletionRole as ChatCompletionRole, type ChatCompletionStoreMessage as ChatCompletionStoreMessage, type ChatCompletionStreamOptions as ChatCompletionStreamOptions, type ChatCompletionSystemMessageParam as ChatCompletionSystemMessageParam, type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob, type ChatCompletionTool as ChatCompletionTool, type ChatCompletionToolChoiceOption as ChatCompletionToolChoiceOption, type ChatCompletionToolMessageParam as ChatCompletionToolMessageParam, type ChatCompletionUserMessageParam as ChatCompletionUserMessageParam, type ChatCompletionAllowedTools as ChatCompletionAllowedTools, type ChatCompletionReasoningEffort as ChatCompletionReasoningEffort, type ChatCompletionsPage as ChatCompletionsPage, type ChatCompletionCreateParams as ChatCompletionCreateParams, type ChatCompletionCreateParamsNonStreaming as ChatCompletionCreateParamsNonStreaming, type ChatCompletionCreateParamsStreaming as ChatCompletionCreateParamsStreaming, type ChatCompletionUpdateParams as ChatCompletionUpdateParams, type ChatCompletionListParams as ChatCompletionListParams, };
     export { Embeddings as Embeddings, type CreateEmbeddingResponse as CreateEmbeddingResponse, type Embedding as Embedding, type EmbeddingModel as EmbeddingModel, type EmbeddingCreateParams as EmbeddingCreateParams, };
@@ -315,6 +336,7 @@ export declare namespace OpenAI {
     export { Beta as Beta };
     export { Batches as Batches, type Batch as Batch, type BatchError as BatchError, type BatchRequestCounts as BatchRequestCounts, type BatchUsage as BatchUsage, type BatchesPage as BatchesPage, type BatchCreateParams as BatchCreateParams, type BatchListParams as BatchListParams, };
     export { UploadsAPIUploads as Uploads, type Upload as Upload, type UploadCreateParams as UploadCreateParams, type UploadCompleteParams as UploadCompleteParams, };
+    export { Admin as Admin };
     export { Responses as Responses };
     export { Realtime as Realtime };
     export { Conversations as Conversations };

@@ -8,7 +8,12 @@ const resource_1 = require("../core/resource.js");
  */
 class Completions extends resource_1.APIResource {
     create(body, options) {
-        return this._client.post('/completions', { body, ...options, stream: body.stream ?? false });
+        return this._client.post('/completions', {
+            body,
+            ...options,
+            stream: body.stream ?? false,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Completions = Completions;

@@ -1,0 +1,1 @@
+{"version":3,"file":"admin.d.mts","sourceRoot":"","sources":["../../src/resources/admin/admin.ts"],"names":[],"mappings":"OAEO,EAAE,WAAW,EAAE;OACf,KAAK,eAAe;OACpB,EAAE,YAAY,EAAE;AAEvB,qBAAa,KAAM,SAAQ,WAAW;IACpC,YAAY,EAAE,eAAe,CAAC,YAAY,CAAkD;CAC7F;AAID,MAAM,CAAC,OAAO,WAAW,KAAK,CAAC;IAC7B,OAAO,EAAE,YAAY,IAAI,YAAY,EAAE,CAAC;CACzC"}

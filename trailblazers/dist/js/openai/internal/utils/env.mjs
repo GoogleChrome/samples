@@ -8,10 +8,10 @@
  */
 export const readEnv = (env) => {
     if (typeof globalThis.process !== 'undefined') {
-        return globalThis.process.env?.[env]?.trim() ?? undefined;
+        return globalThis.process.env?.[env]?.trim() || undefined;
     }
     if (typeof globalThis.Deno !== 'undefined') {
-        return globalThis.Deno.env?.get?.(env)?.trim();
+        return globalThis.Deno.env?.get?.(env)?.trim() || undefined;
     }
     return undefined;
 };

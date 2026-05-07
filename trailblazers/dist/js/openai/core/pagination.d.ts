@@ -86,4 +86,22 @@ export declare class ConversationCursorPage<Item> extends AbstractPage<Item> imp
     hasNextPage(): boolean;
     nextPageRequestOptions(): PageRequestOptions | null;
 }
+export interface NextCursorPageResponse<Item> {
+    data: Array<Item>;
+    has_more: boolean;
+    next: string | null;
+}
+export interface NextCursorPageParams {
+    after?: string;
+    limit?: number;
+}
+export declare class NextCursorPage<Item> extends AbstractPage<Item> implements NextCursorPageResponse<Item> {
+    data: Array<Item>;
+    has_more: boolean;
+    next: string | null;
+    constructor(client: OpenAI, response: Response, body: NextCursorPageResponse<Item>, options: FinalRequestOptions);
+    getPaginatedItems(): Item[];
+    hasNextPage(): boolean;
+    nextPageRequestOptions(): PageRequestOptions | null;
+}
 //# sourceMappingURL=pagination.d.ts.map

@@ -16,7 +16,11 @@ class InputTokens extends resource_1.APIResource {
      * ```
      */
     count(body = {}, options) {
-        return this._client.post('/responses/input_tokens', { body, ...options });
+        return this._client.post('/responses/input_tokens', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.InputTokens = InputTokens;

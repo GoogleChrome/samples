@@ -30,7 +30,7 @@ export class Jobs extends APIResource {
      * ```
      */
     create(body, options) {
-        return this._client.post('/fine_tuning/jobs', { body, ...options });
+        return this._client.post('/fine_tuning/jobs', { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Get info about a fine-tuning job.
@@ -45,7 +45,10 @@ export class Jobs extends APIResource {
      * ```
      */
     retrieve(fineTuningJobID, options) {
-        return this._client.get(path `/fine_tuning/jobs/${fineTuningJobID}`, options);
+        return this._client.get(path `/fine_tuning/jobs/${fineTuningJobID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List your organization's fine-tuning jobs
@@ -59,7 +62,11 @@ export class Jobs extends APIResource {
      * ```
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/fine_tuning/jobs', (CursorPage), { query, ...options });
+        return this._client.getAPIList('/fine_tuning/jobs', (CursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Immediately cancel a fine-tune job.
@@ -72,7 +79,10 @@ export class Jobs extends APIResource {
      * ```
      */
     cancel(fineTuningJobID, options) {
-        return this._client.post(path `/fine_tuning/jobs/${fineTuningJobID}/cancel`, options);
+        return this._client.post(path `/fine_tuning/jobs/${fineTuningJobID}/cancel`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Get status updates for a fine-tuning job.
@@ -88,7 +98,7 @@ export class Jobs extends APIResource {
      * ```
      */
     listEvents(fineTuningJobID, query = {}, options) {
-        return this._client.getAPIList(path `/fine_tuning/jobs/${fineTuningJobID}/events`, (CursorPage), { query, ...options });
+        return this._client.getAPIList(path `/fine_tuning/jobs/${fineTuningJobID}/events`, (CursorPage), { query, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Pause a fine-tune job.
@@ -101,7 +111,10 @@ export class Jobs extends APIResource {
      * ```
      */
     pause(fineTuningJobID, options) {
-        return this._client.post(path `/fine_tuning/jobs/${fineTuningJobID}/pause`, options);
+        return this._client.post(path `/fine_tuning/jobs/${fineTuningJobID}/pause`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Resume a fine-tune job.
@@ -114,7 +127,10 @@ export class Jobs extends APIResource {
      * ```
      */
     resume(fineTuningJobID, options) {
-        return this._client.post(path `/fine_tuning/jobs/${fineTuningJobID}/resume`, options);
+        return this._client.post(path `/fine_tuning/jobs/${fineTuningJobID}/resume`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 Jobs.Checkpoints = Checkpoints;

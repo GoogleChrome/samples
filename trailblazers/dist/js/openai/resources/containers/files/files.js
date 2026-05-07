@@ -22,14 +22,17 @@ class Files extends resource_1.APIResource {
      * a JSON request with a file ID.
      */
     create(containerID, body, options) {
-        return this._client.post((0, path_1.path) `/containers/${containerID}/files`, (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post((0, path_1.path) `/containers/${containerID}/files`, (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Retrieve Container File
      */
     retrieve(fileID, params, options) {
         const { container_id } = params;
-        return this._client.get((0, path_1.path) `/containers/${container_id}/files/${fileID}`, options);
+        return this._client.get((0, path_1.path) `/containers/${container_id}/files/${fileID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List Container files
@@ -38,6 +41,7 @@ class Files extends resource_1.APIResource {
         return this._client.getAPIList((0, path_1.path) `/containers/${containerID}/files`, (pagination_1.CursorPage), {
             query,
             ...options,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -48,6 +52,7 @@ class Files extends resource_1.APIResource {
         return this._client.delete((0, path_1.path) `/containers/${container_id}/files/${fileID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ Accept: '*/*' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
 }

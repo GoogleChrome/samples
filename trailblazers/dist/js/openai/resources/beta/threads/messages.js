@@ -22,6 +22,7 @@ class Messages extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -34,6 +35,7 @@ class Messages extends resource_1.APIResource {
         return this._client.get((0, path_1.path) `/threads/${thread_id}/messages/${messageID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -47,6 +49,7 @@ class Messages extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -59,6 +62,7 @@ class Messages extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -71,6 +75,7 @@ class Messages extends resource_1.APIResource {
         return this._client.delete((0, path_1.path) `/threads/${thread_id}/messages/${messageID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
 }

@@ -32,6 +32,7 @@ class Threads extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -43,6 +44,7 @@ class Threads extends resource_1.APIResource {
         return this._client.get((0, path_1.path) `/threads/${threadID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -55,6 +57,7 @@ class Threads extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -66,6 +69,7 @@ class Threads extends resource_1.APIResource {
         return this._client.delete((0, path_1.path) `/threads/${threadID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     createAndRun(body, options) {
@@ -75,6 +79,7 @@ class Threads extends resource_1.APIResource {
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
             stream: body.stream ?? false,
             __synthesizeEventData: true,
+            __security: { bearerAuth: true },
         });
     }
     /**

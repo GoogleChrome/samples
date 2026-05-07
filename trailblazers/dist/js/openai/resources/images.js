@@ -19,13 +19,18 @@ class Images extends resource_1.APIResource {
      * ```
      */
     createVariation(body, options) {
-        return this._client.post('/images/variations', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/images/variations', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     edit(body, options) {
-        return this._client.post('/images/edits', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, stream: body.stream ?? false }, this._client));
+        return this._client.post('/images/edits', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, stream: body.stream ?? false, __security: { bearerAuth: true } }, this._client));
     }
     generate(body, options) {
-        return this._client.post('/images/generations', { body, ...options, stream: body.stream ?? false });
+        return this._client.post('/images/generations', {
+            body,
+            ...options,
+            stream: body.stream ?? false,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Images = Images;

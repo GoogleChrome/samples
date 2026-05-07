@@ -20,7 +20,7 @@ class InputItems extends resource_1.APIResource {
      * ```
      */
     list(responseID, query = {}, options) {
-        return this._client.getAPIList((0, path_1.path) `/responses/${responseID}/input_items`, (pagination_1.CursorPage), { query, ...options });
+        return this._client.getAPIList((0, path_1.path) `/responses/${responseID}/input_items`, (pagination_1.CursorPage), { query, ...options, __security: { bearerAuth: true } });
     }
 }
 exports.InputItems = InputItems;

@@ -15,7 +15,12 @@ export class Responses extends APIResource {
         this.inputTokens = new InputTokensAPI.InputTokens(this._client);
     }
     create(body, options) {
-        return this._client.post('/responses', { body, ...options, stream: body.stream ?? false })._thenUnwrap((rsp) => {
+        return this._client.post('/responses', {
+            body,
+            ...options,
+            stream: body.stream ?? false,
+            __security: { bearerAuth: true },
+        })._thenUnwrap((rsp) => {
             if ('object' in rsp && rsp.object === 'response') {
                 addOutputText(rsp);
             }
@@ -27,6 +32,7 @@ export class Responses extends APIResource {
             query,
             ...options,
             stream: query?.stream ?? false,
+            __security: { bearerAuth: true },
         })._thenUnwrap((rsp) => {
             if ('object' in rsp && rsp.object === 'response') {
                 addOutputText(rsp);
@@ -48,6 +54,7 @@ export class Responses extends APIResource {
         return this._client.delete(path `/responses/${responseID}`, {
             ...options,
             headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     parse(body, options) {
@@ -74,7 +81,10 @@ export class Responses extends APIResource {
      * ```
      */
     cancel(responseID, options) {
-        return this._client.post(path `/responses/${responseID}/cancel`, options);
+        return this._client.post(path `/responses/${responseID}/cancel`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Compact a conversation. Returns a compacted response object.
@@ -92,7 +102,7 @@ export class Responses extends APIResource {
      * ```
      */
     compact(body, options) {
-        return this._client.post('/responses/compact', { body, ...options });
+        return this._client.post('/responses/compact', { body, ...options, __security: { bearerAuth: true } });
     }
 }
 Responses.InputItems = InputItems;

@@ -6,7 +6,7 @@ import { multipartFormRequestOptions } from "../../internal/uploads.mjs";
  */
 export class Translations extends APIResource {
     create(body, options) {
-        return this._client.post('/audio/translations', multipartFormRequestOptions({ body, ...options, __metadata: { model: body.model } }, this._client));
+        return this._client.post('/audio/translations', multipartFormRequestOptions({ body, ...options, __metadata: { model: body.model }, __security: { bearerAuth: true } }, this._client));
     }
 }
 //# sourceMappingURL=translations.mjs.map

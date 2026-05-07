@@ -21,31 +21,35 @@ export class Evals extends APIResource {
      * the [Evals guide](https://platform.openai.com/docs/guides/evals).
      */
     create(body, options) {
-        return this._client.post('/evals', { body, ...options });
+        return this._client.post('/evals', { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Get an evaluation by ID.
      */
     retrieve(evalID, options) {
-        return this._client.get(path `/evals/${evalID}`, options);
+        return this._client.get(path `/evals/${evalID}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Update certain properties of an evaluation.
      */
     update(evalID, body, options) {
-        return this._client.post(path `/evals/${evalID}`, { body, ...options });
+        return this._client.post(path `/evals/${evalID}`, { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * List evaluations for a project.
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/evals', (CursorPage), { query, ...options });
+        return this._client.getAPIList('/evals', (CursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Delete an evaluation.
      */
     delete(evalID, options) {
-        return this._client.delete(path `/evals/${evalID}`, options);
+        return this._client.delete(path `/evals/${evalID}`, { ...options, __security: { bearerAuth: true } });
     }
 }
 Evals.Runs = Runs;

@@ -1,5 +1,6 @@
 export * from "./chat/index.js";
 export * from "./shared.js";
+export { Admin } from "./admin/admin.js";
 export { Audio, type AudioModel, type AudioResponseFormat } from "./audio/audio.js";
 export { Batches, type Batch, type BatchError, type BatchRequestCounts, type BatchUsage, type BatchCreateParams, type BatchListParams, type BatchesPage, } from "./batches.js";
 export { Beta } from "./beta/beta.js";

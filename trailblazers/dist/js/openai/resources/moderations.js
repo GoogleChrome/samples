@@ -12,7 +12,7 @@ class Moderations extends resource_1.APIResource {
      * the [moderation guide](https://platform.openai.com/docs/guides/moderation).
      */
     create(body, options) {
-        return this._client.post('/moderations', { body, ...options });
+        return this._client.post('/moderations', { body, ...options, __security: { bearerAuth: true } });
     }
 }
 exports.Moderations = Moderations;

@@ -14,21 +14,21 @@ class Models extends resource_1.APIResource {
      * the owner and permissioning.
      */
     retrieve(model, options) {
-        return this._client.get((0, path_1.path) `/models/${model}`, options);
+        return this._client.get((0, path_1.path) `/models/${model}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Lists the currently available models, and provides basic information about each
      * one such as the owner and availability.
      */
     list(options) {
-        return this._client.getAPIList('/models', (pagination_1.Page), options);
+        return this._client.getAPIList('/models', (pagination_1.Page), { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Delete a fine-tuned model. You must have the Owner role in your organization to
      * delete a model.
      */
     delete(model, options) {
-        return this._client.delete((0, path_1.path) `/models/${model}`, options);
+        return this._client.delete((0, path_1.path) `/models/${model}`, { ...options, __security: { bearerAuth: true } });
     }
 }
 exports.Models = Models;

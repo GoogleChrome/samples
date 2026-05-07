@@ -1,42 +1,13 @@
 import * as WS from 'ws';
-import { ResponsesEmitter, ResponsesStreamMessage } from "./internal-base.mjs";
-import * as ResponsesAPI from "./responses.mjs";
+import { NodeWebSocket } from "../../internal/ws-adapter-node.mjs";
+import { ResponsesWSBase, type ResponsesWSBaseOptions } from "./ws-base.mjs";
 import { OpenAI } from "../../client.mjs";
-export declare class ResponsesWS extends ResponsesEmitter {
-    url: URL;
-    socket: WS.WebSocket;
-    private client;
-    constructor(client: OpenAI, options?: WS.ClientOptions | null | undefined);
-    send(event: ResponsesAPI.ResponsesClientEvent): void;
-    close(props?: {
-        code: number;
-        reason: string;
-    }): void;
-    /**
-     * Returns an async iterator over WebSocket lifecycle and message events,
-     * providing an alternative to the event-based `.on()` API.
-     * The iterator will exit if the socket closes but breaking out of the iterator
-     * does not close the socket.
-     *
-     * @example
-     * ```ts
-     * for await (const event of connection.stream()) {
-     *   switch (event.type) {
-     *     case 'message':
-     *       console.log('received:', event.message);
-     *       break;
-     *     case 'error':
-     *       console.error(event.error);
-     *       break;
-     *     case 'close':
-     *       console.log('connection closed');
-     *       break;
-     *   }
-     * }
-     * ```
-     */
-    stream(): AsyncIterableIterator<ResponsesStreamMessage>;
-    [Symbol.asyncIterator](): AsyncIterableIterator<ResponsesStreamMessage>;
-    private authHeaders;
+export type { ResponsesWSReconnectOptions } from "./ws-base.mjs";
+export interface ResponsesWSClientOptions extends WS.ClientOptions, ResponsesWSBaseOptions {
+}
+export declare class ResponsesWS extends ResponsesWSBase<NodeWebSocket> {
+    private _wsOptions;
+    constructor(client: OpenAI, options?: ResponsesWSClientOptions | null | undefined);
+    protected _createSocket(url: URL, authHeaders: Record<string, string>): NodeWebSocket;
 }
 //# sourceMappingURL=ws.d.mts.map

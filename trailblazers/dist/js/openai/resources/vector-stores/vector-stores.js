@@ -25,6 +25,7 @@ class VectorStores extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -34,6 +35,7 @@ class VectorStores extends resource_1.APIResource {
         return this._client.get((0, path_1.path) `/vector_stores/${vectorStoreID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -44,6 +46,7 @@ class VectorStores extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -54,6 +57,7 @@ class VectorStores extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -63,6 +67,7 @@ class VectorStores extends resource_1.APIResource {
         return this._client.delete((0, path_1.path) `/vector_stores/${vectorStoreID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -75,6 +80,7 @@ class VectorStores extends resource_1.APIResource {
             method: 'post',
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
 }

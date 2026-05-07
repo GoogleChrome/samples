@@ -69,12 +69,17 @@ class OpenAIRealtimeWebSocket extends internal_base_1.OpenAIRealtimeEmitter {
     }
     static async azure(client, options = {}) {
         const isApiKeyProvider = await client._callApiKey();
+        const apiKey = client.apiKey;
+        if (!apiKey) {
+            throw new Error('Azure OpenAI Realtime requires an API key');
+        }
+        const azureApiKey = apiKey;
         function onURL(url) {
             if (isApiKeyProvider) {
-                url.searchParams.set('Authorization', `Bearer ${client.apiKey}`);
+                url.searchParams.set('Authorization', `Bearer ${azureApiKey}`);
             }
             else {
-                url.searchParams.set('api-key', client.apiKey);
+                url.searchParams.set('api-key', azureApiKey);
             }
         }
         const deploymentName = options.deploymentName ?? client.deploymentName;

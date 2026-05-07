@@ -5,7 +5,12 @@ import { APIResource } from "../core/resource.mjs";
  */
 export class Completions extends APIResource {
     create(body, options) {
-        return this._client.post('/completions', { body, ...options, stream: body.stream ?? false });
+        return this._client.post('/completions', {
+            body,
+            ...options,
+            stream: body.stream ?? false,
+            __security: { bearerAuth: true },
+        });
     }
 }
 //# sourceMappingURL=completions.mjs.map

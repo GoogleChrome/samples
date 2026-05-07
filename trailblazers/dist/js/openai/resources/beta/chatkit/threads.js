@@ -20,6 +20,7 @@ class Threads extends resource_1.APIResource {
         return this._client.get((0, path_1.path) `/chatkit/threads/${threadID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -38,6 +39,7 @@ class Threads extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -54,6 +56,7 @@ class Threads extends resource_1.APIResource {
         return this._client.delete((0, path_1.path) `/chatkit/threads/${threadID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -70,7 +73,12 @@ class Threads extends resource_1.APIResource {
      * ```
      */
     listItems(threadID, query = {}, options) {
-        return this._client.getAPIList((0, path_1.path) `/chatkit/threads/${threadID}/items`, (pagination_1.ConversationCursorPage), { query, ...options, headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]) });
+        return this._client.getAPIList((0, path_1.path) `/chatkit/threads/${threadID}/items`, (pagination_1.ConversationCursorPage), {
+            query,
+            ...options,
+            headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'chatkit_beta=v1' }, options?.headers]),
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Threads = Threads;

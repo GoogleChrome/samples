@@ -39,7 +39,7 @@ class Uploads extends resource_1.APIResource {
      * Returns the Upload object with status `pending`.
      */
     create(body, options) {
-        return this._client.post('/uploads', { body, ...options });
+        return this._client.post('/uploads', { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Cancels the Upload. No Parts may be added after an Upload is cancelled.
@@ -47,7 +47,10 @@ class Uploads extends resource_1.APIResource {
      * Returns the Upload object with status `cancelled`.
      */
     cancel(uploadID, options) {
-        return this._client.post((0, path_1.path) `/uploads/${uploadID}/cancel`, options);
+        return this._client.post((0, path_1.path) `/uploads/${uploadID}/cancel`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Completes the
@@ -67,7 +70,11 @@ class Uploads extends resource_1.APIResource {
      * object.
      */
     complete(uploadID, body, options) {
-        return this._client.post((0, path_1.path) `/uploads/${uploadID}/complete`, { body, ...options });
+        return this._client.post((0, path_1.path) `/uploads/${uploadID}/complete`, {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 exports.Uploads = Uploads;

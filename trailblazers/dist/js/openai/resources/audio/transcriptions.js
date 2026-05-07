@@ -14,6 +14,7 @@ class Transcriptions extends resource_1.APIResource {
             ...options,
             stream: body.stream ?? false,
             __metadata: { model: body.model },
+            __security: { bearerAuth: true },
         }, this._client));
     }
 }

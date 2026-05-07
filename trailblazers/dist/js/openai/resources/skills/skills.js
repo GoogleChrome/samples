@@ -21,31 +21,39 @@ class Skills extends resource_1.APIResource {
      * Create a new skill.
      */
     create(body = {}, options) {
-        return this._client.post('/skills', (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/skills', (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Get a skill by its ID.
      */
     retrieve(skillID, options) {
-        return this._client.get((0, path_1.path) `/skills/${skillID}`, options);
+        return this._client.get((0, path_1.path) `/skills/${skillID}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Update the default version pointer for a skill.
      */
     update(skillID, body, options) {
-        return this._client.post((0, path_1.path) `/skills/${skillID}`, { body, ...options });
+        return this._client.post((0, path_1.path) `/skills/${skillID}`, {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List all skills for the current project.
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/skills', (pagination_1.CursorPage), { query, ...options });
+        return this._client.getAPIList('/skills', (pagination_1.CursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Delete a skill by its ID.
      */
     delete(skillID, options) {
-        return this._client.delete((0, path_1.path) `/skills/${skillID}`, options);
+        return this._client.delete((0, path_1.path) `/skills/${skillID}`, { ...options, __security: { bearerAuth: true } });
     }
 }
 exports.Skills = Skills;

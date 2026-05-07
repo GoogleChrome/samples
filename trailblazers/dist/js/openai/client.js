@@ -28,6 +28,7 @@ const images_1 = require("./resources/images.js");
 const models_1 = require("./resources/models.js");
 const moderations_1 = require("./resources/moderations.js");
 const videos_1 = require("./resources/videos.js");
+const admin_1 = require("./resources/admin/admin.js");
 const audio_1 = require("./resources/audio/audio.js");
 const beta_1 = require("./resources/beta/beta.js");
 const chat_1 = require("./resources/chat/chat.js");
@@ -55,7 +56,8 @@ class OpenAI {
     /**
      * API Client for interfacing with the OpenAI API.
      *
-     * @param {string | undefined} [opts.apiKey=process.env['OPENAI_API_KEY'] ?? undefined]
+     * @param {string | null | undefined} [opts.apiKey=process.env['OPENAI_API_KEY'] ?? null]
+     * @param {string | null | undefined} [opts.adminAPIKey=process.env['OPENAI_ADMIN_KEY'] ?? null]
      * @param {string | null | undefined} [opts.organization=process.env['OPENAI_ORG_ID'] ?? null]
      * @param {string | null | undefined} [opts.project=process.env['OPENAI_PROJECT_ID'] ?? null]
      * @param {string | null | undefined} [opts.webhookSecret=process.env['OPENAI_WEBHOOK_SECRET'] ?? null]
@@ -68,7 +70,7 @@ class OpenAI {
      * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
      * @param {boolean} [opts.dangerouslyAllowBrowser=false] - By default, client-side use of this library is not allowed, as it risks exposing your secret API credentials to attackers.
      */
-    constructor({ baseURL = (0, env_1.readEnv)('OPENAI_BASE_URL'), apiKey = (0, env_1.readEnv)('OPENAI_API_KEY'), organization = (0, env_1.readEnv)('OPENAI_ORG_ID') ?? null, project = (0, env_1.readEnv)('OPENAI_PROJECT_ID') ?? null, webhookSecret = (0, env_1.readEnv)('OPENAI_WEBHOOK_SECRET') ?? null, workloadIdentity, ...opts } = {}) {
+    constructor({ baseURL = (0, env_1.readEnv)('OPENAI_BASE_URL'), apiKey = (0, env_1.readEnv)('OPENAI_API_KEY') ?? null, adminAPIKey = (0, env_1.readEnv)('OPENAI_ADMIN_KEY') ?? null, organization = (0, env_1.readEnv)('OPENAI_ORG_ID') ?? null, project = (0, env_1.readEnv)('OPENAI_PROJECT_ID') ?? null, webhookSecret = (0, env_1.readEnv)('OPENAI_WEBHOOK_SECRET') ?? null, workloadIdentity, ...opts } = {}) {
         _OpenAI_instances.add(this);
         _OpenAI_encoder.set(this, void 0);
         /**
@@ -110,6 +112,7 @@ class OpenAI {
          * Use Uploads to upload large files in multiple parts.
          */
         this.uploads = new API.Uploads(this);
+        this.admin = new API.Admin(this);
         this.responses = new API.Responses(this);
         this.realtime = new API.Realtime(this);
         /**
@@ -123,17 +126,9 @@ class OpenAI {
         this.containers = new API.Containers(this);
         this.skills = new API.Skills(this);
         this.videos = new API.Videos(this);
-        if (workloadIdentity) {
-            if (apiKey && apiKey !== WORKLOAD_IDENTITY_API_KEY_PLACEHOLDER) {
-                throw new Errors.OpenAIError('The `apiKey` and `workloadIdentity` arguments are mutually exclusive; only one can be passed at a time.');
-            }
-            apiKey = WORKLOAD_IDENTITY_API_KEY_PLACEHOLDER;
-        }
-        else if (apiKey === undefined) {
-            throw new Errors.OpenAIError('Missing credentials. Please pass an `apiKey`, `workloadIdentity`, or set the `OPENAI_API_KEY` environment variable.');
-        }
         const options = {
             apiKey,
+            adminAPIKey,
             organization,
             project,
             webhookSecret,
@@ -141,6 +136,12 @@ class OpenAI {
             ...opts,
             baseURL: baseURL || `https://api.openai.com/v1`,
         };
+        if (apiKey && workloadIdentity) {
+            throw new Errors.OpenAIError('The `apiKey` and `workloadIdentity` options are mutually exclusive');
+        }
+        if (!apiKey && !adminAPIKey && !workloadIdentity) {
+            throw new Errors.OpenAIError('Missing credentials. Please pass an `apiKey`, `workloadIdentity`, `adminAPIKey`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment variable.');
+        }
         if (!options.dangerouslyAllowBrowser && (0, detect_platform_2.isRunningInBrowser)()) {
             throw new Errors.OpenAIError("It looks like you're running in a browser-like environment.\n\nThis is disabled by default, as it risks exposing your secret API credentials to attackers.\nIf you understand the risks and have appropriate mitigations in place,\nyou can set the `dangerouslyAllowBrowser` option to `true`, e.g.,\n\nnew OpenAI({ apiKey, dangerouslyAllowBrowser: true });\n\nhttps://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety\n");
         }
@@ -158,11 +159,23 @@ class OpenAI {
         this.maxRetries = options.maxRetries ?? 2;
         this.fetch = options.fetch ?? Shims.getDefaultFetch();
         tslib_1.__classPrivateFieldSet(this, _OpenAI_encoder, Opts.FallbackEncoder, "f");
+        const customHeadersEnv = (0, env_1.readEnv)('OPENAI_CUSTOM_HEADERS');
+        if (customHeadersEnv) {
+            const parsed = {};
+            for (const line of customHeadersEnv.split('\n')) {
+                const colon = line.indexOf(':');
+                if (colon >= 0) {
+                    parsed[line.substring(0, colon).trim()] = line.substring(colon + 1).trim();
+                }
+            }
+            options.defaultHeaders = (0, headers_1.buildHeaders)([parsed, options.defaultHeaders]);
+        }
         this._options = options;
         if (workloadIdentity) {
             this._workloadIdentityAuth = new workload_identity_auth_1.WorkloadIdentityAuth(workloadIdentity, this.fetch);
         }
-        this.apiKey = typeof apiKey === 'string' ? apiKey : 'Missing Key';
+        this.apiKey = typeof apiKey === 'string' ? apiKey : null;
+        this.adminAPIKey = adminAPIKey;
         this.organization = organization;
         this.project = project;
         this.webhookSecret = webhookSecret;
@@ -180,7 +193,8 @@ class OpenAI {
             logLevel: this.logLevel,
             fetch: this.fetch,
             fetchOptions: this.fetchOptions,
-            apiKey: this.apiKey,
+            apiKey: this._options.apiKey,
+            adminAPIKey: this.adminAPIKey,
             workloadIdentity: this._options.workloadIdentity,
             organization: this.organization,
             project: this.project,
@@ -192,11 +206,44 @@ class OpenAI {
     defaultQuery() {
         return this._options.defaultQuery;
     }
-    validateHeaders({ values, nulls }) {
-        return;
+    validateHeaders({ values, nulls }, schemes = {
+        bearerAuth: true,
+        adminAPIKeyAuth: true,
+    }) {
+        if (values.get('authorization') || values.get('api-key')) {
+            return;
+        }
+        if (nulls.has('authorization') || nulls.has('api-key')) {
+            return;
+        }
+        if (this._workloadIdentityAuth && schemes.bearerAuth) {
+            return;
+        }
+        throw new Error('Could not resolve authentication method. Expected either apiKey or adminAPIKey to be set. Or for one of the "Authorization" or "api-key" headers to be explicitly omitted');
     }
-    async authHeaders(opts) {
+    async authHeaders(opts, schemes = {
+        bearerAuth: true,
+        adminAPIKeyAuth: true,
+    }) {
+        return (0, headers_1.buildHeaders)([
+            schemes.bearerAuth ? await this.bearerAuth(opts) : null,
+            schemes.adminAPIKeyAuth ? await this.adminAPIKeyAuth(opts) : null,
+        ]);
+    }
+    async bearerAuth(opts) {
+        if (this._workloadIdentityAuth) {
+            return (0, headers_1.buildHeaders)([{ Authorization: `Bearer ${await this._workloadIdentityAuth.getToken()}` }]);
+        }
+        if (this.apiKey == null) {
+            return undefined;
+        }
         return (0, headers_1.buildHeaders)([{ Authorization: `Bearer ${this.apiKey}` }]);
+    }
+    async adminAPIKeyAuth(opts) {
+        if (this.adminAPIKey == null) {
+            return undefined;
+        }
+        return (0, headers_1.buildHeaders)([{ Authorization: `Bearer ${this.adminAPIKey}` }]);
     }
     stringifyQuery(query) {
         return (0, query_1.stringifyQuery)(query);
@@ -250,7 +297,10 @@ class OpenAI {
      * Used as a callback for mutating the given `FinalRequestOptions` object.
      */
     async prepareOptions(options) {
-        await this._callApiKey();
+        const security = options.__security ?? { bearerAuth: true };
+        if (security.bearerAuth) {
+            await this._callApiKey();
+        }
     }
     /**
      * Used as a callback for mutating the given `RequestInit` object.
@@ -307,8 +357,9 @@ class OpenAI {
         if (options.signal?.aborted) {
             throw new Errors.APIUserAbortError();
         }
+        const security = options.__security ?? { bearerAuth: true };
         const controller = new AbortController();
-        const response = await this.fetchWithAuth(url, req, timeout, controller).catch(errors_1.castToError);
+        const response = await this.fetchWithAuth(url, req, timeout, controller, security).catch(errors_1.castToError);
         const headersTime = Date.now();
         if (response instanceof globalThis.Error) {
             const retryMessage = `retrying, ${retriesRemaining} attempts remaining`;
@@ -354,6 +405,7 @@ class OpenAI {
         if (!response.ok) {
             if (response.status === 401 &&
                 this._workloadIdentityAuth &&
+                security.bearerAuth &&
                 !options.__metadata?.['hasStreamingBody'] &&
                 !options.__metadata?.['workloadIdentityTokenRefreshed']) {
                 await Shims.CancelReadableStream(response.body);
@@ -416,8 +468,11 @@ class OpenAI {
         const request = this.makeRequest(options, null, undefined);
         return new Pagination.PagePromise(this, request, Page);
     }
-    async fetchWithAuth(url, init, timeout, controller) {
-        if (this._workloadIdentityAuth) {
+    async fetchWithAuth(url, init, timeout, controller, schemes = {
+        bearerAuth: true,
+        adminAPIKeyAuth: true,
+    }) {
+        if (this._workloadIdentityAuth && schemes.bearerAuth) {
             const headers = init.headers;
             const authHeader = headers.get('Authorization');
             if (!authHeader || authHeader === `Bearer ${WORKLOAD_IDENTITY_API_KEY_PLACEHOLDER}`) {
@@ -562,12 +617,12 @@ class OpenAI {
                 'OpenAI-Organization': this.organization,
                 'OpenAI-Project': this.project,
             },
-            await this.authHeaders(options),
+            await this.authHeaders(options, options.__security ?? { bearerAuth: true }),
             this._options.defaultHeaders,
             bodyHeaders,
             options.headers,
         ]);
-        this.validateHeaders(headers);
+        this.validateHeaders(headers, options.__security ?? { bearerAuth: true });
         return headers.values;
     }
     _makeAbort(controller) {
@@ -665,6 +720,7 @@ OpenAI.Webhooks = webhooks_1.Webhooks;
 OpenAI.Beta = beta_1.Beta;
 OpenAI.Batches = batches_1.Batches;
 OpenAI.Uploads = uploads_1.Uploads;
+OpenAI.Admin = admin_1.Admin;
 OpenAI.Responses = responses_1.Responses;
 OpenAI.Realtime = realtime_1.Realtime;
 OpenAI.Conversations = conversations_1.Conversations;

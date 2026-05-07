@@ -72,4 +72,17 @@ export class EventEmitter {
     }
 }
 _EventEmitter_listeners = new WeakMap();
+/**
+ * An EventEmitter variant that exposes `_emit()` publicly.
+ *
+ * The base {@link EventEmitter} keeps `_emit` protected so that consumers
+ * can only listen, not dispatch. When you need a separate emitter instance
+ * that your own code can emit on, without exposing emit on the
+ * consumer-facing emitter, use this class.
+ */
+export class InternalEventEmitter extends EventEmitter {
+    _emit(event, ...args) {
+        super._emit(event, ...args);
+    }
+}
 //# sourceMappingURL=EventEmitter.mjs.map

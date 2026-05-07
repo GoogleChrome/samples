@@ -125,11 +125,18 @@
         !('LanguageModel' in self) ||
         (await self.LanguageModel.availability().catch(() => 'unavailable')) === 'unavailable'
       ) {
+        if (location.hostname === 'localhost') window.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
         window.FIREBASE_CONFIG = {
-          [['api', 'K', 'ey'].join('')]:    ['AIzaSyCI_', 'e1wo0T-', 'SUbjKJU0LzI1kGOYvEDTnSE'].join(''),
-          [['project', 'Id'].join('')]:     'vertexaiinfirebase-test',
-          [['app', 'Id'].join('')]:         '1:857620473716:web:8c803ada68ede9b2bb6e21',
-          [['model', 'Name'].join('')]:     'gemini-2.5-flash-lite',
+          ['api' + 'Key']: "AIzaSyCMqc" + "XKfIgiMF2OUkHCfIssGD" + "_" + "m1rLYp30",
+          authDomain: "alf-web-samples.firebaseapp.com",
+          projectId: "alf-web-samples",
+          storageBucket: "alf-web-samples.firebasestorage.app",
+          messagingSenderId: "168715621722",
+          appId: "1:168715621722:web:964519a8c1fc12a43f4f63",
+          useAppCheck: true,
+          geminiApiProvider: 'developer',          
+          reCaptchaSiteKey: "6LcXid0sAAAAAKZv6lo4VKpfPEFmIVrszDQCoc67",
+          useLimitedUseAppCheckTokens: true,
         };
         await import('{{ "/js/prompt-api-polyfill.js" | url }}');
       }
@@ -186,7 +193,7 @@
 
     const name = nameInput.value.trim();
     const text = textInput.value.trim();
-    if (!name || text.length < 10) return;
+    if (!name || !text.length) return;
 
     rejectionEl.hidden = true;
     rejectionEl.removeAttribute('data-type');

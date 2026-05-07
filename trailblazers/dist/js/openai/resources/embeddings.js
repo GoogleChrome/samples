@@ -34,6 +34,7 @@ class Embeddings extends resource_1.APIResource {
                 encoding_format: encoding_format,
             },
             ...options,
+            __security: { bearerAuth: true },
         });
         // if the user specified an encoding_format, return the response as-is
         if (hasUserProvidedEncodingFormat) {

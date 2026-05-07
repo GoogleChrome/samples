@@ -12,31 +12,35 @@ class Videos extends resource_1.APIResource {
      * Create a new video generation job from a prompt and optional reference assets.
      */
     create(body, options) {
-        return this._client.post('/videos', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/videos', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Fetch the latest metadata for a generated video.
      */
     retrieve(videoID, options) {
-        return this._client.get((0, path_1.path) `/videos/${videoID}`, options);
+        return this._client.get((0, path_1.path) `/videos/${videoID}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * List recently generated videos for the current project.
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/videos', (pagination_1.ConversationCursorPage), { query, ...options });
+        return this._client.getAPIList('/videos', (pagination_1.ConversationCursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Permanently delete a completed or failed video and its stored assets.
      */
     delete(videoID, options) {
-        return this._client.delete((0, path_1.path) `/videos/${videoID}`, options);
+        return this._client.delete((0, path_1.path) `/videos/${videoID}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Create a character from an uploaded video.
      */
     createCharacter(body, options) {
-        return this._client.post('/videos/characters', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/videos/characters', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Download the generated video bytes or a derived preview asset.
@@ -48,6 +52,7 @@ class Videos extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ Accept: 'application/binary' }, options?.headers]),
+            __security: { bearerAuth: true },
             __binaryResponse: true,
         });
     }
@@ -56,25 +61,28 @@ class Videos extends resource_1.APIResource {
      * generated video.
      */
     edit(body, options) {
-        return this._client.post('/videos/edits', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/videos/edits', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Create an extension of a completed video.
      */
     extend(body, options) {
-        return this._client.post('/videos/extensions', (0, uploads_1.multipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post('/videos/extensions', (0, uploads_1.multipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Fetch a character.
      */
     getCharacter(characterID, options) {
-        return this._client.get((0, path_1.path) `/videos/characters/${characterID}`, options);
+        return this._client.get((0, path_1.path) `/videos/characters/${characterID}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Create a remix of a completed video using a refreshed prompt.
      */
     remix(videoID, body, options) {
-        return this._client.post((0, path_1.path) `/videos/${videoID}/remix`, (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options }, this._client));
+        return this._client.post((0, path_1.path) `/videos/${videoID}/remix`, (0, uploads_1.maybeMultipartFormRequestOptions)({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
 }
 exports.Videos = Videos;

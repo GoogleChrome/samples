@@ -75,11 +75,12 @@ class AzureOpenAI extends client_1.OpenAI {
         }
         return super.buildRequest(options, props);
     }
-    async authHeaders(opts) {
-        if (typeof this._options.apiKey === 'string') {
+    async authHeaders(opts, schemes) {
+        const security = schemes ?? { bearerAuth: true, adminAPIKeyAuth: true };
+        if (security.bearerAuth && typeof this._options.apiKey === 'string') {
             return (0, headers_1.buildHeaders)([{ 'api-key': this.apiKey }]);
         }
-        return super.authHeaders(opts);
+        return super.authHeaders(opts, security);
     }
 }
 exports.AzureOpenAI = AzureOpenAI;

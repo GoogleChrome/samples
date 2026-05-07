@@ -5,7 +5,6 @@ exports.ResponsesEmitter = exports.WebSocketError = void 0;
 exports.buildURL = buildURL;
 const EventEmitter_1 = require("../../core/EventEmitter.js");
 const error_1 = require("../../core/error.js");
-const utils_1 = require("../../internal/utils.js");
 class WebSocketError extends error_1.OpenAIError {
     constructor(message, event) {
         super(message);
@@ -31,14 +30,11 @@ class ResponsesEmitter extends EventEmitter_1.EventEmitter {
     }
 }
 exports.ResponsesEmitter = ResponsesEmitter;
-function buildURL(client, query) {
-    const path = '/responses';
-    const baseURL = client.baseURL;
-    const url = new URL(baseURL + (baseURL.endsWith('/') ? path.slice(1) : path));
-    if (query) {
-        url.search = (0, utils_1.stringifyQuery)(query);
-    }
-    url.protocol = url.protocol === 'http:' ? 'ws:' : 'wss:';
+function buildURL(client, parameters) {
+    const { ...query } = parameters;
+    const endpoint = '/responses';
+    const url = new URL(client.buildURL(endpoint, query, undefined));
+    url.protocol = url.protocol === 'http:' || url.protocol === 'ws:' ? 'ws:' : 'wss:';
     return url;
 }
 function safeJSONStringify(value) {

@@ -25,7 +25,11 @@ export class ClientSecrets extends APIResource {
      * ```
      */
     create(body, options) {
-        return this._client.post('/realtime/client_secrets', { body, ...options });
+        return this._client.post('/realtime/client_secrets', {
+            body,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 //# sourceMappingURL=client-secrets.mjs.map

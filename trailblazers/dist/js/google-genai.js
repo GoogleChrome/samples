@@ -1602,7 +1602,7 @@ var FeatureSelectionPreference;
     FeatureSelectionPreference["BALANCED"] = "BALANCED";
     FeatureSelectionPreference["PRIORITIZE_COST"] = "PRIORITIZE_COST";
 })(FeatureSelectionPreference || (FeatureSelectionPreference = {}));
-/** Enum representing the Vertex embedding API to use. */
+/** Enum representing the Gemini Enterprise Agent Platform embedding API to use. */
 var EmbeddingApiType;
 (function (EmbeddingApiType) {
     /**
@@ -1760,6 +1760,20 @@ var VideoCompressionQuality;
      */
     VideoCompressionQuality["LOSSLESS"] = "LOSSLESS";
 })(VideoCompressionQuality || (VideoCompressionQuality = {}));
+/** Resize mode for the image input for video generation. */
+var ImageResizeMode;
+(function (ImageResizeMode) {
+    /**
+     * Crop the image to fit the correct aspect ratio (so we lose parts
+        of the image in the process).
+     */
+    ImageResizeMode["CROP"] = "CROP";
+    /**
+     * Pad the image to fit the correct aspect ratio (so we don't lose
+        any parts of the image in the process).
+     */
+    ImageResizeMode["PAD"] = "PAD";
+})(ImageResizeMode || (ImageResizeMode = {}));
 /** Enum representing the tuning method. */
 var TuningMethod;
 (function (TuningMethod) {
@@ -3569,6 +3583,9 @@ function tBatchJobSource(client, src) {
             else if (src.startsWith('bq://')) {
                 sourceObj = { format: 'bigquery', bigqueryUri: src };
             }
+            else if (/^projects\/[^/]+\/locations\/[^/]+\/datasets\/[^/]+$/.test(src)) {
+                sourceObj = { format: 'vertex-dataset', vertexDatasetName: src };
+            }
             else {
                 throw new Error(`Unsupported string source for Vertex AI: ${src}`);
             }
@@ -3594,14 +3611,18 @@ function tBatchJobSource(client, src) {
         sourceObj = src;
     }
     // Validation logic
-    const vertexSourcesCount = [sourceObj.gcsUri, sourceObj.bigqueryUri].filter(Boolean).length;
+    const vertexSourcesCount = [
+        sourceObj.gcsUri,
+        sourceObj.bigqueryUri,
+        sourceObj.vertexDatasetName,
+    ].filter(Boolean).length;
     const mldevSourcesCount = [
         sourceObj.inlinedRequests,
         sourceObj.fileName,
     ].filter(Boolean).length;
     if (client.isVertexAI()) {
         if (mldevSourcesCount > 0 || vertexSourcesCount !== 1) {
-            throw new Error('Exactly one of `gcsUri` or `bigqueryUri` must be set for Vertex AI.');
+            throw new Error('Exactly one of `gcsUri`, `bigqueryUri`, or `vertexDatasetName` must be set for Vertex AI.');
         }
     }
     else {
@@ -3820,6 +3841,12 @@ function batchJobDestinationFromVertex(fromObject) {
     if (fromBigqueryUri != null) {
         setValueByPath(toObject, ['bigqueryUri'], fromBigqueryUri);
     }
+    const fromVertexDataset = getValueByPath(fromObject, [
+        'vertexMultimodalDatasetDestination',
+    ]);
+    if (fromVertexDataset != null) {
+        setValueByPath(toObject, ['vertexDataset'], vertexMultimodalDatasetDestinationFromVertex(fromVertexDataset));
+    }
     return toObject;
 }
 function batchJobDestinationToVertex(fromObject) {
@@ -3837,14 +3864,20 @@ function batchJobDestinationToVertex(fromObject) {
         setValueByPath(toObject, ['bigqueryDestination', 'outputUri'], fromBigqueryUri);
     }
     if (getValueByPath(fromObject, ['fileName']) !== undefined) {
-        throw new Error('fileName parameter is not supported in Vertex AI.');
+        throw new Error('fileName parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['inlinedResponses']) !== undefined) {
-        throw new Error('inlinedResponses parameter is not supported in Vertex AI.');
+        throw new Error('inlinedResponses parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['inlinedEmbedContentResponses']) !==
         undefined) {
-        throw new Error('inlinedEmbedContentResponses parameter is not supported in Vertex AI.');
+        throw new Error('inlinedEmbedContentResponses parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
+    }
+    const fromVertexDataset = getValueByPath(fromObject, [
+        'vertexDataset',
+    ]);
+    if (fromVertexDataset != null) {
+        setValueByPath(toObject, ['vertexMultimodalDatasetDestination'], vertexMultimodalDatasetDestinationToVertex(fromVertexDataset));
     }
     return toObject;
 }
@@ -3948,6 +3981,10 @@ function batchJobFromVertex(fromObject) {
     if (fromCompletionStats != null) {
         setValueByPath(toObject, ['completionStats'], fromCompletionStats);
     }
+    const fromOutputInfo = getValueByPath(fromObject, ['outputInfo']);
+    if (fromOutputInfo != null) {
+        setValueByPath(toObject, ['outputInfo'], fromOutputInfo);
+    }
     return toObject;
 }
 function batchJobSourceFromVertex(fromObject) {
@@ -3966,6 +4003,13 @@ function batchJobSourceFromVertex(fromObject) {
     ]);
     if (fromBigqueryUri != null) {
         setValueByPath(toObject, ['bigqueryUri'], fromBigqueryUri);
+    }
+    const fromVertexDatasetName = getValueByPath(fromObject, [
+        'vertexMultimodalDatasetSource',
+        'datasetName',
+    ]);
+    if (fromVertexDatasetName != null) {
+        setValueByPath(toObject, ['vertexDatasetName'], fromVertexDatasetName);
     }
     return toObject;
 }
@@ -3996,6 +4040,9 @@ function batchJobSourceToMldev(apiClient, fromObject) {
         }
         setValueByPath(toObject, ['requests', 'requests'], transformedList);
     }
+    if (getValueByPath(fromObject, ['vertexDatasetName']) !== undefined) {
+        throw new Error('vertexDatasetName parameter is not supported in Gemini API.');
+    }
     return toObject;
 }
 function batchJobSourceToVertex(fromObject) {
@@ -4013,10 +4060,16 @@ function batchJobSourceToVertex(fromObject) {
         setValueByPath(toObject, ['bigquerySource', 'inputUri'], fromBigqueryUri);
     }
     if (getValueByPath(fromObject, ['fileName']) !== undefined) {
-        throw new Error('fileName parameter is not supported in Vertex AI.');
+        throw new Error('fileName parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['inlinedRequests']) !== undefined) {
-        throw new Error('inlinedRequests parameter is not supported in Vertex AI.');
+        throw new Error('inlinedRequests parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
+    }
+    const fromVertexDatasetName = getValueByPath(fromObject, [
+        'vertexDatasetName',
+    ]);
+    if (fromVertexDatasetName != null) {
+        setValueByPath(toObject, ['vertexMultimodalDatasetSource', 'datasetName'], fromVertexDatasetName);
     }
     return toObject;
 }
@@ -4171,7 +4224,7 @@ function createBatchJobConfigToVertex(fromObject, parentObject) {
         setValueByPath(parentObject, ['outputConfig'], batchJobDestinationToVertex(tBatchJobDestination(fromDest)));
     }
     if (getValueByPath(fromObject, ['webhookConfig']) !== undefined) {
-        throw new Error('webhookConfig parameter is not supported in Vertex AI.');
+        throw new Error('webhookConfig parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -5013,6 +5066,35 @@ function toolToMldev$4(fromObject) {
     }
     return toObject;
 }
+function vertexMultimodalDatasetDestinationFromVertex(fromObject) {
+    const toObject = {};
+    const fromBigqueryDestination = getValueByPath(fromObject, [
+        'bigqueryDestination',
+        'outputUri',
+    ]);
+    if (fromBigqueryDestination != null) {
+        setValueByPath(toObject, ['bigqueryDestination'], fromBigqueryDestination);
+    }
+    const fromDisplayName = getValueByPath(fromObject, ['displayName']);
+    if (fromDisplayName != null) {
+        setValueByPath(toObject, ['displayName'], fromDisplayName);
+    }
+    return toObject;
+}
+function vertexMultimodalDatasetDestinationToVertex(fromObject) {
+    const toObject = {};
+    const fromBigqueryDestination = getValueByPath(fromObject, [
+        'bigqueryDestination',
+    ]);
+    if (fromBigqueryDestination != null) {
+        setValueByPath(toObject, ['bigqueryDestination', 'outputUri'], fromBigqueryDestination);
+    }
+    const fromDisplayName = getValueByPath(fromObject, ['displayName']);
+    if (fromDisplayName != null) {
+        setValueByPath(toObject, ['displayName'], fromDisplayName);
+    }
+    return toObject;
+}
 
 /**
  * @license
@@ -5267,7 +5349,7 @@ class Batches extends BaseModule {
         this.createEmbeddings = async (params) => {
             console.warn('batches.createEmbeddings() is experimental and may change without notice.');
             if (this.apiClient.isVertexAI()) {
-                throw new Error('Vertex AI does not support batches.createEmbeddings.');
+                throw new Error('Gemini Enterprise Agent Platform (previously known as Vertex AI) does not support batches.createEmbeddings.');
             }
             return this.createEmbeddingsInternal(params);
         };
@@ -5344,7 +5426,7 @@ class Batches extends BaseModule {
                 newConfig.dest = `${bigqueryUri}_dest_${timestampStr}`;
             }
             else {
-                throw new Error('Unsupported source for Vertex AI: No GCS or BigQuery URI found.');
+                throw new Error('Unsupported source for Gemini Enterprise Agent Platform (previously known as Vertex AI): No GCS or BigQuery URI found.');
             }
         }
         return newConfig;
@@ -6029,7 +6111,7 @@ function functionDeclarationToVertex$2(fromObject) {
         setValueByPath(toObject, ['responseJsonSchema'], fromResponseJsonSchema);
     }
     if (getValueByPath(fromObject, ['behavior']) !== undefined) {
-        throw new Error('behavior parameter is not supported in Vertex AI.');
+        throw new Error('behavior parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -6308,13 +6390,13 @@ function partToVertex$2(fromObject) {
         setValueByPath(toObject, ['videoMetadata'], fromVideoMetadata);
     }
     if (getValueByPath(fromObject, ['toolCall']) !== undefined) {
-        throw new Error('toolCall parameter is not supported in Vertex AI.');
+        throw new Error('toolCall parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['toolResponse']) !== undefined) {
-        throw new Error('toolResponse parameter is not supported in Vertex AI.');
+        throw new Error('toolResponse parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['partMetadata']) !== undefined) {
-        throw new Error('partMetadata parameter is not supported in Vertex AI.');
+        throw new Error('partMetadata parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -6354,7 +6436,7 @@ function toolConfigToVertex$1(fromObject) {
     }
     if (getValueByPath(fromObject, ['includeServerSideToolInvocations']) !==
         undefined) {
-        throw new Error('includeServerSideToolInvocations parameter is not supported in Vertex AI.');
+        throw new Error('includeServerSideToolInvocations parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -6436,7 +6518,7 @@ function toolToVertex$2(fromObject) {
         setValueByPath(toObject, ['computerUse'], fromComputerUse);
     }
     if (getValueByPath(fromObject, ['fileSearch']) !== undefined) {
-        throw new Error('fileSearch parameter is not supported in Vertex AI.');
+        throw new Error('fileSearch parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     const fromGoogleSearch = getValueByPath(fromObject, ['googleSearch']);
     if (fromGoogleSearch != null) {
@@ -6487,7 +6569,7 @@ function toolToVertex$2(fromObject) {
         setValueByPath(toObject, ['urlContext'], fromUrlContext);
     }
     if (getValueByPath(fromObject, ['mcpServers']) !== undefined) {
-        throw new Error('mcpServers parameter is not supported in Vertex AI.');
+        throw new Error('mcpServers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -6573,7 +6655,7 @@ class Caches extends BaseModule {
      * @remarks
      * Context caching is only supported for specific models. See [Gemini
      * Developer API reference](https://ai.google.dev/gemini-api/docs/caching?lang=node/context-cac)
-     * and [Vertex AI reference](https://cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview#supported_models)
+     * and [Gemini Enterprise Agent Platform reference](https://cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview#supported_models)
      * for more information.
      *
      * @param params - The parameters for the create request.
@@ -7482,7 +7564,7 @@ class Files extends BaseModule {
     }
     /**
      * Uploads a file asynchronously to the Gemini API.
-     * This method is not available in Vertex AI.
+     * This method is not available in Gemini Enterprise Agent Platform (previously known as Vertex AI).
      * Supported upload sources:
      * - Node.js: File path (string) or Blob object.
      * - Browser: Blob object (e.g., File).
@@ -7508,7 +7590,7 @@ class Files extends BaseModule {
      *         @see {@link types.UploadFileParameters#config} for the optional
      *         config in the parameters.
      * @return A promise that resolves to a `types.File` object.
-     * @throws An error if called on a Vertex AI client.
+     * @throws An error if called on a Gemini Enterprise Agent Platform (previously known as Vertex AI) client.
      * @throws An error if the `mimeType` is not provided and can not be inferred,
      * the `mimeType` can be provided in the `params.config` parameter.
      * @throws An error occurs if a suitable upload location cannot be established.
@@ -7525,7 +7607,7 @@ class Files extends BaseModule {
      */
     async upload(params) {
         if (this.apiClient.isVertexAI()) {
-            throw new Error('Vertex AI does not support uploading files. You can share files through a GCS bucket.');
+            throw new Error('Gemini Enterprise Agent Platform (previously known as Vertex AI) does not support uploading files. You can share files through a GCS bucket.');
         }
         return this.apiClient
             .uploadFile(params.file, params.config)
@@ -7929,7 +8011,7 @@ function functionDeclarationToVertex$1(fromObject) {
         setValueByPath(toObject, ['responseJsonSchema'], fromResponseJsonSchema);
     }
     if (getValueByPath(fromObject, ['behavior']) !== undefined) {
-        throw new Error('behavior parameter is not supported in Vertex AI.');
+        throw new Error('behavior parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -8057,7 +8139,7 @@ function generationConfigToVertex$1(fromObject) {
     }
     if (getValueByPath(fromObject, ['enableEnhancedCivicAnswers']) !==
         undefined) {
-        throw new Error('enableEnhancedCivicAnswers parameter is not supported in Vertex AI.');
+        throw new Error('enableEnhancedCivicAnswers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -8673,13 +8755,13 @@ function partToVertex$1(fromObject) {
         setValueByPath(toObject, ['videoMetadata'], fromVideoMetadata);
     }
     if (getValueByPath(fromObject, ['toolCall']) !== undefined) {
-        throw new Error('toolCall parameter is not supported in Vertex AI.');
+        throw new Error('toolCall parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['toolResponse']) !== undefined) {
-        throw new Error('toolResponse parameter is not supported in Vertex AI.');
+        throw new Error('toolResponse parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['partMetadata']) !== undefined) {
-        throw new Error('partMetadata parameter is not supported in Vertex AI.');
+        throw new Error('partMetadata parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -8787,7 +8869,7 @@ function toolToVertex$1(fromObject) {
         setValueByPath(toObject, ['computerUse'], fromComputerUse);
     }
     if (getValueByPath(fromObject, ['fileSearch']) !== undefined) {
-        throw new Error('fileSearch parameter is not supported in Vertex AI.');
+        throw new Error('fileSearch parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     const fromGoogleSearch = getValueByPath(fromObject, ['googleSearch']);
     if (fromGoogleSearch != null) {
@@ -8838,7 +8920,7 @@ function toolToVertex$1(fromObject) {
         setValueByPath(toObject, ['urlContext'], fromUrlContext);
     }
     if (getValueByPath(fromObject, ['mcpServers']) !== undefined) {
-        throw new Error('mcpServers parameter is not supported in Vertex AI.');
+        throw new Error('mcpServers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -9862,7 +9944,7 @@ function functionDeclarationToVertex(fromObject, _rootObject) {
         setValueByPath(toObject, ['responseJsonSchema'], fromResponseJsonSchema);
     }
     if (getValueByPath(fromObject, ['behavior']) !== undefined) {
-        throw new Error('behavior parameter is not supported in Vertex AI.');
+        throw new Error('behavior parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -10197,7 +10279,7 @@ function generateContentConfigToVertex(apiClient, fromObject, parentObject, root
     }
     if (getValueByPath(fromObject, ['enableEnhancedCivicAnswers']) !==
         undefined) {
-        throw new Error('enableEnhancedCivicAnswers parameter is not supported in Vertex AI.');
+        throw new Error('enableEnhancedCivicAnswers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     const fromModelArmorConfig = getValueByPath(fromObject, [
         'modelArmorConfig',
@@ -10691,6 +10773,9 @@ function generateVideosConfigToMldev(fromObject, parentObject, rootObject) {
     if (parentObject !== undefined && fromWebhookConfig != null) {
         setValueByPath(parentObject, ['webhookConfig'], fromWebhookConfig);
     }
+    if (getValueByPath(fromObject, ['resizeMode']) !== undefined) {
+        throw new Error('resizeMode parameter is not supported in Gemini API.');
+    }
     return toObject;
 }
 function generateVideosConfigToVertex(fromObject, parentObject, rootObject) {
@@ -10786,7 +10871,11 @@ function generateVideosConfigToVertex(fromObject, parentObject, rootObject) {
         setValueByPath(parentObject, ['labels'], fromLabels);
     }
     if (getValueByPath(fromObject, ['webhookConfig']) !== undefined) {
-        throw new Error('webhookConfig parameter is not supported in Vertex AI.');
+        throw new Error('webhookConfig parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
+    }
+    const fromResizeMode = getValueByPath(fromObject, ['resizeMode']);
+    if (parentObject !== undefined && fromResizeMode != null) {
+        setValueByPath(parentObject, ['parameters', 'resizeMode'], fromResizeMode);
     }
     return toObject;
 }
@@ -11181,7 +11270,7 @@ function generationConfigToVertex(fromObject, _rootObject) {
     }
     if (getValueByPath(fromObject, ['enableEnhancedCivicAnswers']) !==
         undefined) {
-        throw new Error('enableEnhancedCivicAnswers parameter is not supported in Vertex AI.');
+        throw new Error('enableEnhancedCivicAnswers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -11741,13 +11830,13 @@ function partToVertex(fromObject, _rootObject) {
         setValueByPath(toObject, ['videoMetadata'], fromVideoMetadata);
     }
     if (getValueByPath(fromObject, ['toolCall']) !== undefined) {
-        throw new Error('toolCall parameter is not supported in Vertex AI.');
+        throw new Error('toolCall parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['toolResponse']) !== undefined) {
-        throw new Error('toolResponse parameter is not supported in Vertex AI.');
+        throw new Error('toolResponse parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     if (getValueByPath(fromObject, ['partMetadata']) !== undefined) {
-        throw new Error('partMetadata parameter is not supported in Vertex AI.');
+        throw new Error('partMetadata parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -12104,7 +12193,7 @@ function toolConfigToVertex(fromObject, _rootObject) {
     }
     if (getValueByPath(fromObject, ['includeServerSideToolInvocations']) !==
         undefined) {
-        throw new Error('includeServerSideToolInvocations parameter is not supported in Vertex AI.');
+        throw new Error('includeServerSideToolInvocations parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -12186,7 +12275,7 @@ function toolToVertex(fromObject, rootObject) {
         setValueByPath(toObject, ['computerUse'], fromComputerUse);
     }
     if (getValueByPath(fromObject, ['fileSearch']) !== undefined) {
-        throw new Error('fileSearch parameter is not supported in Vertex AI.');
+        throw new Error('fileSearch parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     const fromGoogleSearch = getValueByPath(fromObject, ['googleSearch']);
     if (fromGoogleSearch != null) {
@@ -12237,7 +12326,7 @@ function toolToVertex(fromObject, rootObject) {
         setValueByPath(toObject, ['urlContext'], fromUrlContext);
     }
     if (getValueByPath(fromObject, ['mcpServers']) !== undefined) {
-        throw new Error('mcpServers parameter is not supported in Vertex AI.');
+        throw new Error('mcpServers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -12556,20 +12645,25 @@ function videoToVertex(fromObject, _rootObject) {
  * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-// Code generated by the Google Gen AI SDK generator DO NOT EDIT.
-function createFileSearchStoreConfigToMldev(fromObject, parentObject) {
+function createFileSearchStoreConfigToMldev(apiClient, fromObject, parentObject) {
     const toObject = {};
     const fromDisplayName = getValueByPath(fromObject, ['displayName']);
     if (parentObject !== undefined && fromDisplayName != null) {
         setValueByPath(parentObject, ['displayName'], fromDisplayName);
     }
+    const fromEmbeddingModel = getValueByPath(fromObject, [
+        'embeddingModel',
+    ]);
+    if (parentObject !== undefined && fromEmbeddingModel != null) {
+        setValueByPath(parentObject, ['embeddingModel'], tModel(apiClient, fromEmbeddingModel));
+    }
     return toObject;
 }
-function createFileSearchStoreParametersToMldev(fromObject) {
+function createFileSearchStoreParametersToMldev(apiClient, fromObject) {
     const toObject = {};
     const fromConfig = getValueByPath(fromObject, ['config']);
     if (fromConfig != null) {
-        createFileSearchStoreConfigToMldev(fromConfig, toObject);
+        createFileSearchStoreConfigToMldev(apiClient, fromConfig, toObject);
     }
     return toObject;
 }
@@ -12795,7 +12889,7 @@ const CONTENT_TYPE_HEADER = 'Content-Type';
 const SERVER_TIMEOUT_HEADER = 'X-Server-Timeout';
 const USER_AGENT_HEADER = 'User-Agent';
 const GOOGLE_API_CLIENT_HEADER = 'x-goog-api-client';
-const SDK_VERSION = '1.50.0'; // x-release-please-version
+const SDK_VERSION = '1.52.0'; // x-release-please-version
 const LIBRARY_LABEL = `google-genai-sdk/${SDK_VERSION}`;
 const VERTEX_AI_API_DEFAULT_VERSION = 'v1beta1';
 const GOOGLE_AI_API_DEFAULT_VERSION = 'v1beta';
@@ -14450,7 +14544,7 @@ class Models extends BaseModule {
         /**
          * Makes an API request to generate content with a given model.
          *
-         * For the `model` parameter, supported formats for Vertex AI API include:
+         * For the `model` parameter, supported formats for Gemini Enterprise Agent Platform API include:
          * - The Gemini model ID, for example: 'gemini-2.0-flash'
          * - The full resource name starts with 'projects/', for example:
          *  'projects/my-project-id/locations/us-central1/publishers/google/models/gemini-2.0-flash'
@@ -14541,7 +14635,7 @@ class Models extends BaseModule {
          * Makes an API request to generate content with a given model and yields the
          * response in chunks.
          *
-         * For the `model` parameter, supported formats for Vertex AI API include:
+         * For the `model` parameter, supported formats for Gemini Enterprise Agent Platform API include:
          * - The Gemini model ID, for example: 'gemini-2.0-flash'
          * - The full resource name starts with 'projects/', for example:
          *  'projects/my-project-id/locations/us-central1/publishers/google/models/gemini-2.0-flash'
@@ -14670,7 +14764,7 @@ class Models extends BaseModule {
             if (this.apiClient.isVertexAI()) {
                 if (!actualParams.config.queryBase) {
                     if ((_a = actualParams.config) === null || _a === void 0 ? void 0 : _a.filter) {
-                        throw new Error('Filtering tuned models list for Vertex AI is not currently supported');
+                        throw new Error('Filtering tuned models list for Gemini Enterprise Agent Platform (previously known as Vertex AI) is not currently supported');
                     }
                     else {
                         actualParams.config.filter = 'labels.tune-type:*';
@@ -14715,7 +14809,7 @@ class Models extends BaseModule {
         };
         /**
          * Upscales an image based on an image, upscale factor, and configuration.
-         * Only supported in Vertex AI currently.
+         * Only supported in Gemini Enterprise Agent Platform currently.
          *
          * @param params - The parameters for upscaling an image.
          * @return The response from the API.
@@ -15316,7 +15410,7 @@ class Models extends BaseModule {
             });
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     /**
@@ -15359,7 +15453,7 @@ class Models extends BaseModule {
             });
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     /**
@@ -15417,7 +15511,7 @@ class Models extends BaseModule {
             });
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     /**
@@ -15471,7 +15565,7 @@ class Models extends BaseModule {
             });
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     /**
@@ -15889,7 +15983,7 @@ class Models extends BaseModule {
             });
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     /**
@@ -16113,7 +16207,7 @@ class Operations extends BaseModule {
             return response;
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
 }
@@ -17117,7 +17211,7 @@ class FileSearchStores extends BaseModule {
     }
     /**
      * Uploads a file asynchronously to a given File Search Store.
-     * This method is not available in Vertex AI.
+     * This method is not available in Gemini Enterprise Agent Platform (previously known as Vertex AI).
      * Supported upload sources:
      * - Node.js: File path (string) or Blob object.
      * - Browser: Blob object (e.g., File).
@@ -17136,7 +17230,7 @@ class FileSearchStores extends BaseModule {
      *         @see {@link types.UploadToFileSearchStoreParameters#config} for the optional
      *         config in the parameters.
      * @return A promise that resolves to a long running operation.
-     * @throws An error if called on a Vertex AI client.
+     * @throws An error if called on a Gemini Enterprise Agent Platform (previously known as Vertex AI) client.
      * @throws An error if the `mimeType` is not provided and can not be inferred,
      * the `mimeType` can be provided in the `params.config` parameter.
      * @throws An error occurs if a suitable upload location cannot be established.
@@ -17153,9 +17247,49 @@ class FileSearchStores extends BaseModule {
      */
     async uploadToFileSearchStore(params) {
         if (this.apiClient.isVertexAI()) {
-            throw new Error('Vertex AI does not support uploading files to a file search store.');
+            throw new Error('Gemini Enterprise Agent Platform (previously known as Vertex AI) does not support uploading files to a file search store.');
         }
         return this.apiClient.uploadFileToFileSearchStore(params.fileSearchStoreName, params.file, params.config);
+    }
+    /**
+     * Downloads media using a Media ID or URI.
+     * This method is only supported in the Gemini Developer client.
+     *
+     * @param uri - The URI or Media ID of the blob.
+     * @param config - Optional configuration for the download.
+     * @returns A promise that resolves to the blob data as a Uint8Array.
+     */
+    async downloadMedia(uri, config) {
+        if (this.apiClient.isVertexAI()) {
+            throw new Error('This method is only supported in the Gemini Developer client.');
+        }
+        const parsedUri = new URL(uri, 'http://dummy.com');
+        let pathname = parsedUri.pathname;
+        if (pathname.startsWith('/')) {
+            pathname = pathname.slice(1);
+        }
+        if (!pathname.includes('/media/')) {
+            throw new Error(`Invalid uri format: ${uri}. Expected to contain /media/`);
+        }
+        const queryParams = {};
+        parsedUri.searchParams.forEach((value, key) => {
+            queryParams[key] = value;
+        });
+        queryParams['alt'] = 'media';
+        const httpOptions = Object.assign({}, config === null || config === void 0 ? void 0 : config.httpOptions);
+        const response = await this.apiClient.request({
+            path: pathname,
+            httpMethod: 'GET',
+            queryParams: queryParams,
+            httpOptions: httpOptions,
+        });
+        if (response instanceof HttpResponse) {
+            const arrayBuffer = await response.responseInternal.arrayBuffer();
+            return new Uint8Array(arrayBuffer);
+        }
+        else {
+            throw new Error('Unexpected response type from downloadMedia');
+        }
     }
     /**
      * Creates a File Search Store.
@@ -17172,7 +17306,7 @@ class FileSearchStores extends BaseModule {
             throw new Error('This method is only supported by the Gemini Developer API.');
         }
         else {
-            const body = createFileSearchStoreParametersToMldev(params);
+            const body = createFileSearchStoreParametersToMldev(this.apiClient, params);
             path = formatMap('fileSearchStores', body['_url']);
             queryParams = body['_query'];
             delete body['_url'];
@@ -18028,21 +18162,14 @@ class BaseWebhooks extends APIResource {
      * Creates a new Webhook.
      */
     create(params, options) {
-        const { api_version = this._client.apiVersion, webhook_id } = params, body = __rest(params, ["api_version", "webhook_id"]);
-        return this._client.post(path `/${api_version}/webhooks`, Object.assign({ query: { webhook_id }, body }, options));
-    }
-    /**
-     * Gets a specific Webhook.
-     */
-    retrieve(id, params = {}, options) {
-        const { api_version = this._client.apiVersion } = params !== null && params !== void 0 ? params : {};
-        return this._client.get(path `/${api_version}/webhooks/${id}`, options);
+        const { api_version = this._client.apiVersion } = params, body = __rest(params, ["api_version"]);
+        return this._client.post(path `/${api_version}/webhooks`, Object.assign({ body }, options));
     }
     /**
      * Updates an existing Webhook.
      */
-    update(id, params, options) {
-        const { api_version = this._client.apiVersion, update_mask } = params, body = __rest(params, ["api_version", "update_mask"]);
+    update(id, params = {}, options) {
+        const _a = params !== null && params !== void 0 ? params : {}, { api_version = this._client.apiVersion, update_mask } = _a, body = __rest(_a, ["api_version", "update_mask"]);
         return this._client.patch(path `/${api_version}/webhooks/${id}`, Object.assign({ query: { update_mask }, body }, options));
     }
     /**
@@ -18058,6 +18185,13 @@ class BaseWebhooks extends APIResource {
     delete(id, params = {}, options) {
         const { api_version = this._client.apiVersion } = params !== null && params !== void 0 ? params : {};
         return this._client.delete(path `/${api_version}/webhooks/${id}`, options);
+    }
+    /**
+     * Gets a specific Webhook.
+     */
+    get(id, params = {}, options) {
+        const { api_version = this._client.apiVersion } = params !== null && params !== void 0 ? params : {};
+        return this._client.get(path `/${api_version}/webhooks/${id}`, options);
     }
     /**
      * Sends a ping event to a Webhook.
@@ -19726,22 +19860,6 @@ function getTuningJobParametersToVertex(fromObject, _rootObject) {
     }
     return toObject;
 }
-function listTuningJobsConfigToMldev(fromObject, parentObject, _rootObject) {
-    const toObject = {};
-    const fromPageSize = getValueByPath(fromObject, ['pageSize']);
-    if (parentObject !== undefined && fromPageSize != null) {
-        setValueByPath(parentObject, ['_query', 'pageSize'], fromPageSize);
-    }
-    const fromPageToken = getValueByPath(fromObject, ['pageToken']);
-    if (parentObject !== undefined && fromPageToken != null) {
-        setValueByPath(parentObject, ['_query', 'pageToken'], fromPageToken);
-    }
-    const fromFilter = getValueByPath(fromObject, ['filter']);
-    if (parentObject !== undefined && fromFilter != null) {
-        setValueByPath(parentObject, ['_query', 'filter'], fromFilter);
-    }
-    return toObject;
-}
 function listTuningJobsConfigToVertex(fromObject, parentObject, _rootObject) {
     const toObject = {};
     const fromPageSize = getValueByPath(fromObject, ['pageSize']);
@@ -19758,45 +19876,11 @@ function listTuningJobsConfigToVertex(fromObject, parentObject, _rootObject) {
     }
     return toObject;
 }
-function listTuningJobsParametersToMldev(fromObject, rootObject) {
-    const toObject = {};
-    const fromConfig = getValueByPath(fromObject, ['config']);
-    if (fromConfig != null) {
-        listTuningJobsConfigToMldev(fromConfig, toObject);
-    }
-    return toObject;
-}
 function listTuningJobsParametersToVertex(fromObject, rootObject) {
     const toObject = {};
     const fromConfig = getValueByPath(fromObject, ['config']);
     if (fromConfig != null) {
         listTuningJobsConfigToVertex(fromConfig, toObject);
-    }
-    return toObject;
-}
-function listTuningJobsResponseFromMldev(fromObject, rootObject) {
-    const toObject = {};
-    const fromSdkHttpResponse = getValueByPath(fromObject, [
-        'sdkHttpResponse',
-    ]);
-    if (fromSdkHttpResponse != null) {
-        setValueByPath(toObject, ['sdkHttpResponse'], fromSdkHttpResponse);
-    }
-    const fromNextPageToken = getValueByPath(fromObject, [
-        'nextPageToken',
-    ]);
-    if (fromNextPageToken != null) {
-        setValueByPath(toObject, ['nextPageToken'], fromNextPageToken);
-    }
-    const fromTuningJobs = getValueByPath(fromObject, ['tunedModels']);
-    if (fromTuningJobs != null) {
-        let transformedList = fromTuningJobs;
-        if (Array.isArray(transformedList)) {
-            transformedList = transformedList.map((item) => {
-                return tuningJobFromMldev(item);
-            });
-        }
-        setValueByPath(toObject, ['tuningJobs'], transformedList);
     }
     return toObject;
 }
@@ -19917,7 +20001,7 @@ function tuningDatasetToVertex(fromObject, parentObject, rootObject) {
         }
     }
     if (getValueByPath(fromObject, ['examples']) !== undefined) {
-        throw new Error('examples parameter is not supported in Vertex AI.');
+        throw new Error('examples parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).');
     }
     return toObject;
 }
@@ -20333,7 +20417,7 @@ class Tunings extends BaseModule {
         }
     }
     async listInternal(params) {
-        var _a, _b, _c, _d;
+        var _a, _b;
         let response;
         let path = '';
         let queryParams = {};
@@ -20369,35 +20453,7 @@ class Tunings extends BaseModule {
             });
         }
         else {
-            const body = listTuningJobsParametersToMldev(params);
-            path = formatMap('tunedModels', body['_url']);
-            queryParams = body['_query'];
-            delete body['_url'];
-            delete body['_query'];
-            response = this.apiClient
-                .request({
-                path: path,
-                queryParams: queryParams,
-                body: JSON.stringify(body),
-                httpMethod: 'GET',
-                httpOptions: (_c = params.config) === null || _c === void 0 ? void 0 : _c.httpOptions,
-                abortSignal: (_d = params.config) === null || _d === void 0 ? void 0 : _d.abortSignal,
-            })
-                .then((httpResponse) => {
-                return httpResponse.json().then((jsonResponse) => {
-                    const response = jsonResponse;
-                    response.sdkHttpResponse = {
-                        headers: httpResponse.headers,
-                    };
-                    return response;
-                });
-            });
-            return response.then((apiResponse) => {
-                const resp = listTuningJobsResponseFromMldev(apiResponse);
-                const typedResp = new ListTuningJobsResponse();
-                Object.assign(typedResp, resp);
-                return typedResp;
-            });
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     /**
@@ -20514,7 +20570,7 @@ class Tunings extends BaseModule {
             });
         }
         else {
-            throw new Error('This method is only supported by the Vertex AI.');
+            throw new Error('This method is only supported by the Gemini Enterprise Agent Platform (previously known as Vertex AI).');
         }
     }
     async tuneMldevInternal(params) {
@@ -20870,5 +20926,5 @@ class GoogleGenAI {
     }
 }
 
-export { ActivityHandling, AdapterSize, AggregationMetric, ApiError, ApiSpec, AuthType, Batches, Behavior, BlockedReason, Caches, CancelTuningJobResponse, Chat, Chats, ComputeTokensResponse, ContentReferenceImage, ControlReferenceImage, ControlReferenceType, CountTokensResponse, CreateFileResponse, DeleteCachedContentResponse, DeleteFileResponse, DeleteModelResponse, DocumentState, DynamicRetrievalConfigMode, EditImageResponse, EditMode, EmbedContentResponse, EmbeddingApiType, EndSensitivity, Environment, EvaluateDatasetResponse, FeatureSelectionPreference, FileSource, FileState, Files, FinishReason, FunctionCallingConfigMode, FunctionResponse, FunctionResponseBlob, FunctionResponseFileData, FunctionResponsePart, FunctionResponseScheduling, GenerateContentResponse, GenerateContentResponsePromptFeedback, GenerateContentResponseUsageMetadata, GenerateImagesResponse, GenerateVideosOperation, GenerateVideosResponse, GoogleGenAI, HarmBlockMethod, HarmBlockThreshold, HarmCategory, HarmProbability, HarmSeverity, HttpElementLocation, HttpResponse, ImagePromptLanguage, ImportFileOperation, ImportFileResponse, InlinedEmbedContentResponse, InlinedResponse, JobState, Language, ListBatchJobsResponse, ListCachedContentsResponse, ListDocumentsResponse, ListFileSearchStoresResponse, ListFilesResponse, ListModelsResponse, ListTuningJobsResponse, Live, LiveClientToolResponse, LiveMusicPlaybackControl, LiveMusicServerMessage, LiveSendToolResponseParameters, LiveServerMessage, MaskReferenceImage, MaskReferenceMode, MediaModality, MediaResolution, Modality, ModelStage, Models, MusicGenerationMode, Operations, Outcome, PagedItem, Pager, PairwiseChoice, PartMediaResolutionLevel, PersonGeneration, PhishBlockThreshold, ProminentPeople, RawReferenceImage, RecontextImageResponse, RegisterFilesResponse, ReplayResponse, ResourceScope, SafetyFilterLevel, Scale, SegmentImageResponse, SegmentMode, ServiceTier, Session, SingleEmbedContentResponse, StartSensitivity, StyleReferenceImage, SubjectReferenceImage, SubjectReferenceType, ThinkingLevel, Tokens, ToolResponse, ToolType, TrafficType, TuningJobState, TuningMethod, TuningMode, TuningTask, TurnCompleteReason, TurnCoverage, Type, UploadToFileSearchStoreOperation, UploadToFileSearchStoreResponse, UploadToFileSearchStoreResumableResponse, UpscaleImageResponse, UrlRetrievalStatus, VadSignalType, VideoCompressionQuality, VideoGenerationMaskMode, VideoGenerationReferenceType, VoiceActivityType, createFunctionResponsePartFromBase64, createFunctionResponsePartFromUri, createModelContent, createPartFromBase64, createPartFromCodeExecutionResult, createPartFromExecutableCode, createPartFromFunctionCall, createPartFromFunctionResponse, createPartFromText, createPartFromUri, createUserContent, mcpToTool, setDefaultBaseUrls };
+export { ActivityHandling, AdapterSize, AggregationMetric, ApiError, ApiSpec, AuthType, Batches, Behavior, BlockedReason, Caches, CancelTuningJobResponse, Chat, Chats, ComputeTokensResponse, ContentReferenceImage, ControlReferenceImage, ControlReferenceType, CountTokensResponse, CreateFileResponse, DeleteCachedContentResponse, DeleteFileResponse, DeleteModelResponse, DocumentState, DynamicRetrievalConfigMode, EditImageResponse, EditMode, EmbedContentResponse, EmbeddingApiType, EndSensitivity, Environment, EvaluateDatasetResponse, FeatureSelectionPreference, FileSource, FileState, Files, FinishReason, FunctionCallingConfigMode, FunctionResponse, FunctionResponseBlob, FunctionResponseFileData, FunctionResponsePart, FunctionResponseScheduling, GenerateContentResponse, GenerateContentResponsePromptFeedback, GenerateContentResponseUsageMetadata, GenerateImagesResponse, GenerateVideosOperation, GenerateVideosResponse, GoogleGenAI, HarmBlockMethod, HarmBlockThreshold, HarmCategory, HarmProbability, HarmSeverity, HttpElementLocation, HttpResponse, ImagePromptLanguage, ImageResizeMode, ImportFileOperation, ImportFileResponse, InlinedEmbedContentResponse, InlinedResponse, JobState, Language, ListBatchJobsResponse, ListCachedContentsResponse, ListDocumentsResponse, ListFileSearchStoresResponse, ListFilesResponse, ListModelsResponse, ListTuningJobsResponse, Live, LiveClientToolResponse, LiveMusicPlaybackControl, LiveMusicServerMessage, LiveSendToolResponseParameters, LiveServerMessage, MaskReferenceImage, MaskReferenceMode, MediaModality, MediaResolution, Modality, ModelStage, Models, MusicGenerationMode, Operations, Outcome, PagedItem, Pager, PairwiseChoice, PartMediaResolutionLevel, PersonGeneration, PhishBlockThreshold, ProminentPeople, RawReferenceImage, RecontextImageResponse, RegisterFilesResponse, ReplayResponse, ResourceScope, SafetyFilterLevel, Scale, SegmentImageResponse, SegmentMode, ServiceTier, Session, SingleEmbedContentResponse, StartSensitivity, StyleReferenceImage, SubjectReferenceImage, SubjectReferenceType, ThinkingLevel, Tokens, ToolResponse, ToolType, TrafficType, TuningJobState, TuningMethod, TuningMode, TuningTask, TurnCompleteReason, TurnCoverage, Type, UploadToFileSearchStoreOperation, UploadToFileSearchStoreResponse, UploadToFileSearchStoreResumableResponse, UpscaleImageResponse, UrlRetrievalStatus, VadSignalType, VideoCompressionQuality, VideoGenerationMaskMode, VideoGenerationReferenceType, VoiceActivityType, createFunctionResponsePartFromBase64, createFunctionResponsePartFromUri, createModelContent, createPartFromBase64, createPartFromCodeExecutionResult, createPartFromExecutableCode, createPartFromFunctionCall, createPartFromFunctionResponse, createPartFromText, createPartFromUri, createUserContent, mcpToTool, setDefaultBaseUrls };
 //# sourceMappingURL=index.mjs.map

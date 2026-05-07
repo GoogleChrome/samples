@@ -8,7 +8,7 @@ export default function () {
     // when doing a standard build (not --serve or --watch)
     let result = z
       .object({
-        draft: z.boolean().or(z.undefined()),
+        draft: z.boolean().optional(),
       })
       .safeParse(data);
 

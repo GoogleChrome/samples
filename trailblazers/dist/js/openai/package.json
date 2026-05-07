@@ -1,6 +1,6 @@
 {
   "name": "openai",
-  "version": "6.34.0",
+  "version": "6.36.0",
   "description": "The official TypeScript library for the OpenAI API",
   "author": "OpenAI <support@openai.com>",
   "types": "./index.d.ts",
@@ -25,18 +25,6 @@
     "fix": "./scripts/format"
   },
   "dependencies": {},
-  "peerDependencies": {
-    "ws": "^8.18.0",
-    "zod": "^3.25 || ^4.0"
-  },
-  "peerDependenciesMeta": {
-    "ws": {
-      "optional": true
-    },
-    "zod": {
-      "optional": true
-    }
-  },
   "bin": {
     "openai": "bin/cli"
   },
@@ -249,6 +237,18 @@
     },
     "./version.mjs": {
       "default": "./version.mjs"
+    }
+  },
+  "peerDependencies": {
+    "ws": "^8.18.0",
+    "zod": "^3.25 || ^4.0"
+  },
+  "peerDependenciesMeta": {
+    "ws": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
     }
   }
 }

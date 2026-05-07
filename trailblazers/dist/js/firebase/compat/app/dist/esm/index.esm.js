@@ -2,7 +2,7 @@ import firebase from '@firebase/app-compat';
 export { default } from '@firebase/app-compat';
 
 var name = "firebase";
-var version = "12.12.0";
+var version = "12.12.1";
 
 /**
  * @license

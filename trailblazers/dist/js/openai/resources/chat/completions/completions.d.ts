@@ -1356,7 +1356,7 @@ export interface ChatCompletionCreateParamsBase {
      * of 24 hours.
      * [Learn more](https://platform.openai.com/docs/guides/prompt-caching#prompt-cache-retention).
      */
-    prompt_cache_retention?: 'in-memory' | '24h' | null;
+    prompt_cache_retention?: 'in_memory' | '24h' | null;
     /**
      * Constrains effort on reasoning for
      * [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently

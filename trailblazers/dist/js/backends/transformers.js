@@ -25,13 +25,13 @@ var a = class extends e {
 					total: 1,
 					lengthComputable: !0
 				})), e.__lastProgressLoaded = r);
+			}, n = (e) => {
+				e.status === "progress_total" ? t(e.progress / 100) : e.status === "ready" && t(1);
 			};
 			t(0), this.#e = await i("text-generation", this.modelName, {
 				device: this.#n,
 				dtype: this.#r,
-				progress_callback: (e) => {
-					e.status === "progress_total" ? t(e.progress / 100) : e.status === "ready" && t(1);
-				}
+				progress_callback: n
 			}), this.#t = this.#e.tokenizer;
 		}
 		return this.#e;

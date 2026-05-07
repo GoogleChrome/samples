@@ -25,31 +25,35 @@ class Evals extends resource_1.APIResource {
      * the [Evals guide](https://platform.openai.com/docs/guides/evals).
      */
     create(body, options) {
-        return this._client.post('/evals', { body, ...options });
+        return this._client.post('/evals', { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * Get an evaluation by ID.
      */
     retrieve(evalID, options) {
-        return this._client.get((0, path_1.path) `/evals/${evalID}`, options);
+        return this._client.get((0, path_1.path) `/evals/${evalID}`, { ...options, __security: { bearerAuth: true } });
     }
     /**
      * Update certain properties of an evaluation.
      */
     update(evalID, body, options) {
-        return this._client.post((0, path_1.path) `/evals/${evalID}`, { body, ...options });
+        return this._client.post((0, path_1.path) `/evals/${evalID}`, { body, ...options, __security: { bearerAuth: true } });
     }
     /**
      * List evaluations for a project.
      */
     list(query = {}, options) {
-        return this._client.getAPIList('/evals', (pagination_1.CursorPage), { query, ...options });
+        return this._client.getAPIList('/evals', (pagination_1.CursorPage), {
+            query,
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * Delete an evaluation.
      */
     delete(evalID, options) {
-        return this._client.delete((0, path_1.path) `/evals/${evalID}`, options);
+        return this._client.delete((0, path_1.path) `/evals/${evalID}`, { ...options, __security: { bearerAuth: true } });
     }
 }
 exports.Evals = Evals;

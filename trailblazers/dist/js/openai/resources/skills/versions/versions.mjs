@@ -14,14 +14,17 @@ export class Versions extends APIResource {
      * Create a new immutable skill version.
      */
     create(skillID, body = {}, options) {
-        return this._client.post(path `/skills/${skillID}/versions`, maybeMultipartFormRequestOptions({ body, ...options }, this._client));
+        return this._client.post(path `/skills/${skillID}/versions`, maybeMultipartFormRequestOptions({ body, ...options, __security: { bearerAuth: true } }, this._client));
     }
     /**
      * Get a specific skill version.
      */
     retrieve(version, params, options) {
         const { skill_id } = params;
-        return this._client.get(path `/skills/${skill_id}/versions/${version}`, options);
+        return this._client.get(path `/skills/${skill_id}/versions/${version}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
     /**
      * List skill versions for a skill.
@@ -30,6 +33,7 @@ export class Versions extends APIResource {
         return this._client.getAPIList(path `/skills/${skillID}/versions`, (CursorPage), {
             query,
             ...options,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -37,7 +41,10 @@ export class Versions extends APIResource {
      */
     delete(version, params, options) {
         const { skill_id } = params;
-        return this._client.delete(path `/skills/${skill_id}/versions/${version}`, options);
+        return this._client.delete(path `/skills/${skill_id}/versions/${version}`, {
+            ...options,
+            __security: { bearerAuth: true },
+        });
     }
 }
 Versions.Content = Content;

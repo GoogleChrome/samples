@@ -1,0 +1,1 @@
+{"version":3,"file":"admin.mjs","sourceRoot":"","sources":["../../src/resources/admin/admin.ts"],"names":[],"mappings":"AAAA,sFAAsF;OAE/E,EAAE,WAAW,EAAE;OACf,KAAK,eAAe;OACpB,EAAE,YAAY,EAAE;AAEvB,MAAM,OAAO,KAAM,SAAQ,WAAW;IAAtC;;QACE,iBAAY,GAAiC,IAAI,eAAe,CAAC,YAAY,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC;IAC9F,CAAC;CAAA;AAED,KAAK,CAAC,YAAY,GAAG,YAAY,CAAC"}

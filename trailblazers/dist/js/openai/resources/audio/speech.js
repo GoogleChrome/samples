@@ -17,8 +17,8 @@ class Speech extends resource_1.APIResource {
      * ```ts
      * const speech = await client.audio.speech.create({
      *   input: 'input',
-     *   model: 'string',
-     *   voice: 'string',
+     *   model: 'tts-1',
+     *   voice: 'alloy',
      * });
      *
      * const content = await speech.blob();
@@ -30,6 +30,7 @@ class Speech extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ Accept: 'application/octet-stream' }, options?.headers]),
+            __security: { bearerAuth: true },
             __binaryResponse: true,
         });
     }

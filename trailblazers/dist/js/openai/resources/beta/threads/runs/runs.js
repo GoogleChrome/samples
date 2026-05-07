@@ -30,6 +30,7 @@ class Runs extends resource_1.APIResource {
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
             stream: params.stream ?? false,
             __synthesizeEventData: true,
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -42,6 +43,7 @@ class Runs extends resource_1.APIResource {
         return this._client.get((0, path_1.path) `/threads/${thread_id}/runs/${runID}`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -55,6 +57,7 @@ class Runs extends resource_1.APIResource {
             body,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -67,6 +70,7 @@ class Runs extends resource_1.APIResource {
             query,
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -79,6 +83,7 @@ class Runs extends resource_1.APIResource {
         return this._client.post((0, path_1.path) `/threads/${thread_id}/runs/${runID}/cancel`, {
             ...options,
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            __security: { bearerAuth: true },
         });
     }
     /**
@@ -161,6 +166,7 @@ class Runs extends resource_1.APIResource {
             headers: (0, headers_1.buildHeaders)([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
             stream: params.stream ?? false,
             __synthesizeEventData: true,
+            __security: { bearerAuth: true },
         });
     }
     /**
