@@ -3,51 +3,35 @@
     "url": "https://chrome.dev/web-ai-demos/document-translator",
     "title": "",
     "description": "Translate documents in your browser using Chrome's built-in AI, right on your device",
-    "apis": [
-      "LanguageModel",
-      "Translator",
-      "LanguageDetector"
-    ],
+    "apis": ["LanguageModel", "Translator", "LanguageDetector"],
     "screenshot": "screenshots/chrome.dev--web-ai-demos-document-translator.png"
   },
   {
     "url": "https://chrome.dev/web-ai-demos/image-alt-text-playground",
     "title": "Image alt text playground",
     "description": "Explore AI-powered image alt text generation, using prompts to describe images for accessibility.",
-    "apis": [
-      "LanguageModel"
-    ],
+    "apis": ["LanguageModel"],
     "screenshot": "screenshots/chrome.dev--web-ai-demos-image-alt-text-playground.png"
   },
   {
     "url": "https://chrome.dev/web-ai-demos/news-app",
     "title": "Tagesschau Aktuell",
     "description": "Explore AI-powered news summaries and recommendations in this German news app demo",
-    "apis": [
-      "LanguageModel",
-      "Translator"
-    ],
+    "apis": ["LanguageModel", "Translator"],
     "screenshot": "screenshots/chrome.dev--web-ai-demos-news-app.png"
   },
   {
     "url": "https://translator-api-demo-tomayac.yoyo.codes/",
     "title": "Review and Book",
     "description": "Translate and summarize webpage content for booking a Shanghai rental, using Chrome AI.",
-    "apis": [
-      "Translator"
-    ],
+    "apis": ["Translator"],
     "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
   },
   {
     "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
     "title": "trAIlblazers",
     "description": "Create and manage travel blog posts using AI-powered tools in this trAIlblazers demo",
-    "apis": [
-      "LanguageModel",
-      "Translator",
-      "LanguageDetector",
-      "Summarizer"
-    ],
+    "apis": ["LanguageModel", "Translator", "LanguageDetector", "Summarizer"],
     "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
   }
 ]

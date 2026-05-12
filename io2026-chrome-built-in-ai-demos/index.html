@@ -1,655 +1,1352 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chrome Built-in AI Demos — Google I/O 2026</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <noscript data-cos-fonts>
-    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&amp;family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&amp;family=Noto+Color+Emoji&amp;display=swap" rel="stylesheet">
-  </noscript>
-  <script>
-    (async()=>{const f="[COS Fonts]";function C(){const e=new DOMParser,a=new Set;for(const o of document.querySelectorAll("noscript[data-cos-fonts]")){const d=e.parseFromString(o.innerHTML,"text/html");for(const c of d.querySelectorAll('link[rel="stylesheet"]'))try{new URL(c.href).hostname==="fonts.googleapis.com"&&a.add(c.href)}catch{}}return[...a]}function h(e){console.log(f,`Falling back: injecting ${e.length} <link> tag(s)`);for(const a of e){const o=document.createElement("link");o.rel="stylesheet",o.href=a,document.head.appendChild(o)}}const r=C();if(r.length===0){console.log(f,"No <noscript data-cos-fonts> blocks found — nothing to do");return}if(console.log(f,`Found ${r.length} Google Fonts CSS URL(s):`,r),!("crossOriginStorage"in navigator)){console.log(f,"crossOriginStorage not available — falling back to Google Fonts <link>"),h(r);return}console.log(f,"crossOriginStorage available — using COS font loading path");const I={t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouPWhoxrW5OD5k:"9b5b5283adf2524c0d84c9ee603cffc90881cc8a4217936baaa0313c39a36bda",t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouBWhoxrW5O:"1c7d9f9c86f929fb4469b8a93510a65936d3bdc49e0a1a6878ae2b0f3f47c7c2","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.1":"c87e948953bc90e38ba25d711f65377a62aef4e4a7cce272e1c6d8c315e4da41","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vQCIhM907-0x":"ca334c8cc2a9eb66f28217f441b42f69246f168c7720149dc8c3cf79ed7c2f96","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sgCIhM907-0x":"fa27e3ef78d8ff6d8870b802f53de88bb96428b97b50de1b084f64845687259f","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2oQCIhM907-0x":"843cf0483578f333e68db60a5dfcca8c9d7eaa35f2d3cec335c09e31ccacba89","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2tQCIhM907-0x":"ccc5959d188b82e8ac377be16e70ea66a9562575f9171ac96b939f49c1ca3470","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pwCIhM907-0x":"32d2866d43994e2ba5819bbfb445bb1232be73cf2650d7d2a0a1a63589aa33cb","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2twCIhM907-0x":"d75c1385de71217f960d6045be7f70608f126cf733fa81865be13625721d6ec3","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qgCIhM907-0x":"3f90ce2aaf2cfdd4c586cdfd84f7763b2b42d7a1132f6335366e351f7aa55e4b","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq20ACIhM907-0x":"d001bbf7a2e8b1d94d81073ce117443946489568260950a8b0754404e4e87687","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pgCIhM907-0x":"7b5ac7a5175c97050128da33872346768fa4889abaad86d37f085d668301e937","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2owCIhM907-0x":"38f54d0b5e7981f2b44a0857aedc72e4821daef74caf0c5ad12dc54f7e348a10","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vgCIhM907w":"522613a5a76bfdd8d20f44bcb468400e4dda5d25cbaa64e43fdc91c81ec1b770","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCIjshW7d0wve4":"74a5927e362e442609c8a1a061fb766ac29626d993d1bbb3ca56190f077ffc9c","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCljshW7d0wve4":"5f371f6e1019af48b0124b91aca9c8779f37a4a9b28d18c4ae401213a9060167","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCHjshW7d0wve4":"7f63c6ca27ad4025f8288efc8a83f29cff5eacfd3cc028c44577168e628e6740","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sQCIhM907-0x":"cba9116ea92cb36741fb795bb121da411a27b46a5f2e9b2d5dae5ebf939893e6","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCOjshW7d0wve4":"2cc997a717dde013d3e7208d438d891f6088a2d6c17b1f6db42354ba60279fa1","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCejshW7d0wve4":"08d730a36c9b19bfbcc8c2392fc03f56a0cd325cf68a8d6490e16461ecbee379","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2kQCIhM907-0x":"516f31b16e343b1ae6023bd8f218d9d1023b942b294fbb342a0f24240c2ea050","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCJjshW7d0wve4":"60eb3c10b0aa20173f284a0d34e2d66c5defa773073887c87d306fd1f60f6569","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vACIhM907-0x":"c0a5e8acfa2b6f4997b576503080f8f230925da7770ff36963f79fa87a7eeac5","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCFjshW7d0wve4":"7658c064dd2713ec7fae59f4414f656f5a2f206ff04286db69ce376598f3e1e3","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rgCIhM907-0x":"e31ccdcafcbe842da4b04e1a2ed3f1055c946c30fe18c07d3d1683bb6e71e6ed","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCGjshW7d0wve4":"867a0c2b8cd82839684b223baa2763be7799bb8a898f8d9a567fff807faf24b2","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sACIhM907-0x":"ea50cc7786ceec737cf24d3ebaee7fcb5004cda27fd3871abfb23d15e4e5401e","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCajshW7d0wve4":"280729bb52d1229f914610003dc86e9711c86a65d18b07efe3af9d96f14be9cc","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.2":"d500497beb107cb122df6b65452c8bd9699c9078b9ae5f35bb82696a8cce6f60","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCKjshW7d0w":"e98deac67941679b468f2545a34544aece5dcd6ed638f59891e94012617e4656","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qACIhM907-0x":"ab318b6833b45b02ece5d0d60e96d2b6d11799840979d496f7fe8b9e3ce8007f","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ogCIhM907-0x":"2b076d3b2accc9a3b7897d7f3fed33eedcf5a2eee2c74368638d7bb76b9d556d","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ugCIhM907-0x":"686440514690e359c3b829a8fe90236161c7670b87081ae25821965c1a1b8b54","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2nQCIhM907-0x":"0bcf740d0d1cdba34eb4af728c150be6b306e33c4780695cd1045fc8aedae27c","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCVjshW7d0wve4":"82db3d6dd48495e05b1edfffe7994ff35bb3ed0ba45e1db4ab518e1203f3a288","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2swCIhM907-0x":"5a3db91b5270dcd97f050f84e70ec9bdb94d4189ba17a46b9cb7dc4f4060834d","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCDjshW7d0wve4":"6e78f3302dd51024a4cd4b338b418140b54ccb784c01970bb326de62581ce809","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCpjshW7d0wve4":"667f4bbf20fa5c708bd0817b259f4424c362216d602faa6756dd1dbb25c48873","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCcjshW7d0wve4":"d23c3ed27d8bdfcae9153f63c3c6901bf857cc833d4399172c0537a8cbf8e7d4","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCEjshW7d0wve4":"9753d80d8ab72baf54acd4714802cce59005ae954cd1008f5b5774dd2904f17e","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTDkjshW7d0wve4":"9e608b4f7500b0b92b2afcc3facd0f78ab875f09a3b7626fd3b3df8cc3e4f31c","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.6":"732541f93fcf33bb4919aa42f865f242a1d3f3428fd68c659774ad8bdefd5c87","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.4":"f7848ab453b11441c20792f91c202ee98bcdcc223609e8cda6930d5f947c3d68","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCSjshW7d0wve4":"292220d216c6dceeab078691943436641076524ca9c8ad0fc79468ec255056e3","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCLjshW7d0wve4":"6cc7490cf4b03fd7e7aac8dbf44e3b57d7896d8d3a06a8bb99f829f5f2a3bf91","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCRjshW7d0wve4":"6eb80b615703be8d46ea94a895a1a78d240511fa6925645a139b978e76c8aceb","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vwCIhM907-0x":"47bf33fd0676efb1f43f636fde1896d3353ef4ae35c93005d6725e264fea38da","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.5":"59ec028a34d2c3cb6e670d4fd231d7d61895b560738daa6ff4b956643ffe4aac","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.9":"a50590a80ba6589388f4a51d463f853ef382dcbeb1e3b022dc6ed60147676ca2","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pQCIhM907-0x":"04e033501d76c362d5dac19f736f0888776b3db70f3b4e30b7ff5700eea42c4f","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCBjshW7d0wve4":"62047e77091c0dba15e38ede0ed715e69a4e0ba2da34f0bad64aef4fad016d96","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCTjshW7d0wve4":"6a8ccea6400478d63470f5cbb0ffc16d6998d4bcb59609484227452af5624014","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rACIhM907-0x":"c17161ed0c625be4a33ca2fdf730b639c34f2ba98a7b1cf7a9439bb72d609564","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCXjshW7d0wve4":"3b5962005f829d79cae949104ea0595c7b30ace83525b4abda25baac1d11017a","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCYjshW7d0wve4":"1d4d9c6b05fb48a55db31501d849c34dd6d03156fb57e7930a679b6d04d78afe","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.3":"33d863891fc666d3bcd03700f344ef50da89cf005b10d0022b5d196ac18b3596","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCWjshW7d0wve4":"91fa5ed2cdc4605894f58bfbfc22e0ca82b57f236245e2815beca50031c8d6a4","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.7":"d1f87d46c80af676a0099def081fffea41f85bc62dc0957405f2ff9a33f18c4d","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCbjshW7d0wve4":"15c18fb3ffcc3661015b1b0a8c85ad0f26ce05bb532a53e1116a98ef64b2e44a","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rwCIhM907-0x":"0e72475119587f94d812716d43bba51f8b9cd5747a4f062b288a4f9efa743a3c","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.8":"2583da22e236b9b53d85d7a9dcb3f18cb4bca92277ea26cf53ada69c63ac8278","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.0":"1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6"},i=Object.keys(I).length;console.log(f,i>0?`Pre-computed hashes: ${i} font file(s) — COS queries need no network fetch on hit`:"No pre-computed hashes found — will compute SHA-256 from content after download");const u=e=>{try{return localStorage.getItem(e)}catch{return null}},G=(e,a)=>{try{localStorage.setItem(e,a)}catch{}};async function g(e){const a=await crypto.subtle.digest("SHA-256",e);return Array.from(new Uint8Array(a),o=>o.toString(16).padStart(2,"0")).join("")}async function J(e){try{console.log(f,`  COS lookup   hash=${e}`);const[a]=await navigator.crossOriginStorage.requestFileHandles([{algorithm:"SHA-256",value:e}]),o=await a.getFile();return console.log(f,`  COS hit      ${(o.size/1024).toFixed(1)} KB`),o}catch(a){if(a.name==="NotFoundError")return console.log(f,"  COS miss     (not found or privacy-gated)"),null;throw a}}async function w(e,a){try{console.log(f,`  COS store    hash=${a} size=${(e.size/1024).toFixed(1)} KB origins=*`);const[o]=await navigator.crossOriginStorage.requestFileHandles([{algorithm:"SHA-256",value:a}],{create:!0,origins:"*"}),d=await o.createWritable();await d.write(e),await d.close(),console.log(f,"  COS store    done")}catch(o){console.warn(f,`  COS store    failed: ${o.message}`)}}async function x(e){const a=e.split("/").pop().replace(/\.[^.]+$/,""),o=I[a],d=o??u("cos_fh:"+e);if(d){console.log(f,o?`  Pre-computed hash  ${d}`:`  Cached hash  ${d}`);const b=await J(d);if(b)return b}console.log(f,`  Network fetch ${e}`);const c=await fetch(e);if(!c.ok)throw new Error(`Fetch ${e} → ${c.status}`);const t=await c.arrayBuffer(),l=c.headers.get("content-type")||"font/woff2",s=new Blob([t],{type:l});console.log(f,`  Network fetch done  ${(s.size/1024).toFixed(1)} KB`);const n=o??await g(t);return o||(console.warn(f,`  No pre-computed hash for "${a}" — computed from content.`,"Re-run hash-calculator.html and update the hash map in the page."),G("cos_fh:"+e,n)),w(s,n),s}function _(e){try{const a=new URL(e);return a.searchParams.delete("text"),a.toString()}catch{return e}}function q(e){const a=[],o=/@font-face\s*\{([^}]+)\}/g;let d;for(;(d=o.exec(e))!==null;){const c=d[1],t=n=>{const b=n.exec(c);return b?b[1].trim():null},l=t(/font-family:\s*['"]([^'"]+)['"]/),s=t(/url\(['"]?(https?:[^'")\s]+)['"]?\)/);!l||!s||a.push({family:l,style:t(/font-style:\s*([^;]+)/)||"normal",weight:t(/font-weight:\s*([^;]+)/)||"400",stretch:t(/font-stretch:\s*([^;]+)/),display:t(/font-display:\s*([^;]+)/)||"swap",unicodeRange:t(/unicode-range:\s*([^;]+)/),url:s})}return a}async function D(e){const a=_(e),o="cos_font_css_v1:"+a,d=u(o);if(d)try{const s=JSON.parse(d);return console.log(f,`CSS descriptors from localStorage: ${a} (${s.length} faces)`),s}catch{}console.log(f,`Fetching Google Fonts CSS: ${a}`);const c=await fetch(a);if(!c.ok)throw new Error(`CSS fetch → ${c.status}`);const t=await c.text(),l=q(t);return console.log(f,`CSS parsed: ${l.length} @font-face rules found in ${a}`),G(o,JSON.stringify(l)),l}try{const e=(await Promise.all(r.map(D))).flat();console.log(f,`Loading ${e.length} font faces total…`);const a=await Promise.allSettled(e.map(async c=>{const t=`${c.family} weight=${c.weight} style=${c.style}${c.unicodeRange?" unicode="+c.unicodeRange.slice(0,20)+"…":""}`;console.log(`${f} ${t}`);try{const s=await(await x(c.url)).arrayBuffer(),n={style:c.style,weight:c.weight,display:c.display};c.stretch&&(n.stretch=c.stretch),c.unicodeRange&&(n.unicodeRange=c.unicodeRange);const b=new FontFace(c.family,s,n);await b.load(),document.fonts.add(b),console.log(f,"  FontFace loaded and added to document.fonts")}catch(l){throw console.warn(f,`  Failed: ${l.message}`),l}})),o=a.filter(c=>c.status==="fulfilled").length,d=a.length-o;console.log(f,`Done: ${o} faces loaded${d?`, ${d} failed`:""}`)}catch(e){console.warn(f,"Falling back to Google Fonts:",e.message),h(r)}})();
-  </script>
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chrome Built-in AI Demos — Google I/O 2026</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <noscript data-cos-fonts>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&amp;family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&amp;family=Noto+Color+Emoji&amp;display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <script>
+      (async () => {
+        const f = '[COS Fonts]';
+        function C() {
+          const e = new DOMParser(),
+            a = new Set();
+          for (const o of document.querySelectorAll(
+            'noscript[data-cos-fonts]'
+          )) {
+            const d = e.parseFromString(o.innerHTML, 'text/html');
+            for (const c of d.querySelectorAll('link[rel="stylesheet"]'))
+              try {
+                new URL(c.href).hostname === 'fonts.googleapis.com' &&
+                  a.add(c.href);
+              } catch {}
+          }
+          return [...a];
+        }
+        function h(e) {
+          console.log(f, `Falling back: injecting ${e.length} <link> tag(s)`);
+          for (const a of e) {
+            const o = document.createElement('link');
+            ((o.rel = 'stylesheet'),
+              (o.href = a),
+              document.head.appendChild(o));
+          }
+        }
+        const r = C();
+        if (r.length === 0) {
+          console.log(
+            f,
+            'No <noscript data-cos-fonts> blocks found — nothing to do'
+          );
+          return;
+        }
+        if (
+          (console.log(f, `Found ${r.length} Google Fonts CSS URL(s):`, r),
+          !('crossOriginStorage' in navigator))
+        ) {
+          (console.log(
+            f,
+            'crossOriginStorage not available — falling back to Google Fonts <link>'
+          ),
+            h(r));
+          return;
+        }
+        console.log(
+          f,
+          'crossOriginStorage available — using COS font loading path'
+        );
+        const I = {
+            t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouPWhoxrW5OD5k:
+              '9b5b5283adf2524c0d84c9ee603cffc90881cc8a4217936baaa0313c39a36bda',
+            t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouBWhoxrW5O:
+              '1c7d9f9c86f929fb4469b8a93510a65936d3bdc49e0a1a6878ae2b0f3f47c7c2',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.1':
+              'c87e948953bc90e38ba25d711f65377a62aef4e4a7cce272e1c6d8c315e4da41',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vQCIhM907-0x':
+              'ca334c8cc2a9eb66f28217f441b42f69246f168c7720149dc8c3cf79ed7c2f96',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sgCIhM907-0x':
+              'fa27e3ef78d8ff6d8870b802f53de88bb96428b97b50de1b084f64845687259f',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2oQCIhM907-0x':
+              '843cf0483578f333e68db60a5dfcca8c9d7eaa35f2d3cec335c09e31ccacba89',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2tQCIhM907-0x':
+              'ccc5959d188b82e8ac377be16e70ea66a9562575f9171ac96b939f49c1ca3470',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pwCIhM907-0x':
+              '32d2866d43994e2ba5819bbfb445bb1232be73cf2650d7d2a0a1a63589aa33cb',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2twCIhM907-0x':
+              'd75c1385de71217f960d6045be7f70608f126cf733fa81865be13625721d6ec3',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qgCIhM907-0x':
+              '3f90ce2aaf2cfdd4c586cdfd84f7763b2b42d7a1132f6335366e351f7aa55e4b',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq20ACIhM907-0x':
+              'd001bbf7a2e8b1d94d81073ce117443946489568260950a8b0754404e4e87687',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pgCIhM907-0x':
+              '7b5ac7a5175c97050128da33872346768fa4889abaad86d37f085d668301e937',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2owCIhM907-0x':
+              '38f54d0b5e7981f2b44a0857aedc72e4821daef74caf0c5ad12dc54f7e348a10',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vgCIhM907w':
+              '522613a5a76bfdd8d20f44bcb468400e4dda5d25cbaa64e43fdc91c81ec1b770',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCIjshW7d0wve4':
+              '74a5927e362e442609c8a1a061fb766ac29626d993d1bbb3ca56190f077ffc9c',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCljshW7d0wve4':
+              '5f371f6e1019af48b0124b91aca9c8779f37a4a9b28d18c4ae401213a9060167',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCHjshW7d0wve4':
+              '7f63c6ca27ad4025f8288efc8a83f29cff5eacfd3cc028c44577168e628e6740',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sQCIhM907-0x':
+              'cba9116ea92cb36741fb795bb121da411a27b46a5f2e9b2d5dae5ebf939893e6',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCOjshW7d0wve4':
+              '2cc997a717dde013d3e7208d438d891f6088a2d6c17b1f6db42354ba60279fa1',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCejshW7d0wve4':
+              '08d730a36c9b19bfbcc8c2392fc03f56a0cd325cf68a8d6490e16461ecbee379',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2kQCIhM907-0x':
+              '516f31b16e343b1ae6023bd8f218d9d1023b942b294fbb342a0f24240c2ea050',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCJjshW7d0wve4':
+              '60eb3c10b0aa20173f284a0d34e2d66c5defa773073887c87d306fd1f60f6569',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vACIhM907-0x':
+              'c0a5e8acfa2b6f4997b576503080f8f230925da7770ff36963f79fa87a7eeac5',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCFjshW7d0wve4':
+              '7658c064dd2713ec7fae59f4414f656f5a2f206ff04286db69ce376598f3e1e3',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rgCIhM907-0x':
+              'e31ccdcafcbe842da4b04e1a2ed3f1055c946c30fe18c07d3d1683bb6e71e6ed',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCGjshW7d0wve4':
+              '867a0c2b8cd82839684b223baa2763be7799bb8a898f8d9a567fff807faf24b2',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sACIhM907-0x':
+              'ea50cc7786ceec737cf24d3ebaee7fcb5004cda27fd3871abfb23d15e4e5401e',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCajshW7d0wve4':
+              '280729bb52d1229f914610003dc86e9711c86a65d18b07efe3af9d96f14be9cc',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.2':
+              'd500497beb107cb122df6b65452c8bd9699c9078b9ae5f35bb82696a8cce6f60',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCKjshW7d0w':
+              'e98deac67941679b468f2545a34544aece5dcd6ed638f59891e94012617e4656',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qACIhM907-0x':
+              'ab318b6833b45b02ece5d0d60e96d2b6d11799840979d496f7fe8b9e3ce8007f',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ogCIhM907-0x':
+              '2b076d3b2accc9a3b7897d7f3fed33eedcf5a2eee2c74368638d7bb76b9d556d',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ugCIhM907-0x':
+              '686440514690e359c3b829a8fe90236161c7670b87081ae25821965c1a1b8b54',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2nQCIhM907-0x':
+              '0bcf740d0d1cdba34eb4af728c150be6b306e33c4780695cd1045fc8aedae27c',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCVjshW7d0wve4':
+              '82db3d6dd48495e05b1edfffe7994ff35bb3ed0ba45e1db4ab518e1203f3a288',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2swCIhM907-0x':
+              '5a3db91b5270dcd97f050f84e70ec9bdb94d4189ba17a46b9cb7dc4f4060834d',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCDjshW7d0wve4':
+              '6e78f3302dd51024a4cd4b338b418140b54ccb784c01970bb326de62581ce809',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCpjshW7d0wve4':
+              '667f4bbf20fa5c708bd0817b259f4424c362216d602faa6756dd1dbb25c48873',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCcjshW7d0wve4':
+              'd23c3ed27d8bdfcae9153f63c3c6901bf857cc833d4399172c0537a8cbf8e7d4',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCEjshW7d0wve4':
+              '9753d80d8ab72baf54acd4714802cce59005ae954cd1008f5b5774dd2904f17e',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTDkjshW7d0wve4':
+              '9e608b4f7500b0b92b2afcc3facd0f78ab875f09a3b7626fd3b3df8cc3e4f31c',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.6':
+              '732541f93fcf33bb4919aa42f865f242a1d3f3428fd68c659774ad8bdefd5c87',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.4':
+              'f7848ab453b11441c20792f91c202ee98bcdcc223609e8cda6930d5f947c3d68',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCSjshW7d0wve4':
+              '292220d216c6dceeab078691943436641076524ca9c8ad0fc79468ec255056e3',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCLjshW7d0wve4':
+              '6cc7490cf4b03fd7e7aac8dbf44e3b57d7896d8d3a06a8bb99f829f5f2a3bf91',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCRjshW7d0wve4':
+              '6eb80b615703be8d46ea94a895a1a78d240511fa6925645a139b978e76c8aceb',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vwCIhM907-0x':
+              '47bf33fd0676efb1f43f636fde1896d3353ef4ae35c93005d6725e264fea38da',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.5':
+              '59ec028a34d2c3cb6e670d4fd231d7d61895b560738daa6ff4b956643ffe4aac',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.9':
+              'a50590a80ba6589388f4a51d463f853ef382dcbeb1e3b022dc6ed60147676ca2',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pQCIhM907-0x':
+              '04e033501d76c362d5dac19f736f0888776b3db70f3b4e30b7ff5700eea42c4f',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCBjshW7d0wve4':
+              '62047e77091c0dba15e38ede0ed715e69a4e0ba2da34f0bad64aef4fad016d96',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCTjshW7d0wve4':
+              '6a8ccea6400478d63470f5cbb0ffc16d6998d4bcb59609484227452af5624014',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rACIhM907-0x':
+              'c17161ed0c625be4a33ca2fdf730b639c34f2ba98a7b1cf7a9439bb72d609564',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCXjshW7d0wve4':
+              '3b5962005f829d79cae949104ea0595c7b30ace83525b4abda25baac1d11017a',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCYjshW7d0wve4':
+              '1d4d9c6b05fb48a55db31501d849c34dd6d03156fb57e7930a679b6d04d78afe',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.3':
+              '33d863891fc666d3bcd03700f344ef50da89cf005b10d0022b5d196ac18b3596',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCWjshW7d0wve4':
+              '91fa5ed2cdc4605894f58bfbfc22e0ca82b57f236245e2815beca50031c8d6a4',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.7':
+              'd1f87d46c80af676a0099def081fffea41f85bc62dc0957405f2ff9a33f18c4d',
+            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCbjshW7d0wve4':
+              '15c18fb3ffcc3661015b1b0a8c85ad0f26ce05bb532a53e1116a98ef64b2e44a',
+            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rwCIhM907-0x':
+              '0e72475119587f94d812716d43bba51f8b9cd5747a4f062b288a4f9efa743a3c',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.8':
+              '2583da22e236b9b53d85d7a9dcb3f18cb4bca92277ea26cf53ada69c63ac8278',
+            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.0':
+              '1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6',
+          },
+          i = Object.keys(I).length;
+        console.log(
+          f,
+          i > 0
+            ? `Pre-computed hashes: ${i} font file(s) — COS queries need no network fetch on hit`
+            : 'No pre-computed hashes found — will compute SHA-256 from content after download'
+        );
+        const u = (e) => {
+            try {
+              return localStorage.getItem(e);
+            } catch {
+              return null;
+            }
+          },
+          G = (e, a) => {
+            try {
+              localStorage.setItem(e, a);
+            } catch {}
+          };
+        async function g(e) {
+          const a = await crypto.subtle.digest('SHA-256', e);
+          return Array.from(new Uint8Array(a), (o) =>
+            o.toString(16).padStart(2, '0')
+          ).join('');
+        }
+        async function J(e) {
+          try {
+            console.log(f, `  COS lookup   hash=${e}`);
+            const [a] = await navigator.crossOriginStorage.requestFileHandles([
+                { algorithm: 'SHA-256', value: e },
+              ]),
+              o = await a.getFile();
+            return (
+              console.log(f, `  COS hit      ${(o.size / 1024).toFixed(1)} KB`),
+              o
+            );
+          } catch (a) {
+            if (a.name === 'NotFoundError')
+              return (
+                console.log(f, '  COS miss     (not found or privacy-gated)'),
+                null
+              );
+            throw a;
+          }
+        }
+        async function w(e, a) {
+          try {
+            console.log(
+              f,
+              `  COS store    hash=${a} size=${(e.size / 1024).toFixed(1)} KB origins=*`
+            );
+            const [o] = await navigator.crossOriginStorage.requestFileHandles(
+                [{ algorithm: 'SHA-256', value: a }],
+                { create: !0, origins: '*' }
+              ),
+              d = await o.createWritable();
+            (await d.write(e),
+              await d.close(),
+              console.log(f, '  COS store    done'));
+          } catch (o) {
+            console.warn(f, `  COS store    failed: ${o.message}`);
+          }
+        }
+        async function x(e) {
+          const a = e
+              .split('/')
+              .pop()
+              .replace(/\.[^.]+$/, ''),
+            o = I[a],
+            d = o ?? u('cos_fh:' + e);
+          if (d) {
+            console.log(
+              f,
+              o ? `  Pre-computed hash  ${d}` : `  Cached hash  ${d}`
+            );
+            const b = await J(d);
+            if (b) return b;
+          }
+          console.log(f, `  Network fetch ${e}`);
+          const c = await fetch(e);
+          if (!c.ok) throw new Error(`Fetch ${e} → ${c.status}`);
+          const t = await c.arrayBuffer(),
+            l = c.headers.get('content-type') || 'font/woff2',
+            s = new Blob([t], { type: l });
+          console.log(
+            f,
+            `  Network fetch done  ${(s.size / 1024).toFixed(1)} KB`
+          );
+          const n = o ?? (await g(t));
+          return (
+            o ||
+              (console.warn(
+                f,
+                `  No pre-computed hash for "${a}" — computed from content.`,
+                'Re-run hash-calculator.html and update the hash map in the page.'
+              ),
+              G('cos_fh:' + e, n)),
+            w(s, n),
+            s
+          );
+        }
+        function _(e) {
+          try {
+            const a = new URL(e);
+            return (a.searchParams.delete('text'), a.toString());
+          } catch {
+            return e;
+          }
+        }
+        function q(e) {
+          const a = [],
+            o = /@font-face\s*\{([^}]+)\}/g;
+          let d;
+          for (; (d = o.exec(e)) !== null; ) {
+            const c = d[1],
+              t = (n) => {
+                const b = n.exec(c);
+                return b ? b[1].trim() : null;
+              },
+              l = t(/font-family:\s*['"]([^'"]+)['"]/),
+              s = t(/url\(['"]?(https?:[^'")\s]+)['"]?\)/);
+            !l ||
+              !s ||
+              a.push({
+                family: l,
+                style: t(/font-style:\s*([^;]+)/) || 'normal',
+                weight: t(/font-weight:\s*([^;]+)/) || '400',
+                stretch: t(/font-stretch:\s*([^;]+)/),
+                display: t(/font-display:\s*([^;]+)/) || 'swap',
+                unicodeRange: t(/unicode-range:\s*([^;]+)/),
+                url: s,
+              });
+          }
+          return a;
+        }
+        async function D(e) {
+          const a = _(e),
+            o = 'cos_font_css_v1:' + a,
+            d = u(o);
+          if (d)
+            try {
+              const s = JSON.parse(d);
+              return (
+                console.log(
+                  f,
+                  `CSS descriptors from localStorage: ${a} (${s.length} faces)`
+                ),
+                s
+              );
+            } catch {}
+          console.log(f, `Fetching Google Fonts CSS: ${a}`);
+          const c = await fetch(a);
+          if (!c.ok) throw new Error(`CSS fetch → ${c.status}`);
+          const t = await c.text(),
+            l = q(t);
+          return (
+            console.log(
+              f,
+              `CSS parsed: ${l.length} @font-face rules found in ${a}`
+            ),
+            G(o, JSON.stringify(l)),
+            l
+          );
+        }
+        try {
+          const e = (await Promise.all(r.map(D))).flat();
+          console.log(f, `Loading ${e.length} font faces total…`);
+          const a = await Promise.allSettled(
+              e.map(async (c) => {
+                const t = `${c.family} weight=${c.weight} style=${c.style}${c.unicodeRange ? ' unicode=' + c.unicodeRange.slice(0, 20) + '…' : ''}`;
+                console.log(`${f} ${t}`);
+                try {
+                  const s = await (await x(c.url)).arrayBuffer(),
+                    n = {
+                      style: c.style,
+                      weight: c.weight,
+                      display: c.display,
+                    };
+                  (c.stretch && (n.stretch = c.stretch),
+                    c.unicodeRange && (n.unicodeRange = c.unicodeRange));
+                  const b = new FontFace(c.family, s, n);
+                  (await b.load(),
+                    document.fonts.add(b),
+                    console.log(
+                      f,
+                      '  FontFace loaded and added to document.fonts'
+                    ));
+                } catch (l) {
+                  throw (console.warn(f, `  Failed: ${l.message}`), l);
+                }
+              })
+            ),
+            o = a.filter((c) => c.status === 'fulfilled').length,
+            d = a.length - o;
+          console.log(f, `Done: ${o} faces loaded${d ? `, ${d} failed` : ''}`);
+        } catch (e) {
+          (console.warn(f, 'Falling back to Google Fonts:', e.message), h(r));
+        }
+      })();
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    :root {
-      --font-sans: 'Google Sans', system-ui, sans-serif;
-      --font-display: 'Doto', monospace;
-      --font-emoji: 'Noto Color Emoji', sans-serif;
+      :root {
+        --font-sans: 'Google Sans', system-ui, sans-serif;
+        --font-display: 'Doto', monospace;
+        --font-emoji: 'Noto Color Emoji', sans-serif;
 
-      --color-bg: #000000;
-      --color-surface: #1a1a1a;
-      --color-border: #2a2a2a;
-      --color-text: #e8eaed;
-      --color-text-secondary: #9aa0a6;
-      --color-blue: #8ab4f8;
-      --color-red: #f28b82;
-      --color-yellow: #fdd663;
-      --color-green: #81c995;
+        --color-bg: #000000;
+        --color-surface: #1a1a1a;
+        --color-border: #2a2a2a;
+        --color-text: #e8eaed;
+        --color-text-secondary: #9aa0a6;
+        --color-blue: #8ab4f8;
+        --color-red: #f28b82;
+        --color-yellow: #fdd663;
+        --color-green: #81c995;
 
-      --radius-card: 16px;
-      --radius-video: 20px;
-      --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.4);
-      --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.7), 0 12px 32px rgba(0, 0, 0, 0.5);
+        --radius-card: 16px;
+        --radius-video: 20px;
+        --shadow-card:
+          0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.4);
+        --shadow-card-hover:
+          0 4px 16px rgba(0, 0, 0, 0.7), 0 12px 32px rgba(0, 0, 0, 0.5);
 
-      --header-height: 64px;
-      --max-width: 1280px;
-    }
+        --header-height: 64px;
+        --max-width: 1280px;
+      }
 
-    html {
-      scroll-behavior: smooth;
-    }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      font-family: var(--font-sans);
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
+      body {
+        font-family: var(--font-sans);
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    /* ── Header ── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: var(--header-height);
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
-    }
+      /* ── Header ── */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        height: var(--header-height);
+        background: rgba(0, 0, 0, 0.88);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--color-border);
+      }
 
-    .header-inner {
-      max-width: var(--max-width);
-      height: 100%;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .header-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-
-    .header-logo img {
-      height: 24px;
-      width: auto;
-      display: block;
-      filter: invert(1);
-    }
-
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      list-style: none;
-    }
-
-    .header-nav a {
-      display: inline-block;
-      padding: 8px 16px;
-      text-decoration: none;
-      color: var(--color-text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 24px;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .header-nav a:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--color-text);
-    }
-
-    .header-nav a.active {
-      background: rgba(138, 180, 248, 0.15);
-      color: var(--color-blue);
-    }
-
-    /* ── Hero ── */
-    .hero-banner-wrap {
-      overflow: hidden;
-      border-bottom: 1px solid var(--color-border);
-      line-height: 0;
-    }
-
-    .hero-banner {
-      width: 100%;
-      height: auto;
-      max-height: 160px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .hero-content {
-      padding: 40px 24px 44px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .hero-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-    }
-
-    .hero-text {
-      flex: 1 1 0;
-      min-width: 0;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--color-text-secondary);
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.025em;
-      color: var(--color-text);
-      margin-bottom: 24px;
-    }
-
-    .hero-title .gradient-text {
-      background: linear-gradient(115deg, #4285f4 0%, #9c27b0 30%, #ea4335 60%, #fbbc04 80%, #34a853 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-desc {
-      font-size: 18px;
-      line-height: 1.65;
-      color: var(--color-text-secondary);
-      max-width: 500px;
-    }
-
-    .hero-video-wrap {
-      flex: 0 0 auto;
-      width: min(188px, 20%);
-    }
-
-    .hero-video-wrap video {
-      width: 100%;
-      height: auto;
-      border-radius: var(--radius-video);
-      display: block;
-      box-shadow: var(--shadow-card);
-    }
-
-    /* ── Demos section ── */
-    .demos-section {
-      padding: 48px 24px 72px;
-    }
-
-    .section-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--color-text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 2.8vw, 2.25rem);
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      color: var(--color-text);
-      margin-bottom: 48px;
-    }
-
-    /* Grid Lanes with regular-grid fallback */
-    .demos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    @supports (display: grid-lanes) {
-      .demos-grid {
-        display: grid-lanes;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      .header-inner {
+        max-width: var(--max-width);
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         gap: 24px;
       }
-    }
 
-    /* ── Demo cards ── */
-    [hidden] { display: none !important; }
-
-    .demo-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .demo-card:hover {
-      border-color: #444;
-      box-shadow: var(--shadow-card-hover);
-    }
-
-    .demo-card:focus-visible {
-      outline: 2px solid var(--color-blue);
-      outline-offset: 3px;
-    }
-
-    .card-thumb {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* ── API pills on cards ── */
-    .api-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .api-pill {
-      display: inline-block;
-      padding: 3px 9px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      border: 1px solid transparent;
-    }
-
-    .api-pill--languagemodel  { background: rgba(138,180,248,0.12); color: #8ab4f8; border-color: rgba(138,180,248,0.28); }
-    .api-pill--translator     { background: rgba(129,201,149,0.12); color: #81c995; border-color: rgba(129,201,149,0.28); }
-    .api-pill--languagedetector { background: rgba(128,203,196,0.12); color: #80cbc4; border-color: rgba(128,203,196,0.28); }
-    .api-pill--summarizer     { background: rgba(253,214,99,0.12);  color: #fdd663; border-color: rgba(253,214,99,0.28); }
-    .api-pill--writer         { background: rgba(242,139,130,0.12); color: #f28b82; border-color: rgba(242,139,130,0.28); }
-    .api-pill--rewriter       { background: rgba(255,171,64,0.12);  color: #ffab40; border-color: rgba(255,171,64,0.28); }
-
-    /* ── Filter bar ── */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 32px;
-    }
-
-    .filter-pill {
-      padding: 6px 16px;
-      border-radius: 20px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      color: var(--color-text-secondary);
-      font-size: 13px;
-      font-weight: 500;
-      font-family: var(--font-sans);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .filter-pill:hover:not(.active) {
-      background: #2a2a2a;
-      color: var(--color-text);
-      border-color: #444;
-    }
-
-    .filter-pill.active {
-      background: var(--pill-bg, rgba(138, 180, 248, 0.14));
-      border-color: var(--pill-border, rgba(138, 180, 248, 0.4));
-      color: var(--pill-color, var(--color-blue));
-    }
-
-    .card-body {
-      padding: 24px;
-    }
-
-    .card-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-
-    .card-desc {
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--color-text-secondary);
-    }
-
-    /* ── Footer ── */
-    .site-footer {
-      border-top: 1px solid var(--color-border);
-      padding: 28px 24px;
-      background: var(--color-bg);
-    }
-
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      height: 18px;
-      width: auto;
-      display: block;
-      filter: invert(1);
-      opacity: 0.55;
-    }
-
-    .footer-text {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 860px) {
-      .hero-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 40px;
+      .header-logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        flex-shrink: 0;
       }
 
-      .hero-video-wrap {
-        width: 100%;
-        max-width: 480px;
+      .header-logo img {
+        height: 24px;
+        width: auto;
+        display: block;
+        filter: invert(1);
       }
-    }
 
-    @media (max-width: 580px) {
       .header-nav {
-        display: none;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        list-style: none;
+      }
+
+      .header-nav a {
+        display: inline-block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: var(--color-text-secondary);
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 24px;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .header-nav a:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--color-text);
+      }
+
+      .header-nav a.active {
+        background: rgba(138, 180, 248, 0.15);
+        color: var(--color-blue);
+      }
+
+      /* ── Hero ── */
+      .hero-banner-wrap {
+        overflow: hidden;
+        border-bottom: 1px solid var(--color-border);
+        line-height: 0;
+      }
+
+      .hero-banner {
+        width: 100%;
+        height: auto;
+        max-height: 160px;
+        object-fit: contain;
+        display: block;
       }
 
       .hero-content {
-        padding: 48px 20px 56px;
+        padding: 40px 24px 44px;
+        border-bottom: 1px solid var(--color-border);
       }
 
+      .hero-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .hero-text {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .hero-eyebrow {
+        font-family: var(--font-display);
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--color-text-secondary);
+        margin-bottom: 20px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        color: var(--color-text);
+        margin-bottom: 24px;
+      }
+
+      .hero-title .gradient-text {
+        background: linear-gradient(
+          115deg,
+          #4285f4 0%,
+          #9c27b0 30%,
+          #ea4335 60%,
+          #fbbc04 80%,
+          #34a853 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-desc {
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--color-text-secondary);
+        max-width: 500px;
+      }
+
+      .hero-video-wrap {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 14px;
+      }
+
+      .hero-video-wrap video {
+        width: 110px;
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-video);
+        display: block;
+        box-shadow: var(--shadow-card);
+      }
+
+      .dev-quote {
+        margin: 0;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      /* ── Demos section ── */
       .demos-section {
-        padding: 48px 20px 72px;
+        padding: 48px 24px 72px;
+      }
+
+      .section-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-family: var(--font-display);
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--color-text-secondary);
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        color: var(--color-text);
+        margin-bottom: 48px;
+      }
+
+      /* Grid Lanes with regular-grid fallback */
+      .demos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      @supports (display: grid-lanes) {
+        .demos-grid {
+          display: grid-lanes;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 24px;
+        }
+      }
+
+      /* ── Demo cards ── */
+      [hidden] {
+        display: none !important;
+      }
+
+      .demo-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-card);
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .demo-card:hover {
+        border-color: #444;
+        box-shadow: var(--shadow-card-hover);
+      }
+
+      .demo-card:focus-visible {
+        outline: 2px solid var(--color-blue);
+        outline-offset: 3px;
+      }
+
+      .card-thumb {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* ── API pills on cards ── */
+      .api-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+
+      .api-pill {
+        display: inline-block;
+        padding: 3px 9px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        border: 1px solid transparent;
+      }
+
+      .api-pill--languagemodel {
+        background: rgba(138, 180, 248, 0.12);
+        color: #8ab4f8;
+        border-color: rgba(138, 180, 248, 0.28);
+      }
+      .api-pill--translator {
+        background: rgba(129, 201, 149, 0.12);
+        color: #81c995;
+        border-color: rgba(129, 201, 149, 0.28);
+      }
+      .api-pill--languagedetector {
+        background: rgba(128, 203, 196, 0.12);
+        color: #80cbc4;
+        border-color: rgba(128, 203, 196, 0.28);
+      }
+      .api-pill--summarizer {
+        background: rgba(253, 214, 99, 0.12);
+        color: #fdd663;
+        border-color: rgba(253, 214, 99, 0.28);
+      }
+      .api-pill--writer {
+        background: rgba(242, 139, 130, 0.12);
+        color: #f28b82;
+        border-color: rgba(242, 139, 130, 0.28);
+      }
+      .api-pill--rewriter {
+        background: rgba(255, 171, 64, 0.12);
+        color: #ffab40;
+        border-color: rgba(255, 171, 64, 0.28);
+      }
+
+      /* ── Filter bar ── */
+      .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 32px;
+      }
+
+      .filter-pill {
+        padding: 6px 16px;
+        border-radius: 20px;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+        font-size: 13px;
+        font-weight: 500;
+        font-family: var(--font-sans);
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+      }
+
+      .filter-pill:hover:not(.active) {
+        background: #2a2a2a;
+        color: var(--color-text);
+        border-color: #444;
+      }
+
+      .filter-pill.active {
+        background: var(--pill-bg, rgba(138, 180, 248, 0.14));
+        border-color: var(--pill-border, rgba(138, 180, 248, 0.4));
+        color: var(--pill-color, var(--color-blue));
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+
+      .card-title {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 8px;
+        line-height: 1.35;
+      }
+
+      .card-desc {
+        font-size: 14px;
+        line-height: 1.65;
+        color: var(--color-text-secondary);
+      }
+
+      /* ── Footer ── */
+      .site-footer {
+        border-top: 1px solid var(--color-border);
+        padding: 28px 24px;
+        background: var(--color-bg);
       }
 
       .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
       }
-    }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .demo-card { transition: none; }
-      .header-nav a { transition: none; }
-    }
-  </style>
-</head>
-<body>
+      .footer-logo {
+        height: 18px;
+        width: auto;
+        display: block;
+        filter: invert(1);
+        opacity: 0.55;
+      }
 
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="#" class="header-logo" aria-label="Google I/O 2026 — home">
-        <img src="logo.svg" alt="Google I/O 2026" width="129" height="29">
-      </a>
-      <nav aria-label="Main navigation">
-        <ul class="header-nav">
-          <li><a href="." class="active">Demos</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+      .footer-text {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+      }
 
-  <div class="hero-banner-wrap">
-    <img
-      class="hero-banner"
-      src="io26-banner.webp"
-      alt="Google I/O 2026 — Android, Chrome, and AI"
-      width="1440"
-      height="303"
-    >
-  </div>
+      /* ── Responsive ── */
+      @media (max-width: 860px) {
+        .hero-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 40px;
+        }
 
-  <section class="hero-content" aria-label="Introduction">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <p class="hero-eyebrow">Chrome Built-in AI · Google I/O 2026</p>
-        <h1 class="hero-title">
-          AI that runs<br>
-          <span class="gradient-text">in your browser</span>
-        </h1>
-        <p class="hero-desc">
-          No servers. No round&nbsp;trips. Explore Chrome's built-in AI APIs —
-          language models running entirely on&#8209;device, directly in your tab.
-        </p>
+        .hero-video-wrap {
+          align-self: center;
+        }
+      }
+
+      @media (max-width: 580px) {
+        .header-nav {
+          display: none;
+        }
+
+        .hero-content {
+          padding: 48px 20px 56px;
+        }
+
+        .demos-section {
+          padding: 48px 20px 72px;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .demo-card {
+          transition: none;
+        }
+        .header-nav a {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#" class="header-logo" aria-label="Google I/O 2026 — home">
+          <img src="logo.svg" alt="Google I/O 2026" width="129" height="29" />
+        </a>
+        <nav aria-label="Main navigation">
+          <ul class="header-nav">
+            <li><a href="." class="active">Demos</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="hero-video-wrap">
-        <video
-          id="globe-video"
-          src="io26-globe-animation.webm"
-          muted
-          playsinline
-          aria-label="Animated globe"
-        ></video>
-      </div>
+    </header>
+
+    <div class="hero-banner-wrap">
+      <img
+        class="hero-banner"
+        src="io26-banner.webp"
+        alt="Google I/O 2026 — Android, Chrome, and AI"
+        width="1440"
+        height="303"
+      />
     </div>
-  </section>
 
-  <section class="demos-section" id="demos" aria-labelledby="demos-heading">
-    <div class="section-inner">
-      <p class="section-label">Interactive demos</p>
-      <h2 class="section-title" id="demos-heading">Built-in AI in action</h2>
+    <section class="hero-content" aria-label="Introduction">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Chrome Built-in AI · Google I/O 2026</p>
+          <h1 class="hero-title">
+            AI that runs<br />
+            <span class="gradient-text">in your browser</span>
+          </h1>
+          <p class="hero-desc">
+            No servers. No round&nbsp;trips. Explore Chrome's built-in AI APIs —
+            language models running entirely on&#8209;device, directly in your
+            tab.
+          </p>
+        </div>
+        <div class="hero-video-wrap">
+          <video
+            id="globe-video"
+            src="io26-globe-animation.webm"
+            muted
+            playsinline
+            aria-label="Animated globe"
+          ></video>
+          <p id="dev-quote" class="hero-eyebrow dev-quote" aria-live="polite">
+            Developers are <span>amazing</span>
+          </p>
+        </div>
+      </div>
+    </section>
 
-      <div class="filter-bar" id="filter-bar" hidden aria-label="Filter by API"></div>
+    <section class="demos-section" id="demos" aria-labelledby="demos-heading">
+      <div class="section-inner">
+        <p class="section-label">Interactive demos</p>
+        <h2 class="section-title" id="demos-heading">Built-in AI in action</h2>
 
-      <div class="demos-grid" id="demos-grid">
-        <!-- populated from demos-data by renderDemos() below;
+        <div
+          class="filter-bar"
+          id="filter-bar"
+          hidden
+          aria-label="Filter by API"
+        ></div>
+
+        <div class="demos-grid" id="demos-grid">
+          <!-- populated from demos-data by renderDemos() below;
              placeholder cards shown until build.js has been run -->
 
-        <!-- Card 1 — placeholder -->
-        <a class="demo-card" href="#">
-          <svg class="card-thumb" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="c1bg" x1="0" y1="1" x2="1" y2="0" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stop-color="#e8f0fe"/><stop offset="100%" stop-color="#f3e8fd"/>
-              </linearGradient>
-              <linearGradient id="c1star" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stop-color="#4285f4"/><stop offset="45%" stop-color="#9c27b0"/><stop offset="100%" stop-color="#ea4335"/>
-              </linearGradient>
-            </defs>
-            <rect width="480" height="270" fill="url(#c1bg)"/>
-            <circle cx="420" cy="48" r="64" fill="#4285f4" opacity="0.07"/>
-            <circle cx="58" cy="222" r="72" fill="#9c27b0" opacity="0.06"/>
-            <path d="M240 63 C240 102 205 135 168 135 C205 135 240 168 240 207 C240 168 275 135 312 135 C275 135 240 102 240 63Z" fill="url(#c1star)"/>
-          </svg>
-          <div class="card-body">
-            <h3 class="card-title">Demo 1</h3>
-            <p class="card-desc">Run <code>npm run build</code> to populate cards with real screenshots and descriptions.</p>
-          </div>
-        </a>
+          <!-- Card 1 — placeholder -->
+          <a class="demo-card" href="#">
+            <svg
+              class="card-thumb"
+              viewBox="0 0 480 270"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="c1bg"
+                  x1="0"
+                  y1="1"
+                  x2="1"
+                  y2="0"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0%" stop-color="#e8f0fe" />
+                  <stop offset="100%" stop-color="#f3e8fd" />
+                </linearGradient>
+                <linearGradient
+                  id="c1star"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0%" stop-color="#4285f4" />
+                  <stop offset="45%" stop-color="#9c27b0" />
+                  <stop offset="100%" stop-color="#ea4335" />
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#c1bg)" />
+              <circle cx="420" cy="48" r="64" fill="#4285f4" opacity="0.07" />
+              <circle cx="58" cy="222" r="72" fill="#9c27b0" opacity="0.06" />
+              <path
+                d="M240 63 C240 102 205 135 168 135 C205 135 240 168 240 207 C240 168 275 135 312 135 C275 135 240 102 240 63Z"
+                fill="url(#c1star)"
+              />
+            </svg>
+            <div class="card-body">
+              <h3 class="card-title">Demo 1</h3>
+              <p class="card-desc">
+                Run <code>npm run build</code> to populate cards with real
+                screenshots and descriptions.
+              </p>
+            </div>
+          </a>
 
-        <!-- Card 2 — placeholder -->
-        <a class="demo-card" href="#">
-          <svg class="card-thumb" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="c2bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stop-color="#e6f4ea"/><stop offset="100%" stop-color="#e8f0fe"/>
-              </linearGradient>
-              <linearGradient id="c2shape" x1="0" y1="1" x2="1" y2="0" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stop-color="#34a853"/><stop offset="55%" stop-color="#1a73e8"/><stop offset="100%" stop-color="#0d47a1"/>
-              </linearGradient>
-            </defs>
-            <rect width="480" height="270" fill="url(#c2bg)"/>
-            <circle cx="58" cy="56" r="54" fill="#34a853" opacity="0.08"/>
-            <circle cx="422" cy="214" r="66" fill="#1a73e8" opacity="0.07"/>
-            <circle cx="240" cy="135" r="72" fill="none" stroke="url(#c2shape)" stroke-width="26" opacity="0.9"/>
-            <ellipse cx="240" cy="135" rx="28" ry="72" fill="none" stroke="url(#c2shape)" stroke-width="9" opacity="0.55"/>
-            <line x1="168" y1="135" x2="312" y2="135" stroke="url(#c2shape)" stroke-width="9" opacity="0.55"/>
-          </svg>
-          <div class="card-body">
-            <h3 class="card-title">Demo 2</h3>
-            <p class="card-desc">Run <code>npm run build</code> to populate cards with real screenshots and descriptions.</p>
-          </div>
-        </a>
+          <!-- Card 2 — placeholder -->
+          <a class="demo-card" href="#">
+            <svg
+              class="card-thumb"
+              viewBox="0 0 480 270"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="c2bg"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0%" stop-color="#e6f4ea" />
+                  <stop offset="100%" stop-color="#e8f0fe" />
+                </linearGradient>
+                <linearGradient
+                  id="c2shape"
+                  x1="0"
+                  y1="1"
+                  x2="1"
+                  y2="0"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0%" stop-color="#34a853" />
+                  <stop offset="55%" stop-color="#1a73e8" />
+                  <stop offset="100%" stop-color="#0d47a1" />
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#c2bg)" />
+              <circle cx="58" cy="56" r="54" fill="#34a853" opacity="0.08" />
+              <circle cx="422" cy="214" r="66" fill="#1a73e8" opacity="0.07" />
+              <circle
+                cx="240"
+                cy="135"
+                r="72"
+                fill="none"
+                stroke="url(#c2shape)"
+                stroke-width="26"
+                opacity="0.9"
+              />
+              <ellipse
+                cx="240"
+                cy="135"
+                rx="28"
+                ry="72"
+                fill="none"
+                stroke="url(#c2shape)"
+                stroke-width="9"
+                opacity="0.55"
+              />
+              <line
+                x1="168"
+                y1="135"
+                x2="312"
+                y2="135"
+                stroke="url(#c2shape)"
+                stroke-width="9"
+                opacity="0.55"
+              />
+            </svg>
+            <div class="card-body">
+              <h3 class="card-title">Demo 2</h3>
+              <p class="card-desc">
+                Run <code>npm run build</code> to populate cards with real
+                screenshots and descriptions.
+              </p>
+            </div>
+          </a>
 
-        <!-- Card 3 — placeholder -->
-        <a class="demo-card" href="#">
-          <svg class="card-thumb" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="c3bg" x1="1" y1="1" x2="0" y2="0" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stop-color="#fef7e0"/><stop offset="100%" stop-color="#fce8e6"/>
-              </linearGradient>
-              <linearGradient id="c3bars" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stop-color="#fbbc04"/><stop offset="100%" stop-color="#ea4335"/>
-              </linearGradient>
-            </defs>
-            <rect width="480" height="270" fill="url(#c3bg)"/>
-            <circle cx="418" cy="218" r="78" fill="#fbbc04" opacity="0.08"/>
-            <circle cx="62" cy="52" r="52" fill="#ea4335" opacity="0.07"/>
-            <rect x="128" y="72"  width="200" height="17" rx="8.5" fill="url(#c3bars)" opacity="0.90"/>
-            <rect x="128" y="107" width="162" height="17" rx="8.5" fill="url(#c3bars)" opacity="0.72"/>
-            <rect x="128" y="142" width="182" height="17" rx="8.5" fill="url(#c3bars)" opacity="0.55"/>
-            <rect x="128" y="177" width="118" height="17" rx="8.5" fill="url(#c3bars)" opacity="0.38"/>
-            <path d="M352 128 L376 107 L376 119 L412 119 L412 151 L376 151 L376 163Z" fill="url(#c3bars)" opacity="0.75"/>
-          </svg>
-          <div class="card-body">
-            <h3 class="card-title">Demo 3</h3>
-            <p class="card-desc">Run <code>npm run build</code> to populate cards with real screenshots and descriptions.</p>
-          </div>
-        </a>
-
+          <!-- Card 3 — placeholder -->
+          <a class="demo-card" href="#">
+            <svg
+              class="card-thumb"
+              viewBox="0 0 480 270"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="c3bg"
+                  x1="1"
+                  y1="1"
+                  x2="0"
+                  y2="0"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0%" stop-color="#fef7e0" />
+                  <stop offset="100%" stop-color="#fce8e6" />
+                </linearGradient>
+                <linearGradient
+                  id="c3bars"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0%" stop-color="#fbbc04" />
+                  <stop offset="100%" stop-color="#ea4335" />
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#c3bg)" />
+              <circle cx="418" cy="218" r="78" fill="#fbbc04" opacity="0.08" />
+              <circle cx="62" cy="52" r="52" fill="#ea4335" opacity="0.07" />
+              <rect
+                x="128"
+                y="72"
+                width="200"
+                height="17"
+                rx="8.5"
+                fill="url(#c3bars)"
+                opacity="0.90"
+              />
+              <rect
+                x="128"
+                y="107"
+                width="162"
+                height="17"
+                rx="8.5"
+                fill="url(#c3bars)"
+                opacity="0.72"
+              />
+              <rect
+                x="128"
+                y="142"
+                width="182"
+                height="17"
+                rx="8.5"
+                fill="url(#c3bars)"
+                opacity="0.55"
+              />
+              <rect
+                x="128"
+                y="177"
+                width="118"
+                height="17"
+                rx="8.5"
+                fill="url(#c3bars)"
+                opacity="0.38"
+              />
+              <path
+                d="M352 128 L376 107 L376 119 L412 119 L412 151 L376 151 L376 163Z"
+                fill="url(#c3bars)"
+                opacity="0.75"
+              />
+            </svg>
+            <div class="card-body">
+              <h3 class="card-title">Demo 3</h3>
+              <p class="card-desc">
+                Run <code>npm run build</code> to populate cards with real
+                screenshots and descriptions.
+              </p>
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <script id="demos-data" type="application/json">
-[
-  {
-    "url": "https://chrome.dev/web-ai-demos/document-translator",
-    "title": "",
-    "description": "Translate documents in your browser using Chrome's built-in AI, right on your device",
-    "apis": [
-      "LanguageModel",
-      "Translator",
-      "LanguageDetector"
-    ],
-    "screenshot": "screenshots/chrome.dev--web-ai-demos-document-translator.png"
-  },
-  {
-    "url": "https://chrome.dev/web-ai-demos/image-alt-text-playground",
-    "title": "Image alt text playground",
-    "description": "Explore AI-powered image alt text generation, using prompts to describe images for accessibility.",
-    "apis": [
-      "LanguageModel"
-    ],
-    "screenshot": "screenshots/chrome.dev--web-ai-demos-image-alt-text-playground.png"
-  },
-  {
-    "url": "https://chrome.dev/web-ai-demos/news-app",
-    "title": "Tagesschau Aktuell",
-    "description": "Explore AI-powered news summaries and recommendations in this German news app demo",
-    "apis": [
-      "LanguageModel",
-      "Translator"
-    ],
-    "screenshot": "screenshots/chrome.dev--web-ai-demos-news-app.png"
-  },
-  {
-    "url": "https://translator-api-demo-tomayac.yoyo.codes/",
-    "title": "Review and Book",
-    "description": "Translate and summarize webpage content for booking a Shanghai rental, using Chrome AI.",
-    "apis": [
-      "Translator"
-    ],
-    "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
-  },
-  {
-    "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
-    "title": "trAIlblazers",
-    "description": "Create and manage travel blog posts using AI-powered tools in this trAIlblazers demo",
-    "apis": [
-      "LanguageModel",
-      "Translator",
-      "LanguageDetector",
-      "Summarizer"
-    ],
-    "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
-  }
-]
-</script>
+    <script id="demos-data" type="application/json">
+      [
+        {
+          "url": "https://chrome.dev/web-ai-demos/document-translator",
+          "title": "",
+          "description": "Translate documents in your browser using Chrome's built-in AI, right on your device",
+          "apis": ["LanguageModel", "Translator", "LanguageDetector"],
+          "screenshot": "screenshots/chrome.dev--web-ai-demos-document-translator.png"
+        },
+        {
+          "url": "https://chrome.dev/web-ai-demos/image-alt-text-playground",
+          "title": "Image alt text playground",
+          "description": "Explore AI-powered image alt text generation, using prompts to describe images for accessibility.",
+          "apis": ["LanguageModel"],
+          "screenshot": "screenshots/chrome.dev--web-ai-demos-image-alt-text-playground.png"
+        },
+        {
+          "url": "https://chrome.dev/web-ai-demos/news-app",
+          "title": "Tagesschau Aktuell",
+          "description": "Explore AI-powered news summaries and recommendations in this German news app demo",
+          "apis": ["LanguageModel", "Translator"],
+          "screenshot": "screenshots/chrome.dev--web-ai-demos-news-app.png"
+        },
+        {
+          "url": "https://translator-api-demo-tomayac.yoyo.codes/",
+          "title": "Review and Book",
+          "description": "Translate and summarize webpage content for booking a Shanghai rental, using Chrome AI.",
+          "apis": ["Translator"],
+          "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
+        },
+        {
+          "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
+          "title": "trAIlblazers",
+          "description": "Create and manage travel blog posts using AI-powered tools in this trAIlblazers demo",
+          "apis": [
+            "LanguageModel",
+            "Translator",
+            "LanguageDetector",
+            "Summarizer"
+          ],
+          "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
+        }
+      ]
+    </script>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <img src="logo.svg" alt="Google I/O 2026" class="footer-logo">
-      <p class="footer-text">Chrome Built-in AI Demos &mdash; Google I/O 2026</p>
-    </div>
-  </footer>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <img src="logo.svg" alt="Google I/O 2026" class="footer-logo" />
+        <p class="footer-text">
+          Chrome Built-in AI Demos &mdash; Google I/O 2026
+        </p>
+      </div>
+    </footer>
 
-  <script>
-    const video = document.getElementById('globe-video');
-    if (video && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      video.addEventListener('canplay', () => video.play(), { once: true });
-    }
-  </script>
+    <script>
+      const video = document.getElementById('globe-video');
+      if (video) {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          video.addEventListener('canplay', () => video.play(), { once: true });
+        }
+        video.addEventListener(
+          'loadedmetadata',
+          () => {
+            if (video.videoWidth)
+              video.style.maxWidth = video.videoWidth + 'px';
+          },
+          { once: true }
+        );
+      }
+    </script>
 
-  <script>
-    const API_META = {
-      LanguageModel:    { label: 'Prompt API',       cls: 'languagemodel',    color: '#8ab4f8', bg: 'rgba(138,180,248,0.14)', border: 'rgba(138,180,248,0.4)' },
-      Translator:       { label: 'Translator',        cls: 'translator',       color: '#81c995', bg: 'rgba(129,201,149,0.14)', border: 'rgba(129,201,149,0.4)' },
-      LanguageDetector: { label: 'Language Detector', cls: 'languagedetector', color: '#80cbc4', bg: 'rgba(128,203,196,0.14)', border: 'rgba(128,203,196,0.4)' },
-      Summarizer:       { label: 'Summarizer',        cls: 'summarizer',       color: '#fdd663', bg: 'rgba(253,214,99,0.14)',  border: 'rgba(253,214,99,0.4)' },
-      Writer:           { label: 'Writer',            cls: 'writer',           color: '#f28b82', bg: 'rgba(242,139,130,0.14)', border: 'rgba(242,139,130,0.4)' },
-      Rewriter:         { label: 'Rewriter',          cls: 'rewriter',         color: '#ffab40', bg: 'rgba(255,171,64,0.14)',  border: 'rgba(255,171,64,0.4)' },
-    };
+    <script>
+      (async () => {
+        if (!('LanguageModel' in window)) return;
 
-    function pillHtml(api) {
-      const m = API_META[api] ?? { label: api, cls: api.toLowerCase() };
-      return `<span class="api-pill api-pill--${m.cls}">${m.label}</span>`;
-    }
+        const options = {
+          expectedInputs: [{ type: 'text', languages: ['en'] }],
+          expectedOutputs: [{ type: 'text', languages: ['en'] }],
+        };
+        const availability = await LanguageModel.availability(options);
+        if (availability === 'unavailable') return;
 
-    function cardHtml(demo) {
-      const apis = demo.apis ?? [];
-      const thumb = demo.screenshot
-        ? `<img class="card-thumb" src="${demo.screenshot}" alt="${demo.title}" loading="lazy">`
-        : `<svg class="card-thumb" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="480" height="270" fill="#1a1a1a"/></svg>`;
-      const pills = apis.length
-        ? `<div class="api-pills">${apis.map(pillHtml).join('')}</div>`
-        : '';
-      return `<a class="demo-card" href="${demo.url}" target="_blank" rel="noopener"
+        const SYSTEM_PROMPT =
+          'You complete inspirational phrases about developers. Respond with exactly one positive, creative single-word adjective. Be very creative. Do not always say "innovative", think of more exotic words. Never repeat a word you have already used in this conversation. No punctuation. No explanation. Just the adjective in lower case letters.';
+
+        const reducedMotion = window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches;
+        const PREFIX = 'Developers are ';
+        const ROUNDS_PER_SESSION = 20;
+        let running = false;
+        let roundCount = 0;
+        let activeSession = null;
+
+        async function getSession() {
+          if (!activeSession || roundCount % ROUNDS_PER_SESSION === 0) {
+            activeSession?.destroy();
+            activeSession = await LanguageModel.create({
+              ...options,
+              initialPrompts: [{ role: 'system', content: SYSTEM_PROMPT }],
+            });
+          }
+          return activeSession;
+        }
+
+        async function updateQuote() {
+          if (running) return;
+          running = true;
+          try {
+            const quoteEl = document.getElementById('dev-quote');
+            quoteEl.textContent = '';
+
+            // Type the prefix character by character
+            if (reducedMotion) {
+              quoteEl.append(PREFIX);
+            } else {
+              for (const char of PREFIX) {
+                quoteEl.append(char);
+                await new Promise((r) => setTimeout(r, 55));
+              }
+            }
+
+            // Append a span and stream the adjective into it
+            const adjSpan = document.createElement('span');
+            quoteEl.append(adjSpan);
+
+            const session = await getSession();
+            const stream = session.promptStreaming([
+              {
+                role: 'user',
+                content: 'One positive adjective only, no punctuation:',
+              },
+              { role: 'assistant', content: 'Developers are ', prefix: true },
+            ]);
+            for await (const chunk of stream) {
+              adjSpan.append(chunk);
+            }
+            roundCount++;
+          } finally {
+            running = false;
+          }
+        }
+
+        await updateQuote();
+        setInterval(updateQuote, 20_000);
+      })();
+    </script>
+
+    <script>
+      const API_META = {
+        LanguageModel: {
+          label: 'Prompt API',
+          cls: 'languagemodel',
+          color: '#8ab4f8',
+          bg: 'rgba(138,180,248,0.14)',
+          border: 'rgba(138,180,248,0.4)',
+        },
+        Translator: {
+          label: 'Translator',
+          cls: 'translator',
+          color: '#81c995',
+          bg: 'rgba(129,201,149,0.14)',
+          border: 'rgba(129,201,149,0.4)',
+        },
+        LanguageDetector: {
+          label: 'Language Detector',
+          cls: 'languagedetector',
+          color: '#80cbc4',
+          bg: 'rgba(128,203,196,0.14)',
+          border: 'rgba(128,203,196,0.4)',
+        },
+        Summarizer: {
+          label: 'Summarizer',
+          cls: 'summarizer',
+          color: '#fdd663',
+          bg: 'rgba(253,214,99,0.14)',
+          border: 'rgba(253,214,99,0.4)',
+        },
+        Writer: {
+          label: 'Writer',
+          cls: 'writer',
+          color: '#f28b82',
+          bg: 'rgba(242,139,130,0.14)',
+          border: 'rgba(242,139,130,0.4)',
+        },
+        Rewriter: {
+          label: 'Rewriter',
+          cls: 'rewriter',
+          color: '#ffab40',
+          bg: 'rgba(255,171,64,0.14)',
+          border: 'rgba(255,171,64,0.4)',
+        },
+      };
+
+      function pillHtml(api) {
+        const m = API_META[api] ?? { label: api, cls: api.toLowerCase() };
+        return `<span class="api-pill api-pill--${m.cls}">${m.label}</span>`;
+      }
+
+      function cardHtml(demo) {
+        const apis = demo.apis ?? [];
+        const thumb = demo.screenshot
+          ? `<img class="card-thumb" src="${demo.screenshot}" alt="${demo.title}" loading="lazy">`
+          : `<svg class="card-thumb" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="480" height="270" fill="#1a1a1a"/></svg>`;
+        const pills = apis.length
+          ? `<div class="api-pills">${apis.map(pillHtml).join('')}</div>`
+          : '';
+        return `<a class="demo-card" href="${demo.url}" target="_blank" rel="noopener"
                   data-apis="${apis.join(',')}">
         ${thumb}
         <div class="card-body">
@@ -658,64 +1355,74 @@
           <p class="card-desc">${demo.description}</p>
         </div>
       </a>`;
-    }
-
-    function renderDemos() {
-      const demos = JSON.parse(document.getElementById('demos-data').textContent || '[]');
-      if (!demos.length) return; // keep placeholder cards
-
-      const apiOrder = [...new Set(demos.flatMap(d => d.apis ?? []))];
-
-      // Filter bar
-      const filterBar = document.getElementById('filter-bar');
-      filterBar.hidden = false;
-      filterBar.innerHTML =
-        `<button class="filter-pill active" data-api="all">All</button>` +
-        apiOrder.map(api => {
-          const m = API_META[api] ?? { label: api };
-          const style = m.color
-            ? `style="--pill-color:${m.color};--pill-bg:${m.bg};--pill-border:${m.border}"`
-            : '';
-          return `<button class="filter-pill" data-api="${api}" ${style}>${m.label}</button>`;
-        }).join('');
-
-      const activeApis = new Set();
-      const allPill = filterBar.querySelector('[data-api="all"]');
-      const grid = document.getElementById('demos-grid');
-
-      function applyFilter() {
-        grid.querySelectorAll('.demo-card').forEach(card => {
-          if (!activeApis.size) { card.hidden = false; return; }
-          const cardApis = card.dataset.apis ? card.dataset.apis.split(',') : [];
-          card.hidden = !cardApis.some(a => activeApis.has(a));
-        });
       }
 
-      filterBar.addEventListener('click', e => {
-        const pill = e.target.closest('.filter-pill');
-        if (!pill) return;
-        const api = pill.dataset.api;
+      function renderDemos() {
+        const demos = JSON.parse(
+          document.getElementById('demos-data').textContent || '[]'
+        );
+        if (!demos.length) return; // keep placeholder cards
 
-        if (api === 'all') {
-          activeApis.clear();
-        } else {
-          activeApis.has(api) ? activeApis.delete(api) : activeApis.add(api);
+        const apiOrder = [...new Set(demos.flatMap((d) => d.apis ?? []))];
+
+        // Filter bar
+        const filterBar = document.getElementById('filter-bar');
+        filterBar.hidden = false;
+        filterBar.innerHTML =
+          `<button class="filter-pill active" data-api="all">All</button>` +
+          apiOrder
+            .map((api) => {
+              const m = API_META[api] ?? { label: api };
+              const style = m.color
+                ? `style="--pill-color:${m.color};--pill-bg:${m.bg};--pill-border:${m.border}"`
+                : '';
+              return `<button class="filter-pill" data-api="${api}" ${style}>${m.label}</button>`;
+            })
+            .join('');
+
+        const activeApis = new Set();
+        const allPill = filterBar.querySelector('[data-api="all"]');
+        const grid = document.getElementById('demos-grid');
+
+        function applyFilter() {
+          grid.querySelectorAll('.demo-card').forEach((card) => {
+            if (!activeApis.size) {
+              card.hidden = false;
+              return;
+            }
+            const cardApis = card.dataset.apis
+              ? card.dataset.apis.split(',')
+              : [];
+            card.hidden = !cardApis.some((a) => activeApis.has(a));
+          });
         }
 
-        allPill.classList.toggle('active', activeApis.size === 0);
-        filterBar.querySelectorAll('.filter-pill:not([data-api="all"])').forEach(p => {
-          p.classList.toggle('active', activeApis.has(p.dataset.api));
+        filterBar.addEventListener('click', (e) => {
+          const pill = e.target.closest('.filter-pill');
+          if (!pill) return;
+          const api = pill.dataset.api;
+
+          if (api === 'all') {
+            activeApis.clear();
+          } else {
+            activeApis.has(api) ? activeApis.delete(api) : activeApis.add(api);
+          }
+
+          allPill.classList.toggle('active', activeApis.size === 0);
+          filterBar
+            .querySelectorAll('.filter-pill:not([data-api="all"])')
+            .forEach((p) => {
+              p.classList.toggle('active', activeApis.has(p.dataset.api));
+            });
+
+          applyFilter();
         });
 
-        applyFilter();
-      });
+        // Cards
+        grid.innerHTML = demos.map(cardHtml).join('');
+      }
 
-      // Cards
-      grid.innerHTML = demos.map(cardHtml).join('');
-    }
-
-    renderDemos();
-  </script>
-
-</body>
+      renderDemos();
+    </script>
+  </body>
 </html>
