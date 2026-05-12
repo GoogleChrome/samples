@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "start": "npx http-server",
     "build": "node build.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
     "dotenv": "^16.4.0",
+    "http-server": "^14.1.1",
     "puppeteer": "^23.0.0"
   }
 }

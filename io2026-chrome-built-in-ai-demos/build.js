@@ -11,7 +11,20 @@ const DEMOS_TXT = path.join(__dirname, 'demos.txt');
 const DEMOS_JSON = path.join(__dirname, 'demos.json');
 const INDEX_HTML = path.join(__dirname, 'index.html');
 
-// Map API class names to human-readable labels used in the page
+// All top-level Built-in AI class names from the IDL
+const BUILTIN_AI_APIS = ['LanguageModel', 'Translator', 'LanguageDetector', 'Summarizer', 'Writer', 'Rewriter'];
+
+function detectApisInSource(js) {
+  return BUILTIN_AI_APIS.filter(api => new RegExp(`\\b${api}\\b`).test(js));
+}
+
+function urlToSlug(url) {
+  const { hostname, pathname } = new URL(url);
+  const pathPart = pathname.split('/').filter(Boolean).join('-');
+  const raw = pathPart ? `${hostname}--${pathPart}` : hostname;
+  return raw.replace(/[^a-z0-9._-]/gi, '-').toLowerCase();
+}
+
 const API_LABELS = {
   LanguageModel: 'Prompt API',
   Translator: 'Translator',
@@ -36,6 +49,7 @@ async function main() {
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    protocolTimeout: 120_000,
   });
 
   // Load existing results so we can skip already-processed URLs
@@ -53,44 +67,55 @@ async function main() {
     await page.setViewport({ width: 1280, height: 720 });
 
     try {
+      // Intercept JS responses to scan source for API usage
+      const jsChunks = [];
+      const onResponse = async response => {
+        try {
+          const ct = response.headers()['content-type'] || '';
+          if (ct.includes('javascript') || ct.includes('ecmascript') || /\.m?js(\?|$)/.test(response.url())) {
+            jsChunks.push(await response.text());
+          }
+        } catch { /* ignore failed reads */ }
+      };
+      page.on('response', onResponse);
+
       await page.goto(url, { waitUntil: 'networkidle2', timeout: 30_000 });
-      // Give SPAs extra time to render
       await new Promise(r => setTimeout(r, 2_500));
+      page.off('response', onResponse);
+
+      // Also grab inline scripts
+      const inlineJs = await page.evaluate(() =>
+        [...document.querySelectorAll('script:not([src])')].map(s => s.textContent).join('\n'));
+      const allJs = [...jsChunks, inlineJs].join('\n');
+
+      // Detect APIs from actual source — no guessing needed
+      const apis = detectApisInSource(allJs);
+      console.log(`  ✓ apis (from source): ${apis.length ? apis.join(', ') : '(none detected)'}`);
 
       const title = await page.title();
       const innerText = await page.evaluate(
         () => document.body.innerText.trim().slice(0, 4_000)
       );
 
-      const slug = new URL(url).pathname.split('/').filter(Boolean).pop();
+      const slug = urlToSlug(url);
       const screenshotFile = `${slug}.png`;
       await page.screenshot({
         path: path.join(SCREENSHOTS_DIR, screenshotFile),
         clip: { x: 0, y: 0, width: 1280, height: 720 },
+        captureBeyondViewport: false,
       });
       console.log(`  ✓ screenshot → screenshots/${screenshotFile}`);
 
-      const prompt = `You are analyzing a Chrome Built-in AI demo web app. Identify which APIs it uses and write a short description.
+      const prompt = `You are writing a one-line description for a Chrome Built-in AI demo web app.
 
 URL: ${url}
 Page title: ${title}
 Page text (truncated):
 ${innerText}
 
-Available Chrome Built-in AI APIs — pick only the ones actually demonstrated:
-- LanguageModel  → Prompt API (window.LanguageModel): text generation, Q&A, multimodal (image/audio) inference
-- Translator     → Translation API (window.Translator): translate text between languages
-- LanguageDetector → Language Detector (window.LanguageDetector): detect which language text is in
-- Summarizer     → Summarizer API (window.Summarizer): condense long documents
-- Writer         → Writer API (window.Writer): generate written content from scratch
-- Rewriter       → Rewriter API (window.Rewriter): improve or rewrite existing text
-
-Instructions:
-1. Write a punchy single sentence (max 110 chars, no trailing period) describing what the demo does.
-2. Return only the API class names actually used (from the list above).
-
+Write a punchy single sentence (max 110 chars, no trailing period) describing what the demo does.
 Respond with ONLY a valid JSON object, no markdown fences:
-{"description":"...","apis":["ClassName1","ClassName2"]}`;
+{"description":"..."}`;
 
       // Pace Gemini calls; retry with backoff on 429
       if (geminiCallCount++ > 0) await new Promise(r => setTimeout(r, 4_000));
@@ -106,10 +131,9 @@ Respond with ONLY a valid JSON object, no markdown fences:
       }
       const raw = result.response.text().trim();
       const jsonStr = raw.startsWith('{') ? raw : (raw.match(/\{[\s\S]*\}/) ?? ['{}'])[0];
-      const { description, apis } = JSON.parse(jsonStr);
+      const { description } = JSON.parse(jsonStr);
 
       console.log(`  ✓ description: ${description}`);
-      console.log(`  ✓ apis: ${apis.join(', ')}`);
 
       // Clean up title — strip common suffixes like "- Chrome Web AI Demos"
       const cleanTitle = title.split(/\s*[-–|]\s*/)[0].trim();
