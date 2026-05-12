@@ -1222,7 +1222,7 @@
         if (availability === 'unavailable') return;
 
         const SYSTEM_PROMPT =
-          'You complete inspirational phrases about developers. Respond with exactly one positive, creative single-word adjective. Be very creative. Do not always say "innovative", think of more exotic words. Never repeat a word you have already used in this conversation. No punctuation. No explanation. Just the adjective in lower case letters.';
+          'You complete inspirational phrases about developers. Respond with exactly one positive, creative single-word adjective. Be very creative. Do not always say "innovative", think of more exotic words. Never repeat a word you have already used in this conversation. No punctuation. No explanation. Just the adjective in lower case letters. Respond in plain text, do NOT respond in HTML. Do NOT include any formatting, tags, or markup in your response.';
 
         const reducedMotion = window.matchMedia(
           '(prefers-reduced-motion: reduce)'
@@ -1273,8 +1273,10 @@
               },
               { role: 'assistant', content: 'Developers are ', prefix: true },
             ]);
+            let raw = '';
             for await (const chunk of stream) {
-              adjSpan.append(chunk);
+              raw += chunk;
+              adjSpan.textContent = raw.replace(/<[^>]*>/g, '').trim();
             }
             roundCount++;
           } finally {
