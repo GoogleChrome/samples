@@ -9,5 +9,8 @@
   },
   "scripts": {
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "built-in-ai-skills-md-agent-md": "^1.4.0"
   }
 }

@@ -1,0 +1,3 @@
+https://chrome.dev/web-ai-demos/document-translator
+https://chrome.dev/web-ai-demos/image-alt-text-playground
+https://chrome.dev/web-ai-demos/news-app
