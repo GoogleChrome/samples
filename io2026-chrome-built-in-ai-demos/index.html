@@ -625,6 +625,29 @@
         margin-bottom: 48px;
       }
 
+      .demos-section-eyebrow {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--color-text-secondary);
+        margin-bottom: 8px;
+        margin-top: 56px;
+      }
+
+      .demos-section-eyebrow:first-child {
+        margin-top: 0;
+      }
+
+      .demos-section-heading {
+        font-family: var(--font-sans);
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--color-text);
+        margin-bottom: 24px;
+      }
+
       /* Grid Lanes with regular-grid fallback */
       .demos-grid {
         display: grid;
@@ -919,7 +942,8 @@
           aria-label="Filter by API"
         ></div>
 
-        <div class="demos-grid" id="demos-grid">
+        <div id="demos-container">
+          <div class="demos-grid">
           <!-- populated from demos-data by renderDemos() below;
              placeholder cards shown until build.js has been run -->
 
@@ -1135,54 +1159,156 @@
               </p>
             </div>
           </a>
+          </div>
         </div>
       </div>
     </section>
 
     <script id="demos-data" type="application/json">
-      [
-        {
-          "url": "https://chrome.dev/web-ai-demos/document-translator",
-          "title": "",
-          "description": "Translate documents in your browser using Chrome's built-in AI, right on your device",
-          "apis": ["LanguageModel", "Translator", "LanguageDetector"],
-          "screenshot": "screenshots/chrome.dev--web-ai-demos-document-translator.png"
-        },
-        {
-          "url": "https://chrome.dev/web-ai-demos/image-alt-text-playground",
-          "title": "Image alt text playground",
-          "description": "Explore AI-powered image alt text generation, using prompts to describe images for accessibility.",
-          "apis": ["LanguageModel"],
-          "screenshot": "screenshots/chrome.dev--web-ai-demos-image-alt-text-playground.png"
-        },
-        {
-          "url": "https://chrome.dev/web-ai-demos/news-app",
-          "title": "Tagesschau Aktuell",
-          "description": "Explore AI-powered news summaries and recommendations in this German news app demo",
-          "apis": ["LanguageModel", "Translator"],
-          "screenshot": "screenshots/chrome.dev--web-ai-demos-news-app.png"
-        },
-        {
-          "url": "https://translator-api-demo-tomayac.yoyo.codes/",
-          "title": "Review and Book",
-          "description": "Translate and summarize webpage content for booking a Shanghai rental, using Chrome AI.",
-          "apis": ["Translator"],
-          "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
-        },
-        {
-          "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
-          "title": "trAIlblazers",
-          "description": "Create and manage travel blog posts using AI-powered tools in this trAIlblazers demo",
-          "apis": [
-            "LanguageModel",
-            "Translator",
-            "LanguageDetector",
-            "Summarizer"
-          ],
-          "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
-        }
-      ]
-    </script>
+[
+  {
+    "heading": "Chrome demos",
+    "eyebrow": "Demos built by members of the Chrome team.",
+    "demos": [
+      {
+        "url": "https://chrome.dev/web-ai-demos/document-translator",
+        "title": "",
+        "description": "Instantly translate documents in your browser with this Chrome Built-in AI demo",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "LanguageDetector"
+        ],
+        "screenshot": "screenshots/chrome.dev--web-ai-demos-document-translator.png"
+      },
+      {
+        "url": "https://chrome.dev/web-ai-demos/image-alt-text-playground",
+        "title": "Image alt text playground",
+        "description": "Explore AI-generated image alt text, using prompts to describe pictures, including for accessibility",
+        "apis": [
+          "LanguageModel"
+        ],
+        "screenshot": "screenshots/chrome.dev--web-ai-demos-image-alt-text-playground.png"
+      },
+      {
+        "url": "https://chrome.dev/web-ai-demos/news-app",
+        "title": "Tagesschau Aktuell",
+        "description": "Explore a news app demo with AI-powered features, like summaries and personalized recommendations",
+        "apis": [
+          "LanguageModel",
+          "Translator"
+        ],
+        "screenshot": "screenshots/chrome.dev--web-ai-demos-news-app.png"
+      },
+      {
+        "url": "https://translator-api-demo-tomayac.yoyo.codes/",
+        "title": "Review and Book",
+        "description": "Translate and book a Shanghai rental; the demo translates and summarizes pages",
+        "apis": [
+          "Translator"
+        ],
+        "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
+      },
+      {
+        "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
+        "title": "trAIlblazers",
+        "description": "Create and manage travel blog posts using AI features within this demo app",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "LanguageDetector",
+          "Summarizer"
+        ],
+        "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
+      }
+    ]
+  },
+  {
+    "heading": "Partner showcase",
+    "eyebrow": "Live production deployments by our partners.",
+    "demos": [
+      {
+        "url": "https://www.temu.com/search_result.html?search_key=Food%20Container&show_prompt_ai=Q8BKZAXcXb71JMv",
+        "title": "Verificación de seguridad",
+        "description": "This demo uses AI to enhance your shopping experience with the Temu app",
+        "apis": [
+          "LanguageModel",
+          "Writer"
+        ],
+        "screenshot": "screenshots/www.temu.com--search_result.html.png"
+      },
+      {
+        "url": "https://www.trip.com/flights/showfarefirst?dcity=nkg&acity=sel&ddate=2026-06-08&triptype=ow&class=y&lowpricesource=searchform&quantity=1&searchboxarg=t&nonstoponly=off&locale=en-XX&curr=USD&qconfig=isOpenListAI-true%2CisOnlyChromeAI-false%2CisUseChatSidebar-true",
+        "title": "Flights from Nanjing to Seoul",
+        "description": "Finds and displays flight information, like prices and deals, for Nanjing to Seoul on Trip.com",
+        "apis": [
+          "LanguageModel"
+        ],
+        "screenshot": "screenshots/www.trip.com--flights-showfarefirst.png"
+      },
+      {
+        "url": "https://tw.bid.yahoo.com/",
+        "title": "Tus opciones de privacidad",
+        "description": "Explore privacy options on a Yahoo site, allowing you to accept, reject, or customize data usage",
+        "apis": [],
+        "screenshot": "screenshots/tw.bid.yahoo.com.png"
+      },
+      {
+        "url": "https://www.miravia.es/p/i1359804957939637-s2075727153026997.html?spm=euspain.homepage.flashsale.d1.189f1ce8RIKiX6&esr-custom=%2F%2Fimg2.miravia.es%2Fg%2Ffb%2Fkf%2FE96a59c8b2c5f4baa81b84406aa5576edS.jpg_360x360q80.avif",
+        "title": "Dodot Bebé Seco Pack Ahorro,Formato XXL, Tallas 3 a 7. Pañales Bebé con Triple Sistema de Protección Antifugas, Nº 1 Ultra Seco, Triple Capa Absorbente, Piel de tu Bebé Seca hasta 12h.",
+        "description": "Discover AI features on a Miravia product page, including product details and offers",
+        "apis": [],
+        "screenshot": "screenshots/www.miravia.es--p-i1359804957939637-s2075727153026997.html.png"
+      },
+      {
+        "url": "https://www.nykaafashion.com/",
+        "title": "Nykaa Fashion",
+        "description": "Explore fashion, gadgets, and home decor with personalized recommendations on Nykaa Fashion",
+        "apis": [
+          "LanguageModel"
+        ],
+        "screenshot": "screenshots/www.nykaafashion.com.png"
+      },
+      {
+        "url": "https://investmentlife.policybazaar.com/quote?enquiryKey=357QmH2geGdWAbvmpZVrzkZcdxLcPp1dBOosANvc8lMUkpMXusesgMLrBSPjR3EjM7mokEFRqan05OLGUtY1pQ%253d%253d&utm_source=pb_finova",
+        "title": "Access Denied",
+        "description": "Sorry, this demo is inaccessible, displaying an 'Access Denied' error",
+        "apis": [],
+        "screenshot": "screenshots/investmentlife.policybazaar.com--quote.png"
+      },
+      {
+        "url": "https://www.standard.co.uk/news/environment",
+        "title": "Environment & climate change",
+        "description": "Summarizes news articles on environment and climate change from the London Evening Standard.",
+        "apis": [
+          "Summarizer"
+        ],
+        "screenshot": "screenshots/www.standard.co.uk--news-environment.png"
+      },
+      {
+        "url": "https://fakty.com.ua/ua/ukraine/suspilstvo/20201106-ukrayinskyj-pidpryyemets-zasnovnyk-holdyngu-ms-capital/",
+        "title": "Український підприємець, засновник холдингу MS Capital",
+        "description": "Summarize Ukrainian entrepreneur Maxim Shkil's biography from a news article.",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "Summarizer"
+        ],
+        "screenshot": "screenshots/fakty.com.ua--ua-ukraine-suspilstvo-20201106-ukrayinskyj-pidpryyemets-zasnovnyk-holdyngu-ms-capital.png"
+      },
+      {
+        "url": "https://pixiv.github.io/local-chat-vrm/",
+        "title": "ChatVRM",
+        "description": "Chat with 3D characters in your browser using voice/text powered by local AI and customize their personalities",
+        "apis": [
+          "LanguageModel"
+        ],
+        "screenshot": "screenshots/pixiv.github.io--local-chat-vrm.png"
+      }
+    ]
+  }
+]
+</script>
 
     <footer class="site-footer">
       <div class="footer-inner">
@@ -1360,12 +1486,20 @@
       }
 
       function renderDemos() {
-        const demos = JSON.parse(
+        const data = JSON.parse(
           document.getElementById('demos-data').textContent || '[]'
         );
-        if (!demos.length) return; // keep placeholder cards
+        if (!data.length) return; // keep placeholder cards
 
-        const apiOrder = [...new Set(demos.flatMap((d) => d.apis ?? []))];
+        // Support both old flat array and new section-grouped format
+        const sections = data[0]?.demos
+          ? data
+          : [{ heading: '', eyebrow: '', demos: data }];
+
+        const allDemos = sections.flatMap((s) => s.demos);
+        if (!allDemos.length) return;
+
+        const apiOrder = [...new Set(allDemos.flatMap((d) => d.apis ?? []))];
 
         // Filter bar
         const filterBar = document.getElementById('filter-bar');
@@ -1384,10 +1518,10 @@
 
         const activeApis = new Set();
         const allPill = filterBar.querySelector('[data-api="all"]');
-        const grid = document.getElementById('demos-grid');
+        const container = document.getElementById('demos-container');
 
         function applyFilter() {
-          grid.querySelectorAll('.demo-card').forEach((card) => {
+          container.querySelectorAll('.demo-card').forEach((card) => {
             if (!activeApis.size) {
               card.hidden = false;
               return;
@@ -1420,8 +1554,15 @@
           applyFilter();
         });
 
-        // Cards
-        grid.innerHTML = demos.map(cardHtml).join('');
+        // Render sections with eyebrow + heading + grid
+        container.innerHTML = sections
+          .map(
+            ({ heading, eyebrow, demos: sectionDemos }) =>
+              (eyebrow ? `<p class="demos-section-eyebrow">${eyebrow}</p>` : '') +
+              (heading ? `<h3 class="demos-section-heading">${heading}</h3>` : '') +
+              `<div class="demos-grid">${sectionDemos.map(cardHtml).join('')}</div>`
+          )
+          .join('');
       }
 
       renderDemos();
