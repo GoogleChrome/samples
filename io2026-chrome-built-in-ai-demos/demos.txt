@@ -1,5 +1,0 @@
-https://chrome.dev/web-ai-demos/document-translator
-https://chrome.dev/web-ai-demos/image-alt-text-playground
-https://chrome.dev/web-ai-demos/news-app
-https://translator-api-demo-tomayac.yoyo.codes/
-https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true

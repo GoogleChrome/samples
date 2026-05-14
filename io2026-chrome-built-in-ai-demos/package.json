@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "npx http-server",
-    "build": "node build.js"
+    "build": "node build.js",
+    "deploy": "git add screenshots/ demos.json index.html && git diff --cached --quiet && echo 'Nothing to deploy.' || git commit -m 'Update demos' && git push"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",

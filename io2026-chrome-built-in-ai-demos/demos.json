@@ -137,6 +137,13 @@
           "LanguageModel"
         ],
         "screenshot": "screenshots/pixiv.github.io--local-chat-vrm.png"
+      },
+      {
+        "url": "https://blog.ameba.jp/ucs/entry/srventryinsertinput.do",
+        "title": "ログインする",
+        "description": "Demonstrates AI login features, including options for various external services and reCAPTCHA.",
+        "apis": [],
+        "screenshot": "screenshots/blog.ameba.jp--ucs-entry-srventryinsertinput.do.png"
       }
     ]
   }

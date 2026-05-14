@@ -1,13 +1,9 @@
+## <!-- BUILT-IN-AI-SKILLS -->
 
+name: built-in-ai description: Teaches the AI about modern Chrome Built-in AI
+APIs (Prompt, Translation, Writing Assistance) and their polyfills. license:
+Apache-2.0 compatibility: works with Chrome Built-in AI APIs and their polyfills
 
-<!-- BUILT-IN-AI-SKILLS -->
----
-name: built-in-ai
-description:
-  Teaches the AI about modern Chrome Built-in AI APIs (Prompt, Translation,
-  Writing Assistance) and their polyfills.
-license: Apache-2.0
-compatibility: works with Chrome Built-in AI APIs and their polyfills
 ---
 
 # Built-in AI Skills
@@ -185,8 +181,11 @@ console.log(fullResponse);
 ## 📃 Authoritative Reference Documentation
 
 Use the authoritative reference documentation to ensure that you are using the
-APIs correctly. You have access to the [MDN MCP server](https://mdn-mcp-0445ad8e765a.herokuapp.com/mcp) for Mozilla docs and the [Developer
-Knowledge MCP server](https://developerknowledge.googleapis.com/mcp) for Chrome docs.
+APIs correctly. You have access to the
+[MDN MCP server](https://mdn-mcp-0445ad8e765a.herokuapp.com/mcp) for Mozilla
+docs and the
+[Developer Knowledge MCP server](https://developerknowledge.googleapis.com/mcp)
+for Chrome docs.
 
 - [Summarizer API](https://developer.mozilla.org/en-US/docs/Web/API/Summarizer)
 - [Language Detector API](https://developer.mozilla.org/en-US/docs/Web/API/LanguageDetector)
@@ -202,6 +201,7 @@ Below are the latest Web IDLs for these APIs, extracted from the official
 specifications.
 
 <!-- BEGIN IDLS -->
+
 ### Translation API
 
 ```webidl
