@@ -76,6 +76,24 @@
           "LanguageModel"
         ],
         "screenshot": "screenshots/astra.etiennenoel.com--live.png"
+      },
+      {
+        "url": "https://chrome.dev/web-ai-demos/local-ai-smart-invoice/",
+        "title": "Invoice Engine — Local AI Smart Invoice",
+        "description": "This demo uses local AI to intelligently extract and process information from invoices.",
+        "apis": [
+          "LanguageModel"
+        ],
+        "screenshot": "screenshots/chrome.dev--web-ai-demos-local-ai-smart-invoice.png"
+      },
+      {
+        "url": "https://chrome.dev/web-ai-demos/sensitive-data-validator/",
+        "title": "Sensitive Data Validator — Local AI Chat Guard",
+        "description": "This Chrome demo uses local AI to scan your chat messages for sensitive data before sending",
+        "apis": [
+          "LanguageModel"
+        ],
+        "screenshot": "screenshots/chrome.dev--web-ai-demos-sensitive-data-validator.png"
       }
     ]
   },
