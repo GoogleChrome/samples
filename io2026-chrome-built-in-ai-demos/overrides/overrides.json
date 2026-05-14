@@ -1,0 +1,7 @@
+{
+  "https://investmentlife.policybazaar.com/quote?enquiryKey=357QmH2geGdWAbvmpZVrzkZcdxLcPp1dBOosANvc8lMUkpMXusesgMLrBSPjR3EjM7mokEFRqan05OLGUtY1pQ%253d%253d&utm_source=pb_finova": {
+    "title": "PolicyBazaar Investment Life",
+    "description": "Explore AI-powered investment-linked life insurance plans with market insights and fund comparisons",
+    "apis": ["LanguageModel"]
+  }
+}
