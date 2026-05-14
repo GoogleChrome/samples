@@ -5,5 +5,13 @@
     "description": "Explore AI-powered investment-linked life insurance plans with market insights and fund comparisons",
     "apis": ["LanguageModel"],
     "screenshot": "overrides/screenshots/investmentlife.policybazaar.com--quote.png"
-  }
+  },
+  {
+    "url": "https://chrome.dev/web-ai-demos/document-translator",
+    "title": "Document Translator"
+  },
+  {
+    "url": "https://astra.etiennenoel.com/live",
+    "title": "On-device Astra"    
+  }  
 ]

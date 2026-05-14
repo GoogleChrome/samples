@@ -4,8 +4,34 @@
     "eyebrow": "Demos built by members of the Chrome team.",
     "demos": [
       {
+        "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
+        "title": "trAIlblazers",
+        "description": "Create and manage travel blog posts using AI features within this demo app",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "LanguageDetector",
+          "Summarizer"
+        ],
+        "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
+      },
+      {
+        "url": "https://web-ai.studio/",
+        "title": "Chat",
+        "description": "WebAI Studio: Explore on-device AI with Chrome, featuring chat, translation, and writing tools.",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "LanguageDetector",
+          "Summarizer",
+          "Writer",
+          "Rewriter"
+        ],
+        "screenshot": "screenshots/web-ai.studio.png"
+      },
+      {
         "url": "https://chrome.dev/web-ai-demos/document-translator",
-        "title": "",
+        "title": "Document Translator",
         "description": "Instantly translate documents in your browser with this Chrome Built-in AI demo",
         "apis": [
           "LanguageModel",
@@ -43,16 +69,13 @@
         "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
       },
       {
-        "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
-        "title": "trAIlblazers",
-        "description": "Create and manage travel blog posts using AI features within this demo app",
+        "url": "https://astra.etiennenoel.com/live",
+        "title": "On-device Astra",
+        "description": "Experience on-device AI: This demo listens, detects silence, and more in real-time.",
         "apis": [
-          "LanguageModel",
-          "Translator",
-          "LanguageDetector",
-          "Summarizer"
+          "LanguageModel"
         ],
-        "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
+        "screenshot": "screenshots/astra.etiennenoel.com--live.png"
       }
     ]
   },

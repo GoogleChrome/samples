@@ -5,389 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chrome Built-in AI Demos — Google I/O 2026</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <noscript data-cos-fonts>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&amp;family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&amp;family=Noto+Color+Emoji&amp;display=swap"
-        rel="stylesheet"
-      />
+      <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&amp;family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&amp;family=Noto+Color+Emoji&amp;display=swap" rel="stylesheet">
     </noscript>
     <script>
-      (async () => {
-        const f = '[COS Fonts]';
-        function C() {
-          const e = new DOMParser(),
-            a = new Set();
-          for (const o of document.querySelectorAll(
-            'noscript[data-cos-fonts]'
-          )) {
-            const d = e.parseFromString(o.innerHTML, 'text/html');
-            for (const c of d.querySelectorAll('link[rel="stylesheet"]'))
-              try {
-                new URL(c.href).hostname === 'fonts.googleapis.com' &&
-                  a.add(c.href);
-              } catch {}
-          }
-          return [...a];
-        }
-        function h(e) {
-          console.log(f, `Falling back: injecting ${e.length} <link> tag(s)`);
-          for (const a of e) {
-            const o = document.createElement('link');
-            ((o.rel = 'stylesheet'),
-              (o.href = a),
-              document.head.appendChild(o));
-          }
-        }
-        const r = C();
-        if (r.length === 0) {
-          console.log(
-            f,
-            'No <noscript data-cos-fonts> blocks found — nothing to do'
-          );
-          return;
-        }
-        if (
-          (console.log(f, `Found ${r.length} Google Fonts CSS URL(s):`, r),
-          !('crossOriginStorage' in navigator))
-        ) {
-          (console.log(
-            f,
-            'crossOriginStorage not available — falling back to Google Fonts <link>'
-          ),
-            h(r));
-          return;
-        }
-        console.log(
-          f,
-          'crossOriginStorage available — using COS font loading path'
-        );
-        const I = {
-            t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouPWhoxrW5OD5k:
-              '9b5b5283adf2524c0d84c9ee603cffc90881cc8a4217936baaa0313c39a36bda',
-            t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouBWhoxrW5O:
-              '1c7d9f9c86f929fb4469b8a93510a65936d3bdc49e0a1a6878ae2b0f3f47c7c2',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.1':
-              'c87e948953bc90e38ba25d711f65377a62aef4e4a7cce272e1c6d8c315e4da41',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vQCIhM907-0x':
-              'ca334c8cc2a9eb66f28217f441b42f69246f168c7720149dc8c3cf79ed7c2f96',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sgCIhM907-0x':
-              'fa27e3ef78d8ff6d8870b802f53de88bb96428b97b50de1b084f64845687259f',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2oQCIhM907-0x':
-              '843cf0483578f333e68db60a5dfcca8c9d7eaa35f2d3cec335c09e31ccacba89',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2tQCIhM907-0x':
-              'ccc5959d188b82e8ac377be16e70ea66a9562575f9171ac96b939f49c1ca3470',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pwCIhM907-0x':
-              '32d2866d43994e2ba5819bbfb445bb1232be73cf2650d7d2a0a1a63589aa33cb',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2twCIhM907-0x':
-              'd75c1385de71217f960d6045be7f70608f126cf733fa81865be13625721d6ec3',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qgCIhM907-0x':
-              '3f90ce2aaf2cfdd4c586cdfd84f7763b2b42d7a1132f6335366e351f7aa55e4b',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq20ACIhM907-0x':
-              'd001bbf7a2e8b1d94d81073ce117443946489568260950a8b0754404e4e87687',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pgCIhM907-0x':
-              '7b5ac7a5175c97050128da33872346768fa4889abaad86d37f085d668301e937',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2owCIhM907-0x':
-              '38f54d0b5e7981f2b44a0857aedc72e4821daef74caf0c5ad12dc54f7e348a10',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vgCIhM907w':
-              '522613a5a76bfdd8d20f44bcb468400e4dda5d25cbaa64e43fdc91c81ec1b770',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCIjshW7d0wve4':
-              '74a5927e362e442609c8a1a061fb766ac29626d993d1bbb3ca56190f077ffc9c',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCljshW7d0wve4':
-              '5f371f6e1019af48b0124b91aca9c8779f37a4a9b28d18c4ae401213a9060167',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCHjshW7d0wve4':
-              '7f63c6ca27ad4025f8288efc8a83f29cff5eacfd3cc028c44577168e628e6740',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sQCIhM907-0x':
-              'cba9116ea92cb36741fb795bb121da411a27b46a5f2e9b2d5dae5ebf939893e6',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCOjshW7d0wve4':
-              '2cc997a717dde013d3e7208d438d891f6088a2d6c17b1f6db42354ba60279fa1',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCejshW7d0wve4':
-              '08d730a36c9b19bfbcc8c2392fc03f56a0cd325cf68a8d6490e16461ecbee379',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2kQCIhM907-0x':
-              '516f31b16e343b1ae6023bd8f218d9d1023b942b294fbb342a0f24240c2ea050',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCJjshW7d0wve4':
-              '60eb3c10b0aa20173f284a0d34e2d66c5defa773073887c87d306fd1f60f6569',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vACIhM907-0x':
-              'c0a5e8acfa2b6f4997b576503080f8f230925da7770ff36963f79fa87a7eeac5',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCFjshW7d0wve4':
-              '7658c064dd2713ec7fae59f4414f656f5a2f206ff04286db69ce376598f3e1e3',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rgCIhM907-0x':
-              'e31ccdcafcbe842da4b04e1a2ed3f1055c946c30fe18c07d3d1683bb6e71e6ed',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCGjshW7d0wve4':
-              '867a0c2b8cd82839684b223baa2763be7799bb8a898f8d9a567fff807faf24b2',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sACIhM907-0x':
-              'ea50cc7786ceec737cf24d3ebaee7fcb5004cda27fd3871abfb23d15e4e5401e',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCajshW7d0wve4':
-              '280729bb52d1229f914610003dc86e9711c86a65d18b07efe3af9d96f14be9cc',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.2':
-              'd500497beb107cb122df6b65452c8bd9699c9078b9ae5f35bb82696a8cce6f60',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCKjshW7d0w':
-              'e98deac67941679b468f2545a34544aece5dcd6ed638f59891e94012617e4656',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qACIhM907-0x':
-              'ab318b6833b45b02ece5d0d60e96d2b6d11799840979d496f7fe8b9e3ce8007f',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ogCIhM907-0x':
-              '2b076d3b2accc9a3b7897d7f3fed33eedcf5a2eee2c74368638d7bb76b9d556d',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ugCIhM907-0x':
-              '686440514690e359c3b829a8fe90236161c7670b87081ae25821965c1a1b8b54',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2nQCIhM907-0x':
-              '0bcf740d0d1cdba34eb4af728c150be6b306e33c4780695cd1045fc8aedae27c',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCVjshW7d0wve4':
-              '82db3d6dd48495e05b1edfffe7994ff35bb3ed0ba45e1db4ab518e1203f3a288',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2swCIhM907-0x':
-              '5a3db91b5270dcd97f050f84e70ec9bdb94d4189ba17a46b9cb7dc4f4060834d',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCDjshW7d0wve4':
-              '6e78f3302dd51024a4cd4b338b418140b54ccb784c01970bb326de62581ce809',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCpjshW7d0wve4':
-              '667f4bbf20fa5c708bd0817b259f4424c362216d602faa6756dd1dbb25c48873',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCcjshW7d0wve4':
-              'd23c3ed27d8bdfcae9153f63c3c6901bf857cc833d4399172c0537a8cbf8e7d4',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCEjshW7d0wve4':
-              '9753d80d8ab72baf54acd4714802cce59005ae954cd1008f5b5774dd2904f17e',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTDkjshW7d0wve4':
-              '9e608b4f7500b0b92b2afcc3facd0f78ab875f09a3b7626fd3b3df8cc3e4f31c',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.6':
-              '732541f93fcf33bb4919aa42f865f242a1d3f3428fd68c659774ad8bdefd5c87',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.4':
-              'f7848ab453b11441c20792f91c202ee98bcdcc223609e8cda6930d5f947c3d68',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCSjshW7d0wve4':
-              '292220d216c6dceeab078691943436641076524ca9c8ad0fc79468ec255056e3',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCLjshW7d0wve4':
-              '6cc7490cf4b03fd7e7aac8dbf44e3b57d7896d8d3a06a8bb99f829f5f2a3bf91',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCRjshW7d0wve4':
-              '6eb80b615703be8d46ea94a895a1a78d240511fa6925645a139b978e76c8aceb',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vwCIhM907-0x':
-              '47bf33fd0676efb1f43f636fde1896d3353ef4ae35c93005d6725e264fea38da',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.5':
-              '59ec028a34d2c3cb6e670d4fd231d7d61895b560738daa6ff4b956643ffe4aac',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.9':
-              'a50590a80ba6589388f4a51d463f853ef382dcbeb1e3b022dc6ed60147676ca2',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pQCIhM907-0x':
-              '04e033501d76c362d5dac19f736f0888776b3db70f3b4e30b7ff5700eea42c4f',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCBjshW7d0wve4':
-              '62047e77091c0dba15e38ede0ed715e69a4e0ba2da34f0bad64aef4fad016d96',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCTjshW7d0wve4':
-              '6a8ccea6400478d63470f5cbb0ffc16d6998d4bcb59609484227452af5624014',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rACIhM907-0x':
-              'c17161ed0c625be4a33ca2fdf730b639c34f2ba98a7b1cf7a9439bb72d609564',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCXjshW7d0wve4':
-              '3b5962005f829d79cae949104ea0595c7b30ace83525b4abda25baac1d11017a',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCYjshW7d0wve4':
-              '1d4d9c6b05fb48a55db31501d849c34dd6d03156fb57e7930a679b6d04d78afe',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.3':
-              '33d863891fc666d3bcd03700f344ef50da89cf005b10d0022b5d196ac18b3596',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCWjshW7d0wve4':
-              '91fa5ed2cdc4605894f58bfbfc22e0ca82b57f236245e2815beca50031c8d6a4',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.7':
-              'd1f87d46c80af676a0099def081fffea41f85bc62dc0957405f2ff9a33f18c4d',
-            '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCbjshW7d0wve4':
-              '15c18fb3ffcc3661015b1b0a8c85ad0f26ce05bb532a53e1116a98ef64b2e44a',
-            '4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rwCIhM907-0x':
-              '0e72475119587f94d812716d43bba51f8b9cd5747a4f062b288a4f9efa743a3c',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.8':
-              '2583da22e236b9b53d85d7a9dcb3f18cb4bca92277ea26cf53ada69c63ac8278',
-            'Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.0':
-              '1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6',
-          },
-          i = Object.keys(I).length;
-        console.log(
-          f,
-          i > 0
-            ? `Pre-computed hashes: ${i} font file(s) — COS queries need no network fetch on hit`
-            : 'No pre-computed hashes found — will compute SHA-256 from content after download'
-        );
-        const u = (e) => {
-            try {
-              return localStorage.getItem(e);
-            } catch {
-              return null;
-            }
-          },
-          G = (e, a) => {
-            try {
-              localStorage.setItem(e, a);
-            } catch {}
-          };
-        async function g(e) {
-          const a = await crypto.subtle.digest('SHA-256', e);
-          return Array.from(new Uint8Array(a), (o) =>
-            o.toString(16).padStart(2, '0')
-          ).join('');
-        }
-        async function J(e) {
-          try {
-            console.log(f, `  COS lookup   hash=${e}`);
-            const [a] = await navigator.crossOriginStorage.requestFileHandles([
-                { algorithm: 'SHA-256', value: e },
-              ]),
-              o = await a.getFile();
-            return (
-              console.log(f, `  COS hit      ${(o.size / 1024).toFixed(1)} KB`),
-              o
-            );
-          } catch (a) {
-            if (a.name === 'NotFoundError')
-              return (
-                console.log(f, '  COS miss     (not found or privacy-gated)'),
-                null
-              );
-            throw a;
-          }
-        }
-        async function w(e, a) {
-          try {
-            console.log(
-              f,
-              `  COS store    hash=${a} size=${(e.size / 1024).toFixed(1)} KB origins=*`
-            );
-            const [o] = await navigator.crossOriginStorage.requestFileHandles(
-                [{ algorithm: 'SHA-256', value: a }],
-                { create: !0, origins: '*' }
-              ),
-              d = await o.createWritable();
-            (await d.write(e),
-              await d.close(),
-              console.log(f, '  COS store    done'));
-          } catch (o) {
-            console.warn(f, `  COS store    failed: ${o.message}`);
-          }
-        }
-        async function x(e) {
-          const a = e
-              .split('/')
-              .pop()
-              .replace(/\.[^.]+$/, ''),
-            o = I[a],
-            d = o ?? u('cos_fh:' + e);
-          if (d) {
-            console.log(
-              f,
-              o ? `  Pre-computed hash  ${d}` : `  Cached hash  ${d}`
-            );
-            const b = await J(d);
-            if (b) return b;
-          }
-          console.log(f, `  Network fetch ${e}`);
-          const c = await fetch(e);
-          if (!c.ok) throw new Error(`Fetch ${e} → ${c.status}`);
-          const t = await c.arrayBuffer(),
-            l = c.headers.get('content-type') || 'font/woff2',
-            s = new Blob([t], { type: l });
-          console.log(
-            f,
-            `  Network fetch done  ${(s.size / 1024).toFixed(1)} KB`
-          );
-          const n = o ?? (await g(t));
-          return (
-            o ||
-              (console.warn(
-                f,
-                `  No pre-computed hash for "${a}" — computed from content.`,
-                'Re-run hash-calculator.html and update the hash map in the page.'
-              ),
-              G('cos_fh:' + e, n)),
-            w(s, n),
-            s
-          );
-        }
-        function _(e) {
-          try {
-            const a = new URL(e);
-            return (a.searchParams.delete('text'), a.toString());
-          } catch {
-            return e;
-          }
-        }
-        function q(e) {
-          const a = [],
-            o = /@font-face\s*\{([^}]+)\}/g;
-          let d;
-          for (; (d = o.exec(e)) !== null; ) {
-            const c = d[1],
-              t = (n) => {
-                const b = n.exec(c);
-                return b ? b[1].trim() : null;
-              },
-              l = t(/font-family:\s*['"]([^'"]+)['"]/),
-              s = t(/url\(['"]?(https?:[^'")\s]+)['"]?\)/);
-            !l ||
-              !s ||
-              a.push({
-                family: l,
-                style: t(/font-style:\s*([^;]+)/) || 'normal',
-                weight: t(/font-weight:\s*([^;]+)/) || '400',
-                stretch: t(/font-stretch:\s*([^;]+)/),
-                display: t(/font-display:\s*([^;]+)/) || 'swap',
-                unicodeRange: t(/unicode-range:\s*([^;]+)/),
-                url: s,
-              });
-          }
-          return a;
-        }
-        async function D(e) {
-          const a = _(e),
-            o = 'cos_font_css_v1:' + a,
-            d = u(o);
-          if (d)
-            try {
-              const s = JSON.parse(d);
-              return (
-                console.log(
-                  f,
-                  `CSS descriptors from localStorage: ${a} (${s.length} faces)`
-                ),
-                s
-              );
-            } catch {}
-          console.log(f, `Fetching Google Fonts CSS: ${a}`);
-          const c = await fetch(a);
-          if (!c.ok) throw new Error(`CSS fetch → ${c.status}`);
-          const t = await c.text(),
-            l = q(t);
-          return (
-            console.log(
-              f,
-              `CSS parsed: ${l.length} @font-face rules found in ${a}`
-            ),
-            G(o, JSON.stringify(l)),
-            l
-          );
-        }
-        try {
-          const e = (await Promise.all(r.map(D))).flat();
-          console.log(f, `Loading ${e.length} font faces total…`);
-          const a = await Promise.allSettled(
-              e.map(async (c) => {
-                const t = `${c.family} weight=${c.weight} style=${c.style}${c.unicodeRange ? ' unicode=' + c.unicodeRange.slice(0, 20) + '…' : ''}`;
-                console.log(`${f} ${t}`);
-                try {
-                  const s = await (await x(c.url)).arrayBuffer(),
-                    n = {
-                      style: c.style,
-                      weight: c.weight,
-                      display: c.display,
-                    };
-                  (c.stretch && (n.stretch = c.stretch),
-                    c.unicodeRange && (n.unicodeRange = c.unicodeRange));
-                  const b = new FontFace(c.family, s, n);
-                  (await b.load(),
-                    document.fonts.add(b),
-                    console.log(
-                      f,
-                      '  FontFace loaded and added to document.fonts'
-                    ));
-                } catch (l) {
-                  throw (console.warn(f, `  Failed: ${l.message}`), l);
-                }
-              })
-            ),
-            o = a.filter((c) => c.status === 'fulfilled').length,
-            d = a.length - o;
-          console.log(f, `Done: ${o} faces loaded${d ? `, ${d} failed` : ''}`);
-        } catch (e) {
-          (console.warn(f, 'Falling back to Google Fonts:', e.message), h(r));
-        }
-      })();
+      (async()=>{const h=new DOMParser,G=e=>[...document.querySelectorAll("noscript[data-cos-fonts]")].flatMap(a=>[...h.parseFromString(a.innerHTML,"text/html").querySelectorAll(e)]),s=[...new Set(G('link[rel="stylesheet"]').map(e=>e.href).filter(e=>{try{return new URL(e).hostname==="fonts.googleapis.com"}catch{return!1}}))];if(!s.length)return;const l=()=>{for(const e of s)document.head.append(Object.assign(document.createElement("link"),{rel:"stylesheet",href:e}))};if(!("crossOriginStorage"in navigator))return l();const u={"4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCJjshW7d0wve4":"60eb3c10b0aa20173f284a0d34e2d66c5defa773073887c87d306fd1f60f6569",t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouPWhoxrW5OD5k:"9b5b5283adf2524c0d84c9ee603cffc90881cc8a4217936baaa0313c39a36bda","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCRjshW7d0wve4":"6eb80b615703be8d46ea94a895a1a78d240511fa6925645a139b978e76c8aceb","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCGjshW7d0wve4":"867a0c2b8cd82839684b223baa2763be7799bb8a898f8d9a567fff807faf24b2","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCDjshW7d0wve4":"6e78f3302dd51024a4cd4b338b418140b54ccb784c01970bb326de62581ce809","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCIjshW7d0wve4":"74a5927e362e442609c8a1a061fb766ac29626d993d1bbb3ca56190f077ffc9c","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCpjshW7d0wve4":"667f4bbf20fa5c708bd0817b259f4424c362216d602faa6756dd1dbb25c48873","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCBjshW7d0wve4":"62047e77091c0dba15e38ede0ed715e69a4e0ba2da34f0bad64aef4fad016d96","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTDkjshW7d0wve4":"9e608b4f7500b0b92b2afcc3facd0f78ab875f09a3b7626fd3b3df8cc3e4f31c","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCTjshW7d0wve4":"6a8ccea6400478d63470f5cbb0ffc16d6998d4bcb59609484227452af5624014","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ugCIhM907-0x":"686440514690e359c3b829a8fe90236161c7670b87081ae25821965c1a1b8b54","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq20ACIhM907-0x":"d001bbf7a2e8b1d94d81073ce117443946489568260950a8b0754404e4e87687","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sACIhM907-0x":"ea50cc7786ceec737cf24d3ebaee7fcb5004cda27fd3871abfb23d15e4e5401e","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCXjshW7d0wve4":"3b5962005f829d79cae949104ea0595c7b30ace83525b4abda25baac1d11017a","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCFjshW7d0wve4":"7658c064dd2713ec7fae59f4414f656f5a2f206ff04286db69ce376598f3e1e3","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCKjshW7d0w":"e98deac67941679b468f2545a34544aece5dcd6ed638f59891e94012617e4656","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vgCIhM907w":"522613a5a76bfdd8d20f44bcb468400e4dda5d25cbaa64e43fdc91c81ec1b770","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2oQCIhM907-0x":"843cf0483578f333e68db60a5dfcca8c9d7eaa35f2d3cec335c09e31ccacba89","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCHjshW7d0wve4":"7f63c6ca27ad4025f8288efc8a83f29cff5eacfd3cc028c44577168e628e6740","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vACIhM907-0x":"c0a5e8acfa2b6f4997b576503080f8f230925da7770ff36963f79fa87a7eeac5","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2twCIhM907-0x":"d75c1385de71217f960d6045be7f70608f126cf733fa81865be13625721d6ec3","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCVjshW7d0wve4":"82db3d6dd48495e05b1edfffe7994ff35bb3ed0ba45e1db4ab518e1203f3a288","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCljshW7d0wve4":"5f371f6e1019af48b0124b91aca9c8779f37a4a9b28d18c4ae401213a9060167","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCOjshW7d0wve4":"2cc997a717dde013d3e7208d438d891f6088a2d6c17b1f6db42354ba60279fa1","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCejshW7d0wve4":"08d730a36c9b19bfbcc8c2392fc03f56a0cd325cf68a8d6490e16461ecbee379","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sQCIhM907-0x":"cba9116ea92cb36741fb795bb121da411a27b46a5f2e9b2d5dae5ebf939893e6","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rgCIhM907-0x":"e31ccdcafcbe842da4b04e1a2ed3f1055c946c30fe18c07d3d1683bb6e71e6ed","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2swCIhM907-0x":"5a3db91b5270dcd97f050f84e70ec9bdb94d4189ba17a46b9cb7dc4f4060834d","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2kQCIhM907-0x":"516f31b16e343b1ae6023bd8f218d9d1023b942b294fbb342a0f24240c2ea050","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qgCIhM907-0x":"3f90ce2aaf2cfdd4c586cdfd84f7763b2b42d7a1132f6335366e351f7aa55e4b","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2sgCIhM907-0x":"fa27e3ef78d8ff6d8870b802f53de88bb96428b97b50de1b084f64845687259f","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vQCIhM907-0x":"ca334c8cc2a9eb66f28217f441b42f69246f168c7720149dc8c3cf79ed7c2f96","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.1":"c87e948953bc90e38ba25d711f65377a62aef4e4a7cce272e1c6d8c315e4da41","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCajshW7d0wve4":"280729bb52d1229f914610003dc86e9711c86a65d18b07efe3af9d96f14be9cc","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2nQCIhM907-0x":"0bcf740d0d1cdba34eb4af728c150be6b306e33c4780695cd1045fc8aedae27c",t5t6IRMbNJ6TQG7Il_EKPqP9zTnvqouBWhoxrW5O:"1c7d9f9c86f929fb4469b8a93510a65936d3bdc49e0a1a6878ae2b0f3f47c7c2","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.2":"d500497beb107cb122df6b65452c8bd9699c9078b9ae5f35bb82696a8cce6f60","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vwCIhM907-0x":"47bf33fd0676efb1f43f636fde1896d3353ef4ae35c93005d6725e264fea38da","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCcjshW7d0wve4":"d23c3ed27d8bdfcae9153f63c3c6901bf857cc833d4399172c0537a8cbf8e7d4","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCEjshW7d0wve4":"9753d80d8ab72baf54acd4714802cce59005ae954cd1008f5b5774dd2904f17e","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2qACIhM907-0x":"ab318b6833b45b02ece5d0d60e96d2b6d11799840979d496f7fe8b9e3ce8007f","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCSjshW7d0wve4":"292220d216c6dceeab078691943436641076524ca9c8ad0fc79468ec255056e3","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.4":"f7848ab453b11441c20792f91c202ee98bcdcc223609e8cda6930d5f947c3d68","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2ogCIhM907-0x":"2b076d3b2accc9a3b7897d7f3fed33eedcf5a2eee2c74368638d7bb76b9d556d","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.6":"732541f93fcf33bb4919aa42f865f242a1d3f3428fd68c659774ad8bdefd5c87","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2tQCIhM907-0x":"ccc5959d188b82e8ac377be16e70ea66a9562575f9171ac96b939f49c1ca3470","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pgCIhM907-0x":"7b5ac7a5175c97050128da33872346768fa4889abaad86d37f085d668301e937","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pwCIhM907-0x":"32d2866d43994e2ba5819bbfb445bb1232be73cf2650d7d2a0a1a63589aa33cb","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2pQCIhM907-0x":"04e033501d76c362d5dac19f736f0888776b3db70f3b4e30b7ff5700eea42c4f","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.5":"59ec028a34d2c3cb6e670d4fd231d7d61895b560738daa6ff4b956643ffe4aac","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCLjshW7d0wve4":"6cc7490cf4b03fd7e7aac8dbf44e3b57d7896d8d3a06a8bb99f829f5f2a3bf91","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2owCIhM907-0x":"38f54d0b5e7981f2b44a0857aedc72e4821daef74caf0c5ad12dc54f7e348a10","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.9":"a50590a80ba6589388f4a51d463f853ef382dcbeb1e3b022dc6ed60147676ca2","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rACIhM907-0x":"c17161ed0c625be4a33ca2fdf730b639c34f2ba98a7b1cf7a9439bb72d609564","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCWjshW7d0wve4":"91fa5ed2cdc4605894f58bfbfc22e0ca82b57f236245e2815beca50031c8d6a4","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCYjshW7d0wve4":"1d4d9c6b05fb48a55db31501d849c34dd6d03156fb57e7930a679b6d04d78afe","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.3":"33d863891fc666d3bcd03700f344ef50da89cf005b10d0022b5d196ac18b3596","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.7":"d1f87d46c80af676a0099def081fffea41f85bc62dc0957405f2ff9a33f18c4d","4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2rwCIhM907-0x":"0e72475119587f94d812716d43bba51f8b9cd5747a4f062b288a4f9efa743a3c","4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCbjshW7d0wve4":"15c18fb3ffcc3661015b1b0a8c85ad0f26ce05bb532a53e1116a98ef64b2e44a","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.8":"2583da22e236b9b53d85d7a9dcb3f18cb4bca92277ea26cf53ada69c63ac8278","Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabts6diysYTngZPnMC1MfLd4gw.0":"1ea085e149cb9e5f1ac086f0580f7dc10d6cc06cb2e29caa8a7360064a7eadd6"},r=e=>{try{return localStorage.getItem(e)}catch{return null}},o=(e,a)=>{try{localStorage.setItem(e,a)}catch{}},C=async e=>[...new Uint8Array(await crypto.subtle.digest("SHA-256",e))].map(a=>a.toString(16).padStart(2,"0")).join(""),J=async e=>{try{const[a]=await navigator.crossOriginStorage.requestFileHandles([{algorithm:"SHA-256",value:e}]);return await a.getFile()}catch(a){if(a.name==="NotFoundError")return null;throw a}},i=async(e,a)=>{try{const[d]=await navigator.crossOriginStorage.requestFileHandles([{algorithm:"SHA-256",value:a}],{create:!0,origins:"*"}),f=await d.createWritable();await f.write(e),await f.close()}catch{}},_=async e=>{const a=e.split("/").pop().replace(/\.[^.]+$/,""),d=u[a],f=d??r("cos_fh:"+e);if(f){const n=await J(f);if(n)return n}const c=await fetch(e);if(!c.ok)throw new Error(`Fetch ${e} \u2192 ${c.status}`);const b=await c.arrayBuffer(),t=new Blob([b],{type:c.headers.get("content-type")||"font/woff2"}),I=d??await C(b);return d||o("cos_fh:"+e,I),i(t,I),t},w=[["family",/font-family:\s*['"]([^'"]+)['"]/],["style",/font-style:\s*([^;]+)/,"normal"],["weight",/font-weight:\s*([^;]+)/,"400"],["stretch",/font-stretch:\s*([^;]+)/],["display",/font-display:\s*([^;]+)/,"swap"],["unicodeRange",/unicode-range:\s*([^;]+)/],["url",/url\(['"]?(https?:[^'")\s]+)['"]?\)/]],q=e=>[...e.matchAll(/@font-face\s*\{([^}]+)\}/g)].map(a=>Object.fromEntries(w.map(([d,f,c])=>[d,a[1].match(f)?.[1].trim()??c]))).filter(a=>a.family&&a.url),x=async e=>{let a=e;try{const t=new URL(e);t.searchParams.delete("text"),a=t.toString()}catch{}const d="cos_font_css_v1:"+a,f=r(d);if(f)try{return JSON.parse(f)}catch{}const c=await fetch(a);if(!c.ok)throw new Error(`CSS fetch \u2192 ${c.status}`);const b=q(await c.text());return o(d,JSON.stringify(b)),b};try{const e=(await Promise.all(s.map(x))).flat();await Promise.allSettled(e.map(async a=>{const f=await(await _(a.url)).arrayBuffer(),c={style:a.style,weight:a.weight,display:a.display};a.stretch&&(c.stretch=a.stretch),a.unicodeRange&&(c.unicodeRange=a.unicodeRange);const b=new FontFace(a.family,f,c);await b.load(),document.fonts.add(b)}))}catch{l()}})();
     </script>
     <style>
       *,
@@ -1210,8 +834,34 @@
     "eyebrow": "Demos built by members of the Chrome team.",
     "demos": [
       {
+        "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
+        "title": "trAIlblazers",
+        "description": "Create and manage travel blog posts using AI features within this demo app",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "LanguageDetector",
+          "Summarizer"
+        ],
+        "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
+      },
+      {
+        "url": "https://web-ai.studio/",
+        "title": "Chat",
+        "description": "WebAI Studio: Explore on-device AI with Chrome, featuring chat, translation, and writing tools.",
+        "apis": [
+          "LanguageModel",
+          "Translator",
+          "LanguageDetector",
+          "Summarizer",
+          "Writer",
+          "Rewriter"
+        ],
+        "screenshot": "screenshots/web-ai.studio.png"
+      },
+      {
         "url": "https://chrome.dev/web-ai-demos/document-translator",
-        "title": "",
+        "title": "Document Translator",
         "description": "Instantly translate documents in your browser with this Chrome Built-in AI demo",
         "apis": [
           "LanguageModel",
@@ -1249,16 +899,13 @@
         "screenshot": "screenshots/translator-api-demo-tomayac.yoyo.codes.png"
       },
       {
-        "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
-        "title": "trAIlblazers",
-        "description": "Create and manage travel blog posts using AI features within this demo app",
+        "url": "https://astra.etiennenoel.com/live",
+        "title": "On-device Astra",
+        "description": "Experience on-device AI: This demo listens, detects silence, and more in real-time.",
         "apis": [
-          "LanguageModel",
-          "Translator",
-          "LanguageDetector",
-          "Summarizer"
+          "LanguageModel"
         ],
-        "screenshot": "screenshots/googlechrome.github.io--samples-trailblazers-dist-en-blog-create.png"
+        "screenshot": "screenshots/astra.etiennenoel.com--live.png"
       }
     ]
   },
