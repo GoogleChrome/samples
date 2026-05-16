@@ -1,17 +1,10 @@
 [
   {
-    "url": "https://investmentlife.policybazaar.com/quote?enquiryKey=357QmH2geGdWAbvmpZVrzkZcdxLcPp1dBOosANvc8lMUkpMXusesgMLrBSPjR3EjM7mokEFRqan05OLGUtY1pQ%253d%253d&utm_source=pb_finova",
-    "title": "PolicyBazaar Investment Life",
-    "description": "Explore AI-powered investment-linked life insurance plans with market insights and fund comparisons",
-    "apis": ["LanguageModel"],
-    "screenshot": "overrides/screenshots/investmentlife.policybazaar.com--quote.png"
-  },
-  {
     "url": "https://chrome.dev/web-ai-demos/document-translator",
     "title": "Document Translator"
   },
   {
     "url": "https://astra.etiennenoel.com/live",
-    "title": "On-device Astra"    
-  }  
+    "title": "On-device Astra"
+  }
 ]
