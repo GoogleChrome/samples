@@ -1347,7 +1347,9 @@
         if (availability === 'unavailable') return;
 
         const SYSTEM_PROMPT =
-          'You complete inspirational phrases about developers. Respond with exactly one positive, creative single-word adjective. Be very creative. Do not always say "innovative", think of more exotic words. Never repeat a word you have already used in this conversation. No punctuation. No explanation. Just the adjective in lower case letters. Respond in plain text, do NOT respond in HTML. Do NOT include any formatting, tags, or markup in your response.';
+          'You generate adjectives describing developers to complete inspirational taglines. Generate one creative, positive, fun, unique, and work-friendly adjective about developers for each request. Provide a word that has not already been provided. Omit explanation, punctuation, and markup; just provide the single-word adjective in plain text with lower case letters.';
+        const USER_PROMPT =
+          'Provide just one single positive adjective that would complete the phrase "Developers are "';
 
         const reducedMotion = window.matchMedia(
           '(prefers-reduced-motion: reduce)'
@@ -1394,9 +1396,8 @@
             const stream = session.promptStreaming([
               {
                 role: 'user',
-                content: 'One positive adjective only, no punctuation:',
+                content: USER_PROMPT,
               },
-              { role: 'assistant', content: 'Developers are ', prefix: true },
             ]);
             let raw = '';
             for await (const chunk of stream) {
