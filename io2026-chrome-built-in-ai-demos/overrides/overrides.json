@@ -6,5 +6,36 @@
   {
     "url": "https://astra.etiennenoel.com/live",
     "title": "On-device Astra"
+  },
+  {
+    "url": "https://tw.bid.yahoo.com/",
+    "title": "Yahoo! Taiwan",
+    "apis": ["LanguageModel", "Summarizer"]
+  },
+  {
+    "url": "https://www.miravia.es/p/i1359804957939637-s2075727153026997.html?spm=euspain.homepage.flashsale.d1.189f1ce8RIKiX6&esr-custom=%2F%2Fimg2.miravia.es%2Fg%2Ffb%2Fkf%2FE96a59c8b2c5f4baa81b84406aa5576edS.jpg_360x360q80.avif",
+    "title": "Miravia",
+    "apis": ["Summarizer"]
+  },
+  {
+    "url": "https://savings.policybazaar.com/quote?enquiryKey=%252bchLmT8JJWMzxP650DwEjyLugFS0QlwtotjUSFt%252foiJpDqDXnpCrKsoLAryAwb6GrVv%252bAfDTfIynIhwrz08kVQ%253d%253d&utm_source=pb_finova",
+    "title": "PolicyBazaar",
+    "apis": ["LanguageDetector", "Translator"]
+  },
+  {
+    "url": "https://www.standard.co.uk/news/environment",
+    "title": "The Standard"
+  },
+  {
+    "url": "https://fakty.com.ua/ua/ukraine/suspilstvo/20201106-ukrayinskyj-pidpryyemets-zasnovnyk-holdyngu-ms-capital/",
+    "title": "Факти"
+  },
+  {
+    "url": "https://pixiv.github.io/local-chat-vrm/",
+    "title": "Pixiv"
+  },
+  {
+    "url": "https://blog.ameba.jp/ucs/entry/srventryinsertinput.do",
+    "title": "CyberAgent"
   }
 ]

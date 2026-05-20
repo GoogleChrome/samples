@@ -6,7 +6,7 @@
       {
         "url": "https://googlechrome.github.io/samples/trailblazers/dist/en/blog/create/?admin=true",
         "title": "trAIlblazers",
-        "description": "Create and manage travel blog posts using AI features within this demo app",
+        "description": "Create and manage travel blog posts using AI features in this trAIlblazers demo",
         "apis": [
           "LanguageModel",
           "Translator",
@@ -18,7 +18,7 @@
       {
         "url": "https://web-ai.studio/",
         "title": "Chat",
-        "description": "WebAI Studio: Explore on-device AI with Chrome, featuring chat, translation, and writing tools.",
+        "description": "Explore on-device AI with Gemini Nano: chat, translate, summarize, and create with Chrome's built-in APIs.",
         "apis": [
           "LanguageModel",
           "Translator",
@@ -32,7 +32,7 @@
       {
         "url": "https://chrome.dev/web-ai-demos/document-translator",
         "title": "Document Translator",
-        "description": "Instantly translate documents in your browser with this Chrome Built-in AI demo",
+        "description": "Instantly translate documents in your browser with this Chrome web AI demo",
         "apis": [
           "LanguageModel",
           "Translator",
@@ -43,7 +43,7 @@
       {
         "url": "https://chrome.dev/web-ai-demos/image-alt-text-playground",
         "title": "Image alt text playground",
-        "description": "Explore AI-generated image alt text, using prompts to describe pictures, including for accessibility",
+        "description": "Explore AI-powered image alt text generation, using generic & tailored prompts and your own images",
         "apis": [
           "LanguageModel"
         ],
@@ -52,7 +52,7 @@
       {
         "url": "https://chrome.dev/web-ai-demos/news-app",
         "title": "Tagesschau Aktuell",
-        "description": "Explore a news app demo with AI-powered features, like summaries and personalized recommendations",
+        "description": "Summarize news articles and generate personalized recommendations using on-device AI in Chrome.",
         "apis": [
           "LanguageModel",
           "Translator"
@@ -62,7 +62,7 @@
       {
         "url": "https://translator-api-demo-tomayac.yoyo.codes/",
         "title": "Review and Book",
-        "description": "Translate and book a Shanghai rental; the demo translates and summarizes pages",
+        "description": "Translate and summarize booking details on a Shanghai rental, using Chrome's AI capabilities",
         "apis": [
           "Translator"
         ],
@@ -71,7 +71,7 @@
       {
         "url": "https://astra.etiennenoel.com/live",
         "title": "On-device Astra",
-        "description": "Experience on-device AI: This demo listens, detects silence, and more in real-time.",
+        "description": "Experience on-device speech recognition and real-time transcription with this Chrome AI demo",
         "apis": [
           "LanguageModel"
         ],
@@ -80,7 +80,7 @@
       {
         "url": "https://chrome.dev/web-ai-demos/local-ai-smart-invoice/",
         "title": "Invoice Engine — Local AI Smart Invoice",
-        "description": "This demo uses local AI to intelligently extract and process information from invoices.",
+        "description": "The Invoice Engine demo leverages local AI to intelligently scan and generate invoices within Chrome.",
         "apis": [
           "LanguageModel"
         ],
@@ -98,7 +98,7 @@
       {
         "url": "https://brechtdr.github.io/ai-guess-who/",
         "title": "AI Guess Who?",
-        "description": "Play Guess Who? against a Chrome AI, creating custom games or using the default characters",
+        "description": "Test your wits against a Chrome AI in a fun Guess Who? game, with custom character options",
         "apis": [
           "LanguageModel"
         ],
@@ -112,22 +112,27 @@
     "demos": [
       {
         "url": "https://tw.bid.yahoo.com/",
-        "title": "Tus opciones de privacidad",
-        "description": "Explore privacy options on a Yahoo site, allowing you to accept, reject, or customize data usage",
-        "apis": [],
+        "title": "Yahoo! Taiwan",
+        "description": "Browse and shop on Yahoo Auctions Taiwan, the largest online auction platform",
+        "apis": [
+          "LanguageModel",
+          "Summarizer"
+        ],
         "screenshot": "screenshots/tw.bid.yahoo.com.png"
       },
       {
         "url": "https://www.miravia.es/p/i1359804957939637-s2075727153026997.html?spm=euspain.homepage.flashsale.d1.189f1ce8RIKiX6&esr-custom=%2F%2Fimg2.miravia.es%2Fg%2Ffb%2Fkf%2FE96a59c8b2c5f4baa81b84406aa5576edS.jpg_360x360q80.avif",
-        "title": "Dodot Bebé Seco Pack Ahorro,Formato XXL, Tallas 3 a 7. Pañales Bebé con Triple Sistema de Protección Antifugas, Nº 1 Ultra Seco, Triple Capa Absorbente, Piel de tu Bebé Seca hasta 12h.",
-        "description": "Discover AI features on a Miravia product page, including product details and offers",
-        "apis": [],
+        "title": "Miravia",
+        "description": "Explore AI-powered product analysis with this demo, showcasing features from a Miravia listing.",
+        "apis": [
+          "Summarizer"
+        ],
         "screenshot": "screenshots/www.miravia.es--p-i1359804957939637-s2075727153026997.html.png"
       },
       {
         "url": "https://www.nykaafashion.com/",
         "title": "Nykaa Fashion",
-        "description": "Explore fashion, gadgets, and home decor with personalized recommendations on Nykaa Fashion",
+        "description": "Explore fashion, gadgets, and home decor, all with the help of Chrome's built-in AI",
         "apis": [
           "LanguageModel"
         ],
@@ -135,24 +140,28 @@
       },
       {
         "url": "https://savings.policybazaar.com/quote?enquiryKey=%252bchLmT8JJWMzxP650DwEjyLugFS0QlwtotjUSFt%252foiJpDqDXnpCrKsoLAryAwb6GrVv%252bAfDTfIynIhwrz08kVQ%253d%253d&utm_source=pb_finova",
-        "title": "Investment Plan",
-        "description": "Explore investment plans and compare options within this Chrome Built-in AI demo app",
-        "apis": [],
+        "title": "PolicyBazaar",
+        "description": "Explore investment plans and compare options with this financial planning demo.",
+        "apis": [
+          "LanguageDetector",
+          "Translator"
+        ],
         "screenshot": "screenshots/savings.policybazaar.com--quote.png"
       },
       {
         "url": "https://www.standard.co.uk/news/environment",
-        "title": "Environment & climate change",
-        "description": "Summarizes news articles on environment and climate change from the London Evening Standard.",
+        "title": "The Standard",
+        "description": "Summarizes the latest environment news from the London Evening Standard, focusing on climate and weather.",
         "apis": [
+          "LanguageModel",
           "Summarizer"
         ],
         "screenshot": "screenshots/www.standard.co.uk--news-environment.png"
       },
       {
         "url": "https://fakty.com.ua/ua/ukraine/suspilstvo/20201106-ukrayinskyj-pidpryyemets-zasnovnyk-holdyngu-ms-capital/",
-        "title": "Український підприємець, засновник холдингу MS Capital",
-        "description": "Summarize Ukrainian entrepreneur Maxim Shkil's biography from a news article.",
+        "title": "Факти",
+        "description": "Summarize Ukrainian entrepreneur Maksym Shkil's career and philanthropic activities using AI",
         "apis": [
           "LanguageModel",
           "Translator",
@@ -162,8 +171,8 @@
       },
       {
         "url": "https://pixiv.github.io/local-chat-vrm/",
-        "title": "ChatVRM",
-        "description": "Chat with 3D characters in your browser using voice/text powered by local AI and customize their personalities",
+        "title": "Pixiv",
+        "description": "Chat with 3D characters in your browser, powered by Gemini Nano for voice and conversation",
         "apis": [
           "LanguageModel"
         ],
@@ -171,8 +180,8 @@
       },
       {
         "url": "https://blog.ameba.jp/ucs/entry/srventryinsertinput.do",
-        "title": "ログインする",
-        "description": "Demonstrates AI login features, including options for various external services and reCAPTCHA.",
+        "title": "CyberAgent",
+        "description": "Demonstrates AI-powered login with options like email, social accounts, and reCAPTCHA protection",
         "apis": [],
         "screenshot": "screenshots/blog.ameba.jp--ucs-entry-srventryinsertinput.do.png"
       }
