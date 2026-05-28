@@ -1,148 +1,149 @@
 /**
- * Manager class that encapsulates background Web Worker execution for Semantic AI Embeddings.
- * Offloads heavy mathematical operations from the main UI thread to prevent layout freezes.
+ * Semantic Embedder helper for calculating text vector embeddings and running cosine similarity search.
+ * Backed by the updated built-in-ai-task-apis-polyfills which internally offloads model processing
+ * and heavy calculations to its own background Web Worker.
  */
 
-let worker = null;
-let pendingResolver = null;
-let pendingRejecter = null;
-let activeProgressCallback = null;
-let isModelInitializedState = false;
+let embedder = null;
 
 /**
- * Instantiates the background Web Worker inside Vite and registers its message routing systems
- */
-function getWorker() {
-  if (worker) return worker;
-
-  // Spawns standard background thread Web Worker parsed standardly by Vite
-  worker = new Worker(new URL('./embedder.worker.js', import.meta.url), { type: 'module' });
-
-  worker.onmessage = (e) => {
-    const { type, status, percent, message, embeddings, results, values, error } = e.data;
-
-    if (type === 'progress') {
-      if (activeProgressCallback) {
-        activeProgressCallback({ status, percent, message });
-      }
-    }
-
-    else if (type === 'status' && status === 'ready') {
-      isModelInitializedState = true;
-      if (activeProgressCallback) {
-        activeProgressCallback({ status: 'ready', message });
-      }
-      if (pendingResolver) {
-        pendingResolver(true);
-        pendingResolver = null;
-        pendingRejecter = null;
-      }
-    }
-
-    else if (type === 'complete') {
-      if (pendingResolver) {
-        pendingResolver(embeddings);
-        pendingResolver = null;
-        pendingRejecter = null;
-      }
-    }
-
-    else if (type === 'searchResults') {
-      if (pendingResolver) {
-        pendingResolver(results);
-        pendingResolver = null;
-        pendingRejecter = null;
-      }
-    }
-
-    else if (type === 'embedTextResult') {
-      if (pendingResolver) {
-        pendingResolver(values);
-        pendingResolver = null;
-        pendingRejecter = null;
-      }
-    }
-
-    else if (type === 'error') {
-      isModelInitializedState = false;
-      if (pendingRejecter) {
-        pendingRejecter(new Error(message || 'Web Worker operational error'));
-        pendingResolver = null;
-        pendingRejecter = null;
-      }
-    }
-  };
-
-  return worker;
-}
-
-/**
- * Command: Instructs the worker to initialize the model backend.
+ * Initializes the SemanticEmbedder, downloading model weights if needed.
  */
 export async function initEmbedder(onProgress) {
-  const w = getWorker();
-  activeProgressCallback = onProgress;
+  if (embedder) {
+    onProgress({ status: 'ready', message: 'Model is already loaded.' });
+    return embedder;
+  }
 
-  return new Promise((resolve, reject) => {
-    pendingResolver = resolve;
-    pendingRejecter = reject;
-    w.postMessage({ type: 'init' });
-  });
+  // Load the polyfill dynamically if not already present globally
+  if (!('SemanticEmbedder' in window)) {
+    onProgress({ status: 'loading-polyfill', message: 'Loading Built-in AI polyfill module...' });
+    await import('built-in-ai-task-apis-polyfills/semantic-embedder');
+  }
+
+  onProgress({ status: 'initializing', message: 'Initializing model backend...' });
+
+  try {
+    embedder = await window.SemanticEmbedder.create({
+      monitor(m) {
+        m.addEventListener('downloadprogress', (e) => {
+          // e.loaded is a float representing the fraction (0.0 to 1.0)
+          const percent = Math.round((e.loaded || 0) * 100);
+          onProgress({
+            status: 'downloading',
+            percent,
+            message: `Downloading model weights (~420MB)... ${percent}%`
+          });
+        });
+      }
+    });
+
+    onProgress({ status: 'ready', message: 'Semantic AI Model is fully loaded and ready!' });
+    return embedder;
+  } catch (err) {
+    console.error('Failed to initialize SemanticEmbedder:', err);
+    onProgress({ status: 'error', message: `Error loading model: ${err.message}` });
+    throw err;
+  }
 }
 
 /**
- * Command: Instructs the worker to calculate embeddings for an array of tracks.
+ * Calculates embeddings for an array of approved tracks in sequential batches.
+ * Batching keeps the client responsive and reports incremental progress steps.
  */
 export async function calculateEmbeddings(tracks, onProgress) {
-  const w = getWorker();
-  activeProgressCallback = onProgress;
+  if (!embedder) {
+    throw new Error('Embedder is not initialized.');
+  }
 
+  const total = tracks.length;
+  const embeddingsList = [];
+  if (total === 0) return [];
+
+  // Generate clean document representation for each track
   const textsToEmbed = tracks.map(t => `Artist: ${t.artist} | Title: ${t.title}`);
+  
+  // Dynamic chunk processing to keep UI thread responsive and report progress steps
+  const batchSize = 5;
+  for (let i = 0; i < total; i += batchSize) {
+    const chunk = textsToEmbed.slice(i, i + batchSize);
+    const progressPercent = Math.round((i / total) * 100);
 
-  return new Promise((resolve, reject) => {
-    pendingResolver = resolve;
-    pendingRejecter = reject;
-    w.postMessage({ type: 'calculate', payload: { texts: textsToEmbed } });
+    onProgress({
+      current: i,
+      total,
+      percent: progressPercent,
+      message: `Calculating vectors: ${i} / ${total} tracks indexed...`
+    });
+
+    try {
+      const chunkResult = await embedder.embed(chunk, { taskType: 'document' });
+      chunkResult.embeddings.forEach((emb) => {
+        embeddingsList.push(emb.values);
+      });
+    } catch (err) {
+      console.error(`Failed to embed batch starting at index ${i}:`, err);
+      // Fill failed entries with null to maintain index alignment
+      chunk.forEach(() => embeddingsList.push(null));
+    }
+  }
+
+  onProgress({
+    current: total,
+    total,
+    percent: 100,
+    message: `All ${total} tracks successfully indexed!`
   });
+
+  return embeddingsList;
 }
 
 /**
- * Command: Instructs the worker to run similarity comparisons and return scored results.
+ * Runs vector search querying over our track collection using cosine similarity.
  */
 export async function searchTracks(queryText, tracks, trackEmbeddings) {
-  const w = getWorker();
+  if (!queryText.trim() || !embedder || trackEmbeddings.length === 0) {
+    return tracks.map(t => ({ ...t, score: 0 }));
+  }
 
-  return new Promise((resolve, reject) => {
-    pendingResolver = resolve;
-    pendingRejecter = reject;
-    w.postMessage({ type: 'search', payload: { queryText, tracks, trackEmbeddings } });
-  });
+  try {
+    const queryResult = await embedder.embed(queryText, { taskType: 'query' });
+    const queryVec = queryResult.embeddings[0].values;
+
+    const scoredTracks = tracks.map((track, idx) => {
+      const docVec = trackEmbeddings[idx];
+      let score = 0;
+      
+      if (docVec) {
+        score = window.SemanticEmbedder.cosineSimilarity(queryVec, docVec);
+      }
+      
+      return {
+        ...track,
+        score: score
+      };
+    });
+
+    return scoredTracks.sort((a, b) => b.score - a.score);
+  } catch (err) {
+    console.error('Error during semantic search:', err);
+    return tracks.map(t => ({ ...t, score: 0 }));
+  }
 }
 
 /**
- * Command: Instructs the worker to generate a vector signature for a single text.
+ * Embeds a single text or text array dynamically.
  */
 export async function embedText(text, options = {}) {
-  const w = getWorker();
-
-  return new Promise((resolve, reject) => {
-    // Wrap returned value inside our mock standard format block expected by main.js
-    pendingResolver = (values) => resolve({ embeddings: [{ values }] });
-    pendingRejecter = reject;
-    w.postMessage({ type: 'embedText', payload: { text, options } });
-  });
+  if (!embedder) {
+    throw new Error('Semantic AI model is not loaded in memory.');
+  }
+  return await embedder.embed(text, options);
 }
 
 /**
- * Returns whether the AI model is ready in the background.
+ * Returns whether the Gemma model has been loaded into memory.
  */
 export function isModelLoaded() {
-  return isModelInitializedState;
-}
-
-/**
- * Override flag for session restores
- */
-export function setModelLoaded(loaded) {
-  isModelInitializedState = loaded;
+  return embedder !== null;
 }

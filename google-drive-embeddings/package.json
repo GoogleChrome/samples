@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@huggingface/transformers": "4.2.0",
-    "built-in-ai-task-apis-polyfills": "^1.13.0"
+    "built-in-ai-task-apis-polyfills": "^1.14.0"
   },
   "devDependencies": {
     "node-addon-api": "^8.8.0",
