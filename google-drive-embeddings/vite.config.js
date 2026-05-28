@@ -7,7 +7,17 @@ export default defineConfig({
     open: false
   },
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    modulePreload: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('preload-helper')) {
+            return 'vite-preload-helper';
+          }
+        }
+      }
+    }
   },
   optimizeDeps: {
     exclude: [
