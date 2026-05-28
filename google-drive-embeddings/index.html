@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Drive MP3 Semantic Search</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <h1>Google Drive MP3 Semantic Search</h1>
+    <p>Select a folder from Google Drive, scan for tracks with valid artist/title names, and perform vector searches locally.</p>
+
+    <!-- SECTION 1: CREDENTIALS & INITIAL AUTHENTICATION -->
+    <fieldset id="credentials-section">
+      <legend>1. Google API Credentials</legend>
+      <div id="credentials-inputs-wrapper">
+        <p style="font-size: 0.9em; margin-top: 0;">
+          Enter your credentials from the Google Developer Console. Ensure you enable the <strong>Google Drive API v3</strong> and <strong>Google Picker API</strong>.
+        </p>
+        <div style="margin-bottom: 10px;">
+          <label for="input-client-id">OAuth Client ID: </label>
+          <input type="text" id="input-client-id" placeholder="xxxx-xxxx.apps.googleusercontent.com" style="width: 320px;" />
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label for="input-api-key">API Key: </label>
+          <input type="password" id="input-api-key" placeholder="AIzaSy..." style="width: 320px;" />
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label for="input-project-number">GCP Project Number (App ID): </label>
+          <input type="text" id="input-project-number" placeholder="e.g. 123456789012" style="width: 320px;" />
+        </div>
+        <div style="margin-bottom: 10px;">
+          <input type="checkbox" id="check-save-credentials" checked />
+          <label for="check-save-credentials">Save credentials locally in browser (localStorage)</label>
+        </div>
+      </div>
+      <div id="credentials-production-badge" style="display: none; margin-bottom: 10px; font-size: 0.9em; color: green; font-weight: bold;">
+        Using pre-configured production credentials (Zero-Config mode active).
+      </div>
+      <div>
+        <button id="btn-authorize">Connect to Google Drive</button>
+        <button id="btn-logout" disabled>Disconnect</button>
+        <span id="auth-status" style="margin-left: 10px; font-weight: bold; color: red;">Not Connected</span>
+      </div>
+    </fieldset>
+
+    <!-- SECTION 2: FOLDER PICKING & RECURSIVE DIRECTORY SCANNING -->
+    <fieldset id="scanner-section" style="margin-top: 20px;" disabled>
+      <legend>2. Select & Scan Directory</legend>
+      <div>
+        <button id="btn-pick-folder">Pick Google Drive Folder...</button>
+        <span id="selected-folder-info" style="margin-left: 10px; font-style: italic;">No folder selected</span>
+      </div>
+      
+      <div id="scan-controls" style="margin-top: 15px; display: none;">
+        <button id="btn-start-scan">Start Recursive MP3 Scan</button>
+        <button id="btn-cancel-scan" disabled>Cancel Scan</button>
+        <span id="scan-progress-msg" style="margin-left: 10px; font-weight: bold;"></span>
+      </div>
+
+      <!-- Real-time Scan Dashboard Metrics -->
+      <div id="scan-metrics" style="margin-top: 15px; display: none;">
+        <ul>
+          <li>Folders Traversed: <strong id="metric-folders">0</strong></strong></li>
+          <li>Files Evaluated: <strong id="metric-files">0</strong></li>
+          <li>Audio Candidates Discovered: <strong id="metric-candidates">0</strong></li>
+        </ul>
+        <div id="live-scan-log" style="font-family: monospace; font-size: 0.85em; max-height: 100px; overflow-y: auto; border: 1px solid #ccc; padding: 5px; background-color: rgba(0,0,0,0.05); margin-top: 10px;">
+          <em>Live scan logs will output here...</em>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- SECTION 3: TRACK FILTERING & RESULTS DRAWERS -->
+    <fieldset id="tracks-display-section" style="margin-top: 20px; display: none;">
+      <legend>3. Discovered Track list</legend>
+      
+      <div>
+        <input type="radio" id="tab-approved" name="track-list-tab" value="approved" checked />
+        <label for="tab-approved"><strong>Approved Tracks (<span id="count-approved">0</span>)</strong> - Valid Artist and Title extracted</label>
+        <br/>
+        <input type="radio" id="tab-rejected" name="track-list-tab" value="rejected" />
+        <label for="tab-rejected"><strong>Rejected Tracks (<span id="count-rejected">0</span>)</strong> - Filtered out (generic/unclear naming)</label>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <input type="checkbox" id="check-loose-delimiter" />
+        <label for="check-loose-delimiter">Use loose delimiters (split on any dash/separator, not just " - ")</label>
+        <button id="btn-reparse-tracks" style="margin-left: 10px; font-size: 0.9em;">Re-parse Current List</button>
+      </div>
+
+      <!-- Approved Table -->
+      <div id="table-approved-container" style="margin-top: 15px; max-height: 400px; overflow-y: auto; border: 1px solid #ccc;">
+        <table border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: rgba(0,0,0,0.08);">
+              <th style="width: 40%;">Original File Name</th>
+              <th style="width: 25%;">Parsed Artist</th>
+              <th style="width: 25%;">Parsed Title</th>
+              <th style="width: 10%;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-approved">
+            <tr>
+              <td colspan="4" align="center"><em>No approved tracks found. Scan a folder to discover audio files!</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rejected Table -->
+      <div id="table-rejected-container" style="margin-top: 15px; display: none; max-height: 400px; overflow-y: auto; border: 1px solid #ccc;">
+        <table border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: rgba(0,0,0,0.08);">
+              <th style="width: 40%;">Original File Name</th>
+              <th style="width: 40%;">Rejection Reason</th>
+              <th style="width: 20%;">Separation Checklist</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-rejected">
+            <tr>
+              <td colspan="3" align="center"><em>No rejected files.</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+
+    <!-- SECTION 4: VECTOR EMBEDDING AND SEMANTIC SEARCH -->
+    <fieldset id="search-section" style="margin-top: 20px; display: none;">
+      <legend>4. Semantic Vector Index & Search</legend>
+      
+      <!-- Index generation states -->
+      <div id="index-generator-controls">
+        <p>To enable semantic search, load the on-device AI embedding model and generate text vector signatures for all approved tracks.</p>
+        <button id="btn-initialize-model">Build Semantic Search Index</button>
+      </div>
+
+      <!-- Model loading / indexing states -->
+      <div id="index-status-container" style="margin-top: 15px; display: none; padding: 10px; border: 1px dashed #666;">
+        <div id="model-progress-message" style="font-weight: bold; margin-bottom: 5px;">Initializing...</div>
+        <div style="width: 100%; background-color: #ddd; height: 12px; border-radius: 4px; overflow: hidden; margin-bottom: 10px;">
+          <div id="progress-bar-fill" style="width: 0%; background-color: #2196F3; height: 100%; transition: width 0.2s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Search dashboard (visible after embedding indexing completes) -->
+      <div id="search-dashboard" style="margin-top: 15px; display: none;">
+        <div style="margin-bottom: 10px; font-size: 0.9em;">
+          <span id="search-index-status" style="font-weight: bold; color: green;">Vector Index: Active</span>
+          <button id="btn-rebuild-index" style="margin-left: 10px; font-size: 0.8em; padding: 2px 6px;">Rebuild Index</button>
+        </div>
+        <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+          <input type="text" id="input-search-query" placeholder="Type what kind of music/song you are looking for..." style="flex-grow: 1; padding: 6px;" />
+          <button id="btn-search">Search Semantically</button>
+          <button id="btn-search-reset">Reset</button>
+        </div>
+        <!-- Playlist Actions Bar -->
+        <div id="search-playlist-actions" style="margin-bottom: 15px; display: none;">
+          <button id="btn-play-all">Play All Matches</button>
+          <button id="btn-shuffle-all" style="margin-left: 8px;">Randomly Play All Matches</button>
+          <span id="playlist-queue-status" style="margin-left: 10px; font-size: 0.9em; font-style: italic; opacity: 0.8;"></span>
+        </div>
+        <div id="table-search-container" style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc;">
+          <table border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="background-color: rgba(0,0,0,0.08);">
+                <th style="width: 10%;">Score</th>
+                <th style="width: 40%;">Artist Name</th>
+                <th style="width: 40%;">Track Title</th>
+                <th style="width: 10%;">Play</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-search-results">
+              <tr>
+                <td colspan="4" align="center"><em>Enter a search query to search semantic embeddings!</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </fieldset>
+
+
+
+    <!-- FLOATING CENTRAL AUDIO PLAYER BAR -->
+    <div id="audio-player-panel" style="position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: #fff; padding: 10px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); display: none; align-items: center; justify-content: space-between; gap: 20px; z-index: 1000;">
+      <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 40%;">
+        <span style="font-size: 0.8em; color: #aaa; display: block;">NOW PLAYING</span>
+        <strong id="player-track-info" style="font-size: 0.95em;">No track loaded</strong>
+      </div>
+      <audio id="global-audio-element" controls style="flex-grow: 1; max-width: 600px; height: 32px;"></audio>
+      <!-- Player Queue controls -->
+      <div id="player-queue-controls" style="display: none; align-items: center; gap: 10px;">
+        <button id="btn-player-skip" style="background: transparent; color: #fff; border: 1px solid #fff; padding: 4px 8px; cursor: pointer; font-size: 0.85em;">Skip &gt;&gt;</button>
+      </div>
+      <button id="btn-close-player" style="background: transparent; color: #fff; border: 1px solid #fff; padding: 2px 8px; cursor: pointer;">Close</button>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

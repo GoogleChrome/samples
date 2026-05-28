@@ -7,6 +7,9 @@ import 'dotenv/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCREENSHOTS_DIR = path.join(__dirname, 'screenshots');
+const OVERRIDES_DIR = path.join(__dirname, 'overrides');
+const OVERRIDES_SCREENSHOTS_DIR = path.join(OVERRIDES_DIR, 'screenshots');
+const OVERRIDES_JSON = path.join(OVERRIDES_DIR, 'overrides.json');
 const DEMOS_MD = path.join(__dirname, 'demos.md');
 const DEMOS_JSON = path.join(__dirname, 'demos.json');
 const INDEX_HTML = path.join(__dirname, 'index.html');
@@ -30,10 +33,17 @@ function parseDemosMd(content) {
   let current = null;
   for (const line of content.split('\n')) {
     const h = line.match(/^##\s+(.+)/);
-    if (h) { current = { heading: h[1].trim(), eyebrow: '', urls: [] }; sections.push(current); continue; }
+    if (h) {
+      current = { heading: h[1].trim(), eyebrow: '', urls: [] };
+      sections.push(current);
+      continue;
+    }
     if (!current) continue;
     const u = line.match(/^\s*-\s+(https?:\/\/\S+)/);
-    if (u) { current.urls.push(u[1]); continue; }
+    if (u) {
+      current.urls.push(u[1]);
+      continue;
+    }
     // Capture first paragraph (before any URLs) as eyebrow text
     if (!current.urls.length) {
       const text = line.trim();
@@ -75,11 +85,15 @@ const COOKIE_SELECTORS = [
   '#gdpr-consent-tool-wrapper button[mode="primary"]',
   '.gdpr-consent-btn',
   'button#acceptAllButton',
-  'button.accept-all',
+  'button.accept-all', // Yahoo consent.yahoo.com
+  '.agreeButton', // Miravia (Svelte cookie bar)
+  'button.fc-cta-consent', // Google Funding Choices (fakty.com.ua, etc.)
+  'a.closebutton', // PolicyBazaar marketing modal
 ];
 
 // Patterns to match accept/agree button text
-const COOKIE_TEXT_RE = /^(accept all|accept|allow all|allow|agree|i agree|got it|ok|okay|continue)$/i;
+const COOKIE_TEXT_RE =
+  /^(accept all|accept|allow all|allow|allow and continue|agree|i agree|got it|ok|okay|continue)$/i;
 
 async function dismissCookieBanner(page) {
   // Try known selectors first
@@ -94,10 +108,12 @@ async function dismissCookieBanner(page) {
           return;
         }
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
-  // Fall back to text-matching any button/role=button element
+  // Fall back to text-matching any button/role=button element in the main page
   try {
     const clicked = await page.evaluate((re) => {
       const candidates = [
@@ -112,8 +128,39 @@ async function dismissCookieBanner(page) {
       }
       return false;
     }, COOKIE_TEXT_RE.source);
-    if (clicked) await new Promise((r) => setTimeout(r, 800));
-  } catch { /* ignore */ }
+    if (clicked) {
+      await new Promise((r) => setTimeout(r, 800));
+      return;
+    }
+  } catch {
+    /* ignore */
+  }
+
+  // Last resort: text-match inside CMP iframes (e.g. Sourcepoint / contentpass)
+  for (const frame of page.frames()) {
+    if (frame === page.mainFrame()) continue;
+    try {
+      const clicked = await frame.evaluate((re) => {
+        const candidates = [
+          ...document.querySelectorAll('button, [role="button"]'),
+        ];
+        for (const el of candidates) {
+          const text = el.innerText?.trim() ?? '';
+          if (new RegExp(re).test(text)) {
+            el.click();
+            return true;
+          }
+        }
+        return false;
+      }, COOKIE_TEXT_RE.source);
+      if (clicked) {
+        await new Promise((r) => setTimeout(r, 800));
+        return;
+      }
+    } catch {
+      /* cross-origin or detached frame — ignore */
+    }
+  }
 }
 
 const API_LABELS = {
@@ -133,12 +180,24 @@ async function main() {
   }
 
   await fs.mkdir(SCREENSHOTS_DIR, { recursive: true });
+  await fs.mkdir(OVERRIDES_SCREENSHOTS_DIR, { recursive: true });
+
+  // Load manual overrides (title / description / apis / screenshot)
+  let overrides = [];
+  try {
+    overrides = JSON.parse(await fs.readFile(OVERRIDES_JSON, 'utf-8'));
+    console.log(`✓ overrides.json loaded (${overrides.length} entries)`);
+  } catch {
+    /* no overrides file yet — that's fine */
+  }
 
   const sections = parseDemosMd(await fs.readFile(DEMOS_MD, 'utf-8'));
   const allEntries = sections.flatMap(({ heading, urls }) =>
     urls.map((url) => ({ url, section: heading }))
   );
-  const urlToSection = new Map(allEntries.map(({ url, section }) => [url, section]));
+  const urlToSection = new Map(
+    allEntries.map(({ url, section }) => [url, section])
+  );
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
@@ -158,13 +217,51 @@ async function main() {
   let existing = [];
   try {
     const saved = JSON.parse(await fs.readFile(DEMOS_JSON, 'utf-8'));
-    existing = Array.isArray(saved) && saved[0]?.demos
-      ? saved.flatMap((s) => s.demos.map((d) => ({ ...d, section: s.heading })))
-      : saved;
+    existing =
+      Array.isArray(saved) && saved[0]?.demos
+        ? saved.flatMap((s) =>
+            s.demos.map((d) => ({ ...d, section: s.heading }))
+          )
+        : saved;
   } catch {}
   const existingUrls = new Set(existing.map((d) => d.url));
 
-  const demos = [...existing];
+  // Remove entries that are no longer listed in demos.md
+  const activeUrls = new Set(allEntries.map(({ url }) => url));
+  const removed = existing.filter((d) => !activeUrls.has(d.url));
+  if (removed.length) {
+    console.log(`\n✦ Removing ${removed.length} stale entries:`);
+    for (const d of removed) {
+      console.log(`  - ${d.url}`);
+      // Delete auto-generated screenshot
+      if (d.screenshot) {
+        try {
+          await fs.unlink(path.join(__dirname, d.screenshot));
+          console.log(`    ✗ deleted ${d.screenshot}`);
+        } catch {
+          /* already gone */
+        }
+      }
+      // Delete override screenshot (slug-based)
+      try {
+        const slug = urlToSlug(d.url);
+        await fs.unlink(path.join(OVERRIDES_SCREENSHOTS_DIR, `${slug}.png`));
+        console.log(`    ✗ deleted overrides/screenshots/${slug}.png`);
+      } catch {
+        /* none */
+      }
+    }
+    // Purge overrides.json entries for removed URLs
+    const removedSet = new Set(removed.map((d) => d.url));
+    const prunedOverrides = overrides.filter((o) => !removedSet.has(o.url));
+    if (prunedOverrides.length !== overrides.length) {
+      overrides = prunedOverrides;
+      await fs.writeFile(OVERRIDES_JSON, JSON.stringify(overrides, null, 2));
+      console.log(`  ✎ overrides.json pruned`);
+    }
+  }
+
+  const demos = existing.filter((d) => activeUrls.has(d.url));
   let geminiCallCount = 0;
 
   for (const { url, section } of allEntries) {
@@ -288,13 +385,35 @@ Respond with ONLY a valid JSON object, no markdown fences:
 
   await browser.close();
 
+  // Apply manual overrides (title, description, apis, screenshot)
+  for (const demo of demos) {
+    const ov = overrides.find((o) => o.url === demo.url);
+    if (ov) {
+      const { url: _url, ...fields } = ov;
+      Object.assign(demo, fields);
+      console.log(`  ✎ override applied for ${demo.url}`);
+    }
+    // Screenshot override: prefer overrides/screenshots/<slug>.png if present
+    const slug = urlToSlug(demo.url);
+    try {
+      await fs.access(path.join(OVERRIDES_SCREENSHOTS_DIR, `${slug}.png`));
+      demo.screenshot = `overrides/screenshots/${slug}.png`;
+      console.log(`  ✎ screenshot override for ${demo.url}`);
+    } catch {
+      /* no override screenshot */
+    }
+  }
+
   // Apply/update section for all entries and sort to match demos.md order
   const urlOrder = new Map(allEntries.map(({ url }, i) => [url, i]));
   for (const demo of demos) {
     const s = urlToSection.get(demo.url);
     if (s) demo.section = s;
   }
-  demos.sort((a, b) => (urlOrder.get(a.url) ?? Infinity) - (urlOrder.get(b.url) ?? Infinity));
+  demos.sort(
+    (a, b) =>
+      (urlOrder.get(a.url) ?? Infinity) - (urlOrder.get(b.url) ?? Infinity)
+  );
 
   // Output as section-grouped format
   const grouped = sections.map(({ heading, eyebrow }) => ({
@@ -309,6 +428,17 @@ Respond with ONLY a valid JSON object, no markdown fences:
   const demosJson = JSON.stringify(grouped, null, 2);
   await fs.writeFile(DEMOS_JSON, demosJson);
   console.log('\n✓ demos.json written');
+
+  // Purge orphaned screenshots not referenced by any demo
+  const referencedScreenshots = new Set(
+    demos.map((d) => path.basename(d.screenshot)).filter(Boolean)
+  );
+  for (const file of await fs.readdir(SCREENSHOTS_DIR)) {
+    if (file.endsWith('.png') && !referencedScreenshots.has(file)) {
+      await fs.unlink(path.join(SCREENSHOTS_DIR, file));
+      console.log(`  ✗ deleted orphaned screenshots/${file}`);
+    }
+  }
 
   // Inject data into the <script id="demos-data"> block in index.html
   const html = await fs.readFile(INDEX_HTML, 'utf-8');
