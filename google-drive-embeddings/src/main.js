@@ -530,16 +530,12 @@ function renderTracksList() {
         <td class="col-title">${escapeHtml(track.title)}</td>
         <td>
           <button class="btn-play-track" data-index="${track.index}">Play</button>
-          <button class="btn-edit-track" data-index="${track.index}">Edit</button>
         </td>
       `;
       
       // Bind immediate row button handlers
       tr.querySelector('.btn-play-track').addEventListener('click', () => {
         playTrack(track.id, track.artist, track.title);
-      });
-      tr.querySelector('.btn-edit-track').addEventListener('click', () => {
-        enterEditMode(track.index);
       });
 
       DOM.tbodyApproved.appendChild(tr);
@@ -576,91 +572,7 @@ function renderTracksList() {
   }
 }
 
-/**
- * Puts an approved row in edit/input text state for corrections
- */
-function enterEditMode(trackIndex) {
-  const track = state.parsedTracks.find(t => t.index === trackIndex);
-  if (!track) return;
 
-  const row = document.getElementById(`track-row-${trackIndex}`);
-  if (!row) return;
-
-  const artistCol = row.querySelector('.col-artist');
-  const titleCol = row.querySelector('.col-title');
-  const actionCol = row.cells[3];
-
-  // Save current cell markup just in case we need a cancel, though standard is straight swap
-  const oldArtist = track.artist;
-  const oldTitle = track.title;
-
-  artistCol.innerHTML = `<input type="text" class="input-edit-artist" value="${escapeHtml(oldArtist)}" style="width: 90%;" />`;
-  titleCol.innerHTML = `<input type="text" class="input-edit-title" value="${escapeHtml(oldTitle)}" style="width: 90%;" />`;
-  
-  actionCol.innerHTML = `
-    <button class="btn-save-edit" data-index="${trackIndex}">Save</button>
-    <button class="btn-cancel-edit" data-index="${trackIndex}">Cancel</button>
-  `;
-
-  actionCol.querySelector('.btn-save-edit').addEventListener('click', () => {
-    const newArtist = artistCol.querySelector('.input-edit-artist').value.trim();
-    const newTitle = titleCol.querySelector('.input-edit-title').value.trim();
-    
-    if (!newArtist || !newTitle) {
-      alert('Artist and Title cannot be empty!');
-      return;
-    }
-
-    saveTrackEdit(trackIndex, newArtist, newTitle);
-  });
-
-  actionCol.querySelector('.btn-cancel-edit').addEventListener('click', () => {
-    // Restore raw visual cells
-    renderTracksList();
-  });
-}
-
-/**
- * Saves edited metadata values back to our state, with dynamic vector update if model ready!
- */
-async function saveTrackEdit(trackIndex, newArtist, newTitle) {
-  const track = state.parsedTracks.find(t => t.index === trackIndex);
-  if (!track) return;
-
-  track.artist = newArtist;
-  track.title = newTitle;
-
-  // Save the modified list in IndexedDB!
-  await dbSet('gdrive_parsed_tracks', state.parsedTracks);
-
-  // Render normal rows first
-  renderTracksList();
-
-  // HIGH-TECH UPDATE: If vector embeddings list is already calculated, dynamically calculate vectors for JUST this entry!
-  const approved = state.parsedTracks.filter(t => t.approved);
-  const approvedIndex = approved.findIndex(t => t.index === trackIndex);
-
-  if (state.trackEmbeddings.length > 0 && approvedIndex !== -1) {
-    console.log(`Re-generating single vector for changed track indices: ${trackIndex}`);
-    try {
-      const textToEmbed = `Artist: ${newArtist} | Title: ${newTitle}`;
-      // Ensure dynamic model is loaded in memory
-      if (!isModelLoaded()) {
-        console.log('Model not in memory. Initializing for dynamic update...');
-        await handleBuildSemanticIndex();
-      }
-      const chunkResult = await embedText(textToEmbed, { taskType: 'document' });
-      state.trackEmbeddings[approvedIndex] = chunkResult.embeddings[0].values;
-      console.log('Single track vector successfully updated!');
-      
-      // Save updated embeddings!
-      await saveEmbeddingsToCache();
-    } catch (err) {
-      console.error('Failed to update single vector embedding:', err);
-      state.trackEmbeddings[approvedIndex] = null;
-    }
-  }
-}
 
 /**
  * Toggle track table view displays based on tab selections

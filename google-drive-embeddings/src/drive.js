@@ -54,7 +54,7 @@ export function initGoogleAPIClient({ apiKey, clientId, projectNumber, onAuthSta
         // Initialize Google Identity Services (GIS) token client
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: clientId,
-          scope: 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.readonly',
+          scope: 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.file',
           callback: (response) => {
             if (response.error) {
               onAuthStatusChange({ authorized: false, error: response.error });
