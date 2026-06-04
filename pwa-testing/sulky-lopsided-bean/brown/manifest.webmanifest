@@ -1,16 +1,16 @@
 {
   "name": "Sulky Lopsided Brown Bean",
   "display": "standalone",
-  "start_url": "./brown/",
-  "scope": "./brown/",
+  "start_url": "./",
+  "scope": "./",
   "theme_color": "#591313",
   "icons": [{
-    "src": "sulky-lopsided-bean-brown.svg",
-    "sizes": "144x144",
+    "src": "/brown/sulky-lopsided-bean-brown.svg",
+    "sizes": "192x192",
     "type": "image/svg+xml"
   }],
   "share_target": {
-    "action": "/brown/",
+    "action": "./",
     "method": "GET",
     "params": {
       "text": "text",
