@@ -8,5 +8,10 @@
     "src": "/saber_tabby_shield/DarthTabby.jpg",
     "sizes": "155x155",
     "type": "image/png"
-  }]
+  }
+],
+"launch_handler": {
+  "client_mode": "navigate-existing",
+  "route_to": "existing-client-navigate"
+}
 }
