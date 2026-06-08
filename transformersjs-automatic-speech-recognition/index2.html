@@ -16,10 +16,14 @@
       import { pipeline } from "https://unpkg.com/@huggingface/transformers@4.2.0/dist/transformers.min.js"
 
       const pre = document.querySelector('pre');
-      
+
       const asr = await pipeline('automatic-speech-recognition', 'Xenova/whisper-tiny.en', {device: 'webgpu'});
       const result = await asr('jfk.wav');
       pre.append(JSON.stringify(result, null, 2));
+
+      const classifier = await pipeline('sentiment-analysis');
+      const sentiment = await classifier(result.text);
+      pre.append('\n\n' + JSON.stringify(sentiment, null, 2));
     </script>    
   </body>
 </html>
