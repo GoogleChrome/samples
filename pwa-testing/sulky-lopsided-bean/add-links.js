@@ -1,7 +1,7 @@
 const urls = [
-  {url: window.location.origin + "/black/", text: "navigate-existing"},
-  {url: window.location.origin + "/brown/", text: "focus-existing"},
-  {url: window.location.origin + "/white/", text: "navigate-new"},
+  {url: new URL('../black/', window.location.href).href, text: "navigate-existing"},
+  {url: new URL('../brown/', window.location.href).href, text: "focus-existing"},
+  {url: new URL('../white/', window.location.href).href, text: "navigate-new"},
   {url: "about:blank", text: ""},
 ];
 

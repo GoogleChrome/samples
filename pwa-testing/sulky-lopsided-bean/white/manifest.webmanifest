@@ -1,17 +1,18 @@
 {
   "name": "Sulky Lopsided White Bean",
   "display": "standalone",
-  "start_url": "./white/",
-  "scope": "./white/",
+  "start_url": "./",
+  "scope": "./",
   "theme_color": "white",
   "icons": [{
-    "src": "sulky-lopsided-bean-white.svg",
-    "sizes": "144x144",
+    "src": "./sulky-lopsided-bean-white.svg",
+    "sizes": "192x192",
     "type": "image/svg+xml"
   }],
   "share_target": {
-    "action": "/white/",
+    "action": "./",
     "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
     "params": {
       "text": "text",
       "title": "title",
