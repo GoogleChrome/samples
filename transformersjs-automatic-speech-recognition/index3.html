@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>automatic-speech-recognition</title>
+		<style>
+			/* Your styles here */
+		</style>
+	</head>
+
+	<body>
+		<audio controls src="jfk.wav"></audio>
+		<pre></pre>
+		<script type=module>
+			import { env, pipeline } from "https://unpkg.com/@huggingface/transformers@4.2.0/dist/transformers.min.js"
+			
+			// Opt in to the experimental Cross-Origin Storage cache backend.
+			env.experimental_useCrossOriginStorage = true;
+			
+			const pre = document.querySelector('pre');
+			
+			const asr = await pipeline('automatic-speech-recognition', 'Xenova/whisper-tiny.en', {device: 'webgpu'});
+			const result = await asr('jfk.wav');
+			pre.append(JSON.stringify(result, null, 2));
+			
+			const classifier = await pipeline('sentiment-analysis');
+			const sentiment = await classifier(result.text);
+			pre.append('\n\n' + JSON.stringify(sentiment, null, 2));
+		</script>
+	</body>
+</html>
