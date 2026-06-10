@@ -1,0 +1,188 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Google LLC -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite Wasm + Cross-Origin Storage</title>
+    <style>
+      body {
+        font-family: monospace;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        background: #0d1117;
+        color: #e6edf3;
+      }
+      h1 { color: #58a6ff; margin-bottom: 0.25rem; }
+      p.sub { color: #8b949e; margin-top: 0; margin-bottom: 2rem; font-size: 0.9rem; }
+      .card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .card h2 { margin: 0 0 0.75rem; font-size: 0.9rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; }
+      .row { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.2rem 0; }
+      .label { color: #8b949e; min-width: 140px; flex-shrink: 0; }
+      .value { color: #e6edf3; word-break: break-all; }
+      .value.ok     { color: #3fb950; }
+      .value.hit    { color: #58a6ff; }
+      .value.miss   { color: #f0883e; }
+      .value.stored { color: #bc8cff; }
+      .hash { font-size: 0.78rem; color: #8b949e; word-break: break-all; }
+      #log { list-style: none; padding: 0; margin: 0; }
+      #log li { padding: 0.15rem 0; }
+      #log li::before { content: '› '; color: #3fb950; }
+    </style>
+  </head>
+  <body>
+    <h1>SQLite Wasm</h1>
+    <p class="sub">Built with <code>-sCROSS_ORIGIN_STORAGE=1</code> &mdash; Cross-Origin Storage progressive enhancement</p>
+
+    <div class="card">
+      <h2>SQLite</h2>
+      <div class="row"><span class="label">Status</span><span class="value" id="sqlite-status">initializing…</span></div>
+      <div class="row"><span class="label">Version</span><span class="value" id="sqlite-version">—</span></div>
+      <div class="row"><span class="label">Query result</span><span class="value" id="query-result">—</span></div>
+    </div>
+
+    <div class="card">
+      <h2>Cross-Origin Storage</h2>
+      <div class="row"><span class="label">API available</span><span class="value" id="cos-api">—</span></div>
+      <div class="row"><span class="label">Embedded hash</span></div>
+      <div class="hash" id="cos-hash">—</div>
+      <div class="row" style="margin-top:0.5rem"><span class="label">Cache event</span><span class="value" id="cos-event">—</span></div>
+    </div>
+
+    <div class="card">
+      <h2>Log</h2>
+      <ul id="log"></ul>
+    </div>
+
+    <script type="module">
+      const log = (msg) => {
+        const li = document.createElement('li');
+        li.textContent = msg;
+        document.getElementById('log').appendChild(li);
+        console.log(msg);
+      };
+
+      const set = (id, text, cls) => {
+        const el = document.getElementById(id);
+        el.textContent = text;
+        if (cls) el.className = `value ${cls}`;
+      };
+
+      // Show COS API availability immediately
+      const cosAvailable = 'crossOriginStorage' in navigator;
+      set('cos-api', cosAvailable ? 'yes' : 'no (install the COS extension to test)', cosAvailable ? 'ok' : '');
+      log(cosAvailable ? 'navigator.crossOriginStorage is available' : 'navigator.crossOriginStorage not found');
+
+      // SQLite Wasm's pre-js.js installs its own Module['instantiateWasm'] that
+      // bypasses Emscripten's instantiateAsync (and thus the COS block injected
+      // into preamble.js).  The extern-post-js wrapper maps moduleArg.instantiateWasm
+      // → sIMS.emscriptenInstantiateWasm, which is our hook.  Inside the hook
+      // `this` is sIMS (SQLite's internal module state), while Module['wasmSHA256']
+      // is set on the original config object (var Module = moduleArg in the generated
+      // JS).  Holding a reference to the config lets the callback read the hash
+      // without any extra fetch or regex.
+      //
+      // After instantiation we must write the result back to this.instantiateWasm
+      // because sqlite3-api-prologue.c-pp.js reads it (sqlite3.mjs:172).
+
+      const { default: sqlite3InitModule } = await import('./sqlite3.mjs');
+
+      const moduleConfig = {
+        async instantiateWasm(imports, onSuccess) {
+          const self = this;
+          const wasmUrl = new URL('./sqlite3.wasm', location.href).href;
+
+          // preamble.js sets Module['wasmSHA256'] on the config object (Module =
+          // moduleArg) before dispatching to instantiateWasm.  Read it via the
+          // moduleConfig closure reference — `this` here is sIMS, not Module.
+          const embeddedHash = moduleConfig['wasmSHA256'] || null;
+          document.getElementById('cos-hash').textContent =
+            embeddedHash ?? '(not found — was -sCROSS_ORIGIN_STORAGE=1 set?)';
+          if (embeddedHash) log(`Embedded wasm SHA-256: ${embeddedHash.slice(0, 16)}…`);
+
+          // Finish: compile ArrayBuffer → Instance and hand off to SQLite internals
+          const finish = async (bytes) => {
+            const result = await WebAssembly.instantiate(bytes, imports);
+            result.imports = imports;
+            self.instantiateWasm = result; // required by sqlite3-api-prologue
+            onSuccess(result.instance, result.module);
+          };
+
+          if (embeddedHash && cosAvailable) {
+            const cosHash = { algorithm: 'SHA-256', value: embeddedHash };
+            try {
+              const handles = await navigator.crossOriginStorage.requestFileHandles([cosHash]);
+              // Cache hit — read the wasm straight from COS
+              const bytes = await handles[0].getFile().then((f) => f.arrayBuffer());
+              log('COS cache HIT — wasm loaded from cross-origin cache');
+              set('cos-event', 'cache hit — served from COS', 'hit');
+              await finish(bytes);
+              return;
+            } catch (err) {
+              if (err.name === 'NotFoundError') {
+                // Cache miss — fetch from network, then store in COS
+                log('COS cache MISS — fetching wasm from network…');
+                set('cos-event', 'cache miss — fetching from network, storing in COS…', 'miss');
+                const bytes = await fetch(wasmUrl, { credentials: 'same-origin' }).then((r) => r.arrayBuffer());
+                await finish(bytes);
+                // Fire-and-forget store
+                (async () => {
+                  try {
+                    const wh = await navigator.crossOriginStorage.requestFileHandles(
+                      [cosHash], { create: true, origins: '*' },
+                    );
+                    const writable = await wh[0].createWritable();
+                    await writable.write(new Blob([bytes], { type: 'application/wasm' }));
+                    await writable.close();
+                    log('COS stored — wasm written to cross-origin cache');
+                    set('cos-event', 'stored in COS — next load from any origin will be instant', 'stored');
+                  } catch (e) {
+                    console.error('COS store failed:', e);
+                  }
+                })();
+                return;
+              }
+              log(`COS error (${err.name}): ${err.message} — falling back to normal fetch`);
+            }
+          }
+
+          // Fallback: normal streaming instantiation
+          const response = await fetch(wasmUrl, { credentials: 'same-origin' });
+          if (WebAssembly.instantiateStreaming) {
+            const result = await WebAssembly.instantiateStreaming(response, imports);
+            result.imports = imports;
+            self.instantiateWasm = result;
+            onSuccess(result.instance, result.module);
+          } else {
+            await finish(await response.arrayBuffer());
+          }
+        },
+      };
+
+      const sqlite3 = await sqlite3InitModule(moduleConfig);
+
+      set('sqlite-status', 'ready', 'ok');
+      log('SQLite Wasm initialised');
+
+      const db = new sqlite3.oo1.DB(':memory:');
+      const version = db.selectValue('SELECT sqlite_version()');
+      set('sqlite-version', version);
+      log(`sqlite_version() = ${version}`);
+
+      const greeting = db.selectValue("SELECT 'Hello, World!'");
+      set('query-result', greeting);
+      log(`SELECT 'Hello, World!' → ${greeting}`);
+
+      db.close();
+      log('Done.');
+    </script>
+  </body>
+</html>
