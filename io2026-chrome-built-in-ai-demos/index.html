@@ -192,8 +192,8 @@
               .join(''),
           J = async (e) => {
             try {
-              const [a] = await navigator.crossOriginStorage.requestFileHandles(
-                [{ algorithm: 'SHA-256', value: e }]
+              const a = await navigator.crossOriginStorage.requestFileHandle(
+                { algorithm: 'SHA-256', value: e }
               );
               return await a.getFile();
             } catch (a) {
@@ -203,8 +203,8 @@
           },
           i = async (e, a) => {
             try {
-              const [d] = await navigator.crossOriginStorage.requestFileHandles(
-                  [{ algorithm: 'SHA-256', value: a }],
+              const d = await navigator.crossOriginStorage.requestFileHandle(
+                  { algorithm: 'SHA-256', value: a },
                   { create: !0, origins: '*' }
                 ),
                 f = await d.createWritable();
