@@ -126,10 +126,10 @@
         try {
           /* BEGIN MARK */
           // Retrieving a file from cross-origin storage.
-          const [handle] =
-            await navigator.crossOriginStorage.requestFileHandles([
-              hash,
-            ]); /* END MARK */
+          const handle =
+            await navigator.crossOriginStorage.requestFileHandle(
+              hash
+            ); /* END MARK */
           const fileBlob = await handle.getFile();
           console.log('File found in cross-origin storage:', fileBlob);
           return fileBlob;
@@ -165,9 +165,9 @@
           /* BEGIN MARK */
           // Storing a file in cross-origin storage.
           const options = { create: true };
-          const [handle] =
-            await navigator.crossOriginStorage.requestFileHandles(
-              [hash],
+          const handle =
+            await navigator.crossOriginStorage.requestFileHandle(
+              hash,
               options,
             ); /* END MARK */
           const writable = await handle.createWritable();
