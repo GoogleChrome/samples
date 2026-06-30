@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.4",
-    "@angular/cli": "^19.0.4",
+    "@angular/cli": "^22.0.4",
     "@angular/compiler-cli": "^19.0.0",
     "@types/dom-chromium-ai": "^0.0.4",
     "@types/jasmine": "~5.1.0",
