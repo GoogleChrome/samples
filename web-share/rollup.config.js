@@ -1,9 +1,9 @@
-import {terser} from 'rollup-plugin-terser';
-import commonjs from 'rollup-plugin-commonjs';
+import terser from '@rollup/plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import css from 'rollup-plugin-css-only';
 import replace from 'rollup-plugin-replace';
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
 
 export default [{
