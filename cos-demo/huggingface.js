@@ -1,3 +1,6 @@
+// Copyright 2025 Google LLC.
+// SPDX-License-Identifier: Apache-2.0
+
 import {
   pipeline,
   env,
@@ -9,7 +12,7 @@ const output = document.querySelector('output');
 
 const cachedFileHashesLocalStorageKey = 'cached-file-hashes';
 const cachedFileHashes = JSON.parse(
-  localStorage.getItem(cachedFileHashesLocalStorageKey) ?? '{}',
+  localStorage.getItem(cachedFileHashesLocalStorageKey) ?? '{}'
 );
 
 /**
@@ -33,7 +36,7 @@ console.log = (...args) => {
         ? arg.toString()
         : typeof arg === 'string'
           ? arg
-          : JSON.stringify(arg, null, 2),
+          : JSON.stringify(arg, null, 2)
     )
     .join(' ');
   pre.append(document.createTextNode(message + '\n\n'));
@@ -47,7 +50,7 @@ console.error = (...args) => {
         ? arg.toString()
         : typeof arg === 'string'
           ? arg
-          : JSON.stringify(arg, null, 2),
+          : JSON.stringify(arg, null, 2)
     )
     .join(' ');
   if (/onnxruntime/.test(message)) {
@@ -81,7 +84,9 @@ env.customCache = {
     const hash = { algorithm: 'SHA-256', value: hashValue };
     console.log('Trying to access file in cross-origin storage...', hash);
     try {
-      const handle = await navigator.crossOriginStorage.requestFileHandle(hash);
+      const [handle] = await navigator.crossOriginStorage.requestFileHandles([
+        hash,
+      ]);
       const blob = await handle.getFile();
       console.log('File found in cross-origin storage:', blob);
       return new Response(blob);
@@ -96,11 +101,11 @@ env.customCache = {
     cachedFileHashes[request] = hash.value;
     localStorage.setItem(
       cachedFileHashesLocalStorageKey,
-      JSON.stringify(cachedFileHashes),
+      JSON.stringify(cachedFileHashes)
     );
-    const handle = await navigator.crossOriginStorage.requestFileHandle(
-      hash,
-      { create: true },
+    const [handle] = await navigator.crossOriginStorage.requestFileHandles(
+      [hash],
+      { create: true }
     );
     const writableStream = await handle.createWritable();
     await writableStream.write(blob);
@@ -113,7 +118,7 @@ env.customCache = {
 const transcriber = await pipeline(
   'automatic-speech-recognition',
   'onnx-community/whisper-tiny.en',
-  { device: 'webgpu' },
+  { device: 'webgpu' }
 );
 
 // Transcribe audio from a URL
