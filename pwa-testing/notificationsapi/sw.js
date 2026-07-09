@@ -17,7 +17,7 @@ function displaySwNotification(useBadge) {
   var options = {
     body: "A notification body",
     icon:
-      "fugu-512.png",
+      "house.png",
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
