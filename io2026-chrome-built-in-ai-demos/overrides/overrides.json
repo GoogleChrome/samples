@@ -18,7 +18,7 @@
     "apis": ["Summarizer"]
   },
   {
-    "url": "https://savings.policybazaar.com/quote?enquiryKey=%252bchLmT8JJWMzxP650DwEjyLugFS0QlwtotjUSFt%252foiJpDqDXnpCrKsoLAryAwb6GrVv%252bAfDTfIynIhwrz08kVQ%253d%253d&utm_source=pb_finova",
+    "url": "https://savings.policybazaar.com/quote?utm_source=finova_ai&enquiryKey=oIFV655Nkm7Hx9qJ%252fHSVs%252bOQ%252faOF7VwfeO6pGOtnk4vjxcfyxyGC2dEvb1%252fPA%252fcb0%252fP2D5%252fN0eH1AXT7p97Vgg%253d%253d",
     "title": "PolicyBazaar",
     "apis": ["LanguageDetector", "Translator"]
   },
