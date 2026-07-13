@@ -200,7 +200,7 @@ async function main() {
   );
 
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-flash-lite-latest' });
 
   const browser = await puppeteer.launch({
     headless: true,
