@@ -1,6 +1,7 @@
 import { detectLanguage } from './ai-language-detection.js';
 import { customAlert, customConfirm } from '../utils/dialog-utils.js';
 import { runAIAction } from './ai-features.js';
+import { isNativeAIFeature } from './ai-ui-utils.js';
 import { updatePreview } from './ai-translator-preview.js';
 import { drafts, currentDraftId } from '../drafts/draft-manager.js';
 import { generateMarkdown } from '../utils/markdown-utils.js';
@@ -50,7 +51,7 @@ export async function runTranslation(
   const preview = details.querySelector('.translation-preview');
   const btn = details.querySelector('.translate-btn');
 
-  const isNative = Translator.toString().includes('[native code]');
+  const isNative = isNativeAIFeature(Translator);
 
   await runAIAction(
     ui,

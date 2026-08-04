@@ -1,6 +1,7 @@
 import { detectLanguage } from './ai-language-detection.js';
 import { customAlert, customConfirm } from '../utils/dialog-utils.js';
 import { getMonitor, runAIAction } from './ai-features.js';
+import { isNativeAIFeature } from './ai-ui-utils.js';
 import { refreshAIVisibility } from './ai-toggle.js';
 
 /**
@@ -89,7 +90,7 @@ export async function initAIRewriter(ui, updateCallback) {
       return customAlert(ui, 'Please write some content first.');
     }
 
-    const isNative = Rewriter.toString().includes('[native code]');
+    const isNative = isNativeAIFeature(Rewriter);
 
     await runAIAction(
       ui,

@@ -1,6 +1,7 @@
 import { detectLanguage } from './ai-language-detection.js';
 import { customAlert } from '../utils/dialog-utils.js';
 import { runAIAction } from './ai-features.js';
+import { isNativeAIFeature } from './ai-ui-utils.js';
 import { refreshAIVisibility } from './ai-toggle.js';
 import { runTagGeneration } from './ai-tag-generator.js';
 
@@ -60,7 +61,7 @@ export async function initTagSuggestions(ui, updateCallback) {
       return customAlert(ui, 'Please write some content first.');
     }
 
-    const isNative = LanguageModel.toString().includes('[native code]');
+    const isNative = isNativeAIFeature(LanguageModel);
 
     await runAIAction(
       ui,
