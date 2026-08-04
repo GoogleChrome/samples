@@ -1,6 +1,7 @@
 import { updateDraftData } from '../drafts/draft-manager.js';
 import { customAlert } from '../utils/dialog-utils.js';
 import { getMonitor, runAIAction } from './ai-features.js';
+import { isNativeAIFeature } from './ai-ui-utils.js';
 import { refreshAIVisibility } from './ai-toggle.js';
 import {
   renderClassifierResults,
@@ -70,7 +71,7 @@ export async function initAIClassifier(ui, updateCallback) {
     }
 
     const input = `Title: ${title}\n\nContent: ${content}`;
-    const isNative = ClassifierClass.toString().includes('[native code]');
+    const isNative = isNativeAIFeature(ClassifierClass);
 
     await runAIAction(
       ui,

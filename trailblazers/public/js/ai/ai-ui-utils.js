@@ -25,6 +25,25 @@ export const getMonitor = (ui, lang, modelName) => ({
 });
 
 /**
+ * Determines whether an on-device AI API (Writer, Rewriter, Summarizer, etc.)
+ * can run without a cloud AI API key. A `Function.toString()` "[native code]"
+ * check misses the case where `built-in-ai-task-apis-polyfills` installs a
+ * plain-class fallback that itself runs on the browser's native, on-device
+ * Prompt API (`LanguageModel`) — that path needs no key either.
+ * @param {Function} apiClass - The task API class (e.g. `Writer`, `Rewriter`).
+ * @return {boolean} True if the feature can run without a cloud AI API key.
+ */
+export function isNativeAIFeature(apiClass) {
+  if (typeof apiClass !== 'function') {
+    return false;
+  }
+  if (!apiClass.__isPolyfill) {
+    return true;
+  }
+  return typeof LanguageModel !== 'undefined' && !LanguageModel.__isPolyfill;
+}
+
+/**
  * Executes an AI action with UI feedback (loading state).
  * @param {Object} ui - The UI elements.
  * @param {HTMLButtonElement} btn - The button that triggered the action.

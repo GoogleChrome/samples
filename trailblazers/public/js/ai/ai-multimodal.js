@@ -1,5 +1,6 @@
 import { detectLanguage } from './ai-language-detection.js';
 import { checkAIKeys } from './ai-config.js';
+import { isNativeAIFeature } from './ai-ui-utils.js';
 
 /** @type {Object} */
 export const imageMetadataSchema = {
@@ -38,7 +39,7 @@ export async function generateImageMetadata(imageSource, ui) {
     return null;
   }
 
-  const isNative = LanguageModel.toString().includes('[native code]');
+  const isNative = isNativeAIFeature(LanguageModel);
   if (!isNative && !checkAIKeys(ui)) {
     return null;
   }

@@ -1,7 +1,7 @@
 import { detectLanguage } from './ai-language-detection.js';
 import { customAlert } from '../utils/dialog-utils.js';
 import { refreshAIVisibility } from './ai-toggle.js';
-import { getMonitor, runAIAction } from './ai-ui-utils.js';
+import { getMonitor, runAIAction, isNativeAIFeature } from './ai-ui-utils.js';
 
 export { getMonitor, runAIAction };
 
@@ -36,7 +36,7 @@ async function runSummarizer(ui, type, input, targetInput, updateCallback) {
   const btn =
     type === 'headline' ? ui.aiSuggestTitleBtn : ui.aiSuggestDescriptionBtn;
 
-  const isNative = Summarizer.toString().includes('[native code]');
+  const isNative = isNativeAIFeature(Summarizer);
 
   await runAIAction(
     ui,
