@@ -84,9 +84,9 @@ env.customCache = {
     const hash = { algorithm: 'SHA-256', value: hashValue };
     console.log('Trying to access file in cross-origin storage...', hash);
     try {
-      const [handle] = await navigator.crossOriginStorage.requestFileHandles([
+      const handle = await navigator.crossOriginStorage.requestFileHandle(
         hash,
-      ]);
+      );
       const blob = await handle.getFile();
       console.log('File found in cross-origin storage:', blob);
       return new Response(blob);
@@ -103,9 +103,12 @@ env.customCache = {
       cachedFileHashesLocalStorageKey,
       JSON.stringify(cachedFileHashes)
     );
-    const [handle] = await navigator.crossOriginStorage.requestFileHandles(
-      [hash],
-      { create: true }
+    const handle = await navigator.crossOriginStorage.requestFileHandle(
+      hash,
+      {
+        create: true,
+        origins: '*',
+      },
     );
     const writableStream = await handle.createWritable();
     await writableStream.write(blob);
