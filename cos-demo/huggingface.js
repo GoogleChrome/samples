@@ -67,8 +67,7 @@ const getSHA256Hash = async (request) => {
   if (/\/resolve\/main\/onnx\//.test(request)) {
     request = request.replace(/\/resolve\//, '/raw/');
     const text = await fetch(request).then((response) => response.text());
-    const hash = text.replace(/.*?\n^oid sha256:(\w+)\n.*?$/gm, '$1');
-    return hash;
+    return text.match(/^oid sha256:([0-9a-f]{64})$/m)?.[1];
   }
 };
 
@@ -84,9 +83,7 @@ env.customCache = {
     const hash = { algorithm: 'SHA-256', value: hashValue };
     console.log('Trying to access file in cross-origin storage...', hash);
     try {
-      const handle = await navigator.crossOriginStorage.requestFileHandle(
-        hash,
-      );
+      const handle = await navigator.crossOriginStorage.requestFileHandle(hash);
       const blob = await handle.getFile();
       console.log('File found in cross-origin storage:', blob);
       return new Response(blob);
@@ -105,8 +102,7 @@ env.customCache = {
     );
     const handle = await navigator.crossOriginStorage.requestFileHandle(
       hash,
-      {
-        create: true,
+      { create: true,
         origins: '*',
       },
     );
