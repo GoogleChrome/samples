@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Popup Blocker Test</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      line-height: 1.5;
+    }
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>PWA Popup Blocker Test</h1>
+  <p>To verify the PWA popup blocker fix:</p>
+  <ol>
+    <li>Install this page as a PWA (click the install icon in the address bar).</li>
+    <li>Launch the installed PWA.</li>
+    <li>Click the <strong>Trigger Blocked Popup (Ungestured - Wait 3s)</strong> button, which will try to open a popup after 3 seconds (losing user activation/gesture). Or, reload the PWA page (it attempts to open a popup on load).</li>
+    <li>Verify that a <strong>blocked popup icon (a small window with a red cross)</strong> appears in the PWA title bar.</li>
+    <li>Click the icon in the title bar to see the blocked popup option (e.g. allowing popups from this site).</li>
+  </ol>
+
+  <button id="btn-gestured">Open Popup (Gestured - Should open immediately)</button>
+  <button id="btn-ungestured">Trigger Blocked Popup (Ungestured - Wait 3s)</button>
+  
+  <div class="status" id="status-log">Status: Ready</div>
+
+  <script src="main.js"></script>
+</body>
+</html>
