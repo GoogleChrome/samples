@@ -1,0 +1,43 @@
+---
+feature_name: WritableStream
+chrome_version: 59
+feature_id: 5928498656968704
+---
+
+<h3>Background</h3>
+<p>This sample illustrates the use of <code><a href="https://streams.spec.whatwg.org/#ws">WritableStream</a></code>, which shows how to break apart a longer piece of data and stream it (send it in chunks) to an output.</p>
+
+<p>WritableStreams objects are designed to only be used once. This example creates a new instance every time "Send message" is clicked. The <code>sendMessage()</code> uses that instance to send every byte of the entered message and closes the instance when it is done (<code>defaultWriter.close()</code>).</p>
+
+<p>The data flow in this example is generally from the text entry field to sink. The details are a bit more complicated. The general flow is this.</p>
+
+<ol>
+  <li>Create an instance of <code>WritableStream</code>. Pass it a data destination, called a 'sink' in it's constructor as a literal.</li>
+  <li>Call <code>writableStreamInstance.getWriter()</code> to get a defaul writer.</li>
+  <li>Iterate the chunks of the message and pass each to the default writer.</li>
+  <li>Close the default writer.</li>
+</ol>
+
+<p>If you're familliar at all with streams you may be wondering how backpressure is implemented using this API, especially since the word 'backpressure' doesn't appear as a member of any of the API's interfaces. Three items combine to create a backpressure signal.</p>
+
+<ul>
+  <li><em><code>highwatermark</code>:</em> Specifies the maximum amout of data that the <code>WritableStream</code> can handle at once. When creating the <code>WritableStream</code> instance, the second property passed to the constructor is a queuing strategy object. This object's constructor takes an object with a <code>highwatermark</code> property. How <code>highwatermark</code> is specified varies depending on the type of queuing strategy object.</li>
+  <li><em><code>writer.ready</code>: </em>Returns a promise that resolves whenever the underlying data sink is able to receive more data for writing. Check this before adding new data to the pipe <strong>and</strong> before closing the writer.</li>
+
+  <li><em>The promise returned by <code>write()</code>:</em> The sink's <code>write()</code> method must return a promise. This tells <code>writer.ready()</code> when to return its promise.</li>
+</ul>
+
+{% capture initial_output_content %}
+
+<form id="sample-form">
+  <div>
+    <label for="input">Enter a text message:</label>
+    <input id="input" type="text">
+    
+  </div>
+</form>
+<button id="sendMessage">Send message</button>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
+
+{% include js_snippet.html filename='demo.js' %}
