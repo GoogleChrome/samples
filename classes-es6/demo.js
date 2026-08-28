@@ -77,7 +77,7 @@ class Square extends Polygon {
   }
 
   set area(value) {
-    this.area = value;
+    this._area = value;
   }
 }
 
