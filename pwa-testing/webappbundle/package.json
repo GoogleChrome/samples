@@ -10,7 +10,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^5.2.1",
     "wbn": "0.0.5",
     "uuid": "14.0.0",
     "escape-html": "^1.0.3"
