@@ -1,6 +1,9 @@
 /* Copyright 2024 Google LLC.
 SPDX-License-Identifier: Apache-2.0 */
 
+// Source is at https://github.com/GoogleChrome/samples/blob/gh-pages/glitch-migration/url-parts/
+
+
 // To improve display when the page is not in an iframe (in an article or blog post or whatever).
 if (window.parent === window) {
   document.documentElement.classList.add('not-in-iframe');
@@ -188,7 +191,7 @@ function handleUrl() {
   // The scheme border is connected with the span#site border by a dotted border,
   // by wrapping the whole origin (except the port) in span#site-dotted.
   if (scheme) {
-    const siteDottedRegExp = new RegExp(`${scheme}.+${hostname}`);
+    const siteDottedRegExp = new RegExp(`${scheme}.+?${hostname}`);
     urlPartsDiv.innerHTML = urlPartsDiv.innerHTML.
       replace(siteDottedRegExp, '<span id="site-dotted">$&</span>');
   }
