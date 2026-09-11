@@ -131,7 +131,7 @@ async function acceptUnidirectionalStreams(transport) {
 
 async function readFromIncomingStream(stream, number) {
   let decoder = new TextDecoderStream('utf-8');
-  let reader = stream.pipeThrough(decoder).getReader();
+  let reader = stream.readable.pipeThrough(decoder).getReader();
   try {
     while (true) {
       const { value, done } = await reader.read();
