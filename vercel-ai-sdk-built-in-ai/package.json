@@ -16,8 +16,8 @@
     "vite": "^8.0.16"
   },
   "dependencies": {
-    "@ai-sdk/google": "^3.0.64",
-    "@ai-sdk/react": "^3.0.170",
+    "@ai-sdk/google": "^3.0.121",
+    "@ai-sdk/react": "^3.0.280",
     "@browser-ai/core": "^2.1.12",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-slot": "^1.2.4",
