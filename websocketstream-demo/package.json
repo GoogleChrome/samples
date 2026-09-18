@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "eventsource": "^2.0.2",
-    "express": "^4.19.2",
+    "express": "^5.2.1",
     "socket.io": "^4.7.5"
   }
 }
