@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@huggingface/transformers": "4.2.0",
+    "@huggingface/transformers": "4.3.0",
     "built-in-ai-task-apis-polyfills": "^1.14.0"
   },
   "devDependencies": {
