@@ -119,7 +119,7 @@
           if (embeddedHash && cosAvailable) {
             const cosHash = { algorithm: 'SHA-256', value: embeddedHash };
             try {
-              const handle = await navigator.crossOriginStorage.requestFileHandle(cosHash);
+              const handle = await navigator.crossOriginStorage.getFileHandle(cosHash);
               // Cache hit — read the wasm straight from COS
               const bytes = await handle.getFile().then((f) => f.arrayBuffer());
               log('COS cache HIT — wasm loaded from cross-origin cache');
@@ -136,7 +136,7 @@
                 // Fire-and-forget store
                 (async () => {
                   try {
-                    const wh = await navigator.crossOriginStorage.requestFileHandle(
+                    const wh = await navigator.crossOriginStorage.getFileHandle(
                       cosHash, { create: true, origins: '*' },
                     );
                     const writable = await wh.createWritable();

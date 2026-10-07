@@ -127,7 +127,7 @@
           /* BEGIN MARK */
           // Retrieving a file from cross-origin storage.
           const handle =
-            await navigator.crossOriginStorage.requestFileHandle(
+            await navigator.crossOriginStorage.getFileHandle(
               hash
             ); /* END MARK */
           const fileBlob = await handle.getFile();
@@ -169,7 +169,7 @@
             origins: '*',
           };
           const handle =
-            await navigator.crossOriginStorage.requestFileHandle(
+            await navigator.crossOriginStorage.getFileHandle(
               hash,
               options,
             ); /* END MARK */

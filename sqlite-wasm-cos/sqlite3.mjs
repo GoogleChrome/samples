@@ -531,11 +531,11 @@ async function instantiateAsync(binary, binaryFile, imports) {
   // The SHA-256 hash of the final .wasm binary is computed at link time and
   // embedded here as a build-time constant.  At runtime we feature-detect the
   // browser COS API via `'crossOriginStorage' in navigator`, then call
-  // navigator.crossOriginStorage.requestFileHandles() with the hash object
+  // navigator.crossOriginStorage.getFileHandle() with the hash object
   // required by the spec ({ algorithm: 'SHA-256', value: '<lowercase hex>' }).
   //
   // Cache-hit path:
-  //   requestFileHandles() succeeds → getFile() → arrayBuffer() → instantiate
+  //   getFileHandle() succeeds → getFile() → arrayBuffer() → instantiate
   //
   // Cache-miss path (NotFoundError):
   //   fetch() the wasm over the network → instantiate → store in COS.
@@ -555,9 +555,9 @@ async function instantiateAsync(binary, binaryFile, imports) {
   var cosHash = { algorithm: 'SHA-256', value: '62ab862545d5f98d421b49c1e6ab778c88aaeb4ce7ccb43b93b414d418cbd8da' };
   if (cosHash.value && 'crossOriginStorage' in navigator) {
     try {
-      var cosHandles = await navigator.crossOriginStorage.requestFileHandles([cosHash]);
+      var cosHandle = await navigator.crossOriginStorage.getFileHandle(cosHash);
       // Cache hit — read the Blob and instantiate from its ArrayBuffer.
-      var cosFile = await cosHandles[0].getFile();
+      var cosFile = await cosHandle.getFile();
       var cosBytes = await cosFile.arrayBuffer();
       // Optional instrumentation callback: Module['onCOSCacheHit'](hash)
       // Called when the Wasm binary is served from the cross-origin cache.
@@ -575,11 +575,11 @@ async function instantiateAsync(binary, binaryFile, imports) {
           // Fire-and-forget store; never block instantiation on the write.
           (async () => {
             try {
-              var writeHandles = await navigator.crossOriginStorage.requestFileHandles(
-                [cosHash],
+              var writeHandle = await navigator.crossOriginStorage.getFileHandle(
+                cosHash,
                 { create: true, origins: '*' },
               );
-              var writable = await writeHandles[0].createWritable();
+              var writable = await writeHandle.createWritable();
               await writable.write(new Blob([wasmBytes], { type: 'application/wasm' }));
               await writable.close();
               // Optional instrumentation callback: Module['onCOSStore'](hash)
