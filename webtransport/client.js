@@ -69,7 +69,7 @@ async function sendData() {
       case 'bidi': {
         let stream = await transport.createBidirectionalStream();
         let number = streamNumber++;
-        readFromIncomingStream(stream, number);
+        readFromIncomingStream(stream.readable, number);
 
         let writer = stream.writable.getWriter();
         await writer.write(data);
@@ -129,9 +129,9 @@ async function acceptUnidirectionalStreams(transport) {
   }
 }
 
-async function readFromIncomingStream(stream, number) {
+async function readFromIncomingStream(readable, number) {
   let decoder = new TextDecoderStream('utf-8');
-  let reader = stream.pipeThrough(decoder).getReader();
+  let reader = readable.pipeThrough(decoder).getReader();
   try {
     while (true) {
       const { value, done } = await reader.read();
