@@ -77,7 +77,7 @@
       };
 
       // Show COS API availability immediately
-      const cosAvailable = 'crossOriginStorage' in navigator;
+      const cosAvailable = typeof navigator.crossOriginStorage?.getFileHandle === 'function';
       set('cos-api', cosAvailable ? 'yes' : 'no (install the COS extension to test)', cosAvailable ? 'ok' : '');
       log(cosAvailable ? 'navigator.crossOriginStorage is available' : 'navigator.crossOriginStorage not found');
 

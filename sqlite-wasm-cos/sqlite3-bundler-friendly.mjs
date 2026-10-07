@@ -439,7 +439,7 @@ async function instantiateAsync(binary, binaryFile, imports) {
   //
   // The SHA-256 hash of the final .wasm binary is computed at link time and
   // embedded here as a build-time constant.  At runtime we feature-detect the
-  // browser COS API via `'crossOriginStorage' in navigator`, then call
+  // browser COS API via `navigator.crossOriginStorage?.getFileHandle`, then call
   // navigator.crossOriginStorage.getFileHandle() with the hash object
   // required by the spec ({ algorithm: 'SHA-256', value: '<lowercase hex>' }).
   //
@@ -462,7 +462,7 @@ async function instantiateAsync(binary, binaryFile, imports) {
   // Any other error (NotAllowedError, network failure, …) falls through to the
   // standard Emscripten streaming path so the page always loads.
   var cosHash = { algorithm: 'SHA-256', value: '62ab862545d5f98d421b49c1e6ab778c88aaeb4ce7ccb43b93b414d418cbd8da' };
-  if (cosHash.value && 'crossOriginStorage' in navigator) {
+  if (cosHash.value && typeof navigator.crossOriginStorage?.getFileHandle === 'function') {
     try {
       var cosHandle = await navigator.crossOriginStorage.getFileHandle(cosHash);
       // Cache hit — read the Blob and instantiate from its ArrayBuffer.

@@ -47,7 +47,7 @@
               })
             );
         };
-        if (!('crossOriginStorage' in navigator)) return l();
+        if (typeof navigator.crossOriginStorage?.getFileHandle !== 'function') return l();
         const u = {
             '4UaXrENHsxJlGDuGo1OIlL3L2JB874GPhFI9_IqmuTCJjshW7d0wve4':
               '60eb3c10b0aa20173f284a0d34e2d66c5defa773073887c87d306fd1f60f6569',
