@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auxiliary Popup Window</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Auxiliary Popup Window</h1>
+    <p>
+      Opened via <code>window.open()</code> using transient user activation delegated from the Service Worker.
+    </p>
+
+    <ul>
+      <li>Case: <strong id="displayCase">Loading...</strong></li>
+      <li>Options: <span id="displayOptions">Loading...</span></li>
+    </ul>
+
+    <h2>Shared State (<code>window.opener.lastDelegatedMessage</code>)</h2>
+    <pre id="sharedStateBox">Loading...</pre>
+
+    <p>
+      <button type="button" id="btnClosePopup">Close window</button>
+    </p>
+
+    <script>
+      (function() {
+        const queryParams = new URLSearchParams(window.location.search);
+        const caseParam = queryParams.get('caseTitle') || queryParams.get('scenario') || 'Unknown Case';
+        const optionsParam = queryParams.get('optionsText') || '(none)';
+
+        document.getElementById('displayCase').textContent = caseParam;
+        document.getElementById('displayOptions').textContent = optionsParam;
+
+        const sharedStateElement = document.getElementById('sharedStateBox');
+        try {
+          if (window.opener && window.opener.lastDelegatedMessage) {
+            sharedStateElement.textContent = JSON.stringify(window.opener.lastDelegatedMessage, null, 2);
+          } else if (window.opener) {
+            sharedStateElement.textContent = 'window.opener is accessible, but lastDelegatedMessage was not set.';
+          } else {
+            sharedStateElement.textContent = 'window.opener is null or not accessible in this context.';
+          }
+        } catch (err) {
+          sharedStateElement.textContent = 'Error accessing window.opener: ' + err.message;
+        }
+
+        document.getElementById('btnClosePopup').addEventListener('click', () => {
+          window.close();
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sample demonstrating Service Worker Popup Capability Delegation (client.postMessage with {delegate: 'popup'}).">
+    <title>Service Worker Popup Capability Delegation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Service Worker Popup Capability Delegation</h1>
+
+    <p>
+      Demonstrates how a Service Worker handling a notification click can delegate transient user activation to an existing window client via <code>client.postMessage(message, {delegate: 'popup'})</code>, enabling the client to open auxiliary popup windows without being blocked by the popup blocker.
+    </p>
+
+    <ul>
+      <li><a href="https://chromestatus.com/feature/5091965583622144">ChromeStatus: 5091965583622144</a></li>
+      <li><a href="https://crbug.com/542314185">Tracking Bug: crbug.com/542314185</a></li>
+      <li><a href="https://github.com/WICG/capability-delegation/blob/main/explainers/popup-delegation.md">WICG Popup Delegation Explainer</a></li>
+    </ul>
+
+    <!-- 1. Setup & Prerequisites / Enablement -->
+    <fieldset>
+      <legend>1. Setup &amp; Prerequisites / Enablement</legend>
+      <p>
+        <strong>Requirements:</strong> Chrome 157+ with <code>chrome://flags/#enable-experimental-web-platform-features</code> (or <code>--enable-features=CapabilityDelegationPopup</code>).
+      </p>
+      <ul>
+        <li>Service Worker: <strong id="swStatusText">Registering...</strong></li>
+        <li>Notification permission: <strong id="notifPermissionText">Checking...</strong> <button type="button" id="btnRequestPermission">Request permission</button></li>
+        <li>Popup delegation support: <strong id="featureSupportText">Checking...</strong></li>
+      </ul>
+    </fieldset>
+
+    <hr>
+
+    <!-- 2. Primary Demo -->
+    <fieldset>
+      <legend>2. Primary Demo</legend>
+      <p>
+        <label>
+          <input type="checkbox" id="checkWaitActivation" checked>
+          Delay notification by 5.2s so the button click's 5s transient user activation expires first
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" id="checkFocusFirst" checked>
+          Call <code>await client.focus()</code> before delegating
+        </label>
+      </p>
+      <p>
+        <button type="button" id="btnPrimaryDemo">Primary Demo: Delegate Popup on Click</button>
+      </p>
+    </fieldset>
+
+    <hr>
+
+    <!-- 3. Boundary / Error Test Cases -->
+    <fieldset>
+      <legend>3. Boundary / Error Test Cases</legend>
+      <ul>
+        <li><button type="button" id="btnControlNoDelegation">Control: No Delegation</button> — Notification click posts message without <code>{delegate: 'popup'}</code>; <code>window.open()</code> is blocked.</li>
+        <li><button type="button" id="btnDoubleOpen">Single-Use Receiver Token</button> — Client calls <code>window.open()</code> twice; 1st opens, 2nd is blocked.</li>
+        <li><button type="button" id="btnDoublePostMessage">Single-Use Sender Token</button> — SW calls <code>client.postMessage(..., {delegate: 'popup'})</code> twice; 2nd throws <code>NotAllowedError</code>.</li>
+        <li><button type="button" id="btnExpiredToken">Expired Receiver Token (1.5s delay)</button> — Client waits 1.5s before calling <code>window.open()</code>; popup is blocked.</li>
+        <li><button type="button" id="btnNoActivation">SW postMessage Without Notification Click</button> — Calls <code>client.postMessage(..., {delegate: 'popup'})</code> immediately without notification click; throws <code>NotAllowedError</code>.</li>
+        <li><button type="button" id="btnUnsupportedCapability">Unsupported Capability (fullscreen)</button> — SW calls <code>client.postMessage(..., {delegate: 'fullscreen'})</code>; throws <code>NotSupportedError</code>.</li>
+        <li><button type="button" id="btnFrameDelegation">Frame window.postMessage({delegate: 'popup'})</button> — Calls <code>window.postMessage</code> from frame; throws <code>NotSupportedError</code>.</li>
+      </ul>
+    </fieldset>
+
+    <hr>
+
+    <!-- 4. Activity Log -->
+    <fieldset>
+      <legend>4. Activity Log</legend>
+      <p><button type="button" id="btnClearLog">Clear log</button></p>
+      <pre id="logContainer">Ready.&#10;</pre>
+    </fieldset>
+
+    <hr>
+
+    <!-- Example Code -->
+    <fieldset>
+      <legend>Example Code</legend>
+      <h3>Service Worker (<code>service-worker.js</code>)</h3>
+      <pre><code>self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil((async () => {
+    const clientList = await self.clients.matchAll({type: 'window'});
+    if (clientList.length &gt; 0) {
+      // 1. Focus existing window (optional; AllowWindowInteraction is decoupled from popup token)
+      await clientList[0].focus();
+
+      // 2. Delegate popup capability token via postMessage
+      try {
+        clientList[0].postMessage(
+          {type: 'open-popup', payload: event.notification.data},
+          {delegate: 'popup'}
+        );
+      } catch (err) {
+        // Fallback if popup capability delegation is unsupported in the browser
+        if (self.clients.openWindow) {
+          await self.clients.openWindow('index.html');
+        }
+      }
+    } else if (self.clients.openWindow) {
+      // Fallback when no client window is currently open
+      await self.clients.openWindow('index.html?fallback=openWindow');
+    }
+  })());
+});</code></pre>
+
+      <h3>Window Client (<code>script.js</code>)</h3>
+      <pre><code>navigator.serviceWorker.addEventListener('message', (event) => {
+  if (event.data?.type === 'open-popup') {
+    // 1. Share state directly with auxiliary window
+    window.lastDelegatedMessage = event.data.payload;
+
+    // 2. Open auxiliary popup without popup blocker obstruction
+    const popup = window.open('popup.html', '_blank', 'width=540,height=620');
+  }
+});</code></pre>
+    </fieldset>
+  </body>
+</html>

@@ -56,6 +56,9 @@ navigate to a given URL.
 a sample showing a client making use of the foreign fetch service worker
 deployed by a third-party service.
 
+- [Popup Capability Delegation](https://googlechrome.github.io/samples/service-worker/capability-delegation-popup/index.html) - a sample showing how a service worker handling a notification click can delegate the popup capability to an existing client window via client.postMessage(msg, {delegate: 'popup'}).
+
+
 
 # Related samples
 

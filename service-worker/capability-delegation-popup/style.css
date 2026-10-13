@@ -1,0 +1,29 @@
+:root { color-scheme: light dark; }
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 720px;
+  margin: 1em auto;
+  padding: 0 0.75em;
+  line-height: 1.4;
+}
+fieldset { margin: 0.75em 0; padding: 0.5em 0.75em 0.75em; }
+legend { font-weight: bold; padding: 0 0.25em; }
+hr { margin: 1em 0; border: 0; border-top: 1px solid GrayText; }
+pre {
+  padding: 0.5em;
+  border: 1px solid GrayText;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin: 0.5em 0;
+}
+code { font-family: monospace; }
+button { font-size: inherit; padding: 0.2em 0.5em; margin: 0.15em 0; }
+input[type="text"] {
+  font-size: inherit;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 0.35em;
+}
+ul { margin: 0.35em 0; padding-left: 1.5em; }
+li { margin-bottom: 0.35em; }
+p { margin: 0.35em 0; }
