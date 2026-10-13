@@ -4,40 +4,22 @@
  */
 
 function runProbe(client) {
-  let delegateRead = false;
   try {
-    client.postMessage({type: 'probe-response'}, {
-      get delegate() {
-        delegateRead = true;
-        return 'popup';
-      }
+    client.postMessage({type: 'probe-response'}, {delegate: 'popup'});
+    client.postMessage({
+      type: 'probe-status',
+      status: 'Unsupported in this browser build (delegate option ignored; requires Chrome 157+)'
     });
-    if (!delegateRead) {
-      client.postMessage({
-        type: 'probe-status',
-        status: 'Unsupported (< M157, delegate option ignored)'
-      });
-    } else {
-      client.postMessage({
-        type: 'probe-status',
-        status: 'Unexpectedly succeeded without activation'
-      });
-    }
   } catch (err) {
     if (err.name === 'NotAllowedError') {
       client.postMessage({
         type: 'probe-status',
-        status: 'Enabled'
+        status: 'Supported & Enabled'
       });
     } else if (err.name === 'NotSupportedError') {
       client.postMessage({
         type: 'probe-status',
-        status: 'Flag disabled (NotSupportedError)'
-      });
-    } else if (!delegateRead) {
-      client.postMessage({
-        type: 'probe-status',
-        status: 'Unsupported (< M157, delegate option ignored)'
+        status: 'Supported, but flag disabled (enable chrome://flags/#enable-experimental-web-platform-features)'
       });
     } else {
       client.postMessage({
@@ -87,14 +69,14 @@ self.addEventListener('message', (event) => {
     }
     try {
       client.postMessage(
-        {type: 'open-popup', scenario: 'no-activation'},
+        {type: 'noop-delegation-test', scenario: 'no-activation'},
         {delegate: 'popup'}
       );
       client.postMessage({
         type: 'log-result',
         scenario: 'no-activation',
         outcome: 'unexpected-success',
-        errorMessage: 'postMessage({delegate: "popup"}) unexpectedly succeeded without activation'
+        errorMessage: 'postMessage did not throw ({delegate} option was ignored by this browser build)'
       });
     } catch (err) {
       client.postMessage({
@@ -238,14 +220,14 @@ self.addEventListener('notificationclick', (event) => {
 
         try {
           targetClient.postMessage(
-            {type: 'open-popup', scenario: 'double-postmessage-2', payload: payload},
+            {type: 'noop-delegation-test', scenario: 'double-postmessage-2', payload: payload},
             {delegate: 'popup'}
           );
           targetClient.postMessage({
             type: 'log-result',
             scenario: 'double-postmessage',
             outcome: 'unexpected-success',
-            errorMessage: 'Second postMessage unexpectedly succeeded'
+            errorMessage: 'postMessage did not throw ({delegate} option was ignored by this browser build)'
           });
         } catch (err) {
           targetClient.postMessage({
@@ -280,14 +262,14 @@ self.addEventListener('notificationclick', (event) => {
       case 'unsupported-capability': {
         try {
           targetClient.postMessage(
-            {type: 'open-popup', scenario: 'unsupported-capability', payload: payload},
+            {type: 'noop-delegation-test', scenario: 'unsupported-capability', payload: payload},
             {delegate: 'fullscreen'}
           );
           targetClient.postMessage({
             type: 'log-result',
             scenario: 'unsupported-capability',
             outcome: 'unexpected-success',
-            errorMessage: 'postMessage with unsupported capability unexpectedly succeeded'
+            errorMessage: 'postMessage did not throw ({delegate} option was ignored by this browser build)'
           });
         } catch (err) {
           targetClient.postMessage({

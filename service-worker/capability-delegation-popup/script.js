@@ -120,6 +120,10 @@ function handleServiceWorkerMessage(event) {
     return;
   }
 
+  if (data.type === 'probe-response' || data.type === 'noop-delegation-test') {
+    return;
+  }
+
   if (data.type === 'sw-status') {
     const swStatusElement = document.getElementById('swStatusText');
     if (swStatusElement) {
