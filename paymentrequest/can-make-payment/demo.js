@@ -1,43 +1,17 @@
 /**
- * The callback for successful creation of PaymentRequest.
- *
- * @callback successCallback
- * @param {PaymentRequest} request The newly created instance of PaymentRequest
- * object.
- * @param {string} optionalWarning The optional warning message to be used, for
- * example, when unable to determine whether the browser can make payments.
- */
-
-/**
- * The callback for failed creation of PaymentRequest.
- *
- * @callback failureCallback
- * @param {string} error The message indicating the reason why an instance of
- * PaymentRequest was not created.
- */
-
-/**
- * Asynchronously builds PaymentRequest for both Android Pay and BobBucks, but
- * does not show any UI yet. Succeeds only if can make payments.
+ * Builds PaymentRequest for both Google Pay and BobBucks, but does not show any
+ * UI yet.
  * If you encounter issues when running your own copy of this sample, run 'adb
  * logcat | grep Wallet' to see detailed error messages.
  *
- * @param {successCallback} onSuccess The callback to invoke when this function
- * is finished successfully.
- * @param {failureCallback} onFailure The callback to invoke when this function
- * is finished with failure.
+ * @return {PaymentRequest} The PaymentRequest object.
  */
-function initPaymentRequest(onSuccess, onFailure) {
-  if (!window.PaymentRequest) {
-    onFailure('This browser does not support web payments.');
-    return;
-  }
-
-  let supportedInstruments = [{
-    supportedMethods: 'https://android.com/pay',
+function createPaymentRequest() {
+  const supportedInstruments = [{
+    supportedMethods: 'https://google.com/pay',
     data: {
-      merchantName: 'Android Pay Demo',
-      // Place your own Android Pay merchant ID here. The merchant ID is tied to
+      merchantName: 'Google Pay Demo',
+      // Place your own Google Pay merchant ID here. The merchant ID is tied to
       // the origin of the website.
       merchantId: '00184145120947117657',
       // If you do not yet have a merchant ID, uncomment the following line.
@@ -58,7 +32,7 @@ function initPaymentRequest(onSuccess, onFailure) {
     supportedMethods: 'https://bobbucks.dev/pay',
   }];
 
-  let details = {
+  const details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
     displayItems: [
       {
@@ -72,36 +46,20 @@ function initPaymentRequest(onSuccess, onFailure) {
     ],
   };
 
-  let request = new PaymentRequest(supportedInstruments, details);
-
-  if (request.canMakePayment) {
-    request.canMakePayment().then(function(result) {
-      if (result) {
-        onSuccess(request);
-      } else {
-        onFailure('Cannot make payment');
-      }
-    }).catch(function(err) {
-      onSuccess(request, err);
-    });
-  } else {
-    onSuccess(
-        request, 'This browser does not support "can make payment" query');
-  }
+  return new PaymentRequest(supportedInstruments, details);
 }
 
 /**
- * Invokes PaymentRequest for Android Pay.
- *
- * @param {PaymentRequest} request The PaymentRequest object.
+ * Invokes PaymentRequest and handles the response.
  */
-function onBuyClicked(request) {
-  request.show().then(function(instrumentResponse) {
-    sendPaymentToServer(instrumentResponse);
-  })
-  .catch(function(err) {
+async function onBuyClicked() {
+  try {
+    const request = createPaymentRequest();
+    const instrumentResponse = await request.show();
+    await sendPaymentToServer(instrumentResponse);
+  } catch (err) {
     ChromeSamples.setStatus(err);
-  });
+  }
 }
 
 /**
@@ -110,57 +68,43 @@ function onBuyClicked(request) {
  * @param {PaymentResponse} instrumentResponse The payment information to
  * process.
  */
-function sendPaymentToServer(instrumentResponse) {
+async function sendPaymentToServer(instrumentResponse) {
   // There's no server-side component of these samples. No transactions are
   // processed and no money exchanged hands. Instantaneous transactions are not
   // realistic. Add a 2 second delay to make it seem more real.
-  window.setTimeout(function() {
-    instrumentResponse.complete('success')
-        .then(function() {
-          document.getElementById('result').innerHTML =
-              instrumentToJsonString(instrumentResponse);
-        })
-        .catch(function(err) {
-          ChromeSamples.setStatus(err);
-        });
-  }, 2000);
+  await new Promise(resolve => window.setTimeout(resolve, 2000));
+  await instrumentResponse.complete('success');
+  document.getElementById('result').textContent =
+      JSON.stringify(instrumentResponse, undefined, 2);
 }
 
 /**
- * Converts the payment instrument into a JSON string.
- *
- * @param {PaymentResponse} instrument The instrument to convert.
- * @return {string} The JSON string representation of the instrument.
- */
-function instrumentToJsonString(instrument) {
-  if (instrument.toJSON) {
-    return JSON.stringify(instrument, undefined, 2);
-  } else {
-    return JSON.stringify({
-      methodName: instrument.methodName,
-      details: instrument.details,
-    }, undefined, 2);
-  }
-}
-
-/**
- * Initializes the buy button.
+ * Checks whether the browser can make a payment and initializes the buy button.
  *
  * @param {HTMLElement} payButton The "Buy" button to initialize.
  */
-function initBuyButton(payButton) {
-  initPaymentRequest(function(request, optionalWarning) {
-    payButton.setAttribute('style', 'display: inline;');
-    ChromeSamples.setStatus(optionalWarning ? optionalWarning : '');
-    payButton.addEventListener('click', function handleClick() {
-      payButton.removeEventListener('click', handleClick);
-      onBuyClicked(request);
-      initBuyButton(payButton);
-    });
-  }, function(error) {
+async function initBuyButton(payButton) {
+  if (!window.PaymentRequest) {
     payButton.setAttribute('style', 'display: none;');
-    ChromeSamples.setStatus(error);
-  });
+    ChromeSamples.setStatus('This browser does not support web payments.');
+    return;
+  }
+
+  try {
+    const canMakePayment = await createPaymentRequest().canMakePayment();
+    if (canMakePayment) {
+      payButton.setAttribute('style', 'display: inline;');
+      ChromeSamples.setStatus('');
+      payButton.addEventListener('click', onBuyClicked);
+    } else {
+      payButton.setAttribute('style', 'display: none;');
+      ChromeSamples.setStatus('Cannot make payment');
+    }
+  } catch (err) {
+    payButton.setAttribute('style', 'display: inline;');
+    ChromeSamples.setStatus(err);
+    payButton.addEventListener('click', onBuyClicked);
+  }
 }
 
 const payButton = document.getElementById('buyButton');
