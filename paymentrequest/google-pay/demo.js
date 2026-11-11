@@ -9,23 +9,30 @@ function initPaymentRequest() {
   const supportedInstruments = [{
     supportedMethods: 'https://google.com/pay',
     data: {
-      merchantName: 'Google Pay Demo',
-      // Place your own Google Pay merchant ID here. The merchant ID is tied to
-      // the origin of the website.
-      merchantId: '00184145120947117657',
-      // If you do not yet have a merchant ID, uncomment the following line.
-      // environment: 'TEST',
-      allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
-      paymentMethodTokenizationParameters: {
-        tokenizationType: 'GATEWAY_TOKEN',
-        parameters: {
-          'gateway': 'stripe',
-          // Place your own Stripe publishable key here. Use a matching Stripe
-          // secret key on the server to initiate a transaction.
-          'stripe:publishableKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo',
-          'stripe:version': '2016-07-06',
-        },
+      environment: 'TEST',
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      merchantInfo: {
+        // A merchant ID is available after approval by Google.
+        // 'merchantId': '12345678901234567890',
+        merchantName: 'Example Merchant',
       },
+      allowedPaymentMethods: [{
+        type: 'CARD',
+        parameters: {
+          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+          allowedCardNetworks: ['AMEX', 'DISCOVER', 'INTERAC', 'JCB', 'MASTERCARD', 'VISA'],
+        },
+        tokenizationSpecification: {
+          type: 'PAYMENT_GATEWAY',
+          // Check with your payment gateway on the parameters to pass.
+          // @see {@link https://developers.google.com/pay/api/web/reference/request-objects#gateway}
+          parameters: {
+            'gateway': 'example',
+            'gatewayMerchantId': 'exampleGatewayMerchantId',
+          },
+        },
+      }],
     },
   }];
 
