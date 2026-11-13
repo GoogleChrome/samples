@@ -1,0 +1,754 @@
+.web-haptics-sample {
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1f3f4;
+  --border-subtle: #dadce0;
+  --border-strong: #bdc1c6;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --accent-blue: #1a73e8;
+  --accent-blue-hover: #1557b0;
+  --accent-blue-tint: #e8f0fe;
+
+  /* Accessible semantic effect tokens (pill bg + text) */
+  --hint-bg: #e0f2f1;
+  --hint-fg: #00695c;
+  --hint-solid: #00796b;
+
+  --tick-bg: #e8f0fe;
+  --tick-fg: #174ea6;
+  --tick-solid: #1a73e8;
+
+  --align-bg: #fef7e0;
+  --align-fg: #b06000;
+  --align-solid: #e37400;
+
+  --edge-bg: #eceff1;
+  --edge-fg: #37474f;
+  --edge-solid: #455a64;
+
+  --success-bg: #e6f4ea;
+  --success-fg: #137333;
+  --success-solid: #1e8e3e;
+
+  --error-bg: #fce8e6;
+  --error-fg: #c5221f;
+  --error-solid: #d93025;
+
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 16px 0 24px;
+}
+
+.web-haptics-sample *,
+.web-haptics-sample *::before,
+.web-haptics-sample *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.web-haptics-sample code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--bg-subtle);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+/* Feature-Detection Warning Banner */
+.web-haptics-sample .support-banner {
+  background: #fef7e0;
+  border: 1px solid #fbbc04;
+  color: #5f370e;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 16px 0;
+}
+
+.web-haptics-sample .support-banner[hidden] {
+  display: none;
+}
+
+.web-haptics-sample .support-banner a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.web-haptics-sample .support-banner a:hover {
+  text-decoration: underline;
+}
+
+/* Sticky Status & Global Intensity Toolbar */
+.web-haptics-sample .control-bar {
+  position: sticky;
+  top: 10px;
+  z-index: 20;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 14px 0 20px;
+  box-shadow: 0 4px 14px rgba(32, 33, 36, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: transform 0.12s ease;
+}
+
+.web-haptics-sample .control-bar.pulse {
+  transform: scale(1.01);
+}
+
+.web-haptics-sample .status-readout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 240px;
+}
+
+.web-haptics-sample .status-code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.web-haptics-sample .intensity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex: 0 1 auto;
+}
+
+.web-haptics-sample .intensity-control input[type="range"] {
+  width: 104px;
+  margin: 0;
+  accent-color: var(--accent-blue);
+}
+
+.web-haptics-sample .numeric-val {
+  font-weight: 600;
+  color: var(--accent-blue);
+  font-variant-numeric: tabular-nums;
+  min-width: 24px;
+  text-align: right;
+}
+
+/* Effect Badges */
+.web-haptics-sample .effect-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.web-haptics-sample .effect-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+}
+
+.web-haptics-sample .effect-pill.hint {
+  background: var(--hint-bg);
+  color: var(--hint-fg);
+}
+
+.web-haptics-sample .effect-pill.tick {
+  background: var(--tick-bg);
+  color: var(--tick-fg);
+}
+
+.web-haptics-sample .effect-pill.align {
+  background: var(--align-bg);
+  color: var(--align-fg);
+}
+
+.web-haptics-sample .effect-pill.edge {
+  background: var(--edge-bg);
+  color: var(--edge-fg);
+}
+
+.web-haptics-sample .effect-pill.success {
+  background: var(--success-bg);
+  color: var(--success-fg);
+}
+
+.web-haptics-sample .effect-pill.error {
+  background: var(--error-bg);
+  color: var(--error-fg);
+}
+
+/* Demo Cards */
+.web-haptics-sample .widget-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.web-haptics-sample .card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.05);
+}
+
+.web-haptics-sample .card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.web-haptics-sample .card-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.web-haptics-sample .card-desc {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 1. Scroll-Snap Carousel */
+.web-haptics-sample .carousel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.web-haptics-sample .carousel-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.web-haptics-sample .icon-btn {
+  appearance: none;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.web-haptics-sample .icon-btn:hover:not(:disabled) {
+  background: var(--bg-subtle);
+  border-color: var(--border-strong);
+}
+
+.web-haptics-sample .icon-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.web-haptics-sample .snap-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 12% 10px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.web-haptics-sample .snap-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.web-haptics-sample .carousel-card {
+  flex: 0 0 76%;
+  scroll-snap-align: center;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--bg-subtle);
+  transition: border-color 0.16s, background 0.16s, transform 0.16s;
+  user-select: none;
+}
+
+.web-haptics-sample .carousel-card.is-snapped {
+  background: var(--bg-surface);
+  border-color: var(--accent-blue);
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.12);
+}
+
+.web-haptics-sample .carousel-card.is-boundary.is-snapped {
+  border-color: var(--edge-solid);
+}
+
+.web-haptics-sample .carousel-step {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.web-haptics-sample .carousel-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.web-haptics-sample .carousel-caption {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.web-haptics-sample .carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.web-haptics-sample .carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border-subtle);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.web-haptics-sample .carousel-dot.is-changing {
+  background: #8ab4f8;
+  transform: scale(1.25);
+}
+
+.web-haptics-sample .carousel-dot.is-active {
+  background: var(--accent-blue);
+  transform: scale(1.35);
+}
+
+/* 2. Stepped Detent Scrubber */
+.web-haptics-sample .meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.web-haptics-sample .scrubber-input {
+  width: 100%;
+  margin: 4px 0;
+  accent-color: var(--accent-blue);
+}
+
+.web-haptics-sample .detent-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+  margin-top: 4px;
+}
+
+.web-haptics-sample .detent-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-subtle);
+  transition: transform 0.1s, background 0.1s;
+}
+
+.web-haptics-sample .detent-dot.edge-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--border-strong);
+}
+
+.web-haptics-sample .detent-dot.active {
+  background: var(--tick-solid);
+  transform: scale(1.45);
+}
+
+.web-haptics-sample .detent-dot.edge-dot.active {
+  background: var(--edge-solid);
+  transform: scale(1.55);
+}
+
+/* 3. Magnetic Alignment Guide */
+.web-haptics-sample .snap-track {
+  position: relative;
+  height: 60px;
+  background: var(--bg-subtle);
+  border-radius: 10px;
+  border: 1.5px solid var(--border-subtle);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.web-haptics-sample .snap-track.at-edge {
+  border-color: var(--edge-solid);
+  background: var(--edge-bg);
+}
+
+.web-haptics-sample .snap-hint-zone {
+  position: absolute;
+  width: 88px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1.5px dashed #80cbc4;
+  background: rgba(0, 121, 107, 0.06);
+  pointer-events: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.web-haptics-sample .snap-track.in-hint .snap-hint-zone {
+  background: rgba(0, 121, 107, 0.14);
+  border-color: var(--hint-solid);
+}
+
+.web-haptics-sample .snap-center-line {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: var(--border-strong);
+  pointer-events: none;
+  transition: background 0.12s, width 0.12s;
+}
+
+.web-haptics-sample .snap-track.snapped .snap-center-line {
+  background: var(--align-solid);
+  width: 3px;
+}
+
+.web-haptics-sample .snap-puck {
+  position: relative;
+  width: 64px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--accent-blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.28);
+  cursor: grab;
+  z-index: 2;
+  transition: background 0.12s;
+}
+
+.web-haptics-sample .snap-puck:active {
+  cursor: grabbing;
+}
+
+.web-haptics-sample .snap-track.snapped .snap-puck {
+  background: var(--align-solid);
+}
+
+.web-haptics-sample .snap-track.at-edge .snap-puck {
+  background: var(--edge-solid);
+}
+
+/* 4. Threshold Swipe-to-Confirm */
+.web-haptics-sample .swipe-track {
+  position: relative;
+  height: 52px;
+  background: var(--accent-blue-tint);
+  border-radius: 999px;
+  border: 1.5px solid #d2e3fc;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.web-haptics-sample .swipe-threshold-line {
+  position: absolute;
+  left: 72%;
+  top: 0;
+  bottom: 0;
+  border-left: 2px dashed var(--hint-solid);
+  pointer-events: none;
+}
+
+.web-haptics-sample .swipe-label {
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tick-fg);
+  pointer-events: none;
+  padding-left: 36px;
+}
+
+.web-haptics-sample .swipe-track.eligible {
+  background: var(--hint-bg);
+  border-color: var(--hint-solid);
+}
+
+.web-haptics-sample .swipe-track.eligible .swipe-label {
+  color: var(--hint-fg);
+}
+
+.web-haptics-sample .swipe-track.confirmed {
+  background: var(--success-bg);
+  border-color: var(--success-solid);
+}
+
+.web-haptics-sample .swipe-track.confirmed .swipe-label {
+  color: var(--success-fg);
+}
+
+.web-haptics-sample .swipe-thumb {
+  position: absolute;
+  left: 4px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+}
+
+.web-haptics-sample .swipe-track.eligible .swipe-thumb {
+  background: var(--hint-solid);
+}
+
+.web-haptics-sample .swipe-track.confirmed .swipe-thumb {
+  background: var(--success-solid);
+}
+
+/* 5. Verification Outcome */
+.web-haptics-sample .pin-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.web-haptics-sample .pin-input {
+  flex: 1 1 130px;
+  min-width: 0;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 8px;
+  outline: none;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.web-haptics-sample .pin-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.web-haptics-sample .pin-input.valid {
+  border-color: var(--success-solid);
+  background: var(--success-bg);
+}
+
+.web-haptics-sample .pin-input.invalid {
+  border-color: var(--error-solid);
+  background: var(--error-bg);
+  animation: web-haptics-shake 0.3s ease;
+}
+
+@keyframes web-haptics-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.web-haptics-sample .btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.12s, transform 0.08s;
+}
+
+.web-haptics-sample .btn:active {
+  transform: scale(0.98);
+}
+
+.web-haptics-sample .btn-verify-ok {
+  background: var(--success-solid);
+  color: #ffffff;
+}
+
+.web-haptics-sample .btn-verify-err {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+  color: var(--error-fg);
+}
+
+.web-haptics-sample .btn-verify-err:hover {
+  background: var(--error-bg);
+  border-color: var(--error-solid);
+}
+
+.web-haptics-sample .pin-feedback {
+  font-size: 12.5px;
+  font-weight: 500;
+  margin-top: 8px;
+  min-height: 18px;
+}
+
+/* Effect Palette Grid */
+.web-haptics-sample .palette-group-label {
+  margin: 14px 0 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.web-haptics-sample .palette-group-label:first-of-type {
+  margin-top: 4px;
+}
+
+.web-haptics-sample .palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.web-haptics-sample .palette-btn {
+  appearance: none;
+  text-align: left;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: background 0.12s, border-color 0.12s, transform 0.08s;
+}
+
+.web-haptics-sample .palette-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-strong);
+}
+
+.web-haptics-sample .palette-btn:active {
+  transform: scale(0.985);
+}
+
+.web-haptics-sample .palette-btn-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.web-haptics-sample .palette-btn-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* Keep Live Output compact during continuous slider/carousel interactions */
+#log {
+  max-height: 180px;
+  overflow-y: auto;
+  font-family: Inconsolata, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .web-haptics-sample .snap-carousel {
+    scroll-behavior: auto;
+  }
+
+  .web-haptics-sample .pin-input.invalid {
+    animation: none;
+  }
+
+  .web-haptics-sample .control-bar,
+  .web-haptics-sample .carousel-card,
+  .web-haptics-sample .carousel-dot,
+  .web-haptics-sample .detent-dot {
+    transition: none;
+  }
+}
+
+.web-haptics-sample button:focus-visible,
+.web-haptics-sample input:focus-visible,
+.web-haptics-sample .snap-carousel:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .web-haptics-sample .pin-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .web-haptics-sample .pin-input {
+    grid-column: 1 / -1;
+  }
+
+  .web-haptics-sample .palette-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .web-haptics-sample .carousel-card {
+    flex-basis: 82%;
+  }
+
+  .web-haptics-sample .snap-carousel {
+    padding-inline: 9%;
+  }
+}

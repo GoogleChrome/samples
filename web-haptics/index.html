@@ -1,0 +1,234 @@
+---
+feature_name: Web Haptics API
+chrome_version: 160
+check_min_version: false
+feature_id: 5167864517623808
+local_css_files: ['demo.css']
+local_js_files: ['demo.js']
+---
+
+<h3>Background</h3>
+<p>
+  The <a href="https://github.com/WICG/web-haptics">Web Haptics API</a>
+  (<a href="https://chromestatus.com/feature/5167864517623808">Chrome Platform Status</a>)
+  lets web applications request semantic tactile feedback via
+  <code>navigator.playHaptics(effect, intensity)</code> instead of authoring raw millisecond
+  vibration buzzes. The browser maps six interaction and outcome intents
+  (<code>hint</code>, <code>tick</code>, <code>align</code>, <code>edge</code>,
+  <code>success</code>, and <code>error</code>) to the active platform's native tactile
+  vocabulary.
+</p>
+
+<div class="web-haptics-sample">
+  <div id="supportBanner" class="support-banner" role="status" hidden>
+    <strong><code>navigator.playHaptics()</code> is not enabled in this browser.</strong>
+    Interactive controls below will run in visual simulation mode. To enable hardware haptics in
+    Chrome, turn on <code>chrome://flags/#web-haptics-on-android</code> (Android) or
+    <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+  </div>
+
+  <h3>Interactive Demo</h3>
+
+  <!-- Sticky Call Readout & Global Intensity Slider -->
+  <div id="controlBar" class="control-bar">
+    <div class="status-readout">
+      <span id="statusBadge" class="effect-pill">ready</span>
+      <span id="statusCode" class="status-code">Interact with any control below</span>
+    </div>
+    <div class="intensity-control">
+      <label for="intensity">Intensity</label>
+      <input type="range" id="intensity" min="0.1" max="1.0" step="0.1" value="1.0">
+      <span id="intensityVal" class="numeric-val">1.0</span>
+    </div>
+  </div>
+
+  <div class="widget-grid">
+    <!-- 1. Scroll-Snap Carousel -->
+    <article class="card">
+      <div class="card-header">
+        <h4 class="card-title">1. Scroll-Snap Carousel</h4>
+        <div class="effect-tags">
+          <span class="effect-pill tick">tick</span>
+          <span class="effect-pill align">align</span>
+          <span class="effect-pill edge">edge</span>
+        </div>
+      </div>
+      <p class="card-desc">
+        Swipe or flick across cards: passing each card midpoint plays <strong>tick</strong>,
+        settling onto an interior card plays <strong>align</strong>, and reaching the first or
+        last card plays <strong>edge</strong>.
+      </p>
+      <div class="carousel-toolbar">
+        <span id="carouselPosition">Card 1 of 5</span>
+        <div class="carousel-nav">
+          <button type="button" id="carouselPrev" class="icon-btn" aria-label="Previous card">‹ Prev</button>
+          <button type="button" id="carouselNext" class="icon-btn" aria-label="Next card">Next ›</button>
+        </div>
+      </div>
+      <div id="snapCarousel" class="snap-carousel" tabindex="0" aria-label="Preset cards">
+        <div class="carousel-card is-boundary is-snapped">
+          <div class="carousel-step">Start · 01</div>
+          <p class="carousel-name">Morning Light</p>
+          <p class="carousel-caption">First card boundary plays <code>edge</code> on settle.</p>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-step">Preset · 02</div>
+          <p class="carousel-name">Soft Daylight</p>
+          <p class="carousel-caption">Interior snap target plays <code>align</code> on settle.</p>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-step">Preset · 03</div>
+          <p class="carousel-name">Neutral Studio</p>
+          <p class="carousel-caption">Mid-scroll crossings play <code>tick</code> while swiping.</p>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-step">Preset · 04</div>
+          <p class="carousel-name">Warm Amber</p>
+          <p class="carousel-caption">Interior snap target plays <code>align</code> on settle.</p>
+        </div>
+        <div class="carousel-card is-boundary">
+          <div class="carousel-step">End · 05</div>
+          <p class="carousel-name">Golden Hour</p>
+          <p class="carousel-caption">Last card boundary plays <code>edge</code> on settle.</p>
+        </div>
+      </div>
+      <div id="carouselDots" class="carousel-dots" aria-label="Carousel pagination"></div>
+    </article>
+
+    <!-- 2. Stepped Scrubber -->
+    <article class="card">
+      <div class="card-header">
+        <h4 class="card-title">2. Stepped Scrubber</h4>
+        <div class="effect-tags">
+          <span class="effect-pill tick">tick</span>
+          <span class="effect-pill edge">edge</span>
+        </div>
+      </div>
+      <p class="card-desc">
+        Scrub across discrete steps (1-9) to feel <strong>tick</strong>; reach 0 or 10 at
+        either end of the range to feel <strong>edge</strong>.
+      </p>
+      <div class="meta-row">
+        <label for="detentScrubber">Step value</label>
+        <span id="scrubberVal" class="numeric-val">5 / 10</span>
+      </div>
+      <input type="range" id="detentScrubber" class="scrubber-input" min="0" max="10" step="1" value="5">
+      <div id="detentTicks" class="detent-ticks" aria-hidden="true"></div>
+    </article>
+
+    <!-- 3. Magnetic Alignment Guide -->
+    <article class="card">
+      <div class="card-header">
+        <h4 class="card-title">3. Magnetic Alignment Guide</h4>
+        <div class="effect-tags">
+          <span class="effect-pill hint">hint</span>
+          <span class="effect-pill align">align</span>
+          <span class="effect-pill edge">edge</span>
+        </div>
+      </div>
+      <p class="card-desc">
+        Drag the handle horizontally: entering the dashed proximity zone plays
+        <strong>hint</strong>, snapping onto the center guide plays <strong>align</strong>,
+        and hitting either side stop plays <strong>edge</strong>.
+      </p>
+      <div id="snapTrack" class="snap-track">
+        <div class="snap-hint-zone"></div>
+        <div class="snap-center-line"></div>
+        <div id="snapPuck" class="snap-puck">DRAG</div>
+      </div>
+    </article>
+
+    <!-- 4. Threshold Swipe-to-Confirm -->
+    <article class="card">
+      <div class="card-header">
+        <h4 class="card-title">4. Swipe-to-Confirm</h4>
+        <div class="effect-tags">
+          <span class="effect-pill hint">hint</span>
+          <span class="effect-pill success">success</span>
+        </div>
+      </div>
+      <p class="card-desc">
+        Slide past the dashed threshold to feel <strong>hint</strong> when the action becomes
+        eligible (or if cancelled), and release past the threshold to feel
+        <strong>success</strong>.
+      </p>
+      <div id="swipeTrack" class="swipe-track">
+        <div class="swipe-threshold-line"></div>
+        <div id="swipeLabel" class="swipe-label">Slide past threshold to confirm →</div>
+        <div id="swipeThumb" class="swipe-thumb">→</div>
+      </div>
+    </article>
+
+    <!-- 5. Verification Outcome -->
+    <article class="card">
+      <div class="card-header">
+        <h4 class="card-title">5. Form Verification Outcome</h4>
+        <div class="effect-tags">
+          <span class="effect-pill success">success</span>
+          <span class="effect-pill error">error</span>
+        </div>
+      </div>
+      <p class="card-desc">
+        Submit code <code>1234</code> to feel a <strong>success</strong> confirmation, or test
+        an invalid code to feel an <strong>error</strong> alert.
+      </p>
+      <div class="pin-controls">
+        <input type="text" id="pinInput" class="pin-input" value="1234" placeholder="Enter 1234" inputmode="numeric" aria-label="Verification code">
+        <button type="button" id="verifyValidBtn" class="btn btn-verify-ok">Verify 1234</button>
+        <button type="button" id="verifyInvalidBtn" class="btn btn-verify-err">Try Invalid</button>
+      </div>
+      <div id="pinFeedback" class="pin-feedback" role="status" aria-live="polite"></div>
+    </article>
+
+    <!-- 6-Effect Semantic Palette -->
+    <article class="card">
+      <div class="card-header">
+        <h4 class="card-title">Effect Vocabulary Palette</h4>
+      </div>
+      <p class="card-desc">
+        Trigger each of the six semantic effects directly at the selected intensity.
+      </p>
+
+      <p class="palette-group-label">Interaction Feedback</p>
+      <div class="palette-grid">
+        <button type="button" class="palette-btn" id="btnEffectHint" data-haptic-effect="hint">
+          <span class="palette-btn-name"><span>Hint</span><span class="effect-pill hint">hint</span></span>
+          <span class="palette-btn-desc">Subtle cue when approaching a target or threshold</span>
+        </button>
+        <button type="button" class="palette-btn" id="btnEffectTick" data-haptic-effect="tick">
+          <span class="palette-btn-name"><span>Tick</span><span class="effect-pill tick">tick</span></span>
+          <span class="palette-btn-desc">Light step when moving across discrete items or values</span>
+        </button>
+        <button type="button" class="palette-btn" id="btnEffectAlign" data-haptic-effect="align">
+          <span class="palette-btn-name"><span>Align</span><span class="effect-pill align">align</span></span>
+          <span class="palette-btn-desc">Crisp snap when locking onto a guide or resting slot</span>
+        </button>
+        <button type="button" class="palette-btn" id="btnEffectEdge" data-haptic-effect="edge">
+          <span class="palette-btn-name"><span>Edge</span><span class="effect-pill edge">edge</span></span>
+          <span class="palette-btn-desc">Firm stop when reaching the start or end of a range</span>
+        </button>
+      </div>
+
+      <p class="palette-group-label">Outcome Feedback</p>
+      <div class="palette-grid">
+        <button type="button" class="palette-btn" id="btnEffectSuccess" data-haptic-effect="success">
+          <span class="palette-btn-name"><span>Success</span><span class="effect-pill success">success</span></span>
+          <span class="palette-btn-desc">Positive confirmation when an action completes</span>
+        </button>
+        <button type="button" class="palette-btn" id="btnEffectError" data-haptic-effect="error">
+          <span class="palette-btn-name"><span>Error</span><span class="effect-pill error">error</span></span>
+          <span class="palette-btn-desc">Distinct alert when an action fails or is rejected</span>
+        </button>
+      </div>
+    </article>
+  </div>
+</div>
+
+{% include output_helper.html %}
+
+{% capture js %}if ('playHaptics' in navigator) {
+  // Trigger a semantic effect at default (1.0) or custom [0.0, 1.0] intensity:
+  navigator.playHaptics('align');
+  navigator.playHaptics('hint', 0.6);
+}{% endcapture %}
+{% include js_snippet.html js=js displayonly=true %}
