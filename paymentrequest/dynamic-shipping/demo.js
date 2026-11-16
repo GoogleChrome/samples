@@ -5,11 +5,11 @@
  * @return {PaymentRequest} The PaymentRequest object.
  */
 function initPaymentRequest() {
-  let supportedInstruments = [{
+  const supportedInstruments = [{
     supportedMethods: 'https://bobbucks.dev/pay',
   }];
 
-  let details = {
+  const details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
     displayItems: [
       {
@@ -28,14 +28,12 @@ function initPaymentRequest() {
     ],
   };
 
-  let options = {requestShipping: true};
+  const options = {requestShipping: true};
 
-  let request = new PaymentRequest(supportedInstruments, details, options);
+  const request = new PaymentRequest(supportedInstruments, details, options);
 
-  request.addEventListener('shippingaddresschange', function(evt) {
-    evt.updateWith(new Promise(function(resolve) {
-      updateDetails(details, request.shippingAddress, resolve);
-    }));
+  request.addEventListener('shippingaddresschange', evt => {
+    evt.updateWith(updateDetails(details, request.shippingAddress));
   });
 
   return request;
@@ -43,16 +41,15 @@ function initPaymentRequest() {
 
 /**
  * Invokes PaymentRequest with dynamic shipping price calculation.
- *
- * @param {PaymentRequest} request The PaymentRequest object.
  */
-function onBuyClicked(request) {
-  request.show().then(function(instrumentResponse) {
-    sendPaymentToServer(instrumentResponse);
-  })
-  .catch(function(err) {
+async function onBuyClicked() {
+  try {
+    const request = initPaymentRequest();
+    const instrumentResponse = await request.show();
+    await sendPaymentToServer(instrumentResponse);
+  } catch (err) {
     ChromeSamples.setStatus(err);
-  });
+  }
 }
 
 /**
@@ -62,11 +59,10 @@ function onBuyClicked(request) {
  * @param {PaymentDetails} details The line items and shipping options.
  * @param {PaymentAddress} shippingAddress User's preferred shipping address to
  * use for shipping price calculations.
- * @param {function} callback The callback to invoke with updated line items and
- * shipping options.
+ * @return {Promise<PaymentDetails>} The updated payment details.
  */
-function updateDetails(details, shippingAddress, callback) {
-  let shippingOption = {
+async function updateDetails(details, shippingAddress) {
+  const shippingOption = {
     id: '',
     label: '',
     amount: {currency: 'USD', value: '0.00'},
@@ -95,7 +91,7 @@ function updateDetails(details, shippingAddress, callback) {
     delete details.shippingOptions;
   }
   details.displayItems.splice(1, 1, shippingOption);
-  callback(details);
+  return details;
 }
 
 /**
@@ -105,75 +101,28 @@ function updateDetails(details, shippingAddress, callback) {
  * @param {PaymentResponse} instrumentResponse The payment information to
  * process.
  */
-function sendPaymentToServer(instrumentResponse) {
+async function sendPaymentToServer(instrumentResponse) {
   // There's no server-side component of these samples. No transactions are
   // processed and no money exchanged hands. Instantaneous transactions are not
   // realistic. Add a 2 second delay to make it seem more real.
-  window.setTimeout(function() {
-    instrumentResponse.complete('success')
-        .then(function() {
-          document.getElementById('result').innerHTML =
-              instrumentToJsonString(instrumentResponse);
-        })
-        .catch(function(err) {
-          ChromeSamples.setStatus(err);
-        });
-  }, 2000);
-}
-
-/**
- * Converts the payment instrument into a JSON string.
- *
- * @private
- * @param {PaymentResponse} instrument The instrument to convert.
- * @return {string} The JSON string representation of the instrument.
- */
-function instrumentToJsonString(instrument) {
-  let details = instrument.details;
-
-  return JSON.stringify({
-    methodName: instrument.methodName,
-    details: details,
-    shippingAddress: addressToDictionary(instrument.shippingAddress),
-    shippingOption: instrument.shippingOption,
-  }, undefined, 2);
-}
-
-/**
- * Converts the shipping address into a dictionary.
- *
- * @private
- * @param {PaymentAddress} address The address to convert.
- * @return {object} The dictionary representation of the shipping address.
- */
-function addressToDictionary(address) {
-  if (address.toJSON) {
-    return address.toJSON();
-  }
-
-  return {
-    recipient: address.recipient,
-    organization: address.organization,
-    addressLine: address.addressLine,
-    dependentLocality: address.dependentLocality,
-    city: address.city,
-    region: address.region,
-    postalCode: address.postalCode,
-    sortingCode: address.sortingCode,
-    country: address.country,
-    languageCode: address.languageCode,
-    phone: address.phone,
-  };
+  await new Promise(resolve => window.setTimeout(resolve, 2000));
+  await instrumentResponse.complete('success');
+  document.getElementById('result').textContent =
+      JSON.stringify(instrumentResponse, undefined, 2);
 }
 
 const payButton = document.getElementById('buyButton');
 payButton.setAttribute('style', 'display: none;');
 if (window.PaymentRequest) {
-  let request = initPaymentRequest();
-  payButton.setAttribute('style', 'display: inline;');
-  payButton.addEventListener('click', function() {
-    onBuyClicked(request);
-    request = initPaymentRequest();
+  initPaymentRequest().canMakePayment().then(result => {
+    if (result) {
+      payButton.setAttribute('style', 'display: inline;');
+      payButton.addEventListener('click', onBuyClicked);
+    } else {
+      ChromeSamples.setStatus('Cannot make payment');
+    }
+  }).catch(err => {
+    ChromeSamples.setStatus(err);
   });
 } else {
   ChromeSamples.setStatus('This browser does not support web payments');
